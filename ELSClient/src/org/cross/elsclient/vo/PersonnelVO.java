@@ -10,13 +10,13 @@ import org.cross.elsclient.util.PositionType;
 public class PersonnelVO {
 
 	/**
-	 * 人员姓名
-	 */
-	public String name;
-	/**
 	 * 人员工号
 	 */
 	public String id;
+	/**
+	 * 人员姓名
+	 */
+	public String name;
 	/**
 	 * 人员职位
 	 */
@@ -25,13 +25,13 @@ public class PersonnelVO {
 	/**
 	 * 构造方法
 	 * 
-	 * @param name
 	 * @param id
+	 * @param name
 	 * @param position
 	 */
-	public PersonnelVO(String name, String id, PositionType position) {
-		this.name = name;
+	public PersonnelVO(String id, String name, PositionType position) {
 		this.id = id;
+		this.name = name;
 		this.position = position;
 	}
 }

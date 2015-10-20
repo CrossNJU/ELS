@@ -5,15 +5,16 @@
  */
 package org.cross.elsclient.dataservice.logdataservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.po.LogPO;
 
 public interface LogDataService {
 
-	public void insert(LogPO po);
+	public void insert(LogPO po) throws RemoteException;
 
-	public ArrayList<LogPO> find(String startTime, String endTime);
+	public ArrayList<LogPO> find(String startTime, String endTime) throws RemoteException;
 
-	public ArrayList<LogPO> show();
+	public ArrayList<LogPO> show() throws RemoteException;
 }

@@ -17,13 +17,13 @@ public class PersonnelPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 人员姓名
-	 */
-	private String name;
-	/**
 	 * 人员工号
 	 */
 	private String id;
+	/**
+	 * 人员姓名
+	 */
+	private String name;
 	/**
 	 * 人员职位
 	 */
@@ -32,22 +32,14 @@ public class PersonnelPO implements Serializable {
 	/**
 	 * 构造方法
 	 * 
-	 * @param name
 	 * @param id
+	 * @param name
 	 * @param position
 	 */
-	public PersonnelPO(String name, String id, PositionType position) {
-		this.name = name;
+	public PersonnelPO(String id, String name, PositionType position) {
 		this.id = id;
-		this.position = position;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
 		this.name = name;
+		this.position = position;
 	}
 
 	public String getId() {
@@ -56,6 +48,14 @@ public class PersonnelPO implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public PositionType getPosition() {
