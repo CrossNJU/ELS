@@ -1,7 +1,133 @@
 
 package org.cross.elsclient.po;
 
-public class StockPO {
+import java.util.ArrayList;
 
+import org.cross.elsclient.vo.GoodsVO;
+
+public class StockPO {
+	/**
+	 * 仓库编号
+	 */
+	private String stockIdentifier;
+	/**
+	 * 仓库中的不同类型仓库
+	 */
+	private ArrayList<StockAreaPO> specialStockPOs;
+	
+	/**
+	 * 仓库总间数
+	 */
+	private int numOfBooths;
+	
+	/**
+	 * 仓库已用间数
+	 */
+	private int usedBooths;
+	
+	/**
+	 * 出库数量
+	 */
+	private int numOut;
+	
+	/**
+	 * 入库数量
+	 */
+	private int numIn;
+	
+	/**
+	 * 出库金额
+	 */
+	private int moneyOut;
+	
+	/**
+	 * 入库金额
+	 */
+	private int moneyIn;
+	
+	/**
+	 * 库存数量
+	 */
+	private int numInStock;
+
+	
+	/**
+	 * 构造函数
+	 * 
+	 */
+	public StockPO(String id,int numOfBooth){
+		this.stockIdentifier = id;
+		this.numOfBooths = numOfBooth;
+		
+		this.specialStockPOs = new ArrayList<StockAreaPO>();
+		this.usedBooths = 0;
+		this.numOut = 0;
+		this.numIn = 0;
+		this.moneyOut = 0;
+		this.moneyIn = 0;
+		this.numInStock = 0;
+	}
+	public String getStockID(){
+		return stockIdentifier;
+	}
+	public void setStockID(String stockIdentifier){
+		this.stockIdentifier = stockIdentifier;
+	}
+	
+	public ArrayList<StockAreaPO> getSpecialStockPOs(){
+		return specialStockPOs;
+	}
+	public void setSpecialStockPOs(ArrayList<StockAreaPO> specialStockPO){
+		this.specialStockPOs = specialStockPO;
+	}
+	
+	public int getNumOfBooths(){
+		return numOfBooths;
+	}
+	public void setNumOfBooths(int numOfBooths){
+		this.numOfBooths = numOfBooths;
+	}
+	
+	public int getUsedBooths(){
+		return usedBooths;
+	}
+	public void setUsedBooths(int usedBooths){
+		this.usedBooths = usedBooths;
+	}
+	
+	public int getNumOut(){
+		return numOut;
+	}
+	public void setNumOut(int numOut){
+		this.numOut = numOut;
+	}
+	
+	public int getNumIn(){
+		return numIn;
+	}
+	public void setNumIn(int numIn){
+		this.numIn = numIn;
+	}
+	
+	public int getMoneyOut(){
+		return moneyOut;
+	}
+	public void setMoneyOut(int moneyOut){
+		this.moneyOut = moneyOut;
+	}
+	
+	public int getMoneyIn(){
+		return moneyIn;
+	}
+	public void setMoneyIn(int moneyIn){
+		this.moneyIn = moneyIn;
+	}
+	
+	public int getNumInStock(){
+		return numInStock;
+	}
+	public void setNumInStock(int numInStock){
+		this.numInStock = numInStock;
+	}
 
 }
