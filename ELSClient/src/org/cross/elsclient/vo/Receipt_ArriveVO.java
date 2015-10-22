@@ -5,6 +5,8 @@
  */
 package org.cross.elsclient.vo;
 
+import org.cross.elsclient.util.Type_receipt;
+
 public class Receipt_ArriveVO extends ReceiptVO{
 	
 	/**
@@ -36,6 +38,7 @@ public class Receipt_ArriveVO extends ReceiptVO{
 	 */
 	public Receipt_ArriveVO(String time, String place, String number,
 			GoodsVO good){
+		super(number, Type_receipt.ARRIVE);
 		this.time = time;
 		this.place = place;
 		this.number = super.number;

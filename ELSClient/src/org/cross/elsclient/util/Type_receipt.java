@@ -4,5 +4,5 @@
 package org.cross.elsclient.util;
 
 public enum Type_receipt {
-	ARRIVE, MONEYIN, MONEYOUT, ORDER, STOCKIN, STOCKOUT, TRANS
+	ARRIVE, MONEYIN, MONEYOUT, ORDER, STOCKIN, STOCKOUT, TRANS, TOTALMONEYIN
 }

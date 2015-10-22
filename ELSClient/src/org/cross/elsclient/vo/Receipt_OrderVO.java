@@ -58,7 +58,6 @@ public class Receipt_OrderVO extends ReceiptVO{
 	/**
 	 * 构造方法
 	 * @param goods
-	 * @param cost
 	 * @param receiveTime
 	 * @param expectTime
 	 * @param number
@@ -68,13 +67,12 @@ public class Receipt_OrderVO extends ReceiptVO{
 	 * @param receivePeople
 	 */
 	public Receipt_OrderVO(GoodsVO goods,
-			double cost, String receiveTime, 
+			String receiveTime, 
 			String expectTime, String number,
 			String targetPlace, String startPlace,
 			PeoplePO pushPeople, PeoplePO receivePeople){
 		this.goods = goods;
 		this.expectTime = expectTime;
-		this.cost = cost;
 		this.receiveTime = receiveTime;
 		this.targetPlace = targetPlace;
 		this.startPlace = startPlace;
@@ -84,6 +82,7 @@ public class Receipt_OrderVO extends ReceiptVO{
 		this.number = number;
 		super.number = number;
 		super.type = Type_receipt.ORDER;
+		this.cost = 0;
 	}
 	
 	public Receipt_OrderVO(String number){

@@ -71,14 +71,13 @@ public class Receipt_TransVO extends ReceiptVO{
 	 * @param observer
 	 * @param driver
 	 * @param orders
-	 * @param cost
 	 * @param number
 	 */
 	public Receipt_TransVO(String time, String localNumber, 
 			String vehicleNumber, String startPlace, 
 			String arrivePlace, String observer, 
 			String driver, 
-			double cost, String number){
+			String number){
 		this.time = time;
 		this.localNumber = localNumber;
 		this.vehicleNumber = vehicleNumber;
@@ -86,11 +85,11 @@ public class Receipt_TransVO extends ReceiptVO{
 		this.arrivePlace = arrivePlace;
 		this.observer = observer;
 		this.driver = driver;
-		this.cost = cost;
 		
 		this.number = number;
 		super.number = number;
 		super.type = Type_receipt.TRANS;
 		this.orders = new ArrayList<Receipt_OrderVO>();
+		this.cost = 0;
 	}
 }
