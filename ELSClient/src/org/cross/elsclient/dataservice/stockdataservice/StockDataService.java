@@ -5,21 +5,22 @@
  */
 package org.cross.elsclient.dataservice.stockdataservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.po.StockPO;
-import org.cross.elsclient.vo.StockInfoVO;
-import org.cross.elsclient.vo.StockVO;
+import org.cross.elsclient.util.ResultMessage;
 
 public interface StockDataService {
 	
-	public void insert(StockPO stock);
+	public ResultMessage insert(StockPO po) throws RemoteException;
 	
-	public ArrayList<StockInfoVO> showStockInfo(String time1,String time2);
+	public ResultMessage delete(StockPO po) throws RemoteException;
 	
-	public boolean stockEnough(StockPO stock);
+	public ResultMessage update(StockPO po) throws RemoteException;
 	
-	public double stockCapacity(StockPO stock);
+	public ArrayList<StockPO> show() throws RemoteException;
 	
-	public boolean checkGoods(StockPO stock);
+	public boolean find(String id) throws RemoteException;
 }
+

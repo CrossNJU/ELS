@@ -8,13 +8,14 @@ package org.cross.elsclient.vo;
 import java.util.ArrayList;
 
 import org.cross.elsclient.po.GoodsPO;
+import org.cross.elsclient.util.StockType;
 
 public class StockAreaVO {
 	
 	/**
 	 * 特定仓库类型
 	 */
-	public String stockType;
+	public StockType stockType;
 	
 	/**
 	 * 特定仓库总容量
@@ -36,7 +37,7 @@ public class StockAreaVO {
 	 * @param stockType
 	 * @param totalCapacity
 	 */
-	public StockAreaVO(String stockType,int totalCapacity){
+	public StockAreaVO(StockType stockType,int totalCapacity){
 		this.stockType = stockType;
 		this.totalCapacity = totalCapacity;
 		

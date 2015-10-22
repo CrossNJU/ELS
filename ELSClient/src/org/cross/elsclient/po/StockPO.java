@@ -11,7 +11,7 @@ public class StockPO {
 	 */
 	private String stockIdentifier;
 	/**
-	 * 仓库中的不同类型仓库
+	 * 仓库中的不同类型仓库(不同区)
 	 */
 	private ArrayList<StockAreaPO> specialStockPOs;
 	

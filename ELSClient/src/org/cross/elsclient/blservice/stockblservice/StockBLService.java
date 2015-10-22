@@ -8,8 +8,8 @@ package org.cross.elsclient.blservice.stockblservice;
 import java.util.ArrayList;
 
 import org.cross.elsclient.util.ResultMessage;
-import org.cross.elsclient.vo.StockCapacityVO;
-import org.cross.elsclient.vo.StockInfoVO;
+import org.cross.elsclient.util.StockType;
+import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockVO;
 
 public interface StockBLService {
@@ -26,7 +26,7 @@ public interface StockBLService {
 	 * @param time2
 	 * @return 商品库存列表
 	 */
-	public ArrayList<StockInfoVO> showStockInfo(String time1,String time2);
+	public ArrayList<StockVO> showStockInfo(String time1,String time2);
 	
 	/**
 	 * 导出库存盘点信息表格
@@ -39,31 +39,32 @@ public interface StockBLService {
 	 * @param stock
 	 * @return 特定仓库是否有空余
 	 */
-	public boolean stockEnough(String type);
+	public ResultMessage stockEnough(StockType type);
 	
 	/**
 	 * 查询特定仓库容量信息，包括总共、已用、已用占的百分比
 	 * @param stock
 	 * @return 特定仓库已用容量
 	 */
-	public ArrayList<StockCapacityVO> stockCapacity(String type);
+	public StockAreaVO stockCapacity(StockType type);
 	
 	/**
 	 * 核实仓库中快件信息
+	 * @param 快件id
 	 * @return 快件是否在仓库中
 	 */
-	public ResultMessage checkGoods(StockVO stock);
+	public ResultMessage checkGoods(String id);
 	
 	/**
 	 * 快件入库
-	 * @param id
+	 * @param 快件id
 	 * @return 是否入库称成功
 	 */
 	public ResultMessage intoStock(String id);
 	
 	/**
 	 * 快件出库
-	 * @param id
+	 * @param 快件id
 	 * @return 是否出库成功
 	 */
 	public ResultMessage outStock(String id);
