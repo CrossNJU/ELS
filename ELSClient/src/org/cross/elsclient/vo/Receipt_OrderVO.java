@@ -1,3 +1,8 @@
+/**
+ * 订单VO类
+ * @author raychen
+ * @date 2015/10/22
+ */
 package org.cross.elsclient.vo;
 
 import org.cross.elsclient.po.PeoplePO;
@@ -57,14 +62,24 @@ public class Receipt_OrderVO extends ReceiptVO{
 	 * @param receiveTime
 	 * @param expectTime
 	 * @param number
+	 * @param targetPlace
+	 * @param startPlace
+	 * @param pushPeople
+	 * @param receivePeople
 	 */
 	public Receipt_OrderVO(GoodsVO goods,
 			double cost, String receiveTime, 
-			String expectTime, String number){
+			String expectTime, String number,
+			String targetPlace, String startPlace,
+			PeoplePO pushPeople, PeoplePO receivePeople){
 		this.goods = goods;
 		this.expectTime = expectTime;
 		this.cost = cost;
 		this.receiveTime = receiveTime;
+		this.targetPlace = targetPlace;
+		this.startPlace = startPlace;
+		this.pushPeople = pushPeople;
+		this.receivePeople = receivePeople;
 		
 		this.number = number;
 		super.number = number;
