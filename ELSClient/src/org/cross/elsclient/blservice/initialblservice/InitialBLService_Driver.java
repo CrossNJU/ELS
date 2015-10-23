@@ -24,10 +24,7 @@ public class InitialBLService_Driver {
 		
 		System.out.println("期初建账：");
 		
-		ArrayList<InitialVO> list = initialBLService.findById("I20141");
-		System.out.println("查找的账本信息：" + list.get(0).id + "；" + list.get(0).name);
-		
-		list = initialBLService.show();
+		ArrayList<InitialVO> list = initialBLService.show();
 		System.out.println("账本信息：" + list.get(0).id + "；" + list.get(0).name);
 
 		ArrayList<OrganizationVO> organizations = new ArrayList<OrganizationVO>();

@@ -12,7 +12,6 @@ import org.cross.elsclient.po.InitialPO;
 public class InitialDataService_Driver {
 	public void drive(InitialDataService initialDataService) throws RemoteException {
 		System.out.println("期初建账:");
-		initialDataService.findById("I20141");
 		initialDataService.show();
 		initialDataService.insert(new InitialPO("I20141", "2014年期初", null, null, null, null, null));		
 	}

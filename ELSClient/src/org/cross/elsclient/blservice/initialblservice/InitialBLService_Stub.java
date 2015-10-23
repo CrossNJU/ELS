@@ -21,28 +21,6 @@ import org.cross.elsclient.vo.InitialVO;
 public class InitialBLService_Stub implements InitialBLService {
 
 	@Override
-	public ArrayList<InitialVO> findById(String id) {
-		ArrayList<OrganizationVO> organizations = new ArrayList<OrganizationVO>();
-		organizations.add(new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL, "O01001"));
-		
-		ArrayList<PersonnelVO> personnels = new ArrayList<PersonnelVO>();
-		personnels.add(new PersonnelVO("P0100001", "杰利", PositionType.COUNTER));
-		
-		ArrayList<VehicleVO> vehicles = new ArrayList<VehicleVO>();
-		vehicles.add(new VehicleVO("V0100001"));
-		
-		ArrayList<StockVO> stocks = new ArrayList<StockVO>();
-		stocks.add(new StockVO("S00001", 5));
-		
-		ArrayList<AccountVO> accounts = new ArrayList<AccountVO>();
-		accounts.add(new AccountVO("ICBC账户", "6222201234567654321", 500000));
-		
-		ArrayList<InitialVO> list = new ArrayList<InitialVO>();
-		list.add(new InitialVO(id, "2014年期初", organizations, personnels, vehicles, stocks, accounts));
-		return list;
-	}
-
-	@Override
 	public ArrayList<InitialVO> show() {
 		ArrayList<OrganizationVO> organizations = new ArrayList<OrganizationVO>();
 		organizations.add(new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL, "O01001"));

@@ -18,14 +18,6 @@ import org.cross.elsclient.vo.InitialVO;
 public interface InitialBLService {
 
 	/**
-	 * 根据编号查找账本
-	 * 
-	 * @param id
-	 * @return 账本列表
-	 */
-	public ArrayList<InitialVO> findById(String id);
-
-	/**
 	 * 返回所有账本
 	 * 
 	 * @return 账本列表

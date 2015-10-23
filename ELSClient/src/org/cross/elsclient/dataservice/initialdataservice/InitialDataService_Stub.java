@@ -18,14 +18,6 @@ public class InitialDataService_Stub  implements InitialDataService {
 	}
 
 	@Override
-	public ArrayList<InitialPO> findById(String id) throws RemoteException {
-		System.out.println("查找期初建账信息成功");
-		ArrayList<InitialPO> list = new ArrayList<InitialPO>();
-		list.add(new InitialPO(id, "2014年期初", null, null, null, null, null));
-		return list;
-	}
-
-	@Override
 	public ArrayList<InitialPO> show() throws RemoteException {
 		System.out.println("显示期初建账信息成功");
 		ArrayList<InitialPO> list = new ArrayList<InitialPO>();

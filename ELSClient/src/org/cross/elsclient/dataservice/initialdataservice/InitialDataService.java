@@ -14,8 +14,6 @@ public interface InitialDataService {
 
 	public void insert(InitialPO po) throws RemoteException;
 
-	public ArrayList<InitialPO> findById(String id) throws RemoteException;
-
 	public ArrayList<InitialPO> show() throws RemoteException;
 
 }
