@@ -5,8 +5,9 @@
  */
 package org.cross.elsclient.vo;
 
-import org.cross.elsclient.util.Type_receipt;
-import org.cross.elsclient.util.Type_vehicle;
+import org.cross.elsclient.util.City;
+import org.cross.elsclient.util.ReceiptType;
+import org.cross.elsclient.util.VehicleType;
 
 public class Receipt_StockOutVO extends ReceiptVO{
 	/**
@@ -22,12 +23,12 @@ public class Receipt_StockOutVO extends ReceiptVO{
 	/**
 	 * 目的地
 	 */
-	public String place;
+	public City city;
 	
 	/**
 	 * 装运形式
 	 */
-	public Type_vehicle vehicle;
+	public VehicleType vehicle;
 	
 	/**
 	 * 转运单编号
@@ -43,22 +44,21 @@ public class Receipt_StockOutVO extends ReceiptVO{
 	 * 构造方法
 	 * @param goodsNumber
 	 * @param time
-	 * @param place
+	 * @param city
 	 * @param vehicle
 	 * @param transNumber
 	 * @param number
 	 */
 	public Receipt_StockOutVO(String goodsNumber, String time, 
-			String place, Type_vehicle vehicle, String transNumber,
+			City city, VehicleType vehicle, String transNumber,
 			String number){
+		super(number, ReceiptType.STOCKOUT, time);
 		this.goodsNumber = goodsNumber;
 		this.time = time;
-		this.place = place;
+		this.city = city;
 		this.vehicle = vehicle;
 		this.transNumber = transNumber;
 		
 		this.number = number;
-		super.number = number;
-		super.type = Type_receipt.STOCKOUT;
 	}
 }

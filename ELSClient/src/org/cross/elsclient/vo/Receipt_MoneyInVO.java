@@ -7,8 +7,7 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
-import org.cross.elsclient.po.PersonnelPO;
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.ReceiptType;
 
 public class Receipt_MoneyInVO extends ReceiptVO{
 	
@@ -25,7 +24,7 @@ public class Receipt_MoneyInVO extends ReceiptVO{
 	/**
 	 * 收款快递员
 	 */
-	public PersonnelPO person;
+	public PersonnelVO person;
 	
 	/**
 	 * 所有订单条形码号
@@ -44,14 +43,13 @@ public class Receipt_MoneyInVO extends ReceiptVO{
 	 * @param person
 	 * @param number
 	 */
-	public Receipt_MoneyInVO(String time, double money, PersonnelPO person, String number){
+	public Receipt_MoneyInVO(String time, double money, PersonnelVO person, String number){
+		super(number, ReceiptType.MONEYIN, time);
 		this.time = time;
 		this.money = money;
 		this.person = person;
 		
 		this.number = number;
-		super.number = number;
-		super.type = Type_receipt.MONEYIN;
 		this.orderNumbers = new ArrayList<String>();
 	}
 

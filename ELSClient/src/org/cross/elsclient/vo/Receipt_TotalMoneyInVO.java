@@ -7,10 +7,10 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
-import org.cross.elsclient.po.PersonnelPO;
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.City;
+import org.cross.elsclient.util.ReceiptType;
 
-public class Receipt_TotalMoneyIn extends ReceiptVO{
+public class Receipt_TotalMoneyInVO extends ReceiptVO{
 	
 	/**
 	 * 收款日期
@@ -20,7 +20,7 @@ public class Receipt_TotalMoneyIn extends ReceiptVO{
 	/**
 	 * 收款人
 	 */
-	public PersonnelPO person;
+	public PersonnelVO person;
 	
 	/**
 	 * 总收款金额
@@ -35,7 +35,7 @@ public class Receipt_TotalMoneyIn extends ReceiptVO{
 	/**
 	 * 收款地点
 	 */
-	public String place;
+	public City city;
 	
 	/**
 	 * 收款单编号
@@ -46,15 +46,15 @@ public class Receipt_TotalMoneyIn extends ReceiptVO{
 	 * 构造函数
 	 * @param time
 	 * @param person
-	 * @param place
+	 * @param city
 	 * @param number
 	 */
-	public Receipt_TotalMoneyIn(String time, PersonnelPO person,
-			String place, String number) {
-		super(number, Type_receipt.TOTALMONEYIN);
+	public Receipt_TotalMoneyInVO(String time, PersonnelVO person,
+			City city, String number) {
+		super(number, ReceiptType.TOTALMONEYIN, time);
 		this.time = time;
 		this.person = person;
-		this.place = place;
+		this.city = city;
 		this.number = number;
 		
 		this.receipt_Moneyins = new ArrayList<Receipt_MoneyInVO>();

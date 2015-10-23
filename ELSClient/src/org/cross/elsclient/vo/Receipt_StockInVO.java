@@ -5,8 +5,7 @@
  */
 package org.cross.elsclient.vo;
 
-import org.cross.elsclient.po.StockAreaPO;
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.ReceiptType;
 
 public class Receipt_StockInVO extends ReceiptVO{
 	/**
@@ -22,7 +21,7 @@ public class Receipt_StockInVO extends ReceiptVO{
 	/**
 	 * 放到仓库的位置
 	 */
-	public StockAreaPO place;
+	public StockAreaVO place;
 	
 	/**
 	 * 入库单编号
@@ -37,13 +36,12 @@ public class Receipt_StockInVO extends ReceiptVO{
 	 * @param number
 	 */
 	public Receipt_StockInVO(String goodsNumber, String time, 
-			StockAreaPO stock, String number){
+			StockAreaVO stock, String number){
+		super(number, ReceiptType.STOCKIN, time);
 		this.goodsNumber = goodsNumber;
 		this.time = time;
 		this.place = stock;
 		
 		this.number = number;
-		super.number = number;
-		super.type = Type_receipt.STOCKIN;
 	}
 }

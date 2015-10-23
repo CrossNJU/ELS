@@ -5,8 +5,7 @@
  */
 package org.cross.elsclient.vo;
 
-import org.cross.elsclient.po.PersonnelPO;
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.ReceiptType;
 
 public class Receipt_MoneyOutVO extends ReceiptVO{
 
@@ -23,7 +22,7 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 	/**
 	 * 付款人
 	 */
-	public PersonnelPO receivePerson;
+	public PersonnelVO receivePerson;
 	
 	/**
 	 * 付款账号
@@ -55,9 +54,9 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 	 * @param clause
 	 * @param comments
 	 */
-	public Receipt_MoneyOutVO(String number, String time, double money, PersonnelPO receivePerson,
+	public Receipt_MoneyOutVO(String number, String time, double money, PersonnelVO receivePerson,
 			String iD, String clause, String comments) {
-		super(number, Type_receipt.MONEYOUT);
+		super(number, ReceiptType.MONEYOUT, time);
 		this.time = time;
 		this.money = money;
 		this.receivePerson = receivePerson;

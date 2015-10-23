@@ -8,7 +8,7 @@ package org.cross.elsclient.po;
 import java.awt.Image;
 import java.io.Serializable;
 
-import org.cross.elsclient.util.Type_vehicle;
+import org.cross.elsclient.util.VehicleType;
 
 public class VehiclePO implements Serializable{
 	
@@ -50,10 +50,20 @@ public class VehiclePO implements Serializable{
 	/**
 	 * 车辆类型，包括汽车、飞机、火车
 	 */
-	private Type_vehicle type;
+	private VehicleType type;
 	
+	/**
+	 * 构造方法
+	 * @param number
+	 * @param engineNumber
+	 * @param apparatusNumber
+	 * @param buyTime
+	 * @param lastTime
+	 * @param image
+	 * @param type
+	 */
 	public VehiclePO(String number, String engineNumber, String apparatusNumber
-			, String buyTime, String lastTime, Image image,Type_vehicle type){
+			, String buyTime, String lastTime, Image image,VehicleType type){
 		this.number = number;
 		this.engineNumber = engineNumber;
 		this.apparatusNumber = apparatusNumber;
@@ -115,11 +125,11 @@ public class VehiclePO implements Serializable{
 		return this.image;
 	}
 	
-	public void setType(Type_vehicle type){
+	public void setType(VehicleType type){
 		this.type = type;
 	}
 	
-	public Type_vehicle getType(){
+	public VehicleType getType(){
 		return this.type;
 	}
 	

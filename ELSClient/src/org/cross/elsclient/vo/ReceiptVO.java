@@ -5,7 +5,7 @@
  */
 package org.cross.elsclient.vo;
 
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.ReceiptType;
 
 public class ReceiptVO {
 	
@@ -17,20 +17,27 @@ public class ReceiptVO {
 	/**
 	 * 单据类型
 	 */
-	public Type_receipt type;
+	public ReceiptType type;
+	
+	/**
+	 * 单据生成时间
+	 */
+	public String time;
 	
 	/**
 	 * 构造方法
 	 * @param number
 	 * @param type
+	 * @param time
 	 */
-	public ReceiptVO(String number, Type_receipt type){
+	public ReceiptVO(String number, ReceiptType type, String time){
 		this.number = number;
 		this.type = type;
+		this.time = time;
 	}
 	
 	/**
-	 * 构造方法
+	 * 默认构造方法
 	 */
 	public ReceiptVO(){
 		

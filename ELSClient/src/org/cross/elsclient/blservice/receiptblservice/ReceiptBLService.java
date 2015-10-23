@@ -7,6 +7,7 @@ package org.cross.elsclient.blservice.receiptblservice;
 
 import java.util.ArrayList;
 
+import org.cross.elsclient.util.ReceiptType;
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.vo.ReceiptVO;
 
@@ -40,11 +41,11 @@ public interface ReceiptBLService {
 	public ArrayList<ReceiptVO> show();
 	
 	/**
-	 * 根据名称模糊查找
+	 * 根据单据编号查找
 	 * @param names
 	 * @return
 	 */
-	public ArrayList<ReceiptVO> find(String names);
+	public ReceiptVO findByID(String names);
 	
 	/**
 	 * 审批单据
@@ -52,4 +53,19 @@ public interface ReceiptBLService {
 	 * @return
 	 */
 	public ResultMessage check(ReceiptVO vo);
+	
+	/**
+	 * 根据时间查找单据
+	 */
+	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime);
+	
+	/**
+	 * 根据类型查找单据
+	 */
+	public ArrayList<ReceiptVO> findByType(ReceiptType type);
+	
+	/**
+	 * 根据时间、类型查找单据
+	 */
+	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type);
 }

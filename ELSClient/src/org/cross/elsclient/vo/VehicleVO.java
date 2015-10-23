@@ -7,7 +7,7 @@ package org.cross.elsclient.vo;
 
 import java.awt.Image;
 
-import org.cross.elsclient.util.Type_vehicle;
+import org.cross.elsclient.util.VehicleType;
 
 public class VehicleVO {
 	
@@ -44,7 +44,7 @@ public class VehicleVO {
 	/**
 	 * 车辆类型，包括汽车、火车、飞机
 	 */
-	public Type_vehicle type;
+	public VehicleType type;
 	
 	/**
 	 * 构造方法
@@ -57,7 +57,7 @@ public class VehicleVO {
 	 * @param type
 	 */
 	public VehicleVO(String number, String engineNumber, String apparatusNumber
-			, String buyTime, String lastTime, Image image, Type_vehicle type){
+			, String buyTime, String lastTime, Image image, VehicleType type){
 		this.number = number;
 		this.engineNumber = engineNumber;
 		this.apparatusNumber = apparatusNumber;

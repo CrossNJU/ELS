@@ -8,7 +8,7 @@ package org.cross.elsclient.blservice.receiptblservice;
 import java.util.ArrayList;
 
 import org.cross.elsclient.util.ResultMessage;
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.ReceiptType;
 import org.cross.elsclient.vo.ReceiptVO;
 
 public class ReceiptBLService_Stub implements ReceiptBLService{
@@ -22,7 +22,7 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	@Override
 	public ResultMessage delete(ReceiptVO vo) {
 		// TODO Auto-generated method stub
-		if (vo.number == "00001") {
+		if (vo.number == "R120151023000001") {
 			return ResultMessage.SUCCESS;
 		}else return ResultMessage.FAILED;
 	}
@@ -30,7 +30,7 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	@Override
 	public ResultMessage update(ReceiptVO vo) {
 		// TODO Auto-generated method stub
-		if (vo.number == "00001") {
+		if (vo.number == "R120151023000001") {
 			return ResultMessage.SUCCESS;
 		}else return ResultMessage.FAILED;
 	}
@@ -39,23 +39,46 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	public ArrayList<ReceiptVO> show() {
 		// TODO Auto-generated method stub
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
-		list.add(new ReceiptVO("00001", Type_receipt.ORDER));
-		list.add(new ReceiptVO("00002", Type_receipt.ORDER));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
 		return list;
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> find(String names) {
+	public ReceiptVO findByID(String names) {
 		// TODO Auto-generated method stub
-		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
-		list.add(new ReceiptVO("00001", Type_receipt.ORDER));
-		return list;
+		ReceiptVO receipt = new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22");
+		return receipt;
 	}
 
 	@Override
 	public ResultMessage check(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime) {
+		// TODO Auto-generated method stub
+		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		return list;
+	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByType(ReceiptType type) {
+		// TODO Auto-generated method stub
+		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		return list;
+	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type) {
+		// TODO Auto-generated method stub
+		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		return list;
 	}
 
 }

@@ -7,7 +7,8 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.City;
+import org.cross.elsclient.util.ReceiptType;
 
 public class Receipt_TransVO extends ReceiptVO{
 	
@@ -29,27 +30,27 @@ public class Receipt_TransVO extends ReceiptVO{
 	/**
 	 * 出发地
 	 */
-	public String startPlace;
+	public City startCity;
 	
 	/**
 	 * 到达地
 	 */
-	public String arrivePlace;
+	public City arriveCity;
 	
 	/**
 	 * 监装员
 	 */
-	public String observer;
+	public PersonnelVO observer;
 	
 	/**
 	 * 押运员（司机）
 	 */
-	public String driver;
+	public PersonnelVO driver;
 	
 	/**
 	 * 所有装运单号
 	 */
-	public ArrayList<Receipt_OrderVO> orders;
+	public ArrayList<String> orders;
 
 	/**
 	 * 运费
@@ -66,30 +67,29 @@ public class Receipt_TransVO extends ReceiptVO{
 	 * @param time
 	 * @param localNumber
 	 * @param vehicleNumber
-	 * @param startPlace
-	 * @param arrivePlace
+	 * @param startCity
+	 * @param arriveCity
 	 * @param observer
 	 * @param driver
 	 * @param orders
 	 * @param number
 	 */
 	public Receipt_TransVO(String time, String localNumber, 
-			String vehicleNumber, String startPlace, 
-			String arrivePlace, String observer, 
-			String driver, 
+			String vehicleNumber, City startCity, 
+			City arriveCity, PersonnelVO observer, 
+			PersonnelVO driver, 
 			String number){
+		super(number, ReceiptType.TRANS, time);
 		this.time = time;
 		this.localNumber = localNumber;
 		this.vehicleNumber = vehicleNumber;
-		this.startPlace = startPlace;
-		this.arrivePlace = arrivePlace;
+		this.startCity = startCity;
+		this.arriveCity = arriveCity;
 		this.observer = observer;
 		this.driver = driver;
 		
 		this.number = number;
-		super.number = number;
-		super.type = Type_receipt.TRANS;
-		this.orders = new ArrayList<Receipt_OrderVO>();
+		this.orders = new ArrayList<String>();
 		this.cost = 0;
 	}
 }

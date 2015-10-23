@@ -7,34 +7,40 @@ package org.cross.elsclient.po;
 
 import java.io.Serializable;
 
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.ReceiptType;
 
 public class ReceiptPO implements Serializable{
-	
 	
 	/**
 	 * 序列化UID
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 单据编号
 	 */
 	private String number;
 	
 	/**
-	 * 单据类型，包括到达单、收款单、付款单、订单、入库单、出库单、装车转运单
+	 * 单据类型
 	 */
-	private Type_receipt type;
+	private ReceiptType type;
+	
+	/**
+	 * 单据生成时间
+	 */
+	private String time;
 	
 	/**
 	 * 构造方法
 	 * @param number
 	 * @param type
+	 * @param time
 	 */
-	public ReceiptPO(String number, Type_receipt type){
+	public ReceiptPO(String number, ReceiptType type, String time){
 		this.number = number;
 		this.type = type;
+		this.time = time;
 	}
 	
 	/**
@@ -43,20 +49,39 @@ public class ReceiptPO implements Serializable{
 	public ReceiptPO(){
 		
 	}
+
+	public String getNumber() {
+		return number;
+	}
 	
-	public void setNumber(String number){
+
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	
-	public String getNumber(){
-		return this.number;
+
+	public ReceiptType getType() {
+		return type;
 	}
 	
-	public void setType(Type_receipt type){
+
+	public void setType(ReceiptType type) {
 		this.type = type;
 	}
 	
-	public Type_receipt getType(){
-		return this.type;
+
+	public String getTime() {
+		return time;
 	}
+	
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

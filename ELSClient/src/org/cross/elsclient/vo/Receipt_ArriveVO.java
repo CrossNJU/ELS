@@ -5,7 +5,8 @@
  */
 package org.cross.elsclient.vo;
 
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.City;
+import org.cross.elsclient.util.ReceiptType;
 
 public class Receipt_ArriveVO extends ReceiptVO{
 	
@@ -17,7 +18,7 @@ public class Receipt_ArriveVO extends ReceiptVO{
 	/**
 	 * 出发地
 	 */
-	public String place;
+	public City city;
 	
 	/**
 	 * 到达单编号
@@ -32,16 +33,16 @@ public class Receipt_ArriveVO extends ReceiptVO{
 	/**
 	 * 构造方法
 	 * @param time
-	 * @param place
+	 * @param city
 	 * @param number
 	 * @param good
 	 */
-	public Receipt_ArriveVO(String time, String place, String number,
+	public Receipt_ArriveVO(String time, City city, String number,
 			GoodsVO good){
-		super(number, Type_receipt.ARRIVE);
+		super(number, ReceiptType.ARRIVE, time);
 		this.time = time;
-		this.place = place;
-		this.number = super.number;
+		this.city = city;
+		this.number = number;
 		this.good = good;
 	}
 }

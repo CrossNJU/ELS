@@ -5,8 +5,8 @@
  */
 package org.cross.elsclient.vo;
 
-import org.cross.elsclient.po.PeoplePO;
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.City;
+import org.cross.elsclient.util.ReceiptType;
 
 public class Receipt_OrderVO extends ReceiptVO{
 	
@@ -33,12 +33,12 @@ public class Receipt_OrderVO extends ReceiptVO{
 	/**
 	 * 目的地
 	 */
-	public String targetPlace;
+	public City targetPlace;
 	
 	/**
 	 * 出发地
 	 */
-	public String startPlace;
+	public City startPlace;
 	
 	/**
 	 * 订单编号
@@ -48,12 +48,17 @@ public class Receipt_OrderVO extends ReceiptVO{
 	/**
 	 * 寄件人
 	 */
-	public PeoplePO pushPeople;
+	public PeopleVO pushPeople;
 	
 	/**
 	 * 收件人
 	 */
-	public PeoplePO receivePeople;
+	public PeopleVO receivePeople;
+	
+	/**
+	 * 订单创建时间
+	 */
+	public String time;
 	
 	/**
 	 * 构造方法
@@ -65,12 +70,15 @@ public class Receipt_OrderVO extends ReceiptVO{
 	 * @param startPlace
 	 * @param pushPeople
 	 * @param receivePeople
+	 * @param time
 	 */
 	public Receipt_OrderVO(GoodsVO goods,
 			String receiveTime, 
 			String expectTime, String number,
-			String targetPlace, String startPlace,
-			PeoplePO pushPeople, PeoplePO receivePeople){
+			City targetPlace, City startPlace,
+			PeopleVO pushPeople, PeopleVO receivePeople,
+			String time){
+		super(number, ReceiptType.ORDER, time);
 		this.goods = goods;
 		this.expectTime = expectTime;
 		this.receiveTime = receiveTime;
@@ -78,17 +86,21 @@ public class Receipt_OrderVO extends ReceiptVO{
 		this.startPlace = startPlace;
 		this.pushPeople = pushPeople;
 		this.receivePeople = receivePeople;
+		this.time = time;
 		
 		this.number = number;
-		super.number = number;
-		super.type = Type_receipt.ORDER;
 		this.cost = 0;
 	}
 	
-	public Receipt_OrderVO(String number){
+	/**
+	 * 缺省构造方法
+	 * @param number
+	 * @param time
+	 */
+	public Receipt_OrderVO(String number, String time){
+		super(number, ReceiptType.ORDER, time);
 		this.number = number;
-		super.number = number;
-		super.type = Type_receipt.ORDER;
+		this.time = time;
 	}
 	
 }

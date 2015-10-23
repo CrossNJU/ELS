@@ -5,9 +5,15 @@
  */
 package org.cross.elsclient.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PeoplePO {
+public class PeoplePO implements Serializable{
+	/**
+	 * 序列化UID
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 寄出/将收的货物
 	 */
