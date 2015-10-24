@@ -1,10 +1,12 @@
-
+/**
+ * 库存PO类
+ * @author danni
+ * @date 2015/10/24
+ */
 package org.cross.elsclient.po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import org.cross.elsclient.vo.GoodsVO;
 
 public class StockPO implements Serializable{
 	/**

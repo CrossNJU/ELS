@@ -1,3 +1,8 @@
+/**
+ * 快件PO类
+ * @author danni
+ * @date 2015/10/24
+ */
 package org.cross.elsclient.po;
 
 import java.io.Serializable;
@@ -40,6 +45,16 @@ public class GoodsPO implements Serializable{
 	 * 体积
 	 */
 	private int volumeOfGoods;
+	
+	/**
+	 * 入库时间
+	 */
+	private String stockInTime;
+	
+	/**
+	 * 出库时间
+	 */
+	private String stockOutTime;
 	
 	/**
 	 * 构造方法
@@ -101,6 +116,25 @@ public class GoodsPO implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getStockInTime() {
+		return stockInTime;
+	}
+	
+
+	public void setStockInTime(String stockInTime) {
+		this.stockInTime = stockInTime;
+	}
+	
+
+	public String getStockOutTime() {
+		return stockOutTime;
+	}
+	
+
+	public void setStockOutTime(String stockOutTime) {
+		this.stockOutTime = stockOutTime;
 	}
 	
 }
