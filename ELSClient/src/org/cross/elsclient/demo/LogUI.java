@@ -32,7 +32,8 @@ public class LogUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			StockFunctionSelect select = new StockFunctionSelect();
+			logFrame.getContentPane().add(select.stockFunctionSelect);
 		}
 		
 	}
