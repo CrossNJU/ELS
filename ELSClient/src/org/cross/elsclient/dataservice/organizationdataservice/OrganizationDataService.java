@@ -9,6 +9,7 @@ package org.cross.elsclient.dataservice.organizationdataservice;
 import java.util.ArrayList;
 
 import org.cross.elsclient.po.OrganizationPO;
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.OrganizationType;
 
 public interface OrganizationDataService {
@@ -38,7 +39,7 @@ public interface OrganizationDataService {
 	 * @para city
 	 * @return ArrayList<OrganizationVO>
 	 */
-	public ArrayList<OrganizationPO> findByCity(String city);
+	public ArrayList<OrganizationPO> findByCity(City city);
 	
 	/**
 	 * 根据机构类型查找机构

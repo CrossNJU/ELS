@@ -3,6 +3,7 @@ package org.cross.elsclient.dataservice.organizationdataservice;
 import java.util.ArrayList;
 
 import org.cross.elsclient.po.OrganizationPO;
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.OrganizationType;
 import org.cross.elsclient.util.ResultMessage;
 
@@ -25,7 +26,7 @@ public class OrganizationDataService_Stub implements OrganizationDataService{
 	}
 
 	@Override
-	public ArrayList<OrganizationPO> findByCity(String city) {
+	public ArrayList<OrganizationPO> findByCity(City city) {
 		System.out.println("FindByCity Succeed!\n");
 		ArrayList<OrganizationPO> list = new ArrayList<OrganizationPO>();
 		list.add(new OrganizationPO(city, OrganizationType.BUSINESSHALL, "001"));
@@ -36,7 +37,7 @@ public class OrganizationDataService_Stub implements OrganizationDataService{
 	public ArrayList<OrganizationPO> findByType(OrganizationType type) {
 		System.out.println("FindByType Succeed!\n");
 		ArrayList<OrganizationPO> list = new ArrayList<OrganizationPO>();
-		list.add(new OrganizationPO("北京", type, "001"));
+		list.add(new OrganizationPO(City.BEIJING, type, "001"));
 		return list;
 	}
 
@@ -44,7 +45,7 @@ public class OrganizationDataService_Stub implements OrganizationDataService{
 	public ArrayList<OrganizationPO> findById(String id) {
 		System.out.println("FindById Succeed!\n");
 		ArrayList<OrganizationPO> list = new ArrayList<OrganizationPO>();
-		list.add(new OrganizationPO("北京", OrganizationType.BUSINESSHALL, id));
+		list.add(new OrganizationPO(City.BEIJING, OrganizationType.BUSINESSHALL, id));
 		return list;
 	}
 
@@ -52,7 +53,7 @@ public class OrganizationDataService_Stub implements OrganizationDataService{
 	public ArrayList<OrganizationPO> show() {
 		System.out.println("Show Succeed!\n");
 		ArrayList<OrganizationPO> list = new ArrayList<OrganizationPO>();
-		list.add(new OrganizationPO("北京", OrganizationType.BUSINESSHALL, "001"));
+		list.add(new OrganizationPO(City.BEIJING, OrganizationType.BUSINESSHALL, "001"));
 		return list;
 	}
 

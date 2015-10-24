@@ -33,36 +33,36 @@ public class UserBLService_Stub implements UserBLService {
 	@Override
 	public ArrayList<UserVO> findByName(String name) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO("001", name, UserType.COUNTER));
+		list.add(new UserVO("12345678", name, UserType.COUNTER));
 		return list;
 	}
 
 	@Override
 	public ArrayList<UserVO> findByType(UserType type) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO("001", "赛罗奥特曼", type));
+		list.add(new UserVO("12345678","赛罗奥特曼", type));
 		return list;
 	}
 
 	@Override
 	public ArrayList<UserVO> findById(String id) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO(id, "梦优比斯奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "梦优比斯奥特曼", UserType.COUNTER));
 		return list;
 	}
 
 	@Override
 	public ArrayList<UserVO> show() {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO("001", "迪迦奥特曼", UserType.COUNTER));
-		list.add(new UserVO("002", "戴拿奥特曼", UserType.COUNTER));
-		list.add(new UserVO("003", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "迪迦奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678","戴拿奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
 		return list;
 	}
 
 	@Override
-	public ResultMessage login(String id, String password) {
-		return ResultMessage.SUCCESS;
+	public UserType login(String id, String password) {
+		return UserType.COUNTER;
 	}
 
 	@Override

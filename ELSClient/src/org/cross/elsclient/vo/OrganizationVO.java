@@ -1,5 +1,6 @@
 package org.cross.elsclient.vo;
 
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.OrganizationType;
 
 /**
@@ -11,7 +12,7 @@ public class OrganizationVO {
 	/**
 	 * 所在城市
 	 */
-	public String city;
+	public City city;
 	
 	/**
 	 * 机构ID
@@ -29,7 +30,7 @@ public class OrganizationVO {
 	 * @author:Moo
 	 * @para:city, type, id
 	 */
-	public OrganizationVO(String city, OrganizationType type, String id) {
+	public OrganizationVO(City city, OrganizationType type, String id) {
 		this.city = city;
 		this.id = id;
 		this.type = type;

@@ -69,7 +69,7 @@ public interface UserBLService {
 	 * @para password
 	 * @return ResultMessage
 	 */
-	public ResultMessage login(String id, String password);
+	public UserType login(String id, String password);
 	
 	/**
 	 * 注销

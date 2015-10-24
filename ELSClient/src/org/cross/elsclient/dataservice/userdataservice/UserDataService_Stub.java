@@ -26,7 +26,7 @@ public class UserDataService_Stub implements UserDataService {
 	public ArrayList<UserPO> findById(String id) {
 		System.out.println("FindById Succeed!\n");
 		ArrayList<UserPO> list = new ArrayList<UserPO>();
-		list.add(new UserPO(id, "艾斯奥特曼", UserType.BUSINESSHALLCLERK));
+		list.add(new UserPO("12345678","艾斯奥特曼", UserType.BUSINESSHALLCLERK));
 		return list;
 	}
 
@@ -34,7 +34,7 @@ public class UserDataService_Stub implements UserDataService {
 	public ArrayList<UserPO> findByType(UserType type) {
 		System.out.println("FindById Succeed!\n");
 		ArrayList<UserPO> list = new ArrayList<UserPO>();
-		list.add(new UserPO("001", "泰罗奥特曼", type));
+		list.add(new UserPO("12345678", "泰罗奥特曼", type));
 		return list;
 	}
 
@@ -42,7 +42,7 @@ public class UserDataService_Stub implements UserDataService {
 	public ArrayList<UserPO> findByName(String name) {
 		System.out.println("FindById Succeed!\n");
 		ArrayList<UserPO> list = new ArrayList<UserPO>();
-		list.add(new UserPO("001", name, UserType.BUSINESSHALLCLERK));
+		list.add(new UserPO("12345678", name, UserType.BUSINESSHALLCLERK));
 		return list;
 	}
 
@@ -50,7 +50,7 @@ public class UserDataService_Stub implements UserDataService {
 	public ArrayList<UserPO> show() {
 		System.out.println("FindById Succeed!\n");
 		ArrayList<UserPO> list = new ArrayList<UserPO>();
-		list.add(new UserPO("001", "佐菲奥特曼", UserType.BUSINESSHALLCLERK));
+		list.add(new UserPO("12345678","佐菲奥特曼", UserType.BUSINESSHALLCLERK));
 		return list;
 	}
 
