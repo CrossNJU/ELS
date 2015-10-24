@@ -11,7 +11,7 @@ public class UserBLService_Driver {
 		
 		ResultMessage result;
 		System.out.print("添加用户返回信息：");
-		result = userBLService.add(new UserVO("001", "初代奥特曼", UserType.COUNTER));
+		result = userBLService.add(new UserVO("12345678","初代奥特曼", UserType.COUNTER));
 		if(result == ResultMessage.SUCCESS){
 			System.out.print("用户添加成功\n");
 		}else{
@@ -19,7 +19,7 @@ public class UserBLService_Driver {
 		}
 		
 		System.out.print("删除用户返回信息：");
-		result = userBLService.add(new UserVO("001", "初代奥特曼", UserType.COUNTER));
+		result = userBLService.add(new UserVO("12345678", "初代奥特曼", UserType.COUNTER));
 		if(result == ResultMessage.SUCCESS){
 			System.out.print("用户删除成功\n");
 		}else{
@@ -27,7 +27,7 @@ public class UserBLService_Driver {
 		}
 		
 		System.out.print("修改用户返回信息：");
-		result = userBLService.add(new UserVO("001", "初代奥特曼", UserType.COUNTER));
+		result = userBLService.add(new UserVO("12345678","初代奥特曼", UserType.COUNTER));
 		if(result == ResultMessage.SUCCESS){
 			System.out.print("用户修改成功\n");
 		}else{

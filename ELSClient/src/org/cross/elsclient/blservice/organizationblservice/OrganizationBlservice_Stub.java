@@ -2,6 +2,7 @@ package org.cross.elsclient.blservice.organizationblservice;
 
 import java.util.ArrayList;
 
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.OrganizationType;
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.vo.OrganizationVO;
@@ -10,7 +11,7 @@ public class OrganizationBlservice_Stub implements OrganizationBLService {
 
 	@Override
 	public ResultMessage add(OrganizationVO vo) {
-		if(vo.city.equals("北京") && vo.type == OrganizationType.BUSINESSHALL){
+		if(vo.city == City.BEIJING && vo.type == OrganizationType.BUSINESSHALL){
 			return ResultMessage.FAILED;
 		}
 		return ResultMessage.SUCCESS;
@@ -25,7 +26,7 @@ public class OrganizationBlservice_Stub implements OrganizationBLService {
 
 	@Override
 	public ResultMessage update(OrganizationVO vo) {
-		if(vo.city.equals("北京") && vo.type == OrganizationType.BUSINESSHALL){
+		if(vo.city == City.BEIJING && vo.type == OrganizationType.BUSINESSHALL){
 			return ResultMessage.FAILED;
 		}
 		
@@ -35,15 +36,15 @@ public class OrganizationBlservice_Stub implements OrganizationBLService {
 	@Override
 	public ArrayList<OrganizationVO> show() {
 		ArrayList<OrganizationVO> list = new ArrayList<OrganizationVO>();
-		list.add(new OrganizationVO("北京", OrganizationType.BUSINESSHALL,"001" ));
-		list.add(new OrganizationVO("上海", OrganizationType.TRANSITCENTER,"002" ));
-		list.add(new OrganizationVO("广州", OrganizationType.TRANSITCENTER,"003" ));
-		list.add(new OrganizationVO("南京", OrganizationType.TRANSITCENTER,"004" ));
+		list.add(new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL,"001" ));
+		list.add(new OrganizationVO(City.SHANGHAI, OrganizationType.TRANSITCENTER,"002" ));
+		list.add(new OrganizationVO(City.GUANGZHOU, OrganizationType.TRANSITCENTER,"003" ));
+		list.add(new OrganizationVO(City.NANJING, OrganizationType.TRANSITCENTER,"004" ));
 		return list;
 	}
 
 	@Override
-	public ArrayList<OrganizationVO> findByCity(String city) {
+	public ArrayList<OrganizationVO> findByCity(City city) {
 		ArrayList<OrganizationVO> list = new ArrayList<OrganizationVO>();
 		list.add(new OrganizationVO(city, OrganizationType.BUSINESSHALL,"001" ));
 		return list;
@@ -52,14 +53,14 @@ public class OrganizationBlservice_Stub implements OrganizationBLService {
 	@Override
 	public ArrayList<OrganizationVO> findByType(OrganizationType type) {
 		ArrayList<OrganizationVO> list = new ArrayList<OrganizationVO>();
-		list.add(new OrganizationVO("北京", type ,"001" ));
+		list.add(new OrganizationVO(City.BEIJING, type ,"001" ));
 		return list;
 	}
 
 	@Override
 	public ArrayList<OrganizationVO> findById(String id) {
 		ArrayList<OrganizationVO> list = new ArrayList<OrganizationVO>();
-		list.add(new OrganizationVO("北京", OrganizationType.BUSINESSHALL ,id ));
+		list.add(new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL ,id ));
 		return list;
 	}
 

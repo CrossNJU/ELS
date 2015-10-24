@@ -1,5 +1,6 @@
 package org.cross.elsclient.po;
 
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.OrganizationType;
 
 /**
@@ -12,7 +13,7 @@ public class OrganizationPO
 	/**
 	 * 所在城市
 	 */
-	private String city;
+	private City city;
 	
 	/**
 	 * 机构ID
@@ -30,17 +31,17 @@ public class OrganizationPO
 	 * @author:Moo
 	 * @para:city, type, id
 	 */
-	public OrganizationPO(String city, OrganizationType type, String id) {
+	public OrganizationPO(City city, OrganizationType type, String id) {
 		this.city = city;
 		this.id = id;
 		this.type = type;
 	}
 
-	public String getCity() {
+	public City getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(City city) {
 		this.city = city;
 	}
 

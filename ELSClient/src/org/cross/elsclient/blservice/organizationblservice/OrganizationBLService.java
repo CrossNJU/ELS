@@ -10,6 +10,7 @@ package org.cross.elsclient.blservice.organizationblservice;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.OrganizationType;
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.vo.OrganizationVO;
@@ -50,7 +51,7 @@ public interface OrganizationBLService {
 	 * @para city
 	 * @return ArrayList<OrganizationVO>
 	 */
-	public ArrayList<OrganizationVO> findByCity(String city);
+	public ArrayList<OrganizationVO> findByCity(City city);
 	
 	/**
 	 * 根据机构类型查找机构
