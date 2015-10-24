@@ -2,7 +2,7 @@ package org.cross.elsclient.blservice.analysisblservice;
 
 import java.util.ArrayList;
 
-import org.cross.elsclient.util.Type_receipt;
+import org.cross.elsclient.util.ReceiptType;
 import org.cross.elsclient.vo.ReceiptVO;
 
 public class AnalysisBLService_Stub implements AnalysisBLService {
@@ -20,8 +20,8 @@ public class AnalysisBLService_Stub implements AnalysisBLService {
 			String endTime) {
 		ArrayList<ReceiptVO> table = new ArrayList<ReceiptVO>();
 		
-		table.add(new ReceiptVO("00001", Type_receipt.MONEYIN));
-		table.add(new ReceiptVO("00002", Type_receipt.MONEYIN));
+		table.add(new ReceiptVO("00001", ReceiptType.MONEYIN,"2015-10-10"));
+		table.add(new ReceiptVO("00002", ReceiptType.MONEYIN,"2015-10-10"));
 		
 		return table;
 	}
@@ -31,9 +31,8 @@ public class AnalysisBLService_Stub implements AnalysisBLService {
 			String endTime) {
 		ArrayList<ReceiptVO> table = new ArrayList<ReceiptVO>();
 		
-		table.add(new ReceiptVO("00001", Type_receipt.MONEYOUT));
-		table.add(new ReceiptVO("00002", Type_receipt.MONEYOUT));
-		
+		table.add(new ReceiptVO("00001", ReceiptType.MONEYOUT,"2015-10-10"));
+		table.add(new ReceiptVO("00002", ReceiptType.MONEYOUT,"2015-10-10"));
 		return table;
 	}
 
