@@ -8,11 +8,12 @@ package org.cross.elsclient.dataservice.goodsdataservice;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.po.GoodsPO;
+import org.cross.elsclient.util.City;
 
 public class GoodsDataService_Driver {
 	public void driver(GoodsDataService goodsDataService) throws RemoteException{
 		
-		GoodsPO goods = new GoodsPO(45, 43, "南大仙林校区");
+		GoodsPO goods = new GoodsPO(45, 43, City.NANJING);
 		
 		System.out.println("更新快件信息");
 		goodsDataService.update(goods);

@@ -1,8 +1,16 @@
 package org.cross.elsclient.po;
 
+import java.io.Serializable;
+
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.GoodsState;
 
-public class GoodsPO {
+public class GoodsPO implements Serializable{
+	/**
+	 * 序列化UID
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 历史轨迹
 	 */
@@ -16,7 +24,7 @@ public class GoodsPO {
 	/**
 	 * 当前位置
 	 */
-	private String currentLocate;
+	private City currentLocate;
 	
 	/**
 	 * 状态
@@ -36,7 +44,7 @@ public class GoodsPO {
 	/**
 	 * 构造方法
 	 */
-	public GoodsPO(int weight,int volum,String currentLocate){
+	public GoodsPO(int weight,int volum,City currentLocate){
 		this.weightOfGoods = weight;
 		this.volumeOfGoods = volum;
 		this.currentLocate = currentLocate;
@@ -63,10 +71,10 @@ public class GoodsPO {
 		this.order = order;
 	}
 	
-	public String getCurrentLocate(){
+	public City getCurrentLocate(){
 		return currentLocate;
 	}
-	public void setCurrentLocate(String currentLocate){
+	public void setCurrentLocate(City currentLocate){
 		this.currentLocate = currentLocate;
 	}
 	
@@ -89,6 +97,10 @@ public class GoodsPO {
 	}
 	public void setGoodsVolume(int volumeOfGoods){
 		this.volumeOfGoods = volumeOfGoods;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 }

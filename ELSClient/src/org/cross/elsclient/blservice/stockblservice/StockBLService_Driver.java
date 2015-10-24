@@ -24,7 +24,7 @@ public class StockBLService_Driver {
 //		System.out.println("仓库中存放的快递 ： " + stocks.get(0).goodsList.get(0));
 			
 		System.out.println("~~~库存查看~~~");
-		ArrayList<StockVO> list = stockBLService.showStockInfo("2015/10/18/00/00", "2015/10/20/00/00");
+		ArrayList<StockVO> list = stockBLService.showStockInfo("2015-10-22 10:23:22", "2015-10-22 10:26:22");
 //		System.out.println("起始时间 ： " + list.get(0).startTime);
 //		System.out.println("终止时间 ： " + list.get(0).endTime);
 		System.out.println("出库数量 ： " + list.get(0).numOut);
@@ -57,7 +57,7 @@ public class StockBLService_Driver {
 		System.out.println("仓库已用容量 ： " + stockCapacity.usedCapacity);
 		
 		System.out.println("~~~核实快件信息~~~");
-		ResultMessage goodsMessage = stockBLService.checkGoods("36521748");
+		ResultMessage goodsMessage = stockBLService.checkGoods("R120151020000002");
 		if (goodsMessage == ResultMessage.SUCCESS) {
 			System.out.println("快件在仓库里");
 		}else{

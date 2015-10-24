@@ -5,11 +5,17 @@
  */
 package org.cross.elsclient.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.cross.elsclient.util.StockType;
 
-public class StockAreaPO {
+public class StockAreaPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 特定仓库类型
 	 */
@@ -28,7 +34,7 @@ public class StockAreaPO {
 	/**
 	 * 特定仓库中存放的快递
 	 */
-	private static ArrayList<GoodsPO> goodsList;
+	private ArrayList<GoodsPO> goodsList;
 
 	/**
 	 * 构造方法
@@ -69,6 +75,10 @@ public class StockAreaPO {
 	}
 	public void setGoodList(ArrayList<GoodsPO> po){
 		this.goodsList = po;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 }

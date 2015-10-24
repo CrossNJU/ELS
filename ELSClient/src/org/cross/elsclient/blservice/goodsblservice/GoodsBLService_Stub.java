@@ -7,6 +7,7 @@ package org.cross.elsclient.blservice.goodsblservice;
 
 import java.util.ArrayList;
 
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.GoodsState;
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.vo.GoodsVO;
@@ -22,7 +23,7 @@ public class GoodsBLService_Stub implements GoodsBLService{
 	@Override
 	public GoodsVO findGoods(String id) {
 		// TODO Auto-generated method stub
-		GoodsVO goods = new GoodsVO(33, 50,"南大仙林校区");
+		GoodsVO goods = new GoodsVO(33, 50,City.NANJING);
 		return goods;
 	}
 	

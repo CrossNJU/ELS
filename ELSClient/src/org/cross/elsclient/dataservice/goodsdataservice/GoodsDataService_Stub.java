@@ -6,6 +6,7 @@
 package org.cross.elsclient.dataservice.goodsdataservice;
 
 import org.cross.elsclient.po.GoodsPO;
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.vo.GoodsVO;
 
 public class GoodsDataService_Stub implements GoodsDataService{
@@ -20,7 +21,7 @@ public class GoodsDataService_Stub implements GoodsDataService{
 	@Override
 	public GoodsPO show(String id) {
 		// TODO Auto-generated method stub
-		GoodsPO po = new GoodsPO(65, 17, "南大仙林校区");
+		GoodsPO po = new GoodsPO(65, 17, City.NANJING);
 		System.out.println("快件信息查看成功");
 		return po;
 	}

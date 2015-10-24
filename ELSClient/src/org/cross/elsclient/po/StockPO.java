@@ -1,11 +1,16 @@
 
 package org.cross.elsclient.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.cross.elsclient.vo.GoodsVO;
 
-public class StockPO {
+public class StockPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 仓库编号
 	 */
@@ -128,6 +133,9 @@ public class StockPO {
 	}
 	public void setNumInStock(int numInStock){
 		this.numInStock = numInStock;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

@@ -6,6 +6,7 @@
 package org.cross.elsclient.vo;
 
 import org.cross.elsclient.po.HistoryPO;
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.GoodsState;
 
 public class GoodsVO {
@@ -17,7 +18,7 @@ public class GoodsVO {
 	/**
 	 * 当前位置
 	 */
-	public String currentLocate;
+	public City currentLocate;
 	
 	/**
 	 * 状态
@@ -37,20 +38,20 @@ public class GoodsVO {
 	/**
 	 * 历史轨迹
 	 */
-	public HistoryPO historyPO;
+	public HistoryVO historyVO;
 	
 	/**
 	 * 构造方法
 	 * 
 	 */
-	public GoodsVO(int weight,int volum,String currentLocate){
+	public GoodsVO(int weight,int volum,City currentLocate){
 		this.weightOfGoods = weight;
 		this.volumeOfGoods = volum;
 		this.currentLocate = currentLocate;
 		
 		this.state = GoodsState.LIVE;
 		this.order = null;
-		this.historyPO = null;
+		this.historyVO = null;
 	}
 
 }

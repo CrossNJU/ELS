@@ -7,6 +7,7 @@ package org.cross.elsclient.blservice.goodsblservice;
 
 import java.util.ArrayList;
 
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.GoodsState;
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.vo.GoodsVO;
@@ -56,7 +57,7 @@ public class GoodsBLService_Driver {
 //		}
 		
 		System.out.println("~~~更新快件信息~~~");
-		ResultMessage updateResultMessage = goodsBLService.updateGoodsLocate(new GoodsVO(54, 22,"南大仙林校区"));
+		ResultMessage updateResultMessage = goodsBLService.updateGoodsLocate(new GoodsVO(54, 22,City.NANJING));
 		if (updateResultMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");
 		}else{
@@ -64,16 +65,14 @@ public class GoodsBLService_Driver {
 		}
 		
 		System.out.println("~~~查询快件信息~~~");
-		GoodsVO goodsInfo = goodsBLService.findGoods("26572899");
+		GoodsVO goodsInfo = goodsBLService.findGoods("R1201510200000002");
 //		System.out.println("快件编号 ： " + goodsInfo.goodsIdentifier);
 //		System.out.println("目的地 ：" + goodsInfo.destination);
 //		System.out.println("出发地 ： " + goodsInfo.departurePalce);
 //		System.out.println("收件人信息 ： " + goodsInfo.receptorInfo);
 //		System.out.println("寄件人信息 ： " + goodsInfo.senderInfo);
-		System.out.println("当前位置 ： " + goodsInfo.currentLocate);
-		if (goodsInfo.state == GoodsState.LIVE) {
-			System.out.println("快件当前状态 完好");
-		}
+		System.out.println("当前位置 ： " + goodsInfo.currentLocate.toString());
+		System.out.println("快件当前状态 ： " + goodsInfo.state.toString());
 		System.out.println("快件实际重量 ： " + goodsInfo.weightOfGoods);
 		System.out.println("快件体积 ： " + goodsInfo.volumeOfGoods);
 //		System.out.println("件内名称 ： " + goodsInfo.nameOfGoods);
