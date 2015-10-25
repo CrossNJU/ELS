@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import org.cross.elsclient.util.StockOperationType;
 import org.cross.elsclient.util.StockType;
+import org.cross.elsclient.vo.StockOperationVO;
 
 public class StockOperationPO implements Serializable{
 	
@@ -112,4 +113,8 @@ public class StockOperationPO implements Serializable{
 		return serialVersionUID;
 	}
 	
+	public StockOperationVO toVO(){
+		StockOperationVO vo = new StockOperationVO(this.time, this.type, this.good.toVO(), this.money, this.place);
+		return vo;
+	}
 }

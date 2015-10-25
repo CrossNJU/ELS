@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.dataservice.stockdataservice.StockDataService;
 import org.cross.elsclient.po.StockPO;
+import org.cross.elsclient.util.CompareTime;
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.util.StockType;
 import org.cross.elsclient.vo.StockAreaVO;
@@ -18,9 +19,9 @@ public class StockBLImpl implements StockBLService{
 	StockDataService stockData;
 	String stockManager;
 	
-	public StockBLImpl(StockDataService stockdata, String ID){
+	public StockBLImpl(StockDataService stockdata){
 		this.stockData = stockdata;
-		this.stockManager = ID;
+		this.stockManager = null;
 	}
 	
 	@Override
@@ -31,24 +32,22 @@ public class StockBLImpl implements StockBLService{
 
 	@Override
 	public ArrayList<StockOperationVO> showStockInfo(String time1, String time2) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<StockOperationVO> ops = new ArrayList<StockOperationVO>();
+		for (int i = 0; i < stockvo.stockOperations.size(); i++) {
+			StockOperationVO vo = stockvo.stockOperations.get(i);
+			if(CompareTime.compare(vo.time, time1)==1 || 
+					CompareTime.compare(time2, vo.time)==1){
+				ops.add(vo);
+			}
+		}
+		return ops;
 	}
 
 	@Override
 	public StockVO findStock(String ID) throws RemoteException {
 		// TODO Auto-generated method stub
 		stockpo = stockData.findStock(ID);
-		stockvo = new StockVO(ID, stockpo.getNumOfBooths());
-		stockvo.moneyIn = stockpo.getMoneyIn();
-		stockvo.moneyOut = stockpo.getMoneyOut();
-		stockvo.numIn = stockpo.getNumIn();
-		stockvo.numInStock = stockpo.getNumInStock();
-		stockvo.numOut = stockpo.getNumOut();
-		stockvo.usedBooths = stockpo.getUsedBooths();
-		stockvo.specialStockPOs = stockpo.getSpecialStockPOs();
-		stockvo.stockOperations = stockpo.getStockOperations();
-		return null;
+		return stockpo.toVO();
 	}
 
 	@Override

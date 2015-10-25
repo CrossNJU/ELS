@@ -8,6 +8,10 @@ package org.cross.elsclient.po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockOperationVO;
+import org.cross.elsclient.vo.StockVO;
+
 public class StockPO implements Serializable{
 	
 	/**
@@ -155,5 +159,34 @@ public class StockPO implements Serializable{
 	
 	public void setStockOperations(ArrayList<StockOperationPO> stockOperations) {
 		this.stockOperations = stockOperations;
+	}
+	
+	public ArrayList<StockAreaVO> getAreasVO(){
+		ArrayList<StockAreaVO> areas = new ArrayList<StockAreaVO>();
+		for (int i = 0; i < specialStockPOs.size(); i++) {
+			areas.add(specialStockPOs.get(i).toVO());
+		}
+		return areas;
+	}
+	
+	public ArrayList<StockOperationVO> getopVO(){
+		ArrayList<StockOperationVO> ops = new ArrayList<StockOperationVO>();
+		for (int i = 0; i < stockOperations.size(); i++) {
+			ops.add(stockOperations.get(i).toVO());
+		}
+		return ops;
+	}
+	
+	public StockVO toVO(){
+		StockVO stockvo = new StockVO(this.stockIdentifier, this.numOfBooths);
+		stockvo.moneyIn = this.moneyIn;
+		stockvo.moneyOut = this.moneyOut;
+		stockvo.numIn = this.numIn;
+		stockvo.numInStock = this.numInStock;
+		stockvo.numOut = this.numOut;
+		stockvo.usedBooths = this.usedBooths;
+		stockvo.specialStockPOs = getAreasVO();
+		stockvo.stockOperations = getopVO();
+		return stockvo;
 	}
 }

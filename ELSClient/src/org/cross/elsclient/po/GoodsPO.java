@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.GoodsState;
+import org.cross.elsclient.vo.GoodsVO;
 
 public class GoodsPO implements Serializable{
 	/**
@@ -108,4 +109,8 @@ public class GoodsPO implements Serializable{
 		return serialVersionUID;
 	}
 	
+	public GoodsVO toVO(){
+		GoodsVO vo = new GoodsVO(this.weightOfGoods, this.volumeOfGoods, this.currentLocate);
+		return vo;
+	}
 }

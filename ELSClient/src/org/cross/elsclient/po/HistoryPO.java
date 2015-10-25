@@ -5,6 +5,8 @@
  */
 package org.cross.elsclient.po;
 
+import org.cross.elsclient.vo.HistoryVO;
+
 public class HistoryPO {
 	/**
 	 * 到达某地时间
@@ -35,5 +37,10 @@ public class HistoryPO {
 	
 	public String getPlace(){
 		return this.place;
+	}
+	
+	public HistoryVO toVO(){
+		HistoryVO vo = new HistoryVO(this.time, this.place);
+		return vo;
 	}
 }

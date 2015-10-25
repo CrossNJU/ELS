@@ -7,8 +7,6 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
-import org.cross.elsclient.po.StockAreaPO;
-
 public class StockVO {
 	/**
 	 * 仓库编号
@@ -18,7 +16,7 @@ public class StockVO {
 	/**
 	 * 仓库中的不同类型仓库
 	 */
-	public ArrayList<StockAreaPO> specialStockPOs;
+	public ArrayList<StockAreaVO> specialStockPOs;
 	
 	/**
 	 * 仓库操作
@@ -70,7 +68,7 @@ public class StockVO {
 		this.stockIdentifier = stockID;
 		this.numOfBooths = numOfBooth;
 		
-		this.specialStockPOs = new ArrayList<StockAreaPO>();
+		this.specialStockPOs = new ArrayList<StockAreaVO>();
 		this.stockOperations = new ArrayList<StockOperationVO>();
 		this.usedBooths = 0;
 		this.numOut = 0;

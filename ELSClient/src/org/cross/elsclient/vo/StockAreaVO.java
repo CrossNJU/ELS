@@ -7,7 +7,6 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
-import org.cross.elsclient.po.GoodsPO;
 import org.cross.elsclient.util.StockType;
 
 public class StockAreaVO {
@@ -30,7 +29,7 @@ public class StockAreaVO {
 	/**
 	 * 特定仓库中存放的快递
 	 */
-	public static ArrayList<GoodsPO> goodsList;
+	public ArrayList<GoodsVO> goodsList;
 
 	/**
 	 * 构造方法
@@ -42,6 +41,6 @@ public class StockAreaVO {
 		this.totalCapacity = totalCapacity;
 		
 		usedCapacity = 0;
-		goodsList = new ArrayList<GoodsPO>();
+		goodsList = new ArrayList<GoodsVO>();
 	}
 }
