@@ -14,10 +14,10 @@ import org.cross.elsclient.vo.StockVO;
 
 public class StockBLImpl implements StockBLService{
 	
-	StockVO stockvo;
-	StockPO stockpo;
-	StockDataService stockData;
-	String stockManager;
+	public StockVO stockvo;
+	public StockPO stockpo;
+	public StockDataService stockData;
+	public String stockManager;
 	
 	public StockBLImpl(StockDataService stockdata){
 		this.stockData = stockdata;
