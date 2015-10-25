@@ -7,9 +7,13 @@ package org.cross.elsclient.blservice.stockblservice;
 
 import java.util.ArrayList;
 
+import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.ResultMessage;
+import org.cross.elsclient.util.StockOperationType;
 import org.cross.elsclient.util.StockType;
+import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 
 public class StockBLService_Stub implements StockBLService{
@@ -22,9 +26,9 @@ public class StockBLService_Stub implements StockBLService{
 	}
 
 	@Override
-	public ArrayList<StockVO> showStockInfo(String time1, String time2) {
-		ArrayList<StockVO> list = new ArrayList<StockVO>();
-		list.add(new StockVO("S00001",30));
+	public ArrayList<StockOperationVO> showStockInfo(String time1, String time2) {
+		ArrayList<StockOperationVO> list = new ArrayList<StockOperationVO>();
+		list.add(new StockOperationVO("2015-10-25 10:10:10", StockOperationType.STOCKIN, new GoodsVO(20, 20, City.NANJING), 100, StockType.COMMON));
 		return list;
 	}
 
@@ -58,6 +62,12 @@ public class StockBLService_Stub implements StockBLService{
 
 	@Override
 	public StockAreaVO stockCapacity(StockType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StockVO findStock(String ID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

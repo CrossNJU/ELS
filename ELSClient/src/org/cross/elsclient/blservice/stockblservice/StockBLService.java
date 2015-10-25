@@ -5,11 +5,13 @@
  */
 package org.cross.elsclient.blservice.stockblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.util.StockType;
 import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 
 public interface StockBLService {
@@ -26,7 +28,15 @@ public interface StockBLService {
 	 * @param time2
 	 * @return 商品库存列表
 	 */
-	public ArrayList<StockVO> showStockInfo(String time1,String time2);
+	public ArrayList<StockOperationVO> showStockInfo(String time1,String time2);
+	
+	/**
+	 * 寻找仓库
+	 * @param ID
+	 * @return 该仓库管理人员管理的仓库
+	 * @throws RemoteException 
+	 */
+	public StockVO findStock(String ID) throws RemoteException;
 	
 	/**
 	 * 导出库存盘点信息表格

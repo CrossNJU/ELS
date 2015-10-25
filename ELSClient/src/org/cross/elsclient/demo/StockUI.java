@@ -4,13 +4,13 @@ import javax.swing.JFrame;
 
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
 
-public class StockFunctionSelect {
+public class StockUI {
 	
 	JFrame stockFunctionSelect;
 	
 	StockBLService stockbl;
 	
-	public StockFunctionSelect(StockBLService stockbl){
+	public StockUI(StockBLService stockbl){
 		
 		this.stockbl = stockbl;
 		

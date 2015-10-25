@@ -7,10 +7,10 @@ package org.cross.elsclient.blservice.stockblservice;
 
 import java.util.ArrayList;
 
-import org.cross.elsclient.po.StockAreaPO;
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.util.StockType;
 import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 
 public class StockBLService_Driver {
@@ -24,14 +24,14 @@ public class StockBLService_Driver {
 //		System.out.println("仓库中存放的快递 ： " + stocks.get(0).goodsList.get(0));
 			
 		System.out.println("~~~库存查看~~~");
-		ArrayList<StockVO> list = stockBLService.showStockInfo("2015-10-22 10:23:22", "2015-10-22 10:26:22");
+		ArrayList<StockOperationVO> list = stockBLService.showStockInfo("2015-10-22 10:23:22", "2015-10-22 10:26:22");
 //		System.out.println("起始时间 ： " + list.get(0).startTime);
 //		System.out.println("终止时间 ： " + list.get(0).endTime);
-		System.out.println("出库数量 ： " + list.get(0).numOut);
-		System.out.println("出库数量 ： " + list.get(0).numIn);
-		System.out.println("出库金额 ： " + list.get(0).moneyOut);
-		System.out.println("入库金额 ： " + list.get(0).moneyIn);
-		System.out.println("库存数量 ： " + list.get(0).numInStock);
+//		System.out.println("出库数量 ： " + list.get(0).numOut);
+//		System.out.println("出库数量 ： " + list.get(0).numIn);
+//		System.out.println("出库金额 ： " + list.get(0).moneyOut);
+//		System.out.println("入库金额 ： " + list.get(0).moneyIn);
+//		System.out.println("库存数量 ： " + list.get(0).numInStock);
 		System.out.println("存储位置 ： ");
 		
 		System.out.println("~~~导出库存信息表格~~~");

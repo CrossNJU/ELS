@@ -2,21 +2,23 @@ package org.cross.elsclient.demo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class LogUI {
+public class LoginUI {
 	
 	JFrame logFrame;
 	JButton button;
 	
+	UIFactory uiFactory;
 	
-	public LogUI(){
+	public LoginUI(UIFactory uiFactory){
+		
+		this.uiFactory = uiFactory;
+		
 		logFrame = new JFrame("登陆界面");
 		button = new JButton("确认登陆");
-		
 		
 		logFrame.setVisible(true);
 		logFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +34,7 @@ public class LogUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			StockFunctionSelect select = new StockFunctionSelect();
+			StockUI select = uiFactory.getStockUI();
 			logFrame.getContentPane().add(select.stockFunctionSelect);
 		}
 		

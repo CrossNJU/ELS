@@ -9,18 +9,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class StockPO implements Serializable{
+	
 	/**
-	 * 
+	 * 序列化UID
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * 仓库编号
 	 */
 	private String stockIdentifier;
+	
 	/**
 	 * 仓库中的不同类型仓库(不同区)
 	 */
 	private ArrayList<StockAreaPO> specialStockPOs;
+	
+	/**
+	 * 仓库操作
+	 */
+	private ArrayList<StockOperationPO> stockOperations;
 	
 	/**
 	 * 仓库总间数
@@ -67,6 +75,7 @@ public class StockPO implements Serializable{
 		this.numOfBooths = numOfBooth;
 		
 		this.specialStockPOs = new ArrayList<StockAreaPO>();
+		this.stockOperations = new ArrayList<StockOperationPO>();
 		this.usedBooths = 0;
 		this.numOut = 0;
 		this.numIn = 0;
@@ -139,5 +148,12 @@ public class StockPO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
+	public ArrayList<StockOperationPO> getStockOperations() {
+		return stockOperations;
+	}
+	
+	public void setStockOperations(ArrayList<StockOperationPO> stockOperations) {
+		this.stockOperations = stockOperations;
+	}
 }

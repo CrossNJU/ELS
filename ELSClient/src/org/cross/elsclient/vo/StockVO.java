@@ -21,6 +21,11 @@ public class StockVO {
 	public ArrayList<StockAreaPO> specialStockPOs;
 	
 	/**
+	 * 仓库操作
+	 */
+	public ArrayList<StockOperationVO> stockOperations;
+	
+	/**
 	 * 仓库总间数
 	 */
 	public int numOfBooths;
@@ -66,6 +71,7 @@ public class StockVO {
 		this.numOfBooths = numOfBooth;
 		
 		this.specialStockPOs = new ArrayList<StockAreaPO>();
+		this.stockOperations = new ArrayList<StockOperationVO>();
 		this.usedBooths = 0;
 		this.numOut = 0;
 		this.numIn = 0;
