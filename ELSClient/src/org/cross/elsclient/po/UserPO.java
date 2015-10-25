@@ -1,8 +1,19 @@
 package org.cross.elsclient.po;
 
+import java.io.Serializable;
+
 import org.cross.elsclient.util.UserType;
 
-public class UserPO {
+public class UserPO implements Serializable{
+	/**
+	 * 序列化UID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	/**
 	 * 用户id
 	 * 格式为U00001

@@ -1,5 +1,7 @@
 package org.cross.elsclient.po;
 
+import java.io.Serializable;
+
 import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.OrganizationType;
 
@@ -8,8 +10,16 @@ import org.cross.elsclient.util.OrganizationType;
  * @author Moo
  * @date 2015年10月19日
  */
-public class OrganizationPO 
-{
+public class OrganizationPO implements Serializable{
+	/**
+	 * 序列化UID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	/**
 	 * 所在城市
 	 */
