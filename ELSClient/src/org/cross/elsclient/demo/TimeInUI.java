@@ -1,5 +1,6 @@
 package org.cross.elsclient.demo;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,10 +21,14 @@ public class TimeInUI {
 	JTextField endTime;
 	JLabel startTimeLabel;
 	JLabel endTimeLabel;
+	int width = 500;
+	int height = 400;
 	
 	StockBLService stockbl;
 	
 	public TimeInUI(StockBLService stockbl){
+		int w = Toolkit.getDefaultToolkit().getScreenSize().width;
+		int h = Toolkit.getDefaultToolkit().getScreenSize().height;
 		
 		this.stockbl = stockbl;
 		
@@ -38,7 +43,8 @@ public class TimeInUI {
 		
 		timeIn.setVisible(true);
 		timeIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		timeIn.setSize(500, 400);
+		timeIn.setSize(width, height);
+		timeIn.setLocation(w/2 - width/2, h/2 - height/2);
 		
 		button.addActionListener(new timeInListener());
 		

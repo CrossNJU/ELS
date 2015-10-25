@@ -2,6 +2,7 @@ package org.cross.elsclient.demo;
 
 import java.awt.BorderLayout;
 import java.awt.TextField;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -21,12 +22,16 @@ public class LoginUI {
 	JTextField password;
 	JLabel nameLabel;
 	JLabel passwordLabel;
+	int width = 500;
+	int height = 400;
 	
 	
 	
 	UIFactory uiFactory;
 	
 	public LoginUI(UIFactory uiFactory){
+		int w = Toolkit.getDefaultToolkit().getScreenSize().width;
+		int h = Toolkit.getDefaultToolkit().getScreenSize().height;
 		
 		this.uiFactory = uiFactory;
 		
@@ -41,7 +46,9 @@ public class LoginUI {
 		
 		logFrame.setVisible(true);
 		logFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		logFrame.setSize(500, 400);
+		logFrame.setSize(width, height);
+		logFrame.setLocation(w/2 - width/2, h/2 - height/2);
+		
 		
 		button.addActionListener(new logListener());
 		
@@ -60,18 +67,18 @@ public class LoginUI {
 	
 	public class logListener implements ActionListener{
 		
-		String id = name.getText().trim();
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			StockUI select = uiFactory.getStockUI();
 			try {
-				select.stockbl.findStock(id);
+				select.stockbl.findStock(name.getText().trim());
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generated catch block 
 				e1.printStackTrace();
 			}
+			
 //			logFrame.getContentPane().add(select.stockFunctionSelect);
 		}
 		
