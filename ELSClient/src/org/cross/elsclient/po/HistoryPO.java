@@ -5,9 +5,17 @@
  */
 package org.cross.elsclient.po;
 
+import java.io.Serializable;
+
 import org.cross.elsclient.vo.HistoryVO;
 
-public class HistoryPO {
+public class HistoryPO implements Serializable{
+	
+	/**
+	 * 序列化UID
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 到达某地时间
 	 */
@@ -43,4 +51,9 @@ public class HistoryPO {
 		HistoryVO vo = new HistoryVO(this.time, this.place);
 		return vo;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

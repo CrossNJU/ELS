@@ -3,7 +3,6 @@ package org.cross.elsclient.demo;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,7 +35,7 @@ public class StockUI {
 		
 		stockFunctionSelect.setSize(width, height);
 		stockFunctionSelect.setVisible(true);
-		stockFunctionSelect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		stockFunctionSelect.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		stockFunctionSelect.setLocation(w/2 - width/2, h/2 - height/2);
 		
 		stockFunctionSelect.getContentPane().add(button);

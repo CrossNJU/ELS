@@ -34,15 +34,15 @@ public class InputTimeUI {
 		
 		timeIn = new JFrame("起止时间输入界面");
 		button = new JButton("确认");
-		startTime = new JTextField();
-		endTime = new JTextField();
+		startTime = new JTextField("2015-10-25 10:10:10");
+		endTime = new JTextField("2015-10-26 22:10:10");
 		startTimeLabel = new JLabel("startTime ：");
 		endTimeLabel = new JLabel("endTime ：");
 		
 		timeIn.setLayout(null);
 		
 		timeIn.setVisible(true);
-		timeIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		timeIn.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		timeIn.setSize(width, height);
 		timeIn.setLocation(w/2 - width/2, h/2 - height/2);
 		

@@ -9,11 +9,11 @@ public enum StockType {
 	public String toString() {
 		switch (this) {
 		case Fast:
-			return "特快";
+			return "特快仓库";
 		case COMMON:
-			return "标准快递";
+			return "标准快递仓库";
 		case ECONOMICAL:
-			return "经济快递";
+			return "经济快递仓库";
 		default:
 			return null;
 		}

@@ -37,8 +37,8 @@ public class LoginUI {
 		
 		logFrame = new JFrame("登陆界面");
 		button = new JButton("确认登陆");
-		name = new JTextField();
-		password = new JTextField();
+		name = new JTextField("00001");
+		password = new JTextField("*********");
 		nameLabel = new JLabel("用户名 ：");
 		passwordLabel = new JLabel("密码 ：");
 		

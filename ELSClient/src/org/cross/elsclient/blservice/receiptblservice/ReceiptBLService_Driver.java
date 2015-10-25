@@ -57,7 +57,7 @@ public class ReceiptBLService_Driver {
 
 		System.out.println("根据类型查询单据：");
 		ArrayList<ReceiptVO> list3 = receiptBLService.findByType(ReceiptType.ORDER);
-		for (int i = 0; i < list2.size(); i++) {
+		for (int i = 0; i < list3.size(); i++) {
 			System.out.println("单据编号："+list3.get(i).number);
 		}
 
