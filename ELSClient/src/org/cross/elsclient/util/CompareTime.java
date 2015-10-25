@@ -4,7 +4,8 @@ public class CompareTime {
 	
 	public static int compare(String first, String second){
 		MyTime time1 = getTime(first);
-		return time1.compareWith(getTime(second));
+		MyTime time2 = getTime(second);
+		return time1.compareWith(time2);
 	}
 	
 	public static MyTime getTime(String time){

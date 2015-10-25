@@ -14,7 +14,7 @@ import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 
-public class TimeInUI {
+public class InputTimeUI {
 	JFrame timeIn;
 	JButton button;
 	JTextField startTime;
@@ -26,7 +26,7 @@ public class TimeInUI {
 	
 	StockBLService stockbl;
 	
-	public TimeInUI(StockBLService stockbl){
+	public InputTimeUI(StockBLService stockbl){
 		int w = Toolkit.getDefaultToolkit().getScreenSize().width;
 		int h = Toolkit.getDefaultToolkit().getScreenSize().height;
 		

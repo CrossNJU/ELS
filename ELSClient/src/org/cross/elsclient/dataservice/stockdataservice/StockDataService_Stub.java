@@ -104,11 +104,11 @@ public class StockDataService_Stub implements StockDataService{
 		stock1.setStockOperations(stockOperations);
 		stock2.setStockOperations(stockOperations);
 		stock3.setStockOperations(stockOperations);
-//		for (int i = 0; i < stocks.size(); i++) {
-//			if(stocks.get(i).getStockID() == ID) return stocks.get(i);
-//		}
-		return stock1;
-//		return null;
+		for (int i = 0; i < stocks.size(); i++) {
+			if(stocks.get(i).getStockID().equals(ID)) return stocks.get(i);
+		}
+//		return stock1;
+		return null;
 	}
 
 }

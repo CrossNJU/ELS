@@ -47,7 +47,7 @@ public class StockUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			TimeInUI timeinUI = new TimeInUI(stockbl);
+			InputTimeUI timeinUI = new InputTimeUI(stockbl);
 		}
 	}
 

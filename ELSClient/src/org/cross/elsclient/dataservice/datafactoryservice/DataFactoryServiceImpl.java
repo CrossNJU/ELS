@@ -1,4 +1,4 @@
-package org.cross.elsclient.dataservice.dataFactoryService;
+package org.cross.elsclient.dataservice.datafactoryservice;
 
 import java.rmi.RemoteException;
 

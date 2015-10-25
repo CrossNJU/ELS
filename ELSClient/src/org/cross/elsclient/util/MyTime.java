@@ -35,8 +35,11 @@ public class MyTime {
 		int c4 = compareOne(hour, time.hour);
 		if(c4!=0) return c4;
 		int c5 = compareOne(min, time.min);
-		if(c4!=0) return c5;
+		if(c5!=0) return c5;
 		return compareOne(sec, time.sec);
 	}
 	
+	public void print(){
+		System.out.println(year+" "+month+" "+day+" "+hour+" "+min+" "+sec);
+	}
 }

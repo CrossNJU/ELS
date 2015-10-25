@@ -30,10 +30,10 @@ public class StockInfoUI {
 		stockInfo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		stockInfo.setVisible(true);
 		
-		head = new JLabel("快件信息：");
+		head = new JLabel("库存信息：");
 		stockInfo.add(head, BorderLayout.NORTH);
 		
-		textArea = new JTextArea("sample");
+		textArea = new JTextArea("sample\n");
 		stockInfo.add(textArea, BorderLayout.CENTER);
 		
 		returnButton = new JButton("return");

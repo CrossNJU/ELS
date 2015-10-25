@@ -1,6 +1,6 @@
 package org.cross.elsclient.demo;
 
-public class Demo {
+public class MainFrame {
 	
 	public static void main(String [] args){
 		UIFactory ui = new UIFactory();

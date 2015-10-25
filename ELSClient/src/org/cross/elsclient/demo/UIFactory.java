@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.stockblservice.StockBLImpl;
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
-import org.cross.elsclient.dataservice.dataFactoryService.DataFactoryServiceImpl;
+import org.cross.elsclient.dataservice.datafactoryservice.DataFactoryServiceImpl;
 
 public class UIFactory {
 	
