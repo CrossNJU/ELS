@@ -67,7 +67,7 @@ public class LoginUI {
 			// TODO Auto-generated method stub
 			StockUI select = uiFactory.getStockUI();
 			try {
-				StockVO vo = select.stockbl.findStock(id);
+				select.stockbl.findStock(id);
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

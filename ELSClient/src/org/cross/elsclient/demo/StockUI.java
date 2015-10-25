@@ -2,6 +2,7 @@ package org.cross.elsclient.demo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,7 +13,6 @@ public class StockUI {
 	
 	JFrame stockFunctionSelect;
 	JButton button;
-	
 	
 	StockBLService stockbl;
 	
@@ -37,8 +37,7 @@ public class StockUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			TimeInUI timeIn = new TimeInUI();
-			
+			TimeInUI timeinUI = new TimeInUI(stockbl);
 		}
 	}
 

@@ -35,10 +35,11 @@ public class StockBLImpl implements StockBLService{
 		ArrayList<StockOperationVO> ops = new ArrayList<StockOperationVO>();
 		for (int i = 0; i < stockvo.stockOperations.size(); i++) {
 			StockOperationVO vo = stockvo.stockOperations.get(i);
-			if(CompareTime.compare(vo.time, time1)==1 || 
+			if(CompareTime.compare(vo.time, time1)==1 && 
 					CompareTime.compare(time2, vo.time)==1){
 				ops.add(vo);
 			}
+//			ops.add(vo);
 		}
 		return ops;
 	}
@@ -47,6 +48,7 @@ public class StockBLImpl implements StockBLService{
 	public StockVO findStock(String ID) throws RemoteException {
 		// TODO Auto-generated method stub
 		stockpo = stockData.findStock(ID);
+		stockvo = stockpo.toVO();
 		return stockpo.toVO();
 	}
 

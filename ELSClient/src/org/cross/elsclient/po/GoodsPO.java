@@ -111,6 +111,7 @@ public class GoodsPO implements Serializable{
 	
 	public GoodsVO toVO(){
 		GoodsVO vo = new GoodsVO(this.weightOfGoods, this.volumeOfGoods, this.currentLocate);
+		vo.order = this.order.toVOsimple();
 		return vo;
 	}
 }

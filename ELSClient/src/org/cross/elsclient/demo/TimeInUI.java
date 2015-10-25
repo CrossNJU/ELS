@@ -2,13 +2,16 @@ package org.cross.elsclient.demo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.cross.elsclient.demo.LoginUI.logListener;
+import org.cross.elsclient.blservice.stockblservice.StockBLService;
+import org.cross.elsclient.vo.StockOperationVO;
+import org.cross.elsclient.vo.StockVO;
 
 public class TimeInUI {
 	JFrame timeIn;
@@ -18,7 +21,12 @@ public class TimeInUI {
 	JLabel startTimeLabel;
 	JLabel endTimeLabel;
 	
-	public TimeInUI(){
+	StockBLService stockbl;
+	
+	public TimeInUI(StockBLService stockbl){
+		
+		this.stockbl = stockbl;
+		
 		timeIn = new JFrame("起止时间输入界面");
 		button = new JButton("确认");
 		startTime = new JTextField();
@@ -51,7 +59,8 @@ public class TimeInUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<StockOperationVO> ops = stockbl.showStockInfo(startTime.getText(), endTime.getText());
+			StockInfoUI stockInfoUI = new StockInfoUI(ops);
 		}
 		
 	}

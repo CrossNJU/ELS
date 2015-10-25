@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.po.GoodsPO;
+import org.cross.elsclient.po.Receipt_OrderPO;
 import org.cross.elsclient.po.StockAreaPO;
 import org.cross.elsclient.po.StockOperationPO;
 import org.cross.elsclient.po.StockPO;
@@ -76,14 +77,26 @@ public class StockDataService_Stub implements StockDataService{
 		
 		//增加操作
 		stockOperations = new ArrayList<StockOperationPO>();
+		GoodsPO good1 = new GoodsPO(20, 20, City.BEIJING);
+		GoodsPO good2 = new GoodsPO(20, 20, City.BEIJING);
+		GoodsPO good3 = new GoodsPO(20, 20, City.BEIJING);
+		GoodsPO good4 = new GoodsPO(20, 20, City.BEIJING);
+		Receipt_OrderPO order1 = new Receipt_OrderPO("R120151023000001", "2015-10-25 01:10:10");
+		Receipt_OrderPO order2 = new Receipt_OrderPO("R120151023000002", "2015-10-25 10:10:10");
+		Receipt_OrderPO order3 = new Receipt_OrderPO("R120151023000003", "2015-10-25 10:10:10");
+		Receipt_OrderPO order4 = new Receipt_OrderPO("R120151023000004", "2015-10-25 10:10:10");
+		good1.setOrderPO(order1);
+		good2.setOrderPO(order2);
+		good3.setOrderPO(order3);
+		good4.setOrderPO(order4);
 		StockOperationPO op1 = new StockOperationPO("2015-10-25 10:10:10", StockOperationType.STOCKIN, 
-				new GoodsPO(20, 20, City.BEIJING), 20, StockType.COMMON);
+				good1, 20, StockType.COMMON);
 		StockOperationPO op2 = new StockOperationPO("2015-10-26 09:10:10", StockOperationType.STOCKIN, 
-				new GoodsPO(20, 20, City.BEIJING), 30, StockType.COMMON);
+				good2, 30, StockType.COMMON);
 		StockOperationPO op3 = new StockOperationPO("2015-10-25 22:10:10", StockOperationType.STOCKIN, 
-				new GoodsPO(20, 20, City.BEIJING), 40, StockType.COMMON);
+				good3, 40, StockType.COMMON);
 		StockOperationPO op4 = new StockOperationPO("2015-10-26 10:11:10", StockOperationType.STOCKOUT, 
-				new GoodsPO(20, 20, City.BEIJING), 20, StockType.COMMON);
+				good4, 20, StockType.COMMON);
 		stockOperations.add(op1);
 		stockOperations.add(op2);
 		stockOperations.add(op3);
@@ -91,10 +104,11 @@ public class StockDataService_Stub implements StockDataService{
 		stock1.setStockOperations(stockOperations);
 		stock2.setStockOperations(stockOperations);
 		stock3.setStockOperations(stockOperations);
-		for (int i = 0; i < stocks.size(); i++) {
-			if(stocks.get(i).getStockID() == ID) return stocks.get(i);
-		}
-		return null;
+//		for (int i = 0; i < stocks.size(); i++) {
+//			if(stocks.get(i).getStockID() == ID) return stocks.get(i);
+//		}
+		return stock1;
+//		return null;
 	}
 
 }

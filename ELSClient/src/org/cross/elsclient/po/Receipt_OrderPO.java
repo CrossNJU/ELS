@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import org.cross.elsclient.util.City;
 import org.cross.elsclient.util.ReceiptType;
+import org.cross.elsclient.vo.Receipt_OrderVO;
 
 public class Receipt_OrderPO extends ReceiptPO implements Serializable{
 
@@ -214,4 +215,8 @@ public class Receipt_OrderPO extends ReceiptPO implements Serializable{
 		return serialVersionUID;
 	}
 	
+	public Receipt_OrderVO toVOsimple(){
+		Receipt_OrderVO vo = new Receipt_OrderVO(this.number, this.expectTime);
+		return vo;
+	}
 }
