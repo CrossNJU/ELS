@@ -9,8 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.cross.elsclient.util.StockType;
-import org.cross.elsclient.vo.GoodsVO;
-import org.cross.elsclient.vo.StockAreaVO;
 
 public class StockAreaPO implements Serializable{
 	/**
@@ -81,20 +79,5 @@ public class StockAreaPO implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-	
-	public ArrayList<GoodsVO> getVOs(){
-		ArrayList<GoodsVO> vos = new ArrayList<GoodsVO>();
-		for (int i = 0; i < goodsList.size(); i++) {
-			vos.add(goodsList.get(i).toVO());
-		}
-		return vos;
-	}
-	
-	public StockAreaVO toVO(){
-		StockAreaVO vo = new StockAreaVO(this.stockType, this.totalCapacity);
-		vo.usedCapacity = this.usedCapacity;
-		vo.goodsList = getVOs();
-		return vo;
 	}
 }

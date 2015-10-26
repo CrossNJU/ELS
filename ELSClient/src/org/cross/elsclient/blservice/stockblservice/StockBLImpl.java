@@ -3,11 +3,19 @@ package org.cross.elsclient.blservice.stockblservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLImpl;
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
+import org.cross.elsclient.blservice.receiptblservice.ReceiptBLImpl;
+import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.dataservice.stockdataservice.StockDataService;
+import org.cross.elsclient.po.GoodsPO;
+import org.cross.elsclient.po.StockAreaPO;
+import org.cross.elsclient.po.StockOperationPO;
 import org.cross.elsclient.po.StockPO;
 import org.cross.elsclient.util.CompareTime;
 import org.cross.elsclient.util.ResultMessage;
 import org.cross.elsclient.util.StockType;
+import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
@@ -17,11 +25,13 @@ public class StockBLImpl implements StockBLService{
 	public StockVO stockvo;
 	public StockPO stockpo;
 	public StockDataService stockData;
-	public String stockManager;
+	GoodsBLImpl goodsbl;
+	ReceiptBLImpl receiptbl;
 	
-	public StockBLImpl(StockDataService stockdata){
+	public StockBLImpl(StockDataService stockdata, ReceiptBLService receiptbl, GoodsBLService goodsbl){
 		this.stockData = stockdata;
-		this.stockManager = null;
+		this.goodsbl = (GoodsBLImpl)goodsbl;
+		this.receiptbl = (ReceiptBLImpl)receiptbl;
 	}
 	
 	@Override
@@ -39,7 +49,6 @@ public class StockBLImpl implements StockBLService{
 					CompareTime.compare(time2, vo.time)>=0){
 				ops.add(vo);
 			}
-//			ops.add(vo);
 		}
 		return ops;
 	}
@@ -48,8 +57,8 @@ public class StockBLImpl implements StockBLService{
 	public StockVO findStock(String ID) throws RemoteException {
 		// TODO Auto-generated method stub
 		stockpo = stockData.findStock(ID);
-		stockvo = stockpo.toVO();
-		return stockpo.toVO();
+		stockvo = toVO(stockpo);
+		return toVO(stockpo);
 	}
 
 	@Override
@@ -87,5 +96,54 @@ public class StockBLImpl implements StockBLService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public StockVO toVO(StockPO stockpo){
+		StockVO stockvo = new StockVO(stockpo.getStockID(),stockpo.getNumOfBooths());
+		stockvo.moneyIn = stockpo.getMoneyIn();
+		stockvo.moneyOut = stockpo.getMoneyOut();
+		stockvo.numIn = stockpo.getNumIn();
+		stockvo.numInStock = stockpo.getNumInStock();
+		stockvo.numOut = stockpo.getNumOut();
+		stockvo.usedBooths = stockpo.getUsedBooths();
+		stockvo.specialStockPOs = getAreasVO(stockpo.getSpecialStockPOs());
+		stockvo.stockOperations = getopVO(stockpo.getStockOperations());
+		return stockvo;
+	}
+	
+	public ArrayList<StockAreaVO> getAreasVO(ArrayList<StockAreaPO> pos){
+		ArrayList<StockAreaVO> areas = new ArrayList<StockAreaVO>();
+		for (int i = 0; i < pos.size(); i++) {
+			areas.add(toAreaVO(pos.get(i)));
+		}
+		return areas;
+	}
+	
+	public ArrayList<StockOperationVO> getopVO(ArrayList<StockOperationPO> pos){
+		ArrayList<StockOperationVO> ops = new ArrayList<StockOperationVO>();
+		for (int i = 0; i < pos.size(); i++) {
+			ops.add(toOpVO(pos.get(i)));
+		}
+		return ops;
+	}
+	
+	public StockAreaVO toAreaVO(StockAreaPO po){
+		StockAreaVO vo = new StockAreaVO(po.getStockType(), po.getTotalCapacity());
+		vo.usedCapacity = po.getUsedCapacity();
+		vo.goodsList = getGoodsVOs(po.getGoodsList());
+		return vo;
+	}
+	
+	public StockOperationVO toOpVO(StockOperationPO po){
+		StockOperationVO vo = new StockOperationVO(po.getTime(), po.getType(),
+				goodsbl.toVO(po.getGood()), po.getMoney(), po.getPlace());
+		return vo;
+	}
+	
+	public ArrayList<GoodsVO> getGoodsVOs(ArrayList<GoodsPO> pos){
+		ArrayList<GoodsVO> vos = new ArrayList<GoodsVO>();
+		for (int i = 0; i < pos.size(); i++) {
+			vos.add(goodsbl.toVO(pos.get(i)));
+		}
+		return vos;
+	}
 }

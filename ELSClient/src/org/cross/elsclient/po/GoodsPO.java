@@ -108,10 +108,4 @@ public class GoodsPO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	public GoodsVO toVO(){
-		GoodsVO vo = new GoodsVO(this.weightOfGoods, this.volumeOfGoods, this.currentLocate);
-		vo.order = this.order.toVOsimple();
-		return vo;
-	}
 }
