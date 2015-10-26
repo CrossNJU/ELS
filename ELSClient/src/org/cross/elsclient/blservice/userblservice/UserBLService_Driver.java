@@ -44,7 +44,7 @@ public class UserBLService_Driver {
 		
 		System.out.print("根据ID查找用户：");
 		ArrayList<UserVO> list2 = userBLService.findById("001");
-		for(int i = 0;i<list1.size();i++){
+		for(int i = 0;i<list2.size();i++){
 			System.out.print("用户ID：" + list2.get(i).id + "; ");
 			System.out.print("用户姓名：" + list2.get(i).name + "; ");
 			System.out.print("用户类型：" + list2.get(i).type.toString() + ";\n");
@@ -52,7 +52,7 @@ public class UserBLService_Driver {
 		
 		System.out.print("根据姓名查找用户：");
 		ArrayList<UserVO> list3 = userBLService.findByName("奥特之父");
-		for(int i = 0;i<list1.size();i++){
+		for(int i = 0;i<list3.size();i++){
 			System.out.print("用户ID：" + list3.get(i).id + "; ");
 			System.out.print("用户姓名：" + list3.get(i).name + "; ");
 			System.out.print("用户类型：" + list3.get(i).type.toString() + ";\n");
@@ -60,7 +60,7 @@ public class UserBLService_Driver {
 		
 		System.out.print("根据类型查找用户：");
 		ArrayList<UserVO> list4 = userBLService.findByType(UserType.COUNTER);
-		for(int i = 0;i<list1.size();i++){
+		for(int i = 0;i<list4.size();i++){
 			System.out.print("用户ID：" + list4.get(i).id + "; ");
 			System.out.print("用户姓名：" + list4.get(i).name + "; ");
 			System.out.print("用户类型：" + list4.get(i).type.toString() + ";\n");
