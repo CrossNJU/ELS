@@ -52,9 +52,10 @@ public class StockBLService_Driver {
 		
 		System.out.println("~~~查询特定仓库容量信息~~~");
 		StockAreaVO stockCapacity = stockBLService.stockCapacity(StockType.Fast);
-		System.out.println("仓库类型 ： " + stockCapacity.stockType);
-		System.out.println("仓库总容量 ： " + stockCapacity.totalCapacity);
-		System.out.println("仓库已用容量 ： " + stockCapacity.usedCapacity);
+		StockAreaVO tempAreaVO = new StockAreaVO(StockType.Fast, 100);
+		System.out.println("仓库类型 ： " + tempAreaVO.stockType.toString());
+		System.out.println("仓库总容量 ： " + tempAreaVO.totalCapacity);
+		System.out.println("仓库已用容量 ： " + tempAreaVO.usedCapacity);
 		
 		System.out.println("~~~核实快件信息~~~");
 		ResultMessage goodsMessage = stockBLService.checkGoods("R120151020000002");
