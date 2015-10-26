@@ -1,4 +1,4 @@
-package org.cross.elsclient.dataservice;
+package org.cross.elsclient.test;
 
 import java.rmi.RemoteException;
 

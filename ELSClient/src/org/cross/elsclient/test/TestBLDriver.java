@@ -1,4 +1,4 @@
-package org.cross.elsclient.blservice;
+package org.cross.elsclient.test;
 
 import org.cross.elsclient.blservice.accountblservice.AccountBLService_Driver;
 import org.cross.elsclient.blservice.accountblservice.AccountBLService_Stub;
