@@ -1,12 +1,14 @@
 package org.cross.elscommon.dataservice.organizationdataservice;
 
+import java.rmi.RemoteException;
+
 import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 
 public class OrganizationDataService_Driver {
 	
-	public void drive(OrganizationDataService_Stub organizationDataService_Stub){
+	public void drive(OrganizationDataService_Stub organizationDataService_Stub) throws RemoteException{
 		
 		organizationDataService_Stub.insert(new OrganizationPO(City.BEIJING, OrganizationType.BUSINESSHALL, "001"));
 		organizationDataService_Stub.delete(new OrganizationPO(City.BEIJING, OrganizationType.BUSINESSHALL, "001"));
