@@ -1,5 +1,6 @@
 package org.cross.elscommon.dataservice.datafactoryservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;

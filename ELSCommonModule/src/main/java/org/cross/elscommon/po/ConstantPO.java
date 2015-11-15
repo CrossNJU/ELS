@@ -2,6 +2,9 @@ package org.cross.elscommon.po;
 
 import java.io.Serializable;
 
+import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.UserType;
+
 public class ConstantPO implements Serializable{
 
 	/**
@@ -48,7 +51,54 @@ public class ConstantPO implements Serializable{
 	 * 广州到上海的距离
 	 */
 	private double distance_Shanghai_Guangzhou;
+	
+	/**
+	 * 每公里预计时间
+	 */
+	private double timeBykilo;
+	
+	/**
+	 * 底薪
+	 */
+	private double baseMoneyForCOURIER;
+	
+	private double baseMoneyForBUSINESSHALLCLERK;
+	
+	private double baseMoneyForTRANSITCENTERCLERK;
+	
+	private double baseMoneyForSTOCKKEEPER;
+	
+	private double baseMoneyForCOUNTER;
+	
+	private double baseMoneyForMANAGER;
+	
+	private double baseMoneyForADMINISTRATOR;
+	
+	public double getTimeBykilo() {
+		return timeBykilo;
+	}
+	
 
+	public void setTimeBykilo(double timeBykilo) {
+		this.timeBykilo = timeBykilo;
+	}
+	
+	
+	public double getDistance(City c1, City c2){
+		if(c1 == City.BEIJING && c2 == City.GUANGZHOU ||c2 == City.BEIJING && c1 == City.GUANGZHOU)
+			return distance_Beijing_Guangzhou;
+		if(c1 == City.BEIJING && c2 == City.SHANGHAI ||c2 == City.BEIJING && c1 == City.SHANGHAI)
+			return distance_Beijing_Shanghai;
+		if(c1 == City.BEIJING && c2 == City.NANJING ||c2 == City.BEIJING && c1 == City.NANJING)
+			return distance_Beijing_Nanjing;
+		if(c1 == City.NANJING && c2 == City.GUANGZHOU ||c2 == City.NANJING && c1 == City.GUANGZHOU)
+			return distance_Nanjing_Guangzhou;
+		if(c1 == City.SHANGHAI && c2 == City.GUANGZHOU ||c2 == City.SHANGHAI && c1 == City.GUANGZHOU)
+			return distance_Shanghai_Guangzhou;
+		if(c1 == City.NANJING && c2 == City.SHANGHAI ||c2 == City.NANJING && c1 == City.SHANGHAI)
+			return distance_Nanjing_Shanghai;
+		return 0;
+	}
 	
 	public double getPrice() {
 		return price;
@@ -119,9 +169,37 @@ public class ConstantPO implements Serializable{
 		this.distance_Shanghai_Guangzhou = distance_Shanghai_Guangzhou;
 	}
 
+	public void setBaseMoney(UserType user, double money){
+		if(user == UserType.ADMINISTRATOR) baseMoneyForADMINISTRATOR = money;
+		if(user == UserType.BUSINESSHALLCLERK) baseMoneyForBUSINESSHALLCLERK = money;
+		if(user == UserType.COUNTER) baseMoneyForCOUNTER = money;
+		if(user == UserType.COURIER) baseMoneyForCOURIER = money;
+		if(user == UserType.MANAGER) baseMoneyForMANAGER = money;
+		if(user == UserType.STOCKKEEPER) baseMoneyForSTOCKKEEPER = money;
+		if(user == UserType.TRANSITCENTERCLERK) baseMoneyForTRANSITCENTERCLERK = money;
+	}
+
+	public double getBaseMoney(UserType user){
+		if(user == UserType.ADMINISTRATOR) return baseMoneyForADMINISTRATOR;
+		if(user == UserType.BUSINESSHALLCLERK) return baseMoneyForBUSINESSHALLCLERK;
+		if(user == UserType.COUNTER) return baseMoneyForCOUNTER;
+		if(user == UserType.COURIER) return baseMoneyForCOURIER;
+		if(user == UserType.MANAGER) return baseMoneyForMANAGER;
+		if(user == UserType.STOCKKEEPER) return baseMoneyForSTOCKKEEPER;
+		if(user == UserType.TRANSITCENTERCLERK) return baseMoneyForTRANSITCENTERCLERK;
+		return 0;
+	}
 
 	public ConstantPO() {
 		price = 23;
+		timeBykilo = 100;
+		baseMoneyForADMINISTRATOR = 4000;
+		baseMoneyForBUSINESSHALLCLERK = 5000;
+		baseMoneyForCOUNTER = 6000;
+		baseMoneyForCOURIER = 3000;
+		baseMoneyForMANAGER = 8000;
+		baseMoneyForSTOCKKEEPER = 4000;
+		baseMoneyForTRANSITCENTERCLERK = 6000;
 		distance_Beijing_Guangzhou = 1888.8;
 		distance_Beijing_Nanjing = 900;
 		distance_Beijing_Shanghai = 1064.7;

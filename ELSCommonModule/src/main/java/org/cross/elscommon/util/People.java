@@ -1,21 +1,7 @@
-/**
- * 寄/收件人VO类
- * @author raychen
- * @date 2015/10/23
- */
-package org.cross.elsclient.vo;
+package org.cross.elscommon.util;
 
-import java.util.ArrayList;
+public class People {
 
-import org.cross.elscommon.po.GoodsPO;
-
-public class PeopleVO {
-
-	/**
-	 * 寄出/将收的货物
-	 */
-	public ArrayList<GoodsPO> goods;
-	
 	/**
 	 * 寄/收件人姓名
 	 */
@@ -37,7 +23,7 @@ public class PeopleVO {
 	 * @param address
 	 * @param phone
 	 */
-	public PeopleVO(String name, String address, String phone){
+	public People(String name, String address, String phone){
 		this.name = name;
 		this.address = address;
 		this.phone = phone;

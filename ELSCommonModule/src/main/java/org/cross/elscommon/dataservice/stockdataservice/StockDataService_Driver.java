@@ -18,7 +18,7 @@ public class StockDataService_Driver {
 		stockDataService.insert(stockPO);
 		
 		System.out.println("删除仓库");
-		stockDataService.delete(stockPO);
+		stockDataService.delete("S00001");
 		
 		System.out.println("更新仓库");
 		stockDataService.update(stockPO);

@@ -1,7 +1,5 @@
 package org.cross.elsclient.vo;
 
-import java.io.Serializable;
-
 public class ConstantVO {
 	/**
 	 * 价格常量
@@ -39,6 +37,27 @@ public class ConstantVO {
 	 */
 	public double distance_Shanghai_Guangzhou;
 
+	/**
+	 * 预计每公里时间
+	 */
+	public double timeBykilo;
+	
+	/**
+	 * 底薪
+	 */
+	public double baseMoneyForCOURIER;
+	
+	public double baseMoneyForBUSINESSHALLCLERK;
+	
+	public double baseMoneyForTRANSITCENTERCLERK;
+	
+	public double baseMoneyForSTOCKKEEPER;
+	
+	public double baseMoneyForCOUNTER;
+	
+	public double baseMoneyForMANAGER;
+	
+	public double baseMoneyForADMINISTRATOR;
 	
 	public ConstantVO() {
 		price = 23;

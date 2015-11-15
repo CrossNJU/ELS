@@ -53,6 +53,11 @@ public class VehiclePO implements Serializable{
 	private VehicleType type;
 	
 	/**
+	 * 是否被使用
+	 */
+	private boolean inUse;
+	
+	/**
 	 * 构造方法
 	 * @param number
 	 * @param engineNumber
@@ -71,6 +76,8 @@ public class VehiclePO implements Serializable{
 		this.lastTime = lastTime;
 		this.image = image;
 		this.type = type;
+		
+		this.inUse = false;
 	}
 	
 	public VehiclePO(String number){
@@ -133,6 +140,16 @@ public class VehiclePO implements Serializable{
 		return this.type;
 	}
 	
+	public boolean isInUse() {
+		return inUse;
+	}
+	
+
+	public void setInUse(boolean inUse) {
+		this.inUse = inUse;
+	}
+	
+
 	public static long getSerialversionuid(){
 		return serialVersionUID;
 	}

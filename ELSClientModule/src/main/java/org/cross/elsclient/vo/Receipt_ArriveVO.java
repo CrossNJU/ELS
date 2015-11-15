@@ -5,6 +5,8 @@
  */
 package org.cross.elsclient.vo;
 
+import java.util.ArrayList;
+
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.ReceiptType;
 
@@ -26,23 +28,29 @@ public class Receipt_ArriveVO extends ReceiptVO{
 	public String number;
 	
 	/**
+	 * 转运单编号
+	 */
+	public String transNumber;
+	
+	/**
 	 * 货物信息
 	 */
-	public GoodsVO good;
+	public ArrayList<GoodsVO> goods;
 	
 	/**
 	 * 构造方法
 	 * @param time
 	 * @param city
 	 * @param number
-	 * @param good
+	 * @param transNumber 
 	 */
-	public Receipt_ArriveVO(String time, City city, String number,
-			GoodsVO good){
+	public Receipt_ArriveVO(String time, City city, String number, String transNumber){
 		super(number, ReceiptType.ARRIVE, time);
 		this.time = time;
 		this.city = city;
 		this.number = number;
-		this.good = good;
+		this.transNumber = transNumber;
+		
+		this.goods = new ArrayList<GoodsVO>();
 	}
 }

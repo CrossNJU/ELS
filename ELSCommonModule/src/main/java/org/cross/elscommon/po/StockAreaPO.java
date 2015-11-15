@@ -22,12 +22,12 @@ public class StockAreaPO implements Serializable{
 	private StockType stockType;
 	
 	/**
-	 * 特定仓库总容量
+	 * 特定仓库总容量(可存放快件数)
 	 */
 	private int totalCapacity;
 	
 	/**
-	 * 特定仓库已用容量
+	 * 特定仓库已用容量（已放快件数）
 	 */
 	private int usedCapacity;
 	

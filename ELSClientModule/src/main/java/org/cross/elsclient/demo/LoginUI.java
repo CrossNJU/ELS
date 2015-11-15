@@ -10,9 +10,11 @@ import java.rmi.RemoteException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.cross.elsclient.vo.StockVO;
+import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 
 public class LoginUI {
 	
@@ -25,7 +27,9 @@ public class LoginUI {
 	int width = 500;
 	int height = 400;
 	
-	
+	JTextArea show;
+	public GoodsDataService goodsdata;
+	JButton getButton;
 	
 	UIFactory uiFactory;
 	
@@ -58,11 +62,32 @@ public class LoginUI {
 		password.setBounds(65,50,200,20);
 		button.setBounds(10,100,170,50);
 		
+		show = new JTextArea("will show:\n");
+		show.setBounds(20, 200, 200, 100);
+		getButton = new JButton("get");
+		getButton.setBounds(20, 300, 50, 20);
+		
 		logFrame.getContentPane().add(nameLabel);
 		logFrame.getContentPane().add(passwordLabel);
 		logFrame.getContentPane().add(name);
 		logFrame.getContentPane().add(password);
 		logFrame.getContentPane().add(button);
+		logFrame.getContentPane().add(show);
+		logFrame.getContentPane().add(getButton);
+		
+		getButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					show.append(goodsdata.justTest());
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	public class logListener implements ActionListener{

@@ -45,39 +45,45 @@ public interface StockBLService {
 	public ResultMessage exportStockCheck();
 	
 	/**
-	 * 查询特定仓库是否有空余
-	 * @param stock
-	 * @return 特定仓库是否有空余
-	 */
-	public ResultMessage stockEnough(StockType type);
-	
-	/**
 	 * 查询特定仓库容量信息，包括总共、已用、已用占的百分比
 	 * @param stock
 	 * @return 特定仓库已用容量
+	 * @throws RemoteException 
 	 */
-	public StockAreaVO stockCapacity(StockType type);
+	public ArrayList<StockAreaVO> stockCapacity(String id,StockType type) throws RemoteException;
 	
 	/**
 	 * 核实仓库中快件信息
 	 * @param 快件id
 	 * @return 快件是否在仓库中
+	 * @throws RemoteException 
 	 */
-	public ResultMessage checkGoods(String id);
+	public ResultMessage checkGoods(String goodsID,String stockID) throws RemoteException;
 	
 	/**
 	 * 快件入库
 	 * @param 快件id
 	 * @return 是否入库称成功
+	 * @throws RemoteException 
 	 */
-	public ResultMessage intoStock(String id);
+	public ResultMessage intoStock(String goodsID,String stockID) throws RemoteException;
 	
 	/**
 	 * 快件出库
 	 * @param 快件id
 	 * @return 是否出库成功
+	 * @throws RemoteException 
 	 */
-	public ResultMessage outStock(String id);
+	public ResultMessage outStock(String goodsID,String stockID) throws RemoteException;
 	
+	/**
+	 * 库存报警
+	 */
+	public ResultMessage stockAlert(String stockID,StockType stockType);
+	
+	/**
+	 * 库存调整
+	 */
+	public ResultMessage stockAdjust(String stockID,StockType stockType);
 
 }

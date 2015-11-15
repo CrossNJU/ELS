@@ -33,12 +33,12 @@ public class StockPO implements Serializable{
 	/**
 	 * 仓库总间数
 	 */
-	private int numOfBooths;
+	private int numOfArea;
 	
 	/**
 	 * 仓库已用间数
 	 */
-	private int usedBooths;
+	private int usedArea;
 	
 	/**
 	 * 出库数量
@@ -70,13 +70,13 @@ public class StockPO implements Serializable{
 	 * 构造函数
 	 * 
 	 */
-	public StockPO(String id,int numOfBooth){
+	public StockPO(String id,int numOfArea){
 		this.stockIdentifier = id;
-		this.numOfBooths = numOfBooth;
+		this.numOfArea = numOfArea;
 		
 		this.specialStockPOs = new ArrayList<StockAreaPO>();
 		this.stockOperations = new ArrayList<StockOperationPO>();
-		this.usedBooths = 0;
+		this.usedArea = 0;
 		this.numOut = 0;
 		this.numIn = 0;
 		this.moneyOut = 0;
@@ -97,18 +97,18 @@ public class StockPO implements Serializable{
 		this.specialStockPOs = specialStockPO;
 	}
 	
-	public int getNumOfBooths(){
-		return numOfBooths;
+	public int getNumOfArea(){
+		return numOfArea;
 	}
-	public void setNumOfBooths(int numOfBooths){
-		this.numOfBooths = numOfBooths;
+	public void setNumOfArea(int numOfArea){
+		this.numOfArea = numOfArea;
 	}
 	
-	public int getUsedBooths(){
-		return usedBooths;
+	public int getUsedArea(){
+		return usedArea;
 	}
-	public void setUsedBooths(int usedBooths){
-		this.usedBooths = usedBooths;
+	public void setUsedArea(int usedArea){
+		this.usedArea = usedArea;
 	}
 	
 	public int getNumOut(){

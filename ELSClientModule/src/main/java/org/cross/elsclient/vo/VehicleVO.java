@@ -47,6 +47,11 @@ public class VehicleVO {
 	public VehicleType type;
 	
 	/**
+	 * 是否正在被使用
+	 */
+	public boolean inUse;
+	
+	/**
 	 * 构造方法
 	 * @param number
 	 * @param engineNumber
@@ -65,6 +70,8 @@ public class VehicleVO {
 		this.lastTime = lastTime;
 		this.image = image;
 		this.type = type;
+		
+		this.inUse = false;
 	}
 	
 	/**

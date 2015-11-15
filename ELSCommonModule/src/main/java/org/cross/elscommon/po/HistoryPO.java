@@ -7,6 +7,8 @@ package org.cross.elscommon.po;
 
 import java.io.Serializable;
 
+import org.cross.elscommon.util.City;
+
 
 public class HistoryPO implements Serializable{
 	
@@ -23,9 +25,9 @@ public class HistoryPO implements Serializable{
 	/**
 	 * 地点
 	 */
-	private String place;
+	private City place;
 	
-	public HistoryPO(String time, String place){
+	public HistoryPO(String time, City place){
 		this.time = time;
 		this.place = place;
 	}
@@ -38,11 +40,11 @@ public class HistoryPO implements Serializable{
 		return this.time;
 	}
 	
-	public void setPlace(String place){
+	public void setPlace(City place){
 		this.place = place;
 	}
 	
-	public String getPlace(){
+	public City getPlace(){
 		return this.place;
 	}
 	

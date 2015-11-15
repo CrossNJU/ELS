@@ -58,7 +58,7 @@ public class StockInfoUI {
 				out++;
 				outmoney += vo.money;
 			}
-			textArea.append(vo.good.order.number+"  "+vo.time+"  "+vo.type.toString()+"  "
+			textArea.append(vo.good.orderNumber+"  "+vo.time+"  "+vo.type.toString()+"  "
 			+vo.money+"  "+vo.place.toString()+"\n");
 		}
 		textArea.append("入库数量："+ in+"  金额："+inmoney+"\n");

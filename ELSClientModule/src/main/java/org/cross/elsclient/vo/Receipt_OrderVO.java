@@ -6,6 +6,7 @@
 package org.cross.elsclient.vo;
 
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.People;
 import org.cross.elscommon.util.ReceiptType;
 
 public class Receipt_OrderVO extends ReceiptVO{
@@ -48,12 +49,12 @@ public class Receipt_OrderVO extends ReceiptVO{
 	/**
 	 * 寄件人
 	 */
-	public PeopleVO pushPeople;
+	public People pushPeople;
 	
 	/**
 	 * 收件人
 	 */
-	public PeopleVO receivePeople;
+	public People receivePeople;
 	
 	/**
 	 * 订单创建时间
@@ -76,7 +77,7 @@ public class Receipt_OrderVO extends ReceiptVO{
 			String receiveTime, 
 			String expectTime, String number,
 			City targetPlace, City startPlace,
-			PeopleVO pushPeople, PeopleVO receivePeople,
+			People pushPeople, People receivePeople,
 			String time){
 		super(number, ReceiptType.ORDER, time);
 		this.goods = goods;

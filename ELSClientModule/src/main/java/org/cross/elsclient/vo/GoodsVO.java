@@ -5,15 +5,22 @@
  */
 package org.cross.elsclient.vo;
 
+import java.util.ArrayList;
+
 import org.cross.elscommon.po.HistoryPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.GoodsState;
+import org.cross.elscommon.util.StockType;
 
 public class GoodsVO {
 	/**
+	 * 快件类型
+	 */
+	public StockType goodsType;
+	/**
 	 * 订单
 	 */
-	public Receipt_OrderVO order;
+	public String orderNumber;
 	
 	/**
 	 * 当前位置
@@ -38,20 +45,20 @@ public class GoodsVO {
 	/**
 	 * 历史轨迹
 	 */
-	public HistoryVO historyVO;
+	public ArrayList<HistoryVO> historyVO;
 	
 	/**
 	 * 构造方法
 	 * 
 	 */
-	public GoodsVO(int weight,int volum,City currentLocate){
+	public GoodsVO(int weight,int volum,City currentLocate,StockType goodsType){
 		this.weightOfGoods = weight;
 		this.volumeOfGoods = volum;
 		this.currentLocate = currentLocate;
+		this.goodsType = goodsType;
 		
 		this.state = GoodsState.LIVE;
-		this.order = null;
-		this.historyVO = null;
+		this.historyVO = new ArrayList<HistoryVO>();
 	}
 
 }

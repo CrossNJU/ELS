@@ -5,11 +5,13 @@
  */
 package org.cross.elsclient.blservice.goodsblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.GoodsState;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.vo.GoodsVO;
+import org.cross.elsclient.vo.HistoryVO;
 
 public interface GoodsBLService {
 //	/**	 增加快件信息
@@ -27,8 +29,9 @@ public interface GoodsBLService {
 	/**
 	 * 更新快件信息
 	 * @return 是否跟新成功（当前位置和状态）
+	 * @throws RemoteException 
 	 */
-	public ResultMessage updateGoodsLocate(GoodsVO vo);
+	public ResultMessage updateGoods(String id,HistoryVO nowHistory,GoodsState nowState) throws RemoteException;
 	
 //	/**
 //	 * 更新快件状态信息
@@ -58,7 +61,13 @@ public interface GoodsBLService {
 	 * 查询快件信息
 	 * @param id
 	 * @return 快件信息
+	 * @throws RemoteException 
 	 */
-	public GoodsVO findGoods(String id);
+	public ArrayList<HistoryVO> findGoods(String id) throws RemoteException;
 
+	/**
+	 *根据单号查快件
+	 * @throws RemoteException 
+	 */
+	public GoodsVO searchGoods(String goodsID) throws RemoteException;
 }

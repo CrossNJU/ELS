@@ -6,6 +6,7 @@
 package org.cross.elscommon.po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.ReceiptType;
@@ -35,22 +36,35 @@ public class Receipt_ArrivePO extends ReceiptPO implements Serializable{
 	/**
 	 * 货物信息
 	 */
-	private GoodsPO good;
+	private ArrayList<GoodsPO> goods;
+	
+	/**
+	 * 转运单编号
+	 */
+	private String transNumber;
 	
 	/**
 	 * 构造方法
 	 * @param time
 	 * @param city
 	 * @param number
-	 * @param good
 	 */
-	public Receipt_ArrivePO(String time, City city, String number,
-			GoodsPO good){
+	public Receipt_ArrivePO(String time, City city, String number, String transNumber){
 		super(number, ReceiptType.ARRIVE, time);
 		this.time = time;
 		this.city = city;
 		this.number = number;
-		this.good = good;
+		this.transNumber = transNumber;
+		
+		this.goods = new ArrayList<GoodsPO>();
+	}
+
+	public ArrayList<GoodsPO> getGoods() {
+		return goods;
+	}
+	
+	public void setGoods(GoodsPO good) {
+		this.goods.add(good);
 	}
 
 	public String getTime() {
@@ -81,15 +95,14 @@ public class Receipt_ArrivePO extends ReceiptPO implements Serializable{
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
 
-	public GoodsPO getGood() {
-		return good;
+	public String getTransNumber() {
+		return transNumber;
 	}
 	
 
-	public void setGood(GoodsPO good) {
-		this.good = good;
+	public void setTransNumber(String transNumber) {
+		this.transNumber = transNumber;
 	}
 	
 

@@ -6,35 +6,45 @@
 package org.cross.elscommon.dataservice.receiptdataservice;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.util.ReceiptType;
+import org.cross.elscommon.util.ResultMessage;
 
-public class ReceiptDataService_Stub implements ReceiptDataService{
+public class ReceiptDataService_Stub extends UnicastRemoteObject implements ReceiptDataService{
+
+	public ReceiptDataService_Stub() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
-	public void insert(ReceiptPO po) {
+	public ResultMessage insert(ReceiptPO po) {
 		// TODO Auto-generated method stub
 		if (po.getNumber() == "R120151023000001") {
 			System.out.println("insert succeed!");
 		}else System.out.println("insert failed!");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void delete(ReceiptPO po) {
+	public ResultMessage delete(ReceiptPO po) {
 		// TODO Auto-generated method stub
 		if (po.getNumber() == "R120151023000001") {
 			System.out.println("delete succeed!");
 		}else System.out.println("delete failed!");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void update(ReceiptPO po) {
+	public ResultMessage update(ReceiptPO po) {
 		// TODO Auto-generated method stub
 		if (po.getNumber() == "R120151023000001") {
 			System.out.println("update succeed!");
 		}else System.out.println("update failed!");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

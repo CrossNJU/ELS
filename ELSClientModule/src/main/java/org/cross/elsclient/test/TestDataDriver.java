@@ -14,12 +14,11 @@ import org.cross.elscommon.dataservice.logdataservice.LogDataService_Driver;
 import org.cross.elscommon.dataservice.logdataservice.LogDataService_Stub;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService_Driver;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService_Stub;
-import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService_Driver;
-import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService_Stub;
+//import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService_Driver;
+//import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService_Stub;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService_Driver;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService_Stub;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService_Driver;
-import org.cross.elscommon.dataservice.stockdataservice.StockDataService_Stub;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService_Driver;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService_Stub;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService_Driver;
@@ -66,11 +65,11 @@ public class TestDataDriver {
 		organizationDataDriver.drive(new OrganizationDataService_Stub());
 		System.out.println("-----------------------------");
 
-		System.out.println("人员管理驱动测试：");
-		System.out.println("-----------------------------");
-		PersonnelDataService_Driver personnelDataDriver = new PersonnelDataService_Driver();
-		personnelDataDriver.drive(new PersonnelDataService_Stub());
-		System.out.println("-----------------------------");
+//		System.out.println("人员管理驱动测试：");
+//		System.out.println("-----------------------------");
+//		PersonnelDataService_Driver personnelDataDriver = new PersonnelDataService_Driver();
+//		personnelDataDriver.drive(new PersonnelDataService_Stub());
+//		System.out.println("-----------------------------");
 
 		System.out.println("单据管理驱动测试：");
 		System.out.println("-----------------------------");
@@ -81,7 +80,7 @@ public class TestDataDriver {
 		System.out.println("库存管理驱动测试：");
 		System.out.println("-----------------------------");
 		StockDataService_Driver stockDataDriver = new StockDataService_Driver();
-		stockDataDriver.driver(new StockDataService_Stub());
+//		stockDataDriver.driver(new StockDataService_Stub());
 		System.out.println("-----------------------------");
 
 		System.out.println("车辆管理驱动测试：");

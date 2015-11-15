@@ -6,25 +6,32 @@
 package org.cross.elscommon.po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.GoodsState;
+import org.cross.elscommon.util.StockType;
 
 public class GoodsPO implements Serializable{
 	/**
 	 * 序列化UID
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 快件类型
+	 */
+	private StockType goodsType;
 
 	/**
 	 * 历史轨迹
 	 */
-	private HistoryPO historyPO;
+	private ArrayList<HistoryPO> historyPO;
 	
 	/**
 	 * 订单
 	 */
-	private Receipt_OrderPO order;
+	private String orderNumber;
 	
 	/**
 	 * 当前位置
@@ -49,31 +56,39 @@ public class GoodsPO implements Serializable{
 	/**
 	 * 构造方法
 	 */
-	public GoodsPO(int weight,int volum,City currentLocate){
+	public GoodsPO(int weight,int volum,City currentLocate,StockType goodsType){
 		this.weightOfGoods = weight;
 		this.volumeOfGoods = volum;
 		this.currentLocate = currentLocate;
+		this.goodsType = goodsType;
 		
 		this.state = GoodsState.LIVE;
-		this.order = null;
-		this.historyPO = null;
+		this.historyPO = new ArrayList<HistoryPO>();
 	}
 	
 	/**
 	 * get&set
 	 */
-	public HistoryPO getHistoryPO(){
+	public ArrayList<HistoryPO> getHistoryPO(){
 		return historyPO;
 	}
-	public void setHistoryPO(HistoryPO historyPO){
-		this.historyPO = historyPO;
+	public StockType getGoodsType() {
+		return goodsType;
+	}
+
+	public void setGoodsType(StockType goodsType) {
+		this.goodsType = goodsType;
+	}
+
+	public void setHistoryPO(HistoryPO histroyPO){
+		this.historyPO.add(histroyPO);
 	}
 	
-	public Receipt_OrderPO getOrderPO(){
-		return order;
+	public String getOrderNumber(){
+		return orderNumber;
 	}
-	public void setOrderPO(Receipt_OrderPO order){
-		this.order = order;
+	public void setOrderNumber(String order){
+		this.orderNumber = order;
 	}
 	
 	public City getCurrentLocate(){
@@ -108,3 +123,5 @@ public class GoodsPO implements Serializable{
 		return serialVersionUID;
 	}
 }
+
+

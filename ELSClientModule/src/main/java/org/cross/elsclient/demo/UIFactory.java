@@ -2,28 +2,29 @@ package org.cross.elsclient.demo;
 
 import java.rmi.RemoteException;
 
-import org.cross.elsclient.blservice.goodsblservice.GoodsBLImpl;
-import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
-import org.cross.elsclient.blservice.receiptblservice.ReceiptBLImpl;
-import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
-import org.cross.elsclient.blservice.stockblservice.StockBLImpl;
+import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
+import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
+import org.cross.elsclient.blimpl.goodsblimpl.GoodsBLImpl;
+import org.cross.elsclient.blimpl.receiptblimpl.ReceiptBLImpl;
+import org.cross.elsclient.blimpl.stockblimpl.StockBLImpl;
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
-import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryServiceImpl;
+import org.cross.elsclient.network.Datafactory;
+import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 
 public class UIFactory {
 	
 	StockBLService stockbl;
-	GoodsBLService goodsbl;
-	ReceiptBLService receiptbl;
+	GoodsInfo goodsInfo;
+	ReceiptInfo receiptInfo;
 	
-	DataFactoryServiceImpl dataFactory;
+	DataFactoryService dataFactory;
 	
 	public UIFactory(){
-		dataFactory = new DataFactoryServiceImpl();
+		dataFactory = new Datafactory();
 		try {
-			receiptbl = new ReceiptBLImpl(dataFactory.getReceiptData());
-			goodsbl = new GoodsBLImpl(dataFactory.getGoodsData(), receiptbl);
-			stockbl = new StockBLImpl(dataFactory.getStockData(), receiptbl, goodsbl);
+			goodsInfo = new GoodsBLImpl(dataFactory.getGoodsData());
+			receiptInfo = new ReceiptBLImpl(goodsInfo, dataFactory.getReceiptData());
+			stockbl = new StockBLImpl(dataFactory.getStockData(),dataFactory.getGoodsData(), goodsInfo);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

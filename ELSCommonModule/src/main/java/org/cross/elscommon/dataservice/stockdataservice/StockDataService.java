@@ -5,6 +5,7 @@
  */
 package org.cross.elscommon.dataservice.stockdataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -12,11 +13,11 @@ import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public interface StockDataService {
+public interface StockDataService extends Remote{
 	
 	public ResultMessage insert(StockPO po) throws RemoteException;
 	
-	public ResultMessage delete(StockPO po) throws RemoteException;
+	public ResultMessage delete(String id) throws RemoteException;
 	
 	public ResultMessage update(StockPO po) throws RemoteException;
 	

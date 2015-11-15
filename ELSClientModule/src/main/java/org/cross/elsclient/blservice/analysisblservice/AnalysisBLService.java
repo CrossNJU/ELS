@@ -8,21 +8,21 @@ public interface AnalysisBLService {
 	
 	/**
 	 * 展示成本收益表
-	 * @para 
+	 * @param 
 	 * @return 成本收益表（依次为成本，收益，利润）
 	 */
-	public int[] showCostBenefitTable();
+	public double[] showCostBenefitTable();
 	
 	/**
 	 * 展示收款单
-	 * @para beginTime, endTime
+	 * @param beginTime, endTime
 	 * @return 收款单
 	 */
 	public ArrayList<ReceiptVO> showMoneyinTable(String beginTime, String endTime);
 	
 	/**
 	 * 展示付款单
-	 * @para beginTime, endTime
+	 * @param beginTime, endTime
 	 * @return 付款单
 	 */
 	public ArrayList<ReceiptVO> showMoneyoutTable(String beginTime, String endTime);

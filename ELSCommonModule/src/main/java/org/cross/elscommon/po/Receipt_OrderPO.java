@@ -8,6 +8,7 @@ package org.cross.elscommon.po;
 import java.io.Serializable;
 
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.People;
 import org.cross.elscommon.util.ReceiptType;
 
 public class Receipt_OrderPO extends ReceiptPO implements Serializable{
@@ -55,12 +56,12 @@ public class Receipt_OrderPO extends ReceiptPO implements Serializable{
 	/**
 	 * 寄件人
 	 */
-	private PeoplePO pushPeople;
+	private People pushPeople;
 	
 	/**
 	 * 收件人
 	 */
-	private PeoplePO receivePeople;
+	private People receivePeople;
 	
 	/**
 	 * 订单创建时间
@@ -83,7 +84,7 @@ public class Receipt_OrderPO extends ReceiptPO implements Serializable{
 			String receiveTime, 
 			String expectTime, String number,
 			City targetPlace, City startPlace,
-			PeoplePO pushPeople, PeoplePO receivePeople,
+			People pushPeople, People receivePeople,
 			String time){
 		super(number, ReceiptType.ORDER, time);
 		this.goods = goods;
@@ -180,22 +181,22 @@ public class Receipt_OrderPO extends ReceiptPO implements Serializable{
 	}
 	
 
-	public PeoplePO getPushPeople() {
+	public People getPushPeople() {
 		return pushPeople;
 	}
 	
 
-	public void setPushPeople(PeoplePO pushPeople) {
+	public void setPushPeople(People pushPeople) {
 		this.pushPeople = pushPeople;
 	}
 	
 
-	public PeoplePO getReceivePeople() {
+	public People getReceivePeople() {
 		return receivePeople;
 	}
 	
 
-	public void setReceivePeople(PeoplePO receivePeople) {
+	public void setReceivePeople(People receivePeople) {
 		this.receivePeople = receivePeople;
 	}
 	
