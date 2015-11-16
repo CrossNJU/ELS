@@ -70,8 +70,7 @@ public class Receipt {
 
 	public ResultMessage check(ReceiptVO vo) {
 		MockPersonnel personnel = new MockPersonnel();
-		personnel.checkReceipt(vo);
-		return null;
+		return personnel.checkReceipt(vo);
 	}
 	
 	public ResultMessage createLog(String log){

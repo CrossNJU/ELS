@@ -24,7 +24,10 @@ public class ReceiptTest {
 		assertEquals(ResultMessage.SUCCESS, receipt.update(
 				new Receipt_OrderVO("R120151023000001", "2015-10-25 01:10:10")));
 		
-		assertEquals(ResultMessage.SUCCESS, "");
+		assertEquals(ResultMessage.SUCCESS, receipt.check(
+				new Receipt_MoneyInVO("2015-10-25 01:10:10", 2000, person, "R120151023000001")));
+		
+		assertEquals(ResultMessage.SUCCESS, receipt.createLog("execute a receipt"));
 	}
 
 }
