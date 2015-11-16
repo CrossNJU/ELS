@@ -1,6 +1,7 @@
 package org.cross.elsclient.blimpl.initialblimpl;
 
 import org.cross.elsclient.blimpl.accountblimpl.MockLog;
+import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elsclient.vo.InitialVO;
 import org.cross.elscommon.util.ResultMessage;
 
@@ -23,7 +24,12 @@ public class Initial {
 		mockPersonnel.createPersonnel(vo.personnels);
 		mockStock.createStock(vo.stocks);
 		mockVehicle.createVehicle(vo.vehicles);
-		return null;
+		
+		if((mockAccount != null)&&(mockOrganization != null)&&(mockPersonnel != null)&&
+				(mockStock != null)&&(mockVehicle != null))
+			return ResultMessage.SUCCESS;
+		
+		return ResultMessage.FAILED;
 	}
 	
 }

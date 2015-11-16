@@ -10,17 +10,6 @@ import org.cross.elscommon.util.ResultMessage;
 
 public class Goods {
 
-	public ResultMessage updateGoods(String id, HistoryVO nowHistory,
-			GoodsState nowState) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<HistoryVO> findGoods(String id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public ResultMessage createLog(String log){
 		MockLog mockLog = new MockLog(log);
 		return mockLog.createLog();
