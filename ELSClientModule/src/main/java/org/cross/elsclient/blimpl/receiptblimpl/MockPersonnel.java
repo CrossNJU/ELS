@@ -9,4 +9,8 @@ public class MockPersonnel {
 		return ResultMessage.SUCCESS;
 	}
 	
+	public ResultMessage checkReceipt(ReceiptVO receiptvo){
+		return ResultMessage.SUCCESS;
+	}
+	
 }
