@@ -12,7 +12,6 @@ public class Organization {
 	}
 
 	public ResultMessage add(OrganizationVO vo) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 }

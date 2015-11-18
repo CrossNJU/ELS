@@ -69,7 +69,8 @@ public class Receipt {
 	}
 
 	public ResultMessage check(ReceiptVO vo) {
-		return null;
+		MockPersonnel personnel = new MockPersonnel();
+		return personnel.checkReceipt(vo);
 	}
 	
 	public ResultMessage createLog(String log){
