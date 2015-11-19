@@ -1,5 +1,6 @@
 package org.cross.elsclient.blimpl.blUtility;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.vo.GoodsVO;
@@ -15,4 +16,10 @@ public interface GoodsInfo {
 	public GoodsPO toGoodsPO(GoodsVO vo);
 	
 	public HistoryPO toHistroyPO(HistoryVO vo);
+	
+	/**
+	 *根据单号查快件
+	 * @throws RemoteException 
+	 */
+	public GoodsVO searchGoods(String goodsID) throws RemoteException;
 }

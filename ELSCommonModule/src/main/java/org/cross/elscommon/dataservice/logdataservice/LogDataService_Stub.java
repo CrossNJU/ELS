@@ -9,12 +9,14 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.LogPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class LogDataService_Stub implements LogDataService {
 
 	@Override
-	public void insert(LogPO po) throws RemoteException {
+	public ResultMessage insert(LogPO po) throws RemoteException {
 		System.out.println("增加系统日志成功");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

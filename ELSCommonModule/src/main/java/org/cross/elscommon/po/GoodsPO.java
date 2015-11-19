@@ -84,6 +84,10 @@ public class GoodsPO implements Serializable{
 		this.historyPO.add(histroyPO);
 	}
 	
+	public void cloneHistroyFromVO(ArrayList<HistoryPO> historyPOs){
+		this.historyPO = historyPOs;
+	}
+	
 	public String getOrderNumber(){
 		return orderNumber;
 	}

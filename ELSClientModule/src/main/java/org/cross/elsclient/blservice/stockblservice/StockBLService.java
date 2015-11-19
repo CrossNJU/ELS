@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StockState;
 import org.cross.elscommon.util.StockType;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockOperationVO;
@@ -66,7 +67,7 @@ public interface StockBLService {
 	 * @return 是否入库称成功
 	 * @throws RemoteException 
 	 */
-	public ResultMessage intoStock(String goodsID,String stockID) throws RemoteException;
+	public ResultMessage intoStock(String goodsID,String stockID,String time) throws RemoteException;
 	
 	/**
 	 * 快件出库
@@ -74,12 +75,13 @@ public interface StockBLService {
 	 * @return 是否出库成功
 	 * @throws RemoteException 
 	 */
-	public ResultMessage outStock(String goodsID,String stockID) throws RemoteException;
+	public ResultMessage outStock(String goodsID,String stockID,String time) throws RemoteException;
 	
 	/**
 	 * 库存报警
+	 * @throws RemoteException 
 	 */
-	public ResultMessage stockAlert(String stockID,StockType stockType);
+	public StockState stockAlert(String stockID,StockType stockType) throws RemoteException;
 	
 	/**
 	 * 库存调整

@@ -7,13 +7,14 @@ import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.demo.StockInfoUI.returnAct;
-import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StockOperationType;
+import org.cross.elscommon.util.StockState;
 import org.cross.elscommon.util.StockType;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.StockAreaVO;
@@ -24,12 +25,10 @@ public class StockBLImpl implements StockBLService,StockInfo{
 	
 	public StockPO stockpo;
 	public StockDataService stockData;
-	public GoodsDataService goodsData;
 	GoodsInfo goodsInfo;
 	
-	public StockBLImpl(StockDataService stockdata,GoodsDataService goodsData, GoodsInfo goodsInfo){
+	public StockBLImpl(StockDataService stockdata, GoodsInfo goodsInfo){
 		this.stockData = stockdata;
-		this.goodsData = goodsData;
 		this.goodsInfo = goodsInfo;
 	}
 	
@@ -79,7 +78,6 @@ public class StockBLImpl implements StockBLService,StockInfo{
 			if (stockpo.getSpecialStockPOs().get(i).getStockType().equals(type)) {
 				stockAreaPO = stockpo.getSpecialStockPOs().get(i);
 				stockAreaVOs.add(toStockAreaVO(stockAreaPO));
-//				System.out.println("used : " + stockpo.getSpecialStockPOs().get(i).getUsedCapacity());
 			}
 		}
 		return stockAreaVOs;
@@ -88,12 +86,12 @@ public class StockBLImpl implements StockBLService,StockInfo{
 	@Override
 	public ResultMessage checkGoods(String goodsID,String stockID) throws RemoteException {
 		stockpo = stockData.findStock(stockID);
-		GoodsPO goodspo = goodsData.show(goodsID);
+		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
 		for (int i = 0; i < stockpo.getSpecialStockPOs().size(); i++) {
-			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodspo.getGoodsType()) {
+			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodsVO.goodsType) {
 				for (int j = 0; j < stockpo.getSpecialStockPOs().get(i).getGoodsList().size(); j++) {
 					if (stockpo.getSpecialStockPOs().get(i).getGoodsList().get(j).getOrderNumber().
-							equals(goodspo.getOrderNumber())) {
+							equals(goodsVO.orderNumber)) {
 						return ResultMessage.SUCCESS;
 					}
 				}
@@ -103,9 +101,13 @@ public class StockBLImpl implements StockBLService,StockInfo{
 	}
 
 	@Override
-	public ResultMessage intoStock(String goodsID,String stockID) throws RemoteException {
-		// TODO 报警没写
-		GoodsPO goodsPO = goodsData.show(goodsID);
+	public ResultMessage intoStock(String goodsID,String stockID,String time) throws RemoteException {
+		// TODO 报警没写  
+		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
+		GoodsPO goodsPO = goodsInfo.toGoodsPO(goodsVO);
+		if (goodsPO == null) {
+			return ResultMessage.FAILED;
+		}
 		stockpo = stockData.findStock(stockID);
 		if (checkGoods(goodsID, stockID) == ResultMessage.SUCCESS) {
 			return ResultMessage.FAILED;
@@ -115,7 +117,7 @@ public class StockBLImpl implements StockBLService,StockInfo{
 			return ResultMessage.FAILED;
 		}
 		for (int i = 0; i < stockpo.getSpecialStockPOs().size(); i++) {
-			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodsPO.getGoodsType()) {
+			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodsVO.goodsType) {
 				int total = stockpo.getSpecialStockPOs().get(i).getTotalCapacity();
 				int used = stockpo.getSpecialStockPOs().get(i).getUsedCapacity();
 				if (used < total) {
@@ -133,15 +135,17 @@ public class StockBLImpl implements StockBLService,StockInfo{
 	}
 
 	@Override
-	public ResultMessage outStock(String goodsID,String stockID) throws RemoteException {
+	public ResultMessage outStock(String goodsID,String stockID,String time) throws RemoteException {
+		//TODO 增加仓库操作
 		stockpo = stockData.findStock(stockID);
-		GoodsPO goodspo = goodsData.show(goodsID);
+		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
+		StockOperationVO stockOperationVO = new StockOperationVO(time, StockOperationType.STOCKOUT, goodsVO, 77.7,goodsVO.goodsType);
 		for (int i = 0; i < stockpo.getSpecialStockPOs().size(); i++) {
-			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodspo.getGoodsType()) {
+			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodsVO.goodsType) {
 				for (int j = 0; j < stockpo.getSpecialStockPOs().get(i).getGoodsList().size(); j++) {
 					ArrayList<GoodsPO> goodsList = stockpo.getSpecialStockPOs().get(i).getGoodsList();
 					if (goodsList.get(j).getOrderNumber().
-							equals(goodspo.getOrderNumber())) {
+							equals(goodsVO.orderNumber)) {
 						goodsList.remove(j);
 						int used = stockpo.getSpecialStockPOs().get(i).getUsedCapacity();
 						stockpo.getSpecialStockPOs().get(i).setGoodList(goodsList);
@@ -155,6 +159,31 @@ public class StockBLImpl implements StockBLService,StockInfo{
 		return ResultMessage.FAILED;
 	}
 		
+	@Override
+	public StockState stockAlert(String stockID, StockType stockType) throws RemoteException {
+		ArrayList<StockAreaVO> stockAreaVOs = stockCapacity(stockID, stockType);
+		int total = 0;
+		int used = 0;
+		int size = stockAreaVOs.size();
+		for (int i = 0; i < size; i++) {
+			total += stockAreaVOs.get(i).totalCapacity;
+			used += stockAreaVOs.get(i).usedCapacity;
+		}
+		if (9*total < 10*used) {
+			return StockState.ALERT;
+		}
+		else {
+			return StockState.NORMAL;
+		}
+	}
+
+	@Override
+	public ResultMessage stockAdjust(String stockID, StockType stockType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	public ArrayList<StockAreaVO> getAreasVO(ArrayList<StockAreaPO> pos){
 		ArrayList<StockAreaVO> areas = new ArrayList<StockAreaVO>();
 		for (int i = 0; i < pos.size(); i++) {
@@ -212,15 +241,4 @@ public class StockBLImpl implements StockBLService,StockInfo{
 		return vo;
 	}
 
-	@Override
-	public ResultMessage stockAlert(String stockID, StockType stockType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage stockAdjust(String stockID, StockType stockType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

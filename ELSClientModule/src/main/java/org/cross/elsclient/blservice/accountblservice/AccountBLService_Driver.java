@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.blservice.accountblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ResultMessage;
@@ -12,7 +13,7 @@ import org.cross.elsclient.vo.AccountVO;
 
 public class AccountBLService_Driver {
 
-	public void drive(AccountBLService accountBLService) {
+	public void drive(AccountBLService accountBLService) throws RemoteException {
 
 		ResultMessage result;
 		System.out.println("添加账户的返回信息：");

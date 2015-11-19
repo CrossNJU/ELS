@@ -8,6 +8,7 @@ import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blimpl.goodsblimpl.GoodsBLImpl;
 import org.cross.elsclient.blimpl.receiptblimpl.ReceiptBLImpl;
 import org.cross.elsclient.network.Datafactory;
+import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.util.City;
@@ -39,6 +40,11 @@ public class GoodsBLTest {
 		ArrayList<HistoryVO> history2 = goodsBLImpl.findGoods("R120151023000002");
 		for (int i = 0; i < history2.size(); i++) {
 			System.out.println("途经 ： " + history2.get(i).place + "   时间 ： " + history2.get(i).time);
+		}
+		System.out.println("=======测试得到快件所有信息(searchGoods)=======");
+		GoodsVO goods = goodsBLImpl.searchGoods("R120151023000002");
+		if (goods != null) {
+			System.out.println("search successfully");
 		}
 
 		

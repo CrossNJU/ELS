@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface OrganizationDataService {
 	/**
@@ -18,21 +19,21 @@ public interface OrganizationDataService {
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public void insert(OrganizationPO po);
+	public ResultMessage insert(OrganizationPO po);
 	
 	/**
 	 * 删除机构
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public void delete(OrganizationPO po);
+	public ResultMessage delete(OrganizationPO po);
 
 	/**
 	 * 修改机构
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public void update(OrganizationPO po);
+	public ResultMessage update(OrganizationPO po);
 
 	/**
 	 * 根据所在城市查找机构

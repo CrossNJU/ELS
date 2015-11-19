@@ -10,19 +10,22 @@ import org.cross.elscommon.util.ResultMessage;
 public class OrganizationDataService_Stub implements OrganizationDataService{
 
 	@Override
-	public void insert(OrganizationPO po) {
+	public ResultMessage insert(OrganizationPO po) {
 		System.out.println("Insert Succeed!\n");
+		return ResultMessage.SUCCESS;
 		
 	}
 
 	@Override
-	public void delete(OrganizationPO po) {
+	public ResultMessage delete(OrganizationPO po) {
 		System.out.println("Delete Succeed!\n");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void update(OrganizationPO po) {
+	public ResultMessage update(OrganizationPO po) {
 		System.out.println("Update Succeed!\n");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

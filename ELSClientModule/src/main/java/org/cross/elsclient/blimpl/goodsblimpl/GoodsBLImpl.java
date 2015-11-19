@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
+import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
@@ -25,7 +26,6 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 	
 	@Override
 	public ResultMessage updateGoods(String id,HistoryVO nowHistory,GoodsState nowState) throws RemoteException {
-		// TODO Auto-generated method stub
 		goodspo = goodsDataService.show(id);
 		goodspo.setHistoryPO(toHistroyPO(nowHistory));
 		goodspo.setGoodsState(nowState);
@@ -36,7 +36,6 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 
 	@Override
 	public ArrayList<HistoryVO> findGoods(String id) throws RemoteException {
-		// TODO Auto-generated method stub
 		ArrayList<HistoryVO> histroy = new ArrayList<HistoryVO>();
 		
 		goodspo = goodsDataService.show(id);
@@ -44,7 +43,6 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 		goodsvo = toGoodsVO(goodspo);
 		
 		for (int i = 0; i < goodsvo.historyVO.size(); i++) {
-//			System.out.println("in");
 			HistoryVO vo = goodsvo.historyVO.get(i);
 			histroy.add(vo);
 		}
@@ -52,7 +50,17 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 	}
 	
 	@Override
+	public GoodsVO searchGoods(String goodsID) throws RemoteException {
+		goodspo = goodsDataService.show(goodsID);
+		goodsvo = toGoodsVO(goodspo);
+		return goodsvo;
+	}
+	
+	@Override
 	public GoodsVO toGoodsVO(GoodsPO po){
+		if (po == null) {
+			return null;
+		}
 		GoodsVO vo = new GoodsVO(po.getGoodsWeight(), po.getGoodsVolume(), po.getCurrentLocate(),po.getGoodsType());
 		vo.historyVO = toHistroyVO(po.getHistoryPO());
 		vo.orderNumber = po.getOrderNumber();
@@ -72,22 +80,24 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 
 	@Override
 	public GoodsPO toGoodsPO(GoodsVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		if (vo == null) {
+			return null;
+		}
+		GoodsPO goodsPO = new GoodsPO(vo.weightOfGoods, vo.volumeOfGoods, vo.currentLocate, vo.goodsType);
+		ArrayList<HistoryPO> historyPOs = new ArrayList<HistoryPO>();
+		for (int i = 0; i < vo.historyVO.size(); i++) {
+			historyPOs.add(toHistroyPO(vo.historyVO.get(i)));
+		}
+		goodsPO.cloneHistroyFromVO(historyPOs);
+		goodsPO.setOrderNumber(vo.orderNumber);
+		goodsPO.setGoodsState(vo.state);
+		return goodsPO;
 	}
 
 	@Override
 	public HistoryPO toHistroyPO(HistoryVO vo) {
-		// TODO Auto-generated method stub
 		HistoryPO historyPO = new HistoryPO(vo.time, vo.place);
 		return historyPO;
-	}
-
-	@Override
-	public GoodsVO searchGoods(String goodsID) throws RemoteException {
-		goodspo = goodsDataService.show(goodsID);
-		goodsvo = toGoodsVO(goodspo);
-		return goodsvo;
 	}
 	
 //	public ArrayList<HistoryVO> toHistroyVO(GoodsPO po){}

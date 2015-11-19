@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.blservice.accountblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ResultMessage;
@@ -25,29 +26,33 @@ public interface AccountBLService {
 	 * 
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage add(AccountVO vo);
+	public ResultMessage add(AccountVO vo) throws RemoteException;
 
 	/**
 	 * 删除账户
 	 * 
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(AccountVO vo);
+	public ResultMessage delete(AccountVO vo) throws RemoteException;
 
 	/**
 	 * 更新账户
 	 * 
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage update(AccountVO vo);
+	public ResultMessage update(AccountVO vo) throws RemoteException;
 
 	/**
 	 * 显示所有账户信息
 	 * 
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ArrayList<AccountVO> show();
+	public ArrayList<AccountVO> show() throws RemoteException;
 }

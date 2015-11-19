@@ -7,7 +7,6 @@
 package org.cross.elsclient.blservice.organizationblservice;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.City;

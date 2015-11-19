@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.AccountPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class AccountDataService_Stub implements AccountDataService {
 
@@ -20,26 +21,29 @@ public class AccountDataService_Stub implements AccountDataService {
 	}
 
 	@Override
-	public void insert(AccountPO po) throws RemoteException {
+	public ResultMessage insert(AccountPO po) throws RemoteException {
 		System.out.println("增加账户成功");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void delete(AccountPO po) throws RemoteException {
+	public ResultMessage delete(AccountPO po) throws RemoteException {
 		if (po.getName().equals("ICBC账户")) {
 			System.out.println("删除账户成功");
-			return;
+			return ResultMessage.SUCCESS;
 		}
 		System.out.println("删除账户失败");
+		return ResultMessage.FAILED;
 	}
 
 	@Override
-	public void update(AccountPO po) throws RemoteException {
+	public ResultMessage update(AccountPO po) throws RemoteException {
 		if (po.getName().equals("ICBC账户")) {
 			System.out.println("更新账户成功");
-			return;
+			return ResultMessage.SUCCESS;
 		}
 		System.out.println("更新账户失败");
+		return ResultMessage.FAILED;
 	}
 
 	@Override
