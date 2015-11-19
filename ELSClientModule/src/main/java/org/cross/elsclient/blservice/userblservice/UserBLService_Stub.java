@@ -47,7 +47,19 @@ public class UserBLService_Stub implements UserBLService {
 	@Override
 	public ArrayList<UserVO> findById(String id) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO("12345678", "梦优比斯奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "杰克奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "雷欧奥特曼", UserType.COURIER));
+		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+//		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+//		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+//		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+//		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+//		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+//		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
+//		list.add(new UserVO("12345678", "爱迪奥特曼", UserType.STOCKKEEPER));
 		return list;
 	}
 
@@ -57,12 +69,22 @@ public class UserBLService_Stub implements UserBLService {
 		list.add(new UserVO("12345678", "迪迦奥特曼", UserType.COUNTER));
 		list.add(new UserVO("12345678","戴拿奥特曼", UserType.COUNTER));
 		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("12345678", "盖亚奥特曼", UserType.COUNTER));
+		
 		return list;
 	}
 
 	@Override
 	public UserType login(String id, String password) {
-		return UserType.COUNTER;
+		return UserType.ADMINISTRATOR;
 	}
 
 	@Override
