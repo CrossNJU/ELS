@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.blservice.personnelblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ResultMessage;
@@ -17,16 +18,18 @@ public interface PersonnelBLService {
 	 * 
 	 * @param id
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ArrayList<PersonnelVO> findById(String id);
+	public ArrayList<PersonnelVO> findById(String id) throws RemoteException;
 
 	/**
 	 * 根据人员姓名查找
 	 * 
 	 * @param name
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ArrayList<PersonnelVO> findByName(String name);
+	public ArrayList<PersonnelVO> findByName(String name) throws RemoteException;
 
 	/**
 	 * 增加人员

@@ -8,33 +8,37 @@ package org.cross.elscommon.dataservice.vehicledataservice;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.VehiclePO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class VehicleDataService_Stub implements VehicleDataService{
 
 	@Override
-	public void insert(VehiclePO po) {
+	public ResultMessage insert(VehiclePO po) {
 		// TODO Auto-generated method stub
 		if (po.getNumber() == "00001") {
 			System.out.println("insert succeed!");
 		}else {
 			System.out.println("insert failed");
 		}
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void delete(VehiclePO po) {
+	public ResultMessage delete(VehiclePO po) {
 		// TODO Auto-generated method stub
 		if (po.getNumber() == "00001") {
 			System.out.println("delete succeed!");
 		}else {
 			System.out.println("delete failed");
 		}
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void update(VehiclePO po) {
+	public ResultMessage update(VehiclePO po) {
 		// TODO Auto-generated method stub
 		System.out.println("update succeed!");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

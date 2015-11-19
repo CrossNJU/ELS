@@ -9,11 +9,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.VehiclePO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface VehicleDataService {
-	public void insert(VehiclePO po) throws RemoteException;
-	public void delete(VehiclePO po) throws RemoteException;
-	public void update(VehiclePO po) throws RemoteException;
+	public ResultMessage insert(VehiclePO po) throws RemoteException;
+	public ResultMessage delete(VehiclePO po) throws RemoteException;
+	public ResultMessage update(VehiclePO po) throws RemoteException;
 	public ArrayList<VehiclePO> show() throws RemoteException;
 	public ArrayList<VehiclePO> find(String name) throws RemoteException;
 }
