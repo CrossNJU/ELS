@@ -1,74 +1,132 @@
 package org.cross.elsserver.dataimpl.goodsdataimpl;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.po.GoodsPO;
-import org.cross.elscommon.util.Filename;
-import org.cross.elscommon.util.SerIO;
+import org.cross.elscommon.po.HistoryPO;
+import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.GoodsState;
+import org.cross.elscommon.util.MySQL;
+import org.cross.elscommon.util.StockType;
+import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.dataimpl.tools.HistoryTool;
 
-public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataService,Serializable{
-	public GoodsDataImpl() throws RemoteException {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+@SuppressWarnings("serial")
+public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataService {
 
 	public ArrayList<GoodsPO> goodsList;
-	static String fileName = Filename.GOODSPO.toString();
-	
-	String testString = "start";
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public void update(GoodsPO goods) throws RemoteException {
-		// TODO Auto-generated method stub
-		goodsList = (ArrayList<GoodsPO>)SerIO.readPO("GoodsPO.ser");
-		if (goodsList == null) {
-			goodsList = new ArrayList<GoodsPO>();
-		}
-		int find = -1;
-		for (int i = 0; i < goodsList.size(); i++) {
-			if(goods.getOrderNumber().equals(goodsList.get(i).getOrderNumber())){
-				find = i;
-				break;
-			}
-		}
-		if (find >= 0){
-			goodsList.remove(find);
-			goodsList.add(goods);
-		}else goodsList.add(goods);
-		SerIO.writePO(goodsList, fileName);
+	public MySQL mysql;
+	public HistoryTool historyTool;
+
+	public GoodsDataImpl(HistoryTool historyTool) throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+		mysql = new MySQL();
+		this.historyTool = historyTool;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public GoodsPO show(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		goodsList = (ArrayList<GoodsPO>)SerIO.readPO("GoodsPO.ser");
-		if(goodsList==null)System.out.println("null");
-		System.out.println(goodsList.size());
-		for (int i = 0; i < goodsList.size(); i++) {
-			System.out.println(goodsList.get(i).getOrderNumber()+"++++++");
-			if (goodsList.get(i).getOrderNumber().equals(id)) {
-				return goodsList.get(i);
+		String search = "select * from goods where number = '" + id + "'";
+		ResultSet rs = mysql.query(search);
+		GoodsPO goods = getFromDB(rs);
+		return goods;
+	}
+
+	@Override
+	public void updateLocation(String id, City nowLocation) throws RemoteException {
+		// TODO Auto-generated method stub
+		String sql = "update goods set city = '" + nowLocation.toString() + "' where number = '" + id + "'";
+		updateIntoDB(id, sql);
+	}
+
+	@Override
+	public void updateState(String id, GoodsState state) throws RemoteException {
+		// TODO Auto-generated method stub
+		String sql = "update goods set state = '" + state.toString() + "' where number = '" + id + "'";
+		updateIntoDB(id, sql);
+	}
+
+	@Override
+	public void updateTrans(String id, int transNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		String sql = "update goods set belongTrans = " + transNum + " where number = '" + id + "'";
+		updateIntoDB(id, sql);
+	}
+
+	@Override
+	public void updateStock(String id, int stockAreaNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		String sql = "update goods set belongStockArea = " + stockAreaNum + " where number = '" + id + "'";
+		updateIntoDB(id, sql);
+	}
+
+	@Override
+	public void insert(GoodsPO goods) throws RemoteException {
+		// TODO Auto-generated method stub
+		String sql = "insert into goods(type,city,state,weight,volume,number) values ('"
+				+ goods.getGoodsType().toString() + "','" + goods.getCurrentLocate().toString() + "','"
+				+ goods.getGoodsState().toString() + "'," + goods.getGoodsWeight() + "," + goods.getGoodsVolume()
+				+ ",'" + goods.getOrderNumber() + "')";
+		mysql.execute(sql);
+	}
+
+	public GoodsPO getFromDB(ResultSet rs) {
+		GoodsPO goods = null;
+		try {
+			if (rs.next()) {
+				StockType goodsType = StringToType.toGoodsType(rs.getString("type"));
+				GoodsState goodsState = StringToType.toGoodsState(rs.getString("state"));
+				int goodsID = rs.getInt("ID");
+				ArrayList<HistoryPO> list = historyTool.findByGoodsID(goodsID);
+				String number = rs.getString("number");
+				City now = StringToType.toCity(rs.getString("city"));
+				int weight = rs.getInt("weight");
+				int volume = rs.getInt("volume");
+				goods = new GoodsPO(weight, volume, now, goodsType);
+				goods.setGoodsState(goodsState);
+				goods.setOrderNumber(number);
+				for (int i = 0; i < list.size(); i++) {
+					goods.setHistoryPO(list.get(i));
+				}
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return null;
+		return goods;
 	}
 
-	@Override
-	public String justTest() throws RemoteException{
-		// TODO Auto-generated method stub
-		return this.testString+" throw remote\n";
+	public void updateIntoDB(String number, String sql) {
+		String search = "select * from goods where number = '" + number + "'";
+		ResultSet rs = mysql.query(search);
+		try {
+			if (!rs.next()) {
+				System.out.println("not exist!");
+			} else {
+				mysql.execute(sql);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
-	@Override
-	public void setTestString(String s) throws RemoteException {
-		// TODO Auto-generated method stub
-		this.testString = s;
-	}
+//	public static void main(String[] args) throws Exception {
+//		GoodsPO good1 = new GoodsPO(30, 10, City.NANJING, StockType.Fast);
+//		Receipt_OrderPO order1 = new Receipt_OrderPO("R120151023000002", "2015-11-25 01:10:10");
+//		good1.setOrderNumber(order1.getNumber());
+//		HistoryTool historyTool = new HistoryDataImpl();
+//		GoodsDataImpl dataImpl = new GoodsDataImpl(historyTool);
+////		dataImpl.updateLocation(good1.getOrderNumber(), good1.getCurrentLocate());
+//		dataImpl.insert(good1);
+//	}
 
 }
