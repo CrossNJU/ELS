@@ -29,6 +29,7 @@ public class UserVO {
 	 */
 	public UserVO(String password, String name, UserType type) {
 		this.id = "U000001";
+		this.password = password;
 		this.name = name;
 		this.type = type;
 	}

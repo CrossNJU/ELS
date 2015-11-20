@@ -40,6 +40,7 @@ public class UserPO implements Serializable{
 	 */
 	public UserPO(String password, String name, UserType type) {
 		this.id = "U00001";
+		this.password = password;
 		this.name = name;
 		this.type = type;
 	}

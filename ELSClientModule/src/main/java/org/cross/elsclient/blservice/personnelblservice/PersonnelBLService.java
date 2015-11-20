@@ -36,29 +36,33 @@ public interface PersonnelBLService {
 	 * 
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage add(PersonnelVO vo);
+	public ResultMessage add(PersonnelVO vo) throws RemoteException;
 
 	/**
 	 * 删除人员
 	 * 
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(PersonnelVO vo);
+	public ResultMessage delete(PersonnelVO vo) throws RemoteException;
 
 	/**
 	 * 更新人员信息
 	 * 
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage update(PersonnelVO vo);
+	public ResultMessage update(PersonnelVO vo) throws RemoteException;
 
 	/**
 	 * 显示所有人员信息
 	 * 
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ArrayList<PersonnelVO> show();
+	public ArrayList<PersonnelVO> show() throws RemoteException;
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
+import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService_Stub;
@@ -46,27 +47,32 @@ public class PersonnelBLImpl implements PersonnelBLService,PersonnelInfo{
 	}
 
 	@Override
-	public ResultMessage add(PersonnelVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage add(PersonnelVO vo) throws RemoteException {
+		PersonnelPO po = toPersonnelPO(vo);
+		return personnelData.insert(po);
 	}
 
 	@Override
-	public ResultMessage delete(PersonnelVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage delete(PersonnelVO vo) throws RemoteException {
+		PersonnelPO po = toPersonnelPO(vo);
+		return personnelData.delete(po);
 	}
 
 	@Override
-	public ResultMessage update(PersonnelVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage update(PersonnelVO vo) throws RemoteException {
+		PersonnelPO po = toPersonnelPO(vo);
+		return personnelData.update(po);
 	}
 
 	@Override
-	public ArrayList<PersonnelVO> show() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<PersonnelVO> show() throws RemoteException {
+		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
+		ArrayList<PersonnelPO> pos = personnelData.show();
+		int size = pos.size();
+		for (int i = 0; i < size; i++) {
+			vos.add(toPersonnelVO(pos.get(i)));
+		}
+		return vos;
 	}
 
 	@Override
