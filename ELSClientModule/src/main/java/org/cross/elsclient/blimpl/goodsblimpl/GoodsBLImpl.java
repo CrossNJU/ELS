@@ -29,7 +29,8 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 		goodspo = goodsDataService.show(id);
 		goodspo.setHistoryPO(toHistroyPO(nowHistory));
 		goodspo.setGoodsState(nowState);
-		goodsDataService.update(goodspo);
+		goodsDataService.updateLocation(id, nowHistory.place);
+		goodsDataService.updateState(id, nowState);
 		
 		return ResultMessage.SUCCESS;
 	}

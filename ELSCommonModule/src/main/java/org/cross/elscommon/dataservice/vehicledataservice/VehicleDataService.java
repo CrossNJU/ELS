@@ -13,8 +13,8 @@ import org.cross.elscommon.util.ResultMessage;
 
 public interface VehicleDataService {
 	public ResultMessage insert(VehiclePO po) throws RemoteException;
-	public ResultMessage delete(VehiclePO po) throws RemoteException;
+	public ResultMessage delete(String number) throws RemoteException;
 	public ResultMessage update(VehiclePO po) throws RemoteException;
 	public ArrayList<VehiclePO> show() throws RemoteException;
-	public ArrayList<VehiclePO> find(String name) throws RemoteException;
+	public VehiclePO findByID(String number) throws RemoteException;
 }
