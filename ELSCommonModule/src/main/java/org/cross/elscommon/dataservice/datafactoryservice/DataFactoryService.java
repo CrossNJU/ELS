@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
+import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 
 public interface DataFactoryService {
 	
@@ -14,4 +15,6 @@ public interface DataFactoryService {
 	public GoodsDataService getGoodsData() throws RemoteException;
 	
 	public ReceiptDataService getReceiptData() throws RemoteException;
+	
+	public VehicleDataService getVehicleData() throws RemoteException;
 }

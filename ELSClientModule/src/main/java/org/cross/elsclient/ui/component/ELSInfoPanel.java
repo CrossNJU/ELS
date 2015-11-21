@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.print.DocFlavor.INPUT_STREAM;
@@ -190,7 +191,7 @@ public class ELSInfoPanel extends JPanel{
 		parent.remove(ELSInfoPanel.this);
 	}
 	
-	protected void confirm(){
+	protected void confirm() throws RemoteException{
 		
 	}
 	
@@ -205,7 +206,12 @@ public class ELSInfoPanel extends JPanel{
 			if(e.getSource() == backBtn){
 				back();
 			} else if(e.getSource() == confirmBtn){
-				confirm();
+				try {
+					confirm();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else if(e.getSource() == cancelBtn){
 				cancel();
 			}

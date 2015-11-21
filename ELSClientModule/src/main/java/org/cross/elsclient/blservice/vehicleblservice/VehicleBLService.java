@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.blservice.vehicleblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ResultMessage;
@@ -16,33 +17,38 @@ public interface VehicleBLService {
 	 * 增加车辆信息
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage add(VehicleVO vo);
+	public ResultMessage add(VehicleVO vo) throws RemoteException;
 	
 	/**
 	 * 删除车辆信息
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(VehicleVO vo);
+	public ResultMessage delete(VehicleVO vo) throws RemoteException;
 	
 	/**
 	 * 更新车辆信息
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage update(VehicleVO vo);
+	public ResultMessage update(VehicleVO vo) throws RemoteException;
 	
 	/**
 	 * 显示车辆信息
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ArrayList<VehicleVO> show();
+	public ArrayList<VehicleVO> show() throws RemoteException;
 	
 	/**
 	 * 根据名称模糊查找
 	 * @param name
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ArrayList<VehicleVO> find(String name);
+	public ArrayList<VehicleVO> find(String name) throws RemoteException;
 }

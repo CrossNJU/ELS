@@ -2,6 +2,7 @@ package org.cross.elsclient.ui.businesshallclerkui.vehicle;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -131,7 +132,12 @@ public class VehicleManageTable extends ELSManageTable{
 				System.out.println("hhhhh");
 			}else if(btn.getName()=="delete"){
 				VehicleManagePanel parent = (VehicleManagePanel)getParent().getParent();
-				parent.vehiclebl.delete(vo);
+				try {
+					parent.vehiclebl.delete(vo);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				itemLabels.remove(index);
 				vos.remove(index);
 				container.remove(itemLabel);

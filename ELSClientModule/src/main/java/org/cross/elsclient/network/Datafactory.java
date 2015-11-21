@@ -9,6 +9,7 @@ import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
+import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 import org.cross.elscommon.util.NetWork;
 
 public class Datafactory implements DataFactoryService{
@@ -53,7 +54,6 @@ public class Datafactory implements DataFactoryService{
 
 	@Override
 	public ReceiptDataService getReceiptData() throws RemoteException {
-		// TODO Auto-generated method stub
 		
 		ReceiptDataService receiptdata = null;
 		
@@ -68,6 +68,18 @@ public class Datafactory implements DataFactoryService{
 		}
 		return receiptdata;
 		
+	}
+
+	@Override
+	public VehicleDataService getVehicleData() throws RemoteException {
+		VehicleDataService vehicleData = null;
+		try {
+			vehicleData = (VehicleDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/vehicledata");
+		} catch (MalformedURLException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vehicleData;
 	}
 
 }

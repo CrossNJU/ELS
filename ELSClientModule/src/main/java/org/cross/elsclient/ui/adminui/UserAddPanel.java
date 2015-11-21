@@ -1,5 +1,7 @@
 package org.cross.elsclient.ui.adminui;
 
+import java.rmi.RemoteException;
+
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.vo.UserVO;
@@ -31,7 +33,7 @@ public class UserAddPanel extends ELSInfoPanel{
 	}
 	
 	@Override
-	protected void confirm() {
+	protected void confirm() throws RemoteException {
 		super.confirm();
 		bl.add(vo);
 		back();

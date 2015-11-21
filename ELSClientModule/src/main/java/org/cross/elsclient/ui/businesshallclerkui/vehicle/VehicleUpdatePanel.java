@@ -1,5 +1,7 @@
 package org.cross.elsclient.ui.businesshallclerkui.vehicle;
 
+import java.rmi.RemoteException;
+
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
@@ -32,7 +34,7 @@ public class VehicleUpdatePanel extends ELSInfoPanel{
 	}
 	
 	@Override
-	protected void confirm() {
+	protected void confirm() throws RemoteException {
 		super.confirm();
 		vehiclebl.update(vo);
 		back();

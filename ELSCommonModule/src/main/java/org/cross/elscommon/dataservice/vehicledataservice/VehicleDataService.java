@@ -5,13 +5,14 @@
  */
 package org.cross.elscommon.dataservice.vehicledataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.ResultMessage;
 
-public interface VehicleDataService {
+public interface VehicleDataService extends Remote{
 	public ResultMessage insert(VehiclePO po) throws RemoteException;
 	public ResultMessage delete(String number) throws RemoteException;
 	public ResultMessage update(VehiclePO po) throws RemoteException;
