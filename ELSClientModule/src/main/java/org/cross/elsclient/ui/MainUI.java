@@ -8,10 +8,9 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.FontUIResource;
 
+import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
-import org.cross.elsclient.ui.functionPanel.AdminFunctionPanel;
-import org.cross.elsclient.ui.userUI.LoginPanel;
 import org.cross.elsclient.ui.util.UIConstant;
 
 public class MainUI extends JFrame {

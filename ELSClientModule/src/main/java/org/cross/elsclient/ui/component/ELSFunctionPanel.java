@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import org.cross.elsclient.ui.userUI.UserManagePanel;
+import org.cross.elsclient.ui.adminui.UserManagePanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 
@@ -22,9 +22,9 @@ public class ELSFunctionPanel extends ELSPanel {
 	ArrayList<JPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;
 	
-	public ELSFunctionPanel() {
-		init();
-	}
+//	public ELSFunctionPanel() {
+//		init();
+//	}
 	
 	public void init(){
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
@@ -32,7 +32,7 @@ public class ELSFunctionPanel extends ELSPanel {
 		setBackground(Color.LIGHT_GRAY);
 		
 		contentPanel = new ELSPanel();
-		contentPanel.setBounds(100, 100, 924, 668);
+		contentPanel.setBounds(168, 100, 856, 668);
 		
 		logo = new ELSLabel("ELS");
 		logo.setSize(new Dimension(150,100));
@@ -53,7 +53,7 @@ public class ELSFunctionPanel extends ELSPanel {
 		
 		functionBtns.add(btn);
 		
-		btn.setBounds(0, 100+50*functionBtns.indexOf(btn), 100, 50);
+		btn.setBounds(0, 100+54*functionBtns.indexOf(btn), 168, 54);
 		btn.addMouseListener(new FuncBtnListener());
 		
 		this.add(btn);

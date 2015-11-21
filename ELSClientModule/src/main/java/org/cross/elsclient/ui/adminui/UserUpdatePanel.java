@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.userUI;
+package org.cross.elsclient.ui.adminui;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.ui.component.ELSButton;
@@ -8,11 +8,11 @@ import org.cross.elsclient.vo.UserVO;
 
 public class UserUpdatePanel extends ELSInfoPanel{
 	UserVO vo;
-	UserBLService bl;
+	UserBLService userbl;
 	
 	public UserUpdatePanel(UserVO vo, UserBLService bl) {
 		this.vo = vo;
-		this.bl = bl;
+		this.userbl = bl;
 		init();
 	}
 	
@@ -21,7 +21,7 @@ public class UserUpdatePanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("修改用户");
-		addEditableItem("用户名", "U000002", false);
+		addEditableItem("用户名", "U000001", false);
 		addEditableItem("姓名", vo.name, true);
 		addEditableItem("职位", vo.type.toString(), true);
 		
@@ -34,12 +34,13 @@ public class UserUpdatePanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() {
 		super.confirm();
-		bl.update(vo);
+		userbl.update(vo);
 		back();
 	}
 	
 	@Override
 	protected void cancel() {
 		super.cancel();
+		back();
 	}
 }

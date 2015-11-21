@@ -10,6 +10,7 @@ import org.cross.elsclient.blservice.initialblservice.InitialBLService;
 
 public class ELSButton extends JLabel {
 	Color backColor = Color.GRAY;
+	Color pressColor = Color.DARK_GRAY;
 
 	public ELSButton() {
 		super();

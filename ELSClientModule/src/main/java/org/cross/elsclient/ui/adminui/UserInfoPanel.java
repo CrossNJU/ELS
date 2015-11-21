@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.userUI;
+package org.cross.elsclient.ui.adminui;
 
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.vo.UserVO;

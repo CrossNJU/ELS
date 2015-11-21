@@ -98,6 +98,7 @@ public class ELSInfoPanel extends JPanel{
 		contentLabel.setHorizontalAlignment(JLabel.LEFT);
 		contentLabel.setFont(getFont().deriveFont(20f));
 		
+		itemLabel.add(Box.createHorizontalStrut(30));
 		itemLabel.add(nameLabel);
 		itemLabel.add(Box.createHorizontalStrut(10));
 		itemLabel.add(contentLabel);
@@ -130,6 +131,7 @@ public class ELSInfoPanel extends JPanel{
 		inputLabel.setHorizontalAlignment(JTextField.LEFT);
 		inputLabel.setFont(getFont().deriveFont(20f));
 		
+		itemLabel.add(Box.createHorizontalStrut(30));
 		itemLabel.add(nameLabel);
 		itemLabel.add(Box.createHorizontalStrut(10));
 		itemLabel.add(inputLabel);

@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.userUI;
+package org.cross.elsclient.ui.adminui;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -16,25 +16,29 @@ import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.vo.UserVO;
 
 public class UserManageTable extends ELSManageTable{
 	UserBLService userbl;
 	ArrayList<UserVO> vos;
 	
-	public UserManageTable(String[] name, int[] itemWidth, int tableWidth,
-			int tableHeight) {
-		super(name, itemWidth, tableWidth, tableHeight);
+	public UserManageTable(){
+		super();
+	}
+	
+	public UserManageTable(String[] name, int[] itemWidth,UserBLService userbl) {
+		super(name, itemWidth);
+		this.userbl = userbl;
+		init();
 	}
 	
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		userbl = new UserBLService_Stub();
 		vos = new ArrayList<>();
 	}
-
 	
 	public void addItem(UserVO vo){
 		vos.add(vo);
@@ -43,24 +47,20 @@ public class UserManageTable extends ELSManageTable{
 		String[] item = {vo.name,vo.id,vo.type.toString()};
 		addItemLabel(item);
 		
-		ELSButton updateBtn = new ELSButton("改");
-		ELSButton deleteBtn = new ELSButton("删");
+		ELSButton updateBtn = ComponentFactory.createUpdateBtn();
+		ELSButton deleteBtn = ComponentFactory.createDeleteBtn();
 		
-		updateBtn.setPreferredSize(new Dimension(30, 30));
-		updateBtn.setMaximumSize(new Dimension(30, 30));
-		updateBtn.setMinimumSize(new Dimension(30, 30));
-//		updateBtn.setVisible(false);
-		updateBtn.addMouseListener(new UpdateBtnListener(index));
+		updateBtn.setVisible(false);
+		updateBtn.addMouseListener(new BtnListener(index));
 		
-		deleteBtn.setPreferredSize(new Dimension(30, 30));
-		deleteBtn.setMaximumSize(new Dimension(30, 30));
-		deleteBtn.setMinimumSize(new Dimension(30, 30));
-//		deleteBtn.setVisible(false);
+		deleteBtn.setVisible(false);
+		deleteBtn.addMouseListener(new BtnListener(index));
+		
 		itemLabels.get(index).add(Box.createHorizontalGlue());
 		itemLabels.get(index).add(updateBtn);
-		itemLabels.get(index).add(Box.createHorizontalStrut(20));
+		itemLabels.get(index).add(Box.createHorizontalStrut(gap));
 		itemLabels.get(index).add(deleteBtn);
-		itemLabels.get(index).add(Box.createHorizontalStrut(20));
+		itemLabels.get(index).add(Box.createHorizontalStrut(gap));
 		itemLabels.get(index).validate();
 		itemLabels.get(index).addMouseListener(new ItemListener(index));
 		repaint();
@@ -81,8 +81,8 @@ public class UserManageTable extends ELSManageTable{
 		public void mouseClicked(MouseEvent e) {
 			ELSPanel contentPanel  = (ELSPanel)getParent().getParent().getParent();
 			
-			contentPanel.add(new UserInfoPanel(vo),"userInfoPanel");
-			contentPanel.cl.show(contentPanel, "userInfoPanel");
+			contentPanel.add(new UserInfoPanel(vo),"info");
+			contentPanel.cl.show(contentPanel, "info");
 			System.out.println("hhhhh");
 		}
 
@@ -101,40 +101,47 @@ public class UserManageTable extends ELSManageTable{
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-//			if(!itemLabel.getComponent(itemLabel.getComponentCount()-2).isVisible()){
-//				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
-//				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
-//			}
+			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
+			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-//			if(itemLabel.getComponent(itemLabel.getComponentCount()-2).isVisible()){
-//			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
-//			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
-//			}
+			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
+			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
 		}
 	}
 	
-	class UpdateBtnListener implements MouseListener{
-		int index;
+	class BtnListener implements MouseListener{
 		UserVO vo;
 		Box itemLabel;
 		
-		public UpdateBtnListener(int index) {
-			this.index = index;
-			vo = vos.get(index);
+		public BtnListener(int index) {
+			this.vo = vos.get(index);
 			itemLabel = itemLabels.get(index);
 		}
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			ELSPanel contentPanel  = (ELSPanel)getParent().getParent().getParent();
-			UserManagePanel parent = (UserManagePanel)getParent().getParent();
+			ELSButton btn = (ELSButton)e.getSource();
+			int index = vos.indexOf(vo);
 			
-			contentPanel.add(new UserUpdatePanel(vo,parent.userbl),"userInfoPanel");
-			contentPanel.cl.show(contentPanel, "userInfoPanel");
-			System.out.println("hhhhh");
+			if(btn.getName()=="update"){
+				ELSPanel contentPanel  = (ELSPanel)getParent().getParent().getParent();
+				UserManagePanel parent = (UserManagePanel)getParent().getParent();
+				
+				contentPanel.add(new UserUpdatePanel(vo,parent.userbl),"update");
+				contentPanel.cl.show(contentPanel, "update");
+				System.out.println("hhhhh");
+			}else if(btn.getName()=="delete"){
+				UserManagePanel parent = (UserManagePanel)getParent().getParent();
+				parent.userbl.delete(vo);
+				itemLabels.remove(index);
+				vos.remove(index);
+				container.remove(itemLabel);
+				container.validate();
+				container.repaint();
+			}
 		}
 
 		@Override
@@ -151,15 +158,17 @@ public class UserManageTable extends ELSManageTable{
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
+			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
+			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
+			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
+			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
 		}
 		
 	}
+	
+	
 }

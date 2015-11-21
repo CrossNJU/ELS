@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.userUI;
+package org.cross.elsclient.ui.adminui;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -17,7 +17,9 @@ import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
+import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
+import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSTextField;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.vo.UserVO;
@@ -27,9 +29,14 @@ public class UserManagePanel extends ELSManagePanel {
 	UserBLService userbl;
 	ArrayList<UserVO> userVOs;
 	UserManageTable list;
-	ELSTextField searchTextField;
-	ELSComboBox modeBox;
-	ELSButton searchBtn;
+	
+	public UserManagePanel(){}
+	
+	public UserManagePanel(UserBLService userbl) {
+		super();
+		this.userbl = userbl;
+		init();
+	}
 
 	
 	@Override
@@ -37,53 +44,51 @@ public class UserManagePanel extends ELSManagePanel {
 		// TODO Auto-generated method stub
 		super.setContentPanel();
 		String[] s = {"编号","姓名","类型"};
-		int[] itemWidth = {100,100,100};
-		list= new UserManageTable(s,itemWidth,getWidth(),50);
+		int[] itemWidth = {100,100,200};
+		list= new UserManageTable(s,itemWidth,userbl);
 		list.setLocation(0, 0);
 		contentPanel.add(list);
 	}
 	
 	@Override
 	public void setSearchPanel() {
-		userbl = new UserBLService_Stub();
-		
-		searchTextField = new ELSTextField();
-		searchBtn = new ELSButton("Search");
-		modeBox = new ELSComboBox();
-		
 		String[] s = {"按ID查询", "按时间查询", "按类型查询"};
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
-		modeBox.setSize((int)(getWidth()*0.15),30);
-		modeBox.setLocation(0,50);
 		modeBox.addItemListener(new ModeBoxItemListener());
 		
+		btn1.setText("查找用户");
+		btn1.addMouseListener(new BtnListener());
 		
-		searchTextField.setSize((int)(getWidth()*0.7),30);
-		searchTextField.setLocation(modeBox.getLocation().x+modeBox.getWidth()+10,50);
+		btn2.setText("添加用户");
+		btn2.addMouseListener(new BtnListener());
+		searchPanel.add(Box.createHorizontalStrut(10));
+		searchPanel.add(btn2);
 		
-		searchBtn.setSize((int)(getWidth()*0.13),30);
-		searchBtn.setLocation(searchTextField.getLocation().x+searchTextField.getWidth()+10,50);
-		searchBtn.addMouseListener(new SearchBtnListener());
-		
-		searchPanel.add(searchBtn);
-		searchPanel.add(searchTextField);
-		searchPanel.add(modeBox);
+		searchPanel.validate();
 	}
 	
-	class SearchBtnListener implements MouseListener{
+	class BtnListener implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			
 			if(((String)modeBox.getSelectedItem()).equals("按ID查询")){
-				String id = searchTextField.getText();
-				userVOs = new ArrayList<>();
-				userVOs = userbl.findById(id);
-				list.init();
-				
-				for (UserVO userVO : userVOs) {
-					list.addItem(userVO);
+				if(e.getSource()==btn1){
+					String id = searchTextField.getText();
+					userVOs = new ArrayList<>();
+					userVOs = userbl.findById(id);
+					list.init();
+					for (UserVO userVO : userVOs) {
+						list.addItem(userVO);
+					}
+				}else if (e.getSource() == btn2){
+					UserAddPanel userAddPanel = new UserAddPanel(userbl);
+					ELSPanel parent = (ELSPanel) getParent();
+					parent.add(userAddPanel,"add");
+					parent.cl.show(parent, "add");
 				}
+				
 			}
 		}
 

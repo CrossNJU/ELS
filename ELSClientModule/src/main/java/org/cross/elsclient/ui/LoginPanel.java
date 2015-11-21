@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.userUI;
+package org.cross.elsclient.ui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -13,9 +13,10 @@ import javax.swing.JTextField;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
+import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
+import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSPanel;
-import org.cross.elsclient.ui.functionPanel.AdminFunctionPanel;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elscommon.util.UserType;
 
@@ -39,7 +40,7 @@ public class LoginPanel extends ELSPanel{
 		setBackground(Color.LIGHT_GRAY);
 		
 		inputPanel = new JPanel();
-		idTextField = new JTextField("000001");
+		idTextField = new JTextField("1");
 		pwTextField = new JPasswordField("123456");
 		loginBtn = new ELSButton("Login");
 		checkBtn = new ELSButton("Check");
@@ -76,11 +77,17 @@ public class LoginPanel extends ELSPanel{
 			// TODO Auto-generated method stub
 			String id = idTextField.getText();
 			String pw = String.valueOf(pwTextField.getPassword());
+			UserType type = userbl.login(id, pw);
 			
-			if(userbl.login(id, pw) == UserType.ADMINISTRATOR){
+			if(type==UserType.ADMINISTRATOR){//系统管理员
 				System.out.println("登录成功");
 				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
 				parentContainer.add(new AdminFunctionPanel(),"function");
+				parentContainer.cl.show(parentContainer, "function");
+			}else if(type==UserType.BUSINESSHALLCLERK){
+				System.out.println("登录成功");
+				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
+				parentContainer.add(new BusinessFunctionPanel(),"function");
 				parentContainer.cl.show(parentContainer, "function");
 			}
 		}

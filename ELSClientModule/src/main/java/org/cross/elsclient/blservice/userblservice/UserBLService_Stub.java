@@ -84,6 +84,12 @@ public class UserBLService_Stub implements UserBLService {
 
 	@Override
 	public UserType login(String id, String password) {
+		if(id.equals("1")){
+			return UserType.ADMINISTRATOR;
+		}else if(id.equals("2")){
+			return UserType.BUSINESSHALLCLERK;
+		}
+		
 		return UserType.ADMINISTRATOR;
 	}
 

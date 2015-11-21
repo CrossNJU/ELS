@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Label;
 import java.util.ArrayList;
 
@@ -13,23 +14,31 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.cross.elsclient.ui.util.UIConstant;
+
 public class ELSManageTable extends JScrollPane {
 	String[] name;
 	ELSBox header;
-	ELSBox container;
+	protected ELSBox container;
 	ELSLabel tempLabel;
 	protected ArrayList<Box> itemLabels;
 	int[] itemWidth;
 	int width;
 	int height;
+	public int gap;
+	Font font;
 
-	public ELSManageTable(String[] name, int[] itemWidth, int tableWidth,int tableHeight) {
+	public ELSManageTable(){
+		width = UIConstant.CONTENTPANEL_WIDTH;
+		height = UIConstant.MANAGETABLE_ITEM_HEIGHT;
+	}
+	
+	public ELSManageTable(String[] name, int[] itemWidth) {
 		super();
 		this.name = name;
 		this.itemWidth = itemWidth;
-		width = tableWidth;
-		height = tableHeight;
-		init();
+		width = UIConstant.CONTENTPANEL_WIDTH;
+		height = UIConstant.MANAGETABLE_ITEM_HEIGHT;
 	}
 
 	public void init() {
@@ -38,12 +47,13 @@ public class ELSManageTable extends JScrollPane {
 		itemLabels = new ArrayList<>();
 		container = new ELSBox(BoxLayout.Y_AXIS);
 		header = new ELSBox(BoxLayout.X_AXIS);
+		gap = 20;
+		font = getFont().deriveFont(18f);
 
-		setSize(width, 500);
+		setSize(width, UIConstant.MANAGETABLE_HEIGHT);
 		setBorder(null);
 		
-		
-		container.setSize(width,500);
+		container.setSize(width,UIConstant.MANAGETABLE_HEIGHT);
 //		container.setBackground(Color.LIGHT_GRAY);
 //		container.setOpaque(true);
 //		container.setSize(width, height);
@@ -51,21 +61,22 @@ public class ELSManageTable extends JScrollPane {
 
 		header.setOpaque(true);
 		header.setBackground(Color.GRAY);
-		header.setPreferredSize(new Dimension(width,height));
-		header.setMaximumSize(new Dimension(width,height));
-		header.setMinimumSize(new Dimension(width,height));
+		header.setPreferredSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		header.setMaximumSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		header.setMinimumSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
 
 		for (int i = 0; i < name.length; i++) {
 			tempLabel = new ELSLabel(" " + name[i]);
 			tempLabel.setForeground(Color.white);
-			tempLabel.setPreferredSize(new Dimension(itemWidth[i], header.getPreferredSize().height));
-			tempLabel.setMaximumSize(new Dimension(itemWidth[i], header.getPreferredSize().height));
-			tempLabel.setMinimumSize(new Dimension(itemWidth[i], header.getPreferredSize().height));
+			tempLabel.setFont(font);
+			tempLabel.setPreferredSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
+			tempLabel.setMaximumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
+			tempLabel.setMinimumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
 			tempLabel.setVerticalAlignment(JLabel.CENTER);
 			tempLabel.setHorizontalAlignment(JLabel.LEFT);
 			header.add(tempLabel);
 		}
-
+		
 		container.add(header);
 		setViewportView(container);
 		validate();
@@ -77,15 +88,16 @@ public class ELSManageTable extends JScrollPane {
 
 		itemLabel.setOpaque(true);
 		itemLabel.setBackground(Color.lightGray);
-		itemLabel.setPreferredSize(new Dimension(width, header.getPreferredSize().height));
-		itemLabel.setMaximumSize(new Dimension(width, header.getPreferredSize().height));
-		itemLabel.setMinimumSize(new Dimension(width, header.getPreferredSize().height));
+		itemLabel.setPreferredSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		itemLabel.setMaximumSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		itemLabel.setMinimumSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
 
 		for (int i = 0; i < item.length; i++) {
 			tempLabel = new ELSLabel(" " + item[i]);
-			tempLabel.setPreferredSize(new Dimension(itemWidth[i], header.getPreferredSize().height));
-			tempLabel.setMaximumSize(new Dimension(itemWidth[i], header.getPreferredSize().height));
-			tempLabel.setMinimumSize(new Dimension(itemWidth[i], header.getPreferredSize().height));
+			tempLabel.setFont(font);
+			tempLabel.setPreferredSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
+			tempLabel.setMaximumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
+			tempLabel.setMinimumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
 			tempLabel.setVerticalAlignment(JLabel.CENTER);
 			tempLabel.setHorizontalAlignment(JLabel.LEFT);
 			itemLabel.add(tempLabel);
