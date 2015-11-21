@@ -65,11 +65,26 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	}
 
 	@Override
+	public void updateHistory(String id, HistoryPO history) throws RemoteException {
+		// TODO Auto-generated method stub
+		String sql = "select * from goods where number = '"+id+"'";
+		ResultSet rs = mysql.query(sql);
+		try {
+			if (rs.next()) {
+				historyTool.insert(history, rs.getInt("ID"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public void insert(GoodsPO goods) throws RemoteException {
 		String sql = "insert into goods(type,city,state,weight,volume,number) values ('"
 				+ goods.getGoodsType().toString() + "','" + goods.getCurrentLocate().toString() + "','"
-				+ goods.getGoodsState().toString() + "'," + goods.getGoodsWeight() + "," + goods.getGoodsVolume()
-				+ ",'" + goods.getOrderNumber() + "')";
+				+ goods.getGoodsState().toString() + "'," + goods.getGoodsWeight() + "," + goods.getGoodsVolume() + ",'"
+				+ goods.getOrderNumber() + "')";
 		mysql.execute(sql);
 	}
 
@@ -121,7 +136,8 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 		good1.setOrderNumber(order1.getNumber());
 		HistoryTool historyTool = new HistoryDataImpl();
 		GoodsDataImpl dataImpl = new GoodsDataImpl(historyTool);
-//		dataImpl.updateLocation(good1.getOrderNumber(), good1.getCurrentLocate());
+		// dataImpl.updateLocation(good1.getOrderNumber(),
+		// good1.getCurrentLocate());
 		dataImpl.insert(good1);
 	}
 
