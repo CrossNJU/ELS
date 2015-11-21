@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.PersonnelPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface PersonnelDataService {
 
@@ -16,11 +17,11 @@ public interface PersonnelDataService {
 
 	public ArrayList<PersonnelPO> findByName(String name) throws RemoteException;
 
-	public void insert(PersonnelPO po) throws RemoteException;
+	public ResultMessage insert(PersonnelPO po) throws RemoteException;
 
-	public void delete(PersonnelPO po) throws RemoteException;
+	public ResultMessage delete(PersonnelPO po) throws RemoteException;
 
-	public void update(PersonnelPO po) throws RemoteException;
+	public ResultMessage update(PersonnelPO po) throws RemoteException;
 
 	public ArrayList<PersonnelPO> show() throws RemoteException;
 }

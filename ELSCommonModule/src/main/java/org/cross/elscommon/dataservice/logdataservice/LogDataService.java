@@ -9,10 +9,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.LogPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface LogDataService {
 
-	public void insert(LogPO po) throws RemoteException;
+	public ResultMessage insert(LogPO po) throws RemoteException;
 
 	public ArrayList<LogPO> find(String startTime, String endTime) throws RemoteException;
 

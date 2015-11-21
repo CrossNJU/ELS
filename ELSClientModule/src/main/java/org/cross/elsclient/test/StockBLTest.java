@@ -19,7 +19,7 @@ public class StockBLTest {
 		DataFactoryService dataFactoryService = new Datafactory();
 //		ReceiptInfo receiptInfo = new ReceiptBLImpl(dataFactoryService.getReceiptData());
 		GoodsInfo goodsInfo = new GoodsBLImpl(dataFactoryService.getGoodsData());
-		StockBLImpl stockBLImpl = new StockBLImpl(dataFactoryService.getStockData(),dataFactoryService.getGoodsData(), goodsInfo);
+		StockBLImpl stockBLImpl = new StockBLImpl(dataFactoryService.getStockData(), goodsInfo);
 		
 //		System.out.println("=======测试库存盘点（生成库存快照）（showStockCheck）=======");
 //		System.out.println("=======测试库存查看（showStockInfo）=======");
@@ -34,7 +34,7 @@ public class StockBLTest {
 //		System.out.println("=======测试库存查看（showStockInfo）=======");
 		
 		System.out.println("=======测试快件入库（intoStock）=======");
-		ResultMessage intoStockMessage = stockBLImpl.intoStock("R120151023000004", "S00002");
+		ResultMessage intoStockMessage = stockBLImpl.intoStock("R120151023000002", "S00002","2015-11-2 11:34:19");
 		if (intoStockMessage == ResultMessage.SUCCESS) {
 			System.out.println("入库成功");
 		}else {
@@ -42,7 +42,7 @@ public class StockBLTest {
 		}
 		
 		System.out.println("=======测试快件出库（outStock）=======");
-		ResultMessage outStockMessage = stockBLImpl.outStock("R120151023000002", "S00002");
+		ResultMessage outStockMessage = stockBLImpl.outStock("R120151023000003", "S00002","2015-11-2 11:34:19");
 		if (outStockMessage == ResultMessage.SUCCESS) {
 			System.out.println("出库成功");
 		}else {
@@ -51,7 +51,7 @@ public class StockBLTest {
 		
 		System.out.println("=======测试查询特定仓库容量信息（stockCapacity）=======");
 		int total = 0,used = 0;
-		ArrayList<StockAreaVO> stockAreaVOs = stockBLImpl.stockCapacity("S00002", StockType.Fast);
+		ArrayList<StockAreaVO> stockAreaVOs = stockBLImpl.stockCapacity("S00002", StockType.COMMON);
 		if (stockAreaVOs == null) {
 			System.out.println("未找到该仓库中的该区域");
 		}else {
@@ -68,7 +68,7 @@ public class StockBLTest {
 		}
 		
 		System.out.println("=======测试仓库中快件信息核实（checkGoods）=======");
-		ResultMessage checkMessage = stockBLImpl.checkGoods("R120151023000004", "S00002");
+		ResultMessage checkMessage = stockBLImpl.checkGoods("R120151023000002", "S00002");
 		if (checkMessage == ResultMessage.SUCCESS) {
 			System.out.println("找到快件啦");
 		}else {

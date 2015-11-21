@@ -47,10 +47,10 @@ public class TestIO {
 		good4.setHistoryPO(new HistoryPO(order4.getTime(), good4.getCurrentLocate()));
 		
 		GoodsDataService goodsdata = datafactory.getGoodsData();
-		goodsdata.update(good1);
-		goodsdata.update(good2);
-		goodsdata.update(good3);
-		goodsdata.update(good4);
+		goodsdata.insert(good1);
+		goodsdata.insert(good2);
+		goodsdata.insert(good3);
+		goodsdata.insert(good4);
 		
 		System.out.println(good1.getOrderNumber()+"++++++++++++");
 		GoodsPO goods = goodsdata.show("R120151023000002");

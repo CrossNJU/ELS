@@ -74,20 +74,7 @@ public class LoginUI {
 		logFrame.getContentPane().add(button);
 		logFrame.getContentPane().add(show);
 		logFrame.getContentPane().add(getButton);
-		
-		getButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				try {
-					show.append(goodsdata.justTest());
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+
 	}
 	
 	public class logListener implements ActionListener{

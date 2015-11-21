@@ -1,12 +1,14 @@
 package org.cross.elscommon.dataservice.constantdataservice;
 
 import org.cross.elscommon.po.ConstantPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class ConstantDataService_Stub implements ConstantDataService{
 
 	@Override
-	public void update(ConstantPO po) {
+	public ResultMessage update(ConstantPO po) {
 		System.out.println("更新常量成功");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

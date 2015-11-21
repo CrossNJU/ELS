@@ -3,23 +3,27 @@ package org.cross.elscommon.dataservice.userdataservice;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.UserPO;
+import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
 
 public class UserDataService_Stub implements UserDataService {
 
 	@Override
-	public void insert(UserPO po) {
+	public ResultMessage insert(UserPO po) {
 		System.out.println("Insert Succeed!\n");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void delete(UserPO po) {
+	public ResultMessage delete(UserPO po) {
 		System.out.println("Delete Succeed!\n");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void update(UserPO po) {
+	public ResultMessage update(UserPO po) {
 		System.out.println("Update Succeed!\n");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

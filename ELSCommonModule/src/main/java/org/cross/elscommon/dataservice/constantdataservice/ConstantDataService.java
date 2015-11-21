@@ -1,6 +1,7 @@
 package org.cross.elscommon.dataservice.constantdataservice;
 
 import org.cross.elscommon.po.ConstantPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface ConstantDataService {
 	
@@ -9,7 +10,7 @@ public interface ConstantDataService {
 	 * @para 
 	 * @return ResultMessage
 	 */
-	public void update(ConstantPO po);
+	public ResultMessage update(ConstantPO po);
 	
 	/**
 	 * 显示业务常量

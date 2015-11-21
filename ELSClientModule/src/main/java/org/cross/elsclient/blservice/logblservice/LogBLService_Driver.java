@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.blservice.logblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ResultMessage;
@@ -12,7 +13,7 @@ import org.cross.elsclient.vo.LogVO;
 
 public class LogBLService_Driver {
 
-	public void drive(LogBLService logBLService) {
+	public void drive(LogBLService logBLService) throws RemoteException {
 		ArrayList<LogVO> logvolist = logBLService.show("2015-10-01", "2015-10-31");
 		System.out.println("显示系统日志：");
 		System.out.println(logvolist.get(0).id);

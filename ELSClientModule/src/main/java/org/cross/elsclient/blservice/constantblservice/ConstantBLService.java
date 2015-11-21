@@ -1,6 +1,5 @@
 package org.cross.elsclient.blservice.constantblservice;
 
-import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.vo.ConstantVO;
 

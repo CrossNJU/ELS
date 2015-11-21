@@ -8,6 +8,7 @@ package org.cross.elscommon.dataservice.userdataservice;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.UserPO;
+import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
 
 
@@ -18,21 +19,21 @@ public interface UserDataService
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public void insert(UserPO po);
+	public ResultMessage insert(UserPO po);
 	
 	/**
 	 * 删除用户
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public void delete(UserPO po);
+	public ResultMessage delete(UserPO po);
 	
 	/**
 	 * 修改用户
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public void update(UserPO po);
+	public ResultMessage update(UserPO po);
 	
 	/**
 	 * 根据ID模糊查找
