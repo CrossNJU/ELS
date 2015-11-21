@@ -8,6 +8,7 @@ package org.cross.elscommon.po;
 import java.io.Serializable;
 
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.OrganizationType;
 
 
 public class HistoryPO implements Serializable{
@@ -25,13 +26,41 @@ public class HistoryPO implements Serializable{
 	/**
 	 * 地点
 	 */
-	private City place;
+	private City city;
 	
-	public HistoryPO(String time, City place){
+	/**
+	 * 机构
+	 */
+	private OrganizationType organization;
+	
+	/**
+	 * 是到达或发出
+	 */
+	private boolean isArrive;
+	
+	public HistoryPO(String time, City city,OrganizationType organization,boolean isArrive){
 		this.time = time;
-		this.place = place;
+		this.city = city;
+		this.organization = organization;
+		this.isArrive = isArrive;
 	}
 	
+	public OrganizationType getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(OrganizationType organization) {
+		this.organization = organization;
+	}
+
+	public boolean isArrive() {
+		return isArrive;
+	}
+
+	public void setArrive(boolean isArrive) {
+		this.isArrive = isArrive;
+	}
+
 	public void setTime(String time){
 		this.time = time;
 	}
@@ -40,12 +69,12 @@ public class HistoryPO implements Serializable{
 		return this.time;
 	}
 	
-	public void setPlace(City place){
-		this.place = place;
+	public void setCity(City city){
+		this.city = city;
 	}
 	
-	public City getPlace(){
-		return this.place;
+	public City getCity(){
+		return this.city;
 	}
 	
 

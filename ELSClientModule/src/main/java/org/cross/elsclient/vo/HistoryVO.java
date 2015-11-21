@@ -6,6 +6,7 @@
 package org.cross.elsclient.vo;
 
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.OrganizationType;
 
 public class HistoryVO {
 	/**
@@ -16,11 +17,23 @@ public class HistoryVO {
 	/**
 	 * 地点
 	 */
-	public City place;
+	public City city;
 	
-	public HistoryVO(String time, City place){
+	/**
+	 * 机构
+	 */
+	public OrganizationType organization;
+	
+	/**
+	 * 是到达或发出
+	 */
+	public boolean isArrive;
+	
+	public HistoryVO(String time, City city,OrganizationType organization,boolean isArrive){
 		this.time = time;
-		this.place = place;
+		this.city = city;
+		this.organization = organization;
+		this.isArrive = isArrive;
 	}
 	
 //	public void setTime(String time){

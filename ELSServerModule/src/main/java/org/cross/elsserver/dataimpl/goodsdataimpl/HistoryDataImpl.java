@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.HistoryPO;
+import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
@@ -22,12 +23,14 @@ public class HistoryDataImpl implements HistoryTool {
 	public ArrayList<HistoryPO> findByGoodsID(int id) {
 		// TODO Auto-generated method stub
 		ArrayList<HistoryPO> list = new ArrayList<HistoryPO>();
-		String search = "select * from history where belongGoods = '" + id + "'";
+		String search = "select * from `history` where `belongGoods` = " + id;
 		ResultSet rs = mysql.query(search);
 
 		try {
 			while (rs.next()) {
+				System.out.println("in");
 				HistoryPO historyPO = new HistoryPO(rs.getString("time"), StringToType.toCity(rs.getString("place")));
+				System.out.println(rs.getString("place"));
 				list.add(historyPO);
 			}
 		} catch (SQLException e) {
@@ -40,8 +43,8 @@ public class HistoryDataImpl implements HistoryTool {
 	@Override
 	public ResultMessage insert(HistoryPO po, int goodsID) {
 		// TODO Auto-generated method stub
-		String sql = "insert into history(belongGoods, time, place, number) VALUES( " + goodsID
-				+ ", '" + po.getTime() + "', '" + po.getPlace().toString() + ")";
+		String sql = "insert into `history`(`belongGoods`, `time`, `place`) VALUES(" + goodsID
+				+ ",'" + po.getTime() + "','"+po.getPlace().toString()+"')";
 		mysql.execute(sql);
 		return ResultMessage.SUCCESS;
 	}
@@ -49,7 +52,8 @@ public class HistoryDataImpl implements HistoryTool {
 //	public static void main(String[] args) {
 //		HistoryPO po = new HistoryPO("2015-10-25 01:10:10", City.BEIJING);
 //		HistoryDataImpl impl = new HistoryDataImpl();
-//		impl.insert(po, "1000001", 1);
+//		po = impl.findByGoodsID(1000003).get(0);
+//		System.out.println(po.getPlace().toString());
 //	}
 
 }

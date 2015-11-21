@@ -17,13 +17,13 @@ public class StringToType {
 	
 	public static City toCity(String city){
 		switch (city) {
-		case "beijing":
+		case "北京":
 			return City.BEIJING;
-		case "shanghai":
+		case "上海":
 			return City.SHANGHAI;
-		case "nanjing":
+		case "南京":
 			return City.NANJING;
-		case "guangzhou":
+		case "广州":
 			return City.GUANGZHOU;
 		default:
 			return null;

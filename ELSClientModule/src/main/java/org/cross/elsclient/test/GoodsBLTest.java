@@ -25,7 +25,7 @@ public class GoodsBLTest {
 		ReceiptInfo receiptInfo = new ReceiptBLImpl(goodsInfo,datafactory.getReceiptData());
 		
 		System.out.println("=======测试快件查询（findGoods）=======");
-		ArrayList<HistoryVO> history = goodsBLImpl.findGoods("R120151023000001");
+		ArrayList<HistoryVO> history = goodsBLImpl.findGoods("R120151023000002");
 		GoodsDataService goodsdata = datafactory.getGoodsData();
 		GoodsPO po = goodsdata.show("R120151023000001");
 		if (po!=null) {
@@ -35,21 +35,21 @@ public class GoodsBLTest {
 			System.out.println("not found");
 		}
 		for (int i = 0; i < history.size(); i++) {
-			System.out.println("途经 ： " + history.get(i).place + "   时间 ： " + history.get(i).time);
+			System.out.println("途经 ： " + history.get(i).city + "   时间 ： " + history.get(i).time);
 		}
 		
 		System.out.println("=======测试更新快件信息（位置和状态）(updateGoods)=======");
-		HistoryVO newHistroy = new HistoryVO("2015-11-2 12:34:19", City.SHANGHAI);
-		ResultMessage resultMessage = goodsBLImpl.updateGoods("R120151023000002", newHistroy, GoodsState.DIE);
+		HistoryVO newHistroy = new HistoryVO("2015-11-2 12:39:10", City.BEIJING);
+		ResultMessage resultMessage = goodsBLImpl.updateGoods("R120151023000001", newHistroy, GoodsState.DIE);
 		if (resultMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");
 		}else {
 			System.out.println("更新失败");
 		}
 		//--------看看成功了没----------
-		ArrayList<HistoryVO> history2 = goodsBLImpl.findGoods("R120151023000002");
+		ArrayList<HistoryVO> history2 = goodsBLImpl.findGoods("R120151023000001");
 		for (int i = 0; i < history2.size(); i++) {
-			System.out.println("途经 ： " + history2.get(i).place + "   时间 ： " + history2.get(i).time);
+			System.out.println("途经 ： " + history2.get(i).city + "   时间 ： " + history2.get(i).time);
 		}
 		System.out.println("=======测试得到快件所有信息(searchGoods)=======");
 		GoodsVO goods = goodsBLImpl.searchGoods("R120151023000002");

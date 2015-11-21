@@ -32,11 +32,11 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 
 	@Override
 	public GoodsPO show(String id) throws RemoteException {
-		System.out.println("ininin");
+//		System.out.println("ininin");
 		String search = "select * from goods where number = '" + id + "'";
 		ResultSet rs = mysql.query(search);
 		GoodsPO goods = getFromDB(rs);
-		System.out.println("data : " + goods.getHistoryPO().size());
+//		System.out.println("data : " + goods.getHistoryPO().size());
 		return goods;
 	}
 
@@ -131,14 +131,15 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	}
 
 	public static void main(String[] args) throws Exception {
-		GoodsPO good1 = new GoodsPO(300, 10, City.BEIJING, StockType.ECONOMICAL);
-		Receipt_OrderPO order1 = new Receipt_OrderPO("R120151023000005", "2016-11-25 01:10:10");
-		good1.setOrderNumber(order1.getNumber());
+//		GoodsPO good1 = new GoodsPO(300, 10, City.BEIJING, StockType.ECONOMICAL);
+//		Receipt_OrderPO order1 = new Receipt_OrderPO("R120151023000005", "2016-11-25 01:10:10");
+//		good1.setOrderNumber(order1.getNumber());
 		HistoryTool historyTool = new HistoryDataImpl();
 		GoodsDataImpl dataImpl = new GoodsDataImpl(historyTool);
 		// dataImpl.updateLocation(good1.getOrderNumber(),
 		// good1.getCurrentLocate());
-		dataImpl.insert(good1);
+		GoodsPO po = dataImpl.show("R120151023000002");
+		System.out.println(po.getHistoryPO().size());
 	}
 
 }

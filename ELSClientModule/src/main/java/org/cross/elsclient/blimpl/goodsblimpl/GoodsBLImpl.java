@@ -10,6 +10,7 @@ import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
 import org.cross.elscommon.util.GoodsState;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
@@ -32,9 +33,9 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 		}
 		goodspo.setHistoryPO(toHistroyPO(nowHistory));
 		goodspo.setGoodsState(nowState);
-		goodsDataService.updateLocation(id, nowHistory.place);
+		goodsDataService.updateLocation(id, nowHistory.city);
 		goodsDataService.updateState(id, nowState);
-		
+		goodsDataService.updateHistory(id,toHistroyPO(nowHistory));
 		return ResultMessage.SUCCESS;
 	}
 
@@ -82,7 +83,7 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 		ArrayList<HistoryVO> histroyVO = new ArrayList<HistoryVO>();
 		HistoryVO vo;
 		for (int i = 0; i < po.size(); i++) {
-			vo = new HistoryVO(po.get(i).getTime(), po.get(i).getPlace());
+			vo = new HistoryVO(po.get(i).getTime(), po.get(i).getCity(),po.get(i).getOrganization(),po.get(i).isArrive());
 			histroyVO.add(vo);
 		}
 		return histroyVO;
@@ -106,7 +107,7 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 
 	@Override
 	public HistoryPO toHistroyPO(HistoryVO vo) {
-		HistoryPO historyPO = new HistoryPO(vo.time, vo.place);
+		HistoryPO historyPO = new HistoryPO(vo.time, vo.city,vo.organization,vo.isArrive);
 		return historyPO;
 	}
 	
