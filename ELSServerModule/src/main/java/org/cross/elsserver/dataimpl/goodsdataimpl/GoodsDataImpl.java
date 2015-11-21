@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
+import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.GoodsState;
 import org.cross.elscommon.util.MySQL;
@@ -25,51 +26,46 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 
 	public GoodsDataImpl(HistoryTool historyTool) throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 		mysql = new MySQL();
 		this.historyTool = historyTool;
 	}
 
 	@Override
 	public GoodsPO show(String id) throws RemoteException {
-		// TODO Auto-generated method stub
+		System.out.println("ininin");
 		String search = "select * from goods where number = '" + id + "'";
 		ResultSet rs = mysql.query(search);
 		GoodsPO goods = getFromDB(rs);
+		System.out.println("data : " + goods.getHistoryPO().size());
 		return goods;
 	}
 
 	@Override
 	public void updateLocation(String id, City nowLocation) throws RemoteException {
-		// TODO Auto-generated method stub
 		String sql = "update goods set city = '" + nowLocation.toString() + "' where number = '" + id + "'";
 		updateIntoDB(id, sql);
 	}
 
 	@Override
 	public void updateState(String id, GoodsState state) throws RemoteException {
-		// TODO Auto-generated method stub
 		String sql = "update goods set state = '" + state.toString() + "' where number = '" + id + "'";
 		updateIntoDB(id, sql);
 	}
 
 	@Override
 	public void updateTrans(String id, int transNum) throws RemoteException {
-		// TODO Auto-generated method stub
 		String sql = "update goods set belongTrans = " + transNum + " where number = '" + id + "'";
 		updateIntoDB(id, sql);
 	}
 
 	@Override
 	public void updateStock(String id, int stockAreaNum) throws RemoteException {
-		// TODO Auto-generated method stub
 		String sql = "update goods set belongStockArea = " + stockAreaNum + " where number = '" + id + "'";
 		updateIntoDB(id, sql);
 	}
 
 	@Override
 	public void insert(GoodsPO goods) throws RemoteException {
-		// TODO Auto-generated method stub
 		String sql = "insert into goods(type,city,state,weight,volume,number) values ('"
 				+ goods.getGoodsType().toString() + "','" + goods.getCurrentLocate().toString() + "','"
 				+ goods.getGoodsState().toString() + "'," + goods.getGoodsWeight() + "," + goods.getGoodsVolume()
@@ -119,14 +115,14 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 
 	}
 
-//	public static void main(String[] args) throws Exception {
-//		GoodsPO good1 = new GoodsPO(30, 10, City.NANJING, StockType.Fast);
-//		Receipt_OrderPO order1 = new Receipt_OrderPO("R120151023000002", "2015-11-25 01:10:10");
-//		good1.setOrderNumber(order1.getNumber());
-//		HistoryTool historyTool = new HistoryDataImpl();
-//		GoodsDataImpl dataImpl = new GoodsDataImpl(historyTool);
-////		dataImpl.updateLocation(good1.getOrderNumber(), good1.getCurrentLocate());
-//		dataImpl.insert(good1);
-//	}
+	public static void main(String[] args) throws Exception {
+		GoodsPO good1 = new GoodsPO(300, 10, City.BEIJING, StockType.ECONOMICAL);
+		Receipt_OrderPO order1 = new Receipt_OrderPO("R120151023000005", "2016-11-25 01:10:10");
+		good1.setOrderNumber(order1.getNumber());
+		HistoryTool historyTool = new HistoryDataImpl();
+		GoodsDataImpl dataImpl = new GoodsDataImpl(historyTool);
+//		dataImpl.updateLocation(good1.getOrderNumber(), good1.getCurrentLocate());
+		dataImpl.insert(good1);
+	}
 
 }

@@ -27,6 +27,9 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 	@Override
 	public ResultMessage updateGoods(String id,HistoryVO nowHistory,GoodsState nowState) throws RemoteException {
 		goodspo = goodsDataService.show(id);
+		if (goodspo == null) {
+			return ResultMessage.FAILED;
+		}
 		goodspo.setHistoryPO(toHistroyPO(nowHistory));
 		goodspo.setGoodsState(nowState);
 		goodsDataService.updateLocation(id, nowHistory.place);
@@ -40,10 +43,16 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 		ArrayList<HistoryVO> histroy = new ArrayList<HistoryVO>();
 		
 		goodspo = goodsDataService.show(id);
-		if(goodspo==null) return null;
+//		GoodsPO goodspo = goodsDataService.show(id);
+		if(goodspo==null){
+			System.out.println("can not find it");
+			return null;
+		}
+		System.out.println("    " + goodspo.getGoodsWeight());
 		goodsvo = toGoodsVO(goodspo);
-		
-		for (int i = 0; i < goodsvo.historyVO.size(); i++) {
+		int size = goodspo.getHistoryPO().size();
+		System.out.println(size + "(size)");
+		for (int i = 0; i < size; i++) {
 			HistoryVO vo = goodsvo.historyVO.get(i);
 			histroy.add(vo);
 		}
@@ -101,6 +110,4 @@ public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
 		return historyPO;
 	}
 	
-//	public ArrayList<HistoryVO> toHistroyVO(GoodsPO po){}
-
 }
