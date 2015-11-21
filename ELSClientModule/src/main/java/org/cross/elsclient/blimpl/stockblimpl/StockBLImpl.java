@@ -79,7 +79,14 @@ public class StockBLImpl implements StockBLService{
 	public ArrayList<StockAreaVO> stockCapacity(String id, StockType type)
 			throws RemoteException {
 		ArrayList<StockAreaVO> vo = new ArrayList<StockAreaVO>();
-		ArrayList<StockAreaPO> po = stockData.findStockByNum(id).getStockAreas();
+		StockPO stock = stockData.findStockByNum(id);
+		if (stock == null) {
+			return null;
+		}
+		ArrayList<StockAreaPO> po = stock.getStockAreas();
+		if (po == null) {
+			return null;
+		}
 		int size = po.size();
 		for (int i = 0; i < size; i++) {
 			if (po.get(i).getStockType() == type) {

@@ -28,7 +28,7 @@ import org.cross.elscommon.util.ResultMessage;
 
 public class InitialBLImpl implements InitialBLService{
 
-	InitialDataService_Stub initialData;
+	InitialDataService initialData;
 	InitialInfo initialInfo;
 	OrganizationInfo orgInfo;
 	PersonnelInfo personnelInfo;
@@ -36,7 +36,7 @@ public class InitialBLImpl implements InitialBLService{
 	StockInfo stockInfo;
 	AccountInfo accountInfo;
 	
-	public InitialBLImpl(InitialDataService_Stub initialData,InitialInfo initialInfo,
+	public InitialBLImpl(InitialDataService initialData,InitialInfo initialInfo,
 			OrganizationInfo organizationInfo,PersonnelInfo personnelInfo,
 			VehicleInfo vehicleInfo,StockInfo stockInfo,AccountInfo accountInfo){
 		this.initialData = initialData;
@@ -85,7 +85,7 @@ public class InitialBLImpl implements InitialBLService{
 	}
 
 	@Override
-	public ArrayList<PersonnelVO> showPersonnel(String initialID) {
+	public ArrayList<PersonnelVO> showPersonnel(String initialID) throws RemoteException {
 		InitialPO po = initialData.findByID(initialID);
 		ArrayList<PersonnelVO> personnelVOs = new ArrayList<PersonnelVO>();
 		ArrayList<PersonnelPO> personnelPOs = po.getPersonnels();
@@ -100,7 +100,7 @@ public class InitialBLImpl implements InitialBLService{
 	}
 
 	@Override
-	public ArrayList<VehicleVO> showVehicle(String initialID) {
+	public ArrayList<VehicleVO> showVehicle(String initialID) throws RemoteException {
 		InitialPO po = initialData.findByID(initialID);
 		ArrayList<VehicleVO> vehicleVOs = new ArrayList<VehicleVO>();
 		ArrayList<VehiclePO> vehiclePOs = po.getVehicles();
@@ -115,7 +115,7 @@ public class InitialBLImpl implements InitialBLService{
 	}
 
 	@Override
-	public ArrayList<StockVO> showStock(String initialID) {
+	public ArrayList<StockVO> showStock(String initialID) throws RemoteException {
 		InitialPO po = initialData.findByID(initialID);
 		ArrayList<StockVO> stockVOs = new ArrayList<StockVO>();
 		ArrayList<StockPO> stockPOs = po.getStocks();
@@ -130,7 +130,7 @@ public class InitialBLImpl implements InitialBLService{
 	}
 
 	@Override
-	public ArrayList<AccountVO> showAccount(String initialID) {
+	public ArrayList<AccountVO> showAccount(String initialID) throws RemoteException {
 		InitialPO po = initialData.findByID(initialID);
 		ArrayList<AccountVO> accountVOs = new ArrayList<AccountVO>();
 		ArrayList<AccountPO> accountPOs = po.getAccounts();

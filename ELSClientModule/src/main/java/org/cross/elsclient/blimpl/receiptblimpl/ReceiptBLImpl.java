@@ -95,21 +95,48 @@ public class ReceiptBLImpl implements ReceiptBLService{
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime) throws RemoteException {
+		ArrayList<ReceiptPO> po = receiptdata.findByTime(startTime, endTime);
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		if (po == null) {
+			return null;
+		}else {
+			int size = po.size();
+			for (int i = 0; i < size; i++) {
+				vo.add(receiptInfo.toVO(po.get(i)));
+			}
+		}
+		return vo;
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> findByType(ReceiptType type) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ReceiptVO> findByType(ReceiptType type) throws RemoteException {
+		ArrayList<ReceiptPO> po = receiptdata.findByType(type);
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		if (po == null) {
+			return null;
+		}else {
+			int size = po.size();
+			for (int i = 0; i < size; i++) {
+				vo.add(receiptInfo.toVO(po.get(i)));
+			}
+		}
+		return vo;
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type) throws RemoteException {
+		ArrayList<ReceiptPO> po = receiptdata.findByTimeAndType(startTime, endTime, type);
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		if (po == null) {
+			return null;
+		}else {
+			int size = po.size();
+			for (int i = 0; i < size; i++) {
+				vo.add(receiptInfo.toVO(po.get(i)));
+			}
+		}
+		return vo;
 	}
 	
 }

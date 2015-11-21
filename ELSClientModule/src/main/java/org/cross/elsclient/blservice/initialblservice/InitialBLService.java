@@ -49,30 +49,34 @@ public interface InitialBLService {
 	 * 
 	 * @param vo
 	 * @return 人员列表
+	 * @throws RemoteException 
 	 */
-	public ArrayList<PersonnelVO> showPersonnel(String initialID);
+	public ArrayList<PersonnelVO> showPersonnel(String initialID) throws RemoteException;
 
 	/**
 	 * 返回对应账本车辆信息
 	 * 
 	 * @param vo
 	 * @return 车辆列表
+	 * @throws RemoteException 
 	 */
-	public ArrayList<VehicleVO> showVehicle(String initialID);
+	public ArrayList<VehicleVO> showVehicle(String initialID) throws RemoteException;
 
 	/**
 	 * 返回对应账本库存信息
 	 * 
 	 * @param vo
 	 * @return 库存列表
+	 * @throws RemoteException 
 	 */
-	public ArrayList<StockVO> showStock(String initialID);
+	public ArrayList<StockVO> showStock(String initialID) throws RemoteException;
 
 	/**
 	 * 返回对应账本账户信息
 	 * 
 	 * @param vo
 	 * @return 账户列表
+	 * @throws RemoteException 
 	 */
-	public ArrayList<AccountVO> showAccount(String initialID);
+	public ArrayList<AccountVO> showAccount(String initialID) throws RemoteException;
 }

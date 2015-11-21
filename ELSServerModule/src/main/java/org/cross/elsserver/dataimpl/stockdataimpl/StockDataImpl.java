@@ -26,7 +26,7 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 	}
 
 	@Override
-	public ResultMessage insert(StockPO po) throws RemoteException {
+	public ResultMessage insert(StockPO po ) throws RemoteException {
 		String sql = "insert ignore into `stock`(`number`, `totalArea`, `usedArea`, `numOut`, `numIn`, `moneyOut`, `moneyIn`, `numInStock`)"
 				+ " values ('" + po.getNumber() + "'," + po.getTotalAreas() + ","+po.getUsedAreas()+",0,0,0,0,0)";
 		if (!mysql.execute(sql)) 

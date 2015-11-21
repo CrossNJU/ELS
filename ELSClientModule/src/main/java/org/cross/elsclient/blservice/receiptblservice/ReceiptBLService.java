@@ -64,16 +64,19 @@ public interface ReceiptBLService {
 	
 	/**
 	 * 根据时间查找单据
+	 * @throws RemoteException 
 	 */
-	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime);
+	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime) throws RemoteException;
 	
 	/**
 	 * 根据类型查找单据
+	 * @throws RemoteException 
 	 */
-	public ArrayList<ReceiptVO> findByType(ReceiptType type);
+	public ArrayList<ReceiptVO> findByType(ReceiptType type) throws RemoteException;
 	
 	/**
 	 * 根据时间、类型查找单据
+	 * @throws RemoteException 
 	 */
-	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type);
+	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type) throws RemoteException;
 }

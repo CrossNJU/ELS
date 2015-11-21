@@ -3,6 +3,7 @@ package org.cross.elsclient.blimpl.constantblimpl;
 import org.cross.elsclient.blimpl.blUtility.ConstantInfo;
 import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
 import org.cross.elsclient.vo.ConstantVO;
+import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService_Stub;
 import org.cross.elscommon.po.ConstantPO;
 import org.cross.elscommon.util.ResultMessage;
@@ -10,10 +11,10 @@ import org.cross.elscommon.util.UserType;
 
 public class ConstantBLImpl implements ConstantBLService{
 
-	public ConstantDataService_Stub constantData;
+	public ConstantDataService constantData;
 	public ConstantInfo constantInfo;
 	
-	public ConstantBLImpl(ConstantDataService_Stub constantData,ConstantInfo constantInfo){
+	public ConstantBLImpl(ConstantDataService constantData,ConstantInfo constantInfo){
 		this.constantData = constantData;
 		this.constantInfo = constantInfo;
 	}

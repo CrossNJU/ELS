@@ -42,6 +42,9 @@ public class InitialInfoImpl implements InitialInfo{
 
 	@Override
 	public InitialVO toInitialVO(InitialPO po) {
+		if (po == null) {
+			return null;
+		}
 		ArrayList<OrganizationVO> orgVOs = new ArrayList<OrganizationVO>();
 		ArrayList<OrganizationPO> orgPOs = po.getOrganizations();
 		ArrayList<PersonnelVO> personnelVOs = new ArrayList<PersonnelVO>();
@@ -71,6 +74,9 @@ public class InitialInfoImpl implements InitialInfo{
 
 	@Override
 	public InitialPO toInitialPO(InitialVO vo) {
+		if (vo == null) {
+			return null;
+		}
 		ArrayList<OrganizationVO> orgVOs = vo.organizations;
 		ArrayList<OrganizationPO> orgPOs = new ArrayList<OrganizationPO>();
 		ArrayList<PersonnelVO> personnelVOs = vo.personnels;
