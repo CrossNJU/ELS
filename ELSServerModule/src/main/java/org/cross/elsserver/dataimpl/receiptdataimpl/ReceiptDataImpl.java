@@ -18,8 +18,10 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 
 	@Override
 	public ResultMessage insert(ReceiptPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		if(po.getType().equals(ReceiptType.ORDER)){
+			
+		}
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.po.GoodsPO;
@@ -114,6 +115,10 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 				po = new GoodsPO(StringToType.toGoodsType(rs.getString("type")), rs.getString("number"),
 						StringToType.toCity(rs.getString("placeCity")), StringToType.toOrg(rs.getString("placeOrg")),
 						rs.getInt("weight"), rs.getInt("volume"));
+				ArrayList<HistoryPO> list = historyTool.findByGoodsNum(number);
+				for (int i = 0; i < list.size(); i++) {
+					po.addHistory(list.get(i));
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

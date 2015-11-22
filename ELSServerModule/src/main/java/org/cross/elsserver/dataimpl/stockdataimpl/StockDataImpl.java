@@ -30,12 +30,15 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 
 	@Override
 	public ResultMessage insert(StockPO po) throws RemoteException {
-		String sql = "insert into `stock`(`number`, `totalArea`, `usedArea`, `numOut`, `numIn`, `moneyOut`, `moneyIn`, `numInStock`)"
-				+ " values ('" + po.getNumber() + "'," + po.getTotalAreas() + ",0,0,0,0,0,0)";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		} else
+		String sql = "insert ignore into `stock`(`number`, `totalArea`, `usedArea`, `numOut`, `numIn`, `moneyOut`, `moneyIn`, `numInStock`)"
+				+ " values ('" + po.getNumber() + "'," + po.getTotalAreas() + ","+po.getUsedAreas()+",0,0,0,0,0)";
+		if (!mysql.execute(sql)) 
 			return ResultMessage.FAILED;
+		ArrayList<StockAreaPO> areas = po.getStockAreas();
+		for (int i = 0; i < areas.size(); i++) {
+			addstockArea(areas.get(i), po.getNumber());
+		}
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
@@ -56,6 +59,7 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		ResultSet rs = mysql.query(sql);
 		int usedCapacity = -1;
 		try {
+			rs.next();
 			usedCapacity = rs.getInt("usedCapacity") + 1;
 			sql = "update `stockArea` set `usedCapacity`=" + usedCapacity + " where `number`='" + stockAreaNum + "'";
 			mysql.execute(sql);
@@ -68,6 +72,7 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		sql = "select * from `stock` where `number`='" + stockNum + "'";
 		rs = mysql.query(sql);
 		try {
+			rs.next();
 			numIn = rs.getInt("numIn") + 1;
 			moneyIn = rs.getDouble("moneyIn") + op.getMoney();
 			numInStock = rs.getInt("numInStock") + 1;
@@ -90,22 +95,24 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		ResultSet rs = mysql.query(sql);
 		int usedCapacity = -1;
 		try {
+			rs.next();
 			usedCapacity = rs.getInt("usedCapacity") - 1;
 			sql = "update `stockArea` set `usedCapacity`=" + usedCapacity + " where `number`='" + stockAreaNum + "'";
 			mysql.execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		int numIn = -1;
-		double moneyIn = -1;
+		int numOut = -1;
+		double moneyOut = -1;
 		int numInStock = -1;
 		sql = "select * from `stock` where `number`='" + stockNum + "'";
 		rs = mysql.query(sql);
 		try {
-			numIn = rs.getInt("numIn") - 1;
-			moneyIn = rs.getDouble("moneyIn") - op.getMoney();
+			rs.next();
+			numOut = rs.getInt("numOut") + 1;
+			moneyOut = rs.getDouble("moneyOut") + op.getMoney();
 			numInStock = rs.getInt("numInStock") - 1;
-			sql = "update `stock` set `numIn`=" + numIn + ", `moneyIn`=" + moneyIn + ", `numInStock`=" + numInStock
+			sql = "update `stock` set `numOut`=" + numOut + ", `moneyOut`=" + moneyOut + ", `numInStock`=" + numInStock
 					+ " where" + "`number` = '" + stockNum + "'";
 			mysql.execute(sql);
 		} catch (SQLException e) {
@@ -137,13 +144,13 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 	}
 
 	@Override
 	public StockPO findStockByNum(String number) throws RemoteException {
 		StockPO po = null;
-		String sql = "select * from `stock` where `number`='"+number+"'";
+		String sql = "select * from `stock` where `number`='" + number + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			if (rs.next()) {
@@ -174,7 +181,8 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 			while (rs.next()) {
 				String stockAreaNum = rs.getString("number");
 				ArrayList<GoodsPO> goodspos = goodsTool.findByStockAreaNum(stockAreaNum);
-				StockAreaPO po = new StockAreaPO(stockAreaNum, StringToType.toGoodsType(rs.getString("type")), rs.getInt("totalCapacity"));
+				StockAreaPO po = new StockAreaPO(stockAreaNum, StringToType.toGoodsType(rs.getString("type")),
+						rs.getInt("totalCapacity"));
 				po.setGoodslist(goodspos);
 				po.setUsedCapacity(rs.getInt("usedCapacity"));
 				areas.add(po);
@@ -190,6 +198,13 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		String sql = "insert into `stockOperation`(`time`, `type`, `goodsNum`, `money`, `place`, `stockAreaNum`, `stockNum`) values ('"
 				+ po.getTime() + "','" + po.getType().toString() + "','" + po.getGoodNum() + "'," + po.getMoney() + ",'"
 				+ po.getPlace().toString() + "','" + stockAreaNum + "','" + stockNum + "')";
+		mysql.execute(sql);
+	}
+
+	public void addstockArea(StockAreaPO po, String stockNum) {
+		String sql = "insert ignore into `stockArea`(`number`, `totalCapacity`, `usedCapacity`, `type`, `stockNum`) values ('"
+				+ po.getNumber() + "'," + po.getTotalCapacity() + "," + po.getUsedCapacity() + ",'"
+				+ po.getStockType().toString() + "','" + stockNum + "')";
 		mysql.execute(sql);
 	}
 
