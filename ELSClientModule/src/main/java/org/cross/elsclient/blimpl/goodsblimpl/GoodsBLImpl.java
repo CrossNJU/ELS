@@ -15,100 +15,49 @@ import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 
-public class GoodsBLImpl implements GoodsBLService,GoodsInfo{
+public class GoodsBLImpl implements GoodsBLService{
 
-	GoodsVO goodsvo;
-	GoodsPO goodspo;
-	GoodsDataService goodsDataService;
+	public GoodsDataService goodsData;
+	public GoodsInfo goodsInfo;
 	
-	public GoodsBLImpl(GoodsDataService goodsDataService){
-		this.goodsDataService = goodsDataService;
+	public GoodsBLImpl(GoodsDataService goodsData,GoodsInfo goodsInfo){
+		this.goodsData = goodsData;
+		this.goodsInfo = goodsInfo;
 	}
 	
-	@Override
-	public ResultMessage updateGoods(String id,HistoryVO nowHistory,GoodsState nowState) throws RemoteException {
-		goodspo = goodsDataService.show(id);
-		if (goodspo == null) {
+		@Override
+	public ResultMessage updateGoods(String id, HistoryVO nowHistory,
+			GoodsState nowState) throws RemoteException {
+		ResultMessage resultMessage1 = goodsData.updateLocation(id, nowHistory.placeCity, nowHistory.placeOrg);
+		ResultMessage resultMessage2 = goodsData.updateState(id, nowState);
+		ResultMessage resultMessage3 = goodsData.addHistory(id,goodsInfo.toHistroyPO(nowHistory));
+		if (resultMessage1 == ResultMessage.FAILED || resultMessage2 == ResultMessage.FAILED || resultMessage3 == ResultMessage.FAILED) {
 			return ResultMessage.FAILED;
 		}
-		goodspo.setHistoryPO(toHistroyPO(nowHistory));
-		goodspo.setGoodsState(nowState);
-		goodsDataService.updateLocation(id, nowHistory.city);
-		goodsDataService.updateState(id, nowState);
-		goodsDataService.updateHistory(id,toHistroyPO(nowHistory));
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ArrayList<HistoryVO> findGoods(String id) throws RemoteException {
-		ArrayList<HistoryVO> histroy = new ArrayList<HistoryVO>();
-		
-		goodspo = goodsDataService.show(id);
-//		GoodsPO goodspo = goodsDataService.show(id);
-		if(goodspo==null){
-			System.out.println("can not find it");
+		GoodsVO goodsVO = searchGoods(id);
+		if (goodsVO == null) {
 			return null;
 		}
-		System.out.println("    " + goodspo.getGoodsWeight());
-		goodsvo = toGoodsVO(goodspo);
-		int size = goodspo.getHistoryPO().size();
-		System.out.println(size + "(size)");
-		for (int i = 0; i < size; i++) {
-			HistoryVO vo = goodsvo.historyVO.get(i);
-			histroy.add(vo);
-		}
-		return histroy;
+		ArrayList<HistoryVO> historyVOs = goodsVO.history;
+		return historyVOs;
 	}
-	
+
 	@Override
 	public GoodsVO searchGoods(String goodsID) throws RemoteException {
-		goodspo = goodsDataService.show(goodsID);
-		goodsvo = toGoodsVO(goodspo);
-		return goodsvo;
-	}
-	
-	@Override
-	public GoodsVO toGoodsVO(GoodsPO po){
-		if (po == null) {
-			return null;
-		}
-		GoodsVO vo = new GoodsVO(po.getGoodsWeight(), po.getGoodsVolume(), po.getCurrentLocate(),po.getGoodsType());
-		vo.historyVO = toHistroyVO(po.getHistoryPO());
-		vo.orderNumber = po.getOrderNumber();
+		GoodsPO po = goodsData.findByNum(goodsID);
+		GoodsVO vo = goodsInfo.toGoodsVO(po);
 		return vo;
 	}
 
 	@Override
-	public ArrayList<HistoryVO> toHistroyVO(ArrayList<HistoryPO> po) {
-		ArrayList<HistoryVO> histroyVO = new ArrayList<HistoryVO>();
-		HistoryVO vo;
-		for (int i = 0; i < po.size(); i++) {
-			vo = new HistoryVO(po.get(i).getTime(), po.get(i).getCity(),po.get(i).getOrganization(),po.get(i).isArrive());
-			histroyVO.add(vo);
-		}
-		return histroyVO;
+	public ResultMessage addGoods(GoodsVO goods) throws RemoteException {
+		GoodsPO goodsPO = goodsInfo.toGoodsPO(goods);
+		return goodsData.insertToDB(goodsPO);
 	}
 
-	@Override
-	public GoodsPO toGoodsPO(GoodsVO vo) {
-		if (vo == null) {
-			return null;
-		}
-		GoodsPO goodsPO = new GoodsPO(vo.weightOfGoods, vo.volumeOfGoods, vo.currentLocate, vo.goodsType);
-		ArrayList<HistoryPO> historyPOs = new ArrayList<HistoryPO>();
-		for (int i = 0; i < vo.historyVO.size(); i++) {
-			historyPOs.add(toHistroyPO(vo.historyVO.get(i)));
-		}
-		goodsPO.cloneHistroyFromVO(historyPOs);
-		goodsPO.setOrderNumber(vo.orderNumber);
-		goodsPO.setGoodsState(vo.state);
-		return goodsPO;
-	}
-
-	@Override
-	public HistoryPO toHistroyPO(HistoryVO vo) {
-		HistoryPO historyPO = new HistoryPO(vo.time, vo.city,vo.organization,vo.isArrive);
-		return historyPO;
-	}
-	
 }

@@ -63,6 +63,7 @@ public class GoodsVO {
 	 * 
 	 */
 	public GoodsVO(String number,StockType goodsType, City city, OrganizationType org, int weight, int volume){
+		this.number = number;
 		this.weight = weight;
 		this.volume = volume;
 		this.placeCity = city;

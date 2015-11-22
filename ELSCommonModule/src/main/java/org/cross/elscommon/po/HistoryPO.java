@@ -5,11 +5,18 @@
  */
 package org.cross.elscommon.po;
 
+import java.io.Serializable;
+
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 
 
-public class HistoryPO{
+public class HistoryPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 到达某地/从某地发出的时间
 	 */

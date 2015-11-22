@@ -14,10 +14,11 @@ import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 
 public interface GoodsBLService {
-//	/**	 增加快件信息
-//	 * @return 是否增加成功
-//	 */
-//	public ResultMessage addGoods(GoodsVO goods);
+	/**	 增加快件信息
+	 * @return 是否增加成功
+	 * @throws RemoteException 
+	 */
+	public ResultMessage addGoods(GoodsVO goods) throws RemoteException;
 	
 //	/**
 //	 * 删除快件信息

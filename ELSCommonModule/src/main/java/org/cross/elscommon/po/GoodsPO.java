@@ -5,6 +5,7 @@
  */
 package org.cross.elscommon.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.City;
@@ -12,7 +13,12 @@ import org.cross.elscommon.util.GoodsState;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.StockType;
 
-public class GoodsPO {
+public class GoodsPO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 快件类型

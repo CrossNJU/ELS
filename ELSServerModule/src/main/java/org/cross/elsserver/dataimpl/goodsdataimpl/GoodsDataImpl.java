@@ -103,6 +103,7 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 			return ResultMessage.SUCCESS;
 		} else
 			return ResultMessage.FAILED;
+		//TODO 可能需要有反馈信息：仓库是否已经有了
 	}
 
 	@Override

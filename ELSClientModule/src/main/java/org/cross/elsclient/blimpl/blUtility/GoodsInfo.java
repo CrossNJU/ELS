@@ -11,7 +11,7 @@ import org.cross.elscommon.po.HistoryPO;
 public interface GoodsInfo {
 	public GoodsVO toGoodsVO(GoodsPO po);
 	
-	public ArrayList<HistoryVO> toHistroyVO(ArrayList<HistoryPO> po);
+	public HistoryVO toHistroyVO(HistoryPO po);
 	
 	public GoodsPO toGoodsPO(GoodsVO vo);
 	
