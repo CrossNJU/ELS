@@ -11,7 +11,6 @@ import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elscommon.util.VehicleType;
 
 public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataService {
 
@@ -20,7 +19,7 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 	 */
 	private static final long serialVersionUID = 1L;
 
-	MySQL mysql;
+	private MySQL mysql;
 
 	public VehicleDataImpl() throws RemoteException {
 		super();
@@ -29,23 +28,12 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 
 	@Override
 	public ResultMessage insert(VehiclePO po) throws RemoteException {
-		String sql = "INSERT INTO `vehicle`(`number`, `engineNum`, `baseNum`, `buyTime`, `lastTime`, `state`, `type`) VALUES ('"
+		String sql = "INSERT IGNORE INTO `vehicle`(`number`, `engineNum`, `baseNum`, `buyTime`, `lastTime`, `state`, `type`) VALUES ('"
 				+ po.getNumber() + "','" + po.getEngineNumber() + "','" + po.getApparatusNumber() + "','"
 				+ po.getBuyTime() + "','" + po.getLastTime() + "'," + po.isInUse() + ",'" + po.getType().toString()
 				+ "')";
-		String find = "select * from `vehicle` where `number` ='"+po.getNumber()+"'";
-		ResultSet rs = mysql.query(find);
-		try {
-			if(rs.next()) return ResultMessage.FAILED;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		}else {
-			return ResultMessage.FAILED;
-		}
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		else return ResultMessage.FAILED;
 	}
 
 	@Override
@@ -108,13 +96,13 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 		return po;
 	}
 
-	public static void main(String[] args) throws RemoteException {
-		VehiclePO vehiclePO = new VehiclePO("000000003", "EN000002", "BA000002", "2020-01-01", "2032-12-11", null,VehicleType.CAR);
-//		
-		VehicleDataImpl vehicleDataImpl = new VehicleDataImpl();
-		 vehicleDataImpl.insert(vehiclePO);
-		// vehicleDataImpl.delete("V000001");
-//		vehicleDataImpl.;
-	}
+//	public static void main(String[] args) throws RemoteException {
+//		VehiclePO vehiclePO = new VehiclePO("000000003", "EN000002", "BA000002", "2020-01-01", "2032-12-11", null,VehicleType.CAR);
+////		
+//		VehicleDataImpl vehicleDataImpl = new VehicleDataImpl();
+//		 vehicleDataImpl.insert(vehiclePO);
+//		// vehicleDataImpl.delete("V000001");
+////		vehicleDataImpl.;
+//	}
 
 }

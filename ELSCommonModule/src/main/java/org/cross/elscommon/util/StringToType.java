@@ -79,4 +79,19 @@ public class StringToType {
 			return null;
 		}
 	}
+	
+	public static ReceiptType toReceiptType(String receipt){
+		switch (receipt) {
+		case "订单":
+			return ReceiptType.ORDER;
+		case "到达单":
+			return ReceiptType.ARRIVE;
+		case "入库单":
+			return ReceiptType.STOCKIN;
+		case "出库单":
+			return ReceiptType.STOCKOUT;
+		default:
+			return null;
+		}
+	}
 }

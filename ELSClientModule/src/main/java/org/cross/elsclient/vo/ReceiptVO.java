@@ -25,6 +25,11 @@ public class ReceiptVO {
 	public String time;
 	
 	/**
+	 * 是否已被审批
+	 */
+	public boolean isApproved;
+	
+	/**
 	 * 构造方法
 	 * @param number
 	 * @param type
@@ -34,6 +39,8 @@ public class ReceiptVO {
 		this.number = number;
 		this.type = type;
 		this.time = time;
+		
+		this.isApproved = false;
 	}
 	
 	/**

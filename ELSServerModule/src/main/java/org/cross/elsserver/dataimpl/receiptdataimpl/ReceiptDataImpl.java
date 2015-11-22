@@ -34,14 +34,15 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	@Override
 	public ResultMessage delete(String number, ReceiptType type) throws RemoteException {
 		String sql = "delete from `"+Typetotable.gettable(type)+"` where `number`='"+number+"'";
-		if(mysql.execute(sql));
-		return null;
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		else return ResultMessage.FAILED;
 	}
 
 	@Override
-	public ResultMessage updateCheck(String number) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage updateCheck(String number, ReceiptType type) throws RemoteException {
+		String sql = "update `"+Typetotable.gettable(type)+"` set `isApproved`=true where `number`='"+number+"'";
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		else return ResultMessage.FAILED;
 	}
 
 	@Override
