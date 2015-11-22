@@ -7,6 +7,7 @@ package org.cross.elscommon.dataservice.goodsdataservice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
@@ -23,17 +24,23 @@ public interface GoodsDataService extends Remote{
 	
 	//create order first, double reflect
 	public ResultMessage addToOrder(String number, String orderNum) throws RemoteException;
+	public ResultMessage deleteFromOrder(String number) throws RemoteException;
 	
 	public ResultMessage addToTrans(String number, String transNum) throws RemoteException;
+	public ResultMessage deleteFromTrans(String number) throws RemoteException;
 	
 	public ResultMessage addToArri(String number, String arriNum) throws RemoteException;
+	public ResultMessage deleteFromArri(String number) throws RemoteException;
 	
 	public ResultMessage addToStock(String number, String stockAreaNum) throws RemoteException;
+	public ResultMessage deleteFromStock(String number) throws RemoteException;
 	
 	public ResultMessage addHistory(String number , HistoryPO history) throws RemoteException;
 	
 	public ResultMessage insertToDB(GoodsPO goods) throws RemoteException;
 	
 	public GoodsPO findByNum(String number)throws RemoteException;
+
+	public ArrayList<GoodsPO> findByStockAreaNum(String stockAreaNum)throws RemoteException;
 
 }

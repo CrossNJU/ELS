@@ -23,9 +23,9 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	private HistoryTool historyTool;
 	MySQL mysql;
 
-	public GoodsDataImpl(HistoryTool historyTool) throws RemoteException {
+	public GoodsDataImpl() throws RemoteException {
 		super();
-		this.historyTool = historyTool;
+		this.historyTool = new HistoryDataImpl();
 		mysql = new MySQL();
 	}
 
@@ -126,6 +126,54 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 			e.printStackTrace();
 		}
 		return po;
+	}
+
+	@Override
+	public ResultMessage deleteFromOrder(String number) throws RemoteException {
+		String sql = "update `goods` set `orderNum`=NULL where `number`='" + number + "'";
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		else return ResultMessage.FAILED;
+	}
+
+	@Override
+	public ResultMessage deleteFromTrans(String number) throws RemoteException {
+		String sql = "update `goods` set `transNum`=NULL where `number`='" + number + "'";
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		else return ResultMessage.FAILED;
+	}
+
+	@Override
+	public ResultMessage deleteFromArri(String number) throws RemoteException {
+		String sql = "update `goods` set `arriNum`=NULL where `number`='" + number + "'";
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		else return ResultMessage.FAILED;
+	}
+
+	@Override
+	public ResultMessage deleteFromStock(String number) throws RemoteException {
+		String sql = "update `goods` set `stockAreaNum`=NULL where `number`='" + number + "'";
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		else return ResultMessage.FAILED;
+	}
+
+	@Override
+	public ArrayList<GoodsPO> findByStockAreaNum(String stockAreaNum) throws RemoteException {
+		ArrayList<GoodsPO> list = new ArrayList<GoodsPO>();
+		GoodsPO po = null;
+		String sql = "select * from `goods` where `stockAreaNum`='" + stockAreaNum + "'";
+		ResultSet rs = mysql.query(sql);
+		try {
+			while (rs.next()) {
+				po = new GoodsPO(StringToType.toGoodsType(rs.getString("type")), rs.getString("number"),
+						StringToType.toCity(rs.getString("placeCity")), StringToType.toOrg(rs.getString("placeOrg")),
+						rs.getInt("weight"), rs.getInt("volume"));
+				list.add(po);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

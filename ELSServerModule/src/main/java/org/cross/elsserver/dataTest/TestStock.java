@@ -8,14 +8,11 @@ import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.util.StockOperationType;
 import org.cross.elscommon.util.StockType;
-import org.cross.elsserver.dataimpl.goodsdataimpl.GoodsInfoImpl;
 import org.cross.elsserver.dataimpl.stockdataimpl.StockDataImpl;
-import org.cross.elsserver.dataimpl.tools.GoodsTool;
 
 public class TestStock {
 	public static void main(String[] args) throws RemoteException{
-		GoodsTool goodsTool = new GoodsInfoImpl();
-		StockDataImpl impl = new StockDataImpl(goodsTool);
+		StockDataImpl impl = new StockDataImpl();
 		
 		StockPO test1 = new StockPO("S001", 100);
 		StockAreaPO test1_a1 = new StockAreaPO("SA001", StockType.COMMON, 20);
@@ -30,7 +27,7 @@ public class TestStock {
 		list.add(test1_a4);
 		test1.setStockAreas(list);
 		
-		StockOperationPO test_op1 = new StockOperationPO("2015", StockOperationType.STOCKIN, "G002", 20.3, StockType.COMMON);
+//		StockOperationPO test_op1 = new StockOperationPO("2015", StockOperationType.STOCKIN, "G002", 20.3, StockType.COMMON);
 		StockOperationPO test_op2 = new StockOperationPO("2012", StockOperationType.STOCKOUT, "G002", 20.3, StockType.COMMON);
 		impl.updateOutstock("S001", "SA001", test_op2);
 //		impl.updateInstock("S001", "SA001", test_op1);

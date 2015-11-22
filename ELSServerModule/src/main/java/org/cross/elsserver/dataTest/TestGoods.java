@@ -3,13 +3,10 @@ package org.cross.elsserver.dataTest;
 import java.rmi.RemoteException;
 
 import org.cross.elsserver.dataimpl.goodsdataimpl.GoodsDataImpl;
-import org.cross.elsserver.dataimpl.goodsdataimpl.HistoryDataImpl;
-import org.cross.elsserver.dataimpl.tools.HistoryTool;
 
 public class TestGoods {
 	public static void main(String[] args) throws RemoteException{
-		HistoryTool historyTool = new HistoryDataImpl();
-		GoodsDataImpl impl = new GoodsDataImpl(historyTool);
+		GoodsDataImpl impl = new GoodsDataImpl();
 //		
 //		GoodsPO test1 = new GoodsPO(StockType.COMMON, "G001", City.NANJING, OrganizationType.BUSINESSHALL, 10, 10);
 //		GoodsPO test2 = new GoodsPO(StockType.Fast, "G002", City.BEIJING, OrganizationType.TRANSITCENTER, 20, 20);

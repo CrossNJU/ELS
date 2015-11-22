@@ -6,27 +6,35 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.po.Receipt_OrderPO;
+import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 
 @SuppressWarnings("serial")
 public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataService{
 
+	private MySQL mysql;
+	private Receipt_OrderDataImpl order;
+	
 	public ReceiptDataImpl() throws RemoteException {
 		super();
+		this.order = new Receipt_OrderDataImpl();
+		this.mysql = new MySQL();
 	}
 
 	@Override
 	public ResultMessage insert(ReceiptPO po) throws RemoteException {
 		if(po.getType().equals(ReceiptType.ORDER)){
-			
+			order.insert((Receipt_OrderPO)po);
 		}
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ResultMessage delete(String number) throws RemoteException {
-		// TODO Auto-generated method stub
+	public ResultMessage delete(String number, ReceiptType type) throws RemoteException {
+		String sql = "delete from `"+Typetotable.gettable(type)+"` where `number`='"+number+"'";
+		if(mysql.execute(sql));
 		return null;
 	}
 

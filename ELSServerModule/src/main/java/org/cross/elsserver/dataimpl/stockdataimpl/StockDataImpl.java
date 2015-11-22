@@ -7,25 +7,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
-import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elsserver.dataimpl.tools.GoodsTool;
 
 @SuppressWarnings("serial")
 public class StockDataImpl extends UnicastRemoteObject implements StockDataService {
 
 	private MySQL mysql;
-	private GoodsTool goodsTool;
 
-	public StockDataImpl(GoodsTool goodsTool) throws RemoteException {
+	public StockDataImpl() throws RemoteException {
 		super();
 		mysql = new MySQL();
-		this.goodsTool = goodsTool;
 	}
 
 	@Override
@@ -54,7 +50,6 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 	public ResultMessage updateInstock(String stockNum, String stockAreaNum, StockOperationPO op)
 			throws RemoteException {
 		addstockOP(op, stockNum, stockAreaNum);
-		goodsTool.addToStock(op.getGoodNum(), stockAreaNum);
 		String sql = "select * from `stockArea` where `number`='" + stockAreaNum + "'";
 		ResultSet rs = mysql.query(sql);
 		int usedCapacity = -1;
@@ -90,7 +85,6 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 	public ResultMessage updateOutstock(String stockNum, String stockAreaNum, StockOperationPO op)
 			throws RemoteException {
 		addstockOP(op, stockNum, stockAreaNum);
-		goodsTool.deleteFromStock(op.getGoodNum());
 		String sql = "select * from `stockArea` where `number`='" + stockAreaNum + "'";
 		ResultSet rs = mysql.query(sql);
 		int usedCapacity = -1;
@@ -180,10 +174,8 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		try {
 			while (rs.next()) {
 				String stockAreaNum = rs.getString("number");
-				ArrayList<GoodsPO> goodspos = goodsTool.findByStockAreaNum(stockAreaNum);
 				StockAreaPO po = new StockAreaPO(stockAreaNum, StringToType.toGoodsType(rs.getString("type")),
 						rs.getInt("totalCapacity"));
-				po.setGoodslist(goodspos);
 				po.setUsedCapacity(rs.getInt("usedCapacity"));
 				areas.add(po);
 			}
