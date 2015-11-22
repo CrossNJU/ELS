@@ -5,17 +5,10 @@
  */
 package org.cross.elscommon.po;
 
-import java.io.Serializable;
-
 import org.cross.elscommon.util.StockOperationType;
 import org.cross.elscommon.util.StockType;
 
-public class StockOperationPO implements Serializable{
-	
-	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
+public class StockOperationPO{
 
 	/**
 	 * 时间
@@ -23,14 +16,14 @@ public class StockOperationPO implements Serializable{
 	private String time;
 	
 	/**
-	 * 类型
+	 * 类型（出入库）
 	 */
 	private StockOperationType type;
 	
 	/**
-	 * 快件
+	 * 快件编号
 	 */
-	private GoodsPO good;
+	private String goodNum;
 	
 	/**
 	 * 金额
@@ -38,23 +31,15 @@ public class StockOperationPO implements Serializable{
 	private double money;
 	
 	/**
-	 * 存放位置
+	 * 存放小间类型
 	 */
 	private StockType place;
 
-	/**
-	 * 构造方法
-	 * @param time
-	 * @param type
-	 * @param good
-	 * @param money
-	 * @param place
-	 */
-	public StockOperationPO(String time, StockOperationType type, GoodsPO good, double money, StockType place) {
+	public StockOperationPO(String time, StockOperationType type, String goodNum, double money, StockType place) {
 		super();
 		this.time = time;
 		this.type = type;
-		this.good = good;
+		this.goodNum = goodNum;
 		this.money = money;
 		this.place = place;
 	}
@@ -79,13 +64,13 @@ public class StockOperationPO implements Serializable{
 	}
 	
 
-	public GoodsPO getGood() {
-		return good;
+	public String getGoodNum() {
+		return goodNum;
 	}
 	
 
-	public void setGood(GoodsPO good) {
-		this.good = good;
+	public void setGoodNum(String goodNum) {
+		this.goodNum = goodNum;
 	}
 	
 
@@ -107,8 +92,6 @@ public class StockOperationPO implements Serializable{
 	public void setPlace(StockType place) {
 		this.place = place;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
+	
 }

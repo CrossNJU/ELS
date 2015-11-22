@@ -5,73 +5,87 @@
  */
 package org.cross.elscommon.po;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.GoodsState;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.StockType;
 
-public class GoodsPO implements Serializable{
-	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-	
+public class GoodsPO {
+
 	/**
 	 * 快件类型
 	 */
 	private StockType goodsType;
 
 	/**
-	 * 历史轨迹
+	 * 快件编号
 	 */
-	private ArrayList<HistoryPO> historyPO;
-	
+	private String number;
+
 	/**
-	 * 订单
+	 * 当前位置,城市
 	 */
-	private String orderNumber;
-	
+	private City placeCity;
+
 	/**
-	 * 当前位置
+	 * 当前位置,机构
 	 */
-	private City currentLocate;
-	
+	private OrganizationType placeOrg;
+
 	/**
 	 * 状态
 	 */
 	private GoodsState state;
-	
+
 	/**
 	 * 实际重量
 	 */
-	private int weightOfGoods;
-	
+	private int weight;
+
 	/**
 	 * 体积
 	 */
-	private int volumeOfGoods;
-	
+	private int volume;
+
+	/**
+	 * 历史轨迹
+	 */
+	private ArrayList<HistoryPO> history;
+
+	// 不知道要不要
+	/**
+	 * 订单编号
+	 */
+	private String orderNum;
+
 	/**
 	 * 构造方法
+	 * 
+	 * @param goodsType
+	 * @param number
+	 * @param placeCity
+	 * @param placeOrg
+	 * @param state
+	 * @param weight
+	 * @param volume
+	 * @param history
 	 */
-	public GoodsPO(int weight,int volum,City currentLocate,StockType goodsType){
-		this.weightOfGoods = weight;
-		this.volumeOfGoods = volum;
-		this.currentLocate = currentLocate;
+	public GoodsPO(StockType goodsType, String number, City placeCity, OrganizationType placeOrg, int weight,
+			int volume) {
+		super();
 		this.goodsType = goodsType;
-		
+		this.number = number;
+		this.placeCity = placeCity;
+		this.placeOrg = placeOrg;
+		this.weight = weight;
+		this.volume = volume;
+
 		this.state = GoodsState.LIVE;
-		this.historyPO = new ArrayList<HistoryPO>();
+		this.history = new ArrayList<HistoryPO>();
 	}
-	
-	/**
-	 * get&set
-	 */
-	public ArrayList<HistoryPO> getHistoryPO(){
-		return historyPO;
-	}
+
 	public StockType getGoodsType() {
 		return goodsType;
 	}
@@ -80,52 +94,68 @@ public class GoodsPO implements Serializable{
 		this.goodsType = goodsType;
 	}
 
-	public void setHistoryPO(HistoryPO histroyPO){
-		this.historyPO.add(histroyPO);
+	public String getNumber() {
+		return number;
 	}
-	
-	public void cloneHistroyFromVO(ArrayList<HistoryPO> historyPOs){
-		this.historyPO = historyPOs;
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
-	
-	public String getOrderNumber(){
-		return orderNumber;
+
+	public City getPlaceCity() {
+		return placeCity;
 	}
-	public void setOrderNumber(String order){
-		this.orderNumber = order;
+
+	public void setPlaceCity(City placeCity) {
+		this.placeCity = placeCity;
 	}
-	
-	public City getCurrentLocate(){
-		return currentLocate;
+
+	public OrganizationType getPlaceOrg() {
+		return placeOrg;
 	}
-	public void setCurrentLocate(City currentLocate){
-		this.currentLocate = currentLocate;
+
+	public void setPlaceOrg(OrganizationType placeOrg) {
+		this.placeOrg = placeOrg;
 	}
-	
-	public GoodsState getGoodsState(){
+
+	public GoodsState getState() {
 		return state;
 	}
-	public void setGoodsState(GoodsState state){
+
+	public void setState(GoodsState state) {
 		this.state = state;
 	}
-	
-	public int getGoodsWeight(){
-		return weightOfGoods;
-	}
-	public void setGoodsWeight(int weightOfGoods){
-		this.weightOfGoods = weightOfGoods;
-	}
-	
-	public int getGoodsVolume(){
-		return volumeOfGoods;
-	}
-	public void setGoodsVolume(int volumeOfGoods){
-		this.volumeOfGoods = volumeOfGoods;
+
+	public int getWeight() {
+		return weight;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
+
+	public int getVolume() {
+		return volume;
+	}
+
+	public void setVolume(int volume) {
+		this.volume = volume;
+	}
+
+	public ArrayList<HistoryPO> getHistory() {
+		return history;
+	}
+
+	public void addHistory(HistoryPO newhistory) {
+		this.history.add(newhistory);
+	}
+
+	public String getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
+	}
+
 }
-
-

@@ -5,109 +5,73 @@
  */
 package org.cross.elscommon.po;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ReceiptType;
 
-public class Receipt_ArrivePO extends ReceiptPO implements Serializable{
+public class Receipt_ArrivePO extends ReceiptPO {
 
-	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 到达日期
-	 */
-	private String time;
-	
 	/**
 	 * 出发地
 	 */
-	private City city;
-	
-	/**
-	 * 到达单编号
-	 */
-	private String number;
-	
-	/**
-	 * 货物信息
-	 */
-	private ArrayList<GoodsPO> goods;
-	
+	public City startPlace;
+
 	/**
 	 * 转运单编号
 	 */
-	private String transNumber;
-	
+	public String transNum;
+
 	/**
-	 * 构造方法
-	 * @param time
-	 * @param city
-	 * @param number
+	 * 货物信息
 	 */
-	public Receipt_ArrivePO(String time, City city, String number, String transNumber){
-		super(number, ReceiptType.ARRIVE, time);
-		this.time = time;
-		this.city = city;
-		this.number = number;
-		this.transNumber = transNumber;
-		
-		this.goods = new ArrayList<GoodsPO>();
+	public ArrayList<String> orders;
+
+	/**
+	 * 到达的机构
+	 */
+	public OrganizationType arriveOrg;
+
+	public Receipt_ArrivePO(String number, ReceiptType type, String time, City startPlace, String transNum,
+			ArrayList<String> orders, OrganizationType arriveOrg) {
+		super(number, type, time);
+		this.startPlace = startPlace;
+		this.transNum = transNum;
+		this.orders = orders;
+		this.arriveOrg = arriveOrg;
 	}
 
-	public ArrayList<GoodsPO> getGoods() {
-		return goods;
-	}
-	
-	public void setGoods(GoodsPO good) {
-		this.goods.add(good);
+	public City getStartPlace() {
+		return startPlace;
 	}
 
-	public String getTime() {
-		return time;
-	}
-	
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-	
-
-	public City getCity() {
-		return city;
-	}
-	
-
-	public void setCity(City city) {
-		this.city = city;
-	}
-	
-
-	public String getNumber() {
-		return number;
-	}
-	
-
-	public void setNumber(String number) {
-		this.number = number;
+	public void setStartPlace(City startPlace) {
+		this.startPlace = startPlace;
 	}
 
-	public String getTransNumber() {
-		return transNumber;
+	public String getTransNum() {
+		return transNum;
 	}
-	
 
-	public void setTransNumber(String transNumber) {
-		this.transNumber = transNumber;
+	public void setTransNum(String transNum) {
+		this.transNum = transNum;
 	}
-	
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public ArrayList<String> getGoodslist() {
+		return orders;
 	}
-	
+
+	public void setGoodslist(ArrayList<String> orders) {
+		this.orders = orders;
+	}
+
+	public OrganizationType getArriveOrg() {
+		return arriveOrg;
+	}
+
+	public void setArriveOrg(OrganizationType arriveOrg) {
+		this.arriveOrg = arriveOrg;
+	}
+
 }

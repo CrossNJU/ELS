@@ -10,46 +10,39 @@ import org.cross.elscommon.util.OrganizationType;
 
 public class HistoryVO {
 	/**
-	 * 到达某地时间
+	 * 到达某地/从某地发出的时间
 	 */
 	public String time;
 	
 	/**
-	 * 地点
+	 * 地点,城市
 	 */
-	public City city;
+	public City placeCity;
 	
 	/**
-	 * 机构
+	 * 地点,机构
 	 */
-	public OrganizationType organization;
+	public OrganizationType placeOrg;
 	
 	/**
 	 * 是到达或发出
 	 */
 	public boolean isArrive;
-	
-	public HistoryVO(String time, City city,OrganizationType organization,boolean isArrive){
+
+	/**
+	 * 构造方法
+	 * @param time
+	 * @param placeCity
+	 * @param placeOrg
+	 * @param isArrive
+	 */
+	public HistoryVO(String time, City placeCity, OrganizationType placeOrg, boolean isArrive) {
+		super();
 		this.time = time;
-		this.city = city;
-		this.organization = organization;
+		this.placeCity = placeCity;
+		this.placeOrg = placeOrg;
 		this.isArrive = isArrive;
 	}
 	
-//	public void setTime(String time){
-//		this.time = time;
-//	}
-//	
-//	public String getTime(){
-//		return this.time;
-//	}
-//	
-//	public void setPlace(City place){
-//		this.place = place;
-//	}
-//	
-//	public City getPlace(){
-//		return this.place;
-//	}
 }
 

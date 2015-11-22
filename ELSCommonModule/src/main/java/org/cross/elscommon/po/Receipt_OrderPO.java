@@ -5,213 +5,128 @@
  */
 package org.cross.elscommon.po;
 
-import java.io.Serializable;
-
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.People;
 import org.cross.elscommon.util.ReceiptType;
 
-public class Receipt_OrderPO extends ReceiptPO implements Serializable{
-
-	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
+public class Receipt_OrderPO extends ReceiptPO {
 
 	/**
 	 * 快件信息
 	 */
-	private GoodsPO goods;
-	
+	private String goodsNum;
+
 	/**
 	 * 费用
 	 */
 	private double cost;
-	
+
 	/**
 	 * 收件时间
 	 */
 	private String receiveTime;
-	
+
 	/**
 	 * 预计到达时间
 	 */
 	private String expectTime;
-	
+
 	/**
 	 * 目的地
 	 */
 	private City targetPlace;
-	
+
 	/**
 	 * 出发地
 	 */
 	private City startPlace;
-	
-	/**
-	 * 订单编号
-	 */
-	private String number;
-	
+
 	/**
 	 * 寄件人
 	 */
 	private People pushPeople;
-	
+
 	/**
 	 * 收件人
 	 */
 	private People receivePeople;
-	
-	/**
-	 * 订单创建时间
-	 */
-	private String time;
-	
-	/**
-	 * 构造方法
-	 * @param goods
-	 * @param receiveTime
-	 * @param expectTime
-	 * @param number
-	 * @param targetPlace
-	 * @param startPlace
-	 * @param pushPeople
-	 * @param receivePeople
-	 * @param time
-	 */
-	public Receipt_OrderPO(GoodsPO goods,
-			String receiveTime, 
-			String expectTime, String number,
-			City targetPlace, City startPlace,
-			People pushPeople, People receivePeople,
-			String time){
-		super(number, ReceiptType.ORDER, time);
-		this.goods = goods;
+
+	public Receipt_OrderPO(String number, ReceiptType type, String time, String goodsNum, double cost,
+			String expectTime, City targetPlace, City startPlace, People pushPeople, People receivePeople) {
+		super(number, type, time);
+		this.goodsNum = goodsNum;
+		this.cost = cost;
 		this.expectTime = expectTime;
-		this.receiveTime = receiveTime;
 		this.targetPlace = targetPlace;
 		this.startPlace = startPlace;
 		this.pushPeople = pushPeople;
 		this.receivePeople = receivePeople;
-		this.time = time;
-		
-		this.number = number;
-		this.cost = 0;
-	}
-	
-	/**
-	 * 缺省构造方法
-	 * @param number
-	 * @param time
-	 */
-	public Receipt_OrderPO(String number, String time){
-		super(number, ReceiptType.ORDER, time);
-		this.number = number;
-		this.time = time;
+
+		this.receiveTime = null;
 	}
 
-	public GoodsPO getGoods() {
-		return goods;
+	public String getGoodsNum() {
+		return goodsNum;
 	}
-	
 
-	public void setGoods(GoodsPO goods) {
-		this.goods = goods;
+	public void setGoodsNum(String goodsNum) {
+		this.goodsNum = goodsNum;
 	}
-	
 
 	public double getCost() {
 		return cost;
 	}
-	
 
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-	
 
 	public String getReceiveTime() {
 		return receiveTime;
 	}
-	
 
 	public void setReceiveTime(String receiveTime) {
 		this.receiveTime = receiveTime;
 	}
-	
 
 	public String getExpectTime() {
 		return expectTime;
 	}
-	
 
 	public void setExpectTime(String expectTime) {
 		this.expectTime = expectTime;
 	}
-	
 
 	public City getTargetPlace() {
 		return targetPlace;
 	}
-	
 
 	public void setTargetPlace(City targetPlace) {
 		this.targetPlace = targetPlace;
 	}
-	
 
 	public City getStartPlace() {
 		return startPlace;
 	}
-	
 
 	public void setStartPlace(City startPlace) {
 		this.startPlace = startPlace;
 	}
-	
-
-	public String getNumber() {
-		return number;
-	}
-	
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-	
 
 	public People getPushPeople() {
 		return pushPeople;
 	}
-	
 
 	public void setPushPeople(People pushPeople) {
 		this.pushPeople = pushPeople;
 	}
-	
 
 	public People getReceivePeople() {
 		return receivePeople;
 	}
-	
 
 	public void setReceivePeople(People receivePeople) {
 		this.receivePeople = receivePeople;
 	}
-	
 
-	public String getTime() {
-		return time;
-	}
-	
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-	
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 }

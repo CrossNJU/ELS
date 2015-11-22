@@ -40,7 +40,7 @@ public class Receipt_Trans {
 			GoodsPO po = goodsUT.findByID(vo.orders.get(i));
 			po.setCurrentLocate(trans.startCity);
 			po.setGoodsState(GoodsState.LITTLEDIE);
-			HistoryPO history = new HistoryPO(vo.time, trans.startCity);
+			HistoryPO history = new HistoryPO(vo.time, trans.startCity, trans.org, false);
 			po.setHistoryPO(history);
 			if(goodsUT.update(po)!=ResultMessage.SUCCESS) return ResultMessage.FAILED;
 		}
@@ -53,6 +53,6 @@ public class Receipt_Trans {
 				City.BEIJING, City.NANJING, 
 				new PersonnelPO("id", "cjj1", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "orgid"), 
 				new PersonnelPO("id", "cjj2", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "orgid")
-		, "transnumber");
+		, "transnumber", OrganizationType.BUSINESSHALL);
 	}
 }

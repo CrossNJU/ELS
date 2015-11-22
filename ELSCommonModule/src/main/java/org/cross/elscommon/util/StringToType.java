@@ -6,10 +6,12 @@ public class StringToType {
 		switch (state) {
 		case "完好":
 			return GoodsState.LIVE;
-		case "bad":
+		case "部分损坏":
 			return GoodsState.LITTLEDIE;
-		case "lost":
+		case "损坏":
 			return GoodsState.DIE;
+		case "遗失":
+			return GoodsState.MISSING;
 		default:
 			return null;
 		}
@@ -32,11 +34,11 @@ public class StringToType {
 	
 	public static StockType toGoodsType(String goodsType){
 		switch (goodsType) {
-		case "common":
+		case "标准快递仓库":
 			return StockType.COMMON;
-		case "fase":
+		case "特快仓库":
 			return StockType.Fast;
-		case "economical":
+		case "经济快递仓库":
 			return StockType.ECONOMICAL;
 		default:
 			return null;
@@ -51,6 +53,28 @@ public class StringToType {
 			return VehicleType.PLANE;
 		case "火车":
 			return VehicleType.TRAIN;
+		default:
+			return null;
+		}
+	}
+	
+	public static OrganizationType toOrg(String org){
+		switch (org) {
+		case "营业厅":
+			return OrganizationType.BUSINESSHALL;
+		case "中转中心":
+			return OrganizationType.TRANSITCENTER;
+		default:
+			return null;
+		}
+	}
+	
+	public static StockOperationType toStockOperation(String stockop){
+		switch (stockop) {
+		case "出库":	
+			return StockOperationType.STOCKOUT;
+		case "入库":
+			return StockOperationType.STOCKIN;
 		default:
 			return null;
 		}

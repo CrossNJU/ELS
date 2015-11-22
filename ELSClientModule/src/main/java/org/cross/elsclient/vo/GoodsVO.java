@@ -7,9 +7,9 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
-import org.cross.elscommon.po.HistoryPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.GoodsState;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.StockType;
 
 public class GoodsVO {
@@ -17,15 +17,21 @@ public class GoodsVO {
 	 * 快件类型
 	 */
 	public StockType goodsType;
-	/**
-	 * 订单
-	 */
-	public String orderNumber;
 	
 	/**
-	 * 当前位置
+	 * 快件编号
 	 */
-	public City currentLocate;
+	public String number;
+	
+	/**
+	 * 当前位置,城市
+	 */
+	public City placeCity;
+	
+	/**
+	 * 当前位置,机构
+	 */
+	public OrganizationType placeOrg;
 	
 	/**
 	 * 状态
@@ -35,30 +41,36 @@ public class GoodsVO {
 	/**
 	 * 实际重量
 	 */
-	public int weightOfGoods;
+	public int weight;
 	
 	/**
 	 * 体积
 	 */
-	public int volumeOfGoods;
+	public int volume;
 	
 	/**
 	 * 历史轨迹
 	 */
-	public ArrayList<HistoryVO> historyVO;
+	public ArrayList<HistoryVO> history;
+	
+	/**
+	 * 订单编号
+	 */
+	public String orderNum;
 	
 	/**
 	 * 构造方法
 	 * 
 	 */
-	public GoodsVO(int weight,int volum,City currentLocate,StockType goodsType){
-		this.weightOfGoods = weight;
-		this.volumeOfGoods = volum;
-		this.currentLocate = currentLocate;
+	public GoodsVO(String number,StockType goodsType, City city, OrganizationType org, int weight, int volume){
+		this.weight = weight;
+		this.volume = volume;
+		this.placeCity = city;
+		this.placeOrg = org;
 		this.goodsType = goodsType;
 		
 		this.state = GoodsState.LIVE;
-		this.historyVO = new ArrayList<HistoryVO>();
+		this.history = new ArrayList<HistoryVO>();
 	}
 
 }

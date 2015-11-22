@@ -7,74 +7,73 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
+import org.cross.elscommon.po.StockAreaPO;
+import org.cross.elscommon.po.StockOperationPO;
+
 public class StockVO {
 	/**
 	 * 仓库编号
 	 */
-	public String stockIdentifier;
-	
+	public String number;
+
 	/**
-	 * 仓库中的不同类型仓库
+	 * 仓库中的不同类型仓库(不同区)
 	 */
-	public ArrayList<StockAreaVO> specialStockPOs;
-	
+	public ArrayList<StockAreaPO> stockAreas;
+
 	/**
 	 * 仓库操作
 	 */
-	public ArrayList<StockOperationVO> stockOperations;
-	
+	public ArrayList<StockOperationPO> stockOPs;
+
 	/**
 	 * 仓库总间数
 	 */
-	public int numOfBooths;
-	
+	public int totalAreas;
+
 	/**
 	 * 仓库已用间数
 	 */
-	public int usedBooths;
-	
+	public int usedAreas;
+
 	/**
 	 * 出库数量
 	 */
-	public int numOut;
-	
+	public int outNum;
+
 	/**
 	 * 入库数量
 	 */
-	public int numIn;
-	
+	public int inNum;
+
 	/**
 	 * 出库金额
 	 */
-	public int moneyOut;
-	
+	public double outMoney;
+
 	/**
 	 * 入库金额
 	 */
-	public int moneyIn;
-	
+	public double inMoney;
+
 	/**
 	 * 库存数量
 	 */
 	public int numInStock;
 
-	
-	/**
-	 * 构造方法
-	 * @param numOfBooth
-	 */
-	
-	public StockVO(String stockID,int numOfBooth){
-		this.stockIdentifier = stockID;
-		this.numOfBooths = numOfBooth;
-		
-		this.specialStockPOs = new ArrayList<StockAreaVO>();
-		this.stockOperations = new ArrayList<StockOperationVO>();
-		this.usedBooths = 0;
-		this.numOut = 0;
-		this.numIn = 0;
-		this.moneyOut = 0;
-		this.moneyIn = 0;
+	public StockVO(String number, int totalAreas) {
+		super();
+		this.number = number;
+		this.totalAreas = totalAreas;
+
+		this.stockAreas = new ArrayList<StockAreaPO>();
+		this.stockOPs = new ArrayList<StockOperationPO>();
+		this.usedAreas = 0;
+		this.outNum = 0;
+		this.inNum = 0;
+		this.outMoney = 0;
+		this.inMoney = 0;
 		this.numInStock = 0;
 	}
+
 }

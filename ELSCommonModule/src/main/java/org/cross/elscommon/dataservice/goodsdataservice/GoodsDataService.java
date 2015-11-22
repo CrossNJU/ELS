@@ -12,21 +12,28 @@ import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.GoodsState;
+import org.cross.elscommon.util.OrganizationType;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface GoodsDataService extends Remote{
 	
-	public void updateLocation(String id, City nowLocation) throws RemoteException;
+	public ResultMessage updateLocation(String number, City nowLocation, OrganizationType org) throws RemoteException;
 	
-	public void updateState(String id, GoodsState state) throws RemoteException;
+	public ResultMessage updateState(String number, GoodsState state) throws RemoteException;
 	
-	public void updateTrans(String id, int transNum) throws RemoteException;
+	//create order first, double reflect
+	public ResultMessage addToOrder(String number, String orderNum) throws RemoteException;
 	
-	public void updateStock(String id, int stockAreaNum) throws RemoteException;
+	public ResultMessage addToTrans(String number, String transNum) throws RemoteException;
 	
-	public void updateHistory(String id , HistoryPO history) throws RemoteException;
+	public ResultMessage addToArri(String number, String arriNum) throws RemoteException;
 	
-	public void insert(GoodsPO goods) throws RemoteException;
+	public ResultMessage addToStock(String number, String stockAreaNum) throws RemoteException;
 	
-	public GoodsPO show(String id)throws RemoteException;
+	public ResultMessage addHistory(String number , HistoryPO history) throws RemoteException;
+	
+	public ResultMessage insertToDB(GoodsPO goods) throws RemoteException;
+	
+	public GoodsPO findByNum(String number)throws RemoteException;
 
 }

@@ -5,156 +5,153 @@
  */
 package org.cross.elscommon.po;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StockPO implements Serializable{
-	
-	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-	
+public class StockPO {
+
 	/**
 	 * 仓库编号
 	 */
-	private String stockIdentifier;
-	
+	private String number;
+
 	/**
 	 * 仓库中的不同类型仓库(不同区)
 	 */
-	private ArrayList<StockAreaPO> specialStockPOs;
-	
+	private ArrayList<StockAreaPO> stockAreas;
+
 	/**
 	 * 仓库操作
 	 */
-	private ArrayList<StockOperationPO> stockOperations;
-	
+	private ArrayList<StockOperationPO> stockOPs;
+
 	/**
 	 * 仓库总间数
 	 */
-	private int numOfArea;
-	
+	private int totalAreas;
+
 	/**
 	 * 仓库已用间数
 	 */
-	private int usedArea;
-	
+	private int usedAreas;
+
 	/**
 	 * 出库数量
 	 */
-	private int numOut;
-	
+	private int outNum;
+
 	/**
 	 * 入库数量
 	 */
-	private int numIn;
-	
+	private int inNum;
+
 	/**
 	 * 出库金额
 	 */
-	private int moneyOut;
-	
+	private double outMoney;
+
 	/**
 	 * 入库金额
 	 */
-	private int moneyIn;
-	
+	private double inMoney;
+
 	/**
 	 * 库存数量
 	 */
 	private int numInStock;
 
-	
-	/**
-	 * 构造函数
-	 * 
-	 */
-	public StockPO(String id,int numOfArea){
-		this.stockIdentifier = id;
-		this.numOfArea = numOfArea;
-		
-		this.specialStockPOs = new ArrayList<StockAreaPO>();
-		this.stockOperations = new ArrayList<StockOperationPO>();
-		this.usedArea = 0;
-		this.numOut = 0;
-		this.numIn = 0;
-		this.moneyOut = 0;
-		this.moneyIn = 0;
+	public StockPO(String number, int totalAreas) {
+		super();
+		this.number = number;
+		this.totalAreas = totalAreas;
+
+		this.stockAreas = new ArrayList<StockAreaPO>();
+		this.stockOPs = new ArrayList<StockOperationPO>();
+		this.usedAreas = 0;
+		this.outNum = 0;
+		this.inNum = 0;
+		this.outMoney = 0;
+		this.inMoney = 0;
 		this.numInStock = 0;
 	}
-	public String getStockID(){
-		return stockIdentifier;
+
+	public String getNumber() {
+		return number;
 	}
-	public void setStockID(String stockIdentifier){
-		this.stockIdentifier = stockIdentifier;
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
-	
-	public ArrayList<StockAreaPO> getSpecialStockPOs(){
-		return specialStockPOs;
+
+	public ArrayList<StockAreaPO> getStockAreas() {
+		return stockAreas;
 	}
-	public void setSpecialStockPOs(ArrayList<StockAreaPO> specialStockPO){
-		this.specialStockPOs = specialStockPO;
+
+	public void setStockAreas(ArrayList<StockAreaPO> stockAreas) {
+		this.stockAreas = stockAreas;
 	}
-	
-	public int getNumOfArea(){
-		return numOfArea;
+
+	public ArrayList<StockOperationPO> getStockOPs() {
+		return stockOPs;
 	}
-	public void setNumOfArea(int numOfArea){
-		this.numOfArea = numOfArea;
+
+	public void setStockOPs(ArrayList<StockOperationPO> stockOPs) {
+		this.stockOPs = stockOPs;
 	}
-	
-	public int getUsedArea(){
-		return usedArea;
+
+	public int getTotalAreas() {
+		return totalAreas;
 	}
-	public void setUsedArea(int usedArea){
-		this.usedArea = usedArea;
+
+	public void setTotalAreas(int totalAreas) {
+		this.totalAreas = totalAreas;
 	}
-	
-	public int getNumOut(){
-		return numOut;
+
+	public int getUsedAreas() {
+		return usedAreas;
 	}
-	public void setNumOut(int numOut){
-		this.numOut = numOut;
+
+	public void setUsedAreas(int usedAreas) {
+		this.usedAreas = usedAreas;
 	}
-	
-	public int getNumIn(){
-		return numIn;
+
+	public int getOutNum() {
+		return outNum;
 	}
-	public void setNumIn(int numIn){
-		this.numIn = numIn;
+
+	public void setOutNum(int outNum) {
+		this.outNum = outNum;
 	}
-	
-	public int getMoneyOut(){
-		return moneyOut;
+
+	public int getInNum() {
+		return inNum;
 	}
-	public void setMoneyOut(int moneyOut){
-		this.moneyOut = moneyOut;
+
+	public void setInNum(int inNum) {
+		this.inNum = inNum;
 	}
-	
-	public int getMoneyIn(){
-		return moneyIn;
+
+	public double getOutMoney() {
+		return outMoney;
 	}
-	public void setMoneyIn(int moneyIn){
-		this.moneyIn = moneyIn;
+
+	public void setOutMoney(double outMoney) {
+		this.outMoney = outMoney;
 	}
-	
-	public int getNumInStock(){
+
+	public double getInMoney() {
+		return inMoney;
+	}
+
+	public void setInMoney(double inMoney) {
+		this.inMoney = inMoney;
+	}
+
+	public int getNumInStock() {
 		return numInStock;
 	}
-	public void setNumInStock(int numInStock){
+
+	public void setNumInStock(int numInStock) {
 		this.numInStock = numInStock;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	public ArrayList<StockOperationPO> getStockOperations() {
-		return stockOperations;
-	}
-	
-	public void setStockOperations(ArrayList<StockOperationPO> stockOperations) {
-		this.stockOperations = stockOperations;
-	}
-	
+
 }

@@ -15,14 +15,14 @@ public class StockOperationVO {
 	public String time;
 	
 	/**
-	 * 类型
+	 * 类型（出入库）
 	 */
 	public StockOperationType type;
 	
 	/**
-	 * 快件
+	 * 快件编号
 	 */
-	public GoodsVO good;
+	public String goodNum;
 	
 	/**
 	 * 金额
@@ -30,15 +30,15 @@ public class StockOperationVO {
 	public double money;
 	
 	/**
-	 * 存放位置
+	 * 存放小间类型
 	 */
 	public StockType place;
 
-	public StockOperationVO(String time, StockOperationType type, GoodsVO good, double money, StockType place) {
+	public StockOperationVO(String time, StockOperationType type, String goodNum, double money, StockType place) {
 		super();
 		this.time = time;
 		this.type = type;
-		this.good = good;
+		this.goodNum = goodNum;
 		this.money = money;
 		this.place = place;
 	}

@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.HistoryPO;
-import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
@@ -13,25 +12,22 @@ import org.cross.elsserver.dataimpl.tools.HistoryTool;
 
 public class HistoryDataImpl implements HistoryTool {
 
-	public MySQL mysql;
+	MySQL mysql;
 
 	public HistoryDataImpl() {
 		mysql = new MySQL();
 	}
 
 	@Override
-	public ArrayList<HistoryPO> findByGoodsID(int id) {
-		// TODO Auto-generated method stub
+	public ArrayList<HistoryPO> findByGoodsNum(String number) {
 		ArrayList<HistoryPO> list = new ArrayList<HistoryPO>();
-		String search = "select * from `history` where `belongGoods` = " + id;
-		ResultSet rs = mysql.query(search);
-
+		String sql = "select * from `history` where `goodsNum` = '" + number + "'";
+		ResultSet rs = mysql.query(sql);
 		try {
 			while (rs.next()) {
-				System.out.println("in");
-				HistoryPO historyPO = new HistoryPO(rs.getString("time"), StringToType.toCity(rs.getString("place")));
-				System.out.println(rs.getString("place"));
-				list.add(historyPO);
+				HistoryPO po = new HistoryPO(rs.getString("time"), StringToType.toCity(rs.getString("placeCity")),
+						StringToType.toOrg(rs.getString("placeOrg")), rs.getBoolean("isArrive"));
+				list.add(po);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -41,19 +37,16 @@ public class HistoryDataImpl implements HistoryTool {
 	}
 
 	@Override
-	public ResultMessage insert(HistoryPO po, int goodsID) {
-		// TODO Auto-generated method stub
-		String sql = "insert into `history`(`belongGoods`, `time`, `place`) VALUES(" + goodsID
-				+ ",'" + po.getTime() + "','"+po.getPlace().toString()+"')";
-		mysql.execute(sql);
-		return ResultMessage.SUCCESS;
+	public ResultMessage insert(HistoryPO po, String goodsNum) {
+		String sql = "insert ignore into `history`(`time`,`placeCity`,`placeOrg`,`isArrive`,`goodsNum`) values ('"
+				+po.getTime()+"','"
+				+po.getPlaceCity().toString()+"','"
+				+po.getPlaceOrg().toString()+"',"
+				+po.isArrive()+",'"
+				+goodsNum+"')";
+		if (mysql.execute(sql)) {
+			return ResultMessage.SUCCESS;
+		}else return ResultMessage.FAILED;
 	}
-
-//	public static void main(String[] args) {
-//		HistoryPO po = new HistoryPO("2015-10-25 01:10:10", City.BEIJING);
-//		HistoryDataImpl impl = new HistoryDataImpl();
-//		po = impl.findByGoodsID(1000003).get(0);
-//		System.out.println(po.getPlace().toString());
-//	}
 
 }

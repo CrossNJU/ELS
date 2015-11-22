@@ -4,11 +4,13 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
+import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.po.GoodsPO;
+import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
@@ -17,6 +19,7 @@ import org.cross.elscommon.util.StockOperationType;
 import org.cross.elscommon.util.StockState;
 import org.cross.elscommon.util.StockType;
 import org.cross.elsclient.vo.GoodsVO;
+import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
@@ -26,10 +29,12 @@ public class StockBLImpl implements StockBLService,StockInfo{
 	public StockPO stockpo;
 	public StockDataService stockData;
 	GoodsInfo goodsInfo;
+	ReceiptInfo receiptInfo;
 	
-	public StockBLImpl(StockDataService stockdata, GoodsInfo goodsInfo){
+	public StockBLImpl(StockDataService stockdata, GoodsInfo goodsInfo, ReceiptInfo receiptInfo){
 		this.stockData = stockdata;
 		this.goodsInfo = goodsInfo;
+		this.receiptInfo = receiptInfo;
 	}
 	
 	@Override
@@ -105,9 +110,11 @@ public class StockBLImpl implements StockBLService,StockInfo{
 		// TODO 报警没写  
 		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
 		GoodsPO goodsPO = goodsInfo.toGoodsPO(goodsVO);
-		if (goodsPO == null) {
-			return ResultMessage.FAILED;
-		}
+		
+		Receipt_OrderPO order = (Receipt_OrderPO)receiptInfo.toPO((Receipt_OrderVO)receiptInfo.findByID(goodsVO.orderNumber));
+		
+		StockOperationPO po = new StockOperationPO(time, StockOperationType.STOCKIN, goodsPO, order.getCost(), goodsPO.getGoodsType());
+		
 		stockpo = stockData.findStock(stockID);
 		if (checkGoods(goodsID, stockID) == ResultMessage.SUCCESS) {
 			return ResultMessage.FAILED;
@@ -125,7 +132,7 @@ public class StockBLImpl implements StockBLService,StockInfo{
 					goodsList.add(goodsPO);
 					stockpo.getSpecialStockPOs().get(i).setGoodList(goodsList);
 					stockpo.getSpecialStockPOs().get(i).setUsedCapacity(used + 1);
-					stockData.update(stockpo);
+					stockData.updateInstock(stockpo.getStockID(),stockpo.getSpecialStockPOs().get(i).getNumber(),po);
 					return ResultMessage.SUCCESS;
 				}
 			}
@@ -228,7 +235,7 @@ public class StockBLImpl implements StockBLService,StockInfo{
 
 	@Override
 	public StockAreaVO toStockAreaVO(StockAreaPO po) {
-		StockAreaVO vo = new StockAreaVO(po.getStockType(), po.getTotalCapacity());
+		StockAreaVO vo = new StockAreaVO(po.getStockType(), po.getTotalCapacity(), po.getNumber());
 		vo.usedCapacity = po.getUsedCapacity();
 		vo.goodsList = getGoodsVOs(po.getGoodsList());
 		return vo;

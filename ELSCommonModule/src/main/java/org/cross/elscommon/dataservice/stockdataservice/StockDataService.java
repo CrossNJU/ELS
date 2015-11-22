@@ -17,14 +17,19 @@ public interface StockDataService extends Remote{
 	
 	public ResultMessage insert(StockPO po) throws RemoteException;
 	
-	public ResultMessage delete(String id) throws RemoteException;
+	public ResultMessage delete(String number) throws RemoteException;
 	
-	public ResultMessage update(StockPO po) throws RemoteException;
+	public ResultMessage updateInstock(String stockNum, String stockAreaNum, StockOperationPO op) throws RemoteException;
 	
-	public ArrayList<StockOperationPO> show(String startTime, String endTime) throws RemoteException;
+	public ResultMessage updateOutstock(String stockNum, String stockAreaNum, StockOperationPO op) throws RemoteException;
 	
-	public StockPO findStock(String ID) throws RemoteException;
+	//don't understand
+	public ResultMessage updateAdjust(String stockNum) throws RemoteException;
 	
-	public boolean find(String id) throws RemoteException;
+	//show all
+	public ArrayList<StockOperationPO> showStockOps(String stockNum, String startTime, String endTime) throws RemoteException;
+	
+	public StockPO findStockByNum(String number) throws RemoteException;
+	
 }
 

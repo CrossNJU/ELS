@@ -4,6 +4,7 @@ import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StockType;
 
@@ -21,7 +22,7 @@ public class Receipt_Order {
 		GoodsPO po = goodUT.toPO(order.goods);
 		if(po == null) return ResultMessage.FAILED;
 		
-		HistoryPO history = new HistoryPO(order.time, order.startPlace);
+		HistoryPO history = new HistoryPO(order.time, order.startPlace,OrganizationType.BUSINESSHALL,true);
 		po.setHistoryPO(history);
 		
 		return goodUT.add(po);
@@ -64,7 +65,7 @@ public class Receipt_Order {
 	public ResultMessage update(Receipt_OrderVO vo){
 		Receipt_OrderVO order = vo;
 		
-		HistoryPO history = new HistoryPO(order.expectTime, order.targetPlace);
+		HistoryPO history = new HistoryPO(order.expectTime, order.targetPlace,null,false);
 		
 		MockGoods goodsUT = new MockGoods();
 		GoodsPO po = goodsUT.toPO(order.goods);

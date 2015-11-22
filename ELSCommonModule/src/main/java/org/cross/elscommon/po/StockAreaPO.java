@@ -5,79 +5,84 @@
  */
 package org.cross.elscommon.po;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.StockType;
 
-public class StockAreaPO implements Serializable{
+public class StockAreaPO {
 	/**
-	 * 
+	 * 仓库小间编号
 	 */
-	private static final long serialVersionUID = 1L;
+	private String number;
 
 	/**
 	 * 特定仓库类型
 	 */
 	private StockType stockType;
-	
+
 	/**
-	 * 特定仓库总容量(可存放快件数)
+	 * 特定仓库总容量
 	 */
 	private int totalCapacity;
-	
+
 	/**
-	 * 特定仓库已用容量（已放快件数）
+	 * 特定仓库已用容量
 	 */
 	private int usedCapacity;
-	
+
 	/**
 	 * 特定仓库中存放的快递
 	 */
-	private ArrayList<GoodsPO> goodsList;
+	private ArrayList<GoodsPO> goodslist;
 
-	/**
-	 * 构造方法
-	 * @param stockType
-	 * @param totalCapacity
-	 */
-	public StockAreaPO(StockType stockType,int totalCapacity){
+	public StockAreaPO(String number, StockType stockType, int totalCapacity) {
+		super();
+		this.number = number;
 		this.stockType = stockType;
 		this.totalCapacity = totalCapacity;
-		
-		usedCapacity = 0;
-		goodsList = new ArrayList<GoodsPO>();
+
+		this.usedCapacity = 0;
+		this.goodslist = new ArrayList<GoodsPO>();
 	}
-	
-	public StockType getStockType(){
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public StockType getStockType() {
 		return stockType;
 	}
-	public void setStockType(StockType stockType){
+
+	public void setStockType(StockType stockType) {
 		this.stockType = stockType;
 	}
-	
-	public int getTotalCapacity(){
+
+	public int getTotalCapacity() {
 		return totalCapacity;
 	}
-	public void setTotalCapacity(int totalCapacity){
+
+	public void setTotalCapacity(int totalCapacity) {
 		this.totalCapacity = totalCapacity;
 	}
-	
-	public int getUsedCapacity(){
+
+	public int getUsedCapacity() {
 		return usedCapacity;
 	}
-	public void setUsedCapacity(int usedCapacity){
+
+	public void setUsedCapacity(int usedCapacity) {
 		this.usedCapacity = usedCapacity;
 	}
-	
-	public ArrayList<GoodsPO> getGoodsList(){
-		return goodsList;
-	}
-	public void setGoodList(ArrayList<GoodsPO> po){
-		this.goodsList = po;
+
+	public ArrayList<GoodsPO> getGoodslist() {
+		return goodslist;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setGoodslist(ArrayList<GoodsPO> goodslist) {
+		this.goodslist = goodslist;
 	}
+
 }

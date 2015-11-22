@@ -5,81 +5,83 @@
  */
 package org.cross.elscommon.po;
 
-import java.io.Serializable;
-
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 
 
-public class HistoryPO implements Serializable{
-	
+public class HistoryPO{
 	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 到达某地时间
+	 * 到达某地/从某地发出的时间
 	 */
 	private String time;
 	
 	/**
-	 * 地点
+	 * 地点,城市
 	 */
-	private City city;
+	private City placeCity;
 	
 	/**
-	 * 机构
+	 * 地点,机构
 	 */
-	private OrganizationType organization;
+	private OrganizationType placeOrg;
 	
 	/**
 	 * 是到达或发出
 	 */
 	private boolean isArrive;
-	
-	public HistoryPO(String time, City city,OrganizationType organization,boolean isArrive){
+
+	/**
+	 * 构造方法
+	 * @param time
+	 * @param placeCity
+	 * @param placeOrg
+	 * @param isArrive
+	 */
+	public HistoryPO(String time, City placeCity, OrganizationType placeOrg, boolean isArrive) {
+		super();
 		this.time = time;
-		this.city = city;
-		this.organization = organization;
+		this.placeCity = placeCity;
+		this.placeOrg = placeOrg;
 		this.isArrive = isArrive;
 	}
-	
-	public OrganizationType getOrganization() {
-		return organization;
-	}
 
-	public void setOrganization(OrganizationType organization) {
-		this.organization = organization;
+	public String getTime() {
+		return time;
 	}
+	
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+
+	public City getPlaceCity() {
+		return placeCity;
+	}
+	
+
+	public void setPlaceCity(City placeCity) {
+		this.placeCity = placeCity;
+	}
+	
+
+	public OrganizationType getPlaceOrg() {
+		return placeOrg;
+	}
+	
+
+	public void setPlaceOrg(OrganizationType placeOrg) {
+		this.placeOrg = placeOrg;
+	}
+	
 
 	public boolean isArrive() {
 		return isArrive;
 	}
+	
 
 	public void setArrive(boolean isArrive) {
 		this.isArrive = isArrive;
-	}
-
-	public void setTime(String time){
-		this.time = time;
-	}
-	
-	public String getTime(){
-		return this.time;
-	}
-	
-	public void setCity(City city){
-		this.city = city;
-	}
-	
-	public City getCity(){
-		return this.city;
-	}
-	
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	
 }

@@ -8,49 +8,38 @@ package org.cross.elsclient.vo;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ReceiptType;
 
-public class Receipt_ArriveVO extends ReceiptVO{
-	
-	/**
-	 * 到达日期
-	 */
-	public String time;
-	
+public class Receipt_ArriveVO extends ReceiptVO {
+
 	/**
 	 * 出发地
 	 */
-	public City city;
-	
-	/**
-	 * 到达单编号
-	 */
-	public String number;
-	
+	public City startPlace;
+
 	/**
 	 * 转运单编号
 	 */
-	public String transNumber;
-	
+	public String transNum;
+
 	/**
 	 * 货物信息
 	 */
-	public ArrayList<GoodsVO> goods;
-	
+	public ArrayList<String> orders;
+
 	/**
-	 * 构造方法
-	 * @param time
-	 * @param city
-	 * @param number
-	 * @param transNumber 
+	 * 到达的机构
 	 */
-	public Receipt_ArriveVO(String time, City city, String number, String transNumber){
-		super(number, ReceiptType.ARRIVE, time);
-		this.time = time;
-		this.city = city;
-		this.number = number;
-		this.transNumber = transNumber;
-		
-		this.goods = new ArrayList<GoodsVO>();
+	public OrganizationType arriveOrg;
+
+	public Receipt_ArriveVO(String number, ReceiptType type, String time, City startPlace, String transNum,
+			ArrayList<String> orders, OrganizationType arriveOrg) {
+		super(number, type, time);
+		this.startPlace = startPlace;
+		this.transNum = transNum;
+		this.orders = orders;
+		this.arriveOrg = arriveOrg;
 	}
+
 }

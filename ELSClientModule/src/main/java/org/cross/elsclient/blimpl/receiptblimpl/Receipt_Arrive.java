@@ -28,7 +28,7 @@ public class Receipt_Arrive {
 			GoodsPO po = goodsUT.toPO(vo.goods.get(i));
 			po.setCurrentLocate(vo.city);
 			po.setGoodsState(GoodsState.DIE);
-			HistoryPO history = new HistoryPO(vo.time, vo.city);
+			HistoryPO history = new HistoryPO(vo.time, vo.city,vo.org,true);
 			po.setHistoryPO(history);
 			if(goodsUT.update(po) == ResultMessage.FAILED) return ResultMessage.FAILED;
 		}
