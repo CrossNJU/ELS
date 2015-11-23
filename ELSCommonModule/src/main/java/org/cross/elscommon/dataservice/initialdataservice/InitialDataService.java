@@ -9,10 +9,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.InitialPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface InitialDataService {
 
-	public void insert(InitialPO po) throws RemoteException;
+	public ResultMessage insert(InitialPO po) throws RemoteException;
 
 	public ArrayList<InitialPO> show() throws RemoteException;
 

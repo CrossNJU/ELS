@@ -11,29 +11,31 @@ import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 
-public class OrganizationBLImpl implements OrganizationBLService,OrganizationInfo{
+public class OrganizationBLImpl implements OrganizationBLService{
 
 	public OrganizationDataService_Stub organizationData;
+	public OrganizationInfo organizationInfo;
 	
-	public OrganizationBLImpl(OrganizationDataService_Stub organizationData){
+	public OrganizationBLImpl(OrganizationDataService_Stub organizationData,OrganizationInfo organizationInfo){
 		this.organizationData = organizationData;
+		this.organizationInfo = organizationInfo;
 	}
 	
 	@Override
 	public ResultMessage add(OrganizationVO vo) {
-		OrganizationPO po = toOrganizationPO(vo);
+		OrganizationPO po = organizationInfo.toOrganizationPO(vo);
 		return organizationData.insert(po);
 	}
 
 	@Override
 	public ResultMessage delete(OrganizationVO vo) {
-		OrganizationPO po = toOrganizationPO(vo);
+		OrganizationPO po = organizationInfo.toOrganizationPO(vo);
 		return organizationData.delete(po);
 	}
 
 	@Override
 	public ResultMessage update(OrganizationVO vo) {
-		OrganizationPO po = toOrganizationPO(vo);
+		OrganizationPO po = organizationInfo.toOrganizationPO(vo);
 		return organizationData.update(po) ;
 	}
 
@@ -43,7 +45,7 @@ public class OrganizationBLImpl implements OrganizationBLService,OrganizationInf
 		ArrayList<OrganizationPO> pos = organizationData.show();
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toOrganizationVO(pos.get(i)));
+			vos.add(organizationInfo.toOrganizationVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -54,7 +56,7 @@ public class OrganizationBLImpl implements OrganizationBLService,OrganizationInf
 		ArrayList<OrganizationPO> pos = organizationData.findByCity(city);
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toOrganizationVO(pos.get(i)));
+			vos.add(organizationInfo.toOrganizationVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -65,7 +67,7 @@ public class OrganizationBLImpl implements OrganizationBLService,OrganizationInf
 		ArrayList<OrganizationPO> pos = organizationData.findByType(type);
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toOrganizationVO(pos.get(i)));
+			vos.add(organizationInfo.toOrganizationVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -76,7 +78,7 @@ public class OrganizationBLImpl implements OrganizationBLService,OrganizationInf
 		ArrayList<OrganizationPO> pos = organizationData.findById(id);
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toOrganizationVO(pos.get(i)));
+			vos.add(organizationInfo.toOrganizationVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -87,18 +89,4 @@ public class OrganizationBLImpl implements OrganizationBLService,OrganizationInf
 		
 		return distance;
 	}
-
-	@Override
-	public OrganizationVO toOrganizationVO(OrganizationPO po) {
-		OrganizationVO vo = new OrganizationVO(po.getCity(), po.getType(), po.getId());
-		return vo;
-	}
-
-	@Override
-	public OrganizationPO toOrganizationPO(OrganizationVO vo) {
-		OrganizationPO po = new OrganizationPO(vo.city, vo.type, vo.id);
-		return po;
-	}
-
-	
 }

@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.blservice.initialblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ResultMessage;
@@ -21,16 +22,18 @@ public interface InitialBLService {
 	 * 返回所有账本
 	 * 
 	 * @return 账本列表
+	 * @throws RemoteException 
 	 */
-	public ArrayList<InitialVO> show();
+	public ArrayList<InitialVO> show() throws RemoteException;
 
 	/**
 	 * 初始化建账
 	 * 
 	 * @param vo
 	 * @return 建账成功与否消息
+	 * @throws RemoteException 
 	 */
-	public ResultMessage addInitial(InitialVO vo);
+	public ResultMessage addInitial(InitialVO vo) throws RemoteException;
 
 	/**
 	 * 返回对应账本机构信息

@@ -12,36 +12,46 @@ import org.cross.elscommon.dataservice.accountdataservice.AccountDataService_Stu
 import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public class AccountBLImpl implements AccountBLService,AccountInfo{
+public class AccountBLImpl implements AccountBLService{
 
 	public AccountDataService_Stub accountData;
+	public AccountInfo accountInfo;
 	
-	public AccountBLImpl(AccountDataService_Stub accountData) {
+	public AccountBLImpl(AccountDataService_Stub accountData,AccountInfo accountInfo) {
 		this.accountData = accountData;
+		this.accountInfo = accountInfo;
 	}
 	
 	@Override
-	public ArrayList<AccountVO> find(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<AccountVO> find(String name) throws RemoteException {
+		ArrayList<AccountPO> accountPOs = accountData.find(name);
+		ArrayList<AccountVO> accountVOs = new ArrayList<AccountVO>();
+		if (accountPOs == null) {
+			return null;
+		}
+		int size = accountPOs.size();
+		for (int i = 0; i < size; i++) {
+			accountVOs.add(accountInfo.toAccountVO(accountPOs.get(i)));
+		}
+		return accountVOs;
 	}
 
 	@Override
 	public ResultMessage add(AccountVO vo) throws RemoteException {
-		AccountPO po = toAccountPO(vo);
+		AccountPO po = accountInfo.toAccountPO(vo);
 		return accountData.insert(po);
 	}
 
 	@Override
 	
 	public ResultMessage delete(AccountVO vo) throws RemoteException {
-		AccountPO po = toAccountPO(vo);
+		AccountPO po = accountInfo.toAccountPO(vo);
 		return accountData.delete(po);
 	}
 
 	@Override
 	public ResultMessage update(AccountVO vo) throws RemoteException {
-		AccountPO po = toAccountPO(vo);
+		AccountPO po = accountInfo.toAccountPO(vo);
 		return accountData.update(po);
 	}
 
@@ -51,21 +61,9 @@ public class AccountBLImpl implements AccountBLService,AccountInfo{
 		ArrayList<AccountPO> pos = accountData.show();
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toAccountVO(pos.get(i)));
+			vos.add(accountInfo.toAccountVO(pos.get(i)));
 		}
 		return vos;
-	}
-
-	@Override
-	public AccountVO toAccountVO(AccountPO po) {
-		AccountVO vo = new AccountVO(po.getName(), po.getAccount(), po.getBalance());
-		return vo;
-	}
-
-	@Override
-	public AccountPO toAccountPO(AccountVO vo) {
-		AccountPO po = new AccountPO(vo.name, vo.account, vo.balance);
-		return po;
 	}
 
 }

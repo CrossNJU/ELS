@@ -12,29 +12,31 @@ import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
 
-public class UserBLImpl implements UserBLService,UserInfo{
+public class UserBLImpl implements UserBLService{
 
 	public UserDataService_Stub userData;
+	UserInfo userInfo;
 	
-	public UserBLImpl(UserDataService_Stub userData){
+	public UserBLImpl(UserDataService_Stub userData,UserInfo userInfo){
 		this.userData = userData;
+		this.userInfo = userInfo;
 	}
 	
 	@Override
 	public ResultMessage add(UserVO vo) {
-		UserPO po = toUserPO(vo);
+		UserPO po = userInfo.toUserPO(vo);
 		return userData.insert(po);
 	}
 
 	@Override
 	public ResultMessage delete(UserVO vo) {
-		UserPO po = toUserPO(vo);
+		UserPO po = userInfo.toUserPO(vo);
 		return userData.delete(po);
 	}
 
 	@Override
 	public ResultMessage update(UserVO vo) {
-		UserPO po = toUserPO(vo);
+		UserPO po = userInfo.toUserPO(vo);
 		return userData.update(po);
 	}
 
@@ -44,7 +46,7 @@ public class UserBLImpl implements UserBLService,UserInfo{
 		ArrayList<UserPO> pos = userData.findByName(name);
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toUserVO(pos.get(i)));
+			vos.add(userInfo.toUserVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -55,7 +57,7 @@ public class UserBLImpl implements UserBLService,UserInfo{
 		ArrayList<UserPO> pos = userData.findByType(type);
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toUserVO(pos.get(i)));
+			vos.add(userInfo.toUserVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -66,7 +68,7 @@ public class UserBLImpl implements UserBLService,UserInfo{
 		ArrayList<UserPO> pos = userData.findById(id);
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toUserVO(pos.get(i)));
+			vos.add(userInfo.toUserVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -77,7 +79,7 @@ public class UserBLImpl implements UserBLService,UserInfo{
 		ArrayList<UserPO> pos = userData.show();
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toUserVO(pos.get(i)));
+			vos.add(userInfo.toUserVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -100,19 +102,4 @@ public class UserBLImpl implements UserBLService,UserInfo{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public UserVO toUserVO(UserPO po) {
-		UserVO vo = new UserVO(po.getPassword(), po.getName(), po.getType());
-		vo.id = po.getId();
-		return vo;
-	}
-
-	@Override
-	public UserPO toUserPO(UserVO vo) {
-		UserPO po = new UserPO(vo.password, vo.name, vo.type);
-		po.setId(vo.id);
-		return po;
-	}
-
 }

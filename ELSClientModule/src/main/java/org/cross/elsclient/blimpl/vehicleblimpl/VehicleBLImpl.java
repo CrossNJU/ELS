@@ -12,17 +12,19 @@ import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 
-public class VehicleBLImpl implements VehicleBLService,VehicleInfo{
+public class VehicleBLImpl implements VehicleBLService{
 
 	public VehicleDataService vehicleData;
+	public VehicleInfo vehicleInfo;
 	
-	public VehicleBLImpl(VehicleDataService vehicleData){
+	public VehicleBLImpl(VehicleDataService vehicleData,VehicleInfo vehicleInfo){
 		this.vehicleData = vehicleData;
+		this.vehicleInfo = vehicleInfo;
 	}
 	
 	@Override
 	public ResultMessage add(VehicleVO vo) throws RemoteException {
-		VehiclePO po = toVehiclePO(vo);
+		VehiclePO po = vehicleInfo.toVehiclePO(vo);
 		System.out.println(po.getNumber());
 		return vehicleData.insert(po);
 	}
@@ -35,7 +37,7 @@ public class VehicleBLImpl implements VehicleBLService,VehicleInfo{
 
 	@Override
 	public ResultMessage update(VehicleVO vo) throws RemoteException {
-		VehiclePO po = toVehiclePO(vo);
+		VehiclePO po = vehicleInfo.toVehiclePO(vo);
 		System.out.println(po.getNumber());
 		return vehicleData.update(po);
 	}
@@ -46,7 +48,7 @@ public class VehicleBLImpl implements VehicleBLService,VehicleInfo{
 		ArrayList<VehiclePO> pos = vehicleData.show();
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toVehicleVO(pos.get(i)));
+			vos.add(vehicleInfo.toVehicleVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -54,24 +56,10 @@ public class VehicleBLImpl implements VehicleBLService,VehicleInfo{
 	@Override
 	public ArrayList<VehicleVO> find(String id) throws RemoteException {
 		VehiclePO po = vehicleData.findByID(id);
-		VehicleVO vo = toVehicleVO(po);
+		VehicleVO vo = vehicleInfo.toVehicleVO(po);
 		ArrayList<VehicleVO> vos = new ArrayList<VehicleVO>();
 		vos.add(vo);
 		return vos;
-	}
-
-	@Override
-	public VehicleVO toVehicleVO(VehiclePO po) {
-		VehicleVO vo = new VehicleVO(po.getNumber(), po.getEngineNumber(), po.getApparatusNumber(), po.getBuyTime(), po.getLastTime(), po.getImage(), po.getType());
-		vo.inUse = po.isInUse();
-		return vo;
-	}
-
-	@Override
-	public VehiclePO toVehiclePO(VehicleVO vo) {
-		VehiclePO po = new VehiclePO(vo.number, vo.engineNumber, vo.apparatusNumber, vo.buyTime, vo.lastTime, vo.image, vo.type);
-		po.setInUse(vo.inUse);
-		return po;
 	}
 
 }

@@ -18,8 +18,9 @@ public interface AccountBLService {
 	 * 
 	 * @param name
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ArrayList<AccountVO> find(String name);
+	public ArrayList<AccountVO> find(String name) throws RemoteException;
 
 	/**
 	 * 增加账户
