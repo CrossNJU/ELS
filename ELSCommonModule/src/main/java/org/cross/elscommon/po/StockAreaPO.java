@@ -5,11 +5,15 @@
  */
 package org.cross.elscommon.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.StockType;
 
-public class StockAreaPO {
+public class StockAreaPO implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * 仓库小间编号
 	 */

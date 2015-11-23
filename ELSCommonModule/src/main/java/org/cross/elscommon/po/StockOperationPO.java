@@ -5,11 +5,15 @@
  */
 package org.cross.elscommon.po;
 
+import java.io.Serializable;
+
 import org.cross.elscommon.util.StockOperationType;
 import org.cross.elscommon.util.StockType;
 
-public class StockOperationPO{
-
+public class StockOperationPO implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * 时间
 	 */

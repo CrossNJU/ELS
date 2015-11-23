@@ -5,9 +5,12 @@
  */
 package org.cross.elscommon.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StockPO {
+public class StockPO implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 仓库编号

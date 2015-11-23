@@ -14,13 +14,15 @@ import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public class PersonnelBLImpl implements PersonnelBLService,PersonnelInfo{
+public class PersonnelBLImpl implements PersonnelBLService{
 	
 	public PersonnelDataService_Stub personnelData;
 	ReceiptInfo receiptInfo;
+	PersonnelInfo personnelInfo;
 	
-	public PersonnelBLImpl(PersonnelDataService_Stub personnelData,ReceiptInfo receiptInfo){
+	public PersonnelBLImpl(PersonnelDataService_Stub personnelData,PersonnelInfo personnelInfo,ReceiptInfo receiptInfo){
 		this.personnelData = personnelData;
+		this.personnelInfo = personnelInfo;
 		this.receiptInfo = receiptInfo;
 	}
 	
@@ -30,7 +32,7 @@ public class PersonnelBLImpl implements PersonnelBLService,PersonnelInfo{
 		ArrayList<PersonnelPO> pos = personnelData.findById(id);
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toPersonnelVO(pos.get(i)));
+			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
 		}
 		return vos;
 	}
@@ -41,26 +43,26 @@ public class PersonnelBLImpl implements PersonnelBLService,PersonnelInfo{
 		ArrayList<PersonnelPO> pos = personnelData.findByName(name);
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toPersonnelVO(pos.get(i)));
+			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
 		}
 		return vos;
 	}
 
 	@Override
 	public ResultMessage add(PersonnelVO vo) throws RemoteException {
-		PersonnelPO po = toPersonnelPO(vo);
+		PersonnelPO po = personnelInfo.toPersonnelPO(vo);
 		return personnelData.insert(po);
 	}
 
 	@Override
 	public ResultMessage delete(PersonnelVO vo) throws RemoteException {
-		PersonnelPO po = toPersonnelPO(vo);
+		PersonnelPO po = personnelInfo.toPersonnelPO(vo);
 		return personnelData.delete(po);
 	}
 
 	@Override
 	public ResultMessage update(PersonnelVO vo) throws RemoteException {
-		PersonnelPO po = toPersonnelPO(vo);
+		PersonnelPO po = personnelInfo.toPersonnelPO(vo);
 		return personnelData.update(po);
 	}
 
@@ -70,37 +72,9 @@ public class PersonnelBLImpl implements PersonnelBLService,PersonnelInfo{
 		ArrayList<PersonnelPO> pos = personnelData.show();
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(toPersonnelVO(pos.get(i)));
+			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
 		}
 		return vos;
-	}
-
-	@Override
-	public PersonnelVO toPersonnelVO(PersonnelPO po) {
-		PersonnelVO vo = new PersonnelVO(po.getId(),po.getName(),po.getPosition(), po.getOrganization(), po.getOrganizationID());
-		ArrayList<ReceiptVO> receiptVOs = new ArrayList<ReceiptVO>();
-		ArrayList<ReceiptPO> receiptPOs = po.getDealedReceipts();
-		int size = po.getDealedReceipts().size();
-		for (int i = 0; i < size; i++) {
-			receiptVOs.add(receiptInfo.toVO(receiptPOs.get(i)));
-		}
-		vo.payment = po.getPayment();
-		vo.dealedReceipts = receiptVOs;
-		return vo;
-	}
-
-	@Override
-	public PersonnelPO toPersonnelPO(PersonnelVO vo) {
-		PersonnelPO po = new PersonnelPO(vo.id, vo.name, vo.position, vo.organization, vo.organizationID);
-		ArrayList<ReceiptPO> receiptPOs = new ArrayList<ReceiptPO>();
-		ArrayList<ReceiptVO> receiptVOs = vo.dealedReceipts;
-		int size = receiptVOs.size();
-		for (int i = 0; i < size; i++) {
-			receiptPOs.add(receiptInfo.toPO(receiptVOs.get(i)));
-		}
-		po.setPayment(vo.payment);
-		po.setDealedReceipts(receiptPOs);
-		return po;
 	}
 
 }
