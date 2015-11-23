@@ -176,4 +176,19 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 		return list;
 	}
 
+	@Override
+	public String findStockAreaNum(String number) {
+		String sql = "select * from `goods` where `number`='"+number+"'";
+		ResultSet rs = mysql.query(sql);
+		try {
+			if (rs.next()) {
+				return rs.getString("StockAreaNum");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

@@ -200,4 +200,18 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		mysql.execute(sql);
 	}
 
+	@Override
+	public ResultMessage addToInstock(String stockAreaNum, String receipt) {
+		String sql ="update `stockArea` set `reStockInNum`='"+receipt+"' where `number`='"+stockAreaNum+"'";
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		return ResultMessage.FAILED;
+	}
+
+	@Override
+	public ResultMessage deleteFromInstock(String stockAreaNum) {
+		String sql ="update `stockArea` set `reStockInNum`=NULL where `number`='"+stockAreaNum+"'";
+		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
+		return ResultMessage.FAILED;
+	}
+
 }

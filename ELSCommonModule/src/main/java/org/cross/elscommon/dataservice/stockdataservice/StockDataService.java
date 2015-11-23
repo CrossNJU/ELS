@@ -31,5 +31,8 @@ public interface StockDataService extends Remote{
 	
 	public StockPO findStockByNum(String number) throws RemoteException;
 	
+	//更新入库单拥有仓库小间
+	public ResultMessage addToInstock(String stockAreaNum, String receipt);
+	public ResultMessage deleteFromInstock(String stockAreaNum);
 }
 

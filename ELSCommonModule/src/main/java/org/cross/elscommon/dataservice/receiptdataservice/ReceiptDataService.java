@@ -16,7 +16,7 @@ import org.cross.elscommon.util.ResultMessage;
 public interface ReceiptDataService extends Remote{
 	public ResultMessage insert(ReceiptPO po) throws RemoteException;
 	public ResultMessage delete(String number, ReceiptType type) throws RemoteException;
-	public ResultMessage updateCheck(String number, ReceiptType type) throws RemoteException;
+	public ResultMessage updateCheck(String number) throws RemoteException;
 	public ArrayList<ReceiptPO> show() throws RemoteException;
 	public ReceiptPO findByNum(String number) throws RemoteException; 
 	public ArrayList<ReceiptPO> findByTime(String startTime, String endTime) throws RemoteException;

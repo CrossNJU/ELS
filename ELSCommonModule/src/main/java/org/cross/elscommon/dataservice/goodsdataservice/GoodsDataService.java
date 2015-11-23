@@ -42,5 +42,7 @@ public interface GoodsDataService extends Remote{
 	public GoodsPO findByNum(String number)throws RemoteException;
 
 	public ArrayList<GoodsPO> findByStockAreaNum(String stockAreaNum)throws RemoteException;
+	
+	public String findStockAreaNum(String number);
 
 }
