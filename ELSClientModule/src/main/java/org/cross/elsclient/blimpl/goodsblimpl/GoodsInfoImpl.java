@@ -4,13 +4,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
-import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
-import org.cross.elscommon.util.GoodsState;
 import org.cross.elscommon.util.ResultMessage;
 
 public class GoodsInfoImpl implements GoodsInfo{
@@ -109,6 +107,36 @@ public class GoodsInfoImpl implements GoodsInfo{
 	public String findStockAreaNum(String goodsID) throws RemoteException {
 		String areaNum = goodsData.findStockAreaNum(goodsID);
 		return areaNum;
+	}
+
+	@Override
+	public ResultMessage addToOrder(String goodsNum, String orderNum) throws RemoteException {
+		return goodsData.addToOrder(goodsNum, orderNum);
+	}
+
+	@Override
+	public ResultMessage addToTrans(String goodsNum, String transNum) throws RemoteException {
+		return goodsData.addToTrans(goodsNum, transNum);
+	}
+
+	@Override
+	public ResultMessage addToArri(String goodsNum, String arriNum) throws RemoteException {
+		return goodsData.addToArri(goodsNum, arriNum);
+	}
+
+	@Override
+	public ResultMessage deleteFromOrder(String goodsNum) throws RemoteException {
+		return goodsData.deleteFromOrder(goodsNum);
+	}
+
+	@Override
+	public ResultMessage deleteFromTrans(String goodsNum) throws RemoteException {
+		return goodsData.deleteFromTrans(goodsNum);
+	}
+
+	@Override
+	public ResultMessage deleteFromArri(String goodsNum) throws RemoteException {
+		return goodsData.deleteFromArri(goodsNum);
 	}
 
 }

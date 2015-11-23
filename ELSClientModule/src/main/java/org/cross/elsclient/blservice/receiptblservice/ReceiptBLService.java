@@ -26,35 +26,40 @@ public interface ReceiptBLService {
 	 * 删除单据
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(ReceiptVO vo);
+	public ResultMessage delete(ReceiptVO vo) throws RemoteException;
 	
 	/**
 	 * 更新单据信息
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage update(ReceiptVO vo);
+	public ResultMessage update(ReceiptVO vo) throws RemoteException;
 	
 	/**
 	 * 显示所有单据信息
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ArrayList<ReceiptVO> show();
+	public ArrayList<ReceiptVO> show() throws RemoteException;
 	
 	/**
 	 * 根据单据编号查找
 	 * @param names
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ReceiptVO findByID(String names);
+	public ReceiptVO findByID(String names) throws RemoteException;
 	
 	/**
 	 * 审批单据
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage check(ReceiptVO vo);
+	public ResultMessage check(ReceiptVO vo) throws RemoteException;
 	
 	/**
 	 * 根据时间查找单据

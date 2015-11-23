@@ -65,7 +65,7 @@ public class StockInfoUI {
 		textArea.append("出库数量："+out+"  金额："+outmoney+"\n");
 	}
 	
-	public class returnAct implements ActionListener{
+	public class ceturnAct implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

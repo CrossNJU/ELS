@@ -155,4 +155,10 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		return null;
 	}
 
+	@Override
+	public ResultMessage update(ReceiptPO po) throws RemoteException {
+		if(delete(po.getNumber(), po.getType())==ResultMessage.FAILED) return ResultMessage.FAILED;
+		return insert(po);
+	}
+
 }
