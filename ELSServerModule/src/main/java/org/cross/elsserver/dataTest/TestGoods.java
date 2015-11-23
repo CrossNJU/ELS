@@ -2,6 +2,7 @@ package org.cross.elsserver.dataTest;
 
 import java.rmi.RemoteException;
 
+import org.cross.elscommon.po.GoodsPO;
 import org.cross.elsserver.dataimpl.goodsdataimpl.GoodsDataImpl;
 
 public class TestGoods {
@@ -19,10 +20,11 @@ public class TestGoods {
 //		impl.updateLocation("G001", City.SHANGHAI, OrganizationType.TRANSITCENTER);
 //		impl.updateState("G001", GoodsState.DIE);
 		
-//		GoodsPO testFind = impl.findByNum("G001");
+//		GoodsPO testFind = impl.findByNum("G002");
 //		System.out.println(testFind.getNumber());
+		impl.addToStock("G002", "S0002", "0000004");
 		
 //		impl.addToTrans("G002", "T001");
-		impl.addToStock("G003", "K001");
+//		impl.addToStock("G003", "K001");
 	}
 }

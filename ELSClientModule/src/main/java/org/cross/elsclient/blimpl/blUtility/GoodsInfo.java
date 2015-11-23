@@ -29,7 +29,7 @@ public interface GoodsInfo {
 	 * 把快件更新到stockArea中
 	 * @throws RemoteException 
 	 */
-	public ResultMessage updateToArea(String goodsID,String stockAreaNum) throws RemoteException;
+	public ResultMessage updateToArea(String goodsID,String stockNum,String stockAreaNum) throws RemoteException;
 	
 	/**
 	 * 从仓库中删除快件

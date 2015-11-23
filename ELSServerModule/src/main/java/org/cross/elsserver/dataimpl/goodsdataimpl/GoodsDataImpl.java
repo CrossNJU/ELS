@@ -81,7 +81,7 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 
 	@Override
 	public ResultMessage addToStock(String number,String stockNum, String stockAreaNum) throws RemoteException {
-		String sql = "update `goods` set `stockAreaNum`='" + stockAreaNum + "',set `stockNum`='"+stockNum+"' where `number`='" + number + "'";
+		String sql = "update `goods` set `stockNum`='" + stockNum + "', `stockAreaNum`='"+stockAreaNum+"' where `number`='" + number + "'";
 		if (mysql.execute(sql)) {
 			return ResultMessage.SUCCESS;
 		} else

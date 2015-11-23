@@ -100,17 +100,30 @@ public class StockBLImpl implements StockBLService{
 		}
 		StockOperationPO operationPO = new StockOperationPO(time, StockOperationType.STOCKIN, goodsID, 0, goodsVO.goodsType);
 		StockPO stockPO = stockData.findStockByNum(stockID);
+		if (stockPO == null) {
+			return ResultMessage.FAILED;
+		}
+		String stockAreaNum = goodsInfo.findStockAreaNum(goodsID);
+		if(stockAreaNum != null) 
+			return ResultMessage.FAILED;
+//		System.out.println(stockAreaNum + " kkkkk");
+//		System.out.println("in");
 		ArrayList<StockAreaPO> areaPOs = stockPO.getStockAreas();
 		int size = areaPOs.size();
+//		System.out.println(size);
 		for (int i = 0; i < size; i++) {
 			if (areaPOs.get(i).getStockType() == goodsVO.goodsType) {
 				if (areaPOs.get(i).getTotalCapacity() > areaPOs.get(i).getUsedCapacity()) {
-					ResultMessage res = stockData.updateInstock(stockID, areaPOs.get(i).getNumber(), operationPO);
-					ResultMessage res2 = goodsInfo.updateToArea(goodsID, areaPOs.get(i).getNumber());
-					if (res == ResultMessage.SUCCESS && res2 == ResultMessage.SUCCESS) {
-						return ResultMessage.SUCCESS;
-					}
-					return ResultMessage.FAILED;
+					stockData.updateInstock(stockID, areaPOs.get(i).getNumber(), operationPO);
+//					System.out.println(res.toString());
+					System.out.println(goodsID+" "+stockID+" "+areaPOs.get(i).getNumber());
+					goodsInfo.updateToArea(goodsID, stockID,areaPOs.get(i).getNumber());
+//					System.out.println(res2.toString());
+//					if (res == ResultMessage.SUCCESS && res2 == ResultMessage.SUCCESS) {
+//						return ResultMessage.SUCCESS;
+//					}
+//					return ResultMessage.FAILED;
+					return ResultMessage.SUCCESS;
 				}
 			}
 		}
@@ -119,9 +132,10 @@ public class StockBLImpl implements StockBLService{
 	@Override
 	public ResultMessage outStock(String goodsID, String stockID, String time)
 			throws RemoteException {
+		String stockAreaNum = goodsInfo.findStockAreaNum(goodsID);
+		if(stockAreaNum==null) return ResultMessage.FAILED;
 		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
-		StockOperationPO operationPO = new StockOperationPO(time, StockOperationType.STOCKIN, goodsID, 0, goodsVO.goodsType);
-		StockPO stockPO = stockData.findStockByNum(stockID);
+		StockOperationPO operationPO = new StockOperationPO(time, StockOperationType.STOCKOUT, goodsID, 0, goodsVO.goodsType);
 		ResultMessage res = stockData.updateOutstock(stockID, goodsInfo.findStockAreaNum(goodsID), operationPO);
 		ResultMessage res2 = goodsInfo.deleteFromStock(goodsID);
 		if (res == ResultMessage.SUCCESS && res2 == ResultMessage.SUCCESS) {

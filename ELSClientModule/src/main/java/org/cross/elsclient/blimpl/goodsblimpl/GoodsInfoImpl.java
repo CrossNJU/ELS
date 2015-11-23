@@ -76,6 +76,7 @@ public class GoodsInfoImpl implements GoodsInfo{
 
 	@Override
 	public GoodsVO searchGoods(String goodsID) throws RemoteException {
+		System.out.println(goodsID);
 		GoodsPO po = goodsData.findByNum(goodsID);
 		GoodsVO vo = toGoodsVO(po);
 		return vo;
@@ -94,8 +95,9 @@ public class GoodsInfoImpl implements GoodsInfo{
 	}
 
 	@Override
-	public ResultMessage updateToArea(String goodsID, String stockAreaNum) throws RemoteException {
-		return goodsData.addToStock(goodsID, stockAreaNum);
+	public ResultMessage updateToArea(String goodsID,String stockNum, String stockAreaNum) throws RemoteException {
+		System.out.println("in");
+		return goodsData.addToStock(goodsID, stockNum,stockAreaNum);
 	}
 
 	@Override

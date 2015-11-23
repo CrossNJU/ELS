@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
-import org.cross.elsclient.blimpl.goodsblimpl.GoodsBLImpl;
 import org.cross.elsclient.blimpl.goodsblimpl.GoodsInfoImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockInfoImpl;
@@ -24,31 +23,57 @@ public class StockBLTest {
 		GoodsInfo goodsInfo = new GoodsInfoImpl(dataFactoryService.getGoodsData());
 		StockInfo stockInfo = new StockInfoImpl(goodsInfo);
 		StockBLImpl stockBLImpl = new StockBLImpl(dataFactoryService.getStockData(), goodsInfo, stockInfo);
+		StockVO stockVO = new StockVO("S0002", 4);
+		stockVO.usedAreas = 4;
+		StockAreaVO area1 = new StockAreaVO("000001", StockType.COMMON, 100);
+		StockAreaVO area2 = new StockAreaVO("000002", StockType.COMMON, 100);
+		StockAreaVO area3 = new StockAreaVO("000003", StockType.ECONOMICAL, 100);
+		StockAreaVO area4 = new StockAreaVO("000004", StockType.Fast, 100);
+		stockVO.stockAreas.add(area1);
+		stockVO.stockAreas.add(area2);
+		stockVO.stockAreas.add(area3);
+		stockVO.stockAreas.add(area4);
 		
-//		System.out.println("=======测试库存盘点（生成库存快照）（showStockCheck）=======");
-		System.out.println("=======测试寻找仓库（findStock）=======");
-		StockVO stockVO1 = stockBLImpl.findStock("C0100001");
-		if (stockVO1 != null) {
-			System.out.println("已找到 " + stockVO1.number);
-		}else {
-			System.out.println("can not find it...");
-		}
-		System.out.println("=======测试库存查看（showStockInfo）=======");
-		ArrayList<StockOperationVO> stockOperationVOs = stockBLImpl.showStockInfo("C0100001", "2015/10/23 10:12:01", "2015/10/12 10:20:01");
-		for (int i = 0; i < stockOperationVOs.size(); i++) {
-			System.out.println(stockOperationVOs.get(i).time + " " + stockOperationVOs.get(i).type);
-		}
-		
+//		System.out.println("=======测试增加仓库（addStock）=======");
+//		ResultMessage addResult = stockBLImpl.addStock(stockVO);
+//		if (addResult == ResultMessage.SUCCESS) {
+//			System.out.println("增加 " + stockVO.number + " 成功");
+//		}else {
+//			System.out.println("增加失败");
+//		}
+////		System.out.println("=======测试删除仓库（addStock）=======");
+////		ResultMessage deleteMessage = stockBLImpl.deleteStock("S0002");
+////		if (deleteMessage == ResultMessage.SUCCESS) {
+////			System.out.println("删除成功");
+////		}else{
+////			System.out.println("删除失败");
+////		}
+////		System.out.println("=======测试库存盘点（生成库存快照）（showStockCheck）=======");
+//		System.out.println("=======测试寻找仓库（findStock）=======");
+//		StockVO stockVO1 = stockBLImpl.findStock("S0002");
+//		if (stockVO1 != null) {
+//			System.out.println("已找到 " + stockVO1.number);
+//		}else {
+//			System.out.println("can not find it...");
+//		}
+//		System.out.println("=======测试库存查看（showStockInfo）=======");
+//		ArrayList<StockOperationVO> stockOperationVOs = stockBLImpl.showStockInfo("C0100001", "2015/10/23 10:12:01", "2015/10/12 10:20:01");
+//		for (int i = 0; i < stockOperationVOs.size(); i++) {
+//			System.out.println(stockOperationVOs.get(i).time + " " + stockOperationVOs.get(i).type);
+//		}
+//		
 		System.out.println("=======测试快件入库（intoStock）=======");
-		ResultMessage intoStockMessage = stockBLImpl.intoStock("G001", "C0100001","2015-11-2 11:34:19");
+		ResultMessage intoStockMessage = stockBLImpl.intoStock("G002", "S0002","2015-11-2 11:34:19");
 		if (intoStockMessage == ResultMessage.SUCCESS) {
 			System.out.println("入库成功");
 		}else {
 			System.out.println("入库失败");
 		}
 		
+//		goodsInfo.updateToArea("G002", "S0002", "000004");
+		
 //		System.out.println("=======测试快件出库（outStock）=======");
-//		ResultMessage outStockMessage = stockBLImpl.outStock("R120151023000003", "S00002","2015-11-2 11:34:19");
+//		ResultMessage outStockMessage = stockBLImpl.outStock("G002", "S0002","2015-11-2 11:34:19");
 //		if (outStockMessage == ResultMessage.SUCCESS) {
 //			System.out.println("出库成功");
 //		}else {
