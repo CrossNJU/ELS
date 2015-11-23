@@ -6,5 +6,4 @@ import org.cross.elscommon.po.ReceiptPO;
 public interface ReceiptInfo {
 	public ReceiptVO toVO(ReceiptPO po);
 	public ReceiptPO toPO(ReceiptVO vo);
-	public ReceiptVO findByID(String ID);
 }

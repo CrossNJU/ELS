@@ -80,8 +80,8 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	}
 
 	@Override
-	public ResultMessage addToStock(String number, String stockAreaNum) throws RemoteException {
-		String sql = "update `goods` set `stockAreaNum`='" + stockAreaNum + "' where `number`='" + number + "'";
+	public ResultMessage addToStock(String number,String stockNum, String stockAreaNum) throws RemoteException {
+		String sql = "update `goods` set `stockAreaNum`='" + stockAreaNum + "',set `stockNum`='"+stockNum+"' where `number`='" + number + "'";
 		if (mysql.execute(sql)) {
 			return ResultMessage.SUCCESS;
 		} else
@@ -182,7 +182,22 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 		ResultSet rs = mysql.query(sql);
 		try {
 			if (rs.next()) {
-				return rs.getString("StockAreaNum");
+				return rs.getString("stockAreaNum");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String findStockNum(String number) throws RemoteException {
+		String sql = "select * from `goods` where `number`='"+number+"'";
+		ResultSet rs = mysql.query(sql);
+		try {
+			if (rs.next()) {
+				return rs.getString("stockNum");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

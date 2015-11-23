@@ -14,6 +14,11 @@ import org.cross.elscommon.util.ReceiptType;
 public class Receipt_TransPO extends ReceiptPO {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * 所有装运单号
 	 */
 	private ArrayList<String> orders;

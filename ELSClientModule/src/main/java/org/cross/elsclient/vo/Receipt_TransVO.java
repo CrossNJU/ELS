@@ -7,7 +7,6 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
-import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ReceiptType;
@@ -52,16 +51,16 @@ public class Receipt_TransVO extends ReceiptVO{
 	/**
 	 * 监装员
 	 */
-	public PersonnelPO observer;
+	public PersonnelVO observer;
 
 	/**
 	 * 押运员（司机）
 	 */
-	public PersonnelPO driver;
+	public PersonnelVO driver;
 
 	public Receipt_TransVO(String number, ReceiptType type, String time, ArrayList<String> orders, double cost,
 			OrganizationType org, String localNum, String vehicleNum, City startCity, City arriveCity,
-			PersonnelPO observer, PersonnelPO driver) {
+			PersonnelVO observer, PersonnelVO driver) {
 		super(number, type, time);
 		this.orders = orders;
 		this.cost = cost;

@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.blservice.receiptblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ReceiptType;
@@ -17,8 +18,9 @@ public interface ReceiptBLService {
 	 * 增加单据
 	 * @param vo
 	 * @return
+	 * @throws RemoteException 
 	 */
-	public ResultMessage add(ReceiptVO vo);
+	public ResultMessage add(ReceiptVO vo) throws RemoteException;
 	
 	/**
 	 * 删除单据

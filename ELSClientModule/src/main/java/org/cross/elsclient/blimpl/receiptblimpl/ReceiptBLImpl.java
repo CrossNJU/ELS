@@ -1,8 +1,10 @@
 package org.cross.elsclient.blimpl.receiptblimpl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
+import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
@@ -20,9 +22,18 @@ public class ReceiptBLImpl implements ReceiptBLService{
 	}
 	
 	@Override
-	public ResultMessage add(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage add(ReceiptVO vo) throws RemoteException {
+		ReceiptPO po = receiptInfo.toPO(vo);
+		if(receiptdata.insert(po) == ResultMessage.FAILED) return ResultMessage.FAILED;
+		switch (key) {
+		case value:
+			
+			break;
+
+		default:
+			break;
+		}
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public interface GoodsDataService extends Remote{
 	public ResultMessage addToArri(String number, String arriNum) throws RemoteException;
 	public ResultMessage deleteFromArri(String number) throws RemoteException;
 	
-	public ResultMessage addToStock(String number, String stockAreaNum) throws RemoteException;
+	public ResultMessage addToStock(String number,String stockNum, String stockAreaNum) throws RemoteException;
 	public ResultMessage deleteFromStock(String number) throws RemoteException;
 	
 	public ResultMessage addHistory(String number , HistoryPO history) throws RemoteException;
@@ -44,5 +44,6 @@ public interface GoodsDataService extends Remote{
 	public ArrayList<GoodsPO> findByStockAreaNum(String stockAreaNum)throws RemoteException;
 	
 	public String findStockAreaNum(String number)throws RemoteException;
+	public String findStockNum(String number) throws RemoteException;
 
 }
