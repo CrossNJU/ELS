@@ -22,12 +22,12 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 	/**
 	 * 付款人
 	 */
-	public PersonnelVO receivePerson;
-	
+	public PersonnelVO personnel;
+
 	/**
 	 * 付款账号
 	 */
-	public String ID;
+	public String receiveID;
 	
 	/**
 	 * 条目
@@ -59,8 +59,8 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 		super(number, ReceiptType.MONEYOUT, time);
 		this.time = time;
 		this.money = money;
-		this.receivePerson = receivePerson;
-		ID = iD;
+		this.personnel = receivePerson;
+		this.receiveID = iD;
 		this.clause = clause;
 		this.comments = comments;
 		this.number = number;

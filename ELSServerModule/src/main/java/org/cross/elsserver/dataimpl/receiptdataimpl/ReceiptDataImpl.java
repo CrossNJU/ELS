@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.po.ReceiptPO;
-import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
@@ -19,10 +18,24 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 
 	private MySQL mysql;
 	private Receipt_OrderDataImpl order;
+	private Receipt_ArriDataImpl arri;
+	private Receipt_TransDataImpl trans;
+	private Receipt_StockInImpl stockin;
+	private Receipt_StockOutDataImpl stockout;
+	private Receipt_MoneyInDataImpl moneyin;
+	private Receipt_MoneyOutDataImpl moneyout;
+	private Receipt_TotalMoneyInDataImpl totalmoneyin;
 	
 	public ReceiptDataImpl() throws RemoteException {
 		super();
 		this.order = new Receipt_OrderDataImpl();
+		this.arri = new Receipt_ArriDataImpl();
+		this.trans = new Receipt_TransDataImpl();
+		this.stockin = new Receipt_StockInImpl();
+		this.stockout = new Receipt_StockOutDataImpl();
+		this.moneyin = new Receipt_MoneyInDataImpl();
+		this.moneyout = new Receipt_MoneyOutDataImpl();
+		this.totalmoneyin = new Receipt_TotalMoneyInDataImpl();
 		this.mysql = new MySQL();
 	}
 
@@ -30,14 +43,28 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	public ResultMessage insert(ReceiptPO po) throws RemoteException {
 		String sql = "insert ignore into `receipt`(`number`, `type`, `time`, `isApproved`) values ('"
 				+po.getNumber()+"','"+po.getType().toString()+"','"+po.getTime()+"',"+po.isApproved()+ ")";
-		mysql.execute(sql);
+		if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		switch (po.getType()) {
 		case ORDER:
-			return order.insert((Receipt_OrderPO)po);
+			return order.insert(po);
+		case TRANS:
+			return trans.insert(po);
+		case ARRIVE:
+			return arri.insert(po);
+		case STOCKIN:
+			return stockin.insert(po);
+		case STOCKOUT:
+			return stockout.insert(po);
+		case MONEYIN:
+			return moneyin.insert(po);
+		case MONEYOUT:
+			return moneyout.insert(po);
+		case TOTALMONEYIN:
+			return totalmoneyin.insert(po);
 		default:
 			break;
 		}
-		return ResultMessage.SUCCESS;
+		return ResultMessage.FAILED;
 	}
 
 	@Override
@@ -84,7 +111,20 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 				switch (type) {
 				case ORDER:
 					return order.getFromDB(number);
-
+				case TRANS:
+					return trans.getFromDB(number);
+				case ARRIVE:
+					return arri.getFromDB(number);
+				case STOCKIN:
+					return stockin.getFromDB(number);
+				case STOCKOUT:
+					return stockout.getFromDB(number);
+				case MONEYIN:
+					return moneyin.getFromDB(number);
+				case MONEYOUT:
+					return moneyout.getFromDB(number);
+				case TOTALMONEYIN:
+					return totalmoneyin.getFromDB(number);
 				default:
 					break;
 				}

@@ -35,7 +35,7 @@ public class MySQL {
 	public boolean execute(String sql){
 		try {
 			pst = con.prepareStatement(sql);
-			if(pst.executeUpdate() > 1) return true;
+			if(pst.executeUpdate() > 0) return true;
 			else return false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
