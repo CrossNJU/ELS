@@ -94,6 +94,10 @@ public class StockBLImpl implements StockBLService{
 	public ResultMessage intoStock(String goodsID, String stockID, String time)
 			throws RemoteException {
 		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
+		if (goodsVO == null) {
+			System.out.println("goodsVo = null");
+			return ResultMessage.FAILED;
+		}
 		StockOperationPO operationPO = new StockOperationPO(time, StockOperationType.STOCKIN, goodsID, 0, goodsVO.goodsType);
 		StockPO stockPO = stockData.findStockByNum(stockID);
 		ArrayList<StockAreaPO> areaPOs = stockPO.getStockAreas();

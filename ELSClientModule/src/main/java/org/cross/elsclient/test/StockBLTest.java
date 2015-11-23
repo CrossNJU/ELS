@@ -11,6 +11,7 @@ import org.cross.elsclient.blimpl.stockblimpl.StockBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockInfoImpl;
 import org.cross.elsclient.network.Datafactory;
 import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.util.ResultMessage;
@@ -32,18 +33,20 @@ public class StockBLTest {
 		}else {
 			System.out.println("can not find it...");
 		}
-//		System.out.println("=======测试库存查看（showStockInfo）=======");
-
-//		System.out.println("=======测试库存查看（showStockInfo）=======");
-//		
-//		System.out.println("=======测试快件入库（intoStock）=======");
-//		ResultMessage intoStockMessage = stockBLImpl.intoStock("R120151023000002", "S00002","2015-11-2 11:34:19");
-//		if (intoStockMessage == ResultMessage.SUCCESS) {
-//			System.out.println("入库成功");
-//		}else {
-//			System.out.println("入库失败");
-//		}
-//		
+		System.out.println("=======测试库存查看（showStockInfo）=======");
+		ArrayList<StockOperationVO> stockOperationVOs = stockBLImpl.showStockInfo("C0100001", "2015/10/23 10:12:01", "2015/10/12 10:20:01");
+		for (int i = 0; i < stockOperationVOs.size(); i++) {
+			System.out.println(stockOperationVOs.get(i).time + " " + stockOperationVOs.get(i).type);
+		}
+		
+		System.out.println("=======测试快件入库（intoStock）=======");
+		ResultMessage intoStockMessage = stockBLImpl.intoStock("G001", "C0100001","2015-11-2 11:34:19");
+		if (intoStockMessage == ResultMessage.SUCCESS) {
+			System.out.println("入库成功");
+		}else {
+			System.out.println("入库失败");
+		}
+		
 //		System.out.println("=======测试快件出库（outStock）=======");
 //		ResultMessage outStockMessage = stockBLImpl.outStock("R120151023000003", "S00002","2015-11-2 11:34:19");
 //		if (outStockMessage == ResultMessage.SUCCESS) {
