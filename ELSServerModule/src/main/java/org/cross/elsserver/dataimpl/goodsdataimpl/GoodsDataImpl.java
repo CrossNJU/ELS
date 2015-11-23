@@ -177,7 +177,7 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	}
 
 	@Override
-	public String findStockAreaNum(String number) {
+	public String findStockAreaNum(String number) throws RemoteException{
 		String sql = "select * from `goods` where `number`='"+number+"'";
 		ResultSet rs = mysql.query(sql);
 		try {

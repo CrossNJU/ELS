@@ -16,20 +16,32 @@ import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 
 public interface StockBLService {
+	/**
+	 * 增加仓库
+	 * @throws RemoteException 
+	 */
+	public ResultMessage addStock(StockVO vo) throws RemoteException;
+	
+	/**
+	 * 删除仓库
+	 * @throws RemoteException 
+	 */
+	public ResultMessage deleteStock(String stockID) throws RemoteException;
 	
 	/**
 	 * 根据当前时间生成库存快照
 	 * @return 该时间节点的库存快照信息
 	 */
-	public ArrayList<StockVO> showStockCheck();
+	public ArrayList<StockVO> showStockCheck(String stockID);
 	
 	/**
 	 * 库存查看
 	 * @param time1
 	 * @param time2
 	 * @return 商品库存列表
+	 * @throws RemoteException 
 	 */
-	public ArrayList<StockOperationVO> showStockInfo(String time1,String time2);
+	public ArrayList<StockOperationVO> showStockInfo(String stockID,String time1,String time2) throws RemoteException;
 	
 	/**
 	 * 寻找仓库
@@ -54,14 +66,6 @@ public interface StockBLService {
 	public ArrayList<StockAreaVO> stockCapacity(String id,StockType type) throws RemoteException;
 	
 	/**
-	 * 核实仓库中快件信息
-	 * @param 快件id
-	 * @return 快件是否在仓库中
-	 * @throws RemoteException 
-	 */
-	public ResultMessage checkGoods(String goodsID,String stockID) throws RemoteException;
-	
-	/**
 	 * 快件入库
 	 * @param 快件id
 	 * @return 是否入库称成功
@@ -81,11 +85,12 @@ public interface StockBLService {
 	 * 库存报警
 	 * @throws RemoteException 
 	 */
-	public StockState stockAlert(String stockID,StockType stockType) throws RemoteException;
+	public StockState stockAlert(String stockAreaID,StockType stockType) throws RemoteException;
 	
 	/**
 	 * 库存调整
+	 * @throws RemoteException 
 	 */
-	public ResultMessage stockAdjust(String stockID,StockType stockType);
+	public ResultMessage stockAdjust(String stockID,StockType stockType) throws RemoteException;
 
 }

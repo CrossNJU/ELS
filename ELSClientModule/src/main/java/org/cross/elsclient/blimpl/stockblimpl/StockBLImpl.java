@@ -24,228 +24,138 @@ import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 
-public class StockBLImpl implements StockBLService,StockInfo{
+public class StockBLImpl implements StockBLService{
 	
-	public StockPO stockpo;
 	public StockDataService stockData;
 	GoodsInfo goodsInfo;
-	ReceiptInfo receiptInfo;
+	StockInfo stockInfo;
 	
-	public StockBLImpl(StockDataService stockdata, GoodsInfo goodsInfo, ReceiptInfo receiptInfo){
-		this.stockData = stockdata;
+	public StockBLImpl(StockDataService stockData,GoodsInfo goodsInfo,StockInfo stockInfo){
+		this.stockData = stockData;
 		this.goodsInfo = goodsInfo;
-		this.receiptInfo = receiptInfo;
+		this.stockInfo = stockInfo;
 	}
 	
 	@Override
-	public ArrayList<StockVO> showStockCheck() {
-		// TODO Auto-generated method stub
+	public ArrayList<StockVO> showStockCheck(String stockID) {
+		
 		return null;
 	}
-
+	
 	@Override
-	public ArrayList<StockOperationVO> showStockInfo(String time1, String time2) {
-//		ArrayList<StockOperationVO> ops = new ArrayList<StockOperationVO>();
-//		for (int i = 0; i < stockvo.stockOperations.size(); i++) {
-//			StockOperationVO vo = stockvo.stockOperations.get(i);
-//			if(CompareTime.compare(vo.time, time1)>=0 && 
-//					CompareTime.compare(time2, vo.time)>=0){
-//				ops.add(vo);
-//			}
-//		}
-//		return ops;
-		return null;
+	public ArrayList<StockOperationVO> showStockInfo(String stockID,String time1, String time2) throws RemoteException {
+		ArrayList<StockOperationVO> stockOperationVOs = new ArrayList<StockOperationVO>();
+		ArrayList<StockOperationPO> stockOperationPOs = stockData.showStockOps(stockID, time1, time2);
+		int size = stockOperationPOs.size();
+		for (int i = 0; i < size; i++) {
+			stockOperationVOs.add(stockInfo.toStockOperationVO(stockOperationPOs.get(i)));
+		}
+		return stockOperationVOs;
 	}
-
+	
 	@Override
 	public StockVO findStock(String ID) throws RemoteException {
-		stockpo = stockData.findStock(ID);
-		StockVO stockvo = toStockVO(stockpo);
-		return stockvo;
+		StockPO stockPO = stockData.findStockByNum(ID);
+		if (stockPO == null) {
+			return null;
+		}
+		StockVO stockVO = stockInfo.toStockVO(stockPO);
+		
+		int size = stockPO.getStockAreas().size();
+		for (int i = 0; i < size; i++) {
+			StockAreaPO area = stockPO.getStockAreas().get(i);
+			ArrayList<GoodsVO> goodsVOs = goodsInfo.findByStockAreaNum(area.getNumber());
+			stockVO.stockAreas.get(i).goodsList = goodsVOs;
+		}
+		return stockVO;
 	}
-
+	
 	@Override
 	public ResultMessage exportStockCheck() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public ArrayList<StockAreaVO> stockCapacity(String id,StockType type) throws RemoteException {
-		ArrayList<StockAreaVO> stockAreaVOs = new ArrayList<StockAreaVO>();
-		stockpo = stockData.findStock(id);
-		StockAreaPO stockAreaPO = null;
-		if (stockpo == null) {
-			return null;
-		}
-		
-		for (int i = 0; i < stockpo.getSpecialStockPOs().size(); i++) {
-			if (stockpo.getSpecialStockPOs().get(i).getStockType().equals(type)) {
-				stockAreaPO = stockpo.getSpecialStockPOs().get(i);
-				stockAreaVOs.add(toStockAreaVO(stockAreaPO));
+	public ArrayList<StockAreaVO> stockCapacity(String id, StockType type)
+			throws RemoteException {
+		ArrayList<StockAreaVO> vo = new ArrayList<StockAreaVO>();
+		ArrayList<StockAreaPO> po = stockData.findStockByNum(id).getStockAreas();
+		int size = po.size();
+		for (int i = 0; i < size; i++) {
+			if (po.get(i).getStockType() == type) {
+				vo.add(stockInfo.toStockAreaVO(po.get(i)));
 			}
 		}
-		return stockAreaVOs;
+		return vo;
 	}
-
+	
 	@Override
-	public ResultMessage checkGoods(String goodsID,String stockID) throws RemoteException {
-		stockpo = stockData.findStock(stockID);
+	public ResultMessage intoStock(String goodsID, String stockID, String time)
+			throws RemoteException {
 		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
-		for (int i = 0; i < stockpo.getSpecialStockPOs().size(); i++) {
-			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodsVO.goodsType) {
-				for (int j = 0; j < stockpo.getSpecialStockPOs().get(i).getGoodsList().size(); j++) {
-					if (stockpo.getSpecialStockPOs().get(i).getGoodsList().get(j).getOrderNumber().
-							equals(goodsVO.orderNumber)) {
+		StockOperationPO operationPO = new StockOperationPO(time, StockOperationType.STOCKIN, goodsID, 0, goodsVO.goodsType);
+		StockPO stockPO = stockData.findStockByNum(stockID);
+		ArrayList<StockAreaPO> areaPOs = stockPO.getStockAreas();
+		int size = areaPOs.size();
+		for (int i = 0; i < size; i++) {
+			if (areaPOs.get(i).getStockType() == goodsVO.goodsType) {
+				if (areaPOs.get(i).getTotalCapacity() > areaPOs.get(i).getUsedCapacity()) {
+					ResultMessage res = stockData.updateInstock(stockID, areaPOs.get(i).getNumber(), operationPO);
+					ResultMessage res2 = goodsInfo.updateToArea(goodsID, areaPOs.get(i).getNumber());
+					if (res == ResultMessage.SUCCESS && res2 == ResultMessage.SUCCESS) {
 						return ResultMessage.SUCCESS;
 					}
+					return ResultMessage.FAILED;
 				}
 			}
 		}
 		return ResultMessage.FAILED;
 	}
-
 	@Override
-	public ResultMessage intoStock(String goodsID,String stockID,String time) throws RemoteException {
-		// TODO 报警没写  
+	public ResultMessage outStock(String goodsID, String stockID, String time)
+			throws RemoteException {
 		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
-		GoodsPO goodsPO = goodsInfo.toGoodsPO(goodsVO);
-		
-		Receipt_OrderPO order = (Receipt_OrderPO)receiptInfo.toPO((Receipt_OrderVO)receiptInfo.findByID(goodsVO.orderNumber));
-		
-		StockOperationPO po = new StockOperationPO(time, StockOperationType.STOCKIN, goodsPO, order.getCost(), goodsPO.getGoodsType());
-		
-		stockpo = stockData.findStock(stockID);
-		if (checkGoods(goodsID, stockID) == ResultMessage.SUCCESS) {
-			return ResultMessage.FAILED;
-		}
-		
-		if (stockpo == null) {
-			return ResultMessage.FAILED;
-		}
-		for (int i = 0; i < stockpo.getSpecialStockPOs().size(); i++) {
-			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodsVO.goodsType) {
-				int total = stockpo.getSpecialStockPOs().get(i).getTotalCapacity();
-				int used = stockpo.getSpecialStockPOs().get(i).getUsedCapacity();
-				if (used < total) {
-					ArrayList<GoodsPO> goodsList = stockpo.getSpecialStockPOs().get(i).getGoodsList();
-					goodsList.add(goodsPO);
-					stockpo.getSpecialStockPOs().get(i).setGoodList(goodsList);
-					stockpo.getSpecialStockPOs().get(i).setUsedCapacity(used + 1);
-					stockData.updateInstock(stockpo.getStockID(),stockpo.getSpecialStockPOs().get(i).getNumber(),po);
-					return ResultMessage.SUCCESS;
-				}
-			}
-		}
-		
-		return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage outStock(String goodsID,String stockID,String time) throws RemoteException {
-		//TODO 增加仓库操作
-		stockpo = stockData.findStock(stockID);
-		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
-		StockOperationVO stockOperationVO = new StockOperationVO(time, StockOperationType.STOCKOUT, goodsVO, 77.7,goodsVO.goodsType);
-		for (int i = 0; i < stockpo.getSpecialStockPOs().size(); i++) {
-			if (stockpo.getSpecialStockPOs().get(i).getStockType() == goodsVO.goodsType) {
-				for (int j = 0; j < stockpo.getSpecialStockPOs().get(i).getGoodsList().size(); j++) {
-					ArrayList<GoodsPO> goodsList = stockpo.getSpecialStockPOs().get(i).getGoodsList();
-					if (goodsList.get(j).getOrderNumber().
-							equals(goodsVO.orderNumber)) {
-						goodsList.remove(j);
-						int used = stockpo.getSpecialStockPOs().get(i).getUsedCapacity();
-						stockpo.getSpecialStockPOs().get(i).setGoodList(goodsList);
-						stockpo.getSpecialStockPOs().get(i).setUsedCapacity(used - 1);
-						stockData.update(stockpo);
-						return ResultMessage.SUCCESS;
-					}
-				}
-			}
+		StockOperationPO operationPO = new StockOperationPO(time, StockOperationType.STOCKIN, goodsID, 0, goodsVO.goodsType);
+		StockPO stockPO = stockData.findStockByNum(stockID);
+		ResultMessage res = stockData.updateOutstock(stockID, goodsInfo.findStockAreaNum(goodsID), operationPO);
+		ResultMessage res2 = goodsInfo.deleteFromStock(goodsID);
+		if (res == ResultMessage.SUCCESS && res2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}
 		return ResultMessage.FAILED;
 	}
-		
 	@Override
-	public StockState stockAlert(String stockID, StockType stockType) throws RemoteException {
-		ArrayList<StockAreaVO> stockAreaVOs = stockCapacity(stockID, stockType);
+	public StockState stockAlert(String stockID, StockType stockType)
+			throws RemoteException {
+		ArrayList<StockAreaVO> areaVOs = stockCapacity(stockID, stockType);
+		int size = areaVOs.size();
 		int total = 0;
 		int used = 0;
-		int size = stockAreaVOs.size();
 		for (int i = 0; i < size; i++) {
-			total += stockAreaVOs.get(i).totalCapacity;
-			used += stockAreaVOs.get(i).usedCapacity;
+			total += areaVOs.get(i).totalCapacity;
+			used += areaVOs.get(i).usedCapacity;
 		}
-		if (9*total < 10*used) {
+		if (10*used > 9*total) {
 			return StockState.ALERT;
 		}
-		else {
-			return StockState.NORMAL;
-		}
+		return StockState.NORMAL;
+	}
+	@Override
+	public ResultMessage stockAdjust(String stockAreaID, StockType stockType) throws RemoteException {
+		return stockData.updateAdjust(stockAreaID, stockType);
 	}
 
 	@Override
-	public ResultMessage stockAdjust(String stockID, StockType stockType) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage addStock(StockVO vo) throws RemoteException {
+		StockPO po = stockInfo.toStockPO(vo);
+		return stockData.insert(po);
 	}
 
-	
-	public ArrayList<StockAreaVO> getAreasVO(ArrayList<StockAreaPO> pos){
-		ArrayList<StockAreaVO> areas = new ArrayList<StockAreaVO>();
-		for (int i = 0; i < pos.size(); i++) {
-			areas.add(toStockAreaVO(pos.get(i)));
-		}
-		return areas;
+	@Override
+	public ResultMessage deleteStock(String stockID) throws RemoteException {
+		return stockData.delete(stockID);
 	}
 	
-	public ArrayList<StockOperationVO> getopVO(ArrayList<StockOperationPO> pos){
-		ArrayList<StockOperationVO> ops = new ArrayList<StockOperationVO>();
-		for (int i = 0; i < pos.size(); i++) {
-			ops.add(toStockOperationVO(pos.get(i)));
-		}
-		return ops;
-	}
-		
-	
-	public ArrayList<GoodsVO> getGoodsVOs(ArrayList<GoodsPO> pos){
-		ArrayList<GoodsVO> vos = new ArrayList<GoodsVO>();
-		for (int i = 0; i < pos.size(); i++) {
-			vos.add(goodsInfo.toGoodsVO(pos.get(i)));
-		}
-		return vos;
-	}
-
-	@Override
-	public StockVO toStockVO(StockPO po) {
-		if (po == null) {
-			return null;
-		}
-		StockVO stockvo = new StockVO(stockpo.getStockID(),stockpo.getNumOfArea());
-		stockvo.moneyIn = stockpo.getMoneyIn();
-		stockvo.moneyOut = stockpo.getMoneyOut();
-		stockvo.numIn = stockpo.getNumIn();
-		stockvo.numInStock = stockpo.getNumInStock();
-		stockvo.numOut = stockpo.getNumOut();
-		stockvo.usedBooths = stockpo.getUsedArea();
-		stockvo.specialStockPOs = getAreasVO(stockpo.getSpecialStockPOs());
-		stockvo.stockOperations = getopVO(stockpo.getStockOperations());
-		return stockvo;
-	}
-
-	@Override
-	public StockAreaVO toStockAreaVO(StockAreaPO po) {
-		StockAreaVO vo = new StockAreaVO(po.getStockType(), po.getTotalCapacity(), po.getNumber());
-		vo.usedCapacity = po.getUsedCapacity();
-		vo.goodsList = getGoodsVOs(po.getGoodsList());
-		return vo;
-	}
-
-	@Override
-	public StockOperationVO toStockOperationVO(StockOperationPO po) {
-		StockOperationVO vo = new StockOperationVO(po.getTime(), po.getType(),
-				goodsInfo.toGoodsVO(po.getGood()), po.getMoney(), po.getPlace());
-		return vo;
-	}
 
 }

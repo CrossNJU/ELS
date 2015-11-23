@@ -10,6 +10,8 @@ import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
+import org.cross.elscommon.util.GoodsState;
+import org.cross.elscommon.util.ResultMessage;
 
 public class GoodsInfoImpl implements GoodsInfo{
 	
@@ -77,6 +79,34 @@ public class GoodsInfoImpl implements GoodsInfo{
 		GoodsPO po = goodsData.findByNum(goodsID);
 		GoodsVO vo = toGoodsVO(po);
 		return vo;
+	}
+
+	@Override
+	public ArrayList<GoodsVO> findByStockAreaNum(String stockAreaNum)
+			throws RemoteException {
+		ArrayList<GoodsPO> goodsPOs = goodsData.findByStockAreaNum(stockAreaNum);
+		ArrayList<GoodsVO> goodsVOs = new ArrayList<GoodsVO>();
+		int size = goodsPOs.size();
+		for (int i = 0; i < size; i++) {
+			goodsVOs.add(toGoodsVO(goodsPOs.get(i)));
+		}
+		return null;
+	}
+
+	@Override
+	public ResultMessage updateToArea(String goodsID, String stockAreaNum) throws RemoteException {
+		return goodsData.addToStock(goodsID, stockAreaNum);
+	}
+
+	@Override
+	public ResultMessage deleteFromStock(String goodsID) throws RemoteException {
+		return goodsData.deleteFromStock(goodsID);
+	}
+
+	@Override
+	public String findStockAreaNum(String goodsID) throws RemoteException {
+		String areaNum = goodsData.findStockAreaNum(goodsID);
+		return areaNum;
 	}
 
 }

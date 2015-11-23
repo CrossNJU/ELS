@@ -12,6 +12,7 @@ import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StockType;
 import org.cross.elscommon.util.StringToType;
 
 @SuppressWarnings("serial")
@@ -117,9 +118,17 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 	}
 
 	@Override
-	public ResultMessage updateAdjust(String stockNum) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage updateAdjust(String stockAreaNum,StockType type) throws RemoteException {
+		String sql = "select * from `stockArea` where `number`='" + stockAreaNum + "'";
+		ResultSet rs = mysql.query(sql);
+		try {
+			rs.next();
+			sql = "update `stockArea` set `type`=" + type.toString() + " where `number`='" + stockAreaNum + "'";
+			mysql.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
@@ -201,17 +210,20 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 	}
 
 	@Override
-	public ResultMessage addToInstock(String stockAreaNum, String receipt) {
+	public ResultMessage addToInstock(String stockAreaNum, String receipt) throws RemoteException{
 		String sql ="update `stockArea` set `reStockInNum`='"+receipt+"' where `number`='"+stockAreaNum+"'";
 		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
 		return ResultMessage.FAILED;
 	}
 
 	@Override
-	public ResultMessage deleteFromInstock(String stockAreaNum) {
+	public ResultMessage deleteFromInstock(String stockAreaNum) throws RemoteException{
 		String sql ="update `stockArea` set `reStockInNum`=NULL where `number`='"+stockAreaNum+"'";
 		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
 		return ResultMessage.FAILED;
 	}
-
+//	public static void main(String[] args) throws RemoteException{
+//		StockDataImpl stockDataImpl = new StockDataImpl();
+//		stockDataImpl.updateAdjust("A0001", StockType.Fast);
+//	}
 }

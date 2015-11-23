@@ -19,12 +19,12 @@ public class StockVO {
 	/**
 	 * 仓库中的不同类型仓库(不同区)
 	 */
-	public ArrayList<StockAreaPO> stockAreas;
+	public ArrayList<StockAreaVO> stockAreas;
 
 	/**
 	 * 仓库操作
 	 */
-	public ArrayList<StockOperationPO> stockOPs;
+	public ArrayList<StockOperationVO> stockOPs;
 
 	/**
 	 * 仓库总间数
@@ -66,8 +66,8 @@ public class StockVO {
 		this.number = number;
 		this.totalAreas = totalAreas;
 
-		this.stockAreas = new ArrayList<StockAreaPO>();
-		this.stockOPs = new ArrayList<StockOperationPO>();
+		this.stockAreas = new ArrayList<StockAreaVO>();
+		this.stockOPs = new ArrayList<StockOperationVO>();
 		this.usedAreas = 0;
 		this.outNum = 0;
 		this.inNum = 0;
