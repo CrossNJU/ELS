@@ -40,8 +40,9 @@ public interface InitialBLService {
 	 * 
 	 * @param vo
 	 * @return 机构列表
+	 * @throws RemoteException 
 	 */
-	public ArrayList<OrganizationVO> showOrganization(InitialVO vo);
+	public ArrayList<OrganizationVO> showOrganization(InitialVO vo) throws RemoteException;
 
 	/**
 	 * 返回对应账本人员信息

@@ -43,12 +43,11 @@ public class InitialBLImpl implements InitialBLService{
 	@Override
 	public ResultMessage addInitial(InitialVO vo) throws RemoteException {
 		InitialPO po = initialInfo.toInitialPO(vo);
-		return initialData.insert(po);;
+		return initialData.insert(po);
 	}
 
 	@Override
-	public ArrayList<OrganizationVO> showOrganization(InitialVO vo) {
-		// TODO Auto-generated method stub
+	public ArrayList<OrganizationVO> showOrganization(InitialVO vo) throws RemoteException {
 		return null;
 	}
 
