@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.LogInfo;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
-import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elsclient.vo.LogVO;
 import org.cross.elscommon.dataservice.logdataservice.LogDataService_Stub;
 import org.cross.elscommon.po.LogPO;

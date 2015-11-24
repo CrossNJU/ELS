@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
-import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockOperationVO;

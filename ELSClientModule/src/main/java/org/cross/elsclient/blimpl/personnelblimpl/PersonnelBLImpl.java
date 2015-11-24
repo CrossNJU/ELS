@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
-import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService_Stub;

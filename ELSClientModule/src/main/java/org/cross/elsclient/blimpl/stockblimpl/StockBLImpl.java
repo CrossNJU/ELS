@@ -7,7 +7,6 @@ import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
-import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.Receipt_OrderPO;

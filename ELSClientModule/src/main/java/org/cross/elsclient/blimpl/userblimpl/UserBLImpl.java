@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.UserInfo;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
-import org.cross.elsclient.demo.StockInfoUI.returnAct;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService_Stub;
 import org.cross.elscommon.po.UserPO;

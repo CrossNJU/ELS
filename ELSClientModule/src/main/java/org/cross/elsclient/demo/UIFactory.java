@@ -19,17 +19,17 @@ public class UIFactory {
 	
 	DataFactoryService dataFactory;
 	
-	public UIFactory(){
-		dataFactory = new Datafactory();
-		try {
-			goodsInfo = new GoodsBLImpl(dataFactory.getGoodsData());
-			receiptInfo = new ReceiptBLImpl(goodsInfo, dataFactory.getReceiptData());
-			stockbl = new StockBLImpl(dataFactory.getStockData(), goodsInfo);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public UIFactory(){
+//		dataFactory = new Datafactory();
+//		try {
+////			goodsInfo = new GoodsBLImpl(dataFactory.getGoodsData());
+////			receiptInfo = new ReceiptBLImpl(goodsInfo, dataFactory.getReceiptData());
+////			stockbl = new StockBLImpl(dataFactory.getStockData(), goodsInfo);
+////		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public StockUI getStockUI(){
 		return new StockUI(stockbl);

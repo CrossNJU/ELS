@@ -65,8 +65,8 @@ public class InputTimeUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			ArrayList<StockOperationVO> ops = stockbl.showStockInfo(startTime.getText(), endTime.getText());
-			StockInfoUI stockInfoUI = new StockInfoUI(ops);
+//			ArrayList<StockOperationVO> ops = stockbl.showStockInfo(startTime.getText(), endTime.getText());
+//			StockInfoUI stockInfoUI = new StockInfoUI(ops);
 		}
 		
 	}
