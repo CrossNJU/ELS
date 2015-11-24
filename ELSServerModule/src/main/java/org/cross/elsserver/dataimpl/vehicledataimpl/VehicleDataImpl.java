@@ -46,12 +46,19 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 		}
 	}
 
+	public int boolToInt(boolean state){
+		if (state) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 	@Override
 	public ResultMessage update(VehiclePO po) throws RemoteException {
 
 		String sql = "UPDATE `vehicle` SET `engineNum`='" + po.getEngineNumber() + "',`baseNum`='"
 				+ po.getApparatusNumber() + "',`buyTime`='" + po.getBuyTime() + "',`lastTime`='" + po.getLastTime()
-				+ "',`state`='" + po.isInUse() + "',`type`='" + po.getType().toString() + "' WHERE number = '"
+				+ "',`state`='" + boolToInt(po.isInUse()) + "',`type`='" + po.getType().toString() + "' WHERE number = '"
 				+ po.getNumber() + "'";
 		if (mysql.execute(sql)) {
 			return ResultMessage.SUCCESS;
@@ -83,10 +90,10 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 		return getFromDB(rs);
 	}
 
-	public VehiclePO getFromDB(ResultSet rs) {
+	public VehiclePO getFromDB(ResultSet rs) throws RemoteException{
 		VehiclePO po = null;
 		try {
-			po = new VehiclePO(rs.getString("number"), rs.getString("enginNum"), rs.getString("baseNum"),
+			po = new VehiclePO(rs.getString("number"), rs.getString("engineNum"), rs.getString("baseNum"),
 					rs.getString("buyTime"), rs.getString("lastTime"), null,
 					StringToType.toVehicleType(rs.getString("type")));
 			po.setInUse(rs.getBoolean("state"));

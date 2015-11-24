@@ -46,7 +46,15 @@ public class VehicleBLImpl implements VehicleBLService{
 	public ArrayList<VehicleVO> show() throws RemoteException {
 		ArrayList<VehicleVO> vos = new ArrayList<VehicleVO>();
 		ArrayList<VehiclePO> pos = vehicleData.show();
+		System.out.println("in");
+		if (pos == null) {
+			System.out.println("null");
+			return null;
+		}else {
+			System.out.println("not null");
+		}
 		int size = pos.size();
+		System.out.println(size);
 		for (int i = 0; i < size; i++) {
 			vos.add(vehicleInfo.toVehicleVO(pos.get(i)));
 		}
