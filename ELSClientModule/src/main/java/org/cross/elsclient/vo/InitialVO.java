@@ -13,6 +13,11 @@ public class InitialVO {
 	 * 编号
 	 */
 	public String id;
+	
+	/**
+	 * 年份
+	 */
+	public int year;
 
 	/**
 	 * 名称
@@ -55,12 +60,13 @@ public class InitialVO {
 	 * @param stocks
 	 * @param accounts
 	 */
-	public InitialVO(String id, String name,
+	public InitialVO(String id, String name,int year,
 			ArrayList<OrganizationVO> organizations,
 			ArrayList<PersonnelVO> personnels, ArrayList<VehicleVO> vehicles,
 			ArrayList<StockVO> stocks, ArrayList<AccountVO> accounts) {
 		this.id = id;
 		this.name = name;
+		this.year = year;
 		this.organizations = organizations;
 		this.personnels = personnels;
 		this.vehicles = vehicles;

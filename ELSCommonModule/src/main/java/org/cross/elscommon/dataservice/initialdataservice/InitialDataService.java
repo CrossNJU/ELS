@@ -17,4 +17,5 @@ public interface InitialDataService {
 
 	public ArrayList<InitialPO> show() throws RemoteException;
 
+	public InitialPO findByID(String initialID);
 }

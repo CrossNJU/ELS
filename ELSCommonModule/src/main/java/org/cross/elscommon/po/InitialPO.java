@@ -19,6 +19,11 @@ public class InitialPO implements Serializable {
 	 * 编号
 	 */
 	private String id;
+	
+	/**
+	 * 年份
+	 */
+	private int year;
 
 	/**
 	 * 名称
@@ -61,12 +66,13 @@ public class InitialPO implements Serializable {
 	 * @param stocks
 	 * @param accounts
 	 */
-	public InitialPO(String id, String name,
+	public InitialPO(String id, String name,int year,
 			ArrayList<OrganizationPO> organizations,
 			ArrayList<PersonnelPO> personnels, ArrayList<VehiclePO> vehicles,
 			ArrayList<StockPO> stocks, ArrayList<AccountPO> accounts) {
 		this.id = id;
 		this.name = name;
+		this.year = year;
 		this.organizations = organizations;
 		this.personnels = personnels;
 		this.vehicles = vehicles;
@@ -100,6 +106,14 @@ public class InitialPO implements Serializable {
 
 	public ArrayList<AccountPO> getAccounts() {
 		return accounts;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
 	}
 
 }

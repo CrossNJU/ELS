@@ -47,32 +47,34 @@ public class InitialBLImpl implements InitialBLService{
 	}
 
 	@Override
-	public ArrayList<OrganizationVO> showOrganization(InitialVO vo) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PersonnelVO> showPersonnel(InitialVO vo) {
+	public ArrayList<OrganizationVO> showOrganization(String initialID)
+			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<VehicleVO> showVehicle(InitialVO vo) {
+	public ArrayList<PersonnelVO> showPersonnel(String initialID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<StockVO> showStock(InitialVO vo) {
+	public ArrayList<VehicleVO> showVehicle(String initialID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<AccountVO> showAccount(InitialVO vo) {
+	public ArrayList<StockVO> showStock(String initialID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public ArrayList<AccountVO> showAccount(String initialID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

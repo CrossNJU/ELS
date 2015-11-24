@@ -60,7 +60,7 @@ public class InitialInfoImpl implements InitialInfo{
 		for (int i = 0; i < accountPOs.size(); i++) 
 			accountVOs.add(accountInfo.toAccountVO(accountPOs.get(i)));
 		
-		InitialVO vo = new InitialVO(po.getId(), po.getName(), 
+		InitialVO vo = new InitialVO(po.getId(), po.getName(),po.getYear(), 
 				orgVOs,personnelVOs,vehicleVOs, stockVOs, accountVOs);
 		return vo;
 	}
@@ -89,7 +89,7 @@ public class InitialInfoImpl implements InitialInfo{
 		for (int i = 0; i < accountVOs.size(); i++) 
 			accountPOs.add(accountInfo.toAccountPO(accountVOs.get(i)));
 		
-		InitialPO po = new InitialPO(vo.id, vo.name, orgPOs, personnelPOs, vehiclePOs, stockPOs, accountPOs);
+		InitialPO po = new InitialPO(vo.id, vo.name,vo.year, orgPOs, personnelPOs, vehiclePOs, stockPOs, accountPOs);
 		return po;
 	}
 

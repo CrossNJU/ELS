@@ -42,7 +42,7 @@ public interface InitialBLService {
 	 * @return 机构列表
 	 * @throws RemoteException 
 	 */
-	public ArrayList<OrganizationVO> showOrganization(InitialVO vo) throws RemoteException;
+	public ArrayList<OrganizationVO> showOrganization(String initialID) throws RemoteException;
 
 	/**
 	 * 返回对应账本人员信息
@@ -50,7 +50,7 @@ public interface InitialBLService {
 	 * @param vo
 	 * @return 人员列表
 	 */
-	public ArrayList<PersonnelVO> showPersonnel(InitialVO vo);
+	public ArrayList<PersonnelVO> showPersonnel(String initialID);
 
 	/**
 	 * 返回对应账本车辆信息
@@ -58,7 +58,7 @@ public interface InitialBLService {
 	 * @param vo
 	 * @return 车辆列表
 	 */
-	public ArrayList<VehicleVO> showVehicle(InitialVO vo);
+	public ArrayList<VehicleVO> showVehicle(String initialID);
 
 	/**
 	 * 返回对应账本库存信息
@@ -66,7 +66,7 @@ public interface InitialBLService {
 	 * @param vo
 	 * @return 库存列表
 	 */
-	public ArrayList<StockVO> showStock(InitialVO vo);
+	public ArrayList<StockVO> showStock(String initialID);
 
 	/**
 	 * 返回对应账本账户信息
@@ -74,5 +74,5 @@ public interface InitialBLService {
 	 * @param vo
 	 * @return 账户列表
 	 */
-	public ArrayList<AccountVO> showAccount(InitialVO vo);
+	public ArrayList<AccountVO> showAccount(String initialID);
 }
