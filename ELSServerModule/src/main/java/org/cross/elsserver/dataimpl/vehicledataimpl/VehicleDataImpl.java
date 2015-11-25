@@ -93,23 +93,26 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 	public VehiclePO getFromDB(ResultSet rs) throws RemoteException{
 		VehiclePO po = null;
 		try {
+			if(rs.next()){
 			po = new VehiclePO(rs.getString("number"), rs.getString("engineNum"), rs.getString("baseNum"),
 					rs.getString("buyTime"), rs.getString("lastTime"), null,
 					StringToType.toVehicleType(rs.getString("type")));
 			po.setInUse(rs.getBoolean("state"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return po;
 	}
 
-//	public static void main(String[] args) throws RemoteException {
+	public static void main(String[] args) throws RemoteException {
 //		VehiclePO vehiclePO = new VehiclePO("000000003", "EN000002", "BA000002", "2020-01-01", "2032-12-11", null,VehicleType.CAR);
-////		
-//		VehicleDataImpl vehicleDataImpl = new VehicleDataImpl();
-//		 vehicleDataImpl.insert(vehiclePO);
-//		// vehicleDataImpl.delete("V000001");
-////		vehicleDataImpl.;
-//	}
+//		
+		VehicleDataImpl vehicleDataImpl = new VehicleDataImpl();
+		 VehiclePO po = vehicleDataImpl.findByID("V000001");
+		 System.out.println(po.getApparatusNumber());
+		// vehicleDataImpl.delete("V000001");
+//		vehicleDataImpl.;
+	}
 
 }
