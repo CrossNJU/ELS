@@ -13,17 +13,16 @@ import org.cross.elscommon.util.ResultMessage;
 
 public class AccountBLImpl implements AccountBLService{
 
-	public AccountDataService_Stub accountData;
+	public AccountDataService accountData;
 	public AccountInfo accountInfo;
 	
-	public AccountBLImpl(AccountDataService_Stub accountData,AccountInfo accountInfo) {
+	public AccountBLImpl(AccountDataService accountData,AccountInfo accountInfo) {
 		this.accountData = accountData;
 		this.accountInfo = accountInfo;
 	}
-	
 	@Override
-	public ArrayList<AccountVO> find(String name) throws RemoteException {
-		ArrayList<AccountPO> accountPOs = accountData.find(name);
+	public ArrayList<AccountVO> findByName(String name) throws RemoteException {
+		ArrayList<AccountPO> accountPOs = accountData.findbyName(name);
 		ArrayList<AccountVO> accountVOs = new ArrayList<AccountVO>();
 		if (accountPOs == null) {
 			return null;
@@ -36,6 +35,13 @@ public class AccountBLImpl implements AccountBLService{
 	}
 
 	@Override
+	public AccountVO findByID(String ID) throws RemoteException {
+		AccountPO accountPO = accountData.findbyID(ID);
+		AccountVO accountVO = accountInfo.toAccountVO(accountPO);
+		return accountVO;
+	}
+	
+	@Override
 	public ResultMessage add(AccountVO vo) throws RemoteException {
 		AccountPO po = accountInfo.toAccountPO(vo);
 		return accountData.insert(po);
@@ -43,9 +49,8 @@ public class AccountBLImpl implements AccountBLService{
 
 	@Override
 	
-	public ResultMessage delete(AccountVO vo) throws RemoteException {
-		AccountPO po = accountInfo.toAccountPO(vo);
-		return accountData.delete(po);
+	public ResultMessage delete(String ID) throws RemoteException {
+		return accountData.delete(ID);
 	}
 
 	@Override
@@ -64,5 +69,4 @@ public class AccountBLImpl implements AccountBLService{
 		}
 		return vos;
 	}
-
 }

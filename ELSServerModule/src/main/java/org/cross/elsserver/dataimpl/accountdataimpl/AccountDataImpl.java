@@ -20,31 +20,25 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 
 	MySQL mysql;
 
-	protected AccountDataImpl() throws RemoteException {
+	public AccountDataImpl() throws RemoteException {
 		super();
 		this.mysql = new MySQL();
 	}
 
 	@Override
 	public AccountPO findbyID(String ID) throws RemoteException {
-		String sql = "select from `account` where `accountNum`='" + ID + "'";
+		String sql = "select * from `account` where `accountNum`='" + ID + "'";
 		ResultSet rs = mysql.query(sql);
 		return getFromDB(rs);
 	}
 
 	@Override
 	public ArrayList<AccountPO> findbyName(String name) throws RemoteException {
-		String sql = "select from `account` where `name`='" + name + "'";
+		String sql = "select * from `account` where `name`='" + name + "'";
 		ArrayList<AccountPO> list = new ArrayList<AccountPO>();
 		ResultSet rs = mysql.query(sql);
-		try {
-			while (rs.next()) {
-				list.add(getFromDB(rs));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		AccountPO ac = null;
+		while((ac=getFromDB(rs))!=null) list.add(ac);
 		return list;
 	}
 
@@ -80,14 +74,8 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 		String sql = "select * from `account`";
 		ArrayList<AccountPO> list = new ArrayList<AccountPO>();
 		ResultSet rs = mysql.query(sql);
-		try {
-			while (rs.next()) {
-				list.add(getFromDB(rs));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		AccountPO ac = null;
+		while((ac=getFromDB(rs))!=null) list.add(ac);
 		return list;
 	}
 
@@ -103,5 +91,11 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 		}
 		return po;
 	}
+	
+//	public static void main(String [] args) throws RemoteException{
+//		AccountDataImpl data = new AccountDataImpl();
+//		ArrayList<AccountPO> pos = data.findbyName("account1");
+//		System.out.println(pos.get(0).getBalance());
+//	}
 
 }

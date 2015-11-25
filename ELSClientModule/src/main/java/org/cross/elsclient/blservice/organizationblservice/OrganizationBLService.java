@@ -29,7 +29,7 @@ public interface OrganizationBLService {
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public ResultMessage delete(OrganizationVO vo);
+	public ResultMessage delete(String number);
 	
 	/**
 	 * 修改机构

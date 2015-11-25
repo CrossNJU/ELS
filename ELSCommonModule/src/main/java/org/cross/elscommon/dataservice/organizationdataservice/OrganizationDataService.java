@@ -6,6 +6,7 @@
 package org.cross.elscommon.dataservice.organizationdataservice;
 
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.OrganizationPO;
@@ -13,7 +14,7 @@ import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 
-public interface OrganizationDataService {
+public interface OrganizationDataService extends Remote{
 	/**
 	 * 增加机构
 	 * @para vo

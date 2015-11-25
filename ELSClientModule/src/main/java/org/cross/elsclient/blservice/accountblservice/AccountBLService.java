@@ -20,7 +20,16 @@ public interface AccountBLService {
 	 * @return
 	 * @throws RemoteException 
 	 */
-	public ArrayList<AccountVO> find(String name) throws RemoteException;
+	public ArrayList<AccountVO> findByName(String name) throws RemoteException;
+
+	/**
+	 * 根据账户ID模糊查找账户
+	 * 
+	 * @param ID
+	 * @return
+	 * @throws RemoteException 
+	 */
+	public AccountVO findByID(String ID) throws RemoteException;
 
 	/**
 	 * 增加账户
@@ -34,11 +43,11 @@ public interface AccountBLService {
 	/**
 	 * 删除账户
 	 * 
-	 * @param vo
+	 * @param ID
 	 * @return
 	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(AccountVO vo) throws RemoteException;
+	public ResultMessage delete(String ID) throws RemoteException;
 
 	/**
 	 * 更新账户

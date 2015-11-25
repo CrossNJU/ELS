@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.cross.elsclient.blimpl.blUtility.OrganizationInfo;
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
 import org.cross.elsclient.vo.OrganizationVO;
+import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService_Stub;
 import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.util.City;
@@ -13,10 +14,10 @@ import org.cross.elscommon.util.ResultMessage;
 
 public class OrganizationBLImpl implements OrganizationBLService{
 
-	public OrganizationDataService_Stub organizationData;
+	public OrganizationDataService organizationData;
 	public OrganizationInfo organizationInfo;
 	
-	public OrganizationBLImpl(OrganizationDataService_Stub organizationData,OrganizationInfo organizationInfo){
+	public OrganizationBLImpl(OrganizationDataService organizationData,OrganizationInfo organizationInfo){
 		this.organizationData = organizationData;
 		this.organizationInfo = organizationInfo;
 	}
@@ -28,9 +29,8 @@ public class OrganizationBLImpl implements OrganizationBLService{
 	}
 
 	@Override
-	public ResultMessage delete(OrganizationVO vo) {
-		OrganizationPO po = organizationInfo.toOrganizationPO(vo);
-		return organizationData.delete(po);
+	public ResultMessage delete(String number) {
+		return organizationData.delete(number);
 	}
 
 	@Override

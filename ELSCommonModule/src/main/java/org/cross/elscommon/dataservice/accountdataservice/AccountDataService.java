@@ -5,13 +5,14 @@
  */
 package org.cross.elscommon.dataservice.accountdataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public interface AccountDataService {
+public interface AccountDataService extends Remote{
 
 	public AccountPO findbyID(String ID) throws RemoteException;
 	public ArrayList<AccountPO> findbyName(String name) throws RemoteException;

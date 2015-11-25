@@ -5,8 +5,10 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
+import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
@@ -80,6 +82,30 @@ public class Datafactory implements DataFactoryService{
 			e.printStackTrace();
 		}
 		return vehicleData;
+	}
+
+	@Override
+	public AccountDataService getAccountData() throws RemoteException {
+		AccountDataService accountData = null;
+		try {
+			accountData = (AccountDataService) Naming.lookup(NetWork.preAddress+NetWork.port+"/accountdata");
+		} catch (MalformedURLException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return accountData;
+	}
+
+	@Override
+	public OrganizationDataService getOrganizationData() throws RemoteException {
+		OrganizationDataService organizationData = null;
+		try {
+			organizationData = (OrganizationDataService) Naming.lookup(NetWork.preAddress+NetWork.port+"/organizationdata");
+		} catch (MalformedURLException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return organizationData;
 	}
 
 }
