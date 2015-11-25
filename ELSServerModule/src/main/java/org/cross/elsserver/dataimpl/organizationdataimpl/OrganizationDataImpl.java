@@ -82,14 +82,8 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 		String sql = "select * from `organization`";
 		ResultSet rs = mysql.query(sql);
 		ArrayList<OrganizationPO> orgs = new ArrayList<OrganizationPO>();
-		try {
-			while (rs.next()) {
-				orgs.add(getFromDB(rs));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		OrganizationPO org = null;
+		while ((org=getFromDB(rs))!=null) orgs.add(org);
 		return orgs;
 	}
 

@@ -4,11 +4,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Year;
 import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
-import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
@@ -72,14 +70,8 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 		String sql = "select * from `personnel`";
 		ResultSet rs = mysql.query(sql);
 		ArrayList<PersonnelPO> pos = new ArrayList<PersonnelPO>();
-		try {
-			while (rs.next()) {
-				pos.add(getFromDB(rs));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		PersonnelPO po = null;
+		while((po=getFromDB(rs))!=null) pos.add(po);
 		return pos;
 	}
 

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
-import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.po.UserPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
@@ -78,14 +77,8 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 		String sql = "select * from `user`";
 		ResultSet rs = mysql.query(sql);
 		ArrayList<UserPO> users = new ArrayList<UserPO>();
-		try {
-			while (rs.next()) {
-				users.add(getFromDB(rs));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		UserPO po = null;
+		while((po=getFromDB(rs))!=null) users.add(po);
 		return users;
 	}
 
