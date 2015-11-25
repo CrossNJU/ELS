@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
@@ -15,9 +17,13 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.InfoFormatUtil;
+import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elscommon.util.InfoType;
 
 public class ELSInfoPanel extends JPanel{
 	protected ELSPanel titlePanel;
@@ -39,7 +45,7 @@ public class ELSInfoPanel extends JPanel{
 		itemLabels = new ArrayList<>();
 		inputLabels = new ArrayList<>();
 		setLayout(null);
-		setSize(924,600);
+		setSize(UIConstant.CONTENTPANEL_WIDTH,UIConstant.CONTENTPANEL_HEIGHT);
 		
 		titlePanel = new ELSPanel();
 		infoPanel = new ELSBox(BoxLayout.Y_AXIS);
@@ -106,7 +112,6 @@ public class ELSInfoPanel extends JPanel{
 		
 		itemLabels.add(itemLabel);
 		contentLabels.add(contentLabel);
-		
 		infoPanel.setSize(infoPanel.getWidth(),infoPanel.getHeight()+itemHeight);
 		infoPanel.add(itemLabel);
 	}
@@ -130,8 +135,7 @@ public class ELSInfoPanel extends JPanel{
 		inputLabel.setPreferredSize(new Dimension(150, itemHeight-15));
 		inputLabel.setMaximumSize(new Dimension(150, itemHeight-15));
 		inputLabel.setHorizontalAlignment(JTextField.LEFT);
-		inputLabel.setFont(getFont().deriveFont(20f));
-		
+		inputLabel.setFont(getFont().deriveFont(20f));		
 		itemLabel.add(Box.createHorizontalStrut(30));
 		itemLabel.add(nameLabel);
 		itemLabel.add(Box.createHorizontalStrut(10));
@@ -143,6 +147,59 @@ public class ELSInfoPanel extends JPanel{
 		infoPanel.setSize(infoPanel.getWidth(),infoPanel.getHeight()+itemHeight);
 		infoPanel.add(itemLabel);
 	}
+	
+	public void addEditableItem(String name,String defaultValue,boolean isEditabel,InfoType type){
+		ELSLabel itemLabel = new ELSLabel();
+		ELSLabel nameLabel = new ELSLabel(name);
+		ELSTextField inputLabel = new ELSTextField(defaultValue);
+		ELSLabel iconLabel = new ELSLabel();
+		ELSLabel textLabel = new ELSLabel();
+		inputLabel.setEditable(isEditabel);
+		
+		itemLabel.setLayout(new BoxLayout(itemLabel, BoxLayout.X_AXIS));
+		itemLabel.setMaximumSize(new Dimension(infoPanel.getWidth(),itemHeight));
+		itemLabel.setMinimumSize(new Dimension(infoPanel.getWidth(), itemHeight));
+		
+		nameLabel.setPreferredSize(new Dimension(100, itemHeight));
+		nameLabel.setMaximumSize(new Dimension(100, itemHeight));
+		nameLabel.setVerticalAlignment(JLabel.CENTER);
+		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
+		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
+		
+		inputLabel.setPreferredSize(new Dimension(150, itemHeight-15));
+		inputLabel.setMaximumSize(new Dimension(150, itemHeight-15));
+		inputLabel.setHorizontalAlignment(JTextField.LEFT);
+		inputLabel.setFont(getFont().deriveFont(20f));
+		inputLabel.addFocusListener(new TextFormatListener(inputLabel, iconLabel, textLabel,type));
+		
+		iconLabel.setMaximumSize(new Dimension(itemHeight, itemHeight));
+		iconLabel.setMinimumSize(new Dimension(itemHeight, itemHeight));
+		
+//		textLabel.setMaximumSize(new Dimension(itemHeight*6, itemHeight));
+		textLabel.setMinimumSize(new Dimension(itemHeight*3, itemHeight));
+		textLabel.setHorizontalAlignment(JLabel.LEFT);
+		textLabel.setVerticalAlignment(JLabel.CENTER);
+		textLabel.setFont(getFont().deriveFont(15f));
+		textLabel.setForeground(Color.red);
+		
+		itemLabel.add(Box.createHorizontalStrut(30));
+		itemLabel.add(nameLabel);
+		itemLabel.add(Box.createHorizontalStrut(10));
+		itemLabel.add(inputLabel);
+		itemLabel.add(iconLabel);
+		itemLabel.add(textLabel);
+		
+		itemLabels.add(itemLabel);
+		inputLabels.add(inputLabel);
+		
+		infoPanel.setSize(infoPanel.getWidth(),infoPanel.getHeight()+itemHeight);
+		infoPanel.add(itemLabel);
+	}
+	
+	public void addComboxItem(String name,String... items){
+		
+	}
+	
 	
 	public void addConfirmAndCancelBtn(){
 		ELSLabel itemLabel = new ELSLabel();
@@ -239,6 +296,43 @@ public class ELSInfoPanel extends JPanel{
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
+		}
+		
+	}
+	
+	class TextFormatListener implements FocusListener{
+		ELSTextField inputLabel;
+		ELSLabel iconLabel;
+		ELSLabel textLabel;
+		InfoType type;
+		
+		public TextFormatListener(ELSTextField inputLabel, ELSLabel iconLabel,
+				ELSLabel textLabel, InfoType type) {
+			super();
+			this.inputLabel = inputLabel;
+			this.iconLabel = iconLabel;
+			this.textLabel = textLabel;
+			this.type = type;
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			// TODO Auto-generated method stub
+			String src = inputLabel.getText();
+			String result = InfoFormatUtil.CheckFormat(src, type);
+			if(result==null){
+				iconLabel.setText("Y");
+				textLabel.setText("");
+			}else{
+				iconLabel.setText("N");
+				textLabel.setText(result);
+//				System.out.println(result);
+			}
 		}
 		
 	}

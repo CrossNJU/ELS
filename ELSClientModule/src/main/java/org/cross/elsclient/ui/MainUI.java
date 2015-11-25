@@ -11,6 +11,7 @@ import javax.swing.plaf.FontUIResource;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
+import org.cross.elsclient.ui.util.FrameUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 
 public class MainUI extends JFrame {
@@ -46,7 +47,8 @@ public class MainUI extends JFrame {
 		JFrame jf = new JFrame();
 		ELSPanel mainPanel = new ELSPanel();
 		jf.setSize(UIConstant.WINDOW_WIDTH, UIConstant.WINDOW_HEIGHT);
-
+		FrameUtil.frameInit(jf);
+//		jf.setEnabled(false);
 		mainPanel.add(new LoginPanel(), "login");
 		jf.getContentPane().add(mainPanel);
 

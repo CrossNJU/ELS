@@ -15,8 +15,8 @@ public class GoodsCheckTable extends ELSManageTable{
 	}
 	
 	public void addItem(HistoryVO vo){
-		String triggerPlace = vo.city.toString();
-		String arrivePlace = vo.city.toString();
+		String triggerPlace = vo.place.toString();
+		String arrivePlace = vo.place.toString();
 		String triggerTime = vo.time;
 		String arriveTime = vo.time;
 		

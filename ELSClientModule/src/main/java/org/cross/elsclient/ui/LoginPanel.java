@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui;
 
 import java.awt.Color;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -10,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicTextFieldUI;
+import javax.swing.plaf.multi.MultiTextUI;
+import javax.swing.plaf.synth.SynthTextFieldUI;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
@@ -45,6 +49,7 @@ public class LoginPanel extends ELSPanel{
 		loginBtn = new ELSButton("Login");
 		checkBtn = new ELSButton("Check");
 		
+		
 		inputPanel.setSize((int)(UIConstant.WINDOW_WIDTH*0.4),(int)(UIConstant.WINDOW_HEIGHT*0.4));
 		inputPanel.setLocation((int)((UIConstant.WINDOW_WIDTH-inputPanel.getWidth())*0.5),(int)((UIConstant.WINDOW_HEIGHT-inputPanel.getHeight())*0.5));
 		inputPanel.setBackground(Color.DARK_GRAY);
@@ -62,6 +67,7 @@ public class LoginPanel extends ELSPanel{
 		
 		checkBtn.setSize(100, 50);
 		checkBtn.setLocation((int)(inputPanel.getWidth()*0.5+checkBtn.getWidth()*0.2),(int)(inputPanel.getHeight()*0.75-25));
+		
 		
 		inputPanel.add(idTextField);
 		inputPanel.add(pwTextField);

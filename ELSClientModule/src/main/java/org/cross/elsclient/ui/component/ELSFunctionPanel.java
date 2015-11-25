@@ -49,6 +49,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	public void addFunctionBtn(String text,String functionName){
 		ELSButton btn = ComponentFactory.createFunctionBtn();
 		btn.setText(text);
+		btn.setIcon(new ImageIcon("img/testicon.png"));
 		btn.setName(functionName);
 		
 		functionBtns.add(btn);

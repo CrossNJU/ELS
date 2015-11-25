@@ -1,0 +1,128 @@
+package org.cross.elsclient.ui.managerui.organizationui;
+
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
+
+import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
+import org.cross.elsclient.ui.component.ELSManagePanel;
+import org.cross.elsclient.ui.component.ELSManageTable;
+import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.vo.OrganizationVO;
+
+public class OrganizationManagePanel extends ELSManagePanel{
+	OrganizationBLService organizationbl;
+	ArrayList<OrganizationVO> organizationVOs;
+	OrganizationManageTable list;
+	
+	public OrganizationManagePanel(){}
+	
+	public OrganizationManagePanel(OrganizationBLService organizationbl) {
+		super();
+		this.organizationbl = organizationbl;
+		init();
+	}
+
+	
+	@Override
+	public void setContentPanel() {
+		// TODO Auto-generated method stub
+		super.setContentPanel();
+		String[] s = {"机构编号","地区","类型"};
+		int[] itemWidth = {200,100,100};
+		list= new OrganizationManageTable(s,itemWidth,organizationbl);
+		list.setLocation(0, 0);
+		contentPanel.add(list);
+	}
+	
+	@Override
+	public void setSearchPanel() {
+		String[] s = {"按机构地区查询", "按时间查询", "按类型查询"};
+		modeBox.setModel(new DefaultComboBoxModel<String>(s));
+		modeBox.addItemListener(new ModeBoxItemListener());
+		
+		btn1.setText("查找用户");
+		btn1.addMouseListener(new BtnListener());
+		
+		btn2.setText("添加用户");
+		btn2.addMouseListener(new BtnListener());
+		searchPanel.add(Box.createHorizontalStrut(10));
+		searchPanel.add(btn2);
+		
+		searchPanel.validate();
+	}
+	
+	class BtnListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+			if(((String)modeBox.getSelectedItem()).equals("按机构地区查询")){
+				if(e.getSource()==btn1){
+					String id = searchTextField.getText();
+					organizationVOs = new ArrayList<>();
+					organizationVOs = organizationbl.findById(id);
+					list.init();
+					for (OrganizationVO organizationVO : organizationVOs) {
+						list.addItem(organizationVO);
+					}
+				}else if (e.getSource() == btn2){
+//					OrganizationAddPanel userAddPanel = new OrganizationAddPanel(userbl);
+//					ELSPanel parent = (ELSPanel) getParent();
+//					parent.add(userAddPanel,"add");
+//					parent.cl.show(parent, "add");
+				}
+				
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+	
+	class ModeBoxItemListener implements ItemListener{
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			if(e.getStateChange()==ItemEvent.SELECTED){
+				String item = (String)modeBox.getSelectedItem();
+				switch (item) {
+				case "按ID查询":
+					searchTextField.setVisible(true);
+					break;
+				default:
+					searchTextField.setVisible(false);
+					break;
+				}
+			}
+		}
+		
+	}
+}

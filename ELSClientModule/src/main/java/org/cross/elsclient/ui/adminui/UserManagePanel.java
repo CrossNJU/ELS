@@ -1,7 +1,9 @@
 package org.cross.elsclient.ui.adminui;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -17,6 +19,8 @@ import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
+import org.cross.elsclient.ui.component.ELSDatePicker;
+import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
@@ -29,6 +33,7 @@ public class UserManagePanel extends ELSManagePanel {
 	UserBLService userbl;
 	ArrayList<UserVO> userVOs;
 	UserManageTable list;
+	ELSDatePicker datePicker;
 	
 	public UserManagePanel(){}
 	
@@ -52,6 +57,10 @@ public class UserManagePanel extends ELSManagePanel {
 	
 	@Override
 	public void setSearchPanel() {
+		datePicker = new ELSDatePicker();
+		datePicker.setMaximumSize(searchTextField.getMaximumSize());
+		datePicker.setMinimumSize(searchTextField.getMinimumSize());
+		
 		String[] s = {"按ID查询", "按时间查询", "按类型查询"};
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
 		modeBox.addItemListener(new ModeBoxItemListener());
@@ -64,6 +73,8 @@ public class UserManagePanel extends ELSManagePanel {
 		searchPanel.add(Box.createHorizontalStrut(10));
 		searchPanel.add(btn2);
 		
+		datePicker.setVisible(false);
+		searchPanel.add(datePicker,3);
 		searchPanel.validate();
 	}
 	
@@ -73,8 +84,8 @@ public class UserManagePanel extends ELSManagePanel {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
-			if(((String)modeBox.getSelectedItem()).equals("按ID查询")){
-				if(e.getSource()==btn1){
+			if(e.getSource()==btn1){
+				if(((String)modeBox.getSelectedItem()).equals("按ID查询")){
 					String id = searchTextField.getText();
 					userVOs = new ArrayList<>();
 					userVOs = userbl.findById(id);
@@ -82,13 +93,15 @@ public class UserManagePanel extends ELSManagePanel {
 					for (UserVO userVO : userVOs) {
 						list.addItem(userVO);
 					}
-				}else if (e.getSource() == btn2){
-					UserAddPanel userAddPanel = new UserAddPanel(userbl);
-					ELSPanel parent = (ELSPanel) getParent();
-					parent.add(userAddPanel,"add");
-					parent.cl.show(parent, "add");
+				}else if(((String)modeBox.getSelectedItem()).equals("按时间查询")){
+					System.out.println(datePicker.getDate());
 				}
-				
+			}
+			if (e.getSource() == btn2){
+				UserAddPanel userAddPanel = new UserAddPanel(userbl);
+				ELSPanel parent = (ELSPanel) getParent();
+				parent.add(userAddPanel,"add");
+				parent.cl.show(parent, "add");
 			}
 		}
 
@@ -126,6 +139,11 @@ public class UserManagePanel extends ELSManagePanel {
 				switch (item) {
 				case "按ID查询":
 					searchTextField.setVisible(true);
+					datePicker.setVisible(false);
+					break;
+				case "按时间查询":
+					searchTextField.setVisible(false);
+					datePicker.setVisible(true);
 					break;
 				default:
 					searchTextField.setVisible(false);

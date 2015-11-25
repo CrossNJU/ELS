@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Label;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -13,8 +15,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
+import org.cross.elsclient.ui.adminui.UserInfoPanel;
+import org.cross.elsclient.ui.adminui.UserManagePanel;
+import org.cross.elsclient.ui.adminui.UserUpdatePanel;
+import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.vo.UserVO;
 
 public class ELSManageTable extends JScrollPane {
 	String[] name;
@@ -27,6 +36,7 @@ public class ELSManageTable extends JScrollPane {
 	int height;
 	public int gap;
 	Font font;
+	public boolean isUpdateAndDelete;
 
 	public ELSManageTable(){
 		width = UIConstant.CONTENTPANEL_WIDTH;
@@ -49,6 +59,7 @@ public class ELSManageTable extends JScrollPane {
 		header = new ELSBox(BoxLayout.X_AXIS);
 		gap = 20;
 		font = getFont().deriveFont(18f);
+		isUpdateAndDelete = false;
 
 		setSize(width, UIConstant.MANAGETABLE_HEIGHT);
 		setBorder(null);
@@ -102,12 +113,136 @@ public class ELSManageTable extends JScrollPane {
 			tempLabel.setHorizontalAlignment(JLabel.LEFT);
 			itemLabel.add(tempLabel);
 		}
-
-		itemLabels.add(itemLabel);
-		container.add(itemLabel);
-		validate();
-		repaint();
+		
+		if(isUpdateAndDelete){
+			ELSButton updateBtn = ComponentFactory.createUpdateBtn();
+			ELSButton deleteBtn = ComponentFactory.createDeleteBtn();
+			
+			updateBtn.setVisible(false);
+			updateBtn.addMouseListener(new BtnListener(itemLabel));
+			
+			deleteBtn.setVisible(false);
+			deleteBtn.addMouseListener(new BtnListener(itemLabel));
+			
+			itemLabel.add(Box.createHorizontalGlue());
+			itemLabel.add(updateBtn);
+			itemLabel.add(Box.createHorizontalStrut(gap));
+			itemLabel.add(deleteBtn);
+			itemLabel.add(Box.createHorizontalStrut(gap));
+			itemLabel.validate();
+			itemLabel.addMouseListener(new ItemListener(itemLabel));
+			repaint();
+			
+			itemLabels.add(itemLabel);
+			container.add(itemLabel);
+			validate();
+			repaint();
+		}
 	}
 	
+	public void infoBtn(int index){
+	}
+	
+	public void updateBtn(int index){
+	}
+	
+	public boolean deleteBtn(int index){
+		return false;
+	}
+	
+	class ItemListener implements MouseListener{
+		Box itemLabel;
+		
+		public ItemListener(Box itemLabel) {
+			this.itemLabel = itemLabel;
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int index = itemLabels.indexOf(itemLabel);
+			infoBtn(index);
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			if(isUpdateAndDelete){
+				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
+				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
+			}
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			if(isUpdateAndDelete){
+				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
+				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
+			}
+		}
+	}
+	
+	class BtnListener implements MouseListener{
+		Box itemLabel;
+		
+		public BtnListener(Box itemLabel) {
+			this.itemLabel = itemLabel;
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			ELSButton btn = (ELSButton)e.getSource();
+			int index = itemLabels.indexOf(itemLabel);
+			
+			if(btn.getName()=="update"){
+				updateBtn(index);
+			}else if(btn.getName()=="delete"){
+				if(ELSDialog.showConfirmDlg(SwingUtilities.getWindowAncestor(ELSManageTable.this), "删除","是否删除")){
+					if(deleteBtn(index)){
+						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(ELSManageTable.this), "删除成功");
+					}else{
+						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(ELSManageTable.this), "删除失败");
+					}
+				}
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			if(isUpdateAndDelete){
+				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
+				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
+			}
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			if(isUpdateAndDelete){
+				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
+				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
+			}
+		}
+	}
 	
 }

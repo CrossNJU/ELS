@@ -4,8 +4,11 @@ import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
+import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
+import org.cross.elscommon.util.ResultMessage;
 
 public class UserAddPanel extends ELSInfoPanel{
 	UserVO vo;
@@ -34,9 +37,12 @@ public class UserAddPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void confirm() throws RemoteException {
-		super.confirm();
-		bl.add(vo);
-		back();
+		if(bl.add(vo)==ResultMessage.SUCCESS){
+			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+			back();
+		}else{
+			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
+		}
 	}
 	
 	@Override
