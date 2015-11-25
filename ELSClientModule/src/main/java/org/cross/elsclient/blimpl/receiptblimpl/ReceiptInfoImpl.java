@@ -28,9 +28,13 @@ import org.cross.elscommon.po.Receipt_TransPO;
 public class ReceiptInfoImpl implements ReceiptInfo {
 
 	ReceiptDataService receiptdata;
-	StockInfo stockInfo;
-	PersonnelInfo personnelInfo;
+	public StockInfo stockInfo;
+	public PersonnelInfo personnelInfo;
 
+	public ReceiptInfoImpl(){
+		
+	}
+	
 	public ReceiptInfoImpl(ReceiptDataService receiptdata, StockInfo stockInfo, PersonnelInfo personnelInfo) {
 		this.receiptdata = receiptdata;
 		this.stockInfo = stockInfo;

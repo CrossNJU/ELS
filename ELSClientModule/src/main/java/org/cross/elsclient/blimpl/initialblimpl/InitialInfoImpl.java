@@ -21,11 +21,15 @@ import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.po.VehiclePO;
 
 public class InitialInfoImpl implements InitialInfo{
-	OrganizationInfo organizationInfo;
-	PersonnelInfo personnelInfo;
-	VehicleInfo vehicleInfo;
-	StockInfo stockInfo;
-	AccountInfo accountInfo;
+	public OrganizationInfo organizationInfo;
+	public PersonnelInfo personnelInfo;
+	public VehicleInfo vehicleInfo;
+	public StockInfo stockInfo;
+	public AccountInfo accountInfo;
+	
+	public InitialInfoImpl(){
+		
+	}
 	
 	public InitialInfoImpl(OrganizationInfo organizationInfo,PersonnelInfo personnelInfo,
 	VehicleInfo vehicleInfo,StockInfo stockInfo,AccountInfo accountInfo){

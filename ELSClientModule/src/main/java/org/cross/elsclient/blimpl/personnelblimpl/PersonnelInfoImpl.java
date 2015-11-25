@@ -11,7 +11,11 @@ import org.cross.elscommon.po.ReceiptPO;
 
 public class PersonnelInfoImpl implements PersonnelInfo{
 	
-	ReceiptInfo receiptInfo;
+	public ReceiptInfo receiptInfo;
+	
+	public PersonnelInfoImpl(){
+		
+	}
 	
 	public PersonnelInfoImpl(ReceiptInfo receiptInfo){
 		this.receiptInfo = receiptInfo;

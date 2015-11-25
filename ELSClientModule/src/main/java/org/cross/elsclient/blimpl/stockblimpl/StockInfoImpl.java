@@ -12,11 +12,14 @@ import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
-import org.cross.elscommon.util.PositionType;
 
 public class StockInfoImpl implements StockInfo{
 	
-		GoodsInfo goodsInfo;
+		public GoodsInfo goodsInfo;
+		
+		public StockInfoImpl(){
+			
+		}
 		
 		public StockInfoImpl(GoodsInfo goodsInfo){
 			this.goodsInfo = goodsInfo;
