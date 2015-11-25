@@ -10,13 +10,13 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.xml.bind.Marshaller.Listener;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
-import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSDatePicker;
@@ -88,7 +88,12 @@ public class UserManagePanel extends ELSManagePanel {
 				if(((String)modeBox.getSelectedItem()).equals("按ID查询")){
 					String id = searchTextField.getText();
 					userVOs = new ArrayList<>();
-					userVOs = userbl.findById(id);
+					try {
+						userVOs.add(userbl.findById(id));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					list.init();
 					for (UserVO userVO : userVOs) {
 						list.addItem(userVO);

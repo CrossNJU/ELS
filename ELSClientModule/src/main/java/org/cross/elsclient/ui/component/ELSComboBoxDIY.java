@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.cross.elsclient.demo.StockInfoUI.returnAct;
 
 
 public class ELSComboBoxDIY extends ELSPanel{

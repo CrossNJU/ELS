@@ -39,7 +39,7 @@ public class OrganizationAddPanel extends ELSInfoPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		bl.add(vo);
+//		bl.add(vo);
 		back();
 	}
 	

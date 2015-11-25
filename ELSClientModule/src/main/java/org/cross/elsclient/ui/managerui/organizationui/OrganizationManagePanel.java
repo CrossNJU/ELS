@@ -4,6 +4,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -67,7 +68,12 @@ public class OrganizationManagePanel extends ELSManagePanel{
 				if(e.getSource()==btn1){
 					String id = searchTextField.getText();
 					organizationVOs = new ArrayList<>();
-					organizationVOs = organizationbl.findById(id);
+					try {
+						organizationVOs.add(organizationbl.findById(id));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					list.init();
 					for (OrganizationVO organizationVO : organizationVOs) {
 						list.addItem(organizationVO);

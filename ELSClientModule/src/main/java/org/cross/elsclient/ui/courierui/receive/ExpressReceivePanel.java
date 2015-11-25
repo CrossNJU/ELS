@@ -19,7 +19,6 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		vo = new Receipt_OrderVO(null, null);
 		
 		setTitle("创建快件单");
 		addEditableItem("快件单编号", vo.number, false);

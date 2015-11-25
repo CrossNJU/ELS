@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -12,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
-import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
@@ -92,14 +92,19 @@ public class UserManageTable extends ELSManageTable{
 	@Override
 	public boolean deleteBtn(int index) {
 		UserManagePanel parent = (UserManagePanel)getParent().getParent();
-		if(parent.userbl.delete(vos.get(index))==ResultMessage.SUCCESS){
-			container.remove(itemLabels.get(index));
-			itemLabels.remove(index);
-			vos.remove(index);
-			container.validate();
-			container.repaint();
-			return true;
-		}else{
+		try {
+			if(parent.userbl.delete(vos.get(index).id)==ResultMessage.SUCCESS){
+				container.remove(itemLabels.get(index));
+				itemLabels.remove(index);
+				vos.remove(index);
+				container.validate();
+				container.repaint();
+				return true;
+			}else{
+				return false;
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

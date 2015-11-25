@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -15,8 +16,9 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
 import javax.swing.plaf.multi.MultiTextUI;
 import javax.swing.plaf.synth.SynthTextFieldUI;
 
+import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
+import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
-import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
 import org.cross.elsclient.ui.component.ELSButton;
@@ -37,7 +39,14 @@ public class LoginPanel extends ELSPanel{
 		
 	}
 	public void init(){
-		userbl = new UserBLService_Stub();
+		
+		try {
+			BLFactoryService blFactory = new BLFactoryImpl();
+			userbl = blFactory.getUserBLService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
@@ -83,7 +92,13 @@ public class LoginPanel extends ELSPanel{
 			// TODO Auto-generated method stub
 			String id = idTextField.getText();
 			String pw = String.valueOf(pwTextField.getPassword());
-			UserType type = userbl.login(id, pw);
+			UserType type = null;
+			try {
+				type = userbl.login(id, pw);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			if(type==UserType.ADMINISTRATOR){//系统管理员
 				System.out.println("登录成功");

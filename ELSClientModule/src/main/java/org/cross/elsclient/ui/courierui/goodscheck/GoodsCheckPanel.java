@@ -7,7 +7,6 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
-import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.adminui.UserManageTable;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.vo.GoodsVO;

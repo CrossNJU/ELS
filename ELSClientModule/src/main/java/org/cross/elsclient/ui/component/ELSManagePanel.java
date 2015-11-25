@@ -14,7 +14,6 @@ import javax.swing.*;
 import javax.xml.bind.Marshaller.Listener;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
-import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
 import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;

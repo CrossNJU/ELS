@@ -11,7 +11,6 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
-import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
