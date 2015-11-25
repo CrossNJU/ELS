@@ -26,7 +26,7 @@ public interface OrganizationDataService {
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public ResultMessage delete(OrganizationPO po);
+	public ResultMessage delete(String id);
 
 	/**
 	 * 修改机构
@@ -54,7 +54,7 @@ public interface OrganizationDataService {
 	 * @para id
 	 * @return ArrayList<OrganizationVO>
 	 */
-	public ArrayList<OrganizationPO> findById(String id);
+	public OrganizationPO findById(String id);
 
 	/**
 	 * 显示机构列表

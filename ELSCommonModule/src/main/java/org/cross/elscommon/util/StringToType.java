@@ -94,4 +94,48 @@ public class StringToType {
 			return null;
 		}
 	}
+	
+	public static PositionType toPositionType(String position){
+		switch (position) {
+		case "快递员":
+			return PositionType.COURIER;
+		case "司机":
+			return PositionType.DRIVER;
+		case "营业厅业务员":
+			return PositionType.BUSINESSHALLCLERK;
+		case "中转中心业务员":
+			return PositionType.TRANSITCENTERCLERK;
+		case "仓库管理人员":
+			return PositionType.STOCKKEEPER;
+		case "财务人员":
+			return PositionType.COUNTER;
+		case "总经理":
+			return PositionType.MANAGER;
+		case "系统管理员":
+			return PositionType.ADMINISTRATOR;
+		default:
+			return null;
+		}
+	}
+	
+	public static UserType toUserType(String user){
+		switch (user) {
+		case "快递员":
+			return UserType.COURIER;
+		case "营业厅业务员":
+			return UserType.BUSINESSHALLCLERK;
+		case "中转中心业务员":
+			return UserType.TRANSITCENTERCLERK;
+		case "仓库管理人员":
+			return UserType.STOCKKEEPER;
+		case "财务人员":
+			return UserType.COUNTER;
+		case "总经理":
+			return UserType.MANAGER;
+		case "系统管理员":
+			return UserType.ADMINISTRATOR;
+		default:
+			return null;
+		}
+	}
 }

@@ -26,7 +26,7 @@ public interface UserDataService
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public ResultMessage delete(UserPO po);
+	public ResultMessage delete(String id);
 	
 	/**
 	 * 修改用户
@@ -40,7 +40,7 @@ public interface UserDataService
 	 * @para name
 	 * @return ArrayList<UserVO>
 	 */
-	public ArrayList<UserPO> findById(String id);
+	public UserPO findById(String id);
 	
 	/**
 	 * 根据用户类型模糊查找

@@ -13,11 +13,12 @@ import org.cross.elscommon.util.ResultMessage;
 
 public interface AccountDataService {
 
-	public ArrayList<AccountPO> find(String name) throws RemoteException;
+	public AccountPO findbyID(String ID) throws RemoteException;
+	public ArrayList<AccountPO> findbyName(String name) throws RemoteException;
 
 	public ResultMessage insert(AccountPO po) throws RemoteException;
 
-	public ResultMessage delete(AccountPO po) throws RemoteException;
+	public ResultMessage delete(String id) throws RemoteException;
 
 	public ResultMessage update(AccountPO po) throws RemoteException;
 
