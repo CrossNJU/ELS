@@ -90,7 +90,7 @@ public class VehicleManageTable extends ELSManageTable {
 	}
 
 	@Override
-	public boolean deleteBtn(int index) {
+	public void deleteBtn(int index) {
 		super.deleteBtn(index);
 		VehicleManagePanel parent = (VehicleManagePanel) getParent()
 				.getParent();
@@ -102,13 +102,11 @@ public class VehicleManageTable extends ELSManageTable {
 				vos.remove(index);
 				container.validate();
 				container.repaint();
-				return true;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
 	}
 	// class ItemListener implements MouseListener{
 	// int index;

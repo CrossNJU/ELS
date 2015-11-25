@@ -43,6 +43,11 @@ public class ELSManageTable extends JScrollPane {
 		height = UIConstant.MANAGETABLE_ITEM_HEIGHT;
 	}
 	
+	/**
+	 * 
+	 * @author:Moo
+	 * @para: name-表头名，itemWidth-列宽
+	 */
 	public ELSManageTable(String[] name, int[] itemWidth) {
 		super();
 		this.name = name;
@@ -70,6 +75,7 @@ public class ELSManageTable extends JScrollPane {
 //		container.setSize(width, height);
 //		container.setLocation(0, 0);
 
+		//表头初始化
 		header.setOpaque(true);
 		header.setBackground(Color.GRAY);
 		header.setPreferredSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
@@ -94,6 +100,11 @@ public class ELSManageTable extends JScrollPane {
 		repaint();
 	}
 	
+	/**
+	 * 添加条目
+	 * @para item-条目项
+	 * @return void
+	 */
 	protected void addItemLabel(String[] item) {
 		Box itemLabel = new Box(BoxLayout.X_AXIS);
 
@@ -140,14 +151,28 @@ public class ELSManageTable extends JScrollPane {
 		}
 	}
 	
+	/**
+	 * 点击信息按钮的响应事件，需要被重写
+	 * @para index-对应条目的序号
+	 * @return void
+	 */
 	public void infoBtn(int index){
 	}
 	
+	/**
+	 * 点击修改按钮的响应事件，如果添加了修改按钮则需要被重写
+	 * @para index-对应条目的序号
+	 * @return void
+	 */
 	public void updateBtn(int index){
 	}
 	
-	public boolean deleteBtn(int index){
-		return false;
+	/**
+	 * 点击删除按钮的响应事件，如果添加了删除按钮则需要被重写
+	 * @para index-对应条目的序号
+	 * @return void
+	 */
+	public void deleteBtn(int index){
 	}
 	
 	class ItemListener implements MouseListener{
@@ -207,11 +232,7 @@ public class ELSManageTable extends JScrollPane {
 				updateBtn(index);
 			}else if(btn.getName()=="delete"){
 				if(ELSDialog.showConfirmDlg(SwingUtilities.getWindowAncestor(ELSManageTable.this), "删除","是否删除")){
-					if(deleteBtn(index)){
-						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(ELSManageTable.this), "删除成功");
-					}else{
-						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(ELSManageTable.this), "删除失败");
-					}
+					deleteBtn(index);
 				}
 			}
 		}

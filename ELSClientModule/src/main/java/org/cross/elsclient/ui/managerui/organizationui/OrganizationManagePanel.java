@@ -47,8 +47,8 @@ public class OrganizationManagePanel extends ELSManagePanel{
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
 		modeBox.addItemListener(new ModeBoxItemListener());
 		
-		btn1.setText("查找用户");
-		btn1.addMouseListener(new BtnListener());
+		searchBtn.setText("查找用户");
+		searchBtn.addMouseListener(new BtnListener());
 		
 		btn2.setText("添加用户");
 		btn2.addMouseListener(new BtnListener());
@@ -65,7 +65,7 @@ public class OrganizationManagePanel extends ELSManagePanel{
 			// TODO Auto-generated method stub
 			
 			if(((String)modeBox.getSelectedItem()).equals("按机构地区查询")){
-				if(e.getSource()==btn1){
+				if(e.getSource()==searchBtn){
 					String id = searchTextField.getText();
 					organizationVOs = new ArrayList<>();
 					try {

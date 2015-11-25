@@ -3,11 +3,14 @@ package org.cross.elsclient.ui.adminui;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
+import org.cross.elsclient.ui.component.ELSDatePicker;
+import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
+import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class UserAddPanel extends ELSInfoPanel{
@@ -22,12 +25,15 @@ public class UserAddPanel extends ELSInfoPanel{
 	@Override
 	public void init() {
 		super.init();
-		vo = new UserVO("", "", null);
+//		vo = new UserVO("", "", null);
 		
+		//ELSInfoPanel提供了三种添加条目的类型:文字，编辑框，下拉框
+		//其对应的实例化对象存储依次存储在ArrayList: contentLabels,inputLabels,boxLabels
 		setTitle("新增用户");
 		addEditableItem("用户名", "U000001", false);
-		addEditableItem("姓名","", true);
-		addEditableItem("职位", "", true);
+		addEditableItem("姓名","", true,InfoType.NAME);
+		String items[] = {"快递员", "营业厅业务员","中转中心业务员","仓库管理人员","财务人员","高级财务人员","总经理","系统管理员"};
+		addComboxItem("职位", items, true);
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -47,7 +53,8 @@ public class UserAddPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void cancel() {
-		super.cancel();
-		back();
+		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
+			back();
+		}
 	}
 }

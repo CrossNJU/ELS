@@ -32,8 +32,8 @@ public class GoodsCheckPanel extends ELSManagePanel{
 		searchPanel.remove(modeBox);
 		searchPanel.remove(0);
 		
-		btn1.setText("查询订单状态");
-		btn1.addMouseListener(new BtnListener());
+		searchBtn.setText("查询订单状态");
+		searchBtn.addMouseListener(new BtnListener());
 		
 		searchPanel.validate();
 	}

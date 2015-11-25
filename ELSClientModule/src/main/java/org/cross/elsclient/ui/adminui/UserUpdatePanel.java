@@ -26,12 +26,14 @@ public class UserUpdatePanel extends ELSInfoPanel{
 	@Override
 	public void init() {
 		super.init();
+		String items[] = {"快递员", "营业厅业务员","中转中心业务员","仓库管理人员","财务人员","高级财务人员","总经理","系统管理员"};
 		
 		setTitle("修改用户");
 		addEditableItem("用户名", "U000001", false);
-		addEditableItem("姓名", vo.name, true,InfoType.PASSWORD);
-		addEditableItem("职位", vo.type.toString(), true);
+		addEditableItem("姓名", vo.name, true,InfoType.NAME);
+		addComboxItem("职位", items, true);
 		
+		//添加确认和取消按钮
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认修改");
 		cancelBtn.setText("取消修改");

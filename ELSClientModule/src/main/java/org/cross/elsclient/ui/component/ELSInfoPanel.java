@@ -15,23 +15,28 @@ import java.util.ArrayList;
 import javax.print.DocFlavor.INPUT_STREAM;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.InfoFormatUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elscommon.util.InfoType;
 
-public class ELSInfoPanel extends JPanel{
+public class ELSInfoPanel extends JScrollPane{
+	protected ELSPanel contentPanel;
 	protected ELSPanel titlePanel;
 	protected ELSLabel titleLabel;
 	protected ELSBox infoPanel;
 	protected ArrayList<ELSLabel> itemLabels;
 	protected ArrayList<ELSLabel> contentLabels;
 	protected ArrayList<ELSTextField> inputLabels;
+	protected ArrayList<ELSComboBox> boxLabels;
 	protected int itemHeight;
 	protected ELSButton backBtn;
 	protected String backName;
@@ -44,16 +49,19 @@ public class ELSInfoPanel extends JPanel{
 		contentLabels = new ArrayList<>();
 		itemLabels = new ArrayList<>();
 		inputLabels = new ArrayList<>();
-		setLayout(null);
-		setSize(UIConstant.CONTENTPANEL_WIDTH,UIConstant.CONTENTPANEL_HEIGHT);
+		boxLabels = new ArrayList<>();
 		
+		contentPanel = new ELSPanel();
 		titlePanel = new ELSPanel();
+		titleLabel = new ELSLabel("Title");
 		infoPanel = new ELSBox(BoxLayout.Y_AXIS);
 		backBtn = ComponentFactory.createInfoBackBtn();
 		confirmBtn = ComponentFactory.createConfirmBtn();
 		cancelBtn = ComponentFactory.createCancelBtn();
 		
-		titleLabel = new ELSLabel("Title");
+		setSize(UIConstant.CONTENTPANEL_WIDTH+UIConstant.CONTENTPANEL_MARGIN_LEFT*2,UIConstant.CONTENTPANEL_HEIGHT+UIConstant.CONTENTPANEL_MARGIN_TOP*2);
+		
+		contentPanel.setLayout(null);
 		
 		titlePanel.setSize(this.getWidth(),50);
 		titlePanel.setLocation(0, 0);
@@ -61,29 +69,32 @@ public class ELSInfoPanel extends JPanel{
 		titlePanel.setBackground(Color.DARK_GRAY);
 		
 		titleLabel.setSize(200,50);
-		titleLabel.setLocation(50, 0);
+		titleLabel.setLocation(30, 0);
 		titleLabel.setFont(titleLabel.getFont().deriveFont(20f));
 		titleLabel.setForeground(Color.white);
 		titleLabel.setVerticalAlignment(JLabel.CENTER);
 		titlePanel.add(titleLabel);
 		
 		infoPanel.setSize(getWidth(),20);
-		infoPanel.setLocation(0,50);
-//		infoPanel.setPreferredSize(new Dimension(this.getWidth(), 0));
-//		infoPanel.setMaximumSize(new Dimension(this.getWidth(), 0));
-//		infoPanel.setMinimumSize(new Dimension(this.getWidth(), 0));
-		infoPanel.add(Box.createVerticalStrut(20));
+		infoPanel.setLocation(0,70);
 		
 		
 		backBtn.setText("撤");
 		backBtn.setBounds(12, 12, 30, 30);
 		backBtn.addMouseListener(new BtnListener());
 		
-		this.add(infoPanel);
-		this.add(backBtn);
-		this.add(titlePanel);
+		contentPanel.add(infoPanel);
+		contentPanel.add(backBtn);
+		contentPanel.add(titlePanel);
+		
+		this.getViewport().add(contentPanel);
 	}
 	
+	/**
+	 * 添加不需编辑的条目
+	 * @para name-条目名, content-条目内容
+	 * @return void
+	 */
 	public void addNormalItem(String name,String content){
 		ELSLabel itemLabel = new ELSLabel();
 		ELSLabel nameLabel = new ELSLabel(name);
@@ -116,11 +127,16 @@ public class ELSInfoPanel extends JPanel{
 		infoPanel.add(itemLabel);
 	}
 	
-	public void addEditableItem(String name,String defaultValue,boolean isEditabel){
+	/**
+	 * 添加可编辑的输入条目
+	 * @para name-条目名, defaultValue-默认值, isEditable-是否可编辑
+	 * @return void
+	 */
+	public void addEditableItem(String name,String defaultValue,boolean isEditable){
 		ELSLabel itemLabel = new ELSLabel();
 		ELSLabel nameLabel = new ELSLabel(name);
 		ELSTextField inputLabel = new ELSTextField(defaultValue);
-		inputLabel.setEditable(isEditabel);
+		inputLabel.setEditable(isEditable);
 		
 		itemLabel.setLayout(new BoxLayout(itemLabel, BoxLayout.X_AXIS));
 		itemLabel.setMaximumSize(new Dimension(infoPanel.getWidth(),itemHeight));
@@ -148,6 +164,11 @@ public class ELSInfoPanel extends JPanel{
 		infoPanel.add(itemLabel);
 	}
 	
+	/**
+	 * 添加可编辑的输入条目
+	 * @para name-条目名, defaultValue-默认值, isEditable-是否可编辑, type-信息类型(不需判断则为null)
+	 * @return void
+	 */
 	public void addEditableItem(String name,String defaultValue,boolean isEditabel,InfoType type){
 		ELSLabel itemLabel = new ELSLabel();
 		ELSLabel nameLabel = new ELSLabel(name);
@@ -196,11 +217,54 @@ public class ELSInfoPanel extends JPanel{
 		infoPanel.add(itemLabel);
 	}
 	
+	/**
+	 * 添加下拉框条目
+	 * @para name-条目名, items-下拉框内容, isEditable-是否可编辑
+	 * @return void
+	 */
+	public void addComboxItem(String name,String[] items,boolean isEditable){
+		ELSLabel itemLabel = new ELSLabel();
+		ELSLabel nameLabel = new ELSLabel(name);
+		ELSComboBox comboBox = new ELSComboBox();
+		comboBox.setEnabled(isEditable);
+		
+		itemLabel.setLayout(new BoxLayout(itemLabel, BoxLayout.X_AXIS));
+		itemLabel.setMaximumSize(new Dimension(infoPanel.getWidth(),itemHeight));
+		itemLabel.setMinimumSize(new Dimension(infoPanel.getWidth(), itemHeight));
+		
+		nameLabel.setPreferredSize(new Dimension(100, itemHeight));
+		nameLabel.setMaximumSize(new Dimension(100, itemHeight));
+		nameLabel.setVerticalAlignment(JLabel.CENTER);
+		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
+		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
+		
+		comboBox.setModel(new DefaultComboBoxModel<>(items));
+		comboBox.setPreferredSize(new Dimension(150, itemHeight-15));
+		comboBox.setMaximumSize(new Dimension(150, itemHeight-15));
+		comboBox.setFont(getFont().deriveFont(20f));
+		
+		itemLabel.add(Box.createHorizontalStrut(30));
+		itemLabel.add(nameLabel);
+		itemLabel.add(Box.createHorizontalStrut(10));
+		itemLabel.add(comboBox);
+		
+		itemLabels.add(itemLabel);
+		boxLabels.add(comboBox);
+		
+		infoPanel.setSize(infoPanel.getWidth(),infoPanel.getHeight()+itemHeight);
+		infoPanel.add(itemLabel);
+	}
+	
 	public void addComboxItem(String name,String... items){
 		
 	}
 	
 	
+	/**
+	 * 添加确认与取消按钮，一般单纯展示信息的界面不需调用此方法
+	 * @para 
+	 * @return void
+	 */
 	public void addConfirmAndCancelBtn(){
 		ELSLabel itemLabel = new ELSLabel();
 		
@@ -230,14 +294,29 @@ public class ELSInfoPanel extends JPanel{
 		infoPanel.add(itemLabel);
 	}
 	
+	/**
+	 * 设置界面标题
+	 * @para 
+	 * @return void
+	 */
 	public void setTitle(String title){
 		titleLabel.setText(title);
 	}
 	
+	/**
+	 * 设置返回的界面
+	 * @para name-界面的名称
+	 * @return void
+	 */
 	public void setBackPanel(String name){
 		backName = name;
 	}
 	
+	/**
+	 * 执行返回界面
+	 * @para 
+	 * @return void
+	 */
 	public void back(){
 		ELSPanel parent = (ELSPanel) getParent();
 		if(backName == null){
@@ -248,10 +327,20 @@ public class ELSInfoPanel extends JPanel{
 		parent.remove(ELSInfoPanel.this);
 	}
 	
+	/**
+	 * 执行确认按钮的方法，若是执行了addConfirmAndCancelBtn(),需要重写这一方法
+	 * @para 
+	 * @return void
+	 */
 	protected void confirm() throws RemoteException{
 		
 	}
 	
+	/**
+	 * 执行取消按钮的方法，若是执行了addConfirmAndCancelBtn(),需要重写这一方法
+	 * @para 
+	 * @return void
+	 */
 	protected void cancel(){
 		
 	}
@@ -261,7 +350,9 @@ public class ELSInfoPanel extends JPanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == backBtn){
-				back();
+				if(ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(ELSInfoPanel.this), "退出", "确认退出？")){
+					back();
+				}
 			} else if(e.getSource() == confirmBtn){
 				try {
 					confirm();

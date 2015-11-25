@@ -26,7 +26,9 @@ import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSTextField;
 import org.cross.elsclient.ui.component.ELSManagePanel;
+import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.vo.UserVO;
+import org.cross.elscommon.util.UserType;
 import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
 public class UserManagePanel extends ELSManagePanel {
@@ -34,6 +36,8 @@ public class UserManagePanel extends ELSManagePanel {
 	ArrayList<UserVO> userVOs;
 	UserManageTable list;
 	ELSDatePicker datePicker;
+	ELSComboBox typeCombobox;
+	ELSButton addBtn;
 	
 	public UserManagePanel(){}
 	
@@ -57,24 +61,39 @@ public class UserManagePanel extends ELSManagePanel {
 	
 	@Override
 	public void setSearchPanel() {
-		datePicker = new ELSDatePicker();
-		datePicker.setMaximumSize(searchTextField.getMaximumSize());
-		datePicker.setMinimumSize(searchTextField.getMinimumSize());
+		//默认搜索面板有一个modeBox,一个searchTextField,一个SearchBtn(btn1)
+		//另外需要的组件可以用ComponentFactory生成, 不用设置尺寸
+		datePicker = ComponentFactory.createDatePicker();
+		typeCombobox = ComponentFactory.createSearchBox();
+		addBtn = ComponentFactory.createSearchBtn();
 		
-		String[] s = {"按ID查询", "按时间查询", "按类型查询"};
+		//设置搜索模式
+		String[] s = {"按ID查询", "按时间查询", "按职位查询"};
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
 		modeBox.addItemListener(new ModeBoxItemListener());
 		
-		btn1.setText("查找用户");
-		btn1.addMouseListener(new BtnListener());
+		//设置类型选择的搜索下拉框
+		String[] types = {"快递员", "营业厅业务员","中转中心业务员","仓库管理人员","财务人员","高级财务人员","总经理","系统管理员"};
+		typeCombobox.setModel(new DefaultComboBoxModel<String>(types));
 		
-		btn2.setText("添加用户");
-		btn2.addMouseListener(new BtnListener());
+		//搜索按钮设置文字和监听
+		searchBtn.setText("查找用户");
+		searchBtn.addMouseListener(new BtnListener());
+		
+		//添加按钮设置文字和监听
+		addBtn.setText("添加用户");
+		addBtn.addMouseListener(new BtnListener());
+		
+		//添加间隔
 		searchPanel.add(Box.createHorizontalStrut(10));
-		searchPanel.add(btn2);
+		searchPanel.add(addBtn);
 		
+		//除了默认搜索方式外都要设置成不可见
 		datePicker.setVisible(false);
+		typeCombobox.setVisible(false);
+		
 		searchPanel.add(datePicker,3);
+		searchPanel.add(typeCombobox,3);
 		searchPanel.validate();
 	}
 	
@@ -84,7 +103,7 @@ public class UserManagePanel extends ELSManagePanel {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
-			if(e.getSource()==btn1){
+			if(e.getSource()==searchBtn){
 				if(((String)modeBox.getSelectedItem()).equals("按ID查询")){
 					String id = searchTextField.getText();
 					userVOs = new ArrayList<>();
@@ -99,10 +118,24 @@ public class UserManagePanel extends ELSManagePanel {
 						list.addItem(userVO);
 					}
 				}else if(((String)modeBox.getSelectedItem()).equals("按时间查询")){
-					System.out.println(datePicker.getDate());
+					
+				}else if(((String)modeBox.getSelectedItem()).equals("按类型查询")){
+					String type = (String)typeCombobox.getSelectedItem();
+					userVOs = new ArrayList<>();
+					try {
+						userVOs=userbl.findByType(UserType.stringToType(type));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					list.init();
+					for (UserVO userVO : userVOs) {
+						list.addItem(userVO);
+					}
 				}
 			}
-			if (e.getSource() == btn2){
+			if (e.getSource() == addBtn){
+				//界面统一添加到功能界面(managePanel的父容器)
 				UserAddPanel userAddPanel = new UserAddPanel(userbl);
 				ELSPanel parent = (ELSPanel) getParent();
 				parent.add(userAddPanel,"add");
@@ -135,6 +168,12 @@ public class UserManagePanel extends ELSManagePanel {
 		}
 	}
 	
+	
+	/**
+	 * 搜索模式的监听类
+	 * @author Moo
+	 * @date 2015年11月26日
+	 */
 	class ModeBoxItemListener implements ItemListener{
 
 		@Override
@@ -145,10 +184,17 @@ public class UserManagePanel extends ELSManagePanel {
 				case "按ID查询":
 					searchTextField.setVisible(true);
 					datePicker.setVisible(false);
+					typeCombobox.setVisible(false);
 					break;
 				case "按时间查询":
 					searchTextField.setVisible(false);
 					datePicker.setVisible(true);
+					typeCombobox.setVisible(false);
+					break;
+				case "按职位查询":
+					searchTextField.setVisible(false);
+					datePicker.setVisible(false);
+					typeCombobox.setVisible(true);
 					break;
 				default:
 					searchTextField.setVisible(false);

@@ -13,6 +13,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -313,9 +314,10 @@ public class ELSDatePicker extends JPanel {
 		return this.date;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		Calendar cal = Calendar.getInstance();
 		cal.set(this.year, this.month, this.date);
-		return cal.getTime();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(cal.getTime());
 	}
 }

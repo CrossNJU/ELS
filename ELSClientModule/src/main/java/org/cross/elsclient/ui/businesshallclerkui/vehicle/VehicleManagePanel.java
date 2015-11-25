@@ -60,8 +60,8 @@ public class VehicleManagePanel extends ELSManagePanel{
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
 		modeBox.addItemListener(new ModeBoxItemListener());
 		
-		btn1.setText("查找车辆");
-		btn1.addMouseListener(new BtnListener());
+		searchBtn.setText("查找车辆");
+		searchBtn.addMouseListener(new BtnListener());
 		
 		btn2.setText("添加车辆");
 		btn2.addMouseListener(new BtnListener());
@@ -78,7 +78,7 @@ public class VehicleManagePanel extends ELSManagePanel{
 			// TODO Auto-generated method stub
 			
 			if(((String)modeBox.getSelectedItem()).equals("按车辆编号查询")){
-				if(e.getSource()==btn1){
+				if(e.getSource()==searchBtn){
 					String id = searchTextField.getText();
 					vehicleVOs = new ArrayList<>();
 					try {

@@ -22,9 +22,13 @@ public class ELSFunctionPanel extends ELSPanel {
 	ArrayList<JPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;
 	
-//	public ELSFunctionPanel() {
-//		init();
-//	}
+	
+	/**
+	 * 功能控制面板需要先实例化BL对象再执行init()
+	 * @author:Moo
+	 * @para:
+	 */
+	public ELSFunctionPanel() {}
 	
 	public void init(){
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
@@ -46,6 +50,11 @@ public class ELSFunctionPanel extends ELSPanel {
 	}
 	
 	
+	/**
+	 * 添加功能按钮，functionName要与功能面板中参数的functionName相同
+	 * @para text-显示的文字, functionName-功能名称
+	 * @return void
+	 */
 	public void addFunctionBtn(String text,String functionName){
 		ELSButton btn = ComponentFactory.createFunctionBtn();
 		btn.setText(text);
@@ -60,8 +69,13 @@ public class ELSFunctionPanel extends ELSPanel {
 		this.add(btn);
 	}
 	
+	/**
+	 * 添加功能面板，functionName要与功能按钮中参数的functionName相同，默认面板名称为manage,add,update等
+	 * @para panel-功能面板,name-默认面板名称, functionName-功能名称
+	 * @return void
+	 */
 	public void addFunctionPanel(JPanel panel,String name, String functionName){
-		ELSPanel container = ComponentFactory.createNormalPanel();
+		ELSPanel container = new ELSPanel();
 		container.setBackground(Color.white);
 		
 		functionPanels.add(container);

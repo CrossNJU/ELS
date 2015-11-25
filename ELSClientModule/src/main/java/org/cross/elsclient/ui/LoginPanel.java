@@ -19,6 +19,7 @@ import javax.swing.plaf.synth.SynthTextFieldUI;
 import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
 import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
+import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
 import org.cross.elsclient.ui.component.ELSButton;
@@ -40,13 +41,14 @@ public class LoginPanel extends ELSPanel{
 	}
 	public void init(){
 		
-		try {
-			BLFactoryService blFactory = new BLFactoryImpl();
-			userbl = blFactory.getUserBLService();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			BLFactoryService blFactory = new BLFactoryImpl();
+//			userbl = blFactory.getUserBLService();
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		userbl = new UserBLService_Stub();
 		
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
