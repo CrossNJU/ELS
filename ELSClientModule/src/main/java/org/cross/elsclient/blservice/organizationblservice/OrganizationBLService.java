@@ -7,6 +7,7 @@
 package org.cross.elsclient.blservice.organizationblservice;
 
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.City;
@@ -21,50 +22,57 @@ public interface OrganizationBLService {
 	 * 增加机构
 	 * @para vo
 	 * @return ResultMessage
+	 * @throws RemoteException 
 	 */
-	public ResultMessage add(OrganizationVO vo);
+	public ResultMessage add(OrganizationVO vo) throws RemoteException;
 	
 	/**
 	 * 删除机构
 	 * @para vo
 	 * @return ResultMessage
+	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(String number);
+	public ResultMessage delete(String number) throws RemoteException;
 	
 	/**
 	 * 修改机构
 	 * @para vo
 	 * @return ResultMessage
+	 * @throws RemoteException 
 	 */
-	public ResultMessage update(OrganizationVO vo);
+	public ResultMessage update(OrganizationVO vo) throws RemoteException;
 	
 	/**
 	 * 显示机构列表
 	 * @para 
 	 * @return ArrayList<OrganizationVO>
+	 * @throws RemoteException 
 	 */
-	public ArrayList<OrganizationVO> show();
+	public ArrayList<OrganizationVO> show() throws RemoteException;
 	
 	/**
 	 * 根据所在城市查找机构
 	 * @para city
 	 * @return ArrayList<OrganizationVO>
+	 * @throws RemoteException 
 	 */
-	public ArrayList<OrganizationVO> findByCity(City city);
+	public ArrayList<OrganizationVO> findByCity(City city) throws RemoteException;
 	
 	/**
 	 * 根据机构类型查找机构
 	 * @para type
 	 * @return ArrayList<OrganizationVO>
+	 * @throws RemoteException 
 	 */
-	public ArrayList<OrganizationVO> findByType(OrganizationType type);
+	public ArrayList<OrganizationVO> findByType(OrganizationType type) throws RemoteException;
 	
 	/**
 	 * 根据ID查找机构
 	 * @para id
-	 * @return ArrayList<OrganizationVO>
+	 * @return OrganizationVO
+	 * @throws RemoteException 
 	 */
-	public ArrayList<OrganizationVO> findById(String id);
+	public OrganizationVO findById(String id) throws RemoteException;
 	
 	/**
 	 * 显示两个机构间的距离
