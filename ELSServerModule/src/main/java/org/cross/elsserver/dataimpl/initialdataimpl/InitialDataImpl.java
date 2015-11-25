@@ -103,7 +103,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 	}
 
 	@Override
-	public InitialPO findByID(String initialID) {
+	public InitialPO findByID(String initialID)  throws RemoteException{
 		String sql = "select * from `initial` where `number`='"+initialID+"'";
 		ResultSet rs = mysql.query(sql);
 		InitialPO po = null;

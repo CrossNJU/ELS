@@ -29,7 +29,7 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 	}
 
 	@Override
-	public ResultMessage insert(UserPO po) {
+	public ResultMessage insert(UserPO po)  throws RemoteException{
 		String sql = "insert ignore into `user`(`number`,`name`,`password`,`type`) values ('" + po.getId() + "','"
 				+ po.getName() + "','" + po.getPassword() + "','" + po.getType().toString() + "')";
 		if (!mysql.execute(sql)) {
@@ -39,7 +39,7 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 	}
 
 	@Override
-	public ResultMessage delete(String id) {
+	public ResultMessage delete(String id)  throws RemoteException{
 		String sql = "delete from `user` where `number`='" + id + "'";
 		if (!mysql.execute(sql)) {
 			return ResultMessage.FAILED;
@@ -48,33 +48,33 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 	}
 
 	@Override
-	public ResultMessage update(UserPO po) {
+	public ResultMessage update(UserPO po)  throws RemoteException{
 		if (delete(po.getId()) == ResultMessage.FAILED)
 			return ResultMessage.FAILED;
 		return insert(po);
 	}
 
 	@Override
-	public UserPO findById(String id) {
+	public UserPO findById(String id)  throws RemoteException{
 		String sql = "select * from `organization` where `number`='" + id + "'";
 		ResultSet rs = mysql.query(sql);
 		return getFromDB(rs);
 	}
 
 	@Override
-	public ArrayList<UserPO> findByType(UserType type) {
+	public ArrayList<UserPO> findByType(UserType type)  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<UserPO> findByName(String name) {
+	public ArrayList<UserPO> findByName(String name)  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<UserPO> show() {
+	public ArrayList<UserPO> show()  throws RemoteException{
 		String sql = "select * from `user`";
 		ResultSet rs = mysql.query(sql);
 		ArrayList<UserPO> users = new ArrayList<UserPO>();

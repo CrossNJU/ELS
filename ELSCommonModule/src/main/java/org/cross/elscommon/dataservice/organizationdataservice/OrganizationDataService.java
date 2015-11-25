@@ -7,6 +7,7 @@ package org.cross.elscommon.dataservice.organizationdataservice;
 
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.OrganizationPO;
@@ -20,48 +21,48 @@ public interface OrganizationDataService extends Remote{
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public ResultMessage insert(OrganizationPO po);
+	public ResultMessage insert(OrganizationPO po) throws RemoteException;
 	
 	/**
 	 * 删除机构
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public ResultMessage delete(String id);
+	public ResultMessage delete(String id) throws RemoteException;
 
 	/**
 	 * 修改机构
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public ResultMessage update(OrganizationPO po);
+	public ResultMessage update(OrganizationPO po) throws RemoteException;
 
 	/**
 	 * 根据所在城市查找机构
 	 * @para city
 	 * @return ArrayList<OrganizationVO>
 	 */
-	public ArrayList<OrganizationPO> findByCity(City city);
+	public ArrayList<OrganizationPO> findByCity(City city) throws RemoteException;
 	
 	/**
 	 * 根据机构类型查找机构
 	 * @para type
 	 * @return ArrayList<OrganizationVO>
 	 */
-	public ArrayList<OrganizationPO> findByType(OrganizationType type);
+	public ArrayList<OrganizationPO> findByType(OrganizationType type) throws RemoteException;
 	
 	/**
 	 * 根据ID查找机构
 	 * @para id
 	 * @return ArrayList<OrganizationVO>
 	 */
-	public OrganizationPO findById(String id);
+	public OrganizationPO findById(String id) throws RemoteException;
 
 	/**
 	 * 显示机构列表
 	 * @para 
 	 * @return ArrayList<OrganizationVO>
 	 */
-	public ArrayList<OrganizationPO> show();
+	public ArrayList<OrganizationPO> show() throws RemoteException;
 
 }

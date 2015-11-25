@@ -29,7 +29,7 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 	}
 
 	@Override
-	public ResultMessage insert(OrganizationPO po) {
+	public ResultMessage insert(OrganizationPO po)  throws RemoteException{
 		String sql = "insert ignore into `organization`(`number`,`city`,`type`) values ('" + po.getId() + "','"
 				+ po.getCity().toString() + "','" + po.getType().toString() + "')";
 		if (!mysql.execute(sql)) {
@@ -39,7 +39,7 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 	}
 
 	@Override
-	public ResultMessage delete(String number) {
+	public ResultMessage delete(String number)  throws RemoteException{
 		String sql = "delete from `organization` where `number`='" + number + "'";
 		if (!mysql.execute(sql)) {
 			return ResultMessage.FAILED;
@@ -48,7 +48,7 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 	}
 
 	@Override
-	public ResultMessage update(OrganizationPO po) {
+	public ResultMessage update(OrganizationPO po)  throws RemoteException{
 		String sql = "update `organization` set `city`='" + po.getCity().toString() + "', `type`='"
 				+ po.getType().toString() + "' where `number`='" + po.getId() + "'";
 		if (!mysql.execute(sql)) {
@@ -59,26 +59,26 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 	}
 
 	@Override
-	public ArrayList<OrganizationPO> findByCity(City city) {
+	public ArrayList<OrganizationPO> findByCity(City city) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<OrganizationPO> findByType(OrganizationType type) {
+	public ArrayList<OrganizationPO> findByType(OrganizationType type)  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public OrganizationPO findById(String id) {
+	public OrganizationPO findById(String id)  throws RemoteException{
 		String sql = "select * from `organization` where `number`='"+id+"'";
 		ResultSet rs = mysql.query(sql);
 		return getFromDB(rs);
 	}
 
 	@Override
-	public ArrayList<OrganizationPO> show() {
+	public ArrayList<OrganizationPO> show()  throws RemoteException{
 		String sql = "select * from `organization`";
 		ResultSet rs = mysql.query(sql);
 		ArrayList<OrganizationPO> orgs = new ArrayList<OrganizationPO>();
