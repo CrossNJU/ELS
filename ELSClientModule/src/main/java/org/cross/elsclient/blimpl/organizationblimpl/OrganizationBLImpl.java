@@ -7,7 +7,6 @@ import org.cross.elsclient.blimpl.blUtility.OrganizationInfo;
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
-import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService_Stub;
 import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;

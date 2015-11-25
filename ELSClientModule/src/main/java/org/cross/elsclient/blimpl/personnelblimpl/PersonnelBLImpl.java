@@ -8,18 +8,18 @@ import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.ReceiptVO;
-import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService_Stub;
+import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.util.ResultMessage;
 
 public class PersonnelBLImpl implements PersonnelBLService{
 	
-	public PersonnelDataService_Stub personnelData;
+	public PersonnelDataService personnelData;
 	ReceiptInfo receiptInfo;
 	PersonnelInfo personnelInfo;
 	
-	public PersonnelBLImpl(PersonnelDataService_Stub personnelData,PersonnelInfo personnelInfo,ReceiptInfo receiptInfo){
+	public PersonnelBLImpl(PersonnelDataService personnelData,PersonnelInfo personnelInfo,ReceiptInfo receiptInfo){
 		this.personnelData = personnelData;
 		this.personnelInfo = personnelInfo;
 		this.receiptInfo = receiptInfo;
@@ -28,11 +28,11 @@ public class PersonnelBLImpl implements PersonnelBLService{
 	@Override
 	public ArrayList<PersonnelVO> findById(String id) throws RemoteException {
 		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
-		ArrayList<PersonnelPO> pos = personnelData.findById(id);
-		int size = pos.size();
-		for (int i = 0; i < size; i++) {
-			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
-		}
+		PersonnelPO po = personnelData.findById(id);
+//		int size = pos.size();
+//		for (int i = 0; i < size; i++) {
+//			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
+//		}
 		return vos;
 	}
 
@@ -56,7 +56,7 @@ public class PersonnelBLImpl implements PersonnelBLService{
 	@Override
 	public ResultMessage delete(PersonnelVO vo) throws RemoteException {
 		PersonnelPO po = personnelInfo.toPersonnelPO(vo);
-		return personnelData.delete(po);
+		return personnelData.delete(po.getId());
 	}
 
 	@Override
