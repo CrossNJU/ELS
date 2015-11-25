@@ -15,7 +15,7 @@ public class UserInfoImpl implements UserInfo{
 
 	@Override
 	public UserPO toUserPO(UserVO vo) {
-		UserPO po = new UserPO(vo.password, vo.name, vo.type);
+		UserPO po = new UserPO(vo.id,vo.password, vo.name, vo.type);
 		po.setId(vo.id);
 		return po;
 	}
