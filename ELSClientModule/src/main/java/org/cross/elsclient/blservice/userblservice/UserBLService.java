@@ -23,11 +23,11 @@ public interface UserBLService {
 	public ResultMessage add(UserVO vo)throws RemoteException;
 	
 	/**
-	 * 删除用户
+	 * 删除用户，按照id删除
 	 * @para vo
 	 * @return ResultMessage
 	 */
-	public ResultMessage delete(UserVO vo)throws RemoteException;
+	public ResultMessage delete(String id)throws RemoteException;
 	
 	/**
 	 * 修改用户
@@ -51,11 +51,11 @@ public interface UserBLService {
 	public ArrayList<UserVO> findByType(UserType type)throws RemoteException;
 	
 	/**
-	 * 根据id模糊查找
+	 * 根据id精确查找
 	 * @para id
 	 * @return ArrayList<UserVO>
 	 */
-	public ArrayList<UserVO> findById(String id)throws RemoteException;
+	public UserVO findById(String id)throws RemoteException;
 	
 	/**
 	 * 显示所有用户列表

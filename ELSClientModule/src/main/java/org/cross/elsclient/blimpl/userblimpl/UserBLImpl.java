@@ -8,7 +8,6 @@ import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.po.UserPO;
-import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
 
@@ -29,9 +28,8 @@ public class UserBLImpl implements UserBLService{
 	}
 
 	@Override
-	public ResultMessage delete(UserVO vo) throws RemoteException {
-		UserPO po = userInfo.toUserPO(vo);
-		return userData.delete(po.getId());
+	public ResultMessage delete(String id) throws RemoteException {
+		return userData.delete(id);
 	}
 
 	@Override
@@ -63,14 +61,9 @@ public class UserBLImpl implements UserBLService{
 	}
 
 	@Override
-	public ArrayList<UserVO> findById(String id) throws RemoteException{
-		ArrayList<UserVO> vos = new ArrayList<UserVO>();
+	public UserVO findById(String id) throws RemoteException{
 		UserPO pos = userData.findById(id);
-//		int size = pos.size();
-//		for (int i = 0; i < size; i++) {
-//			vos.add(userInfo.toUserVO(pos.get(i)));
-//		}
-		return vos;
+		return userInfo.toUserVO(pos);
 	}
 
 	@Override
