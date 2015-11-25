@@ -35,7 +35,7 @@ public class OrganizationBLTest {
 //			System.out.println("删除失败");
 //		}
 		System.out.println("========测试updateOrg=======");
-		OrganizationVO updateOrg = new OrganizationVO(City.GUANGZHOU, OrganizationType.STOCK, "002378");
+		OrganizationVO updateOrg = new OrganizationVO(City.GUANGZHOU, OrganizationType.HEADQUARTERS, "002378");
 		ResultMessage updateMessage = orgBLImpl.update(updateOrg);
 		if (updateMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");

@@ -64,6 +64,8 @@ public class StringToType {
 			return OrganizationType.BUSINESSHALL;
 		case "中转中心":
 			return OrganizationType.TRANSITCENTER;
+		case "总部":
+			return OrganizationType.HEADQUARTERS;
 		default:
 			return null;
 		}

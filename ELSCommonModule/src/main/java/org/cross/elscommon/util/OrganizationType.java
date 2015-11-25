@@ -12,7 +12,7 @@ public enum OrganizationType {
 		case TRANSITCENTER:
 			return "中转中心";
 		case HEADQUARTERS:
-			return "
+			return "总部";
 		default:
 			return null;
 		}
