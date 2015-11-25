@@ -8,7 +8,7 @@ public class UserInfoImpl implements UserInfo{
 
 	@Override
 	public UserVO toUserVO(UserPO po) {
-		UserVO vo = new UserVO(po.getPassword(), po.getName(), po.getType());
+		UserVO vo = new UserVO(po.getId(),po.getPassword(), po.getName(), po.getType());
 		vo.id = po.getId();
 		return vo;
 	}
