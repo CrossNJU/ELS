@@ -89,10 +89,4 @@ public class UserBLImpl implements UserBLService{
 				return null;
 		}
 	}
-
-	@Override
-	public ResultMessage logout()throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

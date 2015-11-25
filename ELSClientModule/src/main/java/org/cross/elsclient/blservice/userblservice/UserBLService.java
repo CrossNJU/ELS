@@ -72,11 +72,4 @@ public interface UserBLService {
 	 */
 	public UserType login(String id, String password)throws RemoteException;
 	
-	/**
-	 * 注销
-	 * @para 
-	 * @return ResultMessage
-	 */
-	public ResultMessage logout()throws RemoteException;
-
 }
