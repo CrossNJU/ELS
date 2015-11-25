@@ -60,14 +60,22 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 
 	@Override
 	public ArrayList<OrganizationPO> findByCity(City city) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from `organization` where `city`='"+city.toString()+"'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<OrganizationPO> orgs = new ArrayList<OrganizationPO>();
+		OrganizationPO org = null;
+		while ((org=getFromDB(rs))!=null) orgs.add(org);
+		return orgs;
 	}
 
 	@Override
 	public ArrayList<OrganizationPO> findByType(OrganizationType type)  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from `organization` where `type`='"+type.toString()+"'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<OrganizationPO> orgs = new ArrayList<OrganizationPO>();
+		OrganizationPO org = null;
+		while ((org=getFromDB(rs))!=null) orgs.add(org);
+		return orgs;
 	}
 
 	@Override

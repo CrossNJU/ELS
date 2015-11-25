@@ -8,6 +8,9 @@ public class UserInfoImpl implements UserInfo{
 
 	@Override
 	public UserVO toUserVO(UserPO po) {
+		if (po == null) {
+			return null;
+		}
 		UserVO vo = new UserVO(po.getId(),po.getPassword(), po.getName(), po.getType());
 		vo.id = po.getId();
 		return vo;
@@ -15,6 +18,9 @@ public class UserInfoImpl implements UserInfo{
 
 	@Override
 	public UserPO toUserPO(UserVO vo) {
+		if (vo == null) {
+			return null;
+		}
 		UserPO po = new UserPO(vo.id,vo.password, vo.name, vo.type);
 		po.setId(vo.id);
 		return po;

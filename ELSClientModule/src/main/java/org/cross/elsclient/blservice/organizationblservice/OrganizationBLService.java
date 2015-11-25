@@ -74,11 +74,4 @@ public interface OrganizationBLService {
 	 */
 	public OrganizationVO findById(String id) throws RemoteException;
 	
-	/**
-	 * 显示两个机构间的距离
-	 * @para vo1 vo2
-	 * @return int
-	 */
-	public int showDistance(OrganizationVO vo1, OrganizationVO vo2);
-	
 }

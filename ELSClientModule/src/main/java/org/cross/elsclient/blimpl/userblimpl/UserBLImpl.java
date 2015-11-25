@@ -42,6 +42,9 @@ public class UserBLImpl implements UserBLService{
 	public ArrayList<UserVO> findByName(String name) throws RemoteException{
 		ArrayList<UserVO> vos = new ArrayList<UserVO>();
 		ArrayList<UserPO> pos = userData.findByName(name);
+		if (pos == null) {
+			return null;
+		}
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
 			vos.add(userInfo.toUserVO(pos.get(i)));
@@ -53,6 +56,9 @@ public class UserBLImpl implements UserBLService{
 	public ArrayList<UserVO> findByType(UserType type)throws RemoteException {
 		ArrayList<UserVO> vos = new ArrayList<UserVO>();
 		ArrayList<UserPO> pos = userData.findByType(type);
+		if (pos == null) {
+			return null;
+		}
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
 			vos.add(userInfo.toUserVO(pos.get(i)));

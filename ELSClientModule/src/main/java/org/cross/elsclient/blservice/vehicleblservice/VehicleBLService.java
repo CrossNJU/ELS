@@ -23,11 +23,11 @@ public interface VehicleBLService {
 	
 	/**
 	 * 删除车辆信息
-	 * @param vo
+	 * @param number
 	 * @return
 	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(VehicleVO vo) throws RemoteException;
+	public ResultMessage delete(String number) throws RemoteException;
 	
 	/**
 	 * 更新车辆信息

@@ -69,17 +69,11 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 
 	@Override
 	public ArrayList<VehiclePO> show() throws RemoteException {
-		String sql = "SELECT * FROM `vehicle` WHERE 1";
+		String sql = "SELECT * FROM `vehicle`";
 		ResultSet rs = mysql.query(sql);
 		ArrayList<VehiclePO> list = new ArrayList<VehiclePO>();
-		try {
-			while (rs.next()) {
-				VehiclePO po = getFromDB(rs);
-				if(po!=null) list.add(po);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		VehiclePO po = null;
+		while((po = getFromDB(rs))!=null) list.add(po);
 		return list;
 	}
 

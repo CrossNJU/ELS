@@ -1,3 +1,6 @@
+/**
+ * goods全部写好了
+ */
 package org.cross.elsclient.test;
 
 import java.rmi.RemoteException;
@@ -26,45 +29,45 @@ public class GoodsBLTest {
 		GoodsInfo goodsInfo = new GoodsInfoImpl(datafactory.getGoodsData());
 		GoodsBLImpl goodsBLImpl = new GoodsBLImpl(datafactory.getGoodsData(), goodsInfo);
 		
-//		System.out.println("=======增加快件（addGoods）=======");
-//		GoodsVO goodsVO = new GoodsVO("G009", StockType.COMMON, City.NANJING, OrganizationType.BUSINESSHALL, 12, 22);
-//		ResultMessage addResultMessage = goodsBLImpl.addGoods(goodsVO);
-//		if (addResultMessage == ResultMessage.SUCCESS) {
-//			System.out.println("增加成功！");
-//		}else {
-//			System.out.println("增加失败！");
-//		}
+		System.out.println("=======增加快件（addGoods）=======");
+		GoodsVO goodsVO = new GoodsVO("G009", StockType.COMMON, City.NANJING, OrganizationType.BUSINESSHALL, 12, 22);
+		ResultMessage addResultMessage = goodsBLImpl.addGoods(goodsVO);
+		if (addResultMessage == ResultMessage.SUCCESS) {
+			System.out.println("增加成功！");
+		}else {
+			System.out.println("增加失败！");
+		}
 		
-//		System.out.println("=======测试快件查询（findGoods）=======");
-//		GoodsVO vo = goodsBLImpl.searchGoods("G002");
-//		System.out.println(vo.number);
-//		ArrayList<HistoryVO> history = goodsBLImpl.findGoods("G001");
-//		if (history == null) {
-//			System.out.println("查找失败");
-//		}else {
-//			for (int i = 0; i < history.size(); i++) {
-//				System.out.println("途经 ： " + history.get(i).placeCity + "   时间 ： " + history.get(i).time);
-//			}
-//		}
-//		
-//		System.out.println("=======测试更新快件信息（位置和状态）(updateGoods)=======");
-//		HistoryVO newHistroy = new HistoryVO("2015-11-2 12:39:10", City.BEIJING, OrganizationType.BUSINESSHALL, true);
-//		ResultMessage resultMessage = goodsBLImpl.updateGoods("G002", newHistroy, GoodsState.DIE);
-//		if (resultMessage == ResultMessage.SUCCESS) {
-//			System.out.println("更新成功");
-//		}else {
-//			System.out.println("更新失败");
-//		}
-//		//--------看看成功了没----------
-//		ArrayList<HistoryVO> history2 = goodsBLImpl.findGoods("G002");
-//		for (int i = 0; i < history2.size(); i++) {
-//			System.out.println("途经 ： " + history2.get(i).placeCity + "   时间 ： " + history2.get(i).time);
-//		}
-//		System.out.println("=======测试得到快件所有信息(searchGoods)=======");
-//		GoodsVO goods = goodsBLImpl.searchGoods("G003");
-//		if (goods != null) {
-//			System.out.println("search successfully");
-//		}
+		System.out.println("=======测试快件查询（findGoods）=======");
+		GoodsVO vo = goodsBLImpl.searchGoods("G002");
+		System.out.println(vo.number);
+		ArrayList<HistoryVO> history = goodsBLImpl.findGoods("G001");
+		if (history == null) {
+			System.out.println("查找失败");
+		}else {
+			for (int i = 0; i < history.size(); i++) {
+				System.out.println("途经 ： " + history.get(i).placeCity + "   时间 ： " + history.get(i).time);
+			}
+		}
+		
+		System.out.println("=======测试更新快件信息（位置和状态）(updateGoods)=======");
+		HistoryVO newHistroy = new HistoryVO("2015-11-2 12:39:10", City.BEIJING, OrganizationType.BUSINESSHALL, true);
+		ResultMessage resultMessage = goodsBLImpl.updateGoods("G002", newHistroy, GoodsState.DIE);
+		if (resultMessage == ResultMessage.SUCCESS) {
+			System.out.println("更新成功");
+		}else {
+			System.out.println("更新失败");
+		}
+		//--------看看成功了没----------
+		ArrayList<HistoryVO> history2 = goodsBLImpl.findGoods("G002");
+		for (int i = 0; i < history2.size(); i++) {
+			System.out.println("途经 ： " + history2.get(i).placeCity + "   时间 ： " + history2.get(i).time);
+		}
+		System.out.println("=======测试得到快件所有信息(searchGoods)=======");
+		GoodsVO goods = goodsBLImpl.searchGoods("G003");
+		if (goods != null) {
+			System.out.println("search successfully");
+		}
 
 		
 	}

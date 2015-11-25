@@ -35,8 +35,12 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 
 	@Override
 	public ArrayList<PersonnelPO> findByName(String name) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from `personnel` where `name`='"+name+"'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<PersonnelPO> pos = new ArrayList<PersonnelPO>();
+		PersonnelPO po = null;
+		while((po=getFromDB(rs))!=null) pos.add(po);
+		return pos;
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 				+ po.getId()+"','"+po.getName()+"','"+po.getPosition().toString()+"','"+po.getOrganization().toString()+"','"+
 				po.getOrganizationID()+"',"+po.getPayment()+")";
 		if (!mysql.execute(sql)) {
-			return ResultMessage.FAILED;
+			return ResultMessage.FAILED; 
 		}
 		return ResultMessage.SUCCESS;
 	}
@@ -81,7 +85,7 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 			if (rs.next()) {
 				po = new PersonnelPO(rs.getString("number"), rs.getString("name"),
 						StringToType.toPositionType(rs.getString("position")),
-						StringToType.toOrg(rs.getString("orgType")), rs.getString("orgNum"));
+						StringToType.toOrg(rs.getString("orgType")), rs.  getString("orgNum"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -79,10 +79,4 @@ public class OrganizationBLImpl implements OrganizationBLService{
 		return vo;
 	}
 
-	@Override
-	public int showDistance(OrganizationVO vo1, OrganizationVO vo2) {
-		int distance = 0;
-		
-		return distance;
-	}
 }

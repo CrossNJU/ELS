@@ -29,6 +29,7 @@ public class PersonnelBLImpl implements PersonnelBLService{
 	public ArrayList<PersonnelVO> findById(String id) throws RemoteException {
 		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
 		PersonnelPO po = personnelData.findById(id);
+		vos.add(personnelInfo.toPersonnelVO(po));
 //		int size = pos.size();
 //		for (int i = 0; i < size; i++) {
 //			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
@@ -40,6 +41,9 @@ public class PersonnelBLImpl implements PersonnelBLService{
 	public ArrayList<PersonnelVO> findByName(String name) throws RemoteException {
 		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
 		ArrayList<PersonnelPO> pos = personnelData.findByName(name);
+		if (pos == null) {
+			return null;
+		}
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
 			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
@@ -54,9 +58,8 @@ public class PersonnelBLImpl implements PersonnelBLService{
 	}
 
 	@Override
-	public ResultMessage delete(PersonnelVO vo) throws RemoteException {
-		PersonnelPO po = personnelInfo.toPersonnelPO(vo);
-		return personnelData.delete(po.getId());
+	public ResultMessage delete(String id) throws RemoteException {
+		return personnelData.delete(id);
 	}
 
 	@Override

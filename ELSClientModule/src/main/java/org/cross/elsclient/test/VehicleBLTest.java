@@ -1,3 +1,6 @@
+/**
+ * vehicle全部写好了
+ */
 package org.cross.elsclient.test;
 
 import java.rmi.RemoteException;
@@ -16,7 +19,6 @@ public class VehicleBLTest {
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) throws RemoteException{
 		DataFactoryService dataFactory = new Datafactory();
-		@SuppressWarnings("unused")
 		VehicleInfo vehicleInfo = new VehicleInfoImpl();
 		VehicleBLImpl vehicleBLImpl = new VehicleBLImpl(dataFactory.getVehicleData(), vehicleInfo);
 		
@@ -28,14 +30,14 @@ public class VehicleBLTest {
 		}else {
 			System.out.println("添加失败");
 		}
-		System.out.println("=======测试删除车辆信息（delete）=======");
-		VehicleVO vehicleVO2 = new VehicleVO("000000004", "000022", "1234", "2015-10-10", "2015-11-11", null, VehicleType.CAR);
-		ResultMessage resultMessage2 = vehicleBLImpl.delete(vehicleVO2);
-		if (resultMessage2 == ResultMessage.SUCCESS) {
-			System.out.println("删除成功");
-		}else {
-			System.out.println("删除失败");
-		}
+//		System.out.println("=======测试删除车辆信息（delete）=======");
+//		VehicleVO vehicleVO2 = new VehicleVO("000000004", "000022", "1234", "2015-10-10", "2015-11-11", null, VehicleType.CAR);
+//		ResultMessage resultMessage2 = vehicleBLImpl.delete("000000004");
+//		if (resultMessage2 == ResultMessage.SUCCESS) {
+//			System.out.println("删除成功");
+//		}else {
+//			System.out.println("删除失败");
+//		}
 		System.out.println("=======测试更新车辆信息（update）=======");
 		VehicleVO vehicleVO3 = new VehicleVO("000000004", "000022", "124", "2015-10-17", "2015-11-21", null, VehicleType.PLANE);
 		ResultMessage resultMessage3 = vehicleBLImpl.update(vehicleVO3);
@@ -51,7 +53,7 @@ public class VehicleBLTest {
 			System.out.println(vos.get(i).apparatusNumber + " " + vos.get(i).buyTime + " " + vos.get(i).lastTime);
 		}
 		System.out.println("=======测试查找车辆信息（find）=======");
-		ArrayList<VehicleVO> vos2 = vehicleBLImpl.find("V000001");
+		ArrayList<VehicleVO> vos2 = vehicleBLImpl.find("000000004");
 		if (vos2 == null) {
 			System.out.println("未找到");
 		}else {

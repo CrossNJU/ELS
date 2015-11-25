@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
+import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.po.UserPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
@@ -55,21 +56,29 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 
 	@Override
 	public UserPO findById(String id)  throws RemoteException{
-		String sql = "select * from `organization` where `number`='" + id + "'";
+		String sql = "select * from `user` where `number`='" + id + "'";
 		ResultSet rs = mysql.query(sql);
 		return getFromDB(rs);
 	}
 
 	@Override
 	public ArrayList<UserPO> findByType(UserType type)  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from `user` where `type`='"+type+"'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<UserPO> users = new ArrayList<UserPO>();
+		UserPO po = null;
+		while ((po=getFromDB(rs))!=null) users.add(po);
+		return users;
 	}
 
 	@Override
 	public ArrayList<UserPO> findByName(String name)  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from `user` where `name`='"+name+"'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<UserPO> users = new ArrayList<UserPO>();
+		UserPO po = null;
+		while ((po=getFromDB(rs))!=null) users.add(po);
+		return users;
 	}
 
 	@Override

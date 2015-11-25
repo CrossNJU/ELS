@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.VehicleInfo;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
-import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService_Stub;
+//import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService_Stub;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 import org.cross.elscommon.po.VehiclePO;
@@ -30,8 +30,7 @@ public class VehicleBLImpl implements VehicleBLService{
 	}
 
 	@Override
-	public ResultMessage delete(VehicleVO vo) throws RemoteException {
-		String number = vo.number;
+	public ResultMessage delete(String number) throws RemoteException {
 		return vehicleData.delete(number);
 	}
 

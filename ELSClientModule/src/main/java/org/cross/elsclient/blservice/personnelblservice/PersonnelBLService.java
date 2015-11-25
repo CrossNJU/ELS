@@ -47,7 +47,7 @@ public interface PersonnelBLService {
 	 * @return
 	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(PersonnelVO vo) throws RemoteException;
+	public ResultMessage delete(String id) throws RemoteException;
 
 	/**
 	 * 更新人员信息
