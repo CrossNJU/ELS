@@ -5,13 +5,14 @@
  */
 package org.cross.elscommon.dataservice.logdataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.LogPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public interface LogDataService {
+public interface LogDataService extends Remote{
 
 	public ResultMessage insert(LogPO po) throws RemoteException;
 

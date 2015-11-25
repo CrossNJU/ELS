@@ -4,9 +4,13 @@ import java.rmi.RemoteException;
 
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
+import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
+import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
+import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
+import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 
 public interface DataFactoryService {
@@ -22,4 +26,12 @@ public interface DataFactoryService {
 	public AccountDataService getAccountData() throws RemoteException;
 	
 	public OrganizationDataService getOrganizationData() throws RemoteException;
+	
+	public PersonnelDataService getPersonnelData() throws RemoteException;
+	
+	public LogDataService getlogData() throws RemoteException;
+	
+	public InitialDataService getinInitialData() throws RemoteException;
+	
+	public UserDataService getuserdaData() throws RemoteException;
 }

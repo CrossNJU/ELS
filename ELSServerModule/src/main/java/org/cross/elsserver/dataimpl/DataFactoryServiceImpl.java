@@ -6,15 +6,23 @@ import java.rmi.server.UnicastRemoteObject;
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
+import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
+import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
+import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
+import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 import org.cross.elsserver.dataimpl.accountdataimpl.AccountDataImpl;
 import org.cross.elsserver.dataimpl.goodsdataimpl.GoodsDataImpl;
+import org.cross.elsserver.dataimpl.initialdataimpl.InitialDataImpl;
+import org.cross.elsserver.dataimpl.logdataimpl.LogDataImpl;
 import org.cross.elsserver.dataimpl.organizationdataimpl.OrganizationDataImpl;
+import org.cross.elsserver.dataimpl.personneldataimpl.PersonnelDataImpl;
 import org.cross.elsserver.dataimpl.receiptdataimpl.ReceiptDataImpl;
 import org.cross.elsserver.dataimpl.stockdataimpl.StockDataImpl;
+import org.cross.elsserver.dataimpl.userdataimpl.UserDataImpl;
 import org.cross.elsserver.dataimpl.vehicledataimpl.VehicleDataImpl;
 
 public class DataFactoryServiceImpl extends UnicastRemoteObject implements DataFactoryService{
@@ -56,6 +64,26 @@ public class DataFactoryServiceImpl extends UnicastRemoteObject implements DataF
 	@Override
 	public OrganizationDataService getOrganizationData() throws RemoteException {
 		return new OrganizationDataImpl();
+	}
+
+	@Override
+	public PersonnelDataService getPersonnelData() throws RemoteException {
+		return new PersonnelDataImpl();
+	}
+
+	@Override
+	public LogDataService getlogData() throws RemoteException {
+		return new LogDataImpl();
+	}
+
+	@Override
+	public InitialDataService getinInitialData() throws RemoteException {
+		return new InitialDataImpl();
+	}
+
+	@Override
+	public UserDataService getuserdaData() throws RemoteException {
+		return new UserDataImpl();
 	}
 
 }

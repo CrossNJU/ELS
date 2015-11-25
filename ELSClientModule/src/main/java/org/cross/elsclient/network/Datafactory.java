@@ -8,9 +8,13 @@ import java.rmi.RemoteException;
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
+import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
+import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
+import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
+import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 import org.cross.elscommon.util.NetWork;
 
@@ -106,6 +110,66 @@ public class Datafactory implements DataFactoryService{
 			e.printStackTrace();
 		}
 		return organizationData;
+	}
+
+	@Override
+	public PersonnelDataService getPersonnelData() throws RemoteException {
+		PersonnelDataService personnelDataService = null;
+		try {
+			personnelDataService = (PersonnelDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/personneldata");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return personnelDataService;
+	}
+
+	@Override
+	public LogDataService getlogData() throws RemoteException {
+		LogDataService logDataService = null;
+		try {
+			logDataService = (LogDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/logdata");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return logDataService;
+	}
+
+	@Override
+	public InitialDataService getinInitialData() throws RemoteException {
+		InitialDataService initialDataService = null;
+		try {
+			initialDataService = (InitialDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/initialdata");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return initialDataService;
+	}
+
+	@Override
+	public UserDataService getuserdaData() throws RemoteException {
+		UserDataService userDataService = null;
+		try {
+			userDataService = (UserDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/userdata");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userDataService;
 	}
 
 }

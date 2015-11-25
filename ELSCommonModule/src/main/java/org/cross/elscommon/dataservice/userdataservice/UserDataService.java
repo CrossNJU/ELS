@@ -5,6 +5,7 @@
  */
 package org.cross.elscommon.dataservice.userdataservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.UserPO;
@@ -12,7 +13,7 @@ import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
 
 
-public interface UserDataService 
+public interface UserDataService extends Remote
 {
 	/**
 	 * 增加用户

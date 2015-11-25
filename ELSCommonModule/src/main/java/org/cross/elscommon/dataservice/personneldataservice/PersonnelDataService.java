@@ -5,13 +5,14 @@
  */
 package org.cross.elscommon.dataservice.personneldataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public interface PersonnelDataService {
+public interface PersonnelDataService extends Remote{
 
 	public PersonnelPO findById(String id) throws RemoteException;
 

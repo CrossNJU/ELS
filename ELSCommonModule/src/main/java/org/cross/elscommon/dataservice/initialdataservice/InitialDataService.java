@@ -5,13 +5,14 @@
  */
 package org.cross.elscommon.dataservice.initialdataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.InitialPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public interface InitialDataService {
+public interface InitialDataService extends Remote{
 
 	public ResultMessage insert(InitialPO po) throws RemoteException;
 
