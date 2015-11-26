@@ -15,6 +15,7 @@ import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.OrganizationVO;
 
 public class OrganizationManagePanel extends ELSManagePanel{
@@ -39,8 +40,8 @@ public class OrganizationManagePanel extends ELSManagePanel{
 		String[] s = {"机构编号","地区","类型"};
 		int[] itemWidth = {200,100,100};
 		list= new OrganizationManageTable(s,itemWidth,organizationbl);
-		list.setLocation(0, 0);
-		contentPanel.add(list);
+		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		container.add(list);
 	}
 	
 	@Override

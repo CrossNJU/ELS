@@ -21,7 +21,6 @@ import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
 public class ELSManagePanel extends ELSScrollPane {
 	protected ELSPanel container;
-	protected JPanel contentPanel;
 	protected ELSBox searchPanel;
 	protected ELSComboBox modeBox;
 	protected ELSButton searchBtn;
@@ -37,7 +36,6 @@ public class ELSManagePanel extends ELSScrollPane {
 		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		container = new ELSPanel();
-		contentPanel = new JPanel();
 		searchPanel = new ELSBox(BoxLayout.X_AXIS);
 		modeBox = new ELSComboBox();
 		searchTextField = new ELSTextField();
@@ -70,11 +68,6 @@ public class ELSManagePanel extends ELSScrollPane {
 		searchPanel.add(Box.createHorizontalStrut(10));
 		searchPanel.add(searchBtn);
 //		searchPanel.add(Box.createHorizontalStrut(10));
-		
-		
-		contentPanel.setSize(UIConstant.CONTENTPANEL_WIDTH,UIConstant.CONTAINER_HEIGHT);
-		contentPanel.setLayout(null);
-		contentPanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		
 		container.add(searchPanel);
 //		container.add(contentPanel);

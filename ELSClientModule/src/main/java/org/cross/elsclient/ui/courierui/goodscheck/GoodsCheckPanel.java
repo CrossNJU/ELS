@@ -9,6 +9,7 @@ import javax.swing.DefaultComboBoxModel;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.ui.adminui.UserManageTable;
 import org.cross.elsclient.ui.component.ELSManagePanel;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.GoodsVO;
 
 public class GoodsCheckPanel extends ELSManagePanel{
@@ -23,8 +24,8 @@ public class GoodsCheckPanel extends ELSManagePanel{
 		String[] s = {"出发地","出发时间","到达地","到达时间"};
 		int[] itemWidth = {100,200,100,200};
 		list= new GoodsCheckTable(s, itemWidth);
-		list.setLocation(0, 0);
-		contentPanel.add(list);
+		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		container.add(list);
 	}
 	
 	@Override

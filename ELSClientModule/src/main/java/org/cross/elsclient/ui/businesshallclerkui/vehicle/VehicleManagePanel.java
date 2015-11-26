@@ -17,6 +17,7 @@ import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elsclient.vo.VehicleVO;
 
@@ -52,8 +53,8 @@ public class VehicleManagePanel extends ELSManagePanel{
 		String[] s = {"车辆编号","车牌号","服役时间"};
 		int[] itemWidth = {100,100,200};
 		list= new VehicleManageTable(s,itemWidth,vehiclebl);
-		list.setLocation(0, 0);
-		contentPanel.add(list);
+		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		container.add(list);
 	}
 	
 	@Override
