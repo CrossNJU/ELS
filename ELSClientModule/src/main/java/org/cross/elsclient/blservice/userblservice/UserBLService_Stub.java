@@ -90,7 +90,6 @@ public class UserBLService_Stub implements UserBLService {
 			return UserType.SUPERCOUNTER;
 		case "8":
 			return UserType.MANAGER;
-
 		default:
 			break;
 		}

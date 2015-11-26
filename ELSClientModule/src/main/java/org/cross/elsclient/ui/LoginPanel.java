@@ -24,6 +24,10 @@ import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.counterui.CounterFunctionPanel;
+import org.cross.elsclient.ui.courierui.CourierFunctionPanel;
+import org.cross.elsclient.ui.managerui.ManagerFunctionPanel;
+import org.cross.elsclient.ui.transitcenterclerkui.TransmitFunctionPanel;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elscommon.util.UserType;
 
@@ -105,14 +109,40 @@ public class LoginPanel extends ELSPanel{
 			if(type==UserType.ADMINISTRATOR){//系统管理员
 				System.out.println("登录成功");
 				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
-				parentContainer.add(new AdminFunctionPanel(),"function");
+				parentContainer.add("function",new AdminFunctionPanel());
 				parentContainer.cl.show(parentContainer, "function");
 			}else if(type==UserType.BUSINESSHALLCLERK){
 				System.out.println("登录成功");
 				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
-				parentContainer.add(new BusinessFunctionPanel(),"function");
+				parentContainer.add("function",new BusinessFunctionPanel());
+				parentContainer.cl.show(parentContainer, "function");
+			}else if(type==UserType.COURIER){
+				System.out.println("登录成功");
+				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
+				parentContainer.add("function",new CourierFunctionPanel());
+				parentContainer.cl.show(parentContainer, "function");
+			}else if(type==UserType.TRANSITCENTERCLERK){
+				System.out.println("登录成功");
+				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
+				parentContainer.add("function",new TransmitFunctionPanel());
+				parentContainer.cl.show(parentContainer, "function");
+			}else if(type==UserType.COUNTER){
+				System.out.println("登录成功");
+				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
+				parentContainer.add("function",new CounterFunctionPanel());
+				parentContainer.cl.show(parentContainer, "function");
+			}else if(type==UserType.SUPERCOUNTER){
+				System.out.println("登录成功");
+				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
+				parentContainer.add("function",new CounterFunctionPanel());
+				parentContainer.cl.show(parentContainer, "function");
+			}else if(type==UserType.MANAGER){
+				System.out.println("登录成功");
+				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
+				parentContainer.add("function",new ManagerFunctionPanel());
 				parentContainer.cl.show(parentContainer, "function");
 			}
+			System.out.println("用户类型为:"+type.toString());
 		}
 
 		@Override

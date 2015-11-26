@@ -25,18 +25,20 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 	public ConstantBLService constantbl;
 	public LogBLService logbl;
 	
-	
-	@Override
-	public void init() {
-		super.init();
-		
+	public ManagerFunctionPanel() {
 //		organizationbl = new OrganizationBlservice_Stub();
 		receiptbl = new ReceiptBLService_Stub();
 //		accoutbl = new AccountBLService_Stub();
 //		analysisbl = new AnalysisBLService_Stub();
 		constantbl = new ConstantBLService_Stub();
 		logbl = new LogBLService_Stub();
-		
+		init();
+	}
+	
+	
+	@Override
+	public void init() {
+		super.init();
 		
 		addFunctionBtn("单据审批", "receiptApproval");
 		addFunctionBtn("机构管理", "organization");
@@ -47,15 +49,14 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("业务常量", "constant");
 		addFunctionBtn("系统日志", "log");
 		
-//		addFunctionPanel(new ELSManagePanel(),"manange", "receiptApproval");
-//		addFunctionPanel(new ELSManagePanel(),"manange", "organization");
-//		addFunctionPanel(new ELSManagePanel(),"manange", "personnelManage");
-//		addFunctionPanel(new ELSManagePanel(),"manange", "paymentManage");
-//		addFunctionPanel(new ELSManagePanel(),"manange", "accoutCheck");
-//		addFunctionPanel(new ELSManagePanel(),"manange", "analysis");
-//		addFunctionPanel(new ELSManagePanel(),"manange", "constant");
-//		addFunctionPanel(new ELSManagePanel(),"manange", "log");
-		
+		addFunctionPanel(new ELSManagePanel(),"manange", "receiptApproval");
+		addFunctionPanel(new ELSManagePanel(),"manange", "organization");
+		addFunctionPanel(new ELSManagePanel(),"manange", "personnelManage");
+		addFunctionPanel(new ELSManagePanel(),"manange", "paymentManage");
+		addFunctionPanel(new ELSManagePanel(),"manange", "accoutCheck");
+		addFunctionPanel(new ELSManagePanel(),"manange", "analysis");
+		addFunctionPanel(new ELSManagePanel(),"manange", "constant");
+		addFunctionPanel(new ELSManagePanel(),"manange", "log");
 		
 		validate();
 	}

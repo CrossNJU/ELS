@@ -1,5 +1,7 @@
 package org.cross.elsclient.ui.transitcenterclerkui;
 
-public class TransmitFunctionPanel {
+import org.cross.elsclient.ui.component.ELSFunctionPanel;
+
+public class TransmitFunctionPanel extends ELSFunctionPanel {
 
 }

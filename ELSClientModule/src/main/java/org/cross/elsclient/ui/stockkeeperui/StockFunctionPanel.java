@@ -1,5 +1,7 @@
 package org.cross.elsclient.ui.stockkeeperui;
 
-public class StockFunctionPanel {
+import org.cross.elsclient.ui.component.ELSFunctionPanel;
+
+public class StockFunctionPanel extends ELSFunctionPanel{
 
 }

@@ -142,7 +142,7 @@ public class UserManagePanel extends ELSManagePanel {
 				//界面统一添加到功能界面(managePanel的父容器)
 				UserAddPanel userAddPanel = new UserAddPanel(userbl);
 				ELSPanel parent = (ELSPanel) getParent();
-				parent.add(userAddPanel,"add");
+				parent.add("add",userAddPanel);
 				parent.cl.show(parent, "add");
 			}
 		}

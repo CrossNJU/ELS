@@ -65,7 +65,7 @@ public class UserManageTable extends ELSManageTable{
 		//界面统一添加到功能界面(managePanel的父容器)
 		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 0);
 		UserVO vo = vos.get(index);
-		contentPanel.add(new UserInfoPanel(vo),"info");
+		contentPanel.add("info",new UserInfoPanel(vo));
 		contentPanel.cl.show(contentPanel, "info");
 	}
 	
@@ -75,7 +75,7 @@ public class UserManageTable extends ELSManageTable{
 		//界面统一添加到功能界面(managePanel的父容器)
 		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 0);
 		
-		contentPanel.add(new UserUpdatePanel(vos.get(index),userbl),"update");
+		contentPanel.add("update",new UserUpdatePanel(vos.get(index),userbl));
 		contentPanel.cl.show(contentPanel, "update");
 	}
 	
