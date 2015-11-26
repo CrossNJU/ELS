@@ -47,14 +47,14 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("业务常量", "constant");
 		addFunctionBtn("系统日志", "log");
 		
-		addFunctionPanel(new ELSManagePanel(),"manange", "receiptApproval");
-		addFunctionPanel(new ELSManagePanel(),"manange", "organization");
-		addFunctionPanel(new ELSManagePanel(),"manange", "personnelManage");
-		addFunctionPanel(new ELSManagePanel(),"manange", "paymentManage");
-		addFunctionPanel(new ELSManagePanel(),"manange", "accoutCheck");
-		addFunctionPanel(new ELSManagePanel(),"manange", "analysis");
-		addFunctionPanel(new ELSManagePanel(),"manange", "constant");
-		addFunctionPanel(new ELSManagePanel(),"manange", "log");
+//		addFunctionPanel(new ELSManagePanel(),"manange", "receiptApproval");
+//		addFunctionPanel(new ELSManagePanel(),"manange", "organization");
+//		addFunctionPanel(new ELSManagePanel(),"manange", "personnelManage");
+//		addFunctionPanel(new ELSManagePanel(),"manange", "paymentManage");
+//		addFunctionPanel(new ELSManagePanel(),"manange", "accoutCheck");
+//		addFunctionPanel(new ELSManagePanel(),"manange", "analysis");
+//		addFunctionPanel(new ELSManagePanel(),"manange", "constant");
+//		addFunctionPanel(new ELSManagePanel(),"manange", "log");
 		
 		
 		validate();

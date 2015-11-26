@@ -25,7 +25,7 @@ import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
 
-public class ELSManageTable extends JScrollPane {
+public class ELSManageTable extends ELSPanel {
 	String[] name;
 	ELSBox header;
 	protected ELSBox container;
@@ -57,7 +57,7 @@ public class ELSManageTable extends JScrollPane {
 	}
 
 	public void init() {
-		setViewport(null);
+		removeAll();
 		
 		itemLabels = new ArrayList<>();
 		container = new ELSBox(BoxLayout.Y_AXIS);
@@ -66,7 +66,7 @@ public class ELSManageTable extends JScrollPane {
 		font = getFont().deriveFont(18f);
 		isUpdateAndDelete = false;
 
-		setSize(width, UIConstant.MANAGETABLE_HEIGHT);
+		setSize(new Dimension(width, UIConstant.MANAGETABLE_HEIGHT));
 		setBorder(null);
 		
 		container.setSize(width,UIConstant.MANAGETABLE_HEIGHT);
@@ -95,7 +95,7 @@ public class ELSManageTable extends JScrollPane {
 		}
 		
 		container.add(header);
-		setViewportView(container);
+		add(container);
 		validate();
 		repaint();
 	}
@@ -146,6 +146,7 @@ public class ELSManageTable extends JScrollPane {
 			
 			itemLabels.add(itemLabel);
 			container.add(itemLabel);
+			packHeight();
 			validate();
 			repaint();
 		}
@@ -264,6 +265,12 @@ public class ELSManageTable extends JScrollPane {
 				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
 			}
 		}
+	}
+	
+	@Override
+	public void packHeight() {
+		container.setSize(getWidth(),container.getComponentCount()*UIConstant.MANAGETABLE_ITEM_HEIGHT);
+		setSize(getWidth(),container.getComponentCount()*UIConstant.MANAGETABLE_ITEM_HEIGHT);
 	}
 	
 }

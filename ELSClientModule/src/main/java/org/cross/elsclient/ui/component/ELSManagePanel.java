@@ -19,12 +19,12 @@ import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
 import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
-public class ELSManagePanel extends ELSPanel {
+public class ELSManagePanel extends ELSScrollPane {
+	protected ELSPanel container;
 	protected JPanel contentPanel;
 	protected ELSBox searchPanel;
 	protected ELSComboBox modeBox;
 	protected ELSButton searchBtn;
-	protected ELSButton btn2;
 	protected ELSTextField searchTextField;
 
 //	public ELSManagePanel() {
@@ -32,18 +32,21 @@ public class ELSManagePanel extends ELSPanel {
 //	}
 	
 	public void init() {
-		setLayout(null);
-		setSize(UIConstant.CONTENTPANEL_WIDTH,UIConstant.CONTENTPANEL_HEIGHT);
+		setSize(UIConstant.CONTAINER_WIDTH,UIConstant.CONTAINER_WIDTH);
+		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
+		container = new ELSPanel();
 		contentPanel = new JPanel();
 		searchPanel = new ELSBox(BoxLayout.X_AXIS);
 		modeBox = new ELSComboBox();
 		searchTextField = new ELSTextField();
 		searchBtn = new ELSButton();
-		btn2 = new ELSButton();
 		
+		container.setPreferredSize(new Dimension(UIConstant.CONTAINER_WIDTH,UIConstant.CONTAINER_HEIGHT));
+		container.setLayout(null);
 		
-		searchPanel.setSize(getWidth(),48);
+		searchPanel.setSize(UIConstant.CONTENTPANEL_WIDTH,48);
 //		searchPanel.setLayout(null);
 		searchPanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, UIConstant.CONTENTPANEL_MARGIN_TOP);
 		
@@ -60,8 +63,6 @@ public class ELSManagePanel extends ELSPanel {
 		searchBtn.setMaximumSize(new Dimension(250, UIConstant.SEARCHPANEL_HEIGHT));
 		searchBtn.setMinimumSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
 		
-
-		
 		searchPanel.add(modeBox);
 		searchPanel.add(Box.createHorizontalStrut(10));
 		searchPanel.add(searchTextField);
@@ -70,15 +71,17 @@ public class ELSManagePanel extends ELSPanel {
 		searchPanel.add(searchBtn);
 //		searchPanel.add(Box.createHorizontalStrut(10));
 		
-		setSearchPanel();
 		
-		contentPanel.setSize(UIConstant.CONTENTPANEL_WIDTH, 800);
+		contentPanel.setSize(UIConstant.CONTENTPANEL_WIDTH,UIConstant.CONTAINER_HEIGHT);
 		contentPanel.setLayout(null);
 		contentPanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		
+		container.add(searchPanel);
+//		container.add(contentPanel);
+		setSearchPanel();
 		setContentPanel();
 		
-		add(searchPanel);
-		add(contentPanel);
+		this.getViewport().add(container);
 		
 	}
 	

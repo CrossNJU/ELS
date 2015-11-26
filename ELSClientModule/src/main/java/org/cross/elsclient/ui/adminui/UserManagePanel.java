@@ -27,6 +27,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSTextField;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.UserType;
 import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
@@ -55,8 +56,8 @@ public class UserManagePanel extends ELSManagePanel {
 		String[] s = {"编号","姓名","类型"};
 		int[] itemWidth = {100,100,200};
 		list= new UserManageTable(s,itemWidth,userbl);
-		list.setLocation(0, 0);
-		contentPanel.add(list);
+		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		container.add(list);
 	}
 	
 	@Override
@@ -108,7 +109,8 @@ public class UserManagePanel extends ELSManagePanel {
 					String id = searchTextField.getText();
 					userVOs = new ArrayList<>();
 					try {
-						userVOs.add(userbl.findById(id));
+//						userVOs.add(userbl.findById(id));
+						userVOs = userbl.show();
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -117,6 +119,8 @@ public class UserManagePanel extends ELSManagePanel {
 					for (UserVO userVO : userVOs) {
 						list.addItem(userVO);
 					}
+					//容器自适应高度
+					container.packHeight();
 				}else if(((String)modeBox.getSelectedItem()).equals("按时间查询")){
 					
 				}else if(((String)modeBox.getSelectedItem()).equals("按类型查询")){

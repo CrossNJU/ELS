@@ -19,7 +19,8 @@ public class UserInfoPanel extends ELSInfoPanel {
 		addNormalItem("用户名", vo.id);
 		addNormalItem("姓名", vo.name);
 		addNormalItem("职位", vo.type.toString());
-		
+
+		container.packHeight();
 	}
 	
 }

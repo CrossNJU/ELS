@@ -63,7 +63,7 @@ public class UserManageTable extends ELSManageTable{
 	public void infoBtn(int index) {
 		super.infoBtn(index);
 		//界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel  = (ELSPanel)getParent().getParent().getParent();
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 0);
 		UserVO vo = vos.get(index);
 		contentPanel.add(new UserInfoPanel(vo),"info");
 		contentPanel.cl.show(contentPanel, "info");
@@ -73,21 +73,25 @@ public class UserManageTable extends ELSManageTable{
 	public void updateBtn(int index) {
 		super.updateBtn(index);
 		//界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel  = (ELSPanel)getParent().getParent().getParent();
-		UserManagePanel parent = (UserManagePanel)getParent().getParent();
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 0);
 		
-		contentPanel.add(new UserUpdatePanel(vos.get(index),parent.userbl),"update");
+		contentPanel.add(new UserUpdatePanel(vos.get(index),userbl),"update");
 		contentPanel.cl.show(contentPanel, "update");
 	}
 	
 	@Override
 	public void deleteBtn(int index) {
-		UserManagePanel parent = (UserManagePanel)getParent().getParent();
 		try {
-			if(parent.userbl.delete(vos.get(index).id)==ResultMessage.SUCCESS){
+			if(userbl.delete(vos.get(index).id)==ResultMessage.SUCCESS){
+				//从展示层删除该项
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);
 				vos.remove(index);
+				
+				//自适应高度
+				packHeight();
+				((ELSPanel)getParent()).packHeight();
+				
 				container.validate();
 				container.repaint();
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除成功");

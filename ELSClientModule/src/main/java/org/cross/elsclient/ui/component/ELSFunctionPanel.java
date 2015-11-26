@@ -2,6 +2,7 @@ package org.cross.elsclient.ui.component;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -45,8 +46,8 @@ public class ELSFunctionPanel extends ELSPanel {
 //		logo.setFont(logo.getFont().deriveFont(100f));
 		logo.setFont(new Font("Yahei", Font.PLAIN, 60));
 		
-		this.add(logo);
 		this.add(contentPanel);
+		this.add(logo);
 	}
 	
 	
@@ -74,7 +75,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	 * @para panel-功能面板,name-默认面板名称, functionName-功能名称
 	 * @return void
 	 */
-	public void addFunctionPanel(JPanel panel,String name, String functionName){
+	public void addFunctionPanel(Container panel,String name, String functionName){
 		ELSPanel container = new ELSPanel();
 		container.setBackground(Color.white);
 		
