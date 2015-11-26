@@ -9,7 +9,7 @@ public class UIConstant {
 	public static int CONTENTPANEL_MARGIN_LEFT = 18;
 	public static int CONTENTPANEL_MARGIN_TOP = 18;
 	
-	public static int MANAGETABLE_HEIGHT = 500;
+	public static int MANAGETABLE_HEIGHT = 5000;
 	public static int MANAGETABLE_ITEM_HEIGHT = 48;
 	
 	public static int SEARCHPANEL_HEIGHT = 48;

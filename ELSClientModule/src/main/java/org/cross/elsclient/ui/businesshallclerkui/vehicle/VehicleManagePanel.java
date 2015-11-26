@@ -14,6 +14,7 @@ import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
+import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.vo.UserVO;
@@ -24,6 +25,7 @@ public class VehicleManagePanel extends ELSManagePanel{
 	VehicleBLService vehiclebl;
 	ArrayList<VehicleVO> vehicleVOs;
 	VehicleManageTable list;
+	ELSButton addBtn;
 	
 	public VehicleManagePanel(){}
 	
@@ -63,10 +65,12 @@ public class VehicleManagePanel extends ELSManagePanel{
 		searchBtn.setText("查找车辆");
 		searchBtn.addMouseListener(new BtnListener());
 		
-		btn2.setText("添加车辆");
-		btn2.addMouseListener(new BtnListener());
+		addBtn = new ELSButton();
+		addBtn.setText("添加车辆");
+		addBtn.addMouseListener(new BtnListener());
+		
 		searchPanel.add(Box.createHorizontalStrut(10));
-		searchPanel.add(btn2);
+		searchPanel.add(addBtn);
 		
 		searchPanel.validate();
 	}
@@ -91,7 +95,7 @@ public class VehicleManagePanel extends ELSManagePanel{
 					for (VehicleVO  vehicleVO: vehicleVOs) {
 						list.addItem(vehicleVO);
 					}
-				}else if (e.getSource() == btn2){
+				}else if (e.getSource() == addBtn){
 					VehicleAddPanel vehicleAddPanel = new VehicleAddPanel(vehiclebl);
 					ELSPanel parent = (ELSPanel) getParent();
 					parent.add(vehicleAddPanel,"add");

@@ -59,17 +59,42 @@ public class UserBLService_Stub implements UserBLService {
 		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
 		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
 		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		
 		
 		return list;
 	}
 
 	@Override
 	public UserType login(String id, String password) {
-		if(id.equals("1")){
+		switch (id) {
+		case "1":
 			return UserType.ADMINISTRATOR;
-		}else if(id.equals("2")){
+		case "2":
 			return UserType.BUSINESSHALLCLERK;
+		case "3":
+			return UserType.TRANSITCENTERCLERK;
+		case "4":
+			return UserType.COURIER;
+		case "5":
+			return UserType.STOCKKEEPER;
+		case "6":
+			return UserType.COUNTER;
+		case "7":
+			return UserType.SUPERCOUNTER;
+		case "8":
+			return UserType.MANAGER;
+
+		default:
+			break;
 		}
+		
 		
 		return UserType.ADMINISTRATOR;
 	}

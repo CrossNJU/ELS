@@ -11,6 +11,7 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
+import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
@@ -20,6 +21,7 @@ public class OrganizationManagePanel extends ELSManagePanel{
 	OrganizationBLService organizationbl;
 	ArrayList<OrganizationVO> organizationVOs;
 	OrganizationManageTable list;
+	ELSButton addBtn;
 	
 	public OrganizationManagePanel(){}
 	
@@ -50,10 +52,11 @@ public class OrganizationManagePanel extends ELSManagePanel{
 		searchBtn.setText("查找用户");
 		searchBtn.addMouseListener(new BtnListener());
 		
-		btn2.setText("添加用户");
-		btn2.addMouseListener(new BtnListener());
+		addBtn = new ELSButton();
+		addBtn.setText("添加用户");
+		addBtn.addMouseListener(new BtnListener());
 		searchPanel.add(Box.createHorizontalStrut(10));
-		searchPanel.add(btn2);
+		searchPanel.add(addBtn);
 		
 		searchPanel.validate();
 	}
@@ -78,7 +81,7 @@ public class OrganizationManagePanel extends ELSManagePanel{
 					for (OrganizationVO organizationVO : organizationVOs) {
 						list.addItem(organizationVO);
 					}
-				}else if (e.getSource() == btn2){
+				}else if (e.getSource() == addBtn){
 //					OrganizationAddPanel userAddPanel = new OrganizationAddPanel(userbl);
 //					ELSPanel parent = (ELSPanel) getParent();
 //					parent.add(userAddPanel,"add");
