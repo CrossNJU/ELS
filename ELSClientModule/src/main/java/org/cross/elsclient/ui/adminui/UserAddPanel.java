@@ -28,7 +28,7 @@ public class UserAddPanel extends ELSInfoPanel{
 //		vo = new UserVO("", "", null);
 		
 		//ELSInfoPanel提供了三种添加条目的类型:文字，编辑框，下拉框
-		//其对应的实例化对象存储依次存储在ArrayList: contentLabels,inputLabels,boxLabels
+		//要拿到其中的信息，要调用对应的itemLabel.toString()的方法
 		setTitle("新增用户");
 		addEditableItem("用户名", "U000001", false);
 		addEditableItem("姓名","", true,InfoType.NAME);

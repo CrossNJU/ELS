@@ -33,10 +33,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 	protected ELSPanel titlePanel;
 	protected ELSLabel titleLabel;
 	protected ELSBox infoPanel;
-	protected ArrayList<ELSLabel> itemLabels;
-	protected ArrayList<ELSLabel> contentLabels;
-	protected ArrayList<ELSTextField> inputLabels;
-	protected ArrayList<ELSComboBox> boxLabels;
+	protected ArrayList<InfoItemLabel> itemLabels;
 	protected int itemHeight;
 	protected ELSButton backBtn;
 	protected String backName;
@@ -46,10 +43,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 
 	public void init() {
 		itemHeight = 50;
-		contentLabels = new ArrayList<>();
 		itemLabels = new ArrayList<>();
-		inputLabels = new ArrayList<>();
-		boxLabels = new ArrayList<>();
 
 		container = new ELSPanel();
 		titlePanel = new ELSPanel();
@@ -106,35 +100,11 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @return void
 	 */
 	public void addNormalItem(String name, String content) {
-		ELSLabel itemLabel = new ELSLabel();
-		ELSLabel nameLabel = new ELSLabel(name);
-		ELSLabel contentLabel = new ELSLabel(content);
-
-		itemLabel.setLayout(new BoxLayout(itemLabel, BoxLayout.X_AXIS));
-		itemLabel
-				.setMaximumSize(new Dimension(infoPanel.getWidth(), itemHeight));
-		itemLabel
-				.setMinimumSize(new Dimension(infoPanel.getWidth(), itemHeight));
-
-		nameLabel.setPreferredSize(new Dimension(100, itemHeight));
-		nameLabel.setMaximumSize(new Dimension(100, itemHeight));
-		nameLabel.setVerticalAlignment(JLabel.CENTER);
-		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
-
-		contentLabel.setPreferredSize(new Dimension(200, itemHeight));
-		contentLabel.setMaximumSize(new Dimension(200, itemHeight));
-		contentLabel.setVerticalAlignment(JLabel.CENTER);
-		contentLabel.setHorizontalAlignment(JLabel.LEFT);
-		contentLabel.setFont(getFont().deriveFont(20f));
-
-		itemLabel.add(Box.createHorizontalStrut(30));
-		itemLabel.add(nameLabel);
-		itemLabel.add(Box.createHorizontalStrut(10));
-		itemLabel.add(contentLabel);
+		InfoItemLabel itemLabel = new InfoItemLabel();
+		itemLabel.initNormal(name, content);
 
 		itemLabels.add(itemLabel);
-		contentLabels.add(contentLabel);
+//		contentLabels.add(contentLabel);
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 				+ itemHeight);
 		infoPanel.add(itemLabel);
@@ -148,34 +118,16 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 */
 	public void addEditableItem(String name, String defaultValue,
 			boolean isEditable) {
-		ELSLabel itemLabel = new ELSLabel();
-		ELSLabel nameLabel = new ELSLabel(name);
-		ELSTextField inputLabel = new ELSTextField(defaultValue);
-		inputLabel.setEditable(isEditable);
-
-		itemLabel.setLayout(new BoxLayout(itemLabel, BoxLayout.X_AXIS));
-		itemLabel
-				.setMaximumSize(new Dimension(infoPanel.getWidth(), itemHeight));
-		itemLabel
-				.setMinimumSize(new Dimension(infoPanel.getWidth(), itemHeight));
-
-		nameLabel.setPreferredSize(new Dimension(100, itemHeight));
-		nameLabel.setMaximumSize(new Dimension(100, itemHeight));
-		nameLabel.setVerticalAlignment(JLabel.CENTER);
-		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
-
-		inputLabel.setPreferredSize(new Dimension(150, itemHeight - 15));
-		inputLabel.setMaximumSize(new Dimension(150, itemHeight - 15));
-		inputLabel.setHorizontalAlignment(JTextField.LEFT);
-		inputLabel.setFont(getFont().deriveFont(20f));
-		itemLabel.add(Box.createHorizontalStrut(30));
-		itemLabel.add(nameLabel);
-		itemLabel.add(Box.createHorizontalStrut(10));
-		itemLabel.add(inputLabel);
+		InfoItemLabel itemLabel = new InfoItemLabel();
+		itemLabel.initEditable(name, defaultValue, isEditable);;
 
 		itemLabels.add(itemLabel);
-		inputLabels.add(inputLabel);
+		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
+				+ itemHeight);
+		infoPanel.add(itemLabel);
+
+		itemLabels.add(itemLabel);
+//		inputLabels.add(inputLabel);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 				+ itemHeight);
@@ -189,52 +141,17 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @return void
 	 */
 	public void addEditableItem(String name, String defaultValue,
-			boolean isEditabel, InfoType type) {
-		ELSLabel itemLabel = new ELSLabel();
-		ELSLabel nameLabel = new ELSLabel(name);
-		ELSTextField inputLabel = new ELSTextField(defaultValue);
-		ELSLabel iconLabel = new ELSLabel();
-		ELSLabel textLabel = new ELSLabel();
-		inputLabel.setEditable(isEditabel);
-
-		itemLabel.setLayout(new BoxLayout(itemLabel, BoxLayout.X_AXIS));
-		itemLabel
-				.setMaximumSize(new Dimension(infoPanel.getWidth(), itemHeight));
-		itemLabel
-				.setMinimumSize(new Dimension(infoPanel.getWidth(), itemHeight));
-
-		nameLabel.setPreferredSize(new Dimension(100, itemHeight));
-		nameLabel.setMaximumSize(new Dimension(100, itemHeight));
-		nameLabel.setVerticalAlignment(JLabel.CENTER);
-		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
-
-		inputLabel.setPreferredSize(new Dimension(150, itemHeight - 15));
-		inputLabel.setMaximumSize(new Dimension(150, itemHeight - 15));
-		inputLabel.setHorizontalAlignment(JTextField.LEFT);
-		inputLabel.setFont(getFont().deriveFont(20f));
-		inputLabel.addFocusListener(new TextFormatListener(inputLabel,
-				iconLabel, textLabel, type));
-
-		iconLabel.setMaximumSize(new Dimension(itemHeight, itemHeight));
-		iconLabel.setMinimumSize(new Dimension(itemHeight, itemHeight));
-
-		// textLabel.setMaximumSize(new Dimension(itemHeight*6, itemHeight));
-		textLabel.setMinimumSize(new Dimension(itemHeight * 3, itemHeight));
-		textLabel.setHorizontalAlignment(JLabel.LEFT);
-		textLabel.setVerticalAlignment(JLabel.CENTER);
-		textLabel.setFont(getFont().deriveFont(15f));
-		textLabel.setForeground(Color.red);
-
-		itemLabel.add(Box.createHorizontalStrut(30));
-		itemLabel.add(nameLabel);
-		itemLabel.add(Box.createHorizontalStrut(10));
-		itemLabel.add(inputLabel);
-		itemLabel.add(iconLabel);
-		itemLabel.add(textLabel);
+			boolean isEditable, InfoType type) {
+		InfoItemLabel itemLabel = new InfoItemLabel();
+		itemLabel.initEditable(name, defaultValue, isEditable,type);;
 
 		itemLabels.add(itemLabel);
-		inputLabels.add(inputLabel);
+		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
+				+ itemHeight);
+		infoPanel.add(itemLabel);
+
+		itemLabels.add(itemLabel);
+//		inputLabels.add(inputLabel);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 				+ itemHeight);
@@ -248,43 +165,19 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @return void
 	 */
 	public void addComboxItem(String name, String[] items, boolean isEditable) {
-		ELSLabel itemLabel = new ELSLabel();
-		ELSLabel nameLabel = new ELSLabel(name);
-		ELSComboBox comboBox = new ELSComboBox();
-		comboBox.setEnabled(isEditable);
-
-		itemLabel.setLayout(new BoxLayout(itemLabel, BoxLayout.X_AXIS));
-		itemLabel
-				.setMaximumSize(new Dimension(infoPanel.getWidth(), itemHeight));
-		itemLabel
-				.setMinimumSize(new Dimension(infoPanel.getWidth(), itemHeight));
-
-		nameLabel.setPreferredSize(new Dimension(100, itemHeight));
-		nameLabel.setMaximumSize(new Dimension(100, itemHeight));
-		nameLabel.setVerticalAlignment(JLabel.CENTER);
-		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
-
-		comboBox.setModel(new DefaultComboBoxModel<>(items));
-		comboBox.setPreferredSize(new Dimension(150, itemHeight - 15));
-		comboBox.setMaximumSize(new Dimension(150, itemHeight - 15));
-		comboBox.setFont(getFont().deriveFont(20f));
-
-		itemLabel.add(Box.createHorizontalStrut(30));
-		itemLabel.add(nameLabel);
-		itemLabel.add(Box.createHorizontalStrut(10));
-		itemLabel.add(comboBox);
+		InfoItemLabel itemLabel = new InfoItemLabel();
+		itemLabel.initBox(name, items, isEditable);
 
 		itemLabels.add(itemLabel);
-		boxLabels.add(comboBox);
+		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
+				+ itemHeight);
+		infoPanel.add(itemLabel);
+
+		itemLabels.add(itemLabel);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 				+ itemHeight);
 		infoPanel.add(itemLabel);
-	}
-
-	public void addComboxItem(String name, String... items) {
-
 	}
 
 	/**
@@ -362,6 +255,20 @@ public class ELSInfoPanel extends ELSScrollPane {
 	}
 
 	/**
+	 * 返回是否含有非法信息的值
+	 * @para 
+	 * @return void
+	 */
+	public boolean isAllLegal(){
+		for (InfoItemLabel infoItemLabel : itemLabels) {
+			if(!infoItemLabel.isLegal){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
 	 * 执行确认按钮的方法，若是执行了addConfirmAndCancelBtn(),需要重写这一方法
 	 * 
 	 * @para
@@ -429,41 +336,6 @@ public class ELSInfoPanel extends ELSScrollPane {
 
 	}
 
-	class TextFormatListener implements FocusListener {
-		ELSTextField inputLabel;
-		ELSLabel iconLabel;
-		ELSLabel textLabel;
-		InfoType type;
-
-		public TextFormatListener(ELSTextField inputLabel, ELSLabel iconLabel,
-				ELSLabel textLabel, InfoType type) {
-			super();
-			this.inputLabel = inputLabel;
-			this.iconLabel = iconLabel;
-			this.textLabel = textLabel;
-			this.type = type;
-		}
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			// TODO Auto-generated method stub
-			String src = inputLabel.getText();
-			String result = InfoFormatUtil.CheckFormat(src, type);
-			if (result == null) {
-				iconLabel.setText("Y");
-				textLabel.setText("");
-			} else {
-				iconLabel.setText("N");
-				textLabel.setText(result);
-				// System.out.println(result);
-			}
-		}
-
-	}
+	
 
 }

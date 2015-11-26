@@ -13,7 +13,7 @@ public class InfoFormatUtil {
 		
 		switch (type) {
 		case NAME:
-			return null;
+			return CheckString(src);
 		case IDCARD:
 			return CheckIDCardFormat(src);
 		case CELLPHONE:
@@ -27,6 +27,14 @@ public class InfoFormatUtil {
 		}
 		
 		return null;
+	}
+	
+	public static String CheckString(String src){
+		if(src.isEmpty()){
+			return "信息为空";
+		}else {
+			return null;
+		}
 	}
 	
 	public static String CheckIDCardFormat(String src){
