@@ -140,4 +140,17 @@ public class StringToType {
 			return null;
 		}
 	}
+	
+	public static ApproveType toApproveType(String approve){
+		switch (approve) {
+		case "尚未审批":
+			return ApproveType.UNCHECKED;
+		case "审批通过":
+			return ApproveType.APPROVED;
+		case "审批未通过":
+			return ApproveType.NOT_APPROVED;
+		default:
+			return null;
+		}
+	}
 }

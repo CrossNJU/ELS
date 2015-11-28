@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.vo;
 
+import org.cross.elscommon.util.ApproveType;
 import org.cross.elscommon.util.ReceiptType;
 
 public class ReceiptVO {
@@ -27,7 +28,7 @@ public class ReceiptVO {
 	/**
 	 * 是否已被审批
 	 */
-	public boolean isApproved;
+	public ApproveType approveState;
 	
 	/**
 	 * 构造方法
@@ -40,7 +41,7 @@ public class ReceiptVO {
 		this.type = type;
 		this.time = time;
 		
-		this.isApproved = false;
+		this.approveState = ApproveType.UNCHECKED;
 	}
 	
 	/**

@@ -45,7 +45,7 @@ public class Receipt_OrderDataImpl implements ReceiptTool{
 						StringToType.toCity(rs.getString("startCity")),
 						new People(rs.getString("pushPeople"), null, null),
 						new People(rs.getString("receivePeople"), null, null));
-				po.setApproved(rs.getBoolean("isApproved"));
+				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 				po.setReceiveTime(rs.getString("receiveTime"));
 			}
 		} catch (SQLException e) {

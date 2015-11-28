@@ -37,6 +37,8 @@ public class Receipt_TotalMoneyInDataImpl implements ReceiptTool {
 			if (rs.next()) {
 				po = new Receipt_TotalMoneyInPO(rs.getString("time"), new PersonnelPO(rs.getString("personnelNum"), null, null, null, null),
 						StringToType.toCity(rs.getString("place")), rs.getString("number"));
+				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
+				po.setSum(rs.getDouble("money"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

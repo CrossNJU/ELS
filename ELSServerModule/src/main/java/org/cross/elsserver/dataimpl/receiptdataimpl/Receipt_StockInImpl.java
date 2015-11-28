@@ -7,6 +7,7 @@ import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.po.Receipt_StockInPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
 
 public class Receipt_StockInImpl implements ReceiptTool{
@@ -35,6 +36,7 @@ public class Receipt_StockInImpl implements ReceiptTool{
 			if (rs.next()) {
 				realPo = new Receipt_StockInPO(rs.getString("number"), rs.getString("time"), null,
 						rs.getString("goodsNum"));
+				realPo.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

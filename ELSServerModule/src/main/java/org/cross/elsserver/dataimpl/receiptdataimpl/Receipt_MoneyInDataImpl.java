@@ -8,6 +8,7 @@ import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.po.Receipt_MoneyInPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
 
 public class Receipt_MoneyInDataImpl implements ReceiptTool {
@@ -38,6 +39,7 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 			if (rs.next()) {
 				po = new Receipt_MoneyInPO(rs.getString("time"), rs.getDouble("money"),
 						new PersonnelPO(rs.getString("personnelNum"), null, null, null, null), rs.getString("number"));
+				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

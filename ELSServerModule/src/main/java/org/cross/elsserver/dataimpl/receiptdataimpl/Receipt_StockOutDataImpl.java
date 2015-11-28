@@ -38,6 +38,7 @@ public class Receipt_StockOutDataImpl implements ReceiptTool {
 			if (rs.next()) {
 				po = new Receipt_StockOutPO(rs.getString("goodsNum"), rs.getString("time"), StringToType.toCity(rs.getString("targetCity")),
 						StringToType.toVehicleType(rs.getString("transType")), rs.getString("transNum"), rs.getString("number"));
+				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

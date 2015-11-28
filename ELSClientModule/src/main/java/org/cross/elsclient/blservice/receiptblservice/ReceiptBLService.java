@@ -8,6 +8,7 @@ package org.cross.elsclient.blservice.receiptblservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.cross.elscommon.util.ApproveType;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.vo.ReceiptVO;
@@ -59,7 +60,7 @@ public interface ReceiptBLService {
 	 * @return
 	 * @throws RemoteException 
 	 */
-	public ResultMessage check(ReceiptVO vo) throws RemoteException;
+	public ResultMessage check(ReceiptVO vo, ApproveType approveState) throws RemoteException;
 	
 	/**
 	 * 根据时间查找单据

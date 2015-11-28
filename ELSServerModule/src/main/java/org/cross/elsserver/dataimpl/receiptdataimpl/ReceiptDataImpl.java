@@ -41,8 +41,8 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 
 	@Override
 	public ResultMessage insert(ReceiptPO po) throws RemoteException {
-		String sql = "insert ignore into `receipt`(`number`, `type`, `time`, `isApproved`) values ('"
-				+po.getNumber()+"','"+po.getType().toString()+"','"+po.getTime()+"',"+po.isApproved()+ ")";
+		String sql = "insert ignore into `receipt`(`number`, `type`, `time`, `approveState`) values ('"
+				+po.getNumber()+"','"+po.getType().toString()+"','"+po.getTime()+"','"+po.getApproveState().toString()+ "')";
 		if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		switch (po.getType()) {
 		case ORDER:
@@ -77,8 +77,8 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	}
 
 	@Override
-	public ResultMessage updateCheck(String number) throws RemoteException {
-		String sql = "update `receipt` set `isApproved`=true where `number`='"+number+"'";
+	public ResultMessage updateCheck(String number, String state) throws RemoteException {
+		String sql = "update `receipt` set `approveState`='"+state+"' where `number`='"+number+"'";
 		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
 		else return ResultMessage.FAILED;
 	}

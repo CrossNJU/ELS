@@ -7,6 +7,7 @@ package org.cross.elscommon.po;
 
 import java.io.Serializable;
 
+import org.cross.elscommon.util.ApproveType;
 import org.cross.elscommon.util.ReceiptType;
 
 public class ReceiptPO implements Serializable {
@@ -34,7 +35,7 @@ public class ReceiptPO implements Serializable {
 	/**
 	 * 是否已被审批
 	 */
-	private boolean isApproved;
+	private ApproveType approveState;
 
 	/**
 	 * 构造方法
@@ -48,7 +49,7 @@ public class ReceiptPO implements Serializable {
 		this.type = type;
 		this.time = time;
 
-		this.isApproved = false;
+		this.approveState = ApproveType.UNCHECKED;
 	}
 
 	/**
@@ -82,12 +83,12 @@ public class ReceiptPO implements Serializable {
 		this.time = time;
 	}
 
-	public boolean isApproved() {
-		return isApproved;
+	public ApproveType getApproveState() {
+		return approveState;
 	}
 
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
+	public void setApproveState(ApproveType approveState) {
+		this.approveState = approveState;
 	}
 
 	public static long getSerialversionuid() {

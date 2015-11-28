@@ -46,6 +46,7 @@ public class Receipt_TransDataImpl implements ReceiptTool {
 						rs.getString("veNum"), StringToType.toCity(rs.getString("startCity")), 
 						StringToType.toCity(rs.getString("endCity")), new PersonnelPO(rs.getString("observer"), null, null, null, null), 
 						new PersonnelPO(rs.getString("driver"), null, null, null, null));
+				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

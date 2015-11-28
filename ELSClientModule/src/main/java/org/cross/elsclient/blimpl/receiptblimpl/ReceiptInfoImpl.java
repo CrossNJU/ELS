@@ -50,13 +50,13 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					realpo.getGoodsNum(), realpo.getCost(), realpo.getExpectTime(), realpo.getTargetPlace(),
 					realpo.getStartPlace(), realpo.getPushPeople(), realpo.getReceivePeople());
 			order.receiveTime = realpo.getReceiveTime();
-			order.isApproved = realpo.isApproved();
+			order.approveState = realpo.getApproveState();
 			return order;
 		case ARRIVE:
 			Receipt_ArrivePO arripo = (Receipt_ArrivePO) po;
 			Receipt_ArriveVO arri = new Receipt_ArriveVO(arripo.getNumber(), arripo.getType(), arripo.getTime(),
 					arripo.getStartPlace(), arripo.getTransNum(), arripo.getGoodslist(), arripo.getArriveOrg());
-			arri.isApproved = arripo.isApproved();
+			arri.approveState = arripo.getApproveState();
 			return arri;
 		case TRANS:
 			Receipt_TransPO transpo = (Receipt_TransPO) po;
@@ -65,33 +65,33 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					transpo.getVehicleNum(), transpo.getStartCity(), transpo.getArriveCity(),
 					personnelInfo.toPersonnelVO(transpo.getObserver()),
 					personnelInfo.toPersonnelVO(transpo.getDriver()));
-			transvo.isApproved = transpo.isApproved();
+			transvo.approveState = transpo.getApproveState();
 			return transvo;
 		case STOCKIN:
 			Receipt_StockInPO stockinpo = (Receipt_StockInPO) po;
 			Receipt_StockInVO stockinvo = new Receipt_StockInVO(stockinpo.getGoodsNumber(), stockinpo.getTime(),
 					stockInfo.toStockAreaVO(stockinpo.getPlace()), stockinpo.getNumber());
-			stockinvo.isApproved = stockinpo.isApproved();
+			stockinvo.approveState = stockinpo.getApproveState();
 			return stockinvo;
 		case STOCKOUT:
 			Receipt_StockOutPO stockoutpo = (Receipt_StockOutPO) po;
 			Receipt_StockOutVO stockoutvo = new Receipt_StockOutVO(stockoutpo.getGoodsNumber(), stockoutpo.getTime(),
 					stockoutpo.getCity(), stockoutpo.getVehicle(), stockoutpo.getTransNumber(), stockoutpo.getNumber());
-			stockoutvo.isApproved = stockoutpo.isApproved();
+			stockoutvo.approveState = stockoutpo.getApproveState();
 			return stockoutvo;
 		case MONEYIN:
 			Receipt_MoneyInPO moneyinpo = (Receipt_MoneyInPO) po;
 			Receipt_MoneyInVO moneyinvo = new Receipt_MoneyInVO(moneyinpo.getTime(), moneyinpo.getMoney(),
 					personnelInfo.toPersonnelVO(moneyinpo.getPerson()), moneyinpo.getNumber());
 			moneyinvo.orderNumbers = moneyinpo.getOrderNumbers();
-			moneyinvo.isApproved = moneyinpo.isApproved();
+			moneyinvo.approveState = moneyinpo.getApproveState();
 			return moneyinvo;
 		case MONEYOUT:
 			Receipt_MoneyOutPO moneyoutpo = (Receipt_MoneyOutPO) po;
 			Receipt_MoneyOutVO moneyoutvo = new Receipt_MoneyOutVO(moneyoutpo.getNumber(), moneyoutpo.getTime(),
 					moneyoutpo.getMoney(), personnelInfo.toPersonnelVO(moneyoutpo.getPersonnel()),
 					moneyoutpo.getReceiveID(), moneyoutpo.getClause(), moneyoutpo.getComments());
-			moneyoutvo.isApproved = moneyoutpo.isApproved();
+			moneyoutvo.approveState = moneyoutpo.getApproveState();
 			return moneyoutvo;
 		case TOTALMONEYIN:
 			Receipt_TotalMoneyInPO totalmoneyinpo = (Receipt_TotalMoneyInPO) po;
@@ -99,7 +99,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					personnelInfo.toPersonnelVO(totalmoneyinpo.getPerson()), totalmoneyinpo.getCity(),
 					totalmoneyinpo.getNumber());
 			totalMoneyInvo.sum = totalmoneyinpo.getSum();
-			totalMoneyInvo.isApproved = totalmoneyinpo.isApproved();
+			totalMoneyInvo.approveState = totalmoneyinpo.getApproveState();
 			ArrayList<Receipt_MoneyInVO> receipt_MoneyInVOs = new ArrayList<Receipt_MoneyInVO>();
 			ArrayList<Receipt_MoneyInPO> receipt_MoneyInPOs = totalmoneyinpo.getReceipt_Moneyins();
 			int size = receipt_MoneyInPOs.size();
@@ -122,7 +122,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					ordervo.cost, ordervo.expectTime, ordervo.targetPlace, ordervo.startPlace, ordervo.pushPeople,
 					ordervo.receivePeople);
 			orderpo.setReceiveTime(ordervo.receiveTime);
-			orderpo.setApproved(ordervo.isApproved);
+			orderpo.setApproveState(vo.approveState);
 			return orderpo;
 		case TRANS:
 			Receipt_TransVO transvo = (Receipt_TransVO) vo;
@@ -130,39 +130,39 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					transvo.cost, transvo.org, transvo.localNum, transvo.vehicleNum, transvo.startCity,
 					transvo.arriveCity, personnelInfo.toPersonnelPO(transvo.observer),
 					personnelInfo.toPersonnelPO(transvo.driver));
-			transpo.setApproved(transvo.isApproved);
+			transpo.setApproveState(vo.approveState);
 			return transpo;
 		case ARRIVE:
 			Receipt_ArriveVO arrivo = (Receipt_ArriveVO) vo;
 			Receipt_ArrivePO arripo = new Receipt_ArrivePO(arrivo.number, arrivo.type, arrivo.time,
 					arrivo.startPlace, arrivo.transNum, arrivo.orders, arrivo.arriveOrg);
-			arripo.setApproved(arrivo.isApproved);
+			arripo.setApproveState(vo.approveState);
 			return arripo;
 		case STOCKIN:
 			Receipt_StockInVO stockinvo = (Receipt_StockInVO) vo;
 			Receipt_StockInPO stockinpo = new Receipt_StockInPO(stockinvo.goodsNumber, stockinvo.time,
 					stockInfo.toStockAreaPO(stockinvo.place), stockinvo.number);
-			stockinpo.setApproved(stockinvo.isApproved);
+			stockinpo.setApproveState(vo.approveState);
 			return stockinpo;
 		case STOCKOUT:
 			Receipt_StockOutVO stockoutvo = (Receipt_StockOutVO) vo;
 			Receipt_StockOutPO stockoutpo = new Receipt_StockOutPO(stockoutvo.goodsNumber, stockoutvo.time,
 					stockoutvo.city, stockoutvo.vehicle, stockoutvo.transNumber, stockoutvo.number);
-			stockoutpo.setApproved(stockoutvo.isApproved);
+			stockoutpo.setApproveState(vo.approveState);
 			return stockoutpo;
 		case MONEYIN:
 			Receipt_MoneyInVO moneyinvo = (Receipt_MoneyInVO) vo;
 			Receipt_MoneyInPO moneyinpo = new Receipt_MoneyInPO(moneyinvo.time, moneyinvo.money,
 					personnelInfo.toPersonnelPO(moneyinvo.person), moneyinvo.number);
 			moneyinpo.setOrderNumbers(moneyinvo.orderNumbers);
-			moneyinpo.setApproved(moneyinvo.isApproved);
+			moneyinpo.setApproveState(vo.approveState);
 			return moneyinpo;
 		case MONEYOUT:
 			Receipt_MoneyOutVO moneyoutvo = (Receipt_MoneyOutVO) vo;
 			Receipt_MoneyOutPO moneyoutpo = new Receipt_MoneyOutPO(moneyoutvo.number, moneyoutvo.time,
 					moneyoutvo.money, personnelInfo.toPersonnelPO(moneyoutvo.personnel),
 					moneyoutvo.receiveID, moneyoutvo.clause, moneyoutvo.comments);
-			moneyoutpo.setApproved(moneyoutvo.isApproved);
+			moneyoutpo.setApproveState(vo.approveState);
 			return moneyoutpo;
 		case TOTALMONEYIN:
 			Receipt_TotalMoneyInVO totalmoneyinvo = (Receipt_TotalMoneyInVO) vo;
@@ -170,7 +170,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					personnelInfo.toPersonnelPO(totalmoneyinvo.person), totalmoneyinvo.city,
 					totalmoneyinvo.number);
 			totalMoneyInpo.setSum(totalmoneyinvo.sum);
-			totalMoneyInpo.setApproved(totalmoneyinvo.isApproved);
+			totalMoneyInpo.setApproveState(vo.approveState);
 			ArrayList<Receipt_MoneyInVO> receipt_MoneyInVOs = totalmoneyinvo.receipt_Moneyins;
 			ArrayList<Receipt_MoneyInPO> receipt_MoneyInPOs = new ArrayList<Receipt_MoneyInPO>();
 			int size = receipt_MoneyInVOs.size();

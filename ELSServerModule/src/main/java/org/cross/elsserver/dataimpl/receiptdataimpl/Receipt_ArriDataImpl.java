@@ -39,6 +39,7 @@ public class Receipt_ArriDataImpl implements ReceiptTool {
 				po = new Receipt_ArrivePO(rs.getString("number"), ReceiptType.ARRIVE, rs.getString("time"), 
 						StringToType.toCity(rs.getString("startCity")), rs.getString("transNum"), 
 						null, StringToType.toOrg(rs.getString("arriveOrg")));
+				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -4,11 +4,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
-import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.po.Receipt_ArrivePO;
 import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.po.Receipt_TransPO;
+import org.cross.elscommon.util.ApproveType;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
@@ -90,8 +90,8 @@ public class ReceiptBLImpl implements ReceiptBLService{
 	}
 
 	@Override
-	public ResultMessage check(ReceiptVO vo) throws RemoteException {
-		return receiptdata.updateCheck(vo.number);
+	public ResultMessage check(ReceiptVO vo, ApproveType approveState) throws RemoteException {
+		return receiptdata.updateCheck(vo.number, approveState.toString());
 	}
 
 	@Override
