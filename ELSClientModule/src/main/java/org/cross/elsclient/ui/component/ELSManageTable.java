@@ -26,16 +26,16 @@ import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
 
 public class ELSManageTable extends ELSPanel {
-	String[] name;
-	ELSBox header;
+	protected String[] name;
+	protected ManageTableItemLabel header;
 	protected ELSBox container;
-	ELSLabel tempLabel;
-	protected ArrayList<Box> itemLabels;
-	int[] itemWidth;
+	protected ELSLabel tempLabel;
+	public ArrayList<TableItemLabel> itemLabels;
+	protected int[] itemWidth;
 	int width;
 	int height;
 	public int gap;
-	Font font;
+	protected Font font;
 	public boolean isUpdateAndDelete;
 
 	public ELSManageTable(){
@@ -61,7 +61,7 @@ public class ELSManageTable extends ELSPanel {
 		
 		itemLabels = new ArrayList<>();
 		container = new ELSBox(BoxLayout.Y_AXIS);
-		header = new ELSBox(BoxLayout.X_AXIS);
+		header = new ManageTableItemLabel(BoxLayout.X_AXIS);
 		gap = 20;
 		font = getFont().deriveFont(18f);
 		isUpdateAndDelete = false;
@@ -70,29 +70,11 @@ public class ELSManageTable extends ELSPanel {
 		setBorder(null);
 		
 		container.setSize(width,UIConstant.MANAGETABLE_HEIGHT);
-//		container.setBackground(Color.LIGHT_GRAY);
-//		container.setOpaque(true);
-//		container.setSize(width, height);
-//		container.setLocation(0, 0);
 
 		//表头初始化
-		header.setOpaque(true);
+		header.init(name,itemWidth,false);
 		header.setBackground(Color.GRAY);
-		header.setPreferredSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		header.setMaximumSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		header.setMinimumSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
-
-		for (int i = 0; i < name.length; i++) {
-			tempLabel = new ELSLabel(" " + name[i]);
-			tempLabel.setForeground(Color.white);
-			tempLabel.setFont(font);
-			tempLabel.setPreferredSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
-			tempLabel.setMaximumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
-			tempLabel.setMinimumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
-			tempLabel.setVerticalAlignment(JLabel.CENTER);
-			tempLabel.setHorizontalAlignment(JLabel.LEFT);
-			header.add(tempLabel);
-		}
+		header.setFont(font);
 		
 		container.add(header);
 		add(container);
@@ -106,50 +88,18 @@ public class ELSManageTable extends ELSPanel {
 	 * @return void
 	 */
 	protected void addItemLabel(String[] item) {
-		Box itemLabel = new Box(BoxLayout.X_AXIS);
-
-		itemLabel.setOpaque(true);
-		itemLabel.setBackground(Color.lightGray);
-		itemLabel.setPreferredSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		itemLabel.setMaximumSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		itemLabel.setMinimumSize(new Dimension(width,UIConstant.MANAGETABLE_ITEM_HEIGHT));
-
-		for (int i = 0; i < item.length; i++) {
-			tempLabel = new ELSLabel(" " + item[i]);
-			tempLabel.setFont(font);
-			tempLabel.setPreferredSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
-			tempLabel.setMaximumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
-			tempLabel.setMinimumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
-			tempLabel.setVerticalAlignment(JLabel.CENTER);
-			tempLabel.setHorizontalAlignment(JLabel.LEFT);
-			itemLabel.add(tempLabel);
-		}
+		ManageTableItemLabel itemLabel = new ManageTableItemLabel(BoxLayout.X_AXIS);
+		itemLabel.init(item,itemWidth,isUpdateAndDelete);
+		itemLabel.setFont(font);
+		itemLabel.addMouseListener(new ItemListener(itemLabel));
+		itemLabel.updateBtn.addMouseListener(new BtnListener(itemLabel));
+		itemLabel.deleteBtn.addMouseListener(new BtnListener(itemLabel));
 		
-		if(isUpdateAndDelete){
-			ELSButton updateBtn = ComponentFactory.createUpdateBtn();
-			ELSButton deleteBtn = ComponentFactory.createDeleteBtn();
-			
-			updateBtn.setVisible(false);
-			updateBtn.addMouseListener(new BtnListener(itemLabel));
-			
-			deleteBtn.setVisible(false);
-			deleteBtn.addMouseListener(new BtnListener(itemLabel));
-			
-			itemLabel.add(Box.createHorizontalGlue());
-			itemLabel.add(updateBtn);
-			itemLabel.add(Box.createHorizontalStrut(gap));
-			itemLabel.add(deleteBtn);
-			itemLabel.add(Box.createHorizontalStrut(gap));
-			itemLabel.validate();
-			itemLabel.addMouseListener(new ItemListener(itemLabel));
-			repaint();
-			
-			itemLabels.add(itemLabel);
-			container.add(itemLabel);
-			packHeight();
-			validate();
-			repaint();
-		}
+		itemLabels.add(itemLabel);
+		container.add(itemLabel);
+		packHeight();
+		validate();
+		repaint();
 	}
 	
 	/**
@@ -176,10 +126,10 @@ public class ELSManageTable extends ELSPanel {
 	public void deleteBtn(int index){
 	}
 	
-	class ItemListener implements MouseListener{
-		Box itemLabel;
+	public class ItemListener implements MouseListener{
+		ManageTableItemLabel itemLabel;
 		
-		public ItemListener(Box itemLabel) {
+		public ItemListener(ManageTableItemLabel itemLabel) {
 			this.itemLabel = itemLabel;
 		}
 		
@@ -204,24 +154,24 @@ public class ELSManageTable extends ELSPanel {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			if(isUpdateAndDelete){
-				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
-				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
+				itemLabel.updateBtn.setVisible(true);
+				itemLabel.deleteBtn.setVisible(true);
 			}
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			if(isUpdateAndDelete){
-				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
-				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
+				itemLabel.updateBtn.setVisible(false);
+				itemLabel.deleteBtn.setVisible(false);
 			}
 		}
 	}
 	
-	class BtnListener implements MouseListener{
-		Box itemLabel;
+	public class BtnListener implements MouseListener{
+		ManageTableItemLabel itemLabel;
 		
-		public BtnListener(Box itemLabel) {
+		public BtnListener(ManageTableItemLabel itemLabel) {
 			this.itemLabel = itemLabel;
 		}
 		@Override
@@ -249,20 +199,21 @@ public class ELSManageTable extends ELSPanel {
 			// TODO Auto-generated method stub
 			
 		}
-
+		
+		
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			if(isUpdateAndDelete){
-				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
-				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
+				itemLabel.updateBtn.setVisible(true);
+				itemLabel.deleteBtn.setVisible(true);
 			}
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			if(isUpdateAndDelete){
-				itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
-				itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
+				itemLabel.updateBtn.setVisible(false);
+				itemLabel.deleteBtn.setVisible(false);
 			}
 		}
 	}

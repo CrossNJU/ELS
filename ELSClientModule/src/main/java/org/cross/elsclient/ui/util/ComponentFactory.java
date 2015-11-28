@@ -96,7 +96,7 @@ public class ComponentFactory {
 	public static ELSDatePicker createDatePicker(){
 		ELSDatePicker datePicker = new ELSDatePicker();
 		datePicker.setMaximumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
-		datePicker.setMinimumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
+		datePicker.setMinimumSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
 		return datePicker;
 	}
 	

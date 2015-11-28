@@ -7,9 +7,14 @@ package org.cross.elsclient.blservice.receiptblservice;
 
 import java.util.ArrayList;
 
+import org.cross.elscommon.util.OrganizationType;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.ReceiptType;
+import org.cross.elsclient.blimpl.receiptblimpl.Receipt_MoneyIn;
+import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.ReceiptVO;
+import org.cross.elsclient.vo.Receipt_MoneyInVO;
 
 public class ReceiptBLService_Stub implements ReceiptBLService{
 
@@ -69,7 +74,12 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	public ArrayList<ReceiptVO> findByType(ReceiptType type) {
 		// TODO Auto-generated method stub
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
-		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		if(type == ReceiptType.MONEYIN){
+			PersonnelVO person = new PersonnelVO("111", "学睿", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "111111");
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
+		}else{
+			list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		}
 		return list;
 	}
 

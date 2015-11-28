@@ -30,12 +30,10 @@ import org.cross.elscommon.util.InfoType;
 
 public class ELSInfoPanel extends ELSScrollPane {
 	protected ELSPanel container;
-	protected ELSPanel titlePanel;
-	protected ELSLabel titleLabel;
+	protected TitlePanel titlePanel;
 	protected ELSBox infoPanel;
 	protected ArrayList<InfoItemLabel> itemLabels;
 	protected int itemHeight;
-	protected ELSButton backBtn;
 	protected String backName;
 	protected ELSButton confirmBtn;
 	protected ELSButton cancelBtn;
@@ -46,10 +44,8 @@ public class ELSInfoPanel extends ELSScrollPane {
 		itemLabels = new ArrayList<>();
 
 		container = new ELSPanel();
-		titlePanel = new ELSPanel();
-		titleLabel = new ELSLabel("Title");
+		titlePanel = new TitlePanel();
 		infoPanel = new ELSBox(BoxLayout.Y_AXIS);
-		backBtn = ComponentFactory.createInfoBackBtn();
 		confirmBtn = ComponentFactory.createConfirmBtn();
 		cancelBtn = ComponentFactory.createCancelBtn();
 
@@ -67,26 +63,15 @@ public class ELSInfoPanel extends ELSScrollPane {
 				+ UIConstant.CONTENTPANEL_MARGIN_TOP * 2));
 		container.setLayout(null);
 
-		titlePanel.setSize(this.getWidth(), 50);
-		titlePanel.setLocation(0, 0);
-		titlePanel.setLayout(null);
-		titlePanel.setBackground(Color.DARK_GRAY);
-
-		titleLabel.setSize(200, 50);
-		titleLabel.setLocation(30, 0);
-		titleLabel.setFont(titleLabel.getFont().deriveFont(20f));
-		titleLabel.setForeground(Color.white);
-		titleLabel.setVerticalAlignment(JLabel.CENTER);
-		titlePanel.add(titleLabel);
+		titlePanel.init("Title");
+		titlePanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, UIConstant.CONTENTPANEL_MARGIN_TOP);
+		titlePanel.titleLabel.setFont(getFont().deriveFont(18f));
+		titlePanel.backBtn.addMouseListener(new BtnListener());
 
 		infoPanel.setSize(getWidth(), 20);
 		infoPanel.setLocation(0, 70);
 
-		backBtn.setText("撤");
-		backBtn.setBounds(12, 12, 30, 30);
-		backBtn.addMouseListener(new BtnListener());
 
-		container.add(backBtn);
 		container.add(titlePanel);
 		container.add(infoPanel);
 
@@ -121,10 +106,6 @@ public class ELSInfoPanel extends ELSScrollPane {
 		InfoItemLabel itemLabel = new InfoItemLabel();
 		itemLabel.initEditable(name, defaultValue, isEditable);;
 
-		itemLabels.add(itemLabel);
-		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
-				+ itemHeight);
-		infoPanel.add(itemLabel);
 
 		itemLabels.add(itemLabel);
 //		inputLabels.add(inputLabel);
@@ -146,11 +127,6 @@ public class ELSInfoPanel extends ELSScrollPane {
 		itemLabel.initEditable(name, defaultValue, isEditable,type);;
 
 		itemLabels.add(itemLabel);
-		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
-				+ itemHeight);
-		infoPanel.add(itemLabel);
-
-		itemLabels.add(itemLabel);
 //		inputLabels.add(inputLabel);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
@@ -169,9 +145,22 @@ public class ELSInfoPanel extends ELSScrollPane {
 		itemLabel.initBox(name, items, isEditable);
 
 		itemLabels.add(itemLabel);
+
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 				+ itemHeight);
 		infoPanel.add(itemLabel);
+	}
+	
+	/**
+	 * 添加日期条目
+	 * @para name-条目名, isEditable-是否可编辑
+	 * @return void
+	 */
+	public void addDateItem(String name, boolean isEditable) {
+		InfoItemLabel itemLabel = new InfoItemLabel();
+		itemLabel.initDatePicker(name, isEditable);
+
+		
 
 		itemLabels.add(itemLabel);
 
@@ -225,7 +214,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @return void
 	 */
 	public void setTitle(String title) {
-		titleLabel.setText(title);
+		titlePanel.titleLabel.setText(title);
 	}
 
 	/**
@@ -292,7 +281,8 @@ public class ELSInfoPanel extends ELSScrollPane {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if (e.getSource() == backBtn) {
+			if (e.getSource() == titlePanel.backBtn) {
+				System.out.println("Pressed");
 				if (ELSDialog.showConfirmDlg(
 						GetPanelUtil.getMainFrame(ELSInfoPanel.this), "退出",
 						"确认退出？")) {

@@ -1,14 +1,25 @@
 package org.cross.elsclient.ui.counterui;
 
+import org.cross.elsclient.blservice.accountblservice.AccountBLService;
+import org.cross.elsclient.blservice.logblservice.LogBLService;
+import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
+import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSManagePanel;
+import org.cross.elsclient.ui.counterui.account.AccountManagePanel;
+import org.cross.elsclient.ui.counterui.cost.MoneyOutAddPanel;
+import org.cross.elsclient.ui.counterui.log.LogManagePanel;
+import org.cross.elsclient.ui.counterui.settle.MoneyInManagePanel;
 
 public class CounterFunctionPanel extends ELSFunctionPanel{
 	ReceiptBLService receiptbl;
+	PersonnelBLService personnelbl;
+	AccountBLService accountbl;
+	LogBLService logbl;
 	
 	public CounterFunctionPanel() {
-		
+		receiptbl = new ReceiptBLService_Stub();
 		init();
 	}
 	
@@ -24,12 +35,12 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("统计分析", "analysis");
 		addFunctionBtn("系统日志", "log");
 		
-		addFunctionPanel(new ELSManagePanel(),"add", "cost");
-		addFunctionPanel(new ELSManagePanel(),"add", "settle");
-		addFunctionPanel(new ELSManagePanel(),"add", "accout");
+		addFunctionPanel(new MoneyOutAddPanel(receiptbl,personnelbl),"add", "cost");
+		addFunctionPanel(new MoneyInManagePanel(receiptbl),"add", "settle");
+		addFunctionPanel(new AccountManagePanel(accountbl),"manage", "accout");
 		addFunctionPanel(new ELSManagePanel(),"add", "initial");
 		addFunctionPanel(new ELSManagePanel(),"add", "analysis");
-		addFunctionPanel(new ELSManagePanel(),"add", "log");
+		addFunctionPanel(new LogManagePanel(logbl),"manage", "log");
 		
 		validate();
 		

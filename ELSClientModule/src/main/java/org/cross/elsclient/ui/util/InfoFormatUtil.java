@@ -10,6 +10,9 @@ public class InfoFormatUtil {
 	private static Pattern numericPattern = Pattern.compile("^[0-9\\-]+$");
 	
 	public static String CheckFormat(String src,InfoType type){
+		if(CheckString(src)!=null){
+			return CheckString(src);
+		}
 		
 		switch (type) {
 		case NAME:

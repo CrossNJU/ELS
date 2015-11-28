@@ -50,12 +50,14 @@ public class ELSDatePicker extends JPanel {
 	private int date;
 	private int dayOfWeek;
 	private String[] week = { "日", "一", "二", "三", "四", "五", "六" };
+	private boolean isShowTime;
 
 	public ELSDatePicker() {
 		year = Calendar.getInstance().get(Calendar.YEAR);
 		month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 		date = Calendar.getInstance().get(Calendar.DATE);
 		dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+		isShowTime = false;
 		initUI();
 		initDateDialog();
 		updateField();
@@ -234,10 +236,18 @@ public class ELSDatePicker extends JPanel {
 		builder.append(this.date );
 		Calendar cal = Calendar.getInstance();
 		cal.set(this.year, this.month - 1, this.date);
+//		if(isShowTime){
+//			builder.append(this.)
+//		}
 //		builder.append(" 星期" + week[cal.get(Calendar.DAY_OF_WEEK) - 1]);
 		tfDate.setText(builder.toString());
 	}
 
+	public void setShowTime(boolean isShowTime){
+		isShowTime = true;
+		updateField();
+	}
+	
 	public Dimension getPreferredSize() {
 		return new Dimension(this.width, this.height);
 	}

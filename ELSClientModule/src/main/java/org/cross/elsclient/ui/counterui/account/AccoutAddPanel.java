@@ -1,49 +1,49 @@
-package org.cross.elsclient.ui.adminui;
+package org.cross.elsclient.ui.counterui.account;
 
 import java.rmi.RemoteException;
 
-import org.cross.elsclient.blservice.userblservice.UserBLService;
-import org.cross.elsclient.ui.component.ELSDatePicker;
+import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
-import org.cross.elsclient.vo.UserVO;
-import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
+import org.cross.elsclient.vo.AccountVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.ResultMessage;
 
-public class UserAddPanel extends ELSInfoPanel{
-	UserVO vo;
-	UserBLService bl;
-	
-	public UserAddPanel(UserBLService bl) {
+public class AccoutAddPanel extends ELSInfoPanel{
+	AccountVO vo;
+	AccountBLService bl;
+	public AccoutAddPanel(AccountBLService bl) {
+		super();
 		this.bl = bl;
 		init();
 	}
 	
 	@Override
 	public void init() {
+		// TODO Auto-generated method stub
 		super.init();
-//		vo = new UserVO("", "", null);
 		
-		//ELSInfoPanel提供了三种添加条目的类型:文字，编辑框，下拉框
-		//要拿到其中的信息，要调用对应的itemLabel.toString()的方法
-		setTitle("新增用户");
-		addEditableItem("用户名", "U000001", false);
-		addEditableItem("姓名","", true,InfoType.NAME);
-		String items[] = {"快递员", "营业厅业务员","中转中心业务员","仓库管理人员","财务人员","高级财务人员","总经理","系统管理员"};
-		addComboxItem("职位", items, true);
+		setTitle("新增账户");
+		addEditableItem("账户名称", "", true,InfoType.NAME);
+		addEditableItem("账户卡号", "", true,InfoType.NUM);
+		addEditableItem("账户余额", "", true,InfoType.NUM);
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("取消添加");
-		
 	}
 	
 	@Override
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
+			
+			String name = itemLabels.get(0).getText();
+			String account = itemLabels.get(1).getText();
+			double balance = Double.valueOf(itemLabels.get(0).getText());
+			
+			vo = new AccountVO(name, account, balance);
 			if(bl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 				back();
@@ -59,4 +59,5 @@ public class UserAddPanel extends ELSInfoPanel{
 			back();
 		}
 	}
+
 }
