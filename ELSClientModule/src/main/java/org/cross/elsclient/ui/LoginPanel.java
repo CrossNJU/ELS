@@ -27,6 +27,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.counterui.CounterFunctionPanel;
 import org.cross.elsclient.ui.courierui.CourierFunctionPanel;
 import org.cross.elsclient.ui.managerui.ManagerFunctionPanel;
+import org.cross.elsclient.ui.stockkeeperui.StockFunctionPanel;
 import org.cross.elsclient.ui.transitcenterclerkui.TransmitFunctionPanel;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elscommon.util.UserType;
@@ -140,6 +141,11 @@ public class LoginPanel extends ELSPanel{
 				System.out.println("登录成功");
 				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
 				parentContainer.add("function",new ManagerFunctionPanel());
+				parentContainer.cl.show(parentContainer, "function");
+			}else if(type==UserType.STOCKKEEPER){
+				System.out.println("登录成功");
+				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
+				parentContainer.add("function",new StockFunctionPanel());
 				parentContainer.cl.show(parentContainer, "function");
 			}
 			System.out.println("用户类型为:"+type.toString());

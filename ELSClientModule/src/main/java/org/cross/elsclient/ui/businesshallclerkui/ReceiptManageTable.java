@@ -8,11 +8,12 @@ import org.cross.elsclient.ui.businesshallclerkui.trans.TransInfoPanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.Receipt_TransVO;
 
 public class ReceiptManageTable extends ELSManageTable{
 	ReceiptBLService reciptbl;
-	ArrayList<Receipt_TransVO> transVOs;
+	ArrayList<ReceiptVO> receiptvos;
 	
 	public ReceiptManageTable(){super();}
 	public ReceiptManageTable(String[] name, int[] itemWidth, ReceiptBLService receiptbl){
@@ -24,12 +25,12 @@ public class ReceiptManageTable extends ELSManageTable{
 	@Override
 	public void init(){
 		super.init();
-		transVOs = new ArrayList<Receipt_TransVO>();
+		receiptvos = new ArrayList<ReceiptVO>();
 		isUpdateAndDelete = false;
 	}
 	
-	public void addItem(Receipt_TransVO vo){
-		transVOs.add(vo);
+	public void addItem(ReceiptVO vo){
+		receiptvos.add(vo);
 		String[] item = {vo.number,vo.type.toString(),vo.time,vo.approveState.toString()};
 		addItemLabel(item);
 	}
@@ -38,8 +39,8 @@ public class ReceiptManageTable extends ELSManageTable{
 	public void infoBtn(int index){
 		super.updateBtn(index);
 		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, 0);
-		Receipt_TransVO vo = transVOs.get(index);
-		contentPanel.add("info", new TransInfoPanel(vo));
+		ReceiptVO vo = receiptvos.get(index);
+		contentPanel.add("info", new TransInfoPanel((Receipt_TransVO)vo));
 		contentPanel.cl.show(contentPanel, "info");
 	}
 }

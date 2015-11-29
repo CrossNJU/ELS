@@ -11,7 +11,6 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
-import org.cross.elsclient.ui.businesshallclerkui.trans.TransAddPanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSDatePicker;
@@ -20,14 +19,13 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.ReceiptVO;
-import org.cross.elsclient.vo.Receipt_TransVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.UserType;
 
 public class ReceiptManagePanel extends ELSManagePanel{
 	ReceiptBLService receiptbl;
-	ArrayList<Receipt_TransVO> transvos;
+	ArrayList<ReceiptVO> receiptvos;
 	ReceiptManageTable list;
 	ELSDatePicker datePicker;
 	ELSButton addBtn;
@@ -77,9 +75,9 @@ public class ReceiptManagePanel extends ELSManagePanel{
 			if(e.getSource()==searchBtn){
 				if(((String)modeBox.getSelectedItem()).equals("按单据编号查询")){
 					String id = searchTextField.getText();
-					Receipt_TransVO vo = null;
+					ReceiptVO vo = null;
 					try {
-						vo = (Receipt_TransVO)receiptbl.findByID(id);
+						vo = receiptbl.findByID(id);
 						
 					} catch (RemoteException e1) {
 						e1.printStackTrace();
