@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.businesshallclerkui.trans;
+package org.cross.elsclient.ui.businesshallclerkui;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -11,6 +11,7 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
+import org.cross.elsclient.ui.businesshallclerkui.trans.TransAddPanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSDatePicker;
@@ -24,15 +25,15 @@ import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.UserType;
 
-public class TransManagePanel extends ELSManagePanel{
+public class ReceiptManagePanel extends ELSManagePanel{
 	ReceiptBLService receiptbl;
 	ArrayList<Receipt_TransVO> transvos;
-	TransManageTable list;
+	ReceiptManageTable list;
 	ELSDatePicker datePicker;
 	ELSButton addBtn;
 	
-	public TransManagePanel(){}
-	public TransManagePanel(ReceiptBLService receiptbl){
+	public ReceiptManagePanel(){}
+	public ReceiptManagePanel(ReceiptBLService receiptbl){
 		super();
 		this.receiptbl = receiptbl;
 		init();
@@ -43,7 +44,7 @@ public class TransManagePanel extends ELSManagePanel{
 		super.setContentPanel();
 		String[] s = {"单据编号","单据类型","建单时间","单据状态"};
 		int[] itemWidth = {200,100,200,100};
-		list = new TransManageTable(s, itemWidth,receiptbl);
+		list = new ReceiptManageTable(s, itemWidth,receiptbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
 	}
@@ -51,7 +52,6 @@ public class TransManagePanel extends ELSManagePanel{
 	@Override
 	public void setSearchPanel(){
 		datePicker = ComponentFactory.createDatePicker();
-		addBtn = ComponentFactory.createSearchBtn();
 
 		String[] s = {"按单据编号查询", "按时间查询"};
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
@@ -60,11 +60,7 @@ public class TransManagePanel extends ELSManagePanel{
 		searchBtn.setText("查找单据");
 		searchBtn.addMouseListener(new BtnListener());
 		
-		addBtn.setText("新增单据");
-		addBtn.addMouseListener(new BtnListener());
-		
 		searchPanel.add(Box.createHorizontalStrut(10));
-		searchPanel.add(addBtn);
 		
 		datePicker.setVisible(false);
 		
@@ -94,13 +90,6 @@ public class TransManagePanel extends ELSManagePanel{
 				}else if(((String)modeBox.getSelectedItem()).equals("按时间查询")){
 					
 				}
-			}
-			if (e.getSource() == addBtn){
-				//界面统一添加到功能界面(managePanel的父容器)
-				TransAddPanel transAddPanel = new TransAddPanel(receiptbl);
-				ELSPanel parent = (ELSPanel) getParent();
-				parent.add("add",transAddPanel);
-				parent.cl.show(parent, "add");
 			}
 		}
 

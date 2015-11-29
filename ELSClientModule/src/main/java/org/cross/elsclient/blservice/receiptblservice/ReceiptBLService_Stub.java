@@ -5,8 +5,10 @@
  */
 package org.cross.elsclient.blservice.receiptblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.cross.elscommon.util.ApproveType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
@@ -55,13 +57,7 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 		ReceiptVO receipt = new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22");
 		return receipt;
 	}
-
-	@Override
-	public ResultMessage check(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
-
+	
 	@Override
 	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime) {
 		// TODO Auto-generated method stub
@@ -89,6 +85,12 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
 		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
 		return list;
+	}
+
+	@Override
+	public ResultMessage check(ReceiptVO vo, ApproveType approveState) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

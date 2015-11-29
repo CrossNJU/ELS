@@ -3,6 +3,7 @@ package org.cross.elsclient.ui.businesshallclerkui.trans;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
+import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
@@ -53,7 +54,10 @@ public class TransAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		if(bl.add(vo)==ResultMessage.SUCCESS){
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
-			cancel();
+			ReceiptManagePanel receiptManagePanel = new ReceiptManagePanel(bl);
+			ELSPanel parent = (ELSPanel) getParent();
+			parent.add("manage",receiptManagePanel);
+			parent.cl.show(parent, "manage");
 		}else{
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
 		}
@@ -62,9 +66,9 @@ public class TransAddPanel extends ELSInfoPanel{
 	@Override
 	protected void cancel() {		
 		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")){
-			TransManagePanel transManagePanel = new TransManagePanel(bl);
+			ReceiptManagePanel receiptManagePanel = new ReceiptManagePanel(bl);
 			ELSPanel parent = (ELSPanel) getParent();
-			parent.add("manage",transManagePanel);
+			parent.add("manage",receiptManagePanel);
 			parent.cl.show(parent, "manage");
 		}		
 	}

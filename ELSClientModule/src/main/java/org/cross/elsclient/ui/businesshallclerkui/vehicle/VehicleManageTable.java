@@ -95,7 +95,7 @@ public class VehicleManageTable extends ELSManageTable {
 		VehicleManagePanel parent = (VehicleManagePanel) getParent()
 				.getParent();
 		try {
-			if (parent.vehiclebl.delete(vos.get(index)) == ResultMessage.SUCCESS) {
+			if (parent.vehiclebl.delete(vos.get(index).number) == ResultMessage.SUCCESS) {
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);
 

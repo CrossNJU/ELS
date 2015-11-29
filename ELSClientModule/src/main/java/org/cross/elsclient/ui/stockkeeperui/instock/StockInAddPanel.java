@@ -1,8 +1,9 @@
-package org.cross.elsclient.ui.businesshallclerkui.arri;
+package org.cross.elsclient.ui.stockkeeperui.instock;
 
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
+import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
@@ -10,35 +11,31 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
-import org.cross.elsclient.vo.Receipt_ArriveVO;
+import org.cross.elsclient.vo.Receipt_StockInVO;
 import org.cross.elscommon.util.ResultMessage;
 
-public class ArriAddPanel extends ELSInfoPanel{
-
+public class StockInAddPanel extends ELSInfoPanel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Receipt_ArriveVO arrivo;
-	ReceiptBLService bl;
+	Receipt_StockInVO stockinvo;
+	StockBLService stockbl;
+	ReceiptBLService receiptbl;
 	
-	public ArriAddPanel(ReceiptBLService receiptbl){
-		this.bl = receiptbl;
+	public StockInAddPanel(StockBLService stockbl, ReceiptBLService receiptbl){
+		this.stockbl = stockbl;
 		init();
 	}
 	
 	@Override
 	public void init(){
 		super.init();
-		String it1[] = {"南京营业厅","北京营业厅","上海营业厅","广州营业厅"};
-		
-		setTitle("新增到达单");
-		addEditableItem("到达单编号", ConstantValue.getReceiptTransNum(), false);
-		addEditableItem("装车/中转单号", "", true);
-		addComboxItem("出发地", it1, true);
-		addEditableItem("出发时间", "", true);
-		addComboxItem("到达地", it1, true);
-		addEditableItem("到达时间", "", true);
+		setTitle("新增入库单");
+		addEditableItem("入库单编号", ConstantValue.getReceiptTransNum(), false);
+		addEditableItem("快件单编号", "", true);
+		addEditableItem("入库时间", "", true);
+		addEditableItem("仓库区号", "", true);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");
@@ -47,9 +44,9 @@ public class ArriAddPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void confirm() throws RemoteException {
-		if(bl.add(arrivo)==ResultMessage.SUCCESS){
+		if(receiptbl.add(stockinvo)==ResultMessage.SUCCESS){
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
-			ReceiptManagePanel receiptManagePanel = new ReceiptManagePanel(bl);
+			ReceiptManagePanel receiptManagePanel = new ReceiptManagePanel(receiptbl);
 			ELSPanel parent = (ELSPanel) getParent();
 			parent.add("manage",receiptManagePanel);
 			parent.cl.show(parent, "manage");
@@ -61,7 +58,7 @@ public class ArriAddPanel extends ELSInfoPanel{
 	@Override
 	protected void cancel() {		
 		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")){
-			ReceiptManagePanel receiptManagePanel = new ReceiptManagePanel(bl);
+			ReceiptManagePanel receiptManagePanel = new ReceiptManagePanel(receiptbl);
 			ELSPanel parent = (ELSPanel) getParent();
 			parent.add("manage",receiptManagePanel);
 			parent.cl.show(parent, "manage");

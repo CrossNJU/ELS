@@ -1,20 +1,21 @@
-package org.cross.elsclient.ui.businesshallclerkui.trans;
+package org.cross.elsclient.ui.businesshallclerkui;
 
 import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.adminui.UserManageTable;
+import org.cross.elsclient.ui.businesshallclerkui.trans.TransInfoPanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.Receipt_TransVO;
 
-public class TransManageTable extends ELSManageTable{
+public class ReceiptManageTable extends ELSManageTable{
 	ReceiptBLService reciptbl;
 	ArrayList<Receipt_TransVO> transVOs;
 	
-	public TransManageTable(){super();}
-	public TransManageTable(String[] name, int[] itemWidth, ReceiptBLService receiptbl){
+	public ReceiptManageTable(){super();}
+	public ReceiptManageTable(String[] name, int[] itemWidth, ReceiptBLService receiptbl){
 		super(name, itemWidth);
 		this.reciptbl = receiptbl;
 		init();

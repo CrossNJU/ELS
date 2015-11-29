@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.businesshallclerkui.arri;
+package org.cross.elsclient.ui.businesshallclerkui.money;
 
 import java.rmi.RemoteException;
 
@@ -10,19 +10,18 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
-import org.cross.elsclient.vo.Receipt_ArriveVO;
+import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elscommon.util.ResultMessage;
 
-public class ArriAddPanel extends ELSInfoPanel{
-
+public class MoneyAddPanel extends ELSInfoPanel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Receipt_ArriveVO arrivo;
+	Receipt_MoneyInVO arrivo;
 	ReceiptBLService bl;
 	
-	public ArriAddPanel(ReceiptBLService receiptbl){
+	public MoneyAddPanel(ReceiptBLService receiptbl){
 		this.bl = receiptbl;
 		init();
 	}
@@ -30,15 +29,12 @@ public class ArriAddPanel extends ELSInfoPanel{
 	@Override
 	public void init(){
 		super.init();
-		String it1[] = {"南京营业厅","北京营业厅","上海营业厅","广州营业厅"};
-		
-		setTitle("新增到达单");
-		addEditableItem("到达单编号", ConstantValue.getReceiptTransNum(), false);
-		addEditableItem("装车/中转单号", "", true);
-		addComboxItem("出发地", it1, true);
-		addEditableItem("出发时间", "", true);
-		addComboxItem("到达地", it1, true);
-		addEditableItem("到达时间", "", true);
+		setTitle("新增收款单");
+		addEditableItem("收款单编号", ConstantValue.getReceiptTransNum(), false);
+		addEditableItem("快件单编号", "", true);
+		addEditableItem("收款时间", "", true);
+		addEditableItem("收款快递员", "", true);
+		addEditableItem("收款金额", "", true);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");
