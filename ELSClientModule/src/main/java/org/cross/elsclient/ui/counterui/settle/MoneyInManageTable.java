@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.counterui.settle;
 
+import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class MoneyInManageTable extends ELSManageTable {
 		checkBoxHeader = new CheckBoxItemLabel();
 		checkBoxHeader.init(name,itemWidth,false);
 		checkBoxHeader.setFont(font);
+		checkBoxHeader.setBackground(Color.gray);
 		checkBoxHeader.checkBox.addItemListener(new checkBoxListener());
 		container.remove(header);
 		container.add(checkBoxHeader,0);
@@ -42,7 +44,7 @@ public class MoneyInManageTable extends ELSManageTable {
 	}
 	
 	@Override
-	protected void addItemLabel(String[] item) {
+	public void addItemLabel(String[] item) {
 		CheckBoxItemLabel itemLabel = new CheckBoxItemLabel();
 		itemLabel.init(item,itemWidth,isUpdateAndDelete);
 		itemLabel.setFont(font);

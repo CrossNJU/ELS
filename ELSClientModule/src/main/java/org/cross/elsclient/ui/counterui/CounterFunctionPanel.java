@@ -1,6 +1,10 @@
 package org.cross.elsclient.ui.counterui;
 
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
+import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
+import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService_Stub;
+import org.cross.elsclient.blservice.initialblservice.InitialBLService;
+import org.cross.elsclient.blservice.initialblservice.InitialBLService_Stub;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
@@ -8,7 +12,10 @@ import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.counterui.account.AccountManagePanel;
+import org.cross.elsclient.ui.counterui.analysis.AnalysisManagePanel;
 import org.cross.elsclient.ui.counterui.cost.MoneyOutAddPanel;
+import org.cross.elsclient.ui.counterui.initial.InitialCheckPanel;
+import org.cross.elsclient.ui.counterui.initial.InitialManagePanel;
 import org.cross.elsclient.ui.counterui.log.LogManagePanel;
 import org.cross.elsclient.ui.counterui.settle.MoneyInManagePanel;
 
@@ -17,9 +24,13 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 	PersonnelBLService personnelbl;
 	AccountBLService accountbl;
 	LogBLService logbl;
+	AnalysisBLService analysisbl;
+	InitialBLService initialbl;
 	
 	public CounterFunctionPanel() {
 		receiptbl = new ReceiptBLService_Stub();
+		analysisbl = new AnalysisBLService_Stub();
+		initialbl = new InitialBLService_Stub();
 		init();
 	}
 	
@@ -38,8 +49,8 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 		addFunctionPanel(new MoneyOutAddPanel(receiptbl,personnelbl),"add", "cost");
 		addFunctionPanel(new MoneyInManagePanel(receiptbl),"add", "settle");
 		addFunctionPanel(new AccountManagePanel(accountbl),"manage", "accout");
-		addFunctionPanel(new ELSManagePanel(),"add", "initial");
-		addFunctionPanel(new ELSManagePanel(),"add", "analysis");
+		addFunctionPanel(new InitialCheckPanel(initialbl),"manage", "initial");
+		addFunctionPanel(new AnalysisManagePanel(analysisbl),"add", "analysis");
 		addFunctionPanel(new LogManagePanel(logbl),"manage", "log");
 		
 		validate();

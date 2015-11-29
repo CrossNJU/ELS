@@ -20,6 +20,7 @@ public class InfoItemLabel extends ELSLabel{
 	public ELSLabel nameLabel;
 	public ELSTextField inputLabel;
 	public ELSComboBox comboBox;
+	public ELSLabel textLabel;
 	public boolean isLegal;
 	public int type;
 	public InfoType infoType;
@@ -87,7 +88,7 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel = new ELSLabel(name);
 		inputLabel = new ELSTextField(defaultValue);
 		ELSLabel iconLabel = new ELSLabel();
-		ELSLabel textLabel = new ELSLabel();
+		textLabel = new ELSLabel();
 		inputLabel.setEditable(isEditable);
 		inputLabel.setFocusable(isEditable);
 

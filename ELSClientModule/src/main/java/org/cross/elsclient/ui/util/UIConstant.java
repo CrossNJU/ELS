@@ -12,7 +12,7 @@ public class UIConstant {
 	public static int CONTAINER_WIDTH = 856;
 	public static int CONTAINER_HEIGHT = 668;
 	
-	public static int MANAGETABLE_HEIGHT = 700;
+//	public static int MANAGETABLE_HEIGHT = 700;
 	public static int MANAGETABLE_ITEM_HEIGHT = 48;
 	
 	public static int SEARCHPANEL_HEIGHT = 48;

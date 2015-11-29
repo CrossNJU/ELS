@@ -12,6 +12,8 @@ public class ELSStateBar extends JLabel{
 	public static ELSStateBar instance = new ELSStateBar();
 	public ELSStateBar() {
 		setOpaque(true);
+		setFocusable(false);
+		setEnabled(false);
 		setBackground(Color.DARK_GRAY);
 		setHorizontalAlignment(JLabel.CENTER);
 		setVerticalAlignment(JLabel.CENTER);

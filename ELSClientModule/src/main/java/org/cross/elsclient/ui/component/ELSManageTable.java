@@ -27,7 +27,7 @@ import org.cross.elsclient.vo.UserVO;
 
 public class ELSManageTable extends ELSPanel {
 	protected String[] name;
-	protected ManageTableItemLabel header;
+	public ManageTableItemLabel header;
 	protected ELSBox container;
 	protected ELSLabel tempLabel;
 	public ArrayList<TableItemLabel> itemLabels;
@@ -66,10 +66,10 @@ public class ELSManageTable extends ELSPanel {
 		font = getFont().deriveFont(18f);
 		isUpdateAndDelete = false;
 
-		setSize(new Dimension(width, UIConstant.MANAGETABLE_HEIGHT));
+		setSize(new Dimension(width, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		setBorder(null);
 		
-		container.setSize(width,UIConstant.MANAGETABLE_HEIGHT);
+		container.setSize(width,UIConstant.MANAGETABLE_ITEM_HEIGHT);
 
 		//表头初始化
 		header.init(name,itemWidth,false);
@@ -87,7 +87,7 @@ public class ELSManageTable extends ELSPanel {
 	 * @para item-条目项
 	 * @return void
 	 */
-	protected void addItemLabel(String[] item) {
+	public void addItemLabel(String[] item) {
 		ManageTableItemLabel itemLabel = new ManageTableItemLabel(BoxLayout.X_AXIS);
 		itemLabel.init(item,itemWidth,isUpdateAndDelete);
 		itemLabel.setFont(font);

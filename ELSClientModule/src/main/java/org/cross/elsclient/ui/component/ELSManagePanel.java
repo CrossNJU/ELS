@@ -69,9 +69,9 @@ public class ELSManagePanel extends ELSScrollPane {
 		searchPanel.add(searchBtn);
 //		searchPanel.add(Box.createHorizontalStrut(10));
 		
-		container.add(searchPanel);
-//		container.add(contentPanel);
+		setTitle();
 		setSearchPanel();
+		container.add(searchPanel);
 		setContentPanel();
 		
 		this.getViewport().add(container);
@@ -95,5 +95,7 @@ public class ELSManagePanel extends ELSScrollPane {
 	public void setContentPanel(){
 		
 	}
+	
+	public void setTitle(){}
 	
 }

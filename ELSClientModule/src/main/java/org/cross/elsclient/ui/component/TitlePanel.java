@@ -36,6 +36,8 @@ public class TitlePanel extends ELSBox{
 		titleLabel.setMinimumSize(new Dimension(200, getHeight()));titleLabel.setForeground(Color.white);
 		titleLabel.setVerticalAlignment(JLabel.CENTER);
 		titleLabel.setHorizontalAlignment(JLabel.LEFT);
+		titleLabel.setText(title);
+		titleLabel.setForeground(Color.white);
 		
 		this.add(backBtn);
 		this.add(Box.createHorizontalStrut(10));
