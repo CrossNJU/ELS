@@ -1,27 +1,28 @@
-package org.cross.elsclient.ui.counterui.initial;
+package org.cross.elsclient.ui.managerui.personnel;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.counterui.initial.InitialManagePanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.PersonnelVO;
-import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
+import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elscommon.util.VehicleType;
 
-public class PerAddPanel extends ELSInfoPanel{
-	ArrayList<PersonnelVO> vos;
+public class PerAddPanel extends ELSInfoPanel {
 	PersonnelVO vo;
+	PersonnelBLService personelbl;
 	
-	public PerAddPanel(ArrayList<PersonnelVO> vos) {
+	public PerAddPanel(PersonnelBLService personnelbl) {
 		super();
-		this.vos = vos;
+		this.personelbl = personnelbl;
 		init();
 	}
 	
@@ -57,9 +58,12 @@ public class PerAddPanel extends ELSInfoPanel{
 			vo = new PersonnelVO(itemLabels.get(0).toString(),itemLabels.get(1).toString() , 
 					StringToType.toPositionType(itemLabels.get(5).toString()), 
 					StringToType.toOrg(itemLabels.get(3).toString()), itemLabels.get(4).toString());
-			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
-			back();
+			if(personelbl.add(vo)==ResultMessage.SUCCESS){
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
+				back();
+			}else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
+			}
 		}
 	}
 	

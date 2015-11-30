@@ -2,6 +2,7 @@ package org.cross.elsclient.ui.managerui;
 
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
+import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService_Stub;
 import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
 import org.cross.elsclient.blservice.constantblservice.ConstantBLService_Stub;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
@@ -15,6 +16,12 @@ import org.cross.elsclient.ui.adminui.UserManagePanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.counterui.account.AccountManagePanel;
+import org.cross.elsclient.ui.counterui.analysis.AnalysisManagePanel;
+import org.cross.elsclient.ui.counterui.log.LogManagePanel;
+import org.cross.elsclient.ui.managerui.approval.ApprovalManagePanel;
+import org.cross.elsclient.ui.managerui.payment.PaymentManagePanel;
+import org.cross.elsclient.ui.managerui.personnel.PerManagePanel;
 
 public class ManagerFunctionPanel extends ELSFunctionPanel{
 	public OrganizationBLService organizationbl;
@@ -29,7 +36,7 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 //		organizationbl = new OrganizationBlservice_Stub();
 		receiptbl = new ReceiptBLService_Stub();
 //		accoutbl = new AccountBLService_Stub();
-//		analysisbl = new AnalysisBLService_Stub();
+		analysisbl = new AnalysisBLService_Stub();
 		constantbl = new ConstantBLService_Stub();
 		logbl = new LogBLService_Stub();
 		init();
@@ -43,20 +50,20 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("单据审批", "receiptApproval");
 		addFunctionBtn("机构管理", "organization");
 		addFunctionBtn("人员管理", "personnel");
-		addFunctionBtn("工资管理", "paymentManage");
+		addFunctionBtn("工资管理", "payment");
 		addFunctionBtn("账户查看", "accoutCheck");
 		addFunctionBtn("统计分析", "analysis");
 		addFunctionBtn("业务常量", "constant");
 		addFunctionBtn("系统日志", "log");
 		
-		addFunctionPanel(new ELSManagePanel(),"manange", "receiptApproval");
+		addFunctionPanel(new ApprovalManagePanel(receiptbl),"manange", "receiptApproval");
 		addFunctionPanel(new ELSManagePanel(),"manange", "organization");
-		addFunctionPanel(new ELSManagePanel(),"manange", "personnelManage");
-		addFunctionPanel(new ELSManagePanel(),"manange", "paymentManage");
-		addFunctionPanel(new ELSManagePanel(),"manange", "accoutCheck");
-		addFunctionPanel(new ELSManagePanel(),"manange", "analysis");
+		addFunctionPanel(new PerManagePanel(personelbl),"manange", "personnel");
+		addFunctionPanel(new PaymentManagePanel(personelbl),"manange", "payment");
+		addFunctionPanel(new AccountManagePanel(accoutbl),"manange", "accoutCheck");
+		addFunctionPanel(new AnalysisManagePanel(analysisbl),"manange", "analysis");
 		addFunctionPanel(new ELSManagePanel(),"manange", "constant");
-		addFunctionPanel(new ELSManagePanel(),"manange", "log");
+		addFunctionPanel(new LogManagePanel(logbl),"manange", "log");
 		
 		validate();
 	}

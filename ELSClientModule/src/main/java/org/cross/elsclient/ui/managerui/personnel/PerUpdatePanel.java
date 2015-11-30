@@ -1,27 +1,26 @@
-package org.cross.elsclient.ui.counterui.initial;
+package org.cross.elsclient.ui.managerui.personnel;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
+import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.PersonnelVO;
-import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
-import org.cross.elscommon.util.StringToType;
-import org.cross.elscommon.util.VehicleType;
+import org.cross.elscommon.util.ResultMessage;
 
-public class PerAddPanel extends ELSInfoPanel{
-	ArrayList<PersonnelVO> vos;
+public class PerUpdatePanel extends ELSInfoPanel{
 	PersonnelVO vo;
+	PersonnelBLService personelbl;
 	
-	public PerAddPanel(ArrayList<PersonnelVO> vos) {
+	public PerUpdatePanel(PersonnelVO vo,PersonnelBLService personnelbl) {
 		super();
-		this.vos = vos;
+		this.personelbl = personnelbl;
+		this.vo = vo;
 		init();
 	}
 	
@@ -30,17 +29,24 @@ public class PerAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("新增人员");
-		addEditableItem("人员编号", "", true);
-		addEditableItem("姓名", "", true,InfoType.NAME);
+		addEditableItem("人员编号", vo.id, false);
+		addEditableItem("姓名", vo.name, true,InfoType.NAME);
 //		addComboxItem("性别",new String[]{"男","女"} , true);
 //		addEditableItem("身份证", "", true,InfoType.IDCARD);
 		String []items = {OrganizationType.BUSINESSHALL.toString(),
 				OrganizationType.HEADQUARTERS.toString(),
 				OrganizationType.TRANSITCENTER.toString()
 		};
+		for(int i =0;i<items.length;i++){
+			if(items[i].equals(vo.position.toString())){
+				String temp = items[0];
+				items[0] = items[i];
+				items[i] = temp;
+			}
+		}
 		addComboxItem("所属机构类型", items, true);
-		addEditableItem("所属机构ID", "", true,InfoType.NAME);
-		addEditableItem("职位", "", true,InfoType.NAME);
+		addEditableItem("所属机构ID", vo.organizationID, true,InfoType.NAME);
+		addEditableItem("职位",vo.position.toString(), true,InfoType.NAME);
 //		addDateItem("出生日期", true);
 		
 		
@@ -55,11 +61,14 @@ public class PerAddPanel extends ELSInfoPanel{
 		super.confirm();
 		if(isAllLegal()){
 			vo = new PersonnelVO(itemLabels.get(0).toString(),itemLabels.get(1).toString() , 
-					StringToType.toPositionType(itemLabels.get(5).toString()), 
-					StringToType.toOrg(itemLabels.get(3).toString()), itemLabels.get(4).toString());
-			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
-			back();
+					PositionType.valueOf(itemLabels.get(6).toString()), 
+					OrganizationType.valueOf(itemLabels.get(4).toString()), itemLabels.get(5).toString());
+			if(personelbl.update(vo)==ResultMessage.SUCCESS){
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
+				back();
+			}else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
+			}
 		}
 	}
 	

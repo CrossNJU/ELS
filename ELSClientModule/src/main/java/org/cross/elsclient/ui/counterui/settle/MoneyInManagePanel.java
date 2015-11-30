@@ -99,7 +99,12 @@ public class MoneyInManagePanel extends ELSManagePanel {
 					moneyInVOs = new ArrayList<>();
 					// 需修改
 					// moneyInVOs.add((Receipt_MoneyInVO)receiptbl.findByID(searchTextField.getText()));
-					moneyInVOs = receiptbl.findByType(ReceiptType.MONEYIN);
+					try {
+						moneyInVOs = receiptbl.findByType(ReceiptType.MONEYIN);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					for (ReceiptVO receipt : moneyInVOs) {
 						Receipt_MoneyInVO receipt_MoneyInVO = (Receipt_MoneyInVO) receipt;
 						String[] item = { "" + receipt.number,
