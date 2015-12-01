@@ -1,5 +1,6 @@
 package org.cross.elsclient.blimpl.receiptblimpl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
@@ -43,6 +44,9 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 
 	@Override
 	public ReceiptVO toVO(ReceiptPO po) {
+		if (po == null) {
+			return null;
+		}
 		switch (po.getType()) {
 		case ORDER:
 			Receipt_OrderPO realpo = (Receipt_OrderPO) po;
@@ -182,5 +186,11 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 		default:
 			return null;
 		}
+	}
+
+	@Override
+	public ReceiptVO findByID(String names) throws RemoteException {
+		ReceiptPO po = receiptdata.findByNum(names);
+		return toVO(po);
 	}
 }

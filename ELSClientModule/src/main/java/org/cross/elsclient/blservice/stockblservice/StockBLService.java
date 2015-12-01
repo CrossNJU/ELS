@@ -12,6 +12,7 @@ import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StockState;
 import org.cross.elscommon.util.StockType;
 import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockCheckVO;
 import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 
@@ -31,8 +32,9 @@ public interface StockBLService {
 	/**
 	 * 根据当前时间生成库存快照
 	 * @return 该时间节点的库存快照信息
+	 * @throws RemoteException 
 	 */
-	public ArrayList<StockVO> showStockCheck(String stockID);
+	public ArrayList<StockCheckVO> showStockCheck(String stockID) throws RemoteException;
 	
 	/**
 	 * 库存查看
@@ -93,4 +95,15 @@ public interface StockBLService {
 	 */
 	public ResultMessage stockAdjust(String stockID,StockType stockType) throws RemoteException;
 
+	/**
+	 * 得到可调整的仓库
+	 * @throws RemoteException 
+	 */
+	public ArrayList<String> getChangeableArea(String stockID) throws RemoteException;
+	
+	/**
+	 * 得到入库时间
+	 * @throws RemoteException 
+	 */
+	public String getInTime(String stockNum,String goodsNum) throws RemoteException;
 }

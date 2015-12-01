@@ -26,7 +26,7 @@ public class MysqlTest {
 	            e.printStackTrace();  
 	        }  
 	     while(rs.next()){
-	    	 System.out.println(rs.getString("belongStockArea"));
+	    	 System.out.println(rs.getString("number"));
 	     }
 	}
 }

@@ -89,7 +89,7 @@ public class GoodsInfoImpl implements GoodsInfo{
 		for (int i = 0; i < size; i++) {
 			goodsVOs.add(toGoodsVO(goodsPOs.get(i)));
 		}
-		return null;
+		return goodsVOs;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package org.cross.elsclient.test;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.goodsblimpl.GoodsInfoImpl;
 import org.cross.elsclient.blimpl.personnelblimpl.PersonnelInfoImpl;
@@ -41,9 +42,40 @@ public class ReceiptBLTest {
 			System.out.println("删除失败");
 		}
 		System.out.println("---test - update---");
+		ReceiptVO updateVO = new ReceiptVO("0001", ReceiptType.MONEYIN, "2015-10-10-11:11");
+		ResultMessage updateMessage = receiptBLImpl.update(updateVO);
+		if (updateMessage == ResultMessage.SUCCESS) {
+			System.out.println("更新成功");
+		}else {
+			System.out.println("更新失败");
+		}
 		System.out.println("---test - show---");
+		ArrayList<ReceiptVO> shows = receiptBLImpl.show();
+		if (shows == null) {
+			System.out.println("是空的");
+		}else {
+			int size = shows.size();
+			for (int i = 0; i < size; i++) {
+				System.out.println(shows.get(i).number + " " + shows.get(i).type.toString());
+			}
+		}
 		System.out.println("---test - findByID---");
+		ReceiptVO idVO = receiptBLImpl.findByID("0001");
+		if (idVO == null) {
+			System.out.println("查找失败");
+		}else {
+			System.out.println(idVO.number + " " + idVO.time + " " + idVO.type.toString());
+		}
 		System.out.println("---test - findByTime---");
+		ArrayList<ReceiptVO> timeVOs = receiptBLImpl.findByTime("2015-10-10-11:11", "2015-10-10-11:20");
+		if (timeVOs == null) {
+			System.out.println("查找失败");
+		}else {
+			int size2 = timeVOs.size();
+			for (int i = 0; i < size2; i++) {
+				System.out.println(timeVOs.get(i).number + " " + timeVOs.get(i).type.toString());
+			}
+		}
 		System.out.println("---test - findByType---");
 		System.out.println("---test - findByTimeAndType---");
 		System.out.println("---test - check---");

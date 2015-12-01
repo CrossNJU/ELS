@@ -9,6 +9,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.util.ResultMessage;
@@ -35,5 +36,9 @@ public interface StockDataService extends Remote{
 	//更新入库单拥有仓库小间
 	public ResultMessage addToInstock(String stockAreaNum, String receipt)throws RemoteException;
 	public ResultMessage deleteFromInstock(String stockAreaNum) throws RemoteException;
+	
+	public ArrayList<StockAreaPO> findAreas(String stockNum)throws RemoteException;
+	
+	public String getIntoStockTime(String stockNum,String goodsNum)throws RemoteException;
 }
 

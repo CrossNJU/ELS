@@ -20,6 +20,7 @@ import org.cross.elscommon.util.StockType;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockCheckVO;
 import org.cross.elsclient.vo.StockOperationVO;
 import org.cross.elsclient.vo.StockVO;
 
@@ -28,17 +29,39 @@ public class StockBLImpl implements StockBLService{
 	public StockDataService stockData;
 	GoodsInfo goodsInfo;
 	StockInfo stockInfo;
+	ReceiptInfo receiptInfo;
 	
-	public StockBLImpl(StockDataService stockData,GoodsInfo goodsInfo,StockInfo stockInfo){
+	public StockBLImpl(StockDataService stockData,GoodsInfo goodsInfo,StockInfo stockInfo,ReceiptInfo receiptInfo){
 		this.stockData = stockData;
 		this.goodsInfo = goodsInfo;
 		this.stockInfo = stockInfo;
+		this.receiptInfo = receiptInfo;
 	}
 	
 	@Override
-	public ArrayList<StockVO> showStockCheck(String stockID) {
-		
-		return null;
+	public ArrayList<StockCheckVO> showStockCheck(String stockID) throws RemoteException {
+		ArrayList<StockCheckVO> checkVOs = new ArrayList<StockCheckVO>();
+		ArrayList<StockAreaPO> areaPOs = stockData.findAreas(stockID);
+		if (areaPOs == null) {
+			return null;
+		}
+		int size = areaPOs.size();
+		System.out.println(size + "<---- size");
+		for (int i = 0; i < size; i++) {
+			ArrayList<GoodsVO> goodsVOs = goodsInfo.findByStockAreaNum(areaPOs.get(i).getNumber());
+			int goodsSize = goodsVOs.size();
+			for (int j = 0; j < goodsSize; j++) {
+				Receipt_OrderVO order = (Receipt_OrderVO)receiptInfo.findByID(goodsVOs.get(j).orderNum);
+				if (order == null) {
+					return null;
+				}
+				String targetCity = order.targetPlace.toString();
+				String inTime = getInTime(stockID, goodsVOs.get(j).number);
+				StockCheckVO checkVO = new StockCheckVO(goodsVOs.get(i).number, inTime, targetCity, areaPOs.get(i).getNumber());
+				checkVOs.add(checkVO);
+			}
+		}
+		return checkVOs;
 	}
 	
 	@Override
@@ -153,6 +176,10 @@ public class StockBLImpl implements StockBLService{
 	public StockState stockAlert(String stockID, StockType stockType)
 			throws RemoteException {
 		ArrayList<StockAreaVO> areaVOs = stockCapacity(stockID, stockType);
+		if (areaVOs == null) {
+			System.out.println("找不到仓库");
+			return StockState.NORMAL;
+		}
 		int size = areaVOs.size();
 		int total = 0;
 		int used = 0;
@@ -179,6 +206,27 @@ public class StockBLImpl implements StockBLService{
 	@Override
 	public ResultMessage deleteStock(String stockID) throws RemoteException {
 		return stockData.delete(stockID);
+	}
+
+	@Override
+	public ArrayList<String> getChangeableArea(String stockID) throws RemoteException {
+		ArrayList<String> areaNum = new ArrayList<String>();
+		ArrayList<StockAreaPO> areaPOs = stockData.findAreas(stockID);
+		if (areaPOs == null) {
+			return null;
+		}
+		int size = areaPOs.size();
+		for (int i = 0; i < size; i++) {
+			if (areaPOs.get(i).getUsedCapacity() == 0) {
+				areaNum.add(areaPOs.get(i).getNumber());
+			}
+		}
+		return areaNum;
+	}
+
+	@Override
+	public String getInTime(String stockNum,String goodsNum) throws RemoteException {
+		return stockData.getIntoStockTime(stockNum, goodsNum);
 	}
 	
 

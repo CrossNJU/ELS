@@ -40,11 +40,11 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 
 	@Override
 	public ResultMessage delete(String number) throws RemoteException {
-		String sql = "delete from `stock` where `number`='" + number + "'";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		} else
-			return ResultMessage.FAILED;
+		String sql = "delete from `stockArea` where `stockNum`='"+number +"'";
+		if (!mysql.execute(sql)) return ResultMessage.FAILED;
+		sql = "delete from `stock` where `number`='" + number + "'";
+		if (!mysql.execute(sql)) return ResultMessage.FAILED;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		}
 		return ResultMessage.SUCCESS;
 	}
-
+//没写完
 	@Override
 	public ArrayList<StockOperationPO> showStockOps(String stockNum, String startTime, String endTime)
 			throws RemoteException {
@@ -175,8 +175,8 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		}
 		return po;
 	}
-
-	public ArrayList<StockAreaPO> findAreas(String stockNum) {
+	@Override
+	public ArrayList<StockAreaPO> findAreas(String stockNum) throws RemoteException{
 		ArrayList<StockAreaPO> areas = new ArrayList<StockAreaPO>();
 		String sql = "select * from `stockArea` where `stockNum`='" + stockNum + "'";
 		ResultSet rs = mysql.query(sql);
@@ -226,4 +226,29 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 //		StockDataImpl stockDataImpl = new StockDataImpl();
 //		stockDataImpl.updateAdjust("A0001", StockType.Fast);
 //	}
+
+	@Override
+	public String getIntoStockTime(String stockNum,String goodsNum)throws RemoteException{
+		ArrayList<StockOperationPO> list = new ArrayList<StockOperationPO>();
+		String sql = "select * from `stockOperation` where `stockNum`='" + stockNum + "'";
+		ResultSet rs = mysql.query(sql);
+		try {
+			while (rs.next()) {
+				StockOperationPO po = new StockOperationPO(rs.getString("time"),
+						StringToType.toStockOperation(rs.getString("type")), rs.getString("goodsNum"),
+						rs.getDouble("money"), StringToType.toGoodsType(rs.getString("place")));
+				list.add(po);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		int size = list.size();
+		for (int i = size; i >= 0; i--) {
+			if (list.get(i).getGoodNum().equals(goodsNum)) {
+				return list.get(i).getTime();
+			}
+		}
+		return null;
+	}
+
 }
