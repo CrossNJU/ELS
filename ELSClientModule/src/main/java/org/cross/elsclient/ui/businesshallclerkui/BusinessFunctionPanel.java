@@ -36,10 +36,10 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("司机管理", "driver");
 		addFunctionBtn("单据管理", "receipts");
 		
-		addFunctionPanel(new ArriAddPanel(receiptbl), "manage","arrive");
-		addFunctionPanel(new TransAddPanel(receiptbl), "manage","trans");
-		addFunctionPanel(new MoneyAddPanel(receiptbl), "manage","moneyin");
-		addFunctionPanel(new DeliverAddPanel(receiptbl), "manage","send");
+		addFunctionPanel(new ArriAddPanel(receiptbl), "add","arrive");
+		addFunctionPanel(new TransAddPanel(receiptbl), "add","trans");
+		addFunctionPanel(new MoneyAddPanel(receiptbl), "add","moneyin");
+		addFunctionPanel(new DeliverAddPanel(receiptbl), "add","send");
 		addFunctionPanel(new VehicleManagePanel(vehiclebl), "manage","vehicle");
 		addFunctionPanel(new DriverManagePanel(personnelbl), "manage","driver");
 		

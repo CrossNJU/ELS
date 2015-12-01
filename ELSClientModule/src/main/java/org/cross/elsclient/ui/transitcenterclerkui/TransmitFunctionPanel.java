@@ -23,8 +23,8 @@ public class TransmitFunctionPanel extends ELSFunctionPanel {
 		addFunctionBtn("库存查看", "stocksee");
 		addFunctionBtn("单据管理", "receipts");
 		
-		addFunctionPanel(new ArriAddPanel(receiptbl), "manage","arrive");
-		addFunctionPanel(new TransAddPanel(receiptbl), "manage","trans");
+		addFunctionPanel(new ArriAddPanel(receiptbl), "add","arrive");
+		addFunctionPanel(new TransAddPanel(receiptbl), "add","trans");
 		
 		addFunctionPanel(new ReceiptManagePanel(receiptbl), "manage", "receipts");
 	}

@@ -34,8 +34,8 @@ public class StockFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("库存盘点", "stockcheck");
 		addFunctionBtn("单据管理", "receipts");
 		
-		addFunctionPanel(new StockInAddPanel(stockbl, receiptbl), "manage","stockin");
-		addFunctionPanel(new StockOutAddPanel(stockbl, receiptbl), "manage","stockout");
+		addFunctionPanel(new StockInAddPanel(stockbl, receiptbl), "add","stockin");
+		addFunctionPanel(new StockOutAddPanel(stockbl, receiptbl), "add","stockout");
 		addFunctionPanel(new StockSeeManagePanel(receiptbl), "manage", "stocksee");
 		addFunctionPanel(new StockCheckManageTable(name, itemWidth, stockbl), "manage", "stockcheck");
 		

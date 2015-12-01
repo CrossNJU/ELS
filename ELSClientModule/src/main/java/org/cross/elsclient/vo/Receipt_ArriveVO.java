@@ -41,5 +41,19 @@ public class Receipt_ArriveVO extends ReceiptVO {
 		this.orders = orders;
 		this.arriveOrg = arriveOrg;
 	}
+	
+	public void print(){
+		super.print();
+		System.out.println("到达单：出发地："+startPlace.toString()+" ,转运单编号："+transNum+" ,到达的机构："+arriveOrg.toString());
+		System.out.println("array: 货物信息：");
+		if (orders == null)	 {
+			System.out.println("null");
+		}else {
+			for (int i = 0; i < orders.size(); i++) {
+				System.out.println(orders.get(i));
+			}
+		}
+		System.out.println("-------转运单打印结束");
+	}
 
 }

@@ -50,4 +50,8 @@ public class ReceiptVO {
 	public ReceiptVO(){
 		
 	}
+	
+	public void print(){
+		System.out.println("单据公有信息：编号："+number+" ,类型："+type.toString()+" ,创建时间："+time);
+	}
 }

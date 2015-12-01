@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
 import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
@@ -26,6 +27,7 @@ public class TransAddPanel extends ELSInfoPanel{
 	@Override
 	public void init(){
 		super.init();
+		titlePanel.remove(titlePanel.backBtn);
 		String it1[] = {"南京营业厅","北京营业厅","上海营业厅","广州营业厅"};
 		String it2[] = {"营业厅","中转中心"};
 		String it3[] = ConstantValue.getUnusedVehicle();
@@ -54,10 +56,8 @@ public class TransAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		if(bl.add(vo)==ResultMessage.SUCCESS){
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
-			ReceiptManagePanel receiptManagePanel = new ReceiptManagePanel(bl);
-			ELSPanel parent = (ELSPanel) getParent();
-			parent.add("manage",receiptManagePanel);
-			parent.cl.show(parent, "manage");
+			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 		}else{
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
 		}
@@ -66,10 +66,8 @@ public class TransAddPanel extends ELSInfoPanel{
 	@Override
 	protected void cancel() {		
 		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")){
-			ReceiptManagePanel receiptManagePanel = new ReceiptManagePanel(bl);
-			ELSPanel parent = (ELSPanel) getParent();
-			parent.add("manage",receiptManagePanel);
-			parent.cl.show(parent, "manage");
+			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 		}		
 	}
 

@@ -161,4 +161,20 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		return insert(po);
 	}
 
+	@Override
+	public ArrayList<String> findOrdersByTransNum(String transNum) throws RemoteException {
+		String sql = "select * from `goods` where `transNum`='"+transNum+"'";
+		ArrayList<String> goods = new ArrayList<String>();
+		ResultSet rs = mysql.query(sql);
+		try {
+			while (rs.next()) {
+				goods.add(rs.getString("orderNum"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return goods;
+	}
+
 }

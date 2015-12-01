@@ -18,7 +18,7 @@ import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 
 public class ELSFunctionPanel extends ELSPanel {
-	ELSPanel contentPanel;
+	public ELSPanel contentPanel;
 	ArrayList<ELSButton> functionBtns = new ArrayList<>();
 	ArrayList<JPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;

@@ -1,9 +1,23 @@
 package org.cross.elsclient.ui.util;
 
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.ReceiptType;
 
 public class ConstantValue {
+	static int transNum = 0;
+	static int arriNum = 0;
+	public static String getReceiptNum(ReceiptType type){
+		switch (type) {
+		case ARRIVE:
+			arriNum ++;
+			return "R010000"+String.valueOf(arriNum);
+
+		default:
+			return "0000000";
+		}
+	}
 	public static String getReceiptTransNum(){
+		transNum ++;
 		return "R01000001";
 	}
 	public static String getTime(){

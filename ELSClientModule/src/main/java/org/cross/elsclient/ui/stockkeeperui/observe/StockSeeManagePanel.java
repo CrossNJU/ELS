@@ -65,6 +65,8 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		datePicker1.setVisible(true);
 		datePicker2.setVisible(true);
 		
+		searchPanel.remove(modeBox);
+		searchPanel.remove(searchTextField);
 		searchPanel.add(datePicker1,3);
 		searchPanel.add(datePicker2,3);
 		searchPanel.validate();

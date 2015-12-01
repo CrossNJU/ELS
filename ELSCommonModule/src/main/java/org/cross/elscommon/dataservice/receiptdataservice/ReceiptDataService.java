@@ -23,4 +23,5 @@ public interface ReceiptDataService extends Remote{
 	public ArrayList<ReceiptPO> findByTime(String startTime, String endTime) throws RemoteException;
 	public ArrayList<ReceiptPO> findByType(ReceiptType type) throws RemoteException;
 	public ArrayList<ReceiptPO> findByTimeAndType(String startTime, String endTime, ReceiptType type) throws RemoteException;
+	public ArrayList<String> findOrdersByTransNum(String transNum) throws RemoteException;
 }
