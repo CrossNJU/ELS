@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -57,6 +59,16 @@ public class GoodsCheckPanel extends ELSManagePanel{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
+			Collections.sort(historyVOs, new Comparator<HistoryVO>() {
+
+				@Override
+				public int compare(HistoryVO o1, HistoryVO o2) {
+					return 0;
+				}
+				
+				
+			});
 			
 			for (HistoryVO historyVO : historyVOs) {
 				list.addItem(historyVO);

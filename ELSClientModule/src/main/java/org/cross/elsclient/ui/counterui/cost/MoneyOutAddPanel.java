@@ -57,7 +57,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 			String time = itemLabels.get(5).toString();
 			String comments = itemLabels.get(6).toString();
 			
-			PersonnelVO receivePerson = personnelbl.findById(receivePersonID).get(0);
+			PersonnelVO receivePerson = personnelbl.findById(receivePersonID);
 			
 			vo = new Receipt_MoneyOutVO(number, time, money, receivePerson, iD, clause, comments);
 			

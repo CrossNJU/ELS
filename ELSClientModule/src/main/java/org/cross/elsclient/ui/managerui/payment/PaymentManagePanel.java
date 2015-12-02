@@ -82,7 +82,7 @@ public class PaymentManagePanel extends ELSManagePanel{
 					personnelVOs = new ArrayList<>();
 					try {
 						// userVOs.add(userbl.findById(id));
-						personnelVOs = personnelbl.findById(id);
+						personnelVOs.add(personnelbl.findById(id));
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
