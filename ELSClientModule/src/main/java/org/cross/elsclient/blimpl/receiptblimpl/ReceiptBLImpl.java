@@ -138,5 +138,19 @@ public class ReceiptBLImpl implements ReceiptBLService{
 		}
 		return vo;
 	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByUser(String userId)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByOrgan(String organId)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

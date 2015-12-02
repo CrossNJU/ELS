@@ -47,13 +47,16 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
 		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
 		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
+		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
+		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
+		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
 		return list;
 	}
 
 	@Override
-	public ReceiptVO findByID(String names) {
+	public ReceiptVO findByID(String id) {
 		// TODO Auto-generated method stub
-		ReceiptVO receipt = new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22");
+		ReceiptVO receipt = new ReceiptVO(id, ReceiptType.ORDER, "2015-10-22 10:23:22");
 		return receipt;
 	}
 	
@@ -61,6 +64,9 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime) {
 		// TODO Auto-generated method stub
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
 		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
 		return list;
 	}
@@ -72,8 +78,16 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 		if(type == ReceiptType.MONEYIN){
 			PersonnelVO person = new PersonnelVO("111", "学睿", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "111111");
 			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
 		}else{
-			list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
 		}
 		return list;
 	}
@@ -82,12 +96,25 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type) {
 		// TODO Auto-generated method stub
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
-		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
 		return list;
 	}
 
 	@Override
 	public ResultMessage check(ReceiptVO vo, ApproveType approveState) throws RemoteException {
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByUser(String userId)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByOrgan(String organId)
+			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

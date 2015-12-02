@@ -79,4 +79,8 @@ public interface ReceiptBLService {
 	 * @throws RemoteException 
 	 */
 	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type) throws RemoteException;
+	
+	public ArrayList<ReceiptVO> findByUser(String userId) throws RemoteException;
+	
+	public ArrayList<ReceiptVO> findByOrgan(String organId) throws RemoteException;
 }

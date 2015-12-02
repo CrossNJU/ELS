@@ -10,7 +10,6 @@ public class ConstantBLService_Stub implements ConstantBLService {
 
 	@Override
 	public ConstantVO show() {
-		// TODO Auto-generated method stub
 		return new ConstantVO();
 	}
 

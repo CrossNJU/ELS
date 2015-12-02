@@ -119,4 +119,18 @@ public class Receipt_Stub implements ReceiptBLService{
 		}
 		System.out.println("-----------------------");
 	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByUser(String userId)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ReceiptVO> findByOrgan(String organId)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -22,8 +22,11 @@ public class AnalysisBLService_Stub implements AnalysisBLService {
 			String endTime) {
 		ArrayList<Receipt_MoneyInVO> table = new ArrayList<Receipt_MoneyInVO>();
 		
-//		table.add(new Receipt_MoneyInVO("00001", ReceiptType.MONEYIN,"2015-10-10"));
-//		table.add(new ReceiptVO("00002", ReceiptType.MONEYIN,"2015-10-10"));
+		table.add(new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001"));
+		table.add(new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001"));
+		table.add(new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001"));
+		table.add(new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001"));
+		table.add(new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001"));
 		
 		return table;
 	}
@@ -33,8 +36,7 @@ public class AnalysisBLService_Stub implements AnalysisBLService {
 			String endTime) {
 		ArrayList<Receipt_MoneyOutVO> table = new ArrayList<Receipt_MoneyOutVO>();
 		
-//		table.add(new ReceiptVO("00001", ReceiptType.MONEYOUT,"2015-10-10"));
-//		table.add(new ReceiptVO("00002", ReceiptType.MONEYOUT,"2015-10-10"));
+//		new recei
 		return table;
 	}
 
