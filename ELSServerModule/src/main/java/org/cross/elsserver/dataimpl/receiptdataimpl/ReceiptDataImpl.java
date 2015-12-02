@@ -108,6 +108,9 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		try {
 			if (rs.next()) {
 				ReceiptType type = StringToType.toReceiptType(rs.getString("type"));
+				if (type == null) {
+					return null;
+				}
 				switch (type) {
 				case ORDER:
 					return order.getFromDB(number);
@@ -126,7 +129,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 				case TOTALMONEYIN:
 					return totalmoneyin.getFromDB(number);
 				default:
-					break;
+					return null;
 				}
 			}
 		} catch (SQLException e) {

@@ -25,11 +25,11 @@ public interface ReceiptBLService {
 	
 	/**
 	 * 删除单据
-	 * @param vo
+	 * @param number,type
 	 * @return
 	 * @throws RemoteException 
 	 */
-	public ResultMessage delete(ReceiptVO vo) throws RemoteException;
+	public ResultMessage delete(String number,ReceiptType type) throws RemoteException;
 	
 	/**
 	 * 更新单据信息

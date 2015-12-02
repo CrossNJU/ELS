@@ -33,7 +33,7 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 	@Override
 	public ReceiptPO getFromDB(String number) {
 		Receipt_MoneyInPO po = null;
-		String sql = "select from `receiptMoneyIn` where `number`='" + number + "'";
+		String sql = "select * from `receiptMoneyIn` where `number`='" + number + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			if (rs.next()) {

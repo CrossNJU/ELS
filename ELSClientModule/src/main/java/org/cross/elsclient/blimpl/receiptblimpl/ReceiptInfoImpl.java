@@ -119,6 +119,9 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 
 	@Override
 	public ReceiptPO toPO(ReceiptVO vo) {
+		if (vo == null) {
+			return null;
+		}
 		switch (vo.type) {
 		case ORDER:
 			Receipt_OrderVO ordervo = (Receipt_OrderVO) vo;

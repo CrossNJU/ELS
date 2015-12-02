@@ -63,8 +63,8 @@ public class ReceiptBLImpl implements ReceiptBLService{
 	}
 
 	@Override
-	public ResultMessage delete(ReceiptVO vo) throws RemoteException {
-		return receiptdata.delete(vo.number, vo.type);
+	public ResultMessage delete(String number,ReceiptType type) throws RemoteException {
+		return receiptdata.delete(number,type);
 	}
 
 	@Override

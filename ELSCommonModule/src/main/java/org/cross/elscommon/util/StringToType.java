@@ -92,6 +92,14 @@ public class StringToType {
 			return ReceiptType.STOCKIN;
 		case "出库单":
 			return ReceiptType.STOCKOUT;
+		case "收款单":
+			return ReceiptType.MONEYIN;
+		case "付款单":
+			return ReceiptType.MONEYOUT;
+		case "转运单":
+			return ReceiptType.TRANS;
+		case "总收款单":
+			return ReceiptType.TOTALMONEYIN;
 		default:
 			return null;
 		}
