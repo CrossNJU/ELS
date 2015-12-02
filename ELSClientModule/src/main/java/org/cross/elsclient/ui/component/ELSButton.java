@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui.component;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -11,6 +12,7 @@ import org.cross.elsclient.blservice.initialblservice.InitialBLService;
 public class ELSButton extends JLabel {
 	Color backColor = Color.GRAY;
 	Color pressColor = Color.DARK_GRAY;
+	
 
 	public ELSButton() {
 		super();
@@ -25,6 +27,8 @@ public class ELSButton extends JLabel {
 	public void init(){
 		setOpaque(true);
 		setBackground(Color.gray);
+		setForeground(Color.WHITE);
+		setFont(getFont().deriveFont(Font.BOLD));
 		setVerticalAlignment(JLabel.CENTER);
 		setHorizontalAlignment(JLabel.CENTER);
 		setFocusable(false);
@@ -32,20 +36,16 @@ public class ELSButton extends JLabel {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				setBackground(backColor);
+				release();
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				setBackground(Color.DARK_GRAY);
+				press();
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
@@ -56,8 +56,7 @@ public class ELSButton extends JLabel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				click();
 			}
 		});
 	}
@@ -66,4 +65,17 @@ public class ELSButton extends JLabel {
 		setBackground(bg);
 		backColor = bg;
 	}
+	
+	public void click(){
+		setBackground(backColor);
+	}
+	
+	public void press(){
+		setBackground(pressColor);
+	}
+	
+	public void release(){
+		setBackground(backColor);
+	}
+	
 }

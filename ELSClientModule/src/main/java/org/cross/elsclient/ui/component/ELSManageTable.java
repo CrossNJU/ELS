@@ -73,8 +73,11 @@ public class ELSManageTable extends ELSPanel {
 
 		//表头初始化
 		header.init(name,itemWidth,false);
-		header.setBackground(Color.GRAY);
+		header.setBackground(UIConstant.MAINCOLOR);
 		header.setFont(font);
+		for (ELSLabel label : header.labels) {
+			label.setForeground(Color.WHITE);
+		}
 		
 		container.add(header);
 		add(container);

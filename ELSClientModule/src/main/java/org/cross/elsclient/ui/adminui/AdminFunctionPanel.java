@@ -29,10 +29,8 @@ public class AdminFunctionPanel extends ELSFunctionPanel{
 		super.init();
 		
 		addFunctionBtn("用户管理", "userManagement");
-		addFunctionBtn("不知道什么功能", "233333");
 		
 		addFunctionPanel(new UserManagePanel(userbl),"manage", "userManagement");
-		addFunctionPanel(new ELSPanel(), "noknow","233333");
 		
 		validate();
 	}

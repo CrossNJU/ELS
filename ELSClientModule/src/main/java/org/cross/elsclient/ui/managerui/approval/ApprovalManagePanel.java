@@ -65,6 +65,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 		// 设置类型选择的搜索下拉框
 		String[] types = { "到达单","收款单","付款单","订单","入库单","出库单","转运单","总收款单"};
 		typeCombobox.setModel(new DefaultComboBoxModel<String>(types));
+		typeCombobox.setVisible(false);
 
 		// 搜索按钮设置文字和监听
 		searchBtn.setText("查找单据");
@@ -104,8 +105,6 @@ public class ApprovalManagePanel extends ELSManagePanel {
 						list.addItem(receiptVO);
 					}
 					container.packHeight();
-				}else if(((String)modeBox.getSelectedItem()).equals("按时间查询")){
-					
 				}else if(((String)modeBox.getSelectedItem()).equals("按单据类型查找")){
 					String type = (String)typeCombobox.getSelectedItem();
 					receiptVOs = new ArrayList<>();
@@ -119,6 +118,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 						list.addItem(receiptVO);
 					}
 					container.packHeight();
+				}else {
 				}
 			}
 			if (e.getSource() == checkBtn){

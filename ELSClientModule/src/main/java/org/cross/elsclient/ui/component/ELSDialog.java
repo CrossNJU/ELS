@@ -53,7 +53,7 @@ public class ELSDialog extends JDialog {
 		cancelBtn.addMouseListener(new BtnListener());
 		
 		titleLabel = new ELSLabel();
-		titleLabel.setBackground(Color.DARK_GRAY);
+		titleLabel.setBackground(UIConstant.MAINCOLOR);
 		titleLabel.setOpaque(true);
 		titleLabel.setSize(UIConstant.DIALOG_WIDTH,48);
 		titleLabel.setLocation(0, 0);

@@ -19,6 +19,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.InitialVO;
 import org.cross.elsclient.vo.OrganizationVO;
@@ -42,21 +43,25 @@ public class InitialAddPanel extends InitialManagePanel{
 		cancelBtn = ComponentFactory.createSearchBtn();
 		titleLabel = new ELSLabel("创建新账本");
 		
-		titleLabel.setPreferredSize(new Dimension(150, searchPanel.getHeight()));
-		titleLabel.setMinimumSize(new Dimension(150, searchPanel.getHeight()));
-		titleLabel.setOpaque(false);
+//		titleLabel.setMaximumSize(new Dimension(150, searchPanel.getHeight()));
+		titleLabel.setPreferredSize(new Dimension(150, 48));
+		titleLabel.setMinimumSize(new Dimension(150, 48));
+		titleLabel.setOpaque(true);
 		titleLabel.setHorizontalAlignment(JLabel.LEFT);
 		titleLabel.setForeground(Color.white);
+		titleLabel.setBackground(UIConstant.MAINCOLOR);
 		
 		searchBtn.setText("创建账本");
 		searchBtn.addMouseListener(new BtnListener());
 		cancelBtn.setText("取消创建");
 		cancelBtn.addMouseListener(new BtnListener());
 		
-		searchPanel.remove(modeBox);
+		
 		searchPanel.add(titleLabel,0);
+		searchPanel.remove(modeBox);
 		searchPanel.add(Box.createHorizontalStrut(10));
 		searchPanel.add(cancelBtn);
+		searchPanel.validate();
 	}
 	
 	@Override

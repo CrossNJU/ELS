@@ -19,7 +19,7 @@ import org.cross.elsclient.ui.util.UIConstant;
 
 public class ELSFunctionPanel extends ELSPanel {
 	public ELSPanel contentPanel;
-	ArrayList<ELSButton> functionBtns = new ArrayList<>();
+	ArrayList<FunctionBtn> functionBtns = new ArrayList<>();
 	ArrayList<JPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;
 	
@@ -34,7 +34,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	public void init(){
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(UIConstant.MAINCOLOR);
 		
 		contentPanel = new ELSPanel();
 		contentPanel.setBounds(168, 100, 856, 668);
@@ -57,16 +57,19 @@ public class ELSFunctionPanel extends ELSPanel {
 	 * @return void
 	 */
 	public void addFunctionBtn(String text,String functionName){
-		ELSButton btn = ComponentFactory.createFunctionBtn();
+		FunctionBtn btn = (FunctionBtn)ComponentFactory.createFunctionBtn();
+		
 		btn.setText(text);
-		btn.setIcon(new ImageIcon("img/testicon.png"));
+//		btn.setIcon(new ImageIcon("img/test-icon.png"));
 		btn.setName(functionName);
+		btn.addMouseListener(new FuncBtnListener());
+		if(functionBtns.isEmpty()){
+			btn.setArchive(true);
+		}		
 		
 		functionBtns.add(btn);
 		
 		btn.setBounds(0, 100+54*functionBtns.indexOf(btn), 168, 54);
-		btn.addMouseListener(new FuncBtnListener());
-		
 		this.add(btn);
 	}
 	
@@ -90,7 +93,11 @@ public class ELSFunctionPanel extends ELSPanel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			ELSButton btn = (ELSButton)e.getSource();
+			FunctionBtn btn = (FunctionBtn)e.getSource();
+			for (FunctionBtn elsButton : functionBtns) {
+				elsButton.setArchive(false);
+			}
+			btn.setArchive(true);
 			String text = btn.getName();
 			contentPanel.cl.show(contentPanel, text);
 		}

@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elscommon.util.ApproveType;
 
@@ -30,6 +31,8 @@ public class ApprovalInfoPanel extends ELSInfoPanel {
 		
 		if(vo.approveState==ApproveType.UNCHECKED){
 			this.addConfirmAndCancelBtn();
+			confirmBtn.setText("审批通过");
+			cancelBtn.setText("审批不通过");
 		}
 		container.packHeight();
 	}
@@ -37,7 +40,7 @@ public class ApprovalInfoPanel extends ELSInfoPanel {
 	@Override
 	protected void confirm() throws RemoteException {
 		super.confirm();
-		if(ELSDialog.showConfirmDlg(this, "审批单据", "确认审批通过该单据？")){
+		if(ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(this), "审批单据", "确认审批通过该单据？")){
 			receiptbl.check(vo, ApproveType.APPROVED);
 		}
 	}
@@ -46,7 +49,7 @@ public class ApprovalInfoPanel extends ELSInfoPanel {
 	protected void cancel() {
 		// TODO Auto-generated method stub
 		super.cancel();
-		if(ELSDialog.showConfirmDlg(this, "审批单据", "确认审批不通过该单据？")){
+		if(ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(this), "审批单据", "确认审批不通过该单据？")){
 			try {
 				receiptbl.check(vo, ApproveType.NOT_APPROVED);
 			} catch (RemoteException e) {

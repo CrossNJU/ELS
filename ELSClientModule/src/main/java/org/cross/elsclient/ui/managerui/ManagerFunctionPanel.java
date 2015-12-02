@@ -20,6 +20,8 @@ import org.cross.elsclient.ui.counterui.account.AccountManagePanel;
 import org.cross.elsclient.ui.counterui.analysis.AnalysisManagePanel;
 import org.cross.elsclient.ui.counterui.log.LogManagePanel;
 import org.cross.elsclient.ui.managerui.approval.ApprovalManagePanel;
+import org.cross.elsclient.ui.managerui.constant.ConstantInfoPanel;
+import org.cross.elsclient.ui.managerui.organizationui.OrganizationManagePanel;
 import org.cross.elsclient.ui.managerui.payment.PaymentManagePanel;
 import org.cross.elsclient.ui.managerui.personnel.PerManagePanel;
 
@@ -57,12 +59,12 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("系统日志", "log");
 		
 		addFunctionPanel(new ApprovalManagePanel(receiptbl),"manange", "receiptApproval");
-		addFunctionPanel(new ELSManagePanel(),"manange", "organization");
+		addFunctionPanel(new OrganizationManagePanel(organizationbl),"manange", "organization");
 		addFunctionPanel(new PerManagePanel(personelbl),"manange", "personnel");
 		addFunctionPanel(new PaymentManagePanel(personelbl),"manange", "payment");
 		addFunctionPanel(new AccountManagePanel(accoutbl),"manange", "accoutCheck");
 		addFunctionPanel(new AnalysisManagePanel(analysisbl),"manange", "analysis");
-		addFunctionPanel(new ELSManagePanel(),"manange", "constant");
+		addFunctionPanel(new ConstantInfoPanel(constantbl),"info", "constant");
 		addFunctionPanel(new LogManagePanel(logbl),"manange", "log");
 		
 		validate();

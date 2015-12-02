@@ -17,6 +17,7 @@ import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elsclient.vo.VehicleVO;
@@ -35,16 +36,6 @@ public class VehicleManagePanel extends ELSManagePanel{
 		this.vehiclebl = vehiclebl;
 		init();
 	}
-	
-//	@Override
-//	public void init() {
-//		// TODO Auto-generated method stub
-//		super.init();
-//		if(getParent() instanceof AdminFunctionPanel){
-//			BusinessFunctionPanel parent = (BusinessFunctionPanel) getParent();
-//			vehiclebl = parent.vehiclebl;
-//		}
-//	}
 	
 	@Override
 	public void setContentPanel() {
@@ -66,7 +57,7 @@ public class VehicleManagePanel extends ELSManagePanel{
 		searchBtn.setText("查找车辆");
 		searchBtn.addMouseListener(new BtnListener());
 		
-		addBtn = new ELSButton();
+		addBtn = ComponentFactory.createSearchBtn();
 		addBtn.setText("添加车辆");
 		addBtn.addMouseListener(new BtnListener());
 		
@@ -96,6 +87,7 @@ public class VehicleManagePanel extends ELSManagePanel{
 					for (VehicleVO  vehicleVO: vehicleVOs) {
 						list.addItem(vehicleVO);
 					}
+					container.packHeight();
 				}else if (e.getSource() == addBtn){
 					VehicleAddPanel vehicleAddPanel = new VehicleAddPanel(vehiclebl);
 					ELSPanel parent = (ELSPanel) getParent();

@@ -2,24 +2,27 @@ package org.cross.elsclient.ui.managerui.organizationui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
+import org.cross.elsclient.ui.adminui.UserInfoPanel;
+import org.cross.elsclient.ui.adminui.UserUpdatePanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.OrganizationVO;
+import org.cross.elsclient.vo.UserVO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class OrganizationManageTable extends ELSManageTable {
 	OrganizationBLService organizationbl;
 	ArrayList<OrganizationVO> vos;
-	
-	public OrganizationManageTable(){
-		super();
-	}
 	
 	public OrganizationManageTable(String[] name, int[] itemWidth,OrganizationBLService organizationbl) {
 		super(name, itemWidth);
@@ -36,131 +39,52 @@ public class OrganizationManageTable extends ELSManageTable {
 	
 	public void addItem(OrganizationVO vo){
 		vos.add(vo);
-		int index = vos.indexOf(vo);
 		
 		String[] item = {vo.id,vo.city.toString(),vo.type.toString()};
 		addItemLabel(item);
-		
-		ELSButton updateBtn = ComponentFactory.createUpdateBtn();
-		ELSButton deleteBtn = ComponentFactory.createDeleteBtn();
-		
-		updateBtn.setVisible(false);
-		updateBtn.addMouseListener(new BtnListener(index));
-		
-		deleteBtn.setVisible(false);
-		deleteBtn.addMouseListener(new BtnListener(index));
-		
-		itemLabels.get(index).add(Box.createHorizontalGlue());
-		itemLabels.get(index).add(updateBtn);
-		itemLabels.get(index).add(Box.createHorizontalStrut(gap));
-		itemLabels.get(index).add(deleteBtn);
-		itemLabels.get(index).add(Box.createHorizontalStrut(gap));
-		itemLabels.get(index).validate();
-		itemLabels.get(index).addMouseListener(new ItemListener(index));
-		repaint();
 	}
 	
-	class ItemListener implements MouseListener{
-		int index;
-		OrganizationVO vo;
-		Box itemLabel;
-		
-		public ItemListener(int index) {
-			this.index = index;
-			vo = vos.get(index);
-			itemLabel = itemLabels.get(index);
-		}
-		
-		@Override
-		public void mouseClicked(MouseEvent e) {
-//			ELSPanel contentPanel  = (ELSPanel)getParent().getParent().getParent();
-//			
-//			contentPanel.add(new OrganizationVOInfoPanel(vo),"info");
-//			contentPanel.cl.show(contentPanel, "info");
-//			System.out.println("hhhhh");
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
-			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
-			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
-		}
+	@Override
+	public void infoBtn(int index) {
+		super.infoBtn(index);
+		//界面统一添加到功能界面(managePanel的父容器)
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 1);
+		OrganizationVO vo = vos.get(index);
+		contentPanel.add("info",new OrganizationInfoPanel(vo));
+		contentPanel.cl.show(contentPanel, "info");
 	}
 	
-	class BtnListener implements MouseListener{
-		OrganizationVO vo;
-		Box itemLabel;
+	@Override
+	public void updateBtn(int index) {
+		super.updateBtn(index);
+		//界面统一添加到功能界面(managePanel的父容器)
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 1);
 		
-		public BtnListener(int index) {
-			this.vo = vos.get(index);
-			itemLabel = itemLabels.get(index);
+		contentPanel.add("update",new OrganizationUpdatePanel(vos.get(index),organizationbl));
+		contentPanel.cl.show(contentPanel, "update");
+	}
+	
+	@Override
+	public void deleteBtn(int index) {
+		try {
+			if(organizationbl.delete(vos.get(index).id)==ResultMessage.SUCCESS){
+				//从展示层删除该项
+				container.remove(itemLabels.get(index));
+				itemLabels.remove(index);
+				vos.remove(index);
+				
+				//自适应高度
+				packHeight();
+				((ELSPanel)getParent()).packHeight();
+				
+				container.validate();
+				container.repaint();
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除成功");
+			}else{
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除失败");
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			ELSButton btn = (ELSButton)e.getSource();
-			int index = vos.indexOf(vo);
-			
-//			if(btn.getName()=="update"){
-//				ELSPanel contentPanel  = (ELSPanel)getParent().getParent().getParent();
-//				UserManagePanel parent = (UserManagePanel)getParent().getParent();
-//				
-//				contentPanel.add(new OrganizationUpdatePanel(vo,parent.userbl),"update");
-//				contentPanel.cl.show(contentPanel, "update");
-//				System.out.println("hhhhh");
-//			}else if(btn.getName()=="delete"){
-//				UserManagePanel parent = (UserManagePanel)getParent().getParent();
-//				parent.organizationbl.delete(vo);
-//				itemLabels.remove(index);
-//				vos.remove(index);
-//				container.remove(itemLabel);
-//				container.validate();
-//				container.repaint();
-//			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(true);
-			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(true);
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			itemLabel.getComponent(itemLabel.getComponentCount()-2).setVisible(false);
-			itemLabel.getComponent(itemLabel.getComponentCount()-4).setVisible(false);
-		}
-		
 	}
 }

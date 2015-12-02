@@ -19,7 +19,7 @@ public class MainUI extends JFrame {
 	public static void main(String[] args) {
 		try {
 			FontUIResource fontUIResource = new FontUIResource(new Font("YouYuan",
-					Font.TRUETYPE_FONT, 15));
+					Font.PLAIN, 15));
 			for (Enumeration<Object> keys = UIManager.getDefaults().keys(); keys
 					.hasMoreElements();) {
 				Object key = keys.nextElement();

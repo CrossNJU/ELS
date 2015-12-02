@@ -34,6 +34,7 @@ public class UserAddPanel extends ELSInfoPanel{
 		addEditableItem("姓名","", true,InfoType.NAME);
 		String items[] = {"快递员", "营业厅业务员","中转中心业务员","仓库管理人员","财务人员","高级财务人员","总经理","系统管理员"};
 		addComboxItem("职位", items, true);
+		addEditableItem("密码", "", true,InfoType.PASSWORD);
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");

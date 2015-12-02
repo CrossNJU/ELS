@@ -2,6 +2,8 @@ package org.cross.elsclient.ui.courierui.goodscheck;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -11,11 +13,17 @@ import org.cross.elsclient.ui.adminui.UserManageTable;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.GoodsVO;
+import org.cross.elsclient.vo.HistoryVO;
 
 public class GoodsCheckPanel extends ELSManagePanel{
 	GoodsBLService goodsbl;
-	GoodsVO goodsVo;
+	ArrayList<HistoryVO> historyVOs;
 	GoodsCheckTable list;
+	
+	public GoodsCheckPanel(GoodsBLService goodsbl) {
+		this.goodsbl = goodsbl;
+		init();
+	}
 	
 	@Override
 	public void setContentPanel() {
@@ -43,32 +51,29 @@ public class GoodsCheckPanel extends ELSManagePanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
+			try {
+				historyVOs = goodsbl.findGoods(searchTextField.getText());
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			for (HistoryVO historyVO : historyVOs) {
+				list.addItem(historyVO);
+			}
+			container.packHeight();
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mousePressed(MouseEvent e) {}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mouseReleased(MouseEvent e) {}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mouseEntered(MouseEvent e) {}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
+		public void mouseExited(MouseEvent e) {}
 	}
 }

@@ -33,7 +33,8 @@ public class UserUpdatePanel extends ELSInfoPanel{
 		setTitle("修改用户");
 		addEditableItem("用户名", "U000001", false);
 		addEditableItem("姓名", vo.name, true,InfoType.NAME);
-		addComboxItem("职位", items, true);
+		addComboxItem("职位", items,vo.type.toString(), true);
+		addEditableItem("密码", vo.password, true,InfoType.PASSWORD);
 		
 		//添加确认和取消按钮
 		addConfirmAndCancelBtn();

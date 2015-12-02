@@ -56,8 +56,8 @@ public class PerAddPanel extends ELSInfoPanel {
 		super.confirm();
 		if(isAllLegal()){
 			vo = new PersonnelVO(itemLabels.get(0).toString(),itemLabels.get(1).toString() , 
-					StringToType.toPositionType(itemLabels.get(5).toString()), 
-					StringToType.toOrg(itemLabels.get(3).toString()), itemLabels.get(4).toString());
+					StringToType.toPositionType(itemLabels.get(4).toString()), 
+					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(3).toString());
 			if(personelbl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 				back();

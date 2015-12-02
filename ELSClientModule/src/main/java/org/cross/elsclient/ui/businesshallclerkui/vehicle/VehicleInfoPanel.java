@@ -24,6 +24,8 @@ public class VehicleInfoPanel extends ELSInfoPanel {
 		addNormalItem("服役时间", vo.buyTime+"~"+vo.lastTime);
 		addNormalItem("发动机号", vo.engineNumber);
 		addNormalItem("底盘号", vo.apparatusNumber);
+		
+		container.packHeight();
 	}
 	
 }

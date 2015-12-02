@@ -25,6 +25,7 @@ public class InfoItemLabel extends ELSLabel{
 	public int type;
 	public InfoType infoType;
 	public ELSDatePicker datePicker;
+	public ELSButton autoBtn;
 	
 	public InfoItemLabel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -148,6 +149,36 @@ public class InfoItemLabel extends ELSLabel{
 		this.add(comboBox);
 	}
 	
+	public void initBox(String name, String[] items,String defaultValue, boolean isEditable){
+		type = 4;
+		
+		nameLabel = new ELSLabel(name);
+		comboBox = new ELSComboBox();
+		comboBox.setEnabled(isEditable);
+
+		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setVerticalAlignment(JLabel.CENTER);
+		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
+		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
+
+		comboBox.setModel(new DefaultComboBoxModel<>(items));
+		comboBox.setPreferredSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		comboBox.setMaximumSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		comboBox.setFont(getFont().deriveFont(20f));
+		
+		for (String string : items) {
+			if(string.equals(defaultValue)){
+				comboBox.setSelectedItem(string);
+			}
+		}
+
+		this.add(Box.createHorizontalStrut(30));
+		this.add(nameLabel);
+		this.add(Box.createHorizontalStrut(10));
+		this.add(comboBox);
+	}
+	
 	public void initDatePicker(String name, boolean isEditable){
 		type = 5;
 		
@@ -169,6 +200,38 @@ public class InfoItemLabel extends ELSLabel{
 		this.add(nameLabel);
 		this.add(Box.createHorizontalStrut(10));
 		this.add(datePicker);
+	}
+	
+	public void initAuto(String name, String defaultValue,
+			boolean isEditable){
+		type = 2;
+		
+		nameLabel = new ELSLabel(name);
+		autoBtn = new ELSButton("生成");
+		inputLabel = new ELSTextField(defaultValue);
+		inputLabel.setEditable(isEditable);
+
+		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setVerticalAlignment(JLabel.CENTER);
+		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
+		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
+
+		inputLabel.setPreferredSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		inputLabel.setMaximumSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		inputLabel.setHorizontalAlignment(JTextField.LEFT);
+		inputLabel.setFont(getFont().deriveFont(20f));
+		
+		autoBtn.setPreferredSize(new Dimension(UIConstant.MANAGETABLE_ITEM_HEIGHT, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		autoBtn.setMaximumSize(new Dimension(UIConstant.MANAGETABLE_ITEM_HEIGHT, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		
+		
+		this.add(Box.createHorizontalStrut(30));
+		this.add(nameLabel);
+		this.add(Box.createHorizontalStrut(10));
+		this.add(inputLabel);
+		this.add(Box.createHorizontalStrut(10));
+		this.add(autoBtn);
 	}
 	
 	@Override

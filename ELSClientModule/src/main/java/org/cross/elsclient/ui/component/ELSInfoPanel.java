@@ -62,6 +62,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 				UIConstant.CONTENTPANEL_HEIGHT
 				+ UIConstant.CONTENTPANEL_MARGIN_TOP * 2));
 		container.setLayout(null);
+		container.setBackground(Color.white);
 
 		titlePanel.init("Title");
 		titlePanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, UIConstant.CONTENTPANEL_MARGIN_TOP);
@@ -145,6 +146,30 @@ public class ELSInfoPanel extends ELSScrollPane {
 		itemLabel.initBox(name, items, isEditable);
 
 		itemLabels.add(itemLabel);
+
+		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
+				+ itemHeight);
+		infoPanel.add(itemLabel);
+	}
+	
+	public void addComboxItem(String name, String[] items,String defaultValue, boolean isEditable) {
+		InfoItemLabel itemLabel = new InfoItemLabel();
+		itemLabel.initBox(name, items,defaultValue, isEditable);
+
+		itemLabels.add(itemLabel);
+
+		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
+				+ itemHeight);
+		infoPanel.add(itemLabel);
+	}
+	
+	public void addAutoItem(String name, String defaultValue,
+			boolean isEditable){
+		InfoItemLabel itemLabel = new InfoItemLabel();
+		itemLabel.initAuto(name, defaultValue, isEditable);
+		
+		itemLabels.add(itemLabel);
+		itemLabel.autoBtn.addMouseListener(new AutoBtnListener(itemLabel));
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 				+ itemHeight);
@@ -273,8 +298,49 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @para
 	 * @return void
 	 */
-	protected void cancel() {
+	protected void cancel() {}
+	
+	public void autoBtn(String text){}
+	
+	class AutoBtnListener implements MouseListener{
+		InfoItemLabel label;
+		
+		public AutoBtnListener(InfoItemLabel label) {
+			this.label = label;
+		}
 
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			autoBtn(label.toString());
+			for (InfoItemLabel infoItemLabel : itemLabels) {
+				infoItemLabel.validate();
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 	class BtnListener implements MouseListener {

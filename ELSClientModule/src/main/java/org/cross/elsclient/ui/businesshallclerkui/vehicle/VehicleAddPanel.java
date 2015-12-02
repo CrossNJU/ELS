@@ -29,7 +29,11 @@ public class VehicleAddPanel extends ELSInfoPanel {
 		addEditableItem("发动机号", "",true);
 		addEditableItem("底盘号", "",true);
 		
-//		vo = new VehicleVO(itemLabels.get(0).getText(), itemLabels.get(0).getText(), itemLabels.get(0).getText(), buyTime, lastTime, null, type)
+		addConfirmAndCancelBtn();
+		confirmBtn.setText("确认添加");
+		cancelBtn.setText("取消添加");
+		
+		container.packHeight();
 	}
 	
 	@Override

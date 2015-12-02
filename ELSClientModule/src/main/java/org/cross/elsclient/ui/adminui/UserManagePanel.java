@@ -36,7 +36,6 @@ public class UserManagePanel extends ELSManagePanel {
 	UserBLService userbl;
 	ArrayList<UserVO> userVOs;
 	UserManageTable list;
-	ELSDatePicker datePicker;
 	ELSComboBox typeCombobox;
 	ELSButton addBtn;
 	
@@ -64,12 +63,11 @@ public class UserManagePanel extends ELSManagePanel {
 	public void setSearchPanel() {
 		//默认搜索面板有一个modeBox,一个searchTextField,一个SearchBtn(btn1)
 		//另外需要的组件可以用ComponentFactory生成, 不用设置尺寸
-		datePicker = ComponentFactory.createDatePicker();
 		typeCombobox = ComponentFactory.createSearchBox();
 		addBtn = ComponentFactory.createSearchBtn();
 		
 		//设置搜索模式
-		String[] s = {"按ID查询", "按时间查询", "按职位查询"};
+		String[] s = {"按编号查找", "按姓名查找", "按用户类型查找"};
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
 		modeBox.addItemListener(new ModeBoxItemListener());
 		
@@ -90,10 +88,8 @@ public class UserManagePanel extends ELSManagePanel {
 		searchPanel.add(addBtn);
 		
 		//除了默认搜索方式外都要设置成不可见
-		datePicker.setVisible(false);
 		typeCombobox.setVisible(false);
 		
-		searchPanel.add(datePicker,3);
 		searchPanel.add(typeCombobox,3);
 		searchPanel.validate();
 	}
@@ -105,7 +101,7 @@ public class UserManagePanel extends ELSManagePanel {
 			// TODO Auto-generated method stub
 			
 			if(e.getSource()==searchBtn){
-				if(((String)modeBox.getSelectedItem()).equals("按ID查询")){
+				if(((String)modeBox.getSelectedItem()).equals("按编号查找")){
 					String id = searchTextField.getText();
 					userVOs = new ArrayList<>();
 					try {
@@ -121,9 +117,23 @@ public class UserManagePanel extends ELSManagePanel {
 					}
 					//容器自适应高度
 					container.packHeight();
-				}else if(((String)modeBox.getSelectedItem()).equals("按时间查询")){
-					
-				}else if(((String)modeBox.getSelectedItem()).equals("按类型查询")){
+				}else if(((String)modeBox.getSelectedItem()).equals("按姓名查找")){
+					String name = searchTextField.getText();
+					userVOs = new ArrayList<>();
+					try {
+//						userVOs = userbl.findByName(name);
+						userVOs = userbl.show();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					list.init();
+					for (UserVO userVO : userVOs) {
+						list.addItem(userVO);
+					}
+					//容器自适应高度
+					container.packHeight();
+				}else if(((String)modeBox.getSelectedItem()).equals("按用户类型查找")){
 					String type = (String)typeCombobox.getSelectedItem();
 					userVOs = new ArrayList<>();
 					try {
@@ -185,19 +195,13 @@ public class UserManagePanel extends ELSManagePanel {
 			if(e.getStateChange()==ItemEvent.SELECTED){
 				String item = (String)modeBox.getSelectedItem();
 				switch (item) {
-				case "按ID查询":
+				case "按编号查找":
+				case "按姓名查找":
 					searchTextField.setVisible(true);
-					datePicker.setVisible(false);
 					typeCombobox.setVisible(false);
 					break;
-				case "按时间查询":
+				case "按用户类型查找":
 					searchTextField.setVisible(false);
-					datePicker.setVisible(true);
-					typeCombobox.setVisible(false);
-					break;
-				case "按职位查询":
-					searchTextField.setVisible(false);
-					datePicker.setVisible(false);
 					typeCombobox.setVisible(true);
 					break;
 				default:

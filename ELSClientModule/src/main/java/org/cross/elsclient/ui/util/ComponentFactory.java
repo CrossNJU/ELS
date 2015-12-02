@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.util;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import org.cross.elsclient.ui.component.ELSButton;
@@ -7,6 +8,7 @@ import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSDatePicker;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSTextField;
+import org.cross.elsclient.ui.component.FunctionBtn;
 
 public class ComponentFactory {
 	
@@ -16,7 +18,7 @@ public class ComponentFactory {
 	 * @return ELSButton
 	 */
 	public static ELSButton createFunctionBtn(){
-		return new ELSButton();
+		return new FunctionBtn();
 	}
 	
 	/**
@@ -34,7 +36,10 @@ public class ComponentFactory {
 	 * @return ELSButton
 	 */
 	public static ELSButton createConfirmBtn(){
-		return new ELSButton();
+		ELSButton btn = new ELSButton();
+		btn.setColor(Color.decode("#7ed09d"));
+		
+		return btn;
 	}
 	
 	/**
@@ -43,7 +48,10 @@ public class ComponentFactory {
 	 * @return ELSButton
 	 */
 	public static ELSButton createCancelBtn(){
-		return new ELSButton();
+		ELSButton btn = new ELSButton();
+		btn.setColor(Color.decode("#7ebcd0"));
+		
+		return btn;
 	}
 	
 	/**
@@ -121,6 +129,7 @@ public class ComponentFactory {
 		btn.setPreferredSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
 		btn.setMaximumSize(new Dimension(250, UIConstant.SEARCHPANEL_HEIGHT));
 		btn.setMinimumSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
+		btn.setColor(Color.decode("#7ebcd0"));
 		return btn;
 	}
 }

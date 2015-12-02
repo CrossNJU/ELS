@@ -12,6 +12,7 @@ import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StringToType;
 
 public class PerUpdatePanel extends ELSInfoPanel{
 	PersonnelVO vo;
@@ -61,8 +62,8 @@ public class PerUpdatePanel extends ELSInfoPanel{
 		super.confirm();
 		if(isAllLegal()){
 			vo = new PersonnelVO(itemLabels.get(0).toString(),itemLabels.get(1).toString() , 
-					PositionType.valueOf(itemLabels.get(6).toString()), 
-					OrganizationType.valueOf(itemLabels.get(4).toString()), itemLabels.get(5).toString());
+					StringToType.toPositionType(itemLabels.get(4).toString()), 
+					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(3).toString());
 			if(personelbl.update(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 				back();

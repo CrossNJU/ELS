@@ -12,17 +12,22 @@ import javax.swing.DefaultComboBoxModel;
 
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
 import org.cross.elsclient.ui.component.ELSButton;
+import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.OrganizationVO;
+import org.cross.elscommon.util.StringToType;
 
 public class OrganizationManagePanel extends ELSManagePanel{
 	OrganizationBLService organizationbl;
 	ArrayList<OrganizationVO> organizationVOs;
 	OrganizationManageTable list;
 	ELSButton addBtn;
+	ELSComboBox typeComboBox;
+	ELSComboBox areaComboBox;
 	
 	public OrganizationManagePanel(){}
 	
@@ -46,16 +51,31 @@ public class OrganizationManagePanel extends ELSManagePanel{
 	
 	@Override
 	public void setSearchPanel() {
-		String[] s = {"按机构地区查询", "按时间查询", "按类型查询"};
+		typeComboBox = ComponentFactory.createSearchBox();
+		areaComboBox = ComponentFactory.createSearchBox();
+		
+		String[] s = {"按机构编号查找","按机构地区查找", "按机构类型查找"};
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
 		modeBox.addItemListener(new ModeBoxItemListener());
+		
+		String[] types = {"营业厅","中转中心", "总部"};
+		typeComboBox.setModel(new DefaultComboBoxModel<String>(types));
+		
+		String[] area = {"北京","上海", "南京","广州"};
+		areaComboBox.setModel(new DefaultComboBoxModel<String>(area));
 		
 		searchBtn.setText("查找用户");
 		searchBtn.addMouseListener(new BtnListener());
 		
-		addBtn = new ELSButton();
+		typeComboBox.setVisible(false);
+		areaComboBox.setVisible(false);
+		
+		addBtn = ComponentFactory.createSearchBtn();
 		addBtn.setText("添加用户");
 		addBtn.addMouseListener(new BtnListener());
+		
+		searchPanel.add(areaComboBox,3);
+		searchPanel.add(typeComboBox,3);
 		searchPanel.add(Box.createHorizontalStrut(10));
 		searchPanel.add(addBtn);
 		
@@ -68,8 +88,9 @@ public class OrganizationManagePanel extends ELSManagePanel{
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
-			if(((String)modeBox.getSelectedItem()).equals("按机构地区查询")){
-				if(e.getSource()==searchBtn){
+			if (e.getSource() == searchBtn) {
+				switch (((String)modeBox.getSelectedItem())) {
+				case "按机构编号查找":
 					String id = searchTextField.getText();
 					organizationVOs = new ArrayList<>();
 					try {
@@ -82,14 +103,47 @@ public class OrganizationManagePanel extends ELSManagePanel{
 					for (OrganizationVO organizationVO : organizationVOs) {
 						list.addItem(organizationVO);
 					}
-				}else if (e.getSource() == addBtn){
-//					OrganizationAddPanel userAddPanel = new OrganizationAddPanel(userbl);
-//					ELSPanel parent = (ELSPanel) getParent();
-//					parent.add(userAddPanel,"add");
-//					parent.cl.show(parent, "add");
+					break;
+				case "按机构地区查找":
+					String area = (String)areaComboBox.getSelectedItem();
+					organizationVOs = new ArrayList<>();
+					try {
+						organizationVOs = organizationbl.findByCity(StringToType.toCity(area));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					list.init();
+					for (OrganizationVO organizationVO : organizationVOs) {
+						list.addItem(organizationVO);
+					}
+					break;
+					
+				case "按机构类型查找":
+					String type = (String)typeComboBox.getSelectedItem();
+					organizationVOs = new ArrayList<>();
+					try {
+						organizationVOs = organizationbl.findByType(StringToType.toOrg(type));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					list.init();
+					for (OrganizationVO organizationVO : organizationVOs) {
+						list.addItem(organizationVO);
+					}
+					break;
+				default:
+					break;
 				}
 				
+			} else if (e.getSource() == addBtn) {
+				OrganizationAddPanel addPanel = new OrganizationAddPanel(organizationbl);
+				ELSPanel parent = (ELSPanel) getParent();
+				parent.add("add",addPanel);
+				parent.cl.show(parent, "add");
 			}
+
 		}
 
 		@Override
@@ -124,8 +178,20 @@ public class OrganizationManagePanel extends ELSManagePanel{
 			if(e.getStateChange()==ItemEvent.SELECTED){
 				String item = (String)modeBox.getSelectedItem();
 				switch (item) {
-				case "按ID查询":
+				case "按机构编号查找":
 					searchTextField.setVisible(true);
+					typeComboBox.setVisible(false);
+					areaComboBox.setVisible(false);
+					break;
+				case "按机构地区查找":
+					searchTextField.setVisible(false);
+					typeComboBox.setVisible(false);
+					areaComboBox.setVisible(true);
+					break;
+				case "按机构类型查找":
+					searchTextField.setVisible(false);
+					typeComboBox.setVisible(true);
+					areaComboBox.setVisible(false);
 					break;
 				default:
 					searchTextField.setVisible(false);

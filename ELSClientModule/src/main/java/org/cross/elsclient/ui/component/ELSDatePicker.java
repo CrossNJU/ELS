@@ -330,4 +330,12 @@ public class ELSDatePicker extends JPanel {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(cal.getTime());
 	}
+	
+	public void setDate(String date){
+		String dates[] = date.split("-");
+		this.year = Integer.valueOf(dates[0]);
+		this.month = Integer.valueOf(dates[1]);
+		this.date = Integer.valueOf(dates[2]);
+		updateField();
+	}
 }

@@ -20,5 +20,6 @@ public class OrganizationInfoPanel extends ELSInfoPanel{
 		addNormalItem("机构编号", vo.id);
 		addNormalItem("地区", vo.city.toString());
 		addNormalItem("类型", vo.type.toString());
+		container.packHeight();
 	}
 }

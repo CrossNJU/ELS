@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.xml.bind.Marshaller.Listener;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
+import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
 import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
@@ -39,10 +40,11 @@ public class ELSManagePanel extends ELSScrollPane {
 		searchPanel = new ELSBox(BoxLayout.X_AXIS);
 		modeBox = new ELSComboBox();
 		searchTextField = new ELSTextField();
-		searchBtn = new ELSButton();
+		searchBtn = ComponentFactory.createSearchBtn();
 		
 		container.setPreferredSize(new Dimension(UIConstant.CONTAINER_WIDTH,UIConstant.CONTAINER_HEIGHT));
 		container.setLayout(null);
+		container.setBackground(Color.WHITE);
 		
 		searchPanel.setSize(UIConstant.CONTENTPANEL_WIDTH,48);
 //		searchPanel.setLayout(null);

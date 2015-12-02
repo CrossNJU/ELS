@@ -3,14 +3,21 @@ package org.cross.elsclient.ui.managerui.organizationui;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
+import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
+import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.OrganizationVO;
+import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StringToType;
 
 public class OrganizationUpdatePanel extends ELSInfoPanel{
 	OrganizationVO vo;
 	OrganizationBLService bl;
 	
-	public OrganizationUpdatePanel(OrganizationVO vo){
+	public OrganizationUpdatePanel(OrganizationVO vo,OrganizationBLService bl){
+		this.bl = bl;
 		this.vo = vo;
 		init();
 	}
@@ -20,28 +27,42 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 		// TODO Auto-generated method stub
 		super.init();
 		
+		String[] types = {"营业厅","中转中心", "总部"};
+		String[] area = {"北京","上海", "南京","广州"};
+		
 		setTitle("机构详细信息");
-		addEditableItem("机构编号", vo.id,true);
-		addEditableItem("地区", vo.city.toString(),true);
-		addEditableItem("类型", vo.type.toString(),true);
+		addEditableItem("机构编号", vo.id,true,InfoType.NUM);
+		addComboxItem("机构地区", area,vo.city.toString() ,true);
+		addComboxItem("机构类型", types,vo.type.toString(),true);
 		
 		addConfirmAndCancelBtn();
-		confirmBtn.setText("确认修改");
-		cancelBtn.setText("取消修改");
+		confirmBtn.setText("确认添加");
+		cancelBtn.setText("取消添加");
 	}
 	
 	@Override
-	protected void confirm() throws RemoteException {
-		super.confirm();
-		bl.update(vo);
-		back();
+	protected void confirm() {
+		if(isAllLegal()){
+			vo = new OrganizationVO(StringToType.toCity(itemLabels.get(1).toString()),
+					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(0).toString());
+			try {
+				if(bl.add(vo)==ResultMessage.SUCCESS){
+					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+					back();
+				}else{
+					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
+				}
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
 	protected void cancel() {
-		super.cancel();
-		back();
+		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
+			back();
+		}
 	}
-	
-	
 }

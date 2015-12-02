@@ -31,6 +31,12 @@ public class VehicleUpdatePanel extends ELSInfoPanel{
 		addEditableItem("服役时间", vo.buyTime+"~"+vo.lastTime,true);
 		addEditableItem("发动机号", vo.engineNumber,true);
 		addEditableItem("底盘号", vo.apparatusNumber,true);
+		
+		addConfirmAndCancelBtn();
+		confirmBtn.setText("确认修改");
+		cancelBtn.setText("取消修改");
+		
+		container.packHeight();
 	}
 	
 	@Override

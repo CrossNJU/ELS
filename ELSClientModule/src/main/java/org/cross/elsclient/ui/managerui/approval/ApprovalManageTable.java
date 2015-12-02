@@ -24,7 +24,7 @@ public class ApprovalManageTable extends ELSManageTable {
 	public void init() {
 		super.init();
 		vos = new ArrayList<>();
-		isUpdateAndDelete = true;
+		isUpdateAndDelete = false;
 	}
 	
 	public void addItem(ReceiptVO vo){

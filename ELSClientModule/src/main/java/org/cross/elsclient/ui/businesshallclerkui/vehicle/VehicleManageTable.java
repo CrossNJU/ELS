@@ -49,23 +49,6 @@ public class VehicleManageTable extends ELSManageTable {
 		String[] item = { vo.number, vo.number, vo.buyTime + "~" + vo.lastTime };
 		addItemLabel(item);
 
-		// ELSButton updateBtn = ComponentFactory.createUpdateBtn();
-		// ELSButton deleteBtn = ComponentFactory.createDeleteBtn();
-		//
-		// updateBtn.setVisible(false);
-		// updateBtn.addMouseListener(new BtnListener(index));
-		//
-		// deleteBtn.setVisible(false);
-		// deleteBtn.addMouseListener(new BtnListener(index));
-		//
-		// itemLabels.get(index).add(Box.createHorizontalGlue());
-		// itemLabels.get(index).add(updateBtn);
-		// itemLabels.get(index).add(Box.createHorizontalStrut(gap));
-		// itemLabels.get(index).add(deleteBtn);
-		// itemLabels.get(index).add(Box.createHorizontalStrut(gap));
-		// itemLabels.get(index).validate();
-		// itemLabels.get(index).addMouseListener(new ItemListener(index));
-		// repaint();
 	}
 
 	@Override

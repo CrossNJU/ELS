@@ -1,5 +1,7 @@
 package org.cross.elsclient.ui.util;
 
+import java.awt.Color;
+
 public class UIConstant {
 	public static int WINDOW_WIDTH = 1024;
 	public static int WINDOW_HEIGHT = 768;
@@ -22,4 +24,6 @@ public class UIConstant {
 	
 	public static int BTN_WIDTH = 142;
 	public static int BTN_HEIGHT = 48;
+	
+	public static Color MAINCOLOR = Color.decode("#5a6074");
 }

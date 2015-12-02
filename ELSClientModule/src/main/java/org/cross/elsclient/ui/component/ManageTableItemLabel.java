@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui.component;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import org.cross.elsclient.ui.util.UIConstant;
 
 public class ManageTableItemLabel extends TableItemLabel{
 	String item[];
+	public ArrayList<ELSLabel> labels;
 	public ELSButton updateBtn;
 	public ELSButton deleteBtn;
 
@@ -28,6 +30,7 @@ public class ManageTableItemLabel extends TableItemLabel{
 		init();
 		
 		this.item = item;
+		labels = new ArrayList<>();
 		ELSLabel tempLabel = new ELSLabel();
 		updateBtn = ComponentFactory.createUpdateBtn();
 		deleteBtn = ComponentFactory.createDeleteBtn();
@@ -40,6 +43,7 @@ public class ManageTableItemLabel extends TableItemLabel{
 			tempLabel.setMinimumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
 			tempLabel.setVerticalAlignment(JLabel.CENTER);
 			tempLabel.setHorizontalAlignment(JLabel.LEFT);
+			labels.add(tempLabel);
 			this.add(tempLabel);
 		}
 		
