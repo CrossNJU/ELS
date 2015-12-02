@@ -3,6 +3,7 @@ package org.cross.elsclient.ui.businesshallclerkui;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
+import org.cross.elsclient.blservice.receiptblservice.Receipt_Stub;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService_Stub;
 import org.cross.elsclient.ui.businesshallclerkui.arri.ArriAddPanel;
@@ -21,7 +22,7 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 	
 	public BusinessFunctionPanel() {
 		super();
-		receiptbl = new ReceiptBLService_Stub();
+		receiptbl = new Receipt_Stub();
 		vehiclebl = new VehicleBLService_Stub();
 		init();
 	}

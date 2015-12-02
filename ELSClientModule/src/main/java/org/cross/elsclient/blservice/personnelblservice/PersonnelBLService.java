@@ -8,6 +8,8 @@ package org.cross.elsclient.blservice.personnelblservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.cross.elscommon.util.OrganizationType;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.vo.PersonnelVO;
 
@@ -20,7 +22,7 @@ public interface PersonnelBLService {
 	 * @return
 	 * @throws RemoteException 
 	 */
-	public ArrayList<PersonnelVO> findById(String id) throws RemoteException;
+	public PersonnelVO findById(String id) throws RemoteException;
 
 	/**
 	 * 根据人员姓名查找
@@ -30,6 +32,10 @@ public interface PersonnelBLService {
 	 * @throws RemoteException 
 	 */
 	public ArrayList<PersonnelVO> findByName(String name) throws RemoteException;
+	
+	public ArrayList<PersonnelVO> findByOrg(String number) throws RemoteException;
+	
+	public ArrayList<PersonnelVO> findByPosition(PositionType position) throws RemoteException;
 
 	/**
 	 * 增加人员

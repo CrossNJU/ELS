@@ -44,6 +44,17 @@ public class ReceiptManagePanel extends ELSManagePanel{
 		int[] itemWidth = {200,100,200,100};
 		list = new ReceiptManageTable(s, itemWidth,receiptbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		try {
+			receiptvos = receiptbl.show();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(receiptvos.size());
+		for (int i = 0; i < receiptvos.size(); i++) {
+			list.addItem(receiptvos.get(i));
+		}
+		container.packHeight();
 		container.add(list);
 	}
 	

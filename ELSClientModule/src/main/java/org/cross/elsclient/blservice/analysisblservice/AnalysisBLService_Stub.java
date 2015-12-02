@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elsclient.vo.ReceiptVO;
+import org.cross.elsclient.vo.Receipt_MoneyInVO;
+import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 
 public class AnalysisBLService_Stub implements AnalysisBLService {
 
@@ -16,23 +18,23 @@ public class AnalysisBLService_Stub implements AnalysisBLService {
 
 
 	@Override
-	public ArrayList<ReceiptVO> showMoneyinTable(String beginTime,
+	public ArrayList<Receipt_MoneyInVO> showMoneyinTable(String beginTime,
 			String endTime) {
-		ArrayList<ReceiptVO> table = new ArrayList<ReceiptVO>();
+		ArrayList<Receipt_MoneyInVO> table = new ArrayList<Receipt_MoneyInVO>();
 		
-		table.add(new ReceiptVO("00001", ReceiptType.MONEYIN,"2015-10-10"));
-		table.add(new ReceiptVO("00002", ReceiptType.MONEYIN,"2015-10-10"));
+//		table.add(new Receipt_MoneyInVO("00001", ReceiptType.MONEYIN,"2015-10-10"));
+//		table.add(new ReceiptVO("00002", ReceiptType.MONEYIN,"2015-10-10"));
 		
 		return table;
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> showMoneyoutTable(String beginTime,
+	public ArrayList<Receipt_MoneyOutVO> showMoneyoutTable(String beginTime,
 			String endTime) {
-		ArrayList<ReceiptVO> table = new ArrayList<ReceiptVO>();
+		ArrayList<Receipt_MoneyOutVO> table = new ArrayList<Receipt_MoneyOutVO>();
 		
-		table.add(new ReceiptVO("00001", ReceiptType.MONEYOUT,"2015-10-10"));
-		table.add(new ReceiptVO("00002", ReceiptType.MONEYOUT,"2015-10-10"));
+//		table.add(new ReceiptVO("00001", ReceiptType.MONEYOUT,"2015-10-10"));
+//		table.add(new ReceiptVO("00002", ReceiptType.MONEYOUT,"2015-10-10"));
 		return table;
 	}
 

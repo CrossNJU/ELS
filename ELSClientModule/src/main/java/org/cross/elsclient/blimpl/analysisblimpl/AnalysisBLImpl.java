@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
 import org.cross.elsclient.vo.ReceiptVO;
+import org.cross.elsclient.vo.Receipt_MoneyInVO;
+import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 
 public class AnalysisBLImpl implements AnalysisBLService{
 
@@ -14,14 +16,14 @@ public class AnalysisBLImpl implements AnalysisBLService{
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> showMoneyinTable(String beginTime,
+	public ArrayList<Receipt_MoneyInVO> showMoneyinTable(String beginTime,
 			String endTime) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> showMoneyoutTable(String beginTime,
+	public ArrayList<Receipt_MoneyOutVO> showMoneyoutTable(String beginTime,
 			String endTime) {
 		// TODO Auto-generated method stub
 		return null;

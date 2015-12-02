@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.util.CompareTime;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
@@ -20,7 +21,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	private Receipt_OrderDataImpl order;
 	private Receipt_ArriDataImpl arri;
 	private Receipt_TransDataImpl trans;
-	private Receipt_StockInImpl stockin;
+	private Receipt_StockInDataImpl stockin;
 	private Receipt_StockOutDataImpl stockout;
 	private Receipt_MoneyInDataImpl moneyin;
 	private Receipt_MoneyOutDataImpl moneyout;
@@ -31,7 +32,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		this.order = new Receipt_OrderDataImpl();
 		this.arri = new Receipt_ArriDataImpl();
 		this.trans = new Receipt_TransDataImpl();
-		this.stockin = new Receipt_StockInImpl();
+		this.stockin = new Receipt_StockInDataImpl();
 		this.stockout = new Receipt_StockOutDataImpl();
 		this.moneyin = new Receipt_MoneyInDataImpl();
 		this.moneyout = new Receipt_MoneyOutDataImpl();
@@ -141,21 +142,60 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 
 	@Override
 	public ArrayList<ReceiptPO> findByTime(String startTime, String endTime) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ReceiptPO> receipts = new ArrayList<ReceiptPO>();
+		String sql = "select * from `receipt`";
+		ResultSet rs = mysql.query(sql);
+		try {
+			while (rs.next()) {
+				String time = rs.getString("time");
+				if (CompareTime.compare(time, startTime) == 1 && CompareTime.compare(endTime, time) == 1) {
+					ReceiptPO po = findByNum(rs.getString("number"));
+					receipts.add(po);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return receipts;
 	}
 
 	@Override
 	public ArrayList<ReceiptPO> findByType(ReceiptType type) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ReceiptPO> receipts = new ArrayList<ReceiptPO>();
+		String sql = "select * from `receipt` where `type`='"+type.toString()+"'";
+		ResultSet rs = mysql.query(sql);
+		try {
+			while (rs.next()) {
+				ReceiptPO po = findByNum(rs.getString("number"));
+				receipts.add(po);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return receipts;
 	}
 
 	@Override
 	public ArrayList<ReceiptPO> findByTimeAndType(String startTime, String endTime, ReceiptType type)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ReceiptPO> receipts = new ArrayList<ReceiptPO>();
+		String sql = "select * from `receipt` where `type`='"+type.toString()+"'";
+		ResultSet rs = mysql.query(sql);
+		try {
+			while (rs.next()) {
+				String time = rs.getString("time");
+				if (CompareTime.compare(time, startTime) == 1 && CompareTime.compare(endTime, time) == 1) {
+					ReceiptPO po = findByNum(rs.getString("number"));
+					receipts.add(po);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return receipts;
 	}
 
 	@Override

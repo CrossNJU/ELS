@@ -61,4 +61,10 @@ public class VehicleBLImpl implements VehicleBLService{
 		return vos;
 	}
 
+	@Override
+	public ArrayList<VehicleVO> findByOrg(String orgNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

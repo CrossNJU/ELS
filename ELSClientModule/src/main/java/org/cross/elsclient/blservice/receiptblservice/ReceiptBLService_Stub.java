@@ -92,10 +92,4 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 		return null;
 	}
 
-	@Override
-	public ArrayList<String> orders(String transNum) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

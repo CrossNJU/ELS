@@ -138,11 +138,5 @@ public class ReceiptBLImpl implements ReceiptBLService{
 		}
 		return vo;
 	}
-
-	@Override
-	public ArrayList<String> orders(String transNum) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 }

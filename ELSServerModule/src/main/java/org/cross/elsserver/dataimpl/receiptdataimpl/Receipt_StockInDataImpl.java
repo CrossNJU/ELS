@@ -10,11 +10,11 @@ import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
 
-public class Receipt_StockInImpl implements ReceiptTool{
+public class Receipt_StockInDataImpl implements ReceiptTool{
 	
 	private MySQL mysql;
 	
-	public Receipt_StockInImpl(){
+	public Receipt_StockInDataImpl(){
 		this.mysql = new MySQL();
 	}
 

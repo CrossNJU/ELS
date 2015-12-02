@@ -2,7 +2,8 @@ package org.cross.elsclient.blservice.analysisblservice;
 
 import java.util.ArrayList;
 
-import org.cross.elsclient.vo.ReceiptVO;
+import org.cross.elsclient.vo.Receipt_MoneyInVO;
+import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 
 public interface AnalysisBLService {
 	
@@ -18,13 +19,13 @@ public interface AnalysisBLService {
 	 * @param beginTime, endTime
 	 * @return 收款单
 	 */
-	public ArrayList<ReceiptVO> showMoneyinTable(String beginTime, String endTime);
+	public ArrayList<Receipt_MoneyInVO> showMoneyinTable(String beginTime, String endTime);
 	
 	/**
 	 * 展示付款单
 	 * @param beginTime, endTime
 	 * @return 付款单
 	 */
-	public ArrayList<ReceiptVO> showMoneyoutTable(String beginTime, String endTime);
+	public ArrayList<Receipt_MoneyOutVO> showMoneyoutTable(String beginTime, String endTime);
 	
 }

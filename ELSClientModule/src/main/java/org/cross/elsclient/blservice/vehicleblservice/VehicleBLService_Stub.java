@@ -5,6 +5,7 @@
  */
 package org.cross.elsclient.blservice.vehicleblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.util.ResultMessage;
@@ -53,6 +54,12 @@ public class VehicleBLService_Stub implements VehicleBLService{
 		ArrayList<VehicleVO> list = new ArrayList<VehicleVO>();
 		list.add(new VehicleVO("00001"));
 		return list;
+	}
+
+	@Override
+	public ArrayList<VehicleVO> findByOrg(String orgNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

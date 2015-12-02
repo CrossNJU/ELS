@@ -51,4 +51,6 @@ public interface VehicleBLService {
 	 * @throws RemoteException 
 	 */
 	public ArrayList<VehicleVO> find(String name) throws RemoteException;
+	
+	public ArrayList<VehicleVO> findByOrg(String orgNum) throws RemoteException;
 }

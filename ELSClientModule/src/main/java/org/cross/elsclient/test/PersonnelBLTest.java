@@ -61,12 +61,12 @@ public class PersonnelBLTest {
 		}
 		
 		System.out.println("---test-findById---");
-		ArrayList<PersonnelVO> idvo = personnelBLImpl.findById("P0001");
-		int size1 = idvo.size();
-		System.out.println(size1);
-		for (int i = 0; i < size1; i++) {
-			System.out.println(idvo.get(i).name + " " + idvo.get(i).organization);
-		}
+//		ArrayList<PersonnelVO> idvo = personnelBLImpl.findById("P0001");
+//		int size1 = idvo.size();
+//		System.out.println(size1);
+//		for (int i = 0; i < size1; i++) {
+//			System.out.println(idvo.get(i).name + " " + idvo.get(i).organization);
+//		}
 		
 		System.out.println("---test-findByName---");
 		ArrayList<PersonnelVO> namevo = personnelBLImpl.findByName("crr");

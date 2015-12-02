@@ -79,7 +79,4 @@ public interface ReceiptBLService {
 	 * @throws RemoteException 
 	 */
 	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type) throws RemoteException;
-	
-	//根据转运单，查找快件编号
-	public ArrayList<String> orders(String transNum) throws RemoteException;
 }

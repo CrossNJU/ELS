@@ -11,6 +11,7 @@ import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class PersonnelBLImpl implements PersonnelBLService{
@@ -26,15 +27,15 @@ public class PersonnelBLImpl implements PersonnelBLService{
 	}
 	
 	@Override
-	public ArrayList<PersonnelVO> findById(String id) throws RemoteException {
-		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
+	public PersonnelVO findById(String id) throws RemoteException {
+//		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
 		PersonnelPO po = personnelData.findById(id);
-		vos.add(personnelInfo.toPersonnelVO(po));
+		PersonnelVO vo = personnelInfo.toPersonnelVO(po);
 //		int size = pos.size();
 //		for (int i = 0; i < size; i++) {
 //			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
 //		}
-		return vos;
+		return vo;
 	}
 
 	@Override
@@ -77,6 +78,18 @@ public class PersonnelBLImpl implements PersonnelBLService{
 			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
 		}
 		return vos;
+	}
+
+	@Override
+	public ArrayList<PersonnelVO> findByOrg(String number) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PersonnelVO> findByPosition(PositionType position) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

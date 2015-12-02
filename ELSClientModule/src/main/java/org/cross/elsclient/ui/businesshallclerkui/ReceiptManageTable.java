@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.businesshallclerkui;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
