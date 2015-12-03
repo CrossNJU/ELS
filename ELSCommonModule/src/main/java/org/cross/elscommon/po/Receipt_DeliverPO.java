@@ -2,7 +2,7 @@ package org.cross.elscommon.po;
 
 import org.cross.elscommon.util.ReceiptType;
 
-public class Receipt_deliverPO extends ReceiptPO {
+public class Receipt_DeliverPO extends ReceiptPO {
 
 	private String orderNum;
 
@@ -10,7 +10,7 @@ public class Receipt_deliverPO extends ReceiptPO {
 
 	private String posterNum;
 
-	public Receipt_deliverPO(String number, ReceiptType type, String time,
+	public Receipt_DeliverPO(String number, ReceiptType type, String time,
 			String orgNum, String perNum, String orderNum, String name,
 			String posterNum) {
 		super(number, type, time, orgNum, perNum);

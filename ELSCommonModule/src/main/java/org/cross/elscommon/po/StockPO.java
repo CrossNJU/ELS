@@ -50,10 +50,13 @@ public class StockPO implements Serializable {
 	 */
 	private int numInStock;
 
-	public StockPO(String number, int totalAreas) {
+	private String orgNum;
+
+	public StockPO(String number, int totalAreas, String orgNum) {
 		super();
 		this.number = number;
 		this.totalAreas = totalAreas;
+		this.setOrgNum(orgNum);
 		this.usedAreas = 0;
 		this.numOut = 0;
 		this.numIn = 0;
@@ -124,6 +127,14 @@ public class StockPO implements Serializable {
 
 	public void setNumInStock(int numInStock) {
 		this.numInStock = numInStock;
+	}
+
+	public String getOrgNum() {
+		return orgNum;
+	}
+
+	public void setOrgNum(String orgNum) {
+		this.orgNum = orgNum;
 	}
 
 }

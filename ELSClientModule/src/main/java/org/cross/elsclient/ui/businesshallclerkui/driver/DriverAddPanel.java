@@ -36,6 +36,7 @@ public class DriverAddPanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() throws RemoteException {
 		super.confirm();
+//		personnelVO = new PersonnelVO(id, name, position, organization, organizationID)
 		bl.add(personnelVO);
 		back();
 	}
