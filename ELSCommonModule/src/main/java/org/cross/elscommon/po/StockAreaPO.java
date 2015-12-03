@@ -10,10 +10,8 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.util.StockType;
 
-public class StockAreaPO implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	
+public class StockAreaPO implements Serializable {
+
 	/**
 	 * 仓库小间编号
 	 */
@@ -34,19 +32,12 @@ public class StockAreaPO implements Serializable{
 	 */
 	private int usedCapacity;
 
-	/**
-	 * 特定仓库中存放的快递
-	 */
-	private ArrayList<GoodsPO> goodslist;
-
 	public StockAreaPO(String number, StockType stockType, int totalCapacity) {
 		super();
 		this.number = number;
 		this.stockType = stockType;
 		this.totalCapacity = totalCapacity;
-
 		this.usedCapacity = 0;
-		this.goodslist = new ArrayList<GoodsPO>();
 	}
 
 	public String getNumber() {
@@ -79,14 +70,6 @@ public class StockAreaPO implements Serializable{
 
 	public void setUsedCapacity(int usedCapacity) {
 		this.usedCapacity = usedCapacity;
-	}
-
-	public ArrayList<GoodsPO> getGoodslist() {
-		return goodslist;
-	}
-
-	public void setGoodslist(ArrayList<GoodsPO> goodslist) {
-		this.goodslist = goodslist;
 	}
 
 }

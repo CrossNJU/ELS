@@ -6,9 +6,6 @@
 package org.cross.elscommon.po;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-
-import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 
 public class PersonnelPO implements Serializable {
@@ -21,7 +18,7 @@ public class PersonnelPO implements Serializable {
 	/**
 	 * 人员工号
 	 */
-	private String id;
+	private String number;
 	/**
 	 * 人员姓名
 	 */
@@ -31,62 +28,43 @@ public class PersonnelPO implements Serializable {
 	 */
 	private PositionType position;
 	/**
-	 * 人员所属机构type
-	 */
-	private OrganizationType organization;
-	/**
 	 * 人员所属机构ID
 	 */
-	private String organizationID;
+	private String orgNum;
 	/**
 	 * 人员工资
 	 */
 	private double payment;
-	/**
-	 * 已处理单据
-	 */
-	private ArrayList<ReceiptPO> dealedReceipts;
-	
-	public ArrayList<ReceiptPO> getDealedReceipts() {
-		return dealedReceipts;
-	}
 
-	public void setDealedReceipts(ArrayList<ReceiptPO> dealedReceipts) {
-		this.dealedReceipts = dealedReceipts;
-	}
+	private int sex;
 
-	public double getPayment() {
-		return payment;
-	}
+	private String id;
 
-	public void setPayment(double payment) {
-		this.payment = payment;
-	}
-	
-	/**
-	 * 构造方法
-	 * 
-	 * @param id
-	 * @param name
-	 * @param position
-	 */
-	public PersonnelPO(String id, String name, PositionType position,OrganizationType organization,String organizationID) {
-		this.id = id;
+	private String phone;
+
+	private String birth;
+
+	public PersonnelPO(String number, String name, PositionType position,
+			String orgNum, double payment, int sex, String id, String phone,
+			String birth) {
+		super();
+		this.number = number;
 		this.name = name;
 		this.position = position;
-		this.organization = organization;
-		this.organizationID = organizationID;
-		
-		this.payment = 0;
-		this.dealedReceipts = new ArrayList<ReceiptPO>();
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
+		this.orgNum = orgNum;
+		this.payment = payment;
+		this.sex = sex;
 		this.id = id;
+		this.phone = phone;
+		this.birth = birth;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getName() {
@@ -105,24 +83,56 @@ public class PersonnelPO implements Serializable {
 		this.position = position;
 	}
 
+	public String getOrgNum() {
+		return orgNum;
+	}
+
+	public void setOrgNum(String orgNum) {
+		this.orgNum = orgNum;
+	}
+
+	public double getPayment() {
+		return payment;
+	}
+
+	public void setPayment(double payment) {
+		this.payment = payment;
+	}
+
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public OrganizationType getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(OrganizationType organization) {
-		this.organization = organization;
-	}
-
-	public String getOrganizationID() {
-		return organizationID;
-	}
-
-	public void setOrganizationID(String organizationID) {
-		this.organizationID = organizationID;
 	}
 
 }

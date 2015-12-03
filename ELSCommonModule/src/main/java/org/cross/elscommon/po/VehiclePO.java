@@ -10,147 +10,132 @@ import java.io.Serializable;
 
 import org.cross.elscommon.util.VehicleType;
 
-public class VehiclePO implements Serializable{
-	
-	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-	
+public class VehiclePO implements Serializable {
+
 	/**
 	 * 车辆代号
 	 */
 	private String number;
-	
+
 	/**
 	 * 发动机号
 	 */
-	private String engineNumber;
-	
+	private String engineNum;
+
 	/**
 	 * 底盘号
 	 */
-	private String apparatusNumber;
-	
+	private String baseNum;
+
 	/**
 	 * 购买时间
 	 */
 	private String buyTime;
-	
+
 	/**
 	 * 服役时间
 	 */
 	private String lastTime;
-	
+
 	/**
 	 * 车辆图片
 	 */
 	private Image image;
-	
-	/**
-	 * 车辆类型，包括汽车、飞机、火车
-	 */
-	private VehicleType type;
-	
+
 	/**
 	 * 是否被使用
 	 */
-	private boolean inUse;
-	
-	/**
-	 * 构造方法
-	 * @param number
-	 * @param engineNumber
-	 * @param apparatusNumber
-	 * @param buyTime
-	 * @param lastTime
-	 * @param image
-	 * @param type
-	 */
-	public VehiclePO(String number, String engineNumber, String apparatusNumber
-			, String buyTime, String lastTime, Image image,VehicleType type){
+	private boolean state;
+
+	private String licence;
+
+	private String orgNum;
+
+	public VehiclePO(String number, String engineNum, String baseNum,
+			String buyTime, String lastTime, Image image, boolean state,
+			String licence, String orgNum) {
+		super();
 		this.number = number;
-		this.engineNumber = engineNumber;
-		this.apparatusNumber = apparatusNumber;
+		this.engineNum = engineNum;
+		this.baseNum = baseNum;
 		this.buyTime = buyTime;
 		this.lastTime = lastTime;
 		this.image = image;
-		this.type = type;
-		
-		this.inUse = false;
-	}
-	
-	public VehiclePO(String number){
-		this.number = number;
-	}
-	
-	public void setNumber(String number){
-		this.number = number;
-	}
-	
-	public String getNumber(){
-		return this.number;
-	}
-	
-	public void setEngineNumber(String engineNumber){
-		this.engineNumber = engineNumber;
-	}
-	
-	public String getEngineNumber(){
-		return this.engineNumber;
+		this.state = state;
+		this.licence = licence;
+		this.orgNum = orgNum;
 	}
 
-	public void setApparatusNumber(String apparatusNumber){
-		this.apparatusNumber = apparatusNumber;
-	}
-	
-	public String getApparatusNumber(){
-		return this.apparatusNumber;
+	public String getNumber() {
+		return number;
 	}
 
-	public void setBuyTime(String buyTime){
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getEngineNum() {
+		return engineNum;
+	}
+
+	public void setEngineNum(String engineNum) {
+		this.engineNum = engineNum;
+	}
+
+	public String getBaseNum() {
+		return baseNum;
+	}
+
+	public void setBaseNum(String baseNum) {
+		this.baseNum = baseNum;
+	}
+
+	public String getBuyTime() {
+		return buyTime;
+	}
+
+	public void setBuyTime(String buyTime) {
 		this.buyTime = buyTime;
 	}
-	
-	public String getBuyTime(){
-		return this.buyTime;
+
+	public String getLastTime() {
+		return lastTime;
 	}
 
-	public void setLastTime(String lastTime){
+	public void setLastTime(String lastTime) {
 		this.lastTime = lastTime;
 	}
-	
-	public String getLastTime(){
-		return this.lastTime;
+
+	public Image getImage() {
+		return image;
 	}
 
-	public void setImage(Image image){
+	public void setImage(Image image) {
 		this.image = image;
 	}
-	
-	public Image getImage(){
-		return this.image;
-	}
-	
-	public void setType(VehicleType type){
-		this.type = type;
-	}
-	
-	public VehicleType getType(){
-		return this.type;
-	}
-	
-	public boolean isInUse() {
-		return inUse;
-	}
-	
 
-	public void setInUse(boolean inUse) {
-		this.inUse = inUse;
+	public boolean isState() {
+		return state;
 	}
-	
 
-	public static long getSerialversionuid(){
-		return serialVersionUID;
+	public void setState(boolean state) {
+		this.state = state;
 	}
+
+	public String getLicence() {
+		return licence;
+	}
+
+	public void setLicence(String licence) {
+		this.licence = licence;
+	}
+
+	public String getOrgNum() {
+		return orgNum;
+	}
+
+	public void setOrgNum(String orgNum) {
+		this.orgNum = orgNum;
+	}
+
 }

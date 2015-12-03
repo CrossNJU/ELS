@@ -19,7 +19,7 @@ public class Receipt_OrderPO extends ReceiptPO {
 	/**
 	 * 费用
 	 */
-	private double cost;
+	private double price;
 
 	/**
 	 * 收件时间
@@ -31,38 +31,47 @@ public class Receipt_OrderPO extends ReceiptPO {
 	 */
 	private String expectTime;
 
-	/**
-	 * 目的地
-	 */
-	private City targetPlace;
+	private String senderName;
 
-	/**
-	 * 出发地
-	 */
-	private City startPlace;
+	private String receiverName;
 
-	/**
-	 * 寄件人
-	 */
-	private People pushPeople;
+	private String senderOrg;
 
-	/**
-	 * 收件人
-	 */
-	private People receivePeople;
+	private String receiverOrg;
 
-	public Receipt_OrderPO(String number, ReceiptType type, String time, String goodsNum, double cost,
-			String expectTime, City targetPlace, City startPlace, People pushPeople, People receivePeople) {
-		super(number, type, time);
+	private String senderAdd;
+
+	private String receiverAdd;
+
+	private String senderPhone;
+
+	private String receiverPhone;
+
+	private String senderMobile;
+
+	private String receiverMobile;
+
+	public Receipt_OrderPO(String number, ReceiptType type, String time,
+			String orgNum, String perNum, String goodsNum, double price,
+			String expectTime, String senderName,
+			String receiverName, String senderOrg, String receiverOrg,
+			String senderAdd, String receiverAdd, String senderPhone,
+			String receiverPhone, String senderMobile, String receiverMobile) {
+		super(number, type, time, orgNum, perNum);
 		this.goodsNum = goodsNum;
-		this.cost = cost;
-		this.expectTime = expectTime;
-		this.targetPlace = targetPlace;
-		this.startPlace = startPlace;
-		this.pushPeople = pushPeople;
-		this.receivePeople = receivePeople;
-
+		this.price = price;
 		this.receiveTime = null;
+		this.expectTime = expectTime;
+		this.senderName = senderName;
+		this.receiverName = receiverName;
+		this.senderOrg = senderOrg;
+		this.receiverOrg = receiverOrg;
+		this.senderAdd = senderAdd;
+		this.receiverAdd = receiverAdd;
+		this.senderPhone = senderPhone;
+		this.receiverPhone = receiverPhone;
+		this.senderMobile = senderMobile;
+		this.receiverMobile = receiverMobile;
 	}
 
 	public String getGoodsNum() {
@@ -73,12 +82,12 @@ public class Receipt_OrderPO extends ReceiptPO {
 		this.goodsNum = goodsNum;
 	}
 
-	public double getCost() {
-		return cost;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setCost(double cost) {
-		this.cost = cost;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public String getReceiveTime() {
@@ -97,36 +106,84 @@ public class Receipt_OrderPO extends ReceiptPO {
 		this.expectTime = expectTime;
 	}
 
-	public City getTargetPlace() {
-		return targetPlace;
+	public String getSenderName() {
+		return senderName;
 	}
 
-	public void setTargetPlace(City targetPlace) {
-		this.targetPlace = targetPlace;
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
 	}
 
-	public City getStartPlace() {
-		return startPlace;
+	public String getReceiverName() {
+		return receiverName;
 	}
 
-	public void setStartPlace(City startPlace) {
-		this.startPlace = startPlace;
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
 	}
 
-	public People getPushPeople() {
-		return pushPeople;
+	public String getSenderOrg() {
+		return senderOrg;
 	}
 
-	public void setPushPeople(People pushPeople) {
-		this.pushPeople = pushPeople;
+	public void setSenderOrg(String senderOrg) {
+		this.senderOrg = senderOrg;
 	}
 
-	public People getReceivePeople() {
-		return receivePeople;
+	public String getReceiverOrg() {
+		return receiverOrg;
 	}
 
-	public void setReceivePeople(People receivePeople) {
-		this.receivePeople = receivePeople;
+	public void setReceiverOrg(String receiverOrg) {
+		this.receiverOrg = receiverOrg;
+	}
+
+	public String getSenderAdd() {
+		return senderAdd;
+	}
+
+	public void setSenderAdd(String senderAdd) {
+		this.senderAdd = senderAdd;
+	}
+
+	public String getReceiverAdd() {
+		return receiverAdd;
+	}
+
+	public void setReceiverAdd(String receiverAdd) {
+		this.receiverAdd = receiverAdd;
+	}
+
+	public String getSenderPhone() {
+		return senderPhone;
+	}
+
+	public void setSenderPhone(String senderPhone) {
+		this.senderPhone = senderPhone;
+	}
+
+	public String getReceiverPhone() {
+		return receiverPhone;
+	}
+
+	public void setReceiverPhone(String receiverPhone) {
+		this.receiverPhone = receiverPhone;
+	}
+
+	public String getSenderMobile() {
+		return senderMobile;
+	}
+
+	public void setSenderMobile(String senderMobile) {
+		this.senderMobile = senderMobile;
+	}
+
+	public String getReceiverMobile() {
+		return receiverMobile;
+	}
+
+	public void setReceiverMobile(String receiverMobile) {
+		this.receiverMobile = receiverMobile;
 	}
 
 }

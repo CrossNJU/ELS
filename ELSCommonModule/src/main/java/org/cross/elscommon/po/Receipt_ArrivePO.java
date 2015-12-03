@@ -16,38 +16,47 @@ public class Receipt_ArrivePO extends ReceiptPO {
 	/**
 	 * 出发地
 	 */
-	public City startPlace;
+	private String startPlace;
+
+	private String startTime;
 
 	/**
 	 * 转运单编号
 	 */
-	public String transNum;
+	private String transNum;
 
 	/**
-	 * 货物信息
+	 * 到达机构
 	 */
-	public ArrayList<String> orders;
+	private String arriPlace;
 
-	/**
-	 * 到达的机构
-	 */
-	public OrganizationType arriveOrg;
+	private String goodsState;
 
-	public Receipt_ArrivePO(String number, ReceiptType type, String time, City startPlace, String transNum,
-			ArrayList<String> orders, OrganizationType arriveOrg) {
-		super(number, type, time);
+	public Receipt_ArrivePO(String number, ReceiptType type, String time,
+			String orgNum, String perNum, String startPlace, String startTime,
+			String transNum, String arriPlace, String goodsState) {
+		super(number, type, time, orgNum, perNum);
 		this.startPlace = startPlace;
+		this.startTime = startTime;
 		this.transNum = transNum;
-		this.orders = orders;
-		this.arriveOrg = arriveOrg;
+		this.arriPlace = arriPlace;
+		this.goodsState = goodsState;
 	}
 
-	public City getStartPlace() {
+	public String getStartPlace() {
 		return startPlace;
 	}
 
-	public void setStartPlace(City startPlace) {
+	public void setStartPlace(String startPlace) {
 		this.startPlace = startPlace;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
 	public String getTransNum() {
@@ -58,20 +67,20 @@ public class Receipt_ArrivePO extends ReceiptPO {
 		this.transNum = transNum;
 	}
 
-	public ArrayList<String> getGoodslist() {
-		return orders;
+	public String getArriPlace() {
+		return arriPlace;
 	}
 
-	public void setGoodslist(ArrayList<String> orders) {
-		this.orders = orders;
+	public void setArriPlace(String arriPlace) {
+		this.arriPlace = arriPlace;
 	}
 
-	public OrganizationType getArriveOrg() {
-		return arriveOrg;
+	public String getGoodsState() {
+		return goodsState;
 	}
 
-	public void setArriveOrg(OrganizationType arriveOrg) {
-		this.arriveOrg = arriveOrg;
+	public void setGoodsState(String goodsState) {
+		this.goodsState = goodsState;
 	}
 
 }

@@ -7,43 +7,31 @@ import org.cross.elscommon.util.OrganizationType;
 
 /**
  * 机构PO类
+ * 
  * @author Moo
  * @date 2015年10月19日
  */
-public class OrganizationPO implements Serializable{
-	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+public class OrganizationPO implements Serializable {
 
 	/**
 	 * 所在城市
 	 */
 	private City city;
-	
+
 	/**
 	 * 机构ID
 	 */
-	private String id;
-	
+	private String number;
+
 	/**
 	 * 机构类型
 	 */
 	private OrganizationType type;
-	
-	
-	/**
-	 * 构造方法
-	 * @author:Moo
-	 * @para:city, type, id
-	 */
-	public OrganizationPO(City city, OrganizationType type, String id) {
+
+	public OrganizationPO(City city, String number, OrganizationType type) {
+		super();
 		this.city = city;
-		this.id = id;
+		this.number = number;
 		this.type = type;
 	}
 
@@ -55,12 +43,12 @@ public class OrganizationPO implements Serializable{
 		this.city = city;
 	}
 
-	public String getId() {
-		return id;
+	public String getNumber() {
+		return number;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public OrganizationType getType() {

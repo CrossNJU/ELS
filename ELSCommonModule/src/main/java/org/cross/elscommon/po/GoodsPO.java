@@ -13,22 +13,12 @@ import org.cross.elscommon.util.GoodsState;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.StockType;
 
-public class GoodsPO implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class GoodsPO implements Serializable {
 
 	/**
 	 * 快件类型
 	 */
 	private StockType goodsType;
-
-	/**
-	 * 快件编号
-	 */
-	private String number;
 
 	/**
 	 * 当前位置,城市
@@ -56,40 +46,37 @@ public class GoodsPO implements Serializable{
 	private int volume;
 
 	/**
-	 * 历史轨迹
-	 */
-	private ArrayList<HistoryPO> history;
-
-	// 不知道要不要
-	/**
 	 * 订单编号
 	 */
 	private String orderNum;
 
 	/**
-	 * 构造方法
-	 * 
-	 * @param goodsType
-	 * @param number
-	 * @param placeCity
-	 * @param placeOrg
-	 * @param state
-	 * @param weight
-	 * @param volume
-	 * @param history
+	 * 所属仓库
 	 */
-	public GoodsPO(StockType goodsType, String number, City placeCity, OrganizationType placeOrg, int weight,
-			int volume) {
+	private String stockNum;
+
+	/**
+	 * 所属小间
+	 */
+	private String stockAreaNum;
+
+	private String transNum;
+
+	private String delNum;
+
+	private String arriNum;
+
+	public GoodsPO(StockType goodsType, City placeCity,
+			OrganizationType placeOrg, GoodsState state, int weight,
+			int volume, String orderNum) {
 		super();
 		this.goodsType = goodsType;
-		this.number = number;
 		this.placeCity = placeCity;
 		this.placeOrg = placeOrg;
+		this.state = state;
 		this.weight = weight;
 		this.volume = volume;
-
-		this.state = GoodsState.LIVE;
-		this.history = new ArrayList<HistoryPO>();
+		this.orderNum = orderNum;
 	}
 
 	public StockType getGoodsType() {
@@ -98,14 +85,6 @@ public class GoodsPO implements Serializable{
 
 	public void setGoodsType(StockType goodsType) {
 		this.goodsType = goodsType;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 	public City getPlaceCity() {
@@ -148,20 +127,52 @@ public class GoodsPO implements Serializable{
 		this.volume = volume;
 	}
 
-	public ArrayList<HistoryPO> getHistory() {
-		return history;
-	}
-
-	public void addHistory(HistoryPO newhistory) {
-		this.history.add(newhistory);
-	}
-
 	public String getOrderNum() {
 		return orderNum;
 	}
 
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
+	}
+
+	public String getStockNum() {
+		return stockNum;
+	}
+
+	public void setStockNum(String stockNum) {
+		this.stockNum = stockNum;
+	}
+
+	public String getStockAreaNum() {
+		return stockAreaNum;
+	}
+
+	public void setStockAreaNum(String stockAreaNum) {
+		this.stockAreaNum = stockAreaNum;
+	}
+
+	public String getTransNum() {
+		return transNum;
+	}
+
+	public void setTransNum(String transNum) {
+		this.transNum = transNum;
+	}
+
+	public String getDelNum() {
+		return delNum;
+	}
+
+	public void setDelNum(String delNum) {
+		this.delNum = delNum;
+	}
+
+	public String getArriNum() {
+		return arriNum;
+	}
+
+	public void setArriNum(String arriNum) {
+		this.arriNum = arriNum;
 	}
 
 }

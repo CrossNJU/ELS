@@ -10,13 +10,9 @@ import java.io.Serializable;
 public class LogPO implements Serializable {
 
 	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
 	 * 编号
 	 */
-	private String id;
+	private String number;
 
 	/**
 	 * 操作时间
@@ -31,36 +27,46 @@ public class LogPO implements Serializable {
 	/**
 	 * 操作内容
 	 */
-	private String content;
+	private String operation;
 
-	/**
-	 * 构造方法
-	 * 
-	 * @param id
-	 * @param time
-	 * @param operator
-	 * @param content
-	 */
-	public LogPO(String id, String time, String operator, String content) {
-		this.id = id;
+	public LogPO(String number, String time, String operator, String operation) {
+		super();
+		this.number = number;
 		this.time = time;
 		this.operator = operator;
-		this.content = content;
+		this.operation = operation;
 	}
 
-	public String getId() {
-		return id;
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getTime() {
 		return time;
 	}
 
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	public String getOperator() {
 		return operator;
 	}
 
-	public String getContent() {
-		return content;
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+
 }
