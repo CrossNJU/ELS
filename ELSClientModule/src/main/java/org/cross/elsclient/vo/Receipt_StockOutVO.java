@@ -5,60 +5,54 @@
  */
 package org.cross.elsclient.vo;
 
+import java.util.ArrayList;
+
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.VehicleType;
 
-public class Receipt_StockOutVO extends ReceiptVO{
+public class Receipt_StockOutVO extends ReceiptVO {
 	/**
 	 * 快递编号
 	 */
-	public String goodsNumber;
-	
+	public ArrayList<String> goodsNumber;
+
 	/**
 	 * 出库日期
 	 */
 	public String time;
-	
+
 	/**
-	 * 目的地
+	 * 目的地(营业厅name+id)
 	 */
-	public City city;
-	
+	public String businessHallNameID;
+
 	/**
 	 * 装运形式
 	 */
-	public VehicleType vehicle;
-	
+	public String vehicle;
+
 	/**
 	 * 转运单编号
 	 */
 	public String transNumber;
-	
+
 	/**
 	 * 出库单编号
 	 */
 	public String number;
-	
-	/**
-	 * 构造方法
-	 * @param goodsNumber
-	 * @param time
-	 * @param city
-	 * @param vehicle
-	 * @param transNumber
-	 * @param number
-	 */
-	public Receipt_StockOutVO(String goodsNumber, String time, 
-			City city, VehicleType vehicle, String transNumber,
-			String number){
-		super(number, ReceiptType.STOCKOUT, time);
+
+	public Receipt_StockOutVO(String number, ReceiptType type, String time,
+			ArrayList<String> goodsNumber, String time2,
+			String businessHallNameID, String vehicle, String transNumber,
+			String number2) {
+		super(number, type, time);
 		this.goodsNumber = goodsNumber;
-		this.time = time;
-		this.city = city;
+		time = time2;
+		this.businessHallNameID = businessHallNameID;
 		this.vehicle = vehicle;
 		this.transNumber = transNumber;
-		
-		this.number = number;
+		number = number2;
 	}
+
 }

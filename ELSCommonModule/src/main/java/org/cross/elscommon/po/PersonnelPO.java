@@ -37,7 +37,9 @@ public class PersonnelPO implements Serializable {
 	private double payment;
 
 	private int sex;
-
+	/**
+	 * 人员身份证号
+	 */
 	private String id;
 
 	private String phone;

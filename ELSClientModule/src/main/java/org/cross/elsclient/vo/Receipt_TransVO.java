@@ -11,12 +11,12 @@ import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ReceiptType;
 
-public class Receipt_TransVO extends ReceiptVO{
+public class Receipt_TransVO extends ReceiptVO {
 
 	/**
-	 * 所有装运单号
+	 * 所有快件编号
 	 */
-	public ArrayList<String> orders;
+	public ArrayList<String> goodsID;
 
 	/**
 	 * 运费
@@ -39,38 +39,39 @@ public class Receipt_TransVO extends ReceiptVO{
 	public String vehicleNum;
 
 	/**
-	 * 出发地
+	 * 出发地(机构name+id)
 	 */
-	public City startCity;
+	public String startOrg;
 
 	/**
-	 * 到达地
+	 * 到达地(机构name+id)
 	 */
-	public City arriveCity;
+	public String arriveOrg;
 
 	/**
 	 * 监装员
 	 */
-	public PersonnelVO observer;
+	public String observerName;
 
 	/**
 	 * 押运员（司机）
 	 */
-	public PersonnelVO driver;
+	public String driverName;
 
-	public Receipt_TransVO(String number, ReceiptType type, String time, ArrayList<String> orders, double cost,
-			OrganizationType org, String localNum, String vehicleNum, City startCity, City arriveCity,
-			PersonnelVO observer, PersonnelVO driver) {
+	public Receipt_TransVO(String number, ReceiptType type, String time,
+			ArrayList<String> goodsID, double cost, OrganizationType org,
+			String localNum, String vehicleNum, String startOrg,
+			String arriveOrg, String observerName, String driverName) {
 		super(number, type, time);
-		this.orders = orders;
+		this.goodsID = goodsID;
 		this.cost = cost;
 		this.org = org;
 		this.localNum = localNum;
 		this.vehicleNum = vehicleNum;
-		this.startCity = startCity;
-		this.arriveCity = arriveCity;
-		this.observer = observer;
-		this.driver = driver;
+		this.startOrg = startOrg;
+		this.arriveOrg = arriveOrg;
+		this.observerName = observerName;
+		this.driverName = driverName;
 	}
 
 }
