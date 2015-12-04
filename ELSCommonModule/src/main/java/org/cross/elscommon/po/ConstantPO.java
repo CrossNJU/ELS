@@ -43,27 +43,48 @@ public class ConstantPO implements Serializable {
 	private double distance_Shanghai_Guangzhou;
 
 	/**
-	 * 每公里预计时间
+	 * 每公里预计时间，单位：秒
 	 */
 	private double timeBykilo;
 
 	/**
-	 * 底薪
+	 * 底薪，快递员
 	 */
 	private double baseMoneyForCOURIER;
 
+	/**
+	 * 底薪，营业厅业务员
+	 */
 	private double baseMoneyForBUSINESSHALLCLERK;
 
+	/**
+	 * 底薪，中转中心业务员
+	 */
 	private double baseMoneyForTRANSITCENTERCLERK;
 
+	/**
+	 * 底薪，仓库管理人员
+	 */
 	private double baseMoneyForSTOCKKEEPER;
 
+	/**
+	 * 底薪，财务人员
+	 */
 	private double baseMoneyForCOUNTER;
 
+	/**
+	 * 底薪，总经理
+	 */
 	private double baseMoneyForMANAGER;
 
+	/**
+	 * 底薪，系统管理人员
+	 */
 	private double baseMoneyForADMINISTRATOR;
 
+	/**
+	 * 底薪，司机
+	 */
 	private double baseMoneyForDRIVER;
 
 	public double getTimeBykilo() {

@@ -3,10 +3,19 @@ package org.cross.elscommon.po;
 import org.cross.elscommon.util.PositionType;
 
 public class DriverPO extends PersonnelPO {
+	/**
+	 * 司机编号
+	 */
 	private String number;
 
+	/**
+	 * 行驶证开始时间
+	 */
 	private String licenceStart;
 
+	/**
+	 * 行驶证到期时间
+	 */
 	private String licenceEnd;
 
 	public DriverPO(String number, String name, PositionType position,

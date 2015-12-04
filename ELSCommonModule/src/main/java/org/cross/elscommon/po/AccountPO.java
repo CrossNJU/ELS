@@ -22,6 +22,12 @@ public class AccountPO implements Serializable {
 	 */
 	private double balance;
 
+	/**
+	 * 构造方法
+	 * @param name
+	 * @param accountNum
+	 * @param balance
+	 */
 	public AccountPO(String name, String accountNum, double balance) {
 		super();
 		this.name = name;

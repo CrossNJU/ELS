@@ -17,7 +17,6 @@ import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.HistoryTool;
 
-@SuppressWarnings("serial")
 public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataService {
 
 	private HistoryTool historyTool;
@@ -30,180 +29,113 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	}
 
 	@Override
-	public ResultMessage updateLocation(String number, City nowLocation, OrganizationType org) throws RemoteException {
-		String sql = "update `goods` set `placeCity`='" + nowLocation.toString() + "',`placeOrg`='" + org.toString()
-				+ "' where `number`='" + number + "'";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		} else
-			return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage updateState(String number, GoodsState state) throws RemoteException {
-		String sql = "update `goods` set `state`='" + state.toString() + "' where `number`='" + number + "'";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		} else
-			return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage addToOrder(String number, String orderNum) throws RemoteException {
-		String sql = "update `receiptOrder` set `goodsNum`='" + number + "' where `number`='" + orderNum + "'";
-		if (!mysql.execute(sql)) {
-			return ResultMessage.FAILED;
-		}
-		sql = "update `goods` set `orderNum`='" + orderNum + "' where `number`='" + number + "'";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		} else
-			return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage addToTrans(String number, String transNum) throws RemoteException {
-		String sql = "update `goods` set `transNum`='" + transNum + "' where `number`='" + number + "'";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		} else
-			return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage addToArri(String number, String arriNum) throws RemoteException {
-		String sql = "update `goods` set `arriNum`='" + arriNum + "' where `number`='" + number + "'";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		} else
-			return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage addToStock(String number,String stockNum, String stockAreaNum) throws RemoteException {
-		String sql = "update `goods` set `stockNum`='" + stockNum + "', `stockAreaNum`='"+stockAreaNum+"' where `number`='" + number + "'";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		} else
-			return ResultMessage.FAILED;
-	}
-
-	@Override
 	public ResultMessage addHistory(String number, HistoryPO history) throws RemoteException {
 		return historyTool.insert(history, number);
 	}
 
 	@Override
-	public ResultMessage insertToDB(GoodsPO goods) throws RemoteException {
-		String sql = "insert ignore into `goods`(`number`, `type`, `placeCity`, `placeOrg`, `state`, `weight`, `volume`)"
-				+ " values ('" + goods.getNumber() + "','" + goods.getGoodsType().toString() + "','"
-				+ goods.getPlaceCity().toString() + "','" + goods.getPlaceOrg().toString() + "','"
-				+ goods.getState().toString() + "'," + goods.getWeight() + "," + goods.getVolume() + ")";
+	public ResultMessage insert(GoodsPO po) throws RemoteException {
+		String sql = "insert ignore into `goods`(`number`, `type`, `placeCity`, `placeOrg`, `state`, `weight`, `volume`) values ('"
+				+ po.getOrderNum() + "','" + po.getGoodsType().toString() + "','" + po.getPlaceCity().toString() + "','"
+				+ po.getState().toString() + "'," + po.getWeight() + "," + po.getVolume() + ")";
 		if (mysql.execute(sql)) {
 			return ResultMessage.SUCCESS;
-		} else
-			return ResultMessage.FAILED;
-		//TODO 可能需要有反馈信息：仓库是否已经有了
+		}else return ResultMessage.FAILED;
+	}
+
+	@Override
+	public ResultMessage update(GoodsPO po) throws RemoteException {
+		String sql = "update `goods` set `state`='"+po.getState().toString()+"' where `number`='"+po.getOrderNum();
+		if(!mysql.execute(sql)) return ResultMessage.FAILED;
+		if (po.getStockAreaNum()!=null) {
+			sql = "update `goods` set `stockAreaNum`='"+po.getStockAreaNum()+"' where `number`='"+po.getOrderNum();
+			if(!mysql.execute(sql)) return ResultMessage.FAILED;
+		}
+		if (po.getStockNum()!=null) {
+			sql = "update `goods` set `stockNum`='"+po.getStockNum()+"' where `number`='"+po.getOrderNum();
+			if(!mysql.execute(sql)) return ResultMessage.FAILED;
+		}
+		if (po.getArriNum()!=null) {
+			sql = "update `goods` set `arriNum`='"+po.getArriNum()+"' where `number`='"+po.getOrderNum();
+			if(!mysql.execute(sql)) return ResultMessage.FAILED;
+		}
+		if (po.getTransNum()!=null) {
+			sql = "update `goods` set `transNum`='"+po.getTransNum()+"' where `number`='"+po.getOrderNum();
+			if(!mysql.execute(sql)) return ResultMessage.FAILED;
+		}
+		if (po.getDelNum()!=null) {
+			sql = "update `goods` set `delNum`='"+po.getDelNum()+"' where `number`='"+po.getOrderNum();
+			if(!mysql.execute(sql)) return ResultMessage.FAILED;
+		}
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public GoodsPO findByNum(String number) throws RemoteException {
-		GoodsPO po = null;
-		String sql = "select * from `goods` where `number`='" + number + "'";
+		String sql = "select * from `goods` where `number`='"+number+"'";
 		ResultSet rs = mysql.query(sql);
+		return getGoodsFromDB(rs);
+	}
+
+	@Override
+	public ArrayList<GoodsPO> findByStockAreaNum(String stockAreaNum) throws RemoteException {
+		return findGoods(stockAreaNum);
+	}
+
+	@Override
+	public ArrayList<GoodsPO> findByStockNum(String stockNum) throws RemoteException {
+		return findGoods(stockNum);
+	}
+
+	@Override
+	public ArrayList<GoodsPO> findByTransNum(String transNum) throws RemoteException {
+		return findGoods(transNum);
+	}
+
+	@Override
+	public ArrayList<GoodsPO> findByArriNum(String arriNum) throws RemoteException {
+		return findGoods(arriNum);
+	}
+
+	@Override
+	public ArrayList<GoodsPO> findByDelNum(String delNum) throws RemoteException {
+		return findGoods(delNum);
+	}
+
+	@Override
+	public ArrayList<HistoryPO> findHistory(String number) throws RemoteException {
+		return historyTool.findByOrderNum(number);
+	}
+	
+	public ArrayList<GoodsPO> findGoods(String number){
+		ArrayList<GoodsPO> list = new ArrayList<GoodsPO>();
+		String sql = "select * from `goods` where `"+number+"` ='"+number+"'";
+		ResultSet rs = mysql.query(sql);
+		GoodsPO po = null;
+		while ((po=getGoodsFromDB(rs))!=null) list.add(po);
+		return list;	
+	}
+
+	// 可能会get到一些null
+	public GoodsPO getGoodsFromDB(ResultSet rs) {
+		GoodsPO po = null;
 		try {
 			if (rs.next()) {
-				po = new GoodsPO(StringToType.toGoodsType(rs.getString("type")), rs.getString("number"),
+				po = new GoodsPO(StringToType.toGoodsType(rs.getString("type")),
 						StringToType.toCity(rs.getString("placeCity")), StringToType.toOrg(rs.getString("placeOrg")),
-						rs.getInt("weight"), rs.getInt("volume"));
-				ArrayList<HistoryPO> list = historyTool.findByGoodsNum(number);
-				for (int i = 0; i < list.size(); i++) {
-					po.addHistory(list.get(i));
-				}
+						StringToType.toGoodsState(rs.getString("state")), rs.getInt("weight"), rs.getInt("volume"),
+						rs.getString("number"));
+				po.setArriNum(rs.getString("arriNum"));
+				po.setDelNum(rs.getString("delNum"));
+				po.setTransNum(rs.getString("transNum"));
+				po.setStockAreaNum(rs.getString("stockAreaNum"));
+				po.setStockNum(rs.getString("stockNum"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return po;
-	}
-
-	@Override
-	public ResultMessage deleteFromOrder(String number) throws RemoteException {
-		String sql = "update `goods` set `orderNum`=NULL where `number`='" + number + "'";
-		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
-		else return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage deleteFromTrans(String number) throws RemoteException {
-		String sql = "update `goods` set `transNum`=NULL where `number`='" + number + "'";
-		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
-		else return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage deleteFromArri(String number) throws RemoteException {
-		String sql = "update `goods` set `arriNum`=NULL where `number`='" + number + "'";
-		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
-		else return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ResultMessage deleteFromStock(String number) throws RemoteException {
-		String sql = "update `goods` set `stockAreaNum`=NULL where `number`='" + number + "'";
-		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
-		else return ResultMessage.FAILED;
-	}
-
-	@Override
-	public ArrayList<GoodsPO> findByStockAreaNum(String stockAreaNum) throws RemoteException {
-		ArrayList<GoodsPO> list = new ArrayList<GoodsPO>();
-		GoodsPO po = null;
-		String sql = "select * from `goods` where `stockAreaNum`='" + stockAreaNum + "'";
-		ResultSet rs = mysql.query(sql);
-		try {
-			while (rs.next()) {
-				po = new GoodsPO(StringToType.toGoodsType(rs.getString("type")), rs.getString("number"),
-						StringToType.toCity(rs.getString("placeCity")), StringToType.toOrg(rs.getString("placeOrg")),
-						rs.getInt("weight"), rs.getInt("volume"));
-				list.add(po);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	@Override
-	public String findStockAreaNum(String number) throws RemoteException{
-		String sql = "select * from `goods` where `number`='"+number+"'";
-		ResultSet rs = mysql.query(sql);
-		try {
-			if (rs.next()) {
-				return rs.getString("stockAreaNum");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public String findStockNum(String number) throws RemoteException {
-		String sql = "select * from `goods` where `number`='"+number+"'";
-		ResultSet rs = mysql.query(sql);
-		try {
-			if (rs.next()) {
-				return rs.getString("stockNum");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }
