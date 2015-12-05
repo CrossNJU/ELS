@@ -163,4 +163,17 @@ public class StringToType {
 			return null;
 		}
 	}
+	
+	public static SalaryType toSalaryType(String salary){
+		switch (salary) {
+		case "按月":
+			return SalaryType.BYMONTHONLY;
+		case "计次":
+			return SalaryType.ADDONCE;
+		case "提成":
+			return SalaryType.ADDNUM;
+		default:
+			return null;
+		}
+	}
 }
