@@ -17,10 +17,13 @@ public class Receipt_MoneyInPO extends ReceiptPO implements Serializable {
 	 */
 	private double money;
 
-	public Receipt_MoneyInPO(String number, ReceiptType type, String time,
-			String orgNum, String perNum, double money) {
+	private String totalMoneyInNum;
+
+	public Receipt_MoneyInPO(String number, ReceiptType type, String time, String orgNum, String perNum, double money,
+			String totalMoneyInNum) {
 		super(number, type, time, orgNum, perNum);
 		this.money = money;
+		this.totalMoneyInNum = totalMoneyInNum;
 	}
 
 	public double getMoney() {
@@ -29,6 +32,14 @@ public class Receipt_MoneyInPO extends ReceiptPO implements Serializable {
 
 	public void setMoney(double money) {
 		this.money = money;
+	}
+
+	public String getTotalMoneyInNum() {
+		return totalMoneyInNum;
+	}
+
+	public void setTotalMoneyInNum(String totalMoneyInNum) {
+		this.totalMoneyInNum = totalMoneyInNum;
 	}
 
 }

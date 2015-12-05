@@ -5,8 +5,6 @@
  */
 package org.cross.elscommon.po;
 
-import org.cross.elscommon.util.City;
-import org.cross.elscommon.util.People;
 import org.cross.elscommon.util.ReceiptType;
 
 public class Receipt_OrderPO extends ReceiptPO {
@@ -50,6 +48,8 @@ public class Receipt_OrderPO extends ReceiptPO {
 	private String senderMobile;
 
 	private String receiverMobile;
+	
+	private String moneyInNum;
 
 	public Receipt_OrderPO(String number, ReceiptType type, String time,
 			String orgNum, String perNum, String goodsNum, double price,
@@ -72,6 +72,7 @@ public class Receipt_OrderPO extends ReceiptPO {
 		this.receiverPhone = receiverPhone;
 		this.senderMobile = senderMobile;
 		this.receiverMobile = receiverMobile;
+		this.moneyInNum = null;
 	}
 
 	public String getGoodsNum() {
@@ -184,6 +185,14 @@ public class Receipt_OrderPO extends ReceiptPO {
 
 	public void setReceiverMobile(String receiverMobile) {
 		this.receiverMobile = receiverMobile;
+	}
+
+	public String getMoneyInNum() {
+		return moneyInNum;
+	}
+
+	public void setMoneyInNum(String moneyInNum) {
+		this.moneyInNum = moneyInNum;
 	}
 
 }

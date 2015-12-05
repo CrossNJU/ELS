@@ -100,6 +100,8 @@ public class StringToType {
 			return ReceiptType.TRANS;
 		case "总收款单":
 			return ReceiptType.TOTALMONEYIN;
+		case "派件单":
+			return ReceiptType.DELIVER;
 		default:
 			return null;
 		}

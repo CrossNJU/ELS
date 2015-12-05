@@ -30,17 +30,13 @@ public class Receipt_ArrivePO extends ReceiptPO {
 	 */
 	private String arriPlace;
 
-	private String goodsState;
-
-	public Receipt_ArrivePO(String number, ReceiptType type, String time,
-			String orgNum, String perNum, String startPlace, String startTime,
-			String transNum, String arriPlace, String goodsState) {
+	public Receipt_ArrivePO(String number, ReceiptType type, String time, String orgNum, String perNum,
+			String startPlace, String startTime, String transNum, String arriPlace) {
 		super(number, type, time, orgNum, perNum);
 		this.startPlace = startPlace;
 		this.startTime = startTime;
 		this.transNum = transNum;
 		this.arriPlace = arriPlace;
-		this.goodsState = goodsState;
 	}
 
 	public String getStartPlace() {
@@ -73,14 +69,6 @@ public class Receipt_ArrivePO extends ReceiptPO {
 
 	public void setArriPlace(String arriPlace) {
 		this.arriPlace = arriPlace;
-	}
-
-	public String getGoodsState() {
-		return goodsState;
-	}
-
-	public void setGoodsState(String goodsState) {
-		this.goodsState = goodsState;
 	}
 
 }

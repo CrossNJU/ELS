@@ -14,32 +14,45 @@ import org.cross.elsserver.dataimpl.tools.ReceiptTool;
 public class Receipt_ArriDataImpl implements ReceiptTool {
 
 	private MySQL mysql;
-	
-	public Receipt_ArriDataImpl(){
+
+	public Receipt_ArriDataImpl() {
 		this.mysql = new MySQL();
 	}
-	
+
 	@Override
 	public ResultMessage insert(ReceiptPO po) {
 		Receipt_ArrivePO arrivePO = (Receipt_ArrivePO) po;
-		String sql = "insert ignore into `receiptArrive`(`time`, `number`, `startCity`, `arriveOrg`, `transNum`) values ('"
+		String sql = "insert ignore into `receiptArrive`(`time`, `number`, `startCity`, `arriPlace`, `transNum`, `startTime`) values ('"
 				+ arrivePO.getTime() + "','" + arrivePO.getNumber() + "','" + arrivePO.getStartPlace().toString()
-				+ "','" + arrivePO.getArriveOrg().toString() + "','" + arrivePO.getTransNum() + "')";
-		if(!mysql.execute(sql)) return ResultMessage.FAILED;
+				+ "','" + arrivePO.getArriPlace() + "','" + arrivePO.getTransNum() + "','" + arrivePO.getStartTime()
+				+ "')";
+		if (!mysql.execute(sql))
+			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ReceiptPO getFromDB(String number) {
-		String sql = "select * from `receiptArrive` where `number`='"+number+"'";
+		String sql = "select * from `receiptArrive` where `number`='" + number + "'";
 		Receipt_ArrivePO po = null;
 		ResultSet rs = mysql.query(sql);
 		try {
 			if (rs.next()) {
-				po = new Receipt_ArrivePO(rs.getString("number"), ReceiptType.ARRIVE, rs.getString("time"), 
-						StringToType.toCity(rs.getString("startCity")), rs.getString("transNum"), 
-						null, StringToType.toOrg(rs.getString("arriveOrg")));
+				po = new Receipt_ArrivePO(rs.getString("number"), ReceiptType.ARRIVE, rs.getString("time"), null, null,
+						rs.getString("startCity"), rs.getString("startTime"), rs.getString("transNum"),
+						rs.getString("arriPlace"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sql = "select * from `receipt` where `number`='"+number+"'";
+		rs = mysql.query(sql);
+		try {
+			if (rs.next()) {
 				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
+				po.setOrgNum(rs.getString("orgNum"));
+				po.setPerNum(rs.getString("perNum"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

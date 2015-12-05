@@ -28,28 +28,30 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 
 	@Override
 	public PersonnelPO findById(String id) throws RemoteException {
-		String sql = "select * from `personnel` where `number`='"+id+"'";
+		String sql = "select * from `personnel` where `number`='" + id + "'";
 		ResultSet rs = mysql.query(sql);
 		return getFromDB(rs);
 	}
 
 	@Override
 	public ArrayList<PersonnelPO> findByName(String name) throws RemoteException {
-		String sql = "select * from `personnel` where `name`='"+name+"'";
+		String sql = "select * from `personnel` where `name`='" + name + "'";
 		ResultSet rs = mysql.query(sql);
 		ArrayList<PersonnelPO> pos = new ArrayList<PersonnelPO>();
 		PersonnelPO po = null;
-		while((po=getFromDB(rs))!=null) pos.add(po);
+		while ((po = getFromDB(rs)) != null)
+			pos.add(po);
 		return pos;
 	}
 
 	@Override
 	public ResultMessage insert(PersonnelPO po) throws RemoteException {
-		String sql = "insert ignore into `personnel`(`number`, `name`, `position`, `orgType`, `orgNum`, `payment`) values ('"
-				+ po.getId()+"','"+po.getName()+"','"+po.getPosition().toString()+"','"+po.getOrganization().toString()+"','"+
-				po.getOrganizationID()+"',"+po.getPayment()+")";
+		String sql = "insert ignore into `personnel`(`number`, `name`, `position`, `orgNum`, `payment`, `sex`, `id`, `phone`, `birth`) values ('"
+				+ po.getNumber() + "','" + po.getName() + "','" + po.getPosition().toString() + "','" + po.getOrgNum()
+				+ "'," + po.getPayment() + "," + po.getSex() + ",'" + po.getId() + "','" + po.getPhone() + "','"
+				+ po.getBirth() + "')";
 		if (!mysql.execute(sql)) {
-			return ResultMessage.FAILED; 
+			return ResultMessage.FAILED;
 		}
 		return ResultMessage.SUCCESS;
 	}
@@ -65,7 +67,8 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 
 	@Override
 	public ResultMessage update(PersonnelPO po) throws RemoteException {
-		if(delete(po.getId())==ResultMessage.FAILED) return ResultMessage.FAILED;
+		if (delete(po.getId()) == ResultMessage.FAILED)
+			return ResultMessage.FAILED;
 		return insert(po);
 	}
 
@@ -75,7 +78,8 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 		ResultSet rs = mysql.query(sql);
 		ArrayList<PersonnelPO> pos = new ArrayList<PersonnelPO>();
 		PersonnelPO po = null;
-		while((po=getFromDB(rs))!=null) pos.add(po);
+		while ((po = getFromDB(rs)) != null)
+			pos.add(po);
 		return pos;
 	}
 
@@ -84,8 +88,9 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 		try {
 			if (rs.next()) {
 				po = new PersonnelPO(rs.getString("number"), rs.getString("name"),
-						StringToType.toPositionType(rs.getString("position")),
-						StringToType.toOrg(rs.getString("orgType")), rs.  getString("orgNum"));
+						StringToType.toPositionType(rs.getString("position")), rs.getString("orgNum"),
+						rs.getDouble("payment"), rs.getInt("sex"), rs.getString("id"), rs.getString("phone"),
+						rs.getString("birth"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

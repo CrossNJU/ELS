@@ -3,10 +3,10 @@ package org.cross.elsserver.dataimpl.receiptdataimpl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.po.Receipt_MoneyInPO;
 import org.cross.elscommon.util.MySQL;
+import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
@@ -22,9 +22,9 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 	@Override
 	public ResultMessage insert(ReceiptPO po) {
 		Receipt_MoneyInPO realpo = (Receipt_MoneyInPO) po;
-		String sql = "insert ignore into `receiptMoneyIn`(`number`, `time`, `personnelNum`, `money`) values ('"
-				+ realpo.getNumber() + "','" + realpo.getTime() + "','" + realpo.getPerson().getId() + "','"
-				+ realpo.getMoney() + "')";
+		String sql = "insert ignore into `receiptMoneyIn`(`number`, `time`, `money`, `totalMoneyIn`) values ('"
+				+ realpo.getNumber() + "','" + realpo.getTime() + "'," + realpo.getMoney() + ",'"
+				+ realpo.getTotalMoneyInNum() + "')";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
@@ -37,9 +37,20 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 		ResultSet rs = mysql.query(sql);
 		try {
 			if (rs.next()) {
-				po = new Receipt_MoneyInPO(rs.getString("time"), rs.getDouble("money"),
-						new PersonnelPO(rs.getString("personnelNum"), null, null, null, null), rs.getString("number"));
+				po = new Receipt_MoneyInPO(rs.getString("number"), ReceiptType.MONEYIN, rs.getString("time"), null,
+						null, rs.getDouble("money"), rs.getString("totalMoneyInNum"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sql = "select * from `receipt` where `number`='" + number + "'";
+		rs = mysql.query(sql);
+		try {
+			if (rs.next()) {
 				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
+				po.setOrgNum(rs.getString("orgNum"));
+				po.setPerNum(rs.getString("perNum"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

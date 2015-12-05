@@ -13,7 +13,8 @@ public enum ReceiptType {
 	STOCKIN, // 入库单
 	STOCKOUT, // 出库单
 	TRANS, // 转运单
-	TOTALMONEYIN; // 总收款单
+	TOTALMONEYIN, // 总收款单
+	DELIVER;// 派件单
 
 	@Override
 	public String toString() {
@@ -35,6 +36,8 @@ public enum ReceiptType {
 			return "转运单";
 		case TOTALMONEYIN:
 			return "总收款单";
+		case DELIVER:
+			return "派件单";
 		default:
 			return null;
 		}
