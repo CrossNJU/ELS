@@ -18,14 +18,16 @@ public class InitialPO implements Serializable {
 	/**
 	 * 年份
 	 */
-	private int time;
+	private String time;
 
 	/**
 	 * 名称
 	 */
 	private String name;
+	
+	private String perNum;
 
-	public InitialPO(String number, int time, String name) {
+	public InitialPO(String number, String time, String name) {
 		super();
 		this.number = number;
 		this.time = time;
@@ -40,11 +42,11 @@ public class InitialPO implements Serializable {
 		this.number = number;
 	}
 
-	public int getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
@@ -54,6 +56,14 @@ public class InitialPO implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPerNum() {
+		return perNum;
+	}
+
+	public void setPerNum(String perNum) {
+		this.perNum = perNum;
 	}
 
 }

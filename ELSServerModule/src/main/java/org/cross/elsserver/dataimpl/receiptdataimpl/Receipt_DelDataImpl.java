@@ -4,44 +4,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.cross.elscommon.po.ReceiptPO;
-import org.cross.elscommon.po.Receipt_StockOutPO;
+import org.cross.elscommon.po.Receipt_DeliverPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
 
-public class Receipt_StockOutDataImpl implements ReceiptTool {
+public class Receipt_DelDataImpl implements ReceiptTool {
 
 	private MySQL mysql;
 
-	public Receipt_StockOutDataImpl() {
+	public Receipt_DelDataImpl() {
 		this.mysql = new MySQL();
 	}
 
 	@Override
 	public ResultMessage insert(ReceiptPO po) {
-		Receipt_StockOutPO realpo = (Receipt_StockOutPO) po;
-		String sql = "insert ignore into `receiptStockOut`(`number`, `time`, `orderNum`, `transNum`, `transType`, `destination`) values ('"
-				+ realpo.getNumber() + "','" + realpo.getTime() + "','" + realpo.getOrderNum() + "','"
-				+ realpo.getTransNumber() + "','" + realpo.getTransType().toString() + "','" + realpo.getDestination()
-				+ "')";
+		Receipt_DeliverPO delpo = (Receipt_DeliverPO) po;
+		String sql = "insert ignore into `receiptDeliver`(`number`, `orderNum`, `name`, `posterNum`, `time`) values ('"
+				+ delpo.getNumber() + "','" + delpo.getOrderNum() + "','" + delpo.getName() + "','"
+				+ delpo.getPosterNum() + "','" + delpo.getTime() + "')";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
-		else
-			return ResultMessage.SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ReceiptPO getFromDB(String number) {
-		Receipt_StockOutPO po = null;
-		String sql = "select from `receiptStockOut` where `number`='" + number + "'";
+		String sql = "select * from `receiptDeliver` where `number`='" + number + "'";
+		Receipt_DeliverPO po = null;
 		ResultSet rs = mysql.query(sql);
 		try {
 			if (rs.next()) {
-				po = new Receipt_StockOutPO(number, ReceiptType.STOCKOUT, rs.getString("time"), null, null,
-						rs.getString("orderNum"), rs.getString("destination"),
-						StringToType.toVehicleType(rs.getString("transType")), rs.getString("transNum"));
+				po = new Receipt_DeliverPO(number, ReceiptType.DELIVER, rs.getString("time"), null, null,
+						rs.getString("orderNum"), rs.getString("name"), rs.getString("posterNum"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
