@@ -50,7 +50,7 @@ public class VehicleBLTest {
 		ArrayList<VehicleVO> vos = vehicleBLImpl.show();
 		int size = vos.size();
 		for (int i = 0; i < size; i++) {
-			System.out.println(vos.get(i).apparatusNumber + " " + vos.get(i).buyTime + " " + vos.get(i).lastTime);
+			System.out.println(vos.get(i).baseNumber + " " + vos.get(i).buyTime + " " + vos.get(i).lastTime);
 		}
 		System.out.println("=======测试查找车辆信息（find）=======");
 		ArrayList<VehicleVO> vos2 = vehicleBLImpl.find("000000004");
@@ -59,7 +59,7 @@ public class VehicleBLTest {
 		}else {
 			int size2 = vos2.size();
 			for (int i = 0; i < size2; i++) {
-				System.out.println(vos2.get(i).apparatusNumber + " " + vos2.get(i).buyTime + " " + vos2.get(i).lastTime);
+				System.out.println(vos2.get(i).baseNumber + " " + vos2.get(i).buyTime + " " + vos2.get(i).lastTime);
 			}
 		}
 		

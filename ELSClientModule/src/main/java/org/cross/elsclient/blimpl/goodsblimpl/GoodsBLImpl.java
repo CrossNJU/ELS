@@ -27,13 +27,14 @@ public class GoodsBLImpl implements GoodsBLService{
 		@Override
 	public ResultMessage updateGoods(String id, HistoryVO nowHistory,
 			GoodsState nowState) throws RemoteException {
-		ResultMessage resultMessage1 = goodsData.updateLocation(id, nowHistory.placeCity, nowHistory.placeOrg);
-		ResultMessage resultMessage2 = goodsData.updateState(id, nowState);
-		ResultMessage resultMessage3 = goodsData.addHistory(id,goodsInfo.toHistroyPO(nowHistory));
-		if (resultMessage1 == ResultMessage.FAILED || resultMessage2 == ResultMessage.FAILED || resultMessage3 == ResultMessage.FAILED) {
-			return ResultMessage.FAILED;
+		GoodsPO goodsPO = goodsData.findByNum(id);
+		ResultMessage addHistroy = goodsData.addHistory(id, goodsInfo.toHistroyPO(nowHistory, id));
+		goodsPO.setState(nowState);
+		ResultMessage updateMessage = goodsData.update(goodsPO); 
+		if (updateMessage == ResultMessage.SUCCESS && addHistroy == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}
-		return ResultMessage.SUCCESS;
+		return ResultMessage.FAILED;
 	}
 
 	@Override
@@ -48,15 +49,22 @@ public class GoodsBLImpl implements GoodsBLService{
 
 	@Override
 	public GoodsVO searchGoods(String goodsID) throws RemoteException {
+		System.out.println(goodsID);
 		GoodsPO po = goodsData.findByNum(goodsID);
-		GoodsVO vo = goodsInfo.toGoodsVO(po);
+		ArrayList<HistoryPO> historyPOs = goodsData.findHistory(goodsID);
+		ArrayList<HistoryVO> historyVOs = new ArrayList<HistoryVO>();
+		int size = historyPOs.size();
+		for (int i = 0; i < size; i++) {
+			historyVOs.add(goodsInfo.toHistroyVO(historyPOs.get(i)));
+		}
+		GoodsVO vo = goodsInfo.toGoodsVO(po,historyVOs);
 		return vo;
 	}
 
 	@Override
 	public ResultMessage addGoods(GoodsVO goods) throws RemoteException {
 		GoodsPO goodsPO = goodsInfo.toGoodsPO(goods);
-		return goodsData.insertToDB(goodsPO);
+		return goodsData.insert(goodsPO);
 	}
 
 }

@@ -11,9 +11,6 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
-import org.cross.elscommon.util.City;
-import org.cross.elscommon.util.GoodsState;
-import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 
 public interface GoodsDataService extends Remote{

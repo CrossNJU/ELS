@@ -3,6 +3,7 @@ package org.cross.elsclient.blimpl.userblimpl;
 import org.cross.elsclient.blimpl.blUtility.UserInfo;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.po.UserPO;
+import org.cross.elscommon.util.StringToType;
 
 public class UserInfoImpl implements UserInfo{
 
@@ -11,8 +12,7 @@ public class UserInfoImpl implements UserInfo{
 		if (po == null) {
 			return null;
 		}
-		UserVO vo = new UserVO(po.getId(),po.getPassword(), po.getName(), po.getType());
-		vo.id = po.getId();
+		UserVO vo = new UserVO(po.getNumber(), po.getName(), po.getOrgNum(),po.getType().toString(), po.getPassword());
 		return vo;
 	}
 
@@ -21,8 +21,7 @@ public class UserInfoImpl implements UserInfo{
 		if (vo == null) {
 			return null;
 		}
-		UserPO po = new UserPO(vo.id,vo.password, vo.name, vo.type);
-		po.setId(vo.id);
+		UserPO po = new UserPO(vo.number, vo.name,StringToType.toUserType(vo.userType), vo.password, vo.orgNameID);
 		return po;
 	}
 }

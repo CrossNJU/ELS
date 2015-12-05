@@ -51,8 +51,19 @@ public class StockVO {
 	 */
 	public int numInStock;
 
+	/**
+	 * 所属机构num
+	 */
+	public String orgNum;
+
+	/**
+	 * 所属机构name
+	 */
+	public String orgName;
+
 	public StockVO(String number, int totalAreas, int usedAreas, int outNum,
-			int inNum, double outMoney, double inMoney, int numInStock) {
+			int inNum, double outMoney, double inMoney, int numInStock,
+			String orgNum, String orgName) {
 		super();
 		this.number = number;
 		this.totalAreas = totalAreas;
@@ -62,6 +73,8 @@ public class StockVO {
 		this.outMoney = outMoney;
 		this.inMoney = inMoney;
 		this.numInStock = numInStock;
+		this.orgNum = orgNum;
+		this.orgName = orgName;
 	}
 
 }

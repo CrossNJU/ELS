@@ -7,6 +7,7 @@ package org.cross.elsclient.vo;
 
 import java.util.ArrayList;
 
+import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.omg.CORBA.PUBLIC_MEMBER;
@@ -47,18 +48,13 @@ public class PersonnelVO {
 	public String orgNameID;
 
 	/**
-	 * 人员工资
+	 * 薪资策略
 	 */
-	public double payment;
-
-	/**
-	 * 人员工资提成
-	 */
-	public double extraMoney;
+	public SalaryPO salary;
 
 	public PersonnelVO(String number, String name, String sex, String id,
 			String phone, PositionType position, String birthday,
-			String orgNameID, double payment, double extraMoney) {
+			String orgNameID, SalaryPO salary) {
 		super();
 		this.number = number;
 		this.name = name;
@@ -68,8 +64,7 @@ public class PersonnelVO {
 		this.position = position;
 		this.birthday = birthday;
 		this.orgNameID = orgNameID;
-		this.payment = payment;
-		this.extraMoney = extraMoney;
+		this.salary = salary;
 	}
 
 }

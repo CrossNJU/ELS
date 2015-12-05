@@ -21,7 +21,7 @@ public class UserVO {
 	/**
 	 * 用户职位
 	 */
-	public String position;
+	public String userType;
 
 	public String password;
 
@@ -31,7 +31,7 @@ public class UserVO {
 		this.number = number;
 		this.name = name;
 		this.orgNameID = orgNameID;
-		this.position = position;
+		this.userType = position;
 		this.password = password;
 	}
 

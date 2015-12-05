@@ -8,6 +8,8 @@ import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.po.SalaryPO;
+import org.cross.elscommon.util.PositionType;
 
 public class PersonnelInfoImpl implements PersonnelInfo{
 	
@@ -22,30 +24,34 @@ public class PersonnelInfoImpl implements PersonnelInfo{
 	}
 
 	@Override
-	public PersonnelVO toPersonnelVO(PersonnelPO po) {
-		PersonnelVO vo = new PersonnelVO(po.getId(),po.getName(),po.getPosition(), po.getOrganization(), po.getOrganizationID());
-		ArrayList<ReceiptVO> receiptVOs = new ArrayList<ReceiptVO>();
-		ArrayList<ReceiptPO> receiptPOs = po.getDealedReceipts();
-		int size = po.getDealedReceipts().size();
-		for (int i = 0; i < size; i++) {
-			receiptVOs.add(receiptInfo.toVO(receiptPOs.get(i)));
+	public PersonnelVO toPersonnelVO(PersonnelPO po,String orgNameID,double extreMoney) {
+		if (po == null) {
+			return null;
 		}
-		vo.payment = po.getPayment();
-		vo.dealedReceipts = receiptVOs;
+		String sex = "";
+		if (po.getSex() == 1) {
+			sex = "男";
+		}else {
+			sex = "女";
+		}
+		
+		PersonnelVO vo = new 
+		
 		return vo;
 	}
 
 	@Override
 	public PersonnelPO toPersonnelPO(PersonnelVO vo) {
-		PersonnelPO po = new PersonnelPO(vo.id, vo.name, vo.position, vo.organization, vo.organizationID);
-		ArrayList<ReceiptPO> receiptPOs = new ArrayList<ReceiptPO>();
-		ArrayList<ReceiptVO> receiptVOs = vo.dealedReceipts;
-		int size = receiptVOs.size();
-		for (int i = 0; i < size; i++) {
-			receiptPOs.add(receiptInfo.toPO(receiptVOs.get(i)));
+		if (vo == null) {
+			return null;
 		}
-		po.setPayment(vo.payment);
-		po.setDealedReceipts(receiptPOs);
+		int s = 1;
+		if (vo.sex.equals("男")) {
+			s = 1;
+		}else {
+			s = 0;
+		}
+		PersonnelPO po = new PersonnelPO(vo.number, vo.name, vo.position, vo.orgNameID, vo.payment, s, vo.id, vo.phone, vo.birthday);
 		return po;
 	}
 }

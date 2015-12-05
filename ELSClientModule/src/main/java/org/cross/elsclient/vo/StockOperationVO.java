@@ -32,7 +32,7 @@ public class StockOperationVO {
 	/**
 	 * 存放小间类型
 	 */
-	public StockType place;
+	public StockType stockType;
 
 	public StockOperationVO(String time, StockOperationType type, String goodNum, double money, StockType place) {
 		super();
@@ -40,7 +40,7 @@ public class StockOperationVO {
 		this.type = type;
 		this.goodNum = goodNum;
 		this.money = money;
-		this.place = place;
+		this.stockType = place;
 	}
 	
 }

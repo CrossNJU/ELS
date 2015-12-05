@@ -34,7 +34,7 @@ public class VehicleVO {
 	/**
 	 * 底盘号
 	 */
-	public String apparatusNumber;
+	public String baseNumber;
 
 	/**
 	 * 购买时间
@@ -64,7 +64,7 @@ public class VehicleVO {
 		this.licence = licence;
 		this.businessHallNum = businessHallNum;
 		this.engineNumber = engineNumber;
-		this.apparatusNumber = apparatusNumber;
+		this.baseNumber = apparatusNumber;
 		this.buyTime = buyTime;
 		this.lastTime = lastTime;
 		this.image = image;

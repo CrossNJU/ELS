@@ -11,26 +11,23 @@ import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public class GoodsInfoImpl implements GoodsInfo{
-	
+public class GoodsInfoImpl implements GoodsInfo {
+
 	GoodsDataService goodsData;
-	
-	public GoodsInfoImpl(GoodsDataService goodsData){
+
+	public GoodsInfoImpl(GoodsDataService goodsData) {
 		this.goodsData = goodsData;
 	}
 
 	@Override
-	public GoodsVO toGoodsVO(GoodsPO po) {
+	public GoodsVO toGoodsVO(GoodsPO po, ArrayList<HistoryVO> historyVOs) {
 		if (po == null) {
 			return null;
 		}
-		GoodsVO goodsVO = new GoodsVO(po.getNumber(), po.getGoodsType(), po.getPlaceCity(), po.getPlaceOrg(), po.getWeight(), po.getVolume());
-		ArrayList<HistoryVO> historyVOs = new ArrayList<HistoryVO>();
-		ArrayList<HistoryPO> historyPOs = po.getHistory();
-		int size = historyPOs.size();
-		for (int i = 0; i < size; i++) {
-			historyVOs.add(toHistroyVO(historyPOs.get(i)));
-		}
+		GoodsVO goodsVO = new GoodsVO(po.getOrderNum(), po.getGoodsType(),
+				po.getPlaceCity(), po.getPlaceOrg(), po.getWeight(),
+				po.getVolume());
+
 		goodsVO.state = po.getState();
 		goodsVO.history = historyVOs;
 		goodsVO.orderNum = po.getOrderNum();
@@ -42,7 +39,8 @@ public class GoodsInfoImpl implements GoodsInfo{
 		if (po == null) {
 			return null;
 		}
-		HistoryVO historyVO = new HistoryVO(po.getTime(), po.getPlaceCity(), po.getPlaceOrg(), po.isArrive());
+		HistoryVO historyVO = new HistoryVO(po.getTime(), po.getPlaceCity(),
+				po.getPlaceOrg(), po.isArrive());
 		return historyVO;
 	}
 
@@ -51,92 +49,59 @@ public class GoodsInfoImpl implements GoodsInfo{
 		if (vo == null) {
 			return null;
 		}
-		GoodsPO goodsPO = new GoodsPO(vo.goodsType, vo.number, vo.placeCity, vo.placeOrg, vo.weight, vo.volume);
-		ArrayList<HistoryVO> historyVOs = vo.history;
-		int size = historyVOs.size();
-		for (int i = 0; i < size; i++) {
-			goodsPO.addHistory(toHistroyPO(historyVOs.get(i)));
-		}
-		goodsPO.setState(vo.state);
-		goodsPO.setOrderNum(vo.orderNum);
-		
+		GoodsPO goodsPO = new GoodsPO(vo.goodsType, vo.placeCity, vo.placeOrg,
+				vo.state, vo.weight, vo.volume, vo.orderNum);
 		return goodsPO;
 	}
 
 	@Override
-	public HistoryPO toHistroyPO(HistoryVO vo) {
+	public HistoryPO toHistroyPO(HistoryVO vo, String orderNum) {
 		if (vo == null) {
 			return null;
 		}
-		HistoryPO historyPO = new HistoryPO(vo.time, vo.placeCity, vo.placeOrg, vo.isArrive);
+		HistoryPO historyPO = new HistoryPO(vo.time, vo.placeCity, vo.placeOrg,
+				vo.isArrive, orderNum);
 		return historyPO;
+	}
+
+	public ArrayList<HistoryVO> getHistroyVOs(String goodsID)
+			throws RemoteException {
+		ArrayList<HistoryPO> historyPOs = goodsData.findHistory(goodsID);
+		ArrayList<HistoryVO> historyVOs = new ArrayList<HistoryVO>();
+		int size = historyPOs.size();
+		for (int i = 0; i < size; i++) {
+			historyVOs.add(toHistroyVO(historyPOs.get(i)));
+		}
+		return historyVOs;
 	}
 
 	@Override
 	public GoodsVO searchGoods(String goodsID) throws RemoteException {
 		System.out.println(goodsID);
 		GoodsPO po = goodsData.findByNum(goodsID);
-		GoodsVO vo = toGoodsVO(po);
+		GoodsVO vo = toGoodsVO(po, getHistroyVOs(goodsID));
 		return vo;
 	}
 
 	@Override
 	public ArrayList<GoodsVO> findByStockAreaNum(String stockAreaNum)
 			throws RemoteException {
-		ArrayList<GoodsPO> goodsPOs = goodsData.findByStockAreaNum(stockAreaNum);
+		ArrayList<GoodsPO> goodsPOs = goodsData
+				.findByStockAreaNum(stockAreaNum);
 		ArrayList<GoodsVO> goodsVOs = new ArrayList<GoodsVO>();
 		int size = goodsPOs.size();
 		for (int i = 0; i < size; i++) {
-			goodsVOs.add(toGoodsVO(goodsPOs.get(i)));
+			ArrayList<HistoryVO> historyVOs = getHistroyVOs(goodsPOs.get(i)
+					.getOrderNum());
+			goodsVOs.add(toGoodsVO(goodsPOs.get(i), historyVOs));
 		}
 		return goodsVOs;
 	}
 
 	@Override
-	public ResultMessage updateToArea(String goodsID,String stockNum, String stockAreaNum) throws RemoteException {
-		System.out.println("in");
-		return goodsData.addToStock(goodsID, stockNum,stockAreaNum);
-	}
-
-	@Override
-	public ResultMessage deleteFromStock(String goodsID) throws RemoteException {
-		return goodsData.deleteFromStock(goodsID);
-	}
-
-	@Override
-	public String findStockAreaNum(String goodsID) throws RemoteException {
-		String areaNum = goodsData.findStockAreaNum(goodsID);
-		return areaNum;
-	}
-
-	@Override
-	public ResultMessage addToOrder(String goodsNum, String orderNum) throws RemoteException {
-		return goodsData.addToOrder(goodsNum, orderNum);
-	}
-
-	@Override
-	public ResultMessage addToTrans(String goodsNum, String transNum) throws RemoteException {
-		return goodsData.addToTrans(goodsNum, transNum);
-	}
-
-	@Override
-	public ResultMessage addToArri(String goodsNum, String arriNum) throws RemoteException {
-		return goodsData.addToArri(goodsNum, arriNum);
-	}
-
-	@Override
-	public ResultMessage deleteFromOrder(String goodsNum) throws RemoteException {
-		return goodsData.deleteFromOrder(goodsNum);
-	}
-
-	@Override
-	public ResultMessage deleteFromTrans(String goodsNum) throws RemoteException {
-		return goodsData.deleteFromTrans(goodsNum);
-	}
-
-	@Override
-	public ResultMessage deleteFromArri(String goodsNum) throws RemoteException {
-		return goodsData.deleteFromArri(goodsNum);
+	public ArrayList<GoodsVO> findGoodsFromArea(String stockAreaNum) {
+//		ArrayList<GoodsPO> po
+		return null;
 	}
 
 }
