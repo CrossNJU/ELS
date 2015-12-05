@@ -33,8 +33,8 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 
 	@Override
 	public ResultMessage insert(InitialPO po) throws RemoteException {
-		String sql = "insert igore into `initial`(`number`, `time`, `name`) values('" + po.getNumber() + "',"
-				+ po.getTime() + ",'" + po.getName() + "')";
+		String sql = "insert igore into `initial`(``number`, `time`, `name`, `perNum`) values('" + po.getNumber() + "',"
+				+ po.getTime() + ",'" + po.getName() +"','"+po.getPerNum()+ "')";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
@@ -64,7 +64,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 		InitialPO po = null;
 		try {
 			if (rs.next()) {
-				po = new InitialPO(initialID, rs.getInt("time"), rs.getString("name"));
+				po = new InitialPO(initialID, rs.getString("time"), rs.getString("name"), rs.getString("perNum"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

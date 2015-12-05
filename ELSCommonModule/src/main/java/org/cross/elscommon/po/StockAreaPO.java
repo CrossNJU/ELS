@@ -31,12 +31,15 @@ public class StockAreaPO implements Serializable {
 	 * 特定仓库已用容量
 	 */
 	private int usedCapacity;
+	
+	private String stockNum;
 
-	public StockAreaPO(String number, StockType stockType, int totalCapacity) {
+	public StockAreaPO(String number, StockType stockType, int totalCapacity, String stockNum) {
 		super();
 		this.number = number;
 		this.stockType = stockType;
 		this.totalCapacity = totalCapacity;
+		this.setStockNum(stockNum);
 		this.usedCapacity = 0;
 	}
 
@@ -70,6 +73,14 @@ public class StockAreaPO implements Serializable {
 
 	public void setUsedCapacity(int usedCapacity) {
 		this.usedCapacity = usedCapacity;
+	}
+
+	public String getStockNum() {
+		return stockNum;
+	}
+
+	public void setStockNum(String stockNum) {
+		this.stockNum = stockNum;
 	}
 
 }

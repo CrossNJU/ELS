@@ -37,14 +37,36 @@ public class StockOperationPO implements Serializable {
 	 */
 	private StockType stockType;
 
-	public StockOperationPO(String time, StockOperationType opType,
-			String goodsNum, double money, StockType stockType) {
+	private String stockNum;
+
+	private String stockAreaNum;
+
+	public StockOperationPO(String time, StockOperationType opType, String goodsNum, double money, StockType stockType,
+			String stockNum, String stockAreaNum) {
 		super();
 		this.time = time;
 		this.opType = opType;
 		this.goodsNum = goodsNum;
 		this.money = money;
 		this.stockType = stockType;
+		this.stockNum = stockNum;
+		this.stockAreaNum = stockAreaNum;
+	}
+
+	public String getStockNum() {
+		return stockNum;
+	}
+
+	public void setStockNum(String stockNum) {
+		this.stockNum = stockNum;
+	}
+
+	public String getStockAreaNum() {
+		return stockAreaNum;
+	}
+
+	public void setStockAreaNum(String stockAreaNum) {
+		this.stockAreaNum = stockAreaNum;
 	}
 
 	public String getTime() {

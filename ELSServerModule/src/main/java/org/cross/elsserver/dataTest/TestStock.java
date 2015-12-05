@@ -12,26 +12,26 @@ import org.cross.elsserver.dataimpl.stockdataimpl.StockDataImpl;
 
 public class TestStock {
 	public static void main(String[] args) throws RemoteException{
-		StockDataImpl impl = new StockDataImpl();
-		
-		StockPO test1 = new StockPO("S001", 100);
-		StockAreaPO test1_a1 = new StockAreaPO("SA001", StockType.COMMON, 20);
-		StockAreaPO test1_a2 = new StockAreaPO("SA002", StockType.Fast, 25);
-		StockAreaPO test1_a3 = new StockAreaPO("SA003", StockType.ECONOMICAL, 30);
-		StockAreaPO test1_a4 = new StockAreaPO("SA004", StockType.COMMON, 35);
-		test1.setUsedAreas(4);
-		ArrayList<StockAreaPO> list = new ArrayList<StockAreaPO>();
-		list.add(test1_a1);
-		list.add(test1_a2);
-		list.add(test1_a3);
-		list.add(test1_a4);
-		test1.setStockAreas(list);
-		
-//		StockOperationPO test_op1 = new StockOperationPO("2015", StockOperationType.STOCKIN, "G002", 20.3, StockType.COMMON);
-		StockOperationPO test_op2 = new StockOperationPO("2012", StockOperationType.STOCKOUT, "G002", 20.3, StockType.COMMON);
-		impl.updateOutstock("S001", "SA001", test_op2);
-//		impl.updateInstock("S001", "SA001", test_op1);
-//		impl.insert(test1);
+//		StockDataImpl impl = new StockDataImpl();
+//		
+//		StockPO test1 = new StockPO("S001", 100);
+//		StockAreaPO test1_a1 = new StockAreaPO("SA001", StockType.COMMON, 20);
+//		StockAreaPO test1_a2 = new StockAreaPO("SA002", StockType.Fast, 25);
+//		StockAreaPO test1_a3 = new StockAreaPO("SA003", StockType.ECONOMICAL, 30);
+//		StockAreaPO test1_a4 = new StockAreaPO("SA004", StockType.COMMON, 35);
+//		test1.setUsedAreas(4);
+//		ArrayList<StockAreaPO> list = new ArrayList<StockAreaPO>();
+//		list.add(test1_a1);
+//		list.add(test1_a2);
+//		list.add(test1_a3);
+//		list.add(test1_a4);
+//		test1.setStockAreas(list);
+//		
+////		StockOperationPO test_op1 = new StockOperationPO("2015", StockOperationType.STOCKIN, "G002", 20.3, StockType.COMMON);
+//		StockOperationPO test_op2 = new StockOperationPO("2012", StockOperationType.STOCKOUT, "G002", 20.3, StockType.COMMON);
+//		impl.updateOutstock("S001", "SA001", test_op2);
+////		impl.updateInstock("S001", "SA001", test_op1);
+////		impl.insert(test1);
 		
 //		StockPO testGet = impl.findStockByNum("S001");
 //		System.out.println(testGet.getStockAreas().size());
