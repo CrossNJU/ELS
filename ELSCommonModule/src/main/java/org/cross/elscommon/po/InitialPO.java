@@ -27,11 +27,12 @@ public class InitialPO implements Serializable {
 	
 	private String perNum;
 
-	public InitialPO(String number, String time, String name) {
+	public InitialPO(String number, String time, String name, String perNum) {
 		super();
 		this.number = number;
 		this.time = time;
 		this.name = name;
+		this.perNum = perNum;
 	}
 
 	public String getNumber() {
