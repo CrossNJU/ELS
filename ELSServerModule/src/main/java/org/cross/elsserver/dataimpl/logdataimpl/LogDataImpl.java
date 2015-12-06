@@ -8,16 +8,17 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.po.LogPO;
+import org.cross.elscommon.util.CompareTime;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 
-public class LogDataImpl extends UnicastRemoteObject implements LogDataService{
+public class LogDataImpl extends UnicastRemoteObject implements LogDataService {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	MySQL mysql;
 
 	public LogDataImpl() throws RemoteException {
@@ -27,19 +28,27 @@ public class LogDataImpl extends UnicastRemoteObject implements LogDataService{
 
 	@Override
 	public ResultMessage insert(LogPO po) throws RemoteException {
-		String sql = "insert ignore into `log`(`number`, `time`, `operator`, `operation`) values ('"
-				+ po.getId()+"','"+po.getTime()+"','"+po.getOperator()+"','"+po.getContent()+"')";
-		if(!mysql.execute(sql)) return ResultMessage.FAILED;
+		String sql = "insert ignore into `log`(`number`, `time`, `operator`, `operation`) values ('" + po.getNumber()
+				+ "','" + po.getTime() + "','" + po.getOperator() + "','" + po.getOperation() + "')";
+		if (!mysql.execute(sql))
+			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ArrayList<LogPO> find(String startTime, String endTime) throws RemoteException {
-		String sql = "select * from `log`";
-		ArrayList<LogPO> logs = new ArrayList<LogPO>();
-		ResultSet rs = mysql.query(sql);
-		LogPO log = null;
-		while((log = getFromDB(rs))!=null) logs.add(log);
+		ArrayList<LogPO> logs = show();
+		for (int i = 0; i < logs.size(); i++) {
+			boolean con1 = false;
+			boolean con2 = false;
+			if (CompareTime.compare(startTime, logs.get(i).getTime()) == 1)
+				con1 = true;
+			if (CompareTime.compare(logs.get(i).getTime(), endTime) == 1)
+				con2 = true;
+			if (con1 || con2) {
+				logs.remove(i);
+			}
+		}
 		return logs;
 	}
 
@@ -49,16 +58,17 @@ public class LogDataImpl extends UnicastRemoteObject implements LogDataService{
 		ArrayList<LogPO> logs = new ArrayList<LogPO>();
 		ResultSet rs = mysql.query(sql);
 		LogPO log = null;
-		while((log = getFromDB(rs))!=null) logs.add(log);
+		while ((log = getFromDB(rs)) != null)
+			logs.add(log);
 		return logs;
 	}
-	
+
 	public LogPO getFromDB(ResultSet rs) {
 		LogPO po = null;
 		try {
 			if (rs.next()) {
-				po = new LogPO(rs.getString("number"), rs.getString("time"), 
-						rs.getString("operator"), rs.getString("operation"));
+				po = new LogPO(rs.getString("number"), rs.getString("time"), rs.getString("operator"),
+						rs.getString("operation"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

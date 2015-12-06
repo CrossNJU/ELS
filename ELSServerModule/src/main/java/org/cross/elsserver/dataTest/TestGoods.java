@@ -22,7 +22,7 @@ public class TestGoods {
 		
 //		GoodsPO testFind = impl.findByNum("G002");
 //		System.out.println(testFind.getNumber());
-		impl.addToStock("G002", "S0002", "0000004");
+//		impl.addToStock("G002", "S0002", "0000004");
 		
 //		impl.addToTrans("G002", "T001");
 //		impl.addToStock("G003", "K001");

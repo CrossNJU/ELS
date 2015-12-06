@@ -10,18 +10,13 @@ import java.io.Serializable;
 public class AccountPO implements Serializable {
 
 	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
 	 * 账户名称
 	 */
 	private String name;
 	/**
 	 * 银行卡号
 	 */
-	private String account;
+	private String accountNum;
 	/**
 	 * 账户余额
 	 */
@@ -29,14 +24,14 @@ public class AccountPO implements Serializable {
 
 	/**
 	 * 构造方法
-	 * 
 	 * @param name
-	 * @param account
+	 * @param accountNum
 	 * @param balance
 	 */
-	public AccountPO(String name, String account, double balance) {
+	public AccountPO(String name, String accountNum, double balance) {
+		super();
 		this.name = name;
-		this.account = account;
+		this.accountNum = accountNum;
 		this.balance = balance;
 	}
 
@@ -48,24 +43,20 @@ public class AccountPO implements Serializable {
 		this.name = name;
 	}
 
+	public String getAccountNum() {
+		return accountNum;
+	}
+
+	public void setAccountNum(String accountNum) {
+		this.accountNum = accountNum;
+	}
+
 	public double getBalance() {
 		return balance;
 	}
 
 	public void setBalance(double balance) {
 		this.balance = balance;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 }

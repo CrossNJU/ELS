@@ -28,9 +28,9 @@ public class PersonnelBLImpl implements PersonnelBLService{
 	
 	@Override
 	public PersonnelVO findById(String id) throws RemoteException {
-//		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
+		
 		PersonnelPO po = personnelData.findById(id);
-		PersonnelVO vo = personnelInfo.toPersonnelVO(po);
+		PersonnelVO vo = personnelInfo.toPersonnelVO(po, id, 0);
 //		int size = pos.size();
 //		for (int i = 0; i < size; i++) {
 //			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));

@@ -22,6 +22,8 @@ public class Typetotable {
 			return "receiptmoneyout";
 		case TOTALMONEYIN:
 			return "receipttotalmoneyin";
+		case DELIVER:
+			return "receiptDeliver";
 		default:
 			return null;
 		}

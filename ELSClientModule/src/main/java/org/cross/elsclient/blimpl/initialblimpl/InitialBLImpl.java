@@ -26,7 +26,7 @@ import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.ResultMessage;
 
-public class InitialBLImpl implements InitialBLService{
+public class InitialBLImpl implements InitialBLService {
 
 	InitialDataService initialData;
 	InitialInfo initialInfo;
@@ -35,10 +35,11 @@ public class InitialBLImpl implements InitialBLService{
 	VehicleInfo vehicleInfo;
 	StockInfo stockInfo;
 	AccountInfo accountInfo;
-	
-	public InitialBLImpl(InitialDataService initialData,InitialInfo initialInfo,
-			OrganizationInfo organizationInfo,PersonnelInfo personnelInfo,
-			VehicleInfo vehicleInfo,StockInfo stockInfo,AccountInfo accountInfo){
+
+	public InitialBLImpl(InitialDataService initialData,
+			InitialInfo initialInfo, OrganizationInfo organizationInfo,
+			PersonnelInfo personnelInfo, VehicleInfo vehicleInfo,
+			StockInfo stockInfo, AccountInfo accountInfo) {
 		this.initialData = initialData;
 		this.initialInfo = initialInfo;
 		this.orgInfo = organizationInfo;
@@ -47,7 +48,7 @@ public class InitialBLImpl implements InitialBLService{
 		this.stockInfo = stockInfo;
 		this.accountInfo = accountInfo;
 	}
-	
+
 	@Override
 	public ArrayList<InitialVO> show() throws RemoteException {
 		ArrayList<InitialVO> initialVOs = new ArrayList<InitialVO>();
@@ -71,77 +72,47 @@ public class InitialBLImpl implements InitialBLService{
 	@Override
 	public ArrayList<OrganizationVO> showOrganization(String initialID)
 			throws RemoteException {
-		InitialPO po = initialData.findByID(initialID);
-		ArrayList<OrganizationVO> orgVOs = new ArrayList<OrganizationVO>();
-		ArrayList<OrganizationPO> orgPOs = po.getOrganizations();
-		if (orgPOs == null) {
-			return null;
-		}
-		int size = orgPOs.size();
-		for (int i = 0; i < size; i++) {
-			orgVOs.add(orgInfo.toOrganizationVO(orgPOs.get(i)));
-		}
-		return orgVOs;
+		ArrayList<OrganizationPO> orgPos = initialData
+				.findInitOrganizations(initialID);
+		ArrayList<OrganizationVO> orgVos = orgInfo.toOrgVOs(orgPos);
+		return orgVos;
 	}
 
 	@Override
 	public ArrayList<PersonnelVO> showPersonnel(String initialID) throws RemoteException {
 		InitialPO po = initialData.findByID(initialID);
+		ArrayList<PersonnelPO> personnelPOs = initialData.findInitPersonnels(initialID);
 		ArrayList<PersonnelVO> personnelVOs = new ArrayList<PersonnelVO>();
-		ArrayList<PersonnelPO> personnelPOs = po.getPersonnels();
-		if (personnelPOs == null) {
-			return null;
-		}
-		int size = personnelPOs.size();
-		for (int i = 0; i < size; i++) {
-			personnelVOs.add(personnelInfo.toPersonnelVO(personnelPOs.get(i)));
-		}
 		return personnelVOs;
+		...
 	}
 
 	@Override
-	public ArrayList<VehicleVO> showVehicle(String initialID) throws RemoteException {
-		InitialPO po = initialData.findByID(initialID);
-		ArrayList<VehicleVO> vehicleVOs = new ArrayList<VehicleVO>();
-		ArrayList<VehiclePO> vehiclePOs = po.getVehicles();
-		if (vehiclePOs == null) {
-			return null;
-		}
-		int size = vehiclePOs.size();
-		for (int i = 0; i < size; i++) {
-			vehicleVOs.add(vehicleInfo.toVehicleVO(vehiclePOs.get(i)));
-		}
+	public ArrayList<VehicleVO> showVehicle(String initialID)
+			throws RemoteException {
+		ArrayList<VehiclePO> vehiclePOs = initialData
+				.findInitVehicles(initialID);
+		ArrayList<VehicleVO> vehicleVOs = vehicleInfo.toVehVOs(vehiclePOs);
 		return vehicleVOs;
 	}
 
 	@Override
-	public ArrayList<StockVO> showStock(String initialID) throws RemoteException {
-		InitialPO po = initialData.findByID(initialID);
-		ArrayList<StockVO> stockVOs = new ArrayList<StockVO>();
-		ArrayList<StockPO> stockPOs = po.getStocks();
-		if (stockPOs == null) {
-			return null;
-		}
-		int size = stockPOs.size();
-		for (int i = 0; i < size; i++) {
-			stockVOs.add(stockInfo.toStockVO(stockPOs.get(i)));
-		}
+	public ArrayList<StockVO> showStock(String initialID)
+			throws RemoteException {
+		ArrayList<StockPO> stockPOs = initialData.findInitStocks(initialID);
+		ArrayList<StockVO> stockVOs = stockInfo.toStoVOs(stockPOs);
+
 		return stockVOs;
 	}
 
 	@Override
-	public ArrayList<AccountVO> showAccount(String initialID) throws RemoteException {
-		InitialPO po = initialData.findByID(initialID);
-		ArrayList<AccountVO> accountVOs = new ArrayList<AccountVO>();
-		ArrayList<AccountPO> accountPOs = po.getAccounts();
-		if (accountPOs == null) {
-			return null;
-		}
-		int size = accountPOs.size();
-		for (int i = 0; i < size; i++) {
-			accountVOs.add(accountInfo.toAccountVO(accountPOs.get(i)));
-		}
+	public ArrayList<AccountVO> showAccount(String initialID)
+			throws RemoteException {
+		ArrayList<AccountPO> accountPOs = initialData
+				.findInitAccounts(initialID);
+		ArrayList<AccountVO> accountVOs = accountInfo.toAccVOs(accountPOs);
+
 		return accountVOs;
 	}
-	
+
 }

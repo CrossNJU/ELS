@@ -19,14 +19,14 @@ public class HistoryDataImpl implements HistoryTool {
 	}
 
 	@Override
-	public ArrayList<HistoryPO> findByGoodsNum(String number) {
+	public ArrayList<HistoryPO> findByOrderNum(String number) {
 		ArrayList<HistoryPO> list = new ArrayList<HistoryPO>();
-		String sql = "select * from `history` where `goodsNum` = '" + number + "'";
+		String sql = "select * from `history` where `orderNum` = '" + number + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			while (rs.next()) {
 				HistoryPO po = new HistoryPO(rs.getString("time"), StringToType.toCity(rs.getString("placeCity")),
-						StringToType.toOrg(rs.getString("placeOrg")), rs.getBoolean("isArrive"));
+						StringToType.toOrg(rs.getString("placeOrg")), rs.getBoolean("isArrive"), number);
 				list.add(po);
 			}
 		} catch (SQLException e) {
@@ -37,13 +37,13 @@ public class HistoryDataImpl implements HistoryTool {
 	}
 
 	@Override
-	public ResultMessage insert(HistoryPO po, String goodsNum) {
-		String sql = "insert ignore into `history`(`time`,`placeCity`,`placeOrg`,`isArrive`,`goodsNum`) values ('"
+	public ResultMessage insert(HistoryPO po, String orderNum) {
+		String sql = "insert ignore into `history`(`time`,`placeCity`,`placeOrg`,`isArrive`,`orderNum`) values ('"
 				+po.getTime()+"','"
 				+po.getPlaceCity().toString()+"','"
 				+po.getPlaceOrg().toString()+"',"
 				+po.isArrive()+",'"
-				+goodsNum+"')";
+				+orderNum+"')";
 		if (mysql.execute(sql)) {
 			return ResultMessage.SUCCESS;
 		}else return ResultMessage.FAILED;

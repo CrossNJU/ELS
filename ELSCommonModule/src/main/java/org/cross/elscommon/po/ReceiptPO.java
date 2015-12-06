@@ -13,11 +13,6 @@ import org.cross.elscommon.util.ReceiptType;
 public class ReceiptPO implements Serializable {
 
 	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
 	 * 单据编号
 	 */
 	private String number;
@@ -37,26 +32,19 @@ public class ReceiptPO implements Serializable {
 	 */
 	private ApproveType approveState;
 
-	/**
-	 * 构造方法
-	 * 
-	 * @param number
-	 * @param type
-	 * @param time
-	 */
-	public ReceiptPO(String number, ReceiptType type, String time) {
+	private String orgNum;
+
+	private String perNum;
+
+	public ReceiptPO(String number, ReceiptType type, String time,
+			String orgNum, String perNum) {
+		super();
 		this.number = number;
 		this.type = type;
 		this.time = time;
-
 		this.approveState = ApproveType.UNCHECKED;
-	}
-
-	/**
-	 * 默认构造方法
-	 */
-	public ReceiptPO() {
-
+		this.orgNum = orgNum;
+		this.perNum = perNum;
 	}
 
 	public String getNumber() {
@@ -91,8 +79,20 @@ public class ReceiptPO implements Serializable {
 		this.approveState = approveState;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getOrgNum() {
+		return orgNum;
+	}
+
+	public void setOrgNum(String orgNum) {
+		this.orgNum = orgNum;
+	}
+
+	public String getPerNum() {
+		return perNum;
+	}
+
+	public void setPerNum(String perNum) {
+		this.perNum = perNum;
 	}
 
 }

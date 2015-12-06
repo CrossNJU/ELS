@@ -10,7 +10,6 @@ import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
-import org.cross.elscommon.util.StringToType;
 
 public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataService {
 
@@ -27,11 +26,10 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 	}
 
 	@Override
-	public ResultMessage insert(VehiclePO po) throws RemoteException {
-		String sql = "INSERT IGNORE INTO `vehicle`(`number`, `engineNum`, `baseNum`, `buyTime`, `lastTime`, `state`, `type`) VALUES ('"
-				+ po.getNumber() + "','" + po.getEngineNumber() + "','" + po.getApparatusNumber() + "','"
-				+ po.getBuyTime() + "','" + po.getLastTime() + "'," + po.isInUse() + ",'" + po.getType().toString()
-				+ "')";
+	public ResultMessage insert(VehiclePO veh) throws RemoteException {
+		String sql = "insert ignore into `vehicle`(`number`, `engineNum`, `baseNum`, `buyTime`, `lastTime`, `state`, `licence`, `orgNum`, `initialNum`) values ('"
+				+ veh.getNumber() + "','" + veh.getEngineNum() + "','" + veh.getBaseNum() + veh.getBuyTime() + "','"
+				+ veh.getLastTime() + "'," + veh.isState() + ",'" + veh.getLicence() + "','" + veh.getOrgNum() +"')";
 		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
 		else return ResultMessage.FAILED;
 	}
@@ -55,16 +53,8 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 	}
 	@Override
 	public ResultMessage update(VehiclePO po) throws RemoteException {
-
-		String sql = "UPDATE `vehicle` SET `engineNum`='" + po.getEngineNumber() + "',`baseNum`='"
-				+ po.getApparatusNumber() + "',`buyTime`='" + po.getBuyTime() + "',`lastTime`='" + po.getLastTime()
-				+ "',`state`='" + boolToInt(po.isInUse()) + "',`type`='" + po.getType().toString() + "' WHERE number = '"
-				+ po.getNumber() + "'";
-		if (mysql.execute(sql)) {
-			return ResultMessage.SUCCESS;
-		}else {
-			return ResultMessage.FAILED;
-		}
+		if(delete(po.getNumber())==ResultMessage.FAILED) return ResultMessage.FAILED;
+		return insert(po);
 	}
 
 	@Override
@@ -88,10 +78,9 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 		VehiclePO po = null;
 		try {
 			if(rs.next()){
-			po = new VehiclePO(rs.getString("number"), rs.getString("engineNum"), rs.getString("baseNum"),
-					rs.getString("buyTime"), rs.getString("lastTime"), null,
-					StringToType.toVehicleType(rs.getString("type")));
-			po.setInUse(rs.getBoolean("state"));
+			po =new VehiclePO(rs.getString("number"), rs.getString("engineNum"),
+							rs.getString("baseNum"), rs.getString("buyTime"), rs.getString("lastTime"), null,
+							rs.getBoolean("state"), rs.getString("licence"), rs.getString("orgNum"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,7 +93,7 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 //		
 		VehicleDataImpl vehicleDataImpl = new VehicleDataImpl();
 		 VehiclePO po = vehicleDataImpl.findByID("V000001");
-		 System.out.println(po.getApparatusNumber());
+//		 System.out.println(po.getApparatusNumber());
 		// vehicleDataImpl.delete("V000001");
 //		vehicleDataImpl.;
 	}

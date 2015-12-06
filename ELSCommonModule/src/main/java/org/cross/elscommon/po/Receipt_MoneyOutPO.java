@@ -12,29 +12,14 @@ import org.cross.elscommon.util.ReceiptType;
 public class Receipt_MoneyOutPO extends ReceiptPO implements Serializable {
 
 	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 付款日期
-	 */
-	private String time;
-
-	/**
 	 * 付款金额
 	 */
 	private double money;
 
 	/**
-	 * 付款人
-	 */
-	private PersonnelPO personnel;
-
-	/**
 	 * 付款账号
 	 */
-	private String receiveID;
+	private String accountNum;
 
 	/**
 	 * 条目
@@ -46,40 +31,14 @@ public class Receipt_MoneyOutPO extends ReceiptPO implements Serializable {
 	 */
 	private String comments;
 
-	/**
-	 * 付款单编号
-	 */
-	private String number;
-
-	/**
-	 * 构造方法
-	 * 
-	 * @param number
-	 * @param time
-	 * @param money
-	 * @param receivePerson
-	 * @param iD
-	 * @param clause
-	 * @param comments
-	 */
-	public Receipt_MoneyOutPO(String number, String time, double money, PersonnelPO Person, String iD,
+	public Receipt_MoneyOutPO(String number, ReceiptType type, String time,
+			String orgNum, String perNum, double money, String accountNum,
 			String clause, String comments) {
-		super(number, ReceiptType.MONEYOUT, time);
-		this.time = time;
+		super(number, type, time, orgNum, perNum);
 		this.money = money;
-		this.personnel = Person;
-		this.receiveID = iD;
+		this.accountNum = accountNum;
 		this.clause = clause;
 		this.comments = comments;
-		this.number = number;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
 	}
 
 	public double getMoney() {
@@ -90,20 +49,12 @@ public class Receipt_MoneyOutPO extends ReceiptPO implements Serializable {
 		this.money = money;
 	}
 
-	public PersonnelPO getPersonnel() {
-		return personnel;
+	public String getAccountNum() {
+		return accountNum;
 	}
 
-	public void setPersonnel(PersonnelPO personnel) {
-		this.personnel = personnel;
-	}
-
-	public String getReceiveID() {
-		return receiveID;
-	}
-
-	public void setReceiveID(String receiveID) {
-		this.receiveID = receiveID;
+	public void setAccountNum(String accountNum) {
+		this.accountNum = accountNum;
 	}
 
 	public String getClause() {
@@ -120,18 +71,6 @@ public class Receipt_MoneyOutPO extends ReceiptPO implements Serializable {
 
 	public void setComments(String comments) {
 		this.comments = comments;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 }

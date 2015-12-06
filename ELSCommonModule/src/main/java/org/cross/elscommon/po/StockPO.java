@@ -8,24 +8,12 @@ package org.cross.elscommon.po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StockPO implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class StockPO implements Serializable {
 
 	/**
 	 * 仓库编号
 	 */
 	private String number;
-
-	/**
-	 * 仓库中的不同类型仓库(不同区)
-	 */
-	private ArrayList<StockAreaPO> stockAreas;
-
-	/**
-	 * 仓库操作
-	 */
-	private ArrayList<StockOperationPO> stockOPs;
 
 	/**
 	 * 仓库总间数
@@ -40,40 +28,40 @@ public class StockPO implements Serializable{
 	/**
 	 * 出库数量
 	 */
-	private int outNum;
+	private int numOut;
 
 	/**
 	 * 入库数量
 	 */
-	private int inNum;
+	private int numIn;
 
 	/**
 	 * 出库金额
 	 */
-	private double outMoney;
+	private double moneyOut;
 
 	/**
 	 * 入库金额
 	 */
-	private double inMoney;
+	private double moneyIn;
 
 	/**
 	 * 库存数量
 	 */
 	private int numInStock;
 
-	public StockPO(String number, int totalAreas) {
+	private String orgNum;
+
+	public StockPO(String number, int totalAreas, String orgNum) {
 		super();
 		this.number = number;
 		this.totalAreas = totalAreas;
-
-		this.stockAreas = new ArrayList<StockAreaPO>();
-		this.stockOPs = new ArrayList<StockOperationPO>();
+		this.setOrgNum(orgNum);
 		this.usedAreas = 0;
-		this.outNum = 0;
-		this.inNum = 0;
-		this.outMoney = 0;
-		this.inMoney = 0;
+		this.numOut = 0;
+		this.numIn = 0;
+		this.moneyOut = 0;
+		this.moneyIn = 0;
 		this.numInStock = 0;
 	}
 
@@ -83,22 +71,6 @@ public class StockPO implements Serializable{
 
 	public void setNumber(String number) {
 		this.number = number;
-	}
-
-	public ArrayList<StockAreaPO> getStockAreas() {
-		return stockAreas;
-	}
-
-	public void setStockAreas(ArrayList<StockAreaPO> stockAreas) {
-		this.stockAreas = stockAreas;
-	}
-
-	public ArrayList<StockOperationPO> getStockOPs() {
-		return stockOPs;
-	}
-
-	public void setStockOPs(ArrayList<StockOperationPO> stockOPs) {
-		this.stockOPs = stockOPs;
 	}
 
 	public int getTotalAreas() {
@@ -117,36 +89,36 @@ public class StockPO implements Serializable{
 		this.usedAreas = usedAreas;
 	}
 
-	public int getOutNum() {
-		return outNum;
+	public int getNumOut() {
+		return numOut;
 	}
 
-	public void setOutNum(int outNum) {
-		this.outNum = outNum;
+	public void setNumOut(int numOut) {
+		this.numOut = numOut;
 	}
 
-	public int getInNum() {
-		return inNum;
+	public int getNumIn() {
+		return numIn;
 	}
 
-	public void setInNum(int inNum) {
-		this.inNum = inNum;
+	public void setNumIn(int numIn) {
+		this.numIn = numIn;
 	}
 
-	public double getOutMoney() {
-		return outMoney;
+	public double getMoneyOut() {
+		return moneyOut;
 	}
 
-	public void setOutMoney(double outMoney) {
-		this.outMoney = outMoney;
+	public void setMoneyOut(double moneyOut) {
+		this.moneyOut = moneyOut;
 	}
 
-	public double getInMoney() {
-		return inMoney;
+	public double getMoneyIn() {
+		return moneyIn;
 	}
 
-	public void setInMoney(double inMoney) {
-		this.inMoney = inMoney;
+	public void setMoneyIn(double moneyIn) {
+		this.moneyIn = moneyIn;
 	}
 
 	public int getNumInStock() {
@@ -155,6 +127,14 @@ public class StockPO implements Serializable{
 
 	public void setNumInStock(int numInStock) {
 		this.numInStock = numInStock;
+	}
+
+	public String getOrgNum() {
+		return orgNum;
+	}
+
+	public void setOrgNum(String orgNum) {
+		this.orgNum = orgNum;
 	}
 
 }

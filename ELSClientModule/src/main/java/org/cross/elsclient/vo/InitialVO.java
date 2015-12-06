@@ -13,17 +13,26 @@ public class InitialVO {
 	 * 编号
 	 */
 	public String id;
-	
-	/**
-	 * 年份
-	 */
-	public int year;
 
 	/**
-	 * 名称
+	 * 建账日期
 	 */
-	public String name;
+	public String time;
 
+	/**
+	 * 账本名称
+	 */
+	public String initialName;
+
+	/**
+	 * 建账人姓名
+	 */
+	public String perName;
+
+	/**
+	 * 建账人编号
+	 */
+	public String perNumber;
 	/**
 	 * 机构列表
 	 */
@@ -49,28 +58,22 @@ public class InitialVO {
 	 */
 	public ArrayList<AccountVO> accounts;
 
-	/**
-	 * 构造方法
-	 * 
-	 * @param id
-	 * @param name
-	 * @param organizations
-	 * @param personnels
-	 * @param vehicles
-	 * @param stocks
-	 * @param accounts
-	 */
-	public InitialVO(String id, String name,int year,
+	public InitialVO(String id, String time, String initialName,
+			String perName, String perNumber,
 			ArrayList<OrganizationVO> organizations,
 			ArrayList<PersonnelVO> personnels, ArrayList<VehicleVO> vehicles,
 			ArrayList<StockVO> stocks, ArrayList<AccountVO> accounts) {
+		super();
 		this.id = id;
-		this.name = name;
-		this.year = year;
+		this.time = time;
+		this.initialName = initialName;
+		this.perName = perName;
+		this.perNumber = perNumber;
 		this.organizations = organizations;
 		this.personnels = personnels;
 		this.vehicles = vehicles;
 		this.stocks = stocks;
 		this.accounts = accounts;
 	}
+
 }

@@ -9,10 +9,10 @@ import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.People;
 import org.cross.elscommon.util.ReceiptType;
 
-public class Receipt_OrderVO extends ReceiptVO{
+public class Receipt_OrderVO extends ReceiptVO {
 
 	/**
-	 * 快件信息
+	 * 快件单号
 	 */
 	public String goodsNum;
 
@@ -42,28 +42,62 @@ public class Receipt_OrderVO extends ReceiptVO{
 	public City startPlace;
 
 	/**
-	 * 寄件人
+	 * 寄件人姓名
 	 */
-	public People pushPeople;
+	public String senderName;
 
 	/**
-	 * 收件人
+	 * 寄件人手机
 	 */
-	public People receivePeople;
+	public String senderMobile;
 
-	public Receipt_OrderVO(String number, ReceiptType type, String time, String goodsNum, double cost,
-			String expectTime, City targetPlace, City startPlace, People pushPeople,
-			People receivePeople) {
+	/**
+	 * 寄件人电话
+	 */
+	public String senderPhone;
+	/**
+	 * 寄件人地址
+	 */
+	public String senderAdd;
+	/**
+	 * 寄件人单位
+	 */
+	public String senderOrg;
+
+	public String receiverName;
+
+	public String receiverOrg;
+
+	public String receiverAdd;
+
+	public String receiverPhone;
+
+	public String receiverMobile;
+
+	public Receipt_OrderVO(String number, ReceiptType type, String time,
+			String goodsNum, double cost, String receiveTime,
+			String expectTime, City targetPlace, City startPlace,
+			String senderName, String senderMobile, String senderPhone,
+			String senderAdd, String senderOrg, String receiverName,
+			String receiverOrg, String receiverAdd, String receiverPhone,
+			String receiverMobile) {
 		super(number, type, time);
 		this.goodsNum = goodsNum;
 		this.cost = cost;
+		this.receiveTime = receiveTime;
 		this.expectTime = expectTime;
 		this.targetPlace = targetPlace;
 		this.startPlace = startPlace;
-		this.pushPeople = pushPeople;
-		this.receivePeople = receivePeople;
-		
-		this.receiveTime = null;
+		this.senderName = senderName;
+		this.senderMobile = senderMobile;
+		this.senderPhone = senderPhone;
+		this.senderAdd = senderAdd;
+		this.senderOrg = senderOrg;
+		this.receiverName = receiverName;
+		this.receiverOrg = receiverOrg;
+		this.receiverAdd = receiverAdd;
+		this.receiverPhone = receiverPhone;
+		this.receiverMobile = receiverMobile;
 	}
 
 }

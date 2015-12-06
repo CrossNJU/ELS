@@ -9,48 +9,49 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.util.ReceiptType;
 
-public class Receipt_MoneyInVO extends ReceiptVO{
-	
+public class Receipt_MoneyInVO extends ReceiptVO {
+
 	/**
 	 * 收款日期
 	 */
 	public String time;
-	
+
 	/**
 	 * 收款金额
 	 */
 	public double money;
-	
+
 	/**
 	 * 收款快递员
 	 */
 	public PersonnelVO person;
-	
+
 	/**
 	 * 所有订单条形码号
 	 */
 	public ArrayList<String> orderNumbers;
-	
+
 	/**
 	 * 收款单编号
 	 */
 	public String number;
-	
+
 	/**
-	 * 构造方法
-	 * @param time
-	 * @param money
-	 * @param person
-	 * @param number
+	 * 收款营业厅+编号
 	 */
-	public Receipt_MoneyInVO(String time, double money, PersonnelVO person, String number){
-		super(number, ReceiptType.MONEYIN, time);
-		this.time = time;
+	public String businessHallNameID;
+
+	public Receipt_MoneyInVO(String number, ReceiptType type, String time,
+			String time2, double money, PersonnelVO person,
+			ArrayList<String> orderNumbers, String number2,
+			String businessHallNameID) {
+		super(number, type, time);
+		time = time2;
 		this.money = money;
 		this.person = person;
-		
-		this.number = number;
-		this.orderNumbers = new ArrayList<String>();
+		this.orderNumbers = orderNumbers;
+		number = number2;
+		this.businessHallNameID = businessHallNameID;
 	}
 
 }

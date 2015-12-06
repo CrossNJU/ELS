@@ -30,7 +30,7 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 
 	@Override
 	public ResultMessage insert(OrganizationPO po)  throws RemoteException{
-		String sql = "insert ignore into `organization`(`number`,`city`,`type`) values ('" + po.getId() + "','"
+		String sql = "insert ignore into `organization`(`number`,`city`,`type`) values ('" + po.getNumber() + "','"
 				+ po.getCity().toString() + "','" + po.getType().toString() + "')";
 		if (!mysql.execute(sql)) {
 			return ResultMessage.FAILED;
@@ -50,7 +50,7 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 	@Override
 	public ResultMessage update(OrganizationPO po)  throws RemoteException{
 		String sql = "update `organization` set `city`='" + po.getCity().toString() + "', `type`='"
-				+ po.getType().toString() + "' where `number`='" + po.getId() + "'";
+				+ po.getType().toString() + "' where `number`='" + po.getNumber() + "'";
 		if (!mysql.execute(sql)) {
 			return ResultMessage.FAILED;
 		}
@@ -99,8 +99,8 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 		OrganizationPO po = null;
 		try {
 			if (rs.next()) {
-				po = new OrganizationPO(StringToType.toCity(rs.getString("city")),
-						StringToType.toOrg(rs.getString("type")), rs.getString("number"));
+				po = new OrganizationPO( StringToType.toCity(rs.getString("city")),rs.getString("number"),
+						StringToType.toOrg(rs.getString("type")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

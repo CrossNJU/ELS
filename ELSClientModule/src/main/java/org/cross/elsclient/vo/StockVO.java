@@ -17,16 +17,6 @@ public class StockVO {
 	public String number;
 
 	/**
-	 * 仓库中的不同类型仓库(不同区)
-	 */
-	public ArrayList<StockAreaVO> stockAreas;
-
-	/**
-	 * 仓库操作
-	 */
-	public ArrayList<StockOperationVO> stockOPs;
-
-	/**
 	 * 仓库总间数
 	 */
 	public int totalAreas;
@@ -61,19 +51,30 @@ public class StockVO {
 	 */
 	public int numInStock;
 
-	public StockVO(String number, int totalAreas) {
+	/**
+	 * 所属机构num
+	 */
+	public String orgNum;
+
+	/**
+	 * 所属机构name
+	 */
+	public String orgName;
+
+	public StockVO(String number, int totalAreas, int usedAreas, int outNum,
+			int inNum, double outMoney, double inMoney, int numInStock,
+			String orgNum, String orgName) {
 		super();
 		this.number = number;
 		this.totalAreas = totalAreas;
-
-		this.stockAreas = new ArrayList<StockAreaVO>();
-		this.stockOPs = new ArrayList<StockOperationVO>();
-		this.usedAreas = 0;
-		this.outNum = 0;
-		this.inNum = 0;
-		this.outMoney = 0;
-		this.inMoney = 0;
-		this.numInStock = 0;
+		this.usedAreas = usedAreas;
+		this.outNum = outNum;
+		this.inNum = inNum;
+		this.outMoney = outMoney;
+		this.inMoney = inMoney;
+		this.numInStock = numInStock;
+		this.orgNum = orgNum;
+		this.orgName = orgName;
 	}
 
 }

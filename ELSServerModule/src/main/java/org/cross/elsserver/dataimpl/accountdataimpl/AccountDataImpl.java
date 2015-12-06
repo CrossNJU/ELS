@@ -45,7 +45,7 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 	@Override
 	public ResultMessage insert(AccountPO po) throws RemoteException {
 		String sql = "insert into `account`(`name`, `accountNum`, `balance`) values ('" + po.getName() + "','"
-				+ po.getAccount() + "'," + po.getBalance() + ")";
+				+ po.getAccountNum() + "'," + po.getBalance() + ")";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
@@ -62,7 +62,7 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 	@Override
 	public ResultMessage update(AccountPO po) throws RemoteException {
 		String sql = "update `account` set `name`='" + po.getName() + "', `balance`=" + po.getBalance()
-				+ " where `accountNum`='" + po.getAccount() + "'";
+				+ " where `accountNum`='" + po.getAccountNum()+ "'";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;

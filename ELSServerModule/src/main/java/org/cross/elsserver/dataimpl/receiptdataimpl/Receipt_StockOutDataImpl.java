@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.po.Receipt_StockOutPO;
 import org.cross.elscommon.util.MySQL;
+import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
@@ -21,24 +22,38 @@ public class Receipt_StockOutDataImpl implements ReceiptTool {
 	@Override
 	public ResultMessage insert(ReceiptPO po) {
 		Receipt_StockOutPO realpo = (Receipt_StockOutPO) po;
-		String sql = "insert ignore into `receiptStockOut`(`number`, `time`, `goodsNum`, `transNum`, `transType`, `targetCity`) values ('"
-				+ realpo.getNumber() + "','" + realpo.getTime() + "','" + realpo.getGoodsNumber() + "','"
-				+ realpo.getTransNumber() + "','" + realpo.getVehicle().toString() + "','" + realpo.getCity().toString()
+		String sql = "insert ignore into `receiptStockOut`(`number`, `time`, `orderNum`, `transNum`, `transType`, `destination`) values ('"
+				+ realpo.getNumber() + "','" + realpo.getTime() + "','" + realpo.getOrderNum() + "','"
+				+ realpo.getTransNumber() + "','" + realpo.getTransType().toString() + "','" + realpo.getDestination()
 				+ "')";
-		if(!mysql.execute(sql)) return ResultMessage.FAILED;
-		else return ResultMessage.SUCCESS;
+		if (!mysql.execute(sql))
+			return ResultMessage.FAILED;
+		else
+			return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ReceiptPO getFromDB(String number) {
 		Receipt_StockOutPO po = null;
-		String sql = "select from `receiptStockOut` where `number`='"+number+"'";
+		String sql = "select from `receiptStockOut` where `number`='" + number + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			if (rs.next()) {
-				po = new Receipt_StockOutPO(rs.getString("goodsNum"), rs.getString("time"), StringToType.toCity(rs.getString("targetCity")),
-						StringToType.toVehicleType(rs.getString("transType")), rs.getString("transNum"), rs.getString("number"));
+				po = new Receipt_StockOutPO(number, ReceiptType.STOCKOUT, rs.getString("time"), null, null,
+						rs.getString("orderNum"), rs.getString("destination"),
+						StringToType.toVehicleType(rs.getString("transType")), rs.getString("transNum"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sql = "select * from `receipt` where `number`='" + number + "'";
+		rs = mysql.query(sql);
+		try {
+			if (rs.next()) {
 				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
+				po.setOrgNum(rs.getString("orgNum"));
+				po.setPerNum(rs.getString("perNum"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

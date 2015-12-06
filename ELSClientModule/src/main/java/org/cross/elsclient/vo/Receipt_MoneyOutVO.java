@@ -20,9 +20,9 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 	public double money;
 	
 	/**
-	 * 付款人
+	 * 付款人name+ID
 	 */
-	public PersonnelVO personnel;
+	public String perNameID;
 
 	/**
 	 * 付款账号
@@ -44,26 +44,18 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 	 */
 	public String number;
 
-	/**
-	 * 构造方法
-	 * @param number
-	 * @param time
-	 * @param money
-	 * @param receivePerson
-	 * @param iD
-	 * @param clause
-	 * @param comments
-	 */
-	public Receipt_MoneyOutVO(String number, String time, double money, PersonnelVO receivePerson,
-			String iD, String clause, String comments) {
-		super(number, ReceiptType.MONEYOUT, time);
-		this.time = time;
+	public Receipt_MoneyOutVO(String number, ReceiptType type, String time,
+			String time2, double money, String perNameID, String receiveID,
+			String clause, String comments, String number2) {
+		super(number, type, time);
+		time = time2;
 		this.money = money;
-		this.personnel = receivePerson;
-		this.receiveID = iD;
+		this.perNameID = perNameID;
+		this.receiveID = receiveID;
 		this.clause = clause;
 		this.comments = comments;
-		this.number = number;
+		number = number2;
 	}
+
 	
 }

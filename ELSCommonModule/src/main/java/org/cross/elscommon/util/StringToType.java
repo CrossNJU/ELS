@@ -100,6 +100,8 @@ public class StringToType {
 			return ReceiptType.TRANS;
 		case "总收款单":
 			return ReceiptType.TOTALMONEYIN;
+		case "派件单":
+			return ReceiptType.DELIVER;
 		default:
 			return null;
 		}
@@ -157,6 +159,19 @@ public class StringToType {
 			return ApproveType.APPROVED;
 		case "审批未通过":
 			return ApproveType.NOT_APPROVED;
+		default:
+			return null;
+		}
+	}
+	
+	public static SalaryType toSalaryType(String salary){
+		switch (salary) {
+		case "按月":
+			return SalaryType.BYMONTHONLY;
+		case "计次":
+			return SalaryType.ADDONCE;
+		case "提成":
+			return SalaryType.ADDNUM;
 		default:
 			return null;
 		}

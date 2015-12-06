@@ -26,6 +26,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	private Receipt_MoneyInDataImpl moneyin;
 	private Receipt_MoneyOutDataImpl moneyout;
 	private Receipt_TotalMoneyInDataImpl totalmoneyin;
+	private Receipt_DelDataImpl del;
 	
 	public ReceiptDataImpl() throws RemoteException {
 		super();
@@ -37,13 +38,15 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		this.moneyin = new Receipt_MoneyInDataImpl();
 		this.moneyout = new Receipt_MoneyOutDataImpl();
 		this.totalmoneyin = new Receipt_TotalMoneyInDataImpl();
+		this.del = new Receipt_DelDataImpl();
 		this.mysql = new MySQL();
 	}
 
 	@Override
 	public ResultMessage insert(ReceiptPO po) throws RemoteException {
-		String sql = "insert ignore into `receipt`(`number`, `type`, `time`, `approveState`) values ('"
-				+po.getNumber()+"','"+po.getType().toString()+"','"+po.getTime()+"','"+po.getApproveState().toString()+ "')";
+		String sql = "insert ignore into `receipt`(`number`, `type`, `time`, `approveState`, `perNum`, `orgNum`) values ('"
+				+po.getNumber()+"','"+po.getType().toString()+"','"+po.getTime()+"','"+po.getApproveState().toString()+
+				po.getPerNum()+"','"+po.getOrgNum()+"')";
 		if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		switch (po.getType()) {
 		case ORDER:
@@ -62,6 +65,8 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 			return moneyout.insert(po);
 		case TOTALMONEYIN:
 			return totalmoneyin.insert(po);
+		case DELIVER:
+			return del.insert(po);
 		default:
 			break;
 		}
@@ -129,6 +134,8 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 					return moneyout.getFromDB(number);
 				case TOTALMONEYIN:
 					return totalmoneyin.getFromDB(number);
+				case DELIVER:
+					return del.getFromDB(number);
 				default:
 					return null;
 				}
@@ -202,22 +209,6 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	public ResultMessage update(ReceiptPO po) throws RemoteException {
 		if(delete(po.getNumber(), po.getType())==ResultMessage.FAILED) return ResultMessage.FAILED;
 		return insert(po);
-	}
-
-	@Override
-	public ArrayList<String> findOrdersByTransNum(String transNum) throws RemoteException {
-		String sql = "select * from `goods` where `transNum`='"+transNum+"'";
-		ArrayList<String> goods = new ArrayList<String>();
-		ResultSet rs = mysql.query(sql);
-		try {
-			while (rs.next()) {
-				goods.add(rs.getString("orderNum"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return goods;
 	}
 
 }

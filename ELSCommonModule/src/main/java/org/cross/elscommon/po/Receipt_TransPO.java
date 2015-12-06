@@ -14,76 +14,52 @@ import org.cross.elscommon.util.ReceiptType;
 public class Receipt_TransPO extends ReceiptPO {
 
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 所有装运单号
-	 */
-	private ArrayList<String> orders;
-
-	/**
 	 * 运费
 	 */
 	private double cost;
 
 	/**
-	 * 转运单所属机构
-	 */
-	private OrganizationType org;
-
-	/**
 	 * 中转中心/营业厅汽运编号
 	 */
-	private String localNum;
+	private String transNum;
 
 	/**
 	 * 车次/航班号(车辆代号)
 	 */
-	private String vehicleNum;
+	private String veNum;
 
 	/**
 	 * 出发地
 	 */
-	private City startCity;
+	private String startPlace;
 
 	/**
 	 * 到达地
 	 */
-	private City arriveCity;
+	private String arrivePlace;
 
 	/**
 	 * 监装员
 	 */
-	private PersonnelPO observer;
+	private String observer;
 
 	/**
 	 * 押运员（司机）
 	 */
-	private PersonnelPO driver;
+	private String driver;
 
-	public Receipt_TransPO(String number, ReceiptType type, String time, ArrayList<String> orders, double cost,
-			OrganizationType org, String localNum, String vehicleNum, City startCity, City arriveCity,
-			PersonnelPO observer, PersonnelPO driver) {
-		super(number, type, time);
-		this.orders = orders;
+	public Receipt_TransPO(String number, ReceiptType type, String time,
+			String orgNum, String perNum, double cost, String transNum,
+			String veNum, String startPlace, String arrivePlace,
+			String observer, String driver) {
+		super(number, type, time, orgNum, perNum);
 		this.cost = cost;
-		this.org = org;
-		this.localNum = localNum;
-		this.vehicleNum = vehicleNum;
-		this.startCity = startCity;
-		this.arriveCity = arriveCity;
+		this.transNum = transNum;
+		this.veNum = veNum;
+		this.startPlace = startPlace;
+		this.arrivePlace = arrivePlace;
 		this.observer = observer;
 		this.driver = driver;
-	}
-
-	public ArrayList<String> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(ArrayList<String> orders) {
-		this.orders = orders;
 	}
 
 	public double getCost() {
@@ -94,59 +70,51 @@ public class Receipt_TransPO extends ReceiptPO {
 		this.cost = cost;
 	}
 
-	public OrganizationType getOrg() {
-		return org;
+	public String getTransNum() {
+		return transNum;
 	}
 
-	public void setOrg(OrganizationType org) {
-		this.org = org;
+	public void setTransNum(String transNum) {
+		this.transNum = transNum;
 	}
 
-	public String getLocalNum() {
-		return localNum;
+	public String getVeNum() {
+		return veNum;
 	}
 
-	public void setLocalNum(String localNum) {
-		this.localNum = localNum;
+	public void setVeNum(String veNum) {
+		this.veNum = veNum;
 	}
 
-	public String getVehicleNum() {
-		return vehicleNum;
+	public String getStartPlace() {
+		return startPlace;
 	}
 
-	public void setVehicleNum(String vehicleNum) {
-		this.vehicleNum = vehicleNum;
+	public void setStartPlace(String startPlace) {
+		this.startPlace = startPlace;
 	}
 
-	public City getStartCity() {
-		return startCity;
+	public String getArrivePlace() {
+		return arrivePlace;
 	}
 
-	public void setStartCity(City startCity) {
-		this.startCity = startCity;
+	public void setArrivePlace(String arrivePlace) {
+		this.arrivePlace = arrivePlace;
 	}
 
-	public City getArriveCity() {
-		return arriveCity;
-	}
-
-	public void setArriveCity(City arriveCity) {
-		this.arriveCity = arriveCity;
-	}
-
-	public PersonnelPO getObserver() {
+	public String getObserver() {
 		return observer;
 	}
 
-	public void setObserver(PersonnelPO observer) {
+	public void setObserver(String observer) {
 		this.observer = observer;
 	}
 
-	public PersonnelPO getDriver() {
+	public String getDriver() {
 		return driver;
 	}
 
-	public void setDriver(PersonnelPO driver) {
+	public void setDriver(String driver) {
 		this.driver = driver;
 	}
 

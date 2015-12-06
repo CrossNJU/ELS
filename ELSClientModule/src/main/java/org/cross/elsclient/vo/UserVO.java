@@ -4,33 +4,35 @@ import org.cross.elscommon.util.UserType;
 
 public class UserVO {
 	/**
-	 * 用户id
-	 * 格式为U00001
-	 * 第一位数字代表用户类型：0快递员；1营业厅业务员；2中转中心业务员；3仓库管理员；4财务人员；5总经理；6系统管理员
+	 * 用户id 格式为U00001 第一位数字代表用户类型：0快递员；1营业厅业务员；2中转中心业务员；3仓库管理员；4财务人员；5总经理；6系统管理员
 	 */
-	public String id;
-	
+	public String number;
+
 	/**
 	 * 用户姓名
 	 */
 	public String name;
-	
-	/**
-	 * 用户权限
-	 */
-	public UserType type;
-	
-	public String password;
 
 	/**
-	 * 构造方法
-	 * @author:Moo
-	 * @para:
+	 * 所属机构name+id
 	 */
-	public UserVO(String id,String password, String name, UserType type) {
-		this.id = id;
-		this.password = password;
+	public String orgNameID;
+
+	/**
+	 * 用户职位
+	 */
+	public String userType;
+
+	public String password;
+
+	public UserVO(String number, String name, String orgNameID,
+			String position, String password) {
+		super();
+		this.number = number;
 		this.name = name;
-		this.type = type;
+		this.orgNameID = orgNameID;
+		this.userType = position;
+		this.password = password;
 	}
+
 }

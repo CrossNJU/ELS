@@ -23,7 +23,7 @@ public class InitialDataService_Stub  implements InitialDataService {
 	public ArrayList<InitialPO> show() throws RemoteException {
 		System.out.println("显示期初建账信息成功");
 		ArrayList<InitialPO> list = new ArrayList<InitialPO>();
-		list.add(new InitialPO("I20141", "2014年期初",2015, null, null, null, null, null));
+//		list.add(new InitialPO("I20141", "2014年期初",2015, null, null, null, null, null));
 		return list;
 	}
 

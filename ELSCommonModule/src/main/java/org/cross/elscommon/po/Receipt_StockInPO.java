@@ -9,91 +9,51 @@ import java.io.Serializable;
 
 import org.cross.elscommon.util.ReceiptType;
 
-public class Receipt_StockInPO extends ReceiptPO implements Serializable{
-	/**
-	 * 序列化UID
-	 */
-	private static final long serialVersionUID = 1L;
+public class Receipt_StockInPO extends ReceiptPO implements Serializable {
 
 	/**
 	 * 快递编号
 	 */
-	private String goodsNumber;
-	
-	/**
-	 * 入库日期
-	 */
-	private String time;
-	
+	private String orderNum;
+
 	/**
 	 * 放到仓库的位置
 	 */
-	private StockAreaPO place;
-	
-	/**
-	 * 入库单编号
-	 */
-	private String number;
-	
-	/**
-	 * 构造方法
-	 * @param goodsNumber
-	 * @param time
-	 * @param stock
-	 * @param number
-	 */
-	public Receipt_StockInPO(String goodsNumber, String time, 
-			StockAreaPO stock, String number){
-		super(number, ReceiptType.STOCKIN, time);
-		this.goodsNumber = goodsNumber;
-		this.time = time;
-		this.place = stock;
-		
-		this.number = number;
+	private String stockNum;
+
+	private String destination;
+
+	public Receipt_StockInPO(String number, ReceiptType type, String time,
+			String orgNum, String perNum, String orderNum, String stockNum,
+			String destination) {
+		super(number, type, time, orgNum, perNum);
+		this.orderNum = orderNum;
+		this.stockNum = stockNum;
+		this.destination = destination;
 	}
 
-	public String getGoodsNumber() {
-		return goodsNumber;
+	public String getOrderNum() {
+		return orderNum;
 	}
-	
 
-	public void setGoodsNumber(String goodsNumber) {
-		this.goodsNumber = goodsNumber;
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
 	}
-	
 
-	public String getTime() {
-		return time;
+	public String getStockNum() {
+		return stockNum;
 	}
-	
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setStockNum(String stockNum) {
+		this.stockNum = stockNum;
 	}
-	
 
-	public StockAreaPO getPlace() {
-		return place;
+	public String getDestination() {
+		return destination;
 	}
-	
 
-	public void setPlace(StockAreaPO place) {
-		this.place = place;
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
-	
 
-	public String getNumber() {
-		return number;
-	}
-	
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-	
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 }

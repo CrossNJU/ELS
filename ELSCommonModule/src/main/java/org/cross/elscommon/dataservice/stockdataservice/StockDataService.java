@@ -13,32 +13,23 @@ import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.util.ResultMessage;
-import org.cross.elscommon.util.StockType;
 
 public interface StockDataService extends Remote{
+	public ResultMessage insertStock(StockPO po) throws RemoteException;
+	public ResultMessage updateStock(StockPO po) throws RemoteException;
+	public StockPO findStockByNumber(String number) throws RemoteException;
+	public StockPO findStockByOrg(String orgNum) throws RemoteException;
+	public ArrayList<StockPO> showStock() throws RemoteException;
 	
-	public ResultMessage insert(StockPO po) throws RemoteException;
-	
-	public ResultMessage delete(String number) throws RemoteException;
-	
-	public ResultMessage updateInstock(String stockNum, String stockAreaNum, StockOperationPO op) throws RemoteException;
-	
-	public ResultMessage updateOutstock(String stockNum, String stockAreaNum, StockOperationPO op) throws RemoteException;
-	
-	//don't understand -- don't worry,我来改改( •̀ ω •́ )y
-	public ResultMessage updateAdjust(String stockAreaNum,StockType type) throws RemoteException;
-	
-	//show all
-	public ArrayList<StockOperationPO> showStockOps(String stockNum, String startTime, String endTime) throws RemoteException;
-	
-	public StockPO findStockByNum(String number) throws RemoteException;
-	
-	//更新入库单拥有仓库小间
-	public ResultMessage addToInstock(String stockAreaNum, String receipt)throws RemoteException;
-	public ResultMessage deleteFromInstock(String stockAreaNum) throws RemoteException;
-	
-	public ArrayList<StockAreaPO> findAreas(String stockNum)throws RemoteException;
-	
-	public String getIntoStockTime(String stockNum,String goodsNum)throws RemoteException;
+	public ResultMessage insertStockArea(StockAreaPO po) throws RemoteException;
+	public ResultMessage updateStockArea(StockAreaPO po) throws RemoteException;
+	public StockAreaPO findStockAreaByNumber(String number) throws RemoteException;
+	public ArrayList<StockAreaPO> findStockAreaByStock(String stockNum) throws RemoteException;
+	public ArrayList<StockAreaPO> showStockArea() throws RemoteException;
+
+	public ResultMessage insertStockOP(StockOperationPO po) throws RemoteException;
+	public ArrayList<StockOperationPO> findStockOPByStock(String stockNum) throws RemoteException;
+	public ArrayList<StockOperationPO> findStockOPByTime(String startTime, String endTime) throws RemoteException;
+	public ArrayList<StockOperationPO> showStockOP()throws RemoteException;
 }
 
