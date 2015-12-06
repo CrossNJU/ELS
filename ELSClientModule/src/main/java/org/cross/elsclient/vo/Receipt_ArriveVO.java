@@ -47,11 +47,11 @@ public class Receipt_ArriveVO extends ReceiptVO {
 	 */
 	public String arriveOrgID;
 
-	public Receipt_ArriveVO(String number, ReceiptType type, String time,
+	public Receipt_ArriveVO(String number, String time,
 			String startOrgName, String startOrgID, String transNum,
 			String startTime, ArrayList<GoodsVO> goods, String arriveOrgName,
 			String arriveOrgID) {
-		super(number, type, time);
+		super(number, ReceiptType.ARRIVE, time);
 		this.startOrgName = startOrgName;
 		this.startOrgID = startOrgID;
 		this.transNum = transNum;

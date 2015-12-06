@@ -25,8 +25,7 @@ public class UserVO {
 
 	public String password;
 
-	public UserVO(String number, String name, String orgNameID,
-			String position, String password) {
+	public UserVO(String number, String password, String name, String position, String orgNameID) {
 		super();
 		this.number = number;
 		this.name = name;

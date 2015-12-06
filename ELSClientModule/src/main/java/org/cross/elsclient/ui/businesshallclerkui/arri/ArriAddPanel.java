@@ -2,6 +2,7 @@ package org.cross.elsclient.ui.businesshallclerkui.arri;
 
 import java.rmi.RemoteException;
 
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
 import org.cross.elsclient.ui.component.ELSDialog;
@@ -23,10 +24,12 @@ public class ArriAddPanel extends ELSInfoPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	Receipt_ArriveVO arrivo;
-	ReceiptBLService bl;
+	ReceiptBLService receiptbl;
+	GoodsBLService goodsbl;
 	
-	public ArriAddPanel(ReceiptBLService receiptbl){
-		this.bl = receiptbl;
+	public ArriAddPanel(ReceiptBLService receiptbl, GoodsBLService goodsbl){
+		this.receiptbl = receiptbl;
+		this.goodsbl = goodsbl;
 		init();
 	}
 	
