@@ -1,17 +1,32 @@
 package org.cross.elsclient.blimpl.numberblimpl;
 
-import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
-import org.cross.elscommon.util.NumberType;
+import java.rmi.RemoteException;
 
-public class NumberBLImpl {
+import org.cross.elsclient.blservice.numberblservice.NumberBLService;
+import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
+import org.cross.elscommon.po.NumberPO;
+import org.cross.elscommon.util.NumberType;
+import org.cross.elscommon.util.ResultMessage;
+
+public class NumberBLImpl implements NumberBLService{
 	
-	NumberDataService numberDataService;
+	NumberDataService numberdata;
+	NumberPO numberpo;
 	
-	public NumberBLImpl(NumberDataService numberDataService){
-		this.numberDataService = numberDataService;
+	public NumberBLImpl(NumberDataService numberdata){
+		this.numberdata = numberdata;
 	}
-	
-	public static void getNextNum(NumberType type){
-		
+
+	@Override
+	public String getNumber(NumberType type) throws RemoteException {
+		numberpo = numberdata.show();
+		return null;
 	}
+
+	@Override
+	public ResultMessage saveNextNumber(NumberType type, String currentNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
