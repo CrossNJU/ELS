@@ -11,6 +11,7 @@ import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
+import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
@@ -21,6 +22,7 @@ import org.cross.elsserver.dataimpl.logdataimpl.LogDataImpl;
 import org.cross.elsserver.dataimpl.organizationdataimpl.OrganizationDataImpl;
 import org.cross.elsserver.dataimpl.personneldataimpl.PersonnelDataImpl;
 import org.cross.elsserver.dataimpl.receiptdataimpl.ReceiptDataImpl;
+import org.cross.elsserver.dataimpl.salarydataimpl.SalaryDataImpl;
 import org.cross.elsserver.dataimpl.stockdataimpl.StockDataImpl;
 import org.cross.elsserver.dataimpl.userdataimpl.UserDataImpl;
 import org.cross.elsserver.dataimpl.vehicledataimpl.VehicleDataImpl;
@@ -84,6 +86,11 @@ public class DataFactoryServiceImpl extends UnicastRemoteObject implements DataF
 	@Override
 	public UserDataService getuserdaData() throws RemoteException {
 		return new UserDataImpl();
+	}
+
+	@Override
+	public SalaryDataService getSalaryData() throws RemoteException {
+		return new SalaryDataImpl();
 	}
 
 }

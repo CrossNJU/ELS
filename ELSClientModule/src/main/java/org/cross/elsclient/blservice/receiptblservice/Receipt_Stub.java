@@ -19,8 +19,8 @@ public class Receipt_Stub implements ReceiptBLService{
 	
 	public Receipt_Stub(){
 		receiptlist = new ArrayList<ReceiptVO>();
-		Receipt_MoneyInVO test1 = new Receipt_MoneyInVO("2013-1-2 10:21:12", 20.1, new PersonnelVO("P00001", "灿海", PositionType.COURIER, OrganizationType.BUSINESSHALL, "O00001"), "R0100001");
-		receiptlist.add(test1);
+//		Receipt_MoneyInVO test1 = new Receipt_MoneyInVO("2013-1-2 10:21:12", 20.1, new PersonnelVO("P00001", "灿海", PositionType.COURIER, OrganizationType.BUSINESSHALL, "O00001"), "R0100001");
+//		receiptlist.add(test1);
 	}
 
 	@Override

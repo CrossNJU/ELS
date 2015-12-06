@@ -34,10 +34,10 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 	 */
 	public String comments;
 
-	public Receipt_MoneyOutVO(String number, ReceiptType type, String time,
+	public Receipt_MoneyOutVO(String number, String time,
 			double money, String perNameID, String receiveID,
 			String clause, String comments) {
-		super(number, type, time);
+		super(number, ReceiptType.MONEYOUT, time);
 		this.money = money;
 		this.perNameID = perNameID;
 		this.receiveID = receiveID;

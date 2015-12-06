@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.util.MySQL;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 
@@ -97,6 +98,28 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 			e.printStackTrace();
 		}
 		return po;
+	}
+
+	@Override
+	public ArrayList<PersonnelPO> findByOrg(String orgNum) throws RemoteException {
+		String sql = "select * from `personnel` where `orgNum`='" + orgNum + "'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<PersonnelPO> pos = new ArrayList<PersonnelPO>();
+		PersonnelPO po = null;
+		while ((po = getFromDB(rs)) != null)
+			pos.add(po);
+		return pos;
+	}
+
+	@Override
+	public ArrayList<PersonnelPO> findByPosition(PositionType position) throws RemoteException {
+		String sql = "select * from `personnel` where `position`='" + position + "'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<PersonnelPO> pos = new ArrayList<PersonnelPO>();
+		PersonnelPO po = null;
+		while ((po = getFromDB(rs)) != null)
+			pos.add(po);
+		return pos;
 	}
 
 }
