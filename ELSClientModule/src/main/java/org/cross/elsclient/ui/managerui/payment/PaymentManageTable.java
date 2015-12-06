@@ -27,6 +27,7 @@ public class PaymentManageTable extends ELSManageTable{
 	@Override
 	public void init() {
 		super.init();
+		vos = new ArrayList<>();
 		isUpdateAndDelete = true;
 	}
 
@@ -43,7 +44,7 @@ public class PaymentManageTable extends ELSManageTable{
 	public void updateBtn(int index) {
 		// TODO Auto-generated method stub
 		super.updateBtn(index);
-		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, 0);
+		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, 3);
 		contentPanel.add("update", new PaymentUpdatePanel(vos.get(index), personnelbl));
 		contentPanel.cl.show(contentPanel, "update");
 	}

@@ -26,4 +26,9 @@ public enum City {
 		}
 	}
 
+	public static String[] toStrings(){
+		String type[] = {BEIJING.toString(),SHANGHAI.toString(),NANJING.toString(),GUANGZHOU.toString()};
+		
+		return type;
+	}
 }

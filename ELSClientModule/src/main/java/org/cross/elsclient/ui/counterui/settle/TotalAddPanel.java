@@ -29,14 +29,14 @@ public class TotalAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("创建总收款款单");
-		addEditableItem("总收款单编号", "", false, InfoType.NUM);
+		addEditableItem("总收款单编号", "R00001", false, InfoType.NAME);
 		addEditableItem("收款单数量", ""+vos.size(), false, InfoType.NAME);
 		addEditableItem("收款人", "", true,InfoType.NAME);
 		addEditableItem("收款账号", "", true,InfoType.NUM);
 		addEditableItem("收款金额", "", true, InfoType.NUM);
 		addEditableItem("营业厅编号", "", true, InfoType.NAME);
 		
-		titlePanel.backBtn.setVisible(false);
+//		titlePanel.backBtn.setVisible(false);
 //		titleLabel.setLocation(10, titleLabel.getLocation().y);
 		
 		addConfirmAndCancelBtn();
@@ -58,7 +58,7 @@ public class TotalAddPanel extends ELSInfoPanel{
 	@Override
 	protected void cancel() {
 		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
-			init();
+			back();
 		}
 	}
 }

@@ -36,7 +36,14 @@ public class AnalysisBLService_Stub implements AnalysisBLService {
 			String endTime) {
 		ArrayList<Receipt_MoneyOutVO> table = new ArrayList<Receipt_MoneyOutVO>();
 		
-//		new recei
+		table.add(new Receipt_MoneyOutVO("R000001", beginTime, 2000, null, "6222201234567654321", null, null));
+		table.add(new Receipt_MoneyOutVO("R000001", beginTime, 2000, null, "6222201234567654321", null, null));
+		table.add(new Receipt_MoneyOutVO("R000001", beginTime, 2000, null, "6222201234567654321", null, null));
+		table.add(new Receipt_MoneyOutVO("R000001", beginTime, 2000, null, "6222201234567654321", null, null));
+		table.add(new Receipt_MoneyOutVO("R000001", beginTime, 2000, null, "6222201234567654321", null, null));
+		table.add(new Receipt_MoneyOutVO("R000001", beginTime, 2000, null, "6222201234567654321", null, null));
+		
+		
 		return table;
 	}
 

@@ -3,6 +3,8 @@ package org.cross.elsclient.ui.component;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
+import org.cross.elsclient.ui.util.UIConstant;
+
 public class ELSLabel extends JLabel{
 
 	public ELSLabel() {
@@ -38,5 +40,6 @@ public class ELSLabel extends JLabel{
 	void init(){
 		setVerticalAlignment(JLabel.CENTER);
 		setHorizontalAlignment(JLabel.CENTER);
+		setForeground(UIConstant.MAINCOLOR);
 	}
 }

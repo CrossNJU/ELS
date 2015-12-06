@@ -17,4 +17,10 @@ public enum OrganizationType {
 			return null;
 		}
 	} 
+	
+	
+	public static String[] toStrings(){
+		String types[] = {BUSINESSHALL.toString(),TRANSITCENTER.toString(),HEADQUARTERS.toString()};
+		return types;
+	}
 }

@@ -12,6 +12,7 @@ import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StringToType;
 
 public class UserAddPanel extends ELSInfoPanel{
 	UserVO vo;
@@ -45,6 +46,8 @@ public class UserAddPanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
+			vo = new UserVO(itemLabels.get(0).toString(), itemLabels.get(3).toString(),itemLabels.get(1).toString(), 
+					StringToType.toUserType(itemLabels.get(2).toString()));
 			if(bl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 				back();

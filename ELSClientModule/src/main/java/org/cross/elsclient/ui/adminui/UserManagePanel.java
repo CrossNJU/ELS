@@ -29,6 +29,7 @@ import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.UserVO;
+import org.cross.elscommon.util.StringToType;
 import org.cross.elscommon.util.UserType;
 import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
@@ -105,8 +106,8 @@ public class UserManagePanel extends ELSManagePanel {
 					String id = searchTextField.getText();
 					userVOs = new ArrayList<>();
 					try {
-//						userVOs.add(userbl.findById(id));
-						userVOs = userbl.show();
+						userVOs.add(userbl.findById(id));
+//						userVOs = userbl.show();
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -121,8 +122,7 @@ public class UserManagePanel extends ELSManagePanel {
 					String name = searchTextField.getText();
 					userVOs = new ArrayList<>();
 					try {
-//						userVOs = userbl.findByName(name);
-						userVOs = userbl.show();
+						userVOs = userbl.findByName(name);
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -137,7 +137,7 @@ public class UserManagePanel extends ELSManagePanel {
 					String type = (String)typeCombobox.getSelectedItem();
 					userVOs = new ArrayList<>();
 					try {
-						userVOs=userbl.findByType(UserType.stringToType(type));
+						userVOs=userbl.findByType(StringToType.toUserType(type));
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

@@ -25,6 +25,7 @@ public class PerManageTable extends ELSManageTable {
 	@Override
 	public void init() {
 		super.init();
+		vos = new ArrayList<>();
 		isUpdateAndDelete = true;
 	}
 
@@ -41,7 +42,7 @@ public class PerManageTable extends ELSManageTable {
 		// TODO Auto-generated method stub
 		super.infoBtn(index);
 		// 界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, 0);
+		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, 2);
 		PersonnelVO vo = vos.get(index);
 		contentPanel.add("info", new PerInfoPanel(vo));
 		contentPanel.cl.show(contentPanel, "info");
@@ -51,7 +52,7 @@ public class PerManageTable extends ELSManageTable {
 	public void updateBtn(int index) {
 		// TODO Auto-generated method stub
 		super.updateBtn(index);
-		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, 0);
+		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, 2);
 		contentPanel.add("update", new PerUpdatePanel(vos.get(index), personnelbl));
 		contentPanel.cl.show(contentPanel, "update");
 	}

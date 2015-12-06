@@ -3,9 +3,12 @@ package org.cross.elsclient.ui.courierui.goodscheck;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -64,14 +67,29 @@ public class GoodsCheckPanel extends ELSManagePanel{
 
 				@Override
 				public int compare(HistoryVO o1, HistoryVO o2) {
+					SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
+					Date date1;
+					Date date2;
+					if(o1.time==null){
+						return 1;
+					}else if(o2.time==null){
+						return -1;
+					}
+					
+					try {
+						date1 = sdf.parse(o1.time);
+						date2 = sdf.parse(o2.time);
+						return date1.compareTo(date2);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return 0;
 				}
-				
-				
 			});
 			
-			for (HistoryVO historyVO : historyVOs) {
-				list.addItem(historyVO);
+			for(int i = 0;i<historyVOs.size();i=i+2){
+				list.addItem(historyVOs.get(i), historyVOs.get(i+1));
 			}
 			container.packHeight();
 		}

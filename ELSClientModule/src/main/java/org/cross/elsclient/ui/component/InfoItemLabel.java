@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import org.cross.elsclient.blimpl.initialblimpl.InitialBLImpl;
+import org.cross.elsclient.ui.util.Images;
 import org.cross.elsclient.ui.util.InfoFormatUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elscommon.util.InfoType;
@@ -21,17 +22,27 @@ public class InfoItemLabel extends ELSLabel{
 	public ELSTextField inputLabel;
 	public ELSComboBox comboBox;
 	public ELSLabel textLabel;
+	public ELSLabel iconLabel;
 	public boolean isLegal;
 	public int type;
 	public InfoType infoType;
 	public ELSDatePicker datePicker;
 	public ELSButton autoBtn;
+	public int nameItemWidth;
+	public int textItemWidth;
+	public int boxItemWidth;
+	public int dateItemWidth;
+	
 	
 	public InfoItemLabel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setMaximumSize(new Dimension(UIConstant.CONTAINER_WIDTH, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		this.setMinimumSize(new Dimension(UIConstant.CONTAINER_WIDTH, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		this.isLegal = true;
+		nameItemWidth = 100;
+		textItemWidth = 200;
+		boxItemWidth = 200;
+		dateItemWidth = 200;
 	}
 	
 	public void initNormal(String name, String content){
@@ -39,14 +50,14 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel = new ELSLabel(name);
 		ELSLabel contentLabel = new ELSLabel(content);
 		
-		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setPreferredSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setMaximumSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
 
-		contentLabel.setPreferredSize(new Dimension(200, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		contentLabel.setMaximumSize(new Dimension(200, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		contentLabel.setPreferredSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		contentLabel.setMaximumSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		contentLabel.setVerticalAlignment(JLabel.CENTER);
 		contentLabel.setHorizontalAlignment(JLabel.LEFT);
 		contentLabel.setFont(getFont().deriveFont(20f));
@@ -65,14 +76,14 @@ public class InfoItemLabel extends ELSLabel{
 		inputLabel = new ELSTextField(defaultValue);
 		inputLabel.setEditable(isEditable);
 
-		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setPreferredSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setMaximumSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
 
-		inputLabel.setPreferredSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		inputLabel.setMaximumSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		inputLabel.setPreferredSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		inputLabel.setMaximumSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		inputLabel.setHorizontalAlignment(JTextField.LEFT);
 		inputLabel.setFont(getFont().deriveFont(20f));
 		this.add(Box.createHorizontalStrut(30));
@@ -83,27 +94,11 @@ public class InfoItemLabel extends ELSLabel{
 	
 	public void initEditable(String name, String defaultValue,
 			boolean isEditable, InfoType type){
-		this.type = 3;
-		infoType = type;
+		initEditable(name, defaultValue, isEditable);
 		
-		nameLabel = new ELSLabel(name);
-		inputLabel = new ELSTextField(defaultValue);
-		ELSLabel iconLabel = new ELSLabel();
+		infoType = type;
+		iconLabel = new ELSLabel();
 		textLabel = new ELSLabel();
-		inputLabel.setEditable(isEditable);
-		inputLabel.setFocusable(isEditable);
-
-		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setVerticalAlignment(JLabel.CENTER);
-		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
-
-		inputLabel.setPreferredSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		inputLabel.setMaximumSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		inputLabel.setHorizontalAlignment(JTextField.LEFT);
-		inputLabel.setFont(getFont().deriveFont(20f));
-		inputLabel.addFocusListener(new TextFormatListener(inputLabel, iconLabel, textLabel, type));
 		
 		iconLabel.setMaximumSize(new Dimension(UIConstant.MANAGETABLE_ITEM_HEIGHT, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		iconLabel.setMinimumSize(new Dimension(UIConstant.MANAGETABLE_ITEM_HEIGHT, UIConstant.MANAGETABLE_ITEM_HEIGHT));
@@ -113,14 +108,11 @@ public class InfoItemLabel extends ELSLabel{
 		textLabel.setHorizontalAlignment(JLabel.LEFT);
 		textLabel.setVerticalAlignment(JLabel.CENTER);
 		textLabel.setFont(getFont().deriveFont(15f));
-		textLabel.setForeground(Color.red);
+		textLabel.setForeground(Color.orange);
 
-		isLegal = checkFormat(textLabel.getText(), type);
+		isLegal = checkFormat();
 		
-		this.add(Box.createHorizontalStrut(30));
-		this.add(nameLabel);
-		this.add(Box.createHorizontalStrut(10));
-		this.add(inputLabel);
+		inputLabel.addFocusListener(new TextFormatListener(inputLabel, iconLabel, textLabel, type));
 		this.add(iconLabel);
 		this.add(textLabel);
 	}
@@ -132,15 +124,15 @@ public class InfoItemLabel extends ELSLabel{
 		comboBox = new ELSComboBox();
 		comboBox.setEnabled(isEditable);
 
-		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setPreferredSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setMaximumSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
 
 		comboBox.setModel(new DefaultComboBoxModel<>(items));
-		comboBox.setPreferredSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		comboBox.setMaximumSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		comboBox.setPreferredSize(new Dimension(boxItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		comboBox.setMaximumSize(new Dimension(boxItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		comboBox.setFont(getFont().deriveFont(20f));
 
 		this.add(Box.createHorizontalStrut(30));
@@ -150,33 +142,12 @@ public class InfoItemLabel extends ELSLabel{
 	}
 	
 	public void initBox(String name, String[] items,String defaultValue, boolean isEditable){
-		type = 4;
-		
-		nameLabel = new ELSLabel(name);
-		comboBox = new ELSComboBox();
-		comboBox.setEnabled(isEditable);
-
-		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setVerticalAlignment(JLabel.CENTER);
-		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
-
-		comboBox.setModel(new DefaultComboBoxModel<>(items));
-		comboBox.setPreferredSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		comboBox.setMaximumSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		comboBox.setFont(getFont().deriveFont(20f));
-		
+		initBox(name, items, isEditable);
 		for (String string : items) {
 			if(string.equals(defaultValue)){
 				comboBox.setSelectedItem(string);
 			}
 		}
-
-		this.add(Box.createHorizontalStrut(30));
-		this.add(nameLabel);
-		this.add(Box.createHorizontalStrut(10));
-		this.add(comboBox);
 	}
 	
 	public void initDatePicker(String name, boolean isEditable){
@@ -186,14 +157,14 @@ public class InfoItemLabel extends ELSLabel{
 		datePicker = new ELSDatePicker();
 		datePicker.setEnabled(isEditable);
 
-		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setPreferredSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		nameLabel.setMaximumSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
 
-		datePicker.setPreferredSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		datePicker.setMaximumSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		datePicker.setPreferredSize(new Dimension(dateItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
+		datePicker.setMaximumSize(new Dimension(dateItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		datePicker.setFont(getFont().deriveFont(20f));
 
 		this.add(Box.createHorizontalStrut(30));
@@ -204,32 +175,9 @@ public class InfoItemLabel extends ELSLabel{
 	
 	public void initAuto(String name, String defaultValue,
 			boolean isEditable){
-		type = 2;
-		
-		nameLabel = new ELSLabel(name);
-		autoBtn = new ELSButton("生成");
-		inputLabel = new ELSTextField(defaultValue);
-		inputLabel.setEditable(isEditable);
-
-		nameLabel.setPreferredSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setMaximumSize(new Dimension(100, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		nameLabel.setVerticalAlignment(JLabel.CENTER);
-		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
-
-		inputLabel.setPreferredSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		inputLabel.setMaximumSize(new Dimension(150, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		inputLabel.setHorizontalAlignment(JTextField.LEFT);
-		inputLabel.setFont(getFont().deriveFont(20f));
-		
+		initEditable(name, defaultValue, isEditable);
 		autoBtn.setPreferredSize(new Dimension(UIConstant.MANAGETABLE_ITEM_HEIGHT, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		autoBtn.setMaximumSize(new Dimension(UIConstant.MANAGETABLE_ITEM_HEIGHT, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		
-		
-		this.add(Box.createHorizontalStrut(30));
-		this.add(nameLabel);
-		this.add(Box.createHorizontalStrut(10));
-		this.add(inputLabel);
 		this.add(Box.createHorizontalStrut(10));
 		this.add(autoBtn);
 	}
@@ -243,7 +191,7 @@ public class InfoItemLabel extends ELSLabel{
 		case 4:
 			return (String)comboBox.getSelectedItem();
 		case 5:
-			return datePicker.getDate();
+			return datePicker.getDateString();
 		default:
 			break;
 		}
@@ -275,23 +223,38 @@ public class InfoItemLabel extends ELSLabel{
 			// TODO Auto-generated method stub
 			String src = inputLabel.getText();
 			String result = InfoFormatUtil.CheckFormat(src, type);
-			if (result == null) {
-				iconLabel.setText("Y");
-				textLabel.setText("");
-				isLegal = true;
-			} else {
-				iconLabel.setText("N");
-				textLabel.setText(result);
-				isLegal = false;
-			}
+			check();
 		}
 
 	}
 	
-	public boolean checkFormat(String src, InfoType type){
-		if(InfoFormatUtil.CheckFormat(src, type)==null){
+	public boolean checkFormat(){
+		if(infoType==null){
+			return true;
+		}
+		
+		String result = InfoFormatUtil.CheckFormat(toString(), infoType);
+		if(result==null){
+			isLegal = true;
 			return true;
 		}else{
+			isLegal = false;
+			return false;
+		}
+		
+	}
+	
+	public boolean check(){
+		if(infoType==null){
+			return true;
+		}
+		if(checkFormat()){
+			iconLabel.setIcon(Images.CORRECT_IMAGEICON);
+			textLabel.setText("");
+			return true;
+		}else{
+			iconLabel.setIcon(Images.WARNING_IMAGEICON);
+			textLabel.setText(InfoFormatUtil.CheckFormat(toString(),infoType));
 			return false;
 		}
 	}

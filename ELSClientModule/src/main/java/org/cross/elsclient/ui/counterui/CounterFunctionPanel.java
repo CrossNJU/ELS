@@ -1,11 +1,13 @@
 package org.cross.elsclient.ui.counterui;
 
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
+import org.cross.elsclient.blservice.accountblservice.AccountBLService_Stub;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService_Stub;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService_Stub;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
+import org.cross.elsclient.blservice.logblservice.LogBLService_Stub;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
@@ -31,6 +33,8 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 		receiptbl = new ReceiptBLService_Stub();
 		analysisbl = new AnalysisBLService_Stub();
 		initialbl = new InitialBLService_Stub();
+		logbl = new LogBLService_Stub();
+		accountbl = new AccountBLService_Stub();
 		init();
 	}
 	

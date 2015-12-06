@@ -2,10 +2,16 @@ package org.cross.elsclient.ui.util;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSDatePicker;
+import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSTextField;
 import org.cross.elsclient.ui.component.FunctionBtn;
@@ -27,7 +33,13 @@ public class ComponentFactory {
 	 * @return ELSButton
 	 */
 	public static ELSButton	createInfoBackBtn(){
-		return new ELSButton();
+		ELSButton btn = new ELSButton();
+		btn.setOpaque(false);
+		btn.setIcon(Images.BACK_IMAGEICON);
+		btn.setFocusable(false);
+		btn.setName("back");
+		
+		return btn;
 	}
 	
 	/**
@@ -37,7 +49,7 @@ public class ComponentFactory {
 	 */
 	public static ELSButton createConfirmBtn(){
 		ELSButton btn = new ELSButton();
-		btn.setColor(Color.decode("#7ed09d"));
+		btn.setColor(UIConstant.COMFIRM_BTN_COLOR);
 		
 		return btn;
 	}
@@ -49,7 +61,7 @@ public class ComponentFactory {
 	 */
 	public static ELSButton createCancelBtn(){
 		ELSButton btn = new ELSButton();
-		btn.setColor(Color.decode("#7ebcd0"));
+		btn.setColor(UIConstant.NORMAL_BTN_COLOR);
 		
 		return btn;
 	}
@@ -60,7 +72,10 @@ public class ComponentFactory {
 	 * @return ELSButton
 	 */
 	public static ELSButton createUpdateBtn(){
-		ELSButton updateBtn = new ELSButton("改");
+		ELSButton updateBtn = new ELSButton();
+		updateBtn.setOpaque(false);
+		updateBtn.setFocusable(false);
+		updateBtn.setIcon(Images.UPDATE_IMAGEICON);
 		updateBtn.setPreferredSize(new Dimension(30, 30));
 		updateBtn.setMaximumSize(new Dimension(30, 30));
 		updateBtn.setMinimumSize(new Dimension(30, 30));
@@ -74,7 +89,10 @@ public class ComponentFactory {
 	 * @return ELSButton
 	 */
 	public static ELSButton createDeleteBtn(){
-		ELSButton deleteBtn = new ELSButton("删");
+		ELSButton deleteBtn = new ELSButton();
+		deleteBtn.setOpaque(false);
+		deleteBtn.setFocusable(false);
+		deleteBtn.setIcon(Images.DELETE_IMAGEICON);
 		deleteBtn.setPreferredSize(new Dimension(30, 30));
 		deleteBtn.setMaximumSize(new Dimension(30, 30));
 		deleteBtn.setMinimumSize(new Dimension(30, 30));
@@ -115,7 +133,7 @@ public class ComponentFactory {
 	 */
 	public static ELSComboBox createSearchBox(){
 		ELSComboBox box = new ELSComboBox();
-		box.setMaximumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
+//		box.setMaximumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
 		box.setMinimumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
 		return box;
 	}
@@ -129,7 +147,37 @@ public class ComponentFactory {
 		btn.setPreferredSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
 		btn.setMaximumSize(new Dimension(250, UIConstant.SEARCHPANEL_HEIGHT));
 		btn.setMinimumSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
-		btn.setColor(Color.decode("#7ebcd0"));
+		btn.setColor(UIConstant.NORMAL_BTN_COLOR);
+		return btn;
+	}
+	
+	public static ELSButton createExitBtn(){
+		ELSButton btn = new ELSButton();
+		btn.setOpaque(false);
+		btn.setSize(20,20);
+		btn.setIcon(Images.EXIT_IMAGEICON);
+		btn.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame((JComponent)e.getSource()), "退出系统", "确认退出ELS物流管理系统？")){
+					System.exit(0);
+				}
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+		});
+		
 		return btn;
 	}
 }

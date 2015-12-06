@@ -32,13 +32,25 @@ public class UserBLService_Stub implements UserBLService {
 	public ArrayList<UserVO> findByName(String name) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
 		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
+		
 		return list;
 	}
 
 	@Override
 	public ArrayList<UserVO> findByType(UserType type) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
+		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
+		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
+		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
+		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
+		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
+		
 		return list;
 	}
 
@@ -101,7 +113,6 @@ public class UserBLService_Stub implements UserBLService {
 
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 

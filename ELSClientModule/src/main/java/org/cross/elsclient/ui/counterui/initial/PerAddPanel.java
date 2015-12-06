@@ -34,13 +34,11 @@ public class PerAddPanel extends ELSInfoPanel{
 		addEditableItem("姓名", "", true,InfoType.NAME);
 //		addComboxItem("性别",new String[]{"男","女"} , true);
 //		addEditableItem("身份证", "", true,InfoType.IDCARD);
-		String []items = {OrganizationType.BUSINESSHALL.toString(),
-				OrganizationType.HEADQUARTERS.toString(),
-				OrganizationType.TRANSITCENTER.toString()
-		};
+		String []items = OrganizationType.toStrings();
+		String []position = PositionType.toStrings();
 		addComboxItem("所属机构类型", items, true);
 		addEditableItem("所属机构ID", "", true,InfoType.NAME);
-		addEditableItem("职位", "", true,InfoType.NAME);
+		addComboxItem("职位", position, true);
 //		addDateItem("出生日期", true);
 		
 		
@@ -55,8 +53,9 @@ public class PerAddPanel extends ELSInfoPanel{
 		super.confirm();
 		if(isAllLegal()){
 			vo = new PersonnelVO(itemLabels.get(0).toString(),itemLabels.get(1).toString() , 
-					StringToType.toPositionType(itemLabels.get(5).toString()), 
-					StringToType.toOrg(itemLabels.get(3).toString()), itemLabels.get(4).toString());
+					StringToType.toPositionType(itemLabels.get(4).toString()), 
+					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(3).toString());
+			vos.add(vo);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			back();

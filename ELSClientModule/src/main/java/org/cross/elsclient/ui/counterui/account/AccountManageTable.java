@@ -61,7 +61,7 @@ public class AccountManageTable extends ELSManageTable{
 	public void updateBtn(int index) {
 		super.updateBtn(index);
 		//界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 0);
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 2);
 		
 		contentPanel.add("update",new AccountUpdatePanel(vos.get(index), accountbl));
 		contentPanel.cl.show(contentPanel, "update");

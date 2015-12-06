@@ -44,11 +44,13 @@ public class ELSDialog extends JDialog {
 		
 		okBtn = new ELSButton("确定");
 		okBtn.setSize(UIConstant.BTN_WIDTH,UIConstant.BTN_HEIGHT);
+		okBtn.setColor(UIConstant.CANCEL_BTN_COLOR);
 		okBtn.setLocation(64, 208);
 		okBtn.addMouseListener(new BtnListener());
 		
 		cancelBtn = new ELSButton("取消");
 		cancelBtn.setSize(UIConstant.BTN_WIDTH,UIConstant.BTN_HEIGHT);
+		cancelBtn.setColor(UIConstant.NORMAL_BTN_COLOR);
 		cancelBtn.setLocation(214, 208);
 		cancelBtn.addMouseListener(new BtnListener());
 		
@@ -59,15 +61,15 @@ public class ELSDialog extends JDialog {
 		titleLabel.setLocation(0, 0);
 		titleLabel.setHorizontalAlignment(JLabel.LEFT);
 		titleLabel.setVerticalAlignment(JLabel.CENTER);
-		titleLabel.setFont(new Font("YouYuan", Font.PLAIN, 18));
-//		titleLabel.setFont(getFont().deriveFont(18f));
+		titleLabel.setForeground(Color.WHITE);
+		titleLabel.setFont(UIConstant.MainFont.deriveFont(18f));
 		
 		textLabel = new ELSLabel();
 		textLabel.setSize(UIConstant.DIALOG_WIDTH,48);
 		textLabel.setLocation(0, 110);
 		textLabel.setHorizontalAlignment(JLabel.CENTER);
 		textLabel.setVerticalAlignment(JLabel.CENTER);
-		textLabel.setFont(new Font("YouYuan", Font.PLAIN, 18));
+		textLabel.setFont(UIConstant.MainFont.deriveFont(18f));
 		
 		
 		addWindowListener(new WindowAdapter() {
@@ -90,7 +92,7 @@ public class ELSDialog extends JDialog {
 
 	public static boolean showConfirmDlg(Component comp,String title,String text) {
 //		instance = new ELSDialog();
-		instance.titleLabel.setText(" " + title);
+		instance.titleLabel.setText("   " + title);
 		instance.textLabel.setText(text);
 		instance.setLocationRelativeTo(comp);// 使得对话框显示在comp的中间
 		instance.setVisible(true);// 显示对话框时候，调用它的线程被阻塞

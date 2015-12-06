@@ -15,6 +15,7 @@ import javax.swing.*;
 
 import org.cross.elsclient.ui.adminui.UserManagePanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.Images;
 import org.cross.elsclient.ui.util.UIConstant;
 
 public class ELSFunctionPanel extends ELSPanel {
@@ -22,7 +23,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	ArrayList<FunctionBtn> functionBtns = new ArrayList<>();
 	ArrayList<JPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;
-	
+	ELSButton exitBtn;
 	
 	/**
 	 * 功能控制面板需要先实例化BL对象再执行init()
@@ -39,15 +40,17 @@ public class ELSFunctionPanel extends ELSPanel {
 		contentPanel = new ELSPanel();
 		contentPanel.setBounds(168, 100, 856, 668);
 		
-		logo = new ELSLabel("ELS");
-		logo.setSize(new Dimension(150,100));
-		logo.setLocation(0,0);
-//		logo.setFont(logo.getFont().deriveFont(Font.BOLD));
-//		logo.setFont(logo.getFont().deriveFont(100f));
-		logo.setFont(new Font("Yahei", Font.PLAIN, 60));
+		logo = new ELSLabel();
+		logo.setSize(225,44);
+		logo.setLocation(27, 30);
+		logo.setIcon(Images.LOGO_IMAGEICON);
+		
+		exitBtn = ComponentFactory.createExitBtn();
+		exitBtn.setLocation(984, 20);
 		
 		this.add(contentPanel);
 		this.add(logo);
+		this.add(exitBtn);
 	}
 	
 	

@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 
 public class TitlePanel extends ELSBox{
@@ -29,7 +30,7 @@ public class TitlePanel extends ELSBox{
 		this.setBackground(UIConstant.MAINCOLOR);
 		
 		titleLabel = new ELSLabel();
-		backBtn = new ELSButton("撤");
+		backBtn = ComponentFactory.createInfoBackBtn();
 		backBtn.setMaximumSize(new Dimension(30, 30));
 		backBtn.setMinimumSize(new Dimension(30, 30));
 		

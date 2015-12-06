@@ -38,4 +38,9 @@ public enum PositionType {
 		}
 	}
 
+	public static String[] toStrings(){
+		String types[] = {COURIER.toString(),BUSINESSHALLCLERK.toString(),TRANSITCENTERCLERK.toString(),STOCKKEEPER.toString(),
+				COUNTER.toString(),MANAGER.toString(),ADMINISTRATOR.toString(),DRIVER.toString()};
+		return types;
+	}
 }

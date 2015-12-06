@@ -19,6 +19,7 @@ import org.cross.elsclient.ui.managerui.personnel.PerAddPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.PersonnelVO;
+import org.cross.elscommon.util.StringToType;
 
 public class PaymentManagePanel extends ELSManagePanel{
 	PersonnelBLService personnelbl;
@@ -77,7 +78,7 @@ public class PaymentManagePanel extends ELSManagePanel{
 			// TODO Auto-generated method stub
 
 			if (e.getSource() == searchBtn) {
-				if (((String) modeBox.getSelectedItem()).equals("按人员编号查询")) {
+				if (((String) modeBox.getSelectedItem()).equals("按人员编号查找")) {
 					String id = searchTextField.getText();
 					personnelVOs = new ArrayList<>();
 					try {
@@ -93,7 +94,7 @@ public class PaymentManagePanel extends ELSManagePanel{
 					}
 					// 容器自适应高度
 					container.packHeight();
-				} else if (((String) modeBox.getSelectedItem()).equals("按人员姓名查询")) {
+				} else if (((String) modeBox.getSelectedItem()).equals("按人员姓名查找")) {
 					String name = searchTextField.getText();
 					personnelVOs = new ArrayList<>();
 					try {
@@ -109,15 +110,15 @@ public class PaymentManagePanel extends ELSManagePanel{
 					}
 					// 容器自适应高度
 					container.packHeight();
-				} else if (((String) modeBox.getSelectedItem()).equals("按人员职位查询")) {
-					String tpye = (String)typeCombobox.getSelectedItem();
+				} else if (((String) modeBox.getSelectedItem()).equals("按人员职位查找")) {
+					String type = (String)typeCombobox.getSelectedItem();
 					personnelVOs = new ArrayList<>();
-//					try {
-//						personnelVOs = personnelbl.find
-//					} catch (RemoteException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
+					try {
+						personnelVOs = personnelbl.findByPosition(StringToType.toPositionType(type));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					list.init();
 					for (PersonnelVO personnelVO : personnelVOs) {
 						list.addItem(personnelVO);

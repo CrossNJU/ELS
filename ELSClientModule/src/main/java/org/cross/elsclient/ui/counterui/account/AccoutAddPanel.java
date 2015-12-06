@@ -39,9 +39,9 @@ public class AccoutAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
 			
-			String name = itemLabels.get(0).getText();
-			String account = itemLabels.get(1).getText();
-			double balance = Double.valueOf(itemLabels.get(0).getText());
+			String name = itemLabels.get(0).toString();
+			String account = itemLabels.get(1).toString();
+			double balance = Double.valueOf(itemLabels.get(2).toString());
 			
 			vo = new AccountVO(name, account, balance);
 			if(bl.add(vo)==ResultMessage.SUCCESS){

@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui.managerui;
 
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
+import org.cross.elsclient.blservice.accountblservice.AccountBLService_Stub;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService_Stub;
 import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
@@ -8,7 +9,9 @@ import org.cross.elsclient.blservice.constantblservice.ConstantBLService_Stub;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
 import org.cross.elsclient.blservice.logblservice.LogBLService_Stub;
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
+import org.cross.elsclient.blservice.organizationblservice.OrganizationBlservice_Stub;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
+import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService_Stub;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
@@ -35,12 +38,13 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 	public LogBLService logbl;
 	
 	public ManagerFunctionPanel() {
-//		organizationbl = new OrganizationBlservice_Stub();
+		organizationbl = new OrganizationBlservice_Stub();
 		receiptbl = new ReceiptBLService_Stub();
-//		accoutbl = new AccountBLService_Stub();
+		accoutbl = new AccountBLService_Stub();
 		analysisbl = new AnalysisBLService_Stub();
 		constantbl = new ConstantBLService_Stub();
 		logbl = new LogBLService_Stub();
+		personelbl = new PersonnelBLService_Stub();
 		init();
 	}
 	

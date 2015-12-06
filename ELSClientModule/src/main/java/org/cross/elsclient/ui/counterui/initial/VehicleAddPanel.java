@@ -49,6 +49,7 @@ public class VehicleAddPanel extends ELSInfoPanel{
 					itemLabels.get(5).toString(), itemLabels.get(6).toString(), 
 					itemLabels.get(3).toString(), itemLabels.get(4).toString(), null, 
 					VehicleType.CAR);
+			vos.add(vo);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			back();

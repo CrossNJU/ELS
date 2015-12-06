@@ -1,17 +1,26 @@
 package org.cross.elsclient.ui.counterui.analysis;
 
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
 import org.cross.elsclient.ui.component.ELSDatePicker;
+import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
+import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.TitlePanel;
+import org.cross.elsclient.ui.counterui.account.AccoutAddPanel;
+import org.cross.elsclient.ui.counterui.log.LogManagePanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.ReceiptVO;
 
 public class AnalysisManagePanel extends ELSManagePanel {
@@ -44,6 +53,7 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		searchBtn.setText("查看收/付款单");
 		searchBtn.setMaximumSize(new Dimension(250,
 				UIConstant.SEARCHPANEL_HEIGHT));
+		searchBtn.addMouseListener(new BtnListener());
 
 		beginDate.setMaximumSize(new Dimension(300,
 				UIConstant.SEARCHPANEL_HEIGHT));
@@ -98,5 +108,46 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		this.container.add(title1);
 		this.container.add(title2);
 	}
+	
+	class BtnListener implements MouseListener{
 
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if(beginDate.getDate().compareTo(endDate.getDate())<1){
+				receiptVOs = new ArrayList<>();
+				receiptVOs.addAll(analysisbl.showMoneyinTable(beginDate.getDateString(), endDate.getDateString()));
+				receiptVOs.addAll(analysisbl.showMoneyoutTable(beginDate.getDateString(), endDate.getDateString()));
+				for (ReceiptVO receiptVO : receiptVOs) {
+					list2.addItem(receiptVO);
+				}
+				container.packHeight();
+			}else{
+				ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(AnalysisManagePanel.this), "时间矛盾", "起始时间大于结束时间");
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
 }

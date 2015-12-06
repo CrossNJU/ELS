@@ -4,6 +4,8 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
+import org.cross.elsclient.ui.util.UIConstant;
+
 public class ELSTextField extends JTextField{
 	public ELSTextField() {
 		super();
@@ -17,5 +19,6 @@ public class ELSTextField extends JTextField{
 	
 	public void init(){
 		setFont(new Font("YouYuan", Font.TRUETYPE_FONT, 20));
+		setForeground(UIConstant.MAINCOLOR);
 	}
 }

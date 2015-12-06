@@ -10,19 +10,20 @@ public class GoodsCheckTable extends ELSManageTable{
 
 	public GoodsCheckTable(String[] name, int[] itemWidth) {
 		super(name, itemWidth);
-		// TODO Auto-generated constructor stub
+		init();
 	}
 	
-	public void addItem(HistoryVO vo){
-//		String triggerPlace = vo.place.toString();
-//		String arrivePlace = vo.place.toString();
-		String triggerTime = vo.time;
-		String arriveTime = vo.time;
+	public void addItem(HistoryVO vo1, HistoryVO vo2){
+		String triggerPlace = vo1.placeCity.toString()+vo1.placeOrg.toString();
+		String arrivePlace = vo2.placeCity.toString()+vo2.placeOrg.toString();
+		String triggerTime = vo1.time;
+		String arriveTime = vo2.time;
 		
 		if(arriveTime==null){
 			arriveTime = "未到达";
 		}
-//		String []item = {triggerPlace,triggerTime,arrivePlace,arriveTime};
-//		addItemLabel(item);
+		
+		String []item = {triggerPlace,triggerTime,arrivePlace,arriveTime};
+		addItemLabel(item);
 	}
 }

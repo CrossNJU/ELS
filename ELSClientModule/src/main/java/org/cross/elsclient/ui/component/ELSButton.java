@@ -1,19 +1,25 @@
 package org.cross.elsclient.ui.component;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
+import org.cross.elsclient.ui.util.Images;
 
 public class ELSButton extends JLabel {
 	Color backColor = Color.GRAY;
 	Color pressColor = Color.DARK_GRAY;
+	ImageIcon icon;
 	
-
 	public ELSButton() {
 		super();
 		init();
@@ -31,7 +37,7 @@ public class ELSButton extends JLabel {
 		setFont(getFont().deriveFont(Font.BOLD));
 		setVerticalAlignment(JLabel.CENTER);
 		setHorizontalAlignment(JLabel.CENTER);
-		setFocusable(false);
+//		setFocusable(false);
 		addMouseListener(new MouseListener() {
 			
 			@Override
@@ -71,11 +77,19 @@ public class ELSButton extends JLabel {
 	}
 	
 	public void press(){
-		setBackground(pressColor);
+		setSize(getWidth()-6, getHeight()-6);
+		setLocation(getX()+3, getY()+3);
+		setPreferredSize(new Dimension(getPreferredSize().width-6, getPreferredSize().height-6));
+//		setBackground(pressColor);
 	}
 	
 	public void release(){
-		setBackground(backColor);
+		setSize(getWidth()+6, getHeight()+6);
+		setLocation(getX()-3, getY()-3);
+		setPreferredSize(new Dimension(getPreferredSize().width+6, getPreferredSize().height+6));
+//		setBackground(backColor);
 	}
 	
+	
+
 }

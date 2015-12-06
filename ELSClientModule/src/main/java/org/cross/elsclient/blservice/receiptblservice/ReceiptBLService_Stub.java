@@ -50,6 +50,8 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
 		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
 		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
+		list.get(0).approveState = ApproveType.APPROVED;
+		list.get(0).approveState = ApproveType.NOT_APPROVED;
 		return list;
 	}
 

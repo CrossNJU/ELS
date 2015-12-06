@@ -18,6 +18,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.PersonnelVO;
+import org.cross.elscommon.util.StringToType;
 
 public class PerManagePanel extends ELSManagePanel {
 	PersonnelBLService personnelbl;
@@ -83,11 +84,10 @@ public class PerManagePanel extends ELSManagePanel {
 			// TODO Auto-generated method stub
 
 			if (e.getSource() == searchBtn) {
-				if (((String) modeBox.getSelectedItem()).equals("按人员编号查询")) {
+				if (((String) modeBox.getSelectedItem()).equals("按人员编号查找")) {
 					String id = searchTextField.getText();
 					personnelVOs = new ArrayList<>();
 					try {
-						// userVOs.add(userbl.findById(id));
 						personnelVOs.add(personnelbl.findById(id));
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
@@ -99,7 +99,7 @@ public class PerManagePanel extends ELSManagePanel {
 					}
 					// 容器自适应高度
 					container.packHeight();
-				} else if (((String) modeBox.getSelectedItem()).equals("按人员姓名查询")) {
+				} else if (((String) modeBox.getSelectedItem()).equals("按人员姓名查找")) {
 					String name = searchTextField.getText();
 					personnelVOs = new ArrayList<>();
 					try {
@@ -115,15 +115,15 @@ public class PerManagePanel extends ELSManagePanel {
 					}
 					// 容器自适应高度
 					container.packHeight();
-				} else if (((String) modeBox.getSelectedItem()).equals("按人员职位查询")) {
+				} else if (((String) modeBox.getSelectedItem()).equals("按人员职位查找")) {
 					String tpye = (String)typeCombobox.getSelectedItem();
 					personnelVOs = new ArrayList<>();
-//					try {
-//						personnelVOs = personnelbl.find
-//					} catch (RemoteException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
+					try {
+						personnelVOs = personnelbl.findByPosition(StringToType.toPositionType((String)typeCombobox.getSelectedItem()));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					list.init();
 					for (PersonnelVO personnelVO : personnelVOs) {
 						list.addItem(personnelVO);

@@ -3,6 +3,7 @@ package org.cross.elsclient.ui.courierui;
 import org.cross.elsclient.blimpl.goodsblimpl.GoodsBLImpl;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Driver;
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Stub;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
 import org.cross.elsclient.ui.adminui.UserManagePanel;
@@ -20,7 +21,7 @@ public class CourierFunctionPanel extends ELSFunctionPanel{
 	public CourierFunctionPanel() {
 		super();
 		receiptbl = new ReceiptBLService_Stub();
-//		goodsbl = new GoodsBLImpl(new GoodsData)
+		goodsbl = new GoodsBLService_Stub();
 		init();
 	}
 	

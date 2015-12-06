@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui;
 
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.util.Enumeration;
 
 import javax.swing.JFrame;
@@ -18,8 +19,8 @@ public class MainUI extends JFrame {
 
 	public static void main(String[] args) {
 		try {
-			FontUIResource fontUIResource = new FontUIResource(new Font("YouYuan",
-					Font.PLAIN, 15));
+			FontUIResource fontUIResource = new FontUIResource(new Font("Microsoft YaHei UI",
+					Font.TRUETYPE_FONT, 15));
 			for (Enumeration<Object> keys = UIManager.getDefaults().keys(); keys
 					.hasMoreElements();) {
 				Object key = keys.nextElement();
@@ -43,15 +44,22 @@ public class MainUI extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+//		GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();  
+//        String[] fontName = e.getAvailableFontFamilyNames();  
+//        for(int i = 0; i<fontName.length ; i++)  
+//        {  
+//            System.out.println(fontName[i]);  
+//        }  
 
 		JFrame jf = new JFrame();
 		ELSPanel mainPanel = new ELSPanel();
 		jf.setSize(UIConstant.WINDOW_WIDTH, UIConstant.WINDOW_HEIGHT);
 		FrameUtil.frameInit(jf);
-//		jf.setEnabled(false);
+		com.sun.awt.AWTUtilities.setWindowOpaque(jf, false);
 		mainPanel.add(new LoginPanel(), "login");
-		jf.getContentPane().add(mainPanel);
-
+		mainPanel.setOpaque(false);
+		jf.getContentPane().add(mainPanel);	
 		jf.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

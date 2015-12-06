@@ -33,28 +33,11 @@ public enum UserType {
 		}
 	}
 	
-	public static UserType stringToType(String type){
-		switch (type) {
-		case "快递员":
-			return COURIER;
-		case "营业厅业务员":
-			return BUSINESSHALLCLERK;
-		case "中转中心业务员":
-			return TRANSITCENTERCLERK;
-		case "仓库管理人员":
-			return STOCKKEEPER;
-		case "财务人员":
-			return COUNTER;
-		case "高级财务人员":
-			return SUPERCOUNTER;
-		case "总经理":
-			return MANAGER;
-		case "系统管理员":
-			return ADMINISTRATOR;
-		default:
-			return null;
-		}
-		
-		
+	
+	public static String[] toStrings(){
+		String types[] = {COURIER.toString(),BUSINESSHALLCLERK.toString(),TRANSITCENTERCLERK.toString(),STOCKKEEPER.toString(),
+				COUNTER.toString(),SUPERCOUNTER.toString(),MANAGER.toString(),ADMINISTRATOR.toString()};
+		return types;
 	}
 }
+

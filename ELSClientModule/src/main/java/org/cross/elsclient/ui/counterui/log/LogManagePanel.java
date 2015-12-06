@@ -13,11 +13,15 @@ import org.cross.elsclient.blservice.logblservice.LogBLService;
 import org.cross.elsclient.ui.adminui.UserAddPanel;
 import org.cross.elsclient.ui.adminui.UserManageTable;
 import org.cross.elsclient.ui.component.ELSDatePicker;
+import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.counterui.analysis.AnalysisManagePanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.LogVO;
+import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.UserType;
 
@@ -39,7 +43,7 @@ public class LogManagePanel extends ELSManagePanel{
 		// TODO Auto-generated method stub
 		super.setContentPanel();
 		String[] s = {"操作时间","操作人员","操作内容"};
-		int[] itemWidth = {150,100,200};
+		int[] itemWidth = {200,100,200};
 		list= new LogManageTable(s,itemWidth,logbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
@@ -54,6 +58,7 @@ public class LogManagePanel extends ELSManagePanel{
 		
 		searchBtn.setText("查看系统日志");
 		searchBtn.setMaximumSize(new Dimension(250, UIConstant.SEARCHPANEL_HEIGHT));
+		searchBtn.addMouseListener(new BtnListener());
 		
 		beginDate.setMaximumSize(new Dimension(300, UIConstant.SEARCHPANEL_HEIGHT));
 		endDate.setMaximumSize(new Dimension(300, UIConstant.SEARCHPANEL_HEIGHT));
@@ -73,16 +78,22 @@ public class LogManagePanel extends ELSManagePanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			logvos = new ArrayList<>();
-			try {
-				logvos = logbl.show(beginDate.getDate(), endDate.getDate());
-			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			if(beginDate.getDate().compareTo(endDate.getDate())<1){
+				logvos = new ArrayList<>();
+				try {
+					logvos = logbl.show(beginDate.getDateString(), endDate.getDateString());
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				for (LogVO logVO : logvos) {
+					list.addItem(logVO);
+				}
+				container.packHeight();
+			}else{
+				ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(LogManagePanel.this), "时间矛盾", "起始时间大于结束时间");
 			}
-			for (LogVO logVO : logvos) {
-				list.addItem(logVO);
-			}
+			
 		}
 
 		@Override

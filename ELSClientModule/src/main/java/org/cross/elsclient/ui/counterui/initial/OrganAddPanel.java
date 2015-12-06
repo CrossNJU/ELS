@@ -10,6 +10,7 @@ import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
+import org.cross.elscommon.util.StringToType;
 
 public class OrganAddPanel extends ELSInfoPanel{
 	ArrayList<OrganizationVO> vos;
@@ -25,12 +26,14 @@ public class OrganAddPanel extends ELSInfoPanel{
 	public void init() {
 		super.init();
 		
+		String citys[] = City.toStrings();
+		String organs[] = OrganizationType.toStrings();
+		
 		setTitle("新增机构");
 		addEditableItem("机构编号", "",true);
-		addEditableItem("地区", "",true);
-		addEditableItem("类型", "",true);
-		
-		vo = new OrganizationVO(null, null, null);
+		addComboxItem("地区", citys, true);
+		addComboxItem("机构", organs, true);
+	
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("取消添加");
@@ -41,8 +44,8 @@ public class OrganAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			vo = new OrganizationVO(City.valueOf(itemLabels.get(1).toString()),
-					OrganizationType.valueOf(itemLabels.get(2).toString()), itemLabels.get(0).toString());
+			vo = new OrganizationVO(StringToType.toCity(itemLabels.get(1).toString()),
+					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(0).toString());
 			vos.add(vo);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");

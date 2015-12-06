@@ -40,4 +40,9 @@ public enum ReceiptType {
 		}
 	}
 
+	public static String[] toStrings(){
+		String type[] = {ARRIVE.toString(),MONEYIN.toString(),MONEYOUT.toString(),ORDER.toString(),STOCKIN.toString(),STOCKOUT.toString(),TRANS.toString(),
+				TOTALMONEYIN.toString()};
+		return type;
+	}
 }

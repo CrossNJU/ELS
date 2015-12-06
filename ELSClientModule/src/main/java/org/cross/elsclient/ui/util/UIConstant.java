@@ -1,6 +1,9 @@
 package org.cross.elsclient.ui.util;
 
 import java.awt.Color;
+import java.awt.Font;
+
+import org.cross.elsclient.vo.UserVO;
 
 public class UIConstant {
 	public static int WINDOW_WIDTH = 1024;
@@ -26,4 +29,11 @@ public class UIConstant {
 	public static int BTN_HEIGHT = 48;
 	
 	public static Color MAINCOLOR = Color.decode("#5a6074");
+	public static Color COMFIRM_BTN_COLOR = Color.decode("#7ED09D");
+	public static Color NORMAL_BTN_COLOR = Color.decode("#7EBCD0");
+	public static Color CANCEL_BTN_COLOR = Color.decode("#E57979");
+	
+	public static Font MainFont = new Font("Microsoft YaHei UI",Font.TRUETYPE_FONT, 15);
+	
+	public static UserVO CURRENT_USER;
 }

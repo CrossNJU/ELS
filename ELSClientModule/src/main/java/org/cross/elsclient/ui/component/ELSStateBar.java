@@ -41,6 +41,7 @@ public class ELSStateBar extends JLabel{
 		
 		@Override
 		protected Boolean doInBackground() throws Exception {
+			
 			for(int i = 0;i<50;i++){
 				c.setLocation(c.getLocation().x, c.getLocation().y-1);
 				c.repaint();

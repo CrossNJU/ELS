@@ -12,6 +12,7 @@ import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StringToType;
 
 public class UserUpdatePanel extends ELSInfoPanel{
 	UserVO vo;
@@ -44,8 +45,12 @@ public class UserUpdatePanel extends ELSInfoPanel{
 	
 	@Override
 	protected void confirm() throws RemoteException {
-		//判断是否所有信息都合法
+		
 		if(isAllLegal()){
+			vo.id = itemLabels.get(0).toString();
+			vo.name = itemLabels.get(1).toString();
+			vo.password = itemLabels.get(3).toString();
+			vo.type = StringToType.toUserType(itemLabels.get(2).toString());
 			if(userbl.update(vo)==ResultMessage.SUCCESS){
 				System.out.println(itemLabels.get(0).toString());
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更新成功");

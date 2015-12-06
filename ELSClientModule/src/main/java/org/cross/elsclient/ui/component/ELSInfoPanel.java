@@ -215,12 +215,14 @@ public class ELSInfoPanel extends ELSScrollPane {
 		confirmBtn.setMaximumSize(new Dimension(100, 50));
 		confirmBtn.setMinimumSize(new Dimension(100, 50));
 		confirmBtn.addMouseListener(new BtnListener());
+		confirmBtn.setColor(UIConstant.COMFIRM_BTN_COLOR);
 
 		cancelBtn.setPreferredSize(new Dimension(100, 50));
 		cancelBtn.setMaximumSize(new Dimension(100, 50));
 		cancelBtn.setMinimumSize(new Dimension(100, 50));
 		cancelBtn.addMouseListener(new BtnListener());
-
+		cancelBtn.setColor(UIConstant.NORMAL_BTN_COLOR);
+		
 		itemLabel.add(Box.createHorizontalStrut(20));
 		itemLabel.add(confirmBtn);
 		itemLabel.add(Box.createHorizontalStrut(20));
@@ -274,12 +276,13 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @return void
 	 */
 	public boolean isAllLegal(){
+		boolean result = true;
 		for (InfoItemLabel infoItemLabel : itemLabels) {
-			if(!infoItemLabel.isLegal){
-				return false;
+			if(!infoItemLabel.check()){
+				result = false;
 			}
 		}
-		return true;
+		return result;
 	}
 	
 	/**
