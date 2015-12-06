@@ -61,23 +61,21 @@ public class InitialBLService_Stub implements InitialBLService {
 		personnels1.add(new PersonnelVO("P000001", "汤姆", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "O000001"));
 		
 		ArrayList<VehicleVO> vehicles1 = new ArrayList<VehicleVO>();
-		vehicles1.add(new VehicleVO("V0100001"));
+		vehicles1.add(new VehicleVO(number, licence, businessHallNum, engineNumber, apparatusNumber, buyTime, lastTime, image, inUse));
 		vehicles1.add(new VehicleVO("V0100001"));
 		vehicles1.add(new VehicleVO("V0100001"));
 		vehicles1.add(new VehicleVO("V0100001"));
 		
 		ArrayList<StockVO> stocks1 = new ArrayList<StockVO>();
-		stocks1.add(new StockVO("S00001", 5));
+		stocks1.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 100, "O0000001"));
 		stocks1.add(new StockVO("S00001", 5));
 		stocks1.add(new StockVO("S00001", 5));
 		stocks1.add(new StockVO("S00001", 5));
 		
 		ArrayList<AccountVO> accounts1 = new ArrayList<AccountVO>();
-		accounts1.add(new AccountVO("ICBC账户", "6222201234567654321", 500000));
-		
 		ArrayList<InitialVO> list = new ArrayList<InitialVO>();
-		list.add(new InitialVO("I20141", "2014年期初",2014, organizations, personnels, vehicles, stocks, accounts));
-		list.add(new InitialVO("I20140", "2013年期初",2013, organizations1, personnels1, vehicles1, stocks1, accounts1));
+		list.add(new InitialVO("I20141", "2014年期初", organizations, personnels, vehicles, stocks, accounts,"2015-4-26 12:00","汤姆","P000001"));
+		list.add(new InitialVO("I20140", "2013年期初", organizations1, personnels1, vehicles1, stocks1, accounts1,"2015-4-26 12:00","汤姆","P000001"));
 		return list;
 	}
 	

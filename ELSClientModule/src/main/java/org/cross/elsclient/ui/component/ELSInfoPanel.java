@@ -22,6 +22,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
+import org.cross.elsclient.blimpl.numberblimpl.NumberBLImpl;
+import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
+import org.cross.elsclient.blservice.numberblservice.NumberBLService;
+import org.cross.elsclient.blservice.numberblservice.NumberBLService_Stub;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.InfoFormatUtil;
@@ -38,10 +43,12 @@ public class ELSInfoPanel extends ELSScrollPane {
 	protected ELSButton confirmBtn;
 	protected ELSButton cancelBtn;
 	protected ELSBox btnBox;
+	protected NumberBLService numberbl;
 
 	public void init() {
 		itemHeight = 50;
 		itemLabels = new ArrayList<>();
+		numberbl = new NumberBLService_Stub();
 
 		container = new ELSPanel();
 		titlePanel = new TitlePanel();

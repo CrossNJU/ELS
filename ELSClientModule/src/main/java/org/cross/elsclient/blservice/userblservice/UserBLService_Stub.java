@@ -21,7 +21,7 @@ public class UserBLService_Stub implements UserBLService {
 
 	@Override
 	public ResultMessage update(UserVO vo) {
-		if(vo.name.equals("阿斯特拉奥特曼")&&vo.id.equals("001")){
+		if(vo.name.equals("阿斯特拉奥特曼")&&vo.number.equals("001")){
 			return ResultMessage.FAILED;
 		}
 		
@@ -31,7 +31,7 @@ public class UserBLService_Stub implements UserBLService {
 	@Override
 	public ArrayList<UserVO> findByName(String name) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
+		list.add(new UserVO(number, name, orgNameID, position, password));
 		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
 		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
 		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));

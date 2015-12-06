@@ -12,6 +12,7 @@ import javax.swing.plaf.FontUIResource;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
+import org.cross.elsclient.ui.managerui.ManagerFunctionPanel;
 import org.cross.elsclient.ui.util.FrameUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 
@@ -57,7 +58,8 @@ public class MainUI extends JFrame {
 		jf.setSize(UIConstant.WINDOW_WIDTH, UIConstant.WINDOW_HEIGHT);
 		FrameUtil.frameInit(jf);
 		com.sun.awt.AWTUtilities.setWindowOpaque(jf, false);
-		mainPanel.add(new LoginPanel(), "login");
+//		mainPanel.add(new LoginPanel(), "login");
+		mainPanel.add(new ManagerFunctionPanel());
 		mainPanel.setOpaque(false);
 		jf.getContentPane().add(mainPanel);	
 		jf.setVisible(true);

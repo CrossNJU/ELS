@@ -30,7 +30,7 @@ public class PersonnelBLService_Stub implements PersonnelBLService {
 	@Override
 	public ArrayList<PersonnelVO> findByName(String name) {
 		ArrayList<PersonnelVO> personnelList=new ArrayList<PersonnelVO>();
-		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, OrganizationType.HEADQUARTERS, "O000001"));
+		personnelList.add(new PersonnelVO("P0000001", name, position, orgNum, orgName, sex, id, phone, birthday, salary));
 		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, OrganizationType.HEADQUARTERS, "O000001"));
 		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, OrganizationType.HEADQUARTERS, "O000001"));
 		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, OrganizationType.HEADQUARTERS, "O000001"));
