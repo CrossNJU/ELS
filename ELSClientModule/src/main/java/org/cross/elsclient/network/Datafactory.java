@@ -13,6 +13,7 @@ import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
+import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
@@ -29,10 +30,8 @@ public class Datafactory implements DataFactoryService{
 		try {
 			stockdata = (StockDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/stockdata");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -41,17 +40,13 @@ public class Datafactory implements DataFactoryService{
 
 	@Override
 	public GoodsDataService getGoodsData() throws RemoteException {
-		// TODO Auto-generated method stub
-		
 		GoodsDataService goodsdata = null;
 		
 		try {
 			goodsdata = (GoodsDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/goodsdata");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -66,10 +61,8 @@ public class Datafactory implements DataFactoryService{
 		try {
 			receiptdata = (ReceiptDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/receiptdata");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return receiptdata;
@@ -82,7 +75,6 @@ public class Datafactory implements DataFactoryService{
 		try {
 			vehicleData = (VehicleDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/vehicledata");
 		} catch (MalformedURLException | NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return vehicleData;
@@ -94,7 +86,6 @@ public class Datafactory implements DataFactoryService{
 		try {
 			accountData = (AccountDataService) Naming.lookup(NetWork.preAddress+NetWork.port+"/accountdata");
 		} catch (MalformedURLException | NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return accountData;
@@ -106,7 +97,6 @@ public class Datafactory implements DataFactoryService{
 		try {
 			organizationData = (OrganizationDataService) Naming.lookup(NetWork.preAddress+NetWork.port+"/organizationdata");
 		} catch (MalformedURLException | NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return organizationData;
@@ -118,10 +108,8 @@ public class Datafactory implements DataFactoryService{
 		try {
 			personnelDataService = (PersonnelDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/personneldata");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return personnelDataService;
@@ -133,10 +121,8 @@ public class Datafactory implements DataFactoryService{
 		try {
 			logDataService = (LogDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/logdata");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return logDataService;
@@ -148,10 +134,8 @@ public class Datafactory implements DataFactoryService{
 		try {
 			initialDataService = (InitialDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/initialdata");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return initialDataService;
@@ -163,13 +147,24 @@ public class Datafactory implements DataFactoryService{
 		try {
 			userDataService = (UserDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/userdata");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return userDataService;
+	}
+
+	@Override
+	public SalaryDataService getSalaryData() throws RemoteException {
+		SalaryDataService salaryDataService = null;
+		try {
+			salaryDataService = (SalaryDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/salarydata");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return salaryDataService;
 	}
 
 }

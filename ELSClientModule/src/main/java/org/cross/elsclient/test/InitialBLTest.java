@@ -4,11 +4,13 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.accountblimpl.AccountInfoImpl;
+import org.cross.elsclient.blimpl.blUtility.SalaryInfo;
 import org.cross.elsclient.blimpl.initialblimpl.InitialBLImpl;
 import org.cross.elsclient.blimpl.initialblimpl.InitialInfo;
 import org.cross.elsclient.blimpl.initialblimpl.InitialInfoImpl;
 import org.cross.elsclient.blimpl.organizationblimpl.OrganizationInfoImpl;
 import org.cross.elsclient.blimpl.personnelblimpl.PersonnelInfoImpl;
+import org.cross.elsclient.blimpl.salaryblimpl.SalaryBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockInfoImpl;
 import org.cross.elsclient.blimpl.vehicleblimpl.VehicleInfoImpl;
 import org.cross.elsclient.network.Datafactory;
@@ -19,43 +21,101 @@ import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
+import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class InitialBLTest {
 
-	public static void main(String[] args) throws RemoteException{
+	public static void main(String[] args) throws RemoteException {
 		DataFactoryService dataFactory = new Datafactory();
-		OrganizationInfoImpl orginfo = new OrganizationInfoImpl();
-		PersonnelInfoImpl personnelInfo = new PersonnelInfoImpl();
-		VehicleInfoImpl vehicleInfo = new VehicleInfoImpl();
-		StockInfoImpl stockInfo = new StockInfoImpl();
-		AccountInfoImpl accountInfo = new AccountInfoImpl();
-		InitialInfoImpl initialInfo = new InitialInfoImpl(orginfo, personnelInfo, vehicleInfo, stockInfo, accountInfo);
-		InitialBLImpl initialBLImpl = new InitialBLImpl(dataFactory.getinInitialData(), initialInfo, orginfo, personnelInfo, vehicleInfo, stockInfo, accountInfo);
+		SalaryInfo salaryInfo = new SalaryBLImpl(dataFactory.getSalaryData());
+		OrganizationInfoImpl orginfo = new OrganizationInfoImpl(
+				dataFactory.getOrganizationData());
+		PersonnelInfoImpl personnelInfo = new PersonnelInfoImpl(
+				dataFactory.getPersonnelData(), salaryInfo);
+		VehicleInfoImpl vehicleInfo = new VehicleInfoImpl(
+				dataFactory.getVehicleData());
+		StockInfoImpl stockInfo = new StockInfoImpl(dataFactory.getStockData());
+		AccountInfoImpl accountInfo = new AccountInfoImpl(
+				dataFactory.getAccountData());
+		InitialInfoImpl initialInfo = new InitialInfoImpl(orginfo,
+				personnelInfo, vehicleInfo, stockInfo, accountInfo);
+		InitialBLImpl initialBLImpl = new InitialBLImpl(
+				dataFactory.getinInitialData(), initialInfo, orginfo,
+				personnelInfo, vehicleInfo, stockInfo, accountInfo, salaryInfo);
+
 		System.out.println("---test-add---");
-		InitialVO newVO = new InitialVO("1", "crr", 2015, new ArrayList<OrganizationVO>(), new ArrayList<PersonnelVO>(), new ArrayList<VehicleVO>(), new ArrayList<StockVO>(), new ArrayList<AccountVO>());
+		ArrayList<OrganizationVO> orgVO = new ArrayList<OrganizationVO>();
+		orgVO.add(new OrganizationVO(City.BEIJING, "O00010272",
+				OrganizationType.BUSINESSHALL));
+		ArrayList<PersonnelVO> perVO = new ArrayList<PersonnelVO>();
+		perVO.add(new PersonnelVO("P00001", "chenr", "男", null, null, null,
+				null, "北京营业厅", "O00010272", null));
+		ArrayList<VehicleVO> vehicleVOs = new ArrayList<VehicleVO>();
+		vehicleVOs.add(new VehicleVO("V00001", null, null, null, null,
+				"2015-01-01", "2019-01-01", null, false));
+		ArrayList<StockVO> stockVOs = new ArrayList<StockVO>();
+		stockVOs.add(new StockVO("S0001", 100, 0, 0, 0, 0, 0, 0, "O01111233",
+				"南京中转中心"));
+		ArrayList<AccountVO> accountVOs = new ArrayList<AccountVO>();
+		accountVOs.add(new AccountVO("chenr", "26352717288939", 923726332));
+
+		InitialVO newVO = new InitialVO("In2222", "2015-01-01", "2015年账本",
+				"cdn", "P000000", orgVO, perVO, vehicleVOs, stockVOs,
+				accountVOs);
 		ResultMessage addMessage = initialBLImpl.addInitial(newVO);
 		if (addMessage == ResultMessage.SUCCESS) {
 			System.out.println("增加成功");
-		}else {
+		} else {
 			System.out.println("增加失败");
 		}
+
 		System.out.println("---test-show---");
 		ArrayList<InitialVO> show = initialBLImpl.show();
 		if (show == null) {
 			System.out.println("是空的啊");
-		}else {
+		} else {
 			int size = show.size();
 			for (int i = 0; i < size; i++) {
-				System.out.println(show.get(i).name + " " + show.get(i).year + " " + show.get(i).id);
+				System.out.println(show.get(i).perName + " " + show.get(i).time
+						+ " " + show.get(i).id);
 			}
 		}
+
 		System.out.println("---test-showOrg---");
-		ArrayList<OrganizationVO> orgVO = initialBLImpl.showOrganization("1");
+		ArrayList<OrganizationVO> org = initialBLImpl
+				.showOrganization("In2222");
+		for (int i = 0; i < org.size(); i++) {
+			System.out.println(org.get(i).number + " " + org.get(i).type + " "
+					+ org.get(i).city);
+		}
+
 		System.out.println("---test-showPersonnel---");
+		ArrayList<PersonnelVO> pers = initialBLImpl.showPersonnel("In2222");
+		for (int i = 0; i < pers.size(); i++) {
+			System.out.println(pers.get(i).name + " " + pers.get(i).birthday
+					+ " " + pers.get(i).orgName);
+		}
 		System.out.println("---test-showVehicle---");
+		ArrayList<VehicleVO> vehicle = initialBLImpl.showVehicle("In2222");
+		for (int i = 0; i < vehicle.size(); i++) {
+			System.out.println(vehicle.get(i).number + " "
+					+ vehicle.get(i).buyTime + " " + vehicle.get(i).lastTime);
+		}
+
 		System.out.println("---test-showStock---");
+		ArrayList<StockVO> stock = initialBLImpl.showStock("In2222");
+		for (int i = 0; i < stock.size(); i++) {
+			System.out
+					.println(stock.get(i).number + " " + stock.get(i).orgName);
+		}
+
 		System.out.println("---test-showAccount---");
-		
+		ArrayList<AccountVO> account = initialBLImpl.showAccount("In2222");
+		for (int i = 0; i < account.size(); i++) {
+			System.out.println(account.get(i).name + " "
+					+ account.get(i).account + " " + account.get(i).balance);
+		}
 	}
 }

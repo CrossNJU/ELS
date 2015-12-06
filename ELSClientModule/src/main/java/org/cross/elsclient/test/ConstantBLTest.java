@@ -1,6 +1,5 @@
 package org.cross.elsclient.test;
 
-import org.cross.elsclient.blimpl.constantblimpl.ConstantBLImpl;
 import org.cross.elsclient.network.Datafactory;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 

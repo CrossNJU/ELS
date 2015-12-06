@@ -20,6 +20,7 @@ import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.network.Datafactory;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
+import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 
 public class BLFactoryImpl implements BLFactoryService{
@@ -102,6 +103,12 @@ public class BLFactoryImpl implements BLFactoryService{
 
 	@Override
 	public VehicleBLService vehicleBLService() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SalaryDataService salaryDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

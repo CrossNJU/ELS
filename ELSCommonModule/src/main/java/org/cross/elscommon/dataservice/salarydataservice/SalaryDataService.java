@@ -1,5 +1,6 @@
 package org.cross.elscommon.dataservice.salarydataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.SalaryType;
 
-public interface SalaryDataService {
+public interface SalaryDataService extends Remote{
 
 	public ResultMessage insert(SalaryPO po) throws RemoteException;
 

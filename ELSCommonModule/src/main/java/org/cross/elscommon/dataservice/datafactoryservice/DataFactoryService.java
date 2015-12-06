@@ -9,6 +9,7 @@ import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
+import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
 import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
@@ -34,4 +35,6 @@ public interface DataFactoryService {
 	public InitialDataService getinInitialData() throws RemoteException;
 	
 	public UserDataService getuserdaData() throws RemoteException;
+	
+	public SalaryDataService getSalaryData() throws RemoteException;
 }
