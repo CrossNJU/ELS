@@ -56,14 +56,9 @@ public class StockVO {
 	 */
 	public String orgNum;
 
-	/**
-	 * 所属机构name
-	 */
-	public String orgName;
-
 	public StockVO(String number, int totalAreas, int usedAreas, int outNum,
 			int inNum, double outMoney, double inMoney, int numInStock,
-			String orgNum, String orgName) {
+			String orgNum) {
 		super();
 		this.number = number;
 		this.totalAreas = totalAreas;
@@ -74,7 +69,6 @@ public class StockVO {
 		this.inMoney = inMoney;
 		this.numInStock = numInStock;
 		this.orgNum = orgNum;
-		this.orgName = orgName;
 	}
 
 }
