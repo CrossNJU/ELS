@@ -1,4 +1,4 @@
-package org.cross.elsserver.dataimpl.numberdataservice;
+package org.cross.elsserver.dataimpl.numberdataimpl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

@@ -58,11 +58,11 @@ public class InitialVO {
 	 */
 	public ArrayList<AccountVO> accounts;
 
-	public InitialVO(String id, String time, String initialName,
-			String perName, String perNumber,
+	public InitialVO(String id,String initialName,
+			
 			ArrayList<OrganizationVO> organizations,
 			ArrayList<PersonnelVO> personnels, ArrayList<VehicleVO> vehicles,
-			ArrayList<StockVO> stocks, ArrayList<AccountVO> accounts) {
+			ArrayList<StockVO> stocks, ArrayList<AccountVO> accounts ,String time,String perName, String perNumber) {
 		super();
 		this.id = id;
 		this.time = time;

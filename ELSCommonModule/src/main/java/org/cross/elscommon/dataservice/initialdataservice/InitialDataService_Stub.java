@@ -8,7 +8,12 @@ package org.cross.elscommon.dataservice.initialdataservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.po.InitialPO;
+import org.cross.elscommon.po.OrganizationPO;
+import org.cross.elscommon.po.PersonnelPO;
+import org.cross.elscommon.po.StockPO;
+import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.ResultMessage;
 
 public class InitialDataService_Stub  implements InitialDataService {
@@ -29,6 +34,66 @@ public class InitialDataService_Stub  implements InitialDataService {
 
 	@Override
 	public InitialPO findByID(String initialID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage insertInitAccount(AccountPO po, String initNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage insertInitVehicle(VehiclePO po, String initNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage insertInitOrganization(OrganizationPO po, String initNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage insertInitPersonnel(PersonnelPO po, String initNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage insertInitStock(StockPO po, String initNum) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<AccountPO> findInitAccounts(String initialID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<OrganizationPO> findInitOrganizations(String initialID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PersonnelPO> findInitPersonnels(String initialID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<VehiclePO> findInitVehicles(String initialID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<StockPO> findInitStocks(String initialID) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

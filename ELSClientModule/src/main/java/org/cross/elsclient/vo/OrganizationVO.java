@@ -25,7 +25,7 @@ public class OrganizationVO {
 	 */
 	public OrganizationType type;
 
-	public OrganizationVO(City city, String number, OrganizationType type) {
+	public OrganizationVO(City city, OrganizationType type, String number) {
 		super();
 		this.city = city;
 		this.number = number;

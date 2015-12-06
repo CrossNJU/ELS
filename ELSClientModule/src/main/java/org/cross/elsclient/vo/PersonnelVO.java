@@ -55,9 +55,8 @@ public class PersonnelVO {
 	 */
 	public SalaryPO salary;
 
-	public PersonnelVO(String number, String name, String sex, String id,
-			String phone, PositionType position, String birthday,
-			String orgName, String orgNum, SalaryPO salary) {
+	public PersonnelVO(String number, String name, PositionType position, String orgNum, String orgName, String sex,
+			String id, String phone, String birthday, SalaryPO salary) {
 		super();
 		this.number = number;
 		this.name = name;

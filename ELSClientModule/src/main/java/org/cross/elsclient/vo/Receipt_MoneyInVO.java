@@ -12,11 +12,6 @@ import org.cross.elscommon.util.ReceiptType;
 public class Receipt_MoneyInVO extends ReceiptVO {
 
 	/**
-	 * 收款日期
-	 */
-	public String time;
-
-	/**
 	 * 收款金额
 	 */
 	public double money;
@@ -32,25 +27,18 @@ public class Receipt_MoneyInVO extends ReceiptVO {
 	public ArrayList<String> orderNumbers;
 
 	/**
-	 * 收款单编号
-	 */
-	public String number;
-
-	/**
 	 * 收款营业厅+编号
 	 */
 	public String businessHallNameID;
 
-	public Receipt_MoneyInVO(String number, ReceiptType type, String time,
-			String time2, double money, PersonnelVO person,
-			ArrayList<String> orderNumbers, String number2,
+	public Receipt_MoneyInVO(String time,
+			double money, PersonnelVO person,String number,
+			ArrayList<String> orderNumbers,
 			String businessHallNameID) {
-		super(number, type, time);
-		time = time2;
+		super(number, ReceiptType.MONEYIN, time);
 		this.money = money;
 		this.person = person;
 		this.orderNumbers = orderNumbers;
-		number = number2;
 		this.businessHallNameID = businessHallNameID;
 	}
 
