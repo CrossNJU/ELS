@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import org.cross.elsclient.blimpl.blUtility.AccountInfo;
 import org.cross.elsclient.blimpl.blUtility.OrganizationInfo;
 import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
+import org.cross.elsclient.blimpl.blUtility.SalaryInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blimpl.blUtility.VehicleInfo;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
-import org.cross.elsclient.blservice.logblservice.LogBLService;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.InitialVO;
 import org.cross.elsclient.vo.OrganizationVO;
@@ -17,11 +17,11 @@ import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
-import org.cross.elscommon.dataservice.initialdataservice.InitialDataService_Stub;
 import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.po.InitialPO;
 import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.po.PersonnelPO;
+import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.ResultMessage;
@@ -35,11 +35,12 @@ public class InitialBLImpl implements InitialBLService {
 	VehicleInfo vehicleInfo;
 	StockInfo stockInfo;
 	AccountInfo accountInfo;
+	SalaryInfo salaryInfo;
 
 	public InitialBLImpl(InitialDataService initialData,
 			InitialInfo initialInfo, OrganizationInfo organizationInfo,
 			PersonnelInfo personnelInfo, VehicleInfo vehicleInfo,
-			StockInfo stockInfo, AccountInfo accountInfo) {
+			StockInfo stockInfo, AccountInfo accountInfo, SalaryInfo salaryInfo) {
 		this.initialData = initialData;
 		this.initialInfo = initialInfo;
 		this.orgInfo = organizationInfo;
@@ -47,6 +48,7 @@ public class InitialBLImpl implements InitialBLService {
 		this.vehicleInfo = vehicleInfo;
 		this.stockInfo = stockInfo;
 		this.accountInfo = accountInfo;
+		this.salaryInfo = salaryInfo;
 	}
 
 	@Override
@@ -80,11 +82,17 @@ public class InitialBLImpl implements InitialBLService {
 
 	@Override
 	public ArrayList<PersonnelVO> showPersonnel(String initialID) throws RemoteException {
-		InitialPO po = initialData.findByID(initialID);
 		ArrayList<PersonnelPO> personnelPOs = initialData.findInitPersonnels(initialID);
 		ArrayList<PersonnelVO> personnelVOs = new ArrayList<PersonnelVO>();
+		if (personnelPOs == null) {
+			return null;
+		}
+		int size = personnelPOs.size();
+		for (int i = 0; i < size; i++) {
+			SalaryPO salary = salaryInfo.findbyPerNum(personnelPOs.get(i).getNumber());
+			personnelVOs.add(personnelInfo.toPersonnelVO(personnelPOs.get(i), salary));
+		}
 		return personnelVOs;
-		...
 	}
 
 	@Override

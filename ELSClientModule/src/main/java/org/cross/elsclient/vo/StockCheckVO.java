@@ -1,6 +1,5 @@
 package org.cross.elsclient.vo;
 
-import org.cross.elscommon.util.City;
 
 public class StockCheckVO {
 	

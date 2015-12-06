@@ -98,10 +98,39 @@ public class GoodsInfoImpl implements GoodsInfo {
 		return goodsVOs;
 	}
 
-	@Override
-	public ArrayList<GoodsVO> findGoodsFromArea(String stockAreaNum) {
-//		ArrayList<GoodsPO> po
+	public ArrayList<GoodsVO> toGoodsVO(ArrayList<GoodsPO> pos)
+			throws RemoteException {
+		if (pos == null) {
+			return null;
+		}
+		ArrayList<GoodsVO> vos = new ArrayList<GoodsVO>();
+		int size = pos.size();
+		for (int i = 0; i < size; i++) {
+			ArrayList<HistoryPO> histroy = goodsData.findHistory(pos.get(i).getOrderNum());
+			vos.add(toGoodsVO(pos.get(i),toHistroyVO(histroy)));
+		}
 		return null;
 	}
+	
+	@Override
+	public ArrayList<GoodsVO> findGoodsFromArea(String stockAreaNum) throws RemoteException {
+		ArrayList<GoodsPO> po = goodsData.findByStockAreaNum(stockAreaNum);
+		return toGoodsVO(po);
+	}
+
+	@Override
+	public ArrayList<HistoryVO> toHistroyVO(ArrayList<HistoryPO> pos) {
+		if (pos == null) {
+			return null;
+		}
+		ArrayList<HistoryVO> vos = new ArrayList<HistoryVO>();
+		int size = pos.size();
+		for (int i = 0; i < size; i++) {
+			vos.add(toHistroyVO(pos.get(i)));
+		}
+		return vos;
+	}
+
+	
 
 }

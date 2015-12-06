@@ -44,7 +44,7 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 
 	@Override
 	public ResultMessage insert(AccountPO po) throws RemoteException {
-		String sql = "insert into `account`(`name`, `accountNum`, `balance`) values ('" + po.getName() + "','"
+		String sql = "insert ignore into `account`(`name`, `accountNum`, `balance`) values ('" + po.getName() + "','"
 				+ po.getAccountNum() + "'," + po.getBalance() + ")";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;

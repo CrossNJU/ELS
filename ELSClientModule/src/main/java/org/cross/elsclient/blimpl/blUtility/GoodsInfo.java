@@ -28,27 +28,7 @@ public interface GoodsInfo {
 	 */
 	public GoodsVO searchGoods(String goodsID) throws RemoteException;
 
-	public ArrayList<GoodsVO> findGoodsFromArea(String stockAreaNum);
-//	/**
-//	 * 把快件更新到stockArea中
-//	 * 
-//	 * @throws RemoteException
-//	 */
-//	public ResultMessage updateToArea(String goodsID, String stockNum,
-//			String stockAreaNum) throws RemoteException;
-//
-//	/**
-//	 * 从仓库中删除快件
-//	 * 
-//	 * @throws RemoteException
-//	 */
-//	public ResultMessage deleteFromStock(String goodsID) throws RemoteException;
-//
-//	/**
-//	 * 查找快件所在的stockArea编号
-//	 * 
-//	 * @throws RemoteException
-//	 */
-//	public String findStockAreaNum(String goodsID) throws RemoteException;
+	public ArrayList<GoodsVO> findGoodsFromArea(String stockAreaNum) throws RemoteException;
 
+	public ArrayList<HistoryVO> toHistroyVO(ArrayList<HistoryPO> pos);
 }

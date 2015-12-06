@@ -5,36 +5,36 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
+import org.cross.elsclient.blimpl.blUtility.SalaryInfo;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.vo.PersonnelVO;
-import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.po.PersonnelPO;
-import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 
-public class PersonnelBLImpl implements PersonnelBLService{
-	
+public class PersonnelBLImpl implements PersonnelBLService {
+
 	public PersonnelDataService personnelData;
 	ReceiptInfo receiptInfo;
 	PersonnelInfo personnelInfo;
-	
-	public PersonnelBLImpl(PersonnelDataService personnelData,PersonnelInfo personnelInfo,ReceiptInfo receiptInfo){
+	SalaryInfo salaryInfo;
+
+	public PersonnelBLImpl(PersonnelDataService personnelData,
+			PersonnelInfo personnelInfo, ReceiptInfo receiptInfo,
+			SalaryInfo salaryInfo) {
 		this.personnelData = personnelData;
 		this.personnelInfo = personnelInfo;
 		this.receiptInfo = receiptInfo;
+		this.salaryInfo = salaryInfo;
 	}
-	
+
 	@Override
 	public PersonnelVO findById(String id) throws RemoteException {
 		
 		PersonnelPO po = personnelData.findById(id);
-		PersonnelVO vo = personnelInfo.toPersonnelVO(po, id, 0);
-//		int size = pos.size();
-//		for (int i = 0; i < size; i++) {
-//			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
-//		}
+		PersonnelVO vo = personnelInfo.toPersonnelVO(po, salaryInfo.findbyPerNum(id));
 		return vo;
 	}
 
@@ -47,7 +47,8 @@ public class PersonnelBLImpl implements PersonnelBLService{
 		}
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
+			SalaryPO salary = salaryInfo.findbyPerNum(pos.get(i).getNumber());
+			vos.add(personnelInfo.toPersonnelVO(pos.get(i), salary));
 		}
 		return vos;
 	}
@@ -75,21 +76,35 @@ public class PersonnelBLImpl implements PersonnelBLService{
 		ArrayList<PersonnelPO> pos = personnelData.show();
 		int size = pos.size();
 		for (int i = 0; i < size; i++) {
-			vos.add(personnelInfo.toPersonnelVO(pos.get(i)));
+			SalaryPO salary = salaryInfo.findbyPerNum(pos.get(i).getNumber());
+			vos.add(personnelInfo.toPersonnelVO(pos.get(i), salary));
 		}
 		return vos;
 	}
 
 	@Override
-	public ArrayList<PersonnelVO> findByOrg(String number) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<PersonnelVO> findByOrg(String number)
+			throws RemoteException {
+		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
+		ArrayList<PersonnelPO> pos = personnelData.findByOrg(number);
+		int size = pos.size();
+		for (int i = 0; i < size; i++) {
+			SalaryPO salary = salaryInfo.findbyPerNum(pos.get(i).getNumber());
+			vos.add(personnelInfo.toPersonnelVO(pos.get(i), salary));
+		}
+		return vos;
 	}
 
 	@Override
-	public ArrayList<PersonnelVO> findByPosition(PositionType position) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<PersonnelVO> findByPosition(PositionType position)
+			throws RemoteException {
+		ArrayList<PersonnelVO> vos = new ArrayList<PersonnelVO>();
+		ArrayList<PersonnelPO> pos = personnelData.findByPosition(position);
+		int size = pos.size();
+		for (int i = 0; i < size; i++) {
+			SalaryPO salary = salaryInfo.findbyPerNum(pos.get(i).getNumber());
+			vos.add(personnelInfo.toPersonnelVO(pos.get(i), salary));
+		}
+		return vos;
 	}
-
 }

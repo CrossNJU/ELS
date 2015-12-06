@@ -39,14 +39,24 @@ public class Receipt_TransVO extends ReceiptVO {
 	public String vehicleNum;
 
 	/**
-	 * 出发地(机构name+id)
+	 * 出发地(机构name)
 	 */
-	public String startOrg;
+	public String startOrgName;
 
 	/**
-	 * 到达地(机构name+id)
+	 * 出发地(机构ID)
 	 */
-	public String arriveOrg;
+	public String startOrgID;
+
+	/**
+	 * 到达地(机构name)
+	 */
+	public String arriveOrgName;
+
+	/**
+	 * 到达地(机构ID)
+	 */
+	public String arriveOrgID;
 
 	/**
 	 * 监装员
@@ -60,16 +70,19 @@ public class Receipt_TransVO extends ReceiptVO {
 
 	public Receipt_TransVO(String number, ReceiptType type, String time,
 			ArrayList<String> goodsID, double cost, OrganizationType org,
-			String localNum, String vehicleNum, String startOrg,
-			String arriveOrg, String observerName, String driverName) {
+			String localNum, String vehicleNum, String startOrgName,
+			String startOrgID, String arriveOrgName, String arriveOrgID,
+			String observerName, String driverName) {
 		super(number, type, time);
 		this.goodsID = goodsID;
 		this.cost = cost;
 		this.org = org;
 		this.localNum = localNum;
 		this.vehicleNum = vehicleNum;
-		this.startOrg = startOrg;
-		this.arriveOrg = arriveOrg;
+		this.startOrgName = startOrgName;
+		this.startOrgID = startOrgID;
+		this.arriveOrgName = arriveOrgName;
+		this.arriveOrgID = arriveOrgID;
 		this.observerName = observerName;
 		this.driverName = driverName;
 	}

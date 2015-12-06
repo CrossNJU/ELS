@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elscommon.po.PersonnelPO;
+import org.cross.elscommon.po.SalaryPO;
 
 public interface PersonnelInfo {
 
-	public PersonnelVO toPersonnelVO(PersonnelPO po, String orgNameID,
-			double extreMoney);
+	public PersonnelVO toPersonnelVO(PersonnelPO po, SalaryPO salary);
 
 	public PersonnelPO toPersonnelPO(PersonnelVO vo);
 

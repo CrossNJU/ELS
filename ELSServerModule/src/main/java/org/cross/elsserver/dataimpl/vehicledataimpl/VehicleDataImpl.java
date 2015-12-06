@@ -27,7 +27,7 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 
 	@Override
 	public ResultMessage insert(VehiclePO veh) throws RemoteException {
-		String sql = "insert ignore into `vehicle`(`number`, `engineNum`, `baseNum`, `buyTime`, `lastTime`, `state`, `licence`, `orgNum`, `initialNum`) values ('"
+		String sql = "insert ignore into `vehicle`(`number`, `engineNum`, `baseNum`, `buyTime`, `lastTime`, `state`, `licence`, `orgNum`) values ('"
 				+ veh.getNumber() + "','" + veh.getEngineNum() + "','" + veh.getBaseNum() + veh.getBuyTime() + "','"
 				+ veh.getLastTime() + "'," + veh.isState() + ",'" + veh.getLicence() + "','" + veh.getOrgNum() +"')";
 		if(mysql.execute(sql)) return ResultMessage.SUCCESS;

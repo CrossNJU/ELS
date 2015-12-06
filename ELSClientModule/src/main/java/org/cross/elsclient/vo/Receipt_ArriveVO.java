@@ -14,9 +14,14 @@ import org.cross.elscommon.util.ReceiptType;
 public class Receipt_ArriveVO extends ReceiptVO {
 
 	/**
-	 * 出发地(机构name+id)
+	 * 出发地(机构name)
 	 */
-	public String startOrgNameID;
+	public String startOrgName;
+
+	/**
+	 * 出发地(机构ID)
+	 */
+	public String startOrgID;
 
 	/**
 	 * 转运单编号
@@ -26,30 +31,34 @@ public class Receipt_ArriveVO extends ReceiptVO {
 	 * 出发时间
 	 */
 	public String startTime;
-	/**
-	 * 到达时间
-	 */
-	public String time;
+
 	/**
 	 * 货物信息
 	 */
 	public ArrayList<GoodsVO> goods;
 
 	/**
-	 * 到达的机构name+id
+	 * 到达的机构name
 	 */
-	public String arriveOrgNameID;
+	public String arriveOrgName;
+
+	/**
+	 * 到达的机构ID
+	 */
+	public String arriveOrgID;
 
 	public Receipt_ArriveVO(String number, ReceiptType type, String time,
-			String startOrgNameID, String transNum, String startTime,
-			String time2, ArrayList<GoodsVO> goods, String arriveOrgNameID) {
+			String startOrgName, String startOrgID, String transNum,
+			String startTime, ArrayList<GoodsVO> goods, String arriveOrgName,
+			String arriveOrgID) {
 		super(number, type, time);
-		this.startOrgNameID = startOrgNameID;
+		this.startOrgName = startOrgName;
+		this.startOrgID = startOrgID;
 		this.transNum = transNum;
 		this.startTime = startTime;
-		time = time2;
 		this.goods = goods;
-		this.arriveOrgNameID = arriveOrgNameID;
+		this.arriveOrgName = arriveOrgName;
+		this.arriveOrgID = arriveOrgID;
 	}
 
 }

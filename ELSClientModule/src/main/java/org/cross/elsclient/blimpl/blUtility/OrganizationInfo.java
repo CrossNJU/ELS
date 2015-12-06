@@ -23,5 +23,4 @@ public interface OrganizationInfo {
 	 * @throws RemoteException 
 	 */
 	public ArrayList<OrganizationVO> show() throws RemoteException;
-	
 }

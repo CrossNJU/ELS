@@ -10,6 +10,7 @@ import java.io.Serializable;
 import org.cross.elscommon.util.ApproveType;
 import org.cross.elscommon.util.ReceiptType;
 
+@SuppressWarnings("serial")
 public class ReceiptPO implements Serializable {
 
 	/**
@@ -32,8 +33,14 @@ public class ReceiptPO implements Serializable {
 	 */
 	private ApproveType approveState;
 
+	/**
+	 * 生成单据的机构
+	 */
 	private String orgNum;
 
+	/**
+	 * 生成单据的人员Number
+	 */
 	private String perNum;
 
 	public ReceiptPO(String number, ReceiptType type, String time,

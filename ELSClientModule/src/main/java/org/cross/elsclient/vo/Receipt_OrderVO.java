@@ -32,16 +32,6 @@ public class Receipt_OrderVO extends ReceiptVO {
 	public String expectTime;
 
 	/**
-	 * 目的地
-	 */
-	public City targetPlace;
-
-	/**
-	 * 出发地
-	 */
-	public City startPlace;
-
-	/**
 	 * 寄件人姓名
 	 */
 	public String senderName;
@@ -76,18 +66,15 @@ public class Receipt_OrderVO extends ReceiptVO {
 
 	public Receipt_OrderVO(String number, ReceiptType type, String time,
 			String goodsNum, double cost, String receiveTime,
-			String expectTime, City targetPlace, City startPlace,
-			String senderName, String senderMobile, String senderPhone,
-			String senderAdd, String senderOrg, String receiverName,
-			String receiverOrg, String receiverAdd, String receiverPhone,
-			String receiverMobile) {
+			String expectTime, String senderName, String senderMobile,
+			String senderPhone, String senderAdd, String senderOrg,
+			String receiverName, String receiverOrg, String receiverAdd,
+			String receiverPhone, String receiverMobile) {
 		super(number, type, time);
 		this.goodsNum = goodsNum;
 		this.cost = cost;
 		this.receiveTime = receiveTime;
 		this.expectTime = expectTime;
-		this.targetPlace = targetPlace;
-		this.startPlace = startPlace;
 		this.senderName = senderName;
 		this.senderMobile = senderMobile;
 		this.senderPhone = senderPhone;

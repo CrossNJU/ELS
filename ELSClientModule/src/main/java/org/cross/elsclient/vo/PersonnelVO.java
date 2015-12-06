@@ -43,10 +43,13 @@ public class PersonnelVO {
 	 */
 	public String birthday;
 	/**
-	 * 人员所属机构名称 + 编号
+	 * 人员所属机构名称
 	 */
-	public String orgNameID;
-
+	public String orgName;
+	/**
+	 * 人员所属机构编号
+	 */
+	public String orgNum;
 	/**
 	 * 薪资策略
 	 */
@@ -54,7 +57,7 @@ public class PersonnelVO {
 
 	public PersonnelVO(String number, String name, String sex, String id,
 			String phone, PositionType position, String birthday,
-			String orgNameID, SalaryPO salary) {
+			String orgName, String orgNum, SalaryPO salary) {
 		super();
 		this.number = number;
 		this.name = name;
@@ -63,7 +66,8 @@ public class PersonnelVO {
 		this.phone = phone;
 		this.position = position;
 		this.birthday = birthday;
-		this.orgNameID = orgNameID;
+		this.orgName = orgName;
+		this.orgNum = orgNum;
 		this.salary = salary;
 	}
 

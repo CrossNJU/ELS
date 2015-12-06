@@ -15,4 +15,6 @@ public interface ReceiptInfo {
 	 * @throws RemoteException 
 	 */
 	public ReceiptVO findByID(String names) throws RemoteException;
+	
+	
 }
