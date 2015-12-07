@@ -34,6 +34,6 @@ public class StockSeeVO {
 	/**
 	 * 快件
 	 */
-	ArrayList<GoodsVO> goods;
+	public ArrayList<GoodsVO> goods;
 	
 }

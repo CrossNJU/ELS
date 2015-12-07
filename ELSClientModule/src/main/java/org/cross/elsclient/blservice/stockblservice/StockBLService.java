@@ -103,12 +103,6 @@ public interface StockBLService {
 	public ArrayList<String> getChangeableArea(String stockID) throws RemoteException;
 	
 	/**
-	 * 得到入库时间
-	 * @throws RemoteException 
-	 */
-	public String getInTime(String stockNum,String goodsNum) throws RemoteException;
-	
-	/**
 	 * 根据机构查找仓库
 	 */
 	public StockVO findStockByOrg(String orgNum) throws RemoteException;
