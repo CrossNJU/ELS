@@ -59,6 +59,11 @@ public class GoodsVO {
 	public String orderNum;
 	
 	/**
+	 * 所属仓库小间编号
+	 */
+	public String stockAreaNum;
+	
+	/**
 	 * 构造方法
 	 * 
 	 */
@@ -71,6 +76,7 @@ public class GoodsVO {
 		this.goodsType = goodsType;
 		
 		this.state = GoodsState.LIVE;
+		this.stockAreaNum = null;
 		this.history = new ArrayList<HistoryVO>();
 	}
 
