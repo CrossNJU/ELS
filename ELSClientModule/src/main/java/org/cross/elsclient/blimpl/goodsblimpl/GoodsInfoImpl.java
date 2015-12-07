@@ -165,6 +165,11 @@ public class GoodsInfoImpl implements GoodsInfo {
 		return goodsData.update(po);
 	}
 
+	@Override
+	public ArrayList<GoodsPO> findByTransNum(String transNum) throws RemoteException {
+		return goodsData.findByTransNum(transNum);
+	}
+
 	
 
 }

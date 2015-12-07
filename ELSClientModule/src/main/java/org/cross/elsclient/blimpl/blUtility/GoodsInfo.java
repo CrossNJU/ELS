@@ -39,4 +39,6 @@ public interface GoodsInfo {
 	public String findStockAreaNum(String goodsID) throws RemoteException;
 	
 	public double getCost(String goodsID) throws RemoteException;
+	
+	public ArrayList<GoodsPO> findByTransNum(String transNum) throws RemoteException;
 }

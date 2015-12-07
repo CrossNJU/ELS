@@ -10,6 +10,7 @@ import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
+import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.vo.ReceiptVO;
 
@@ -137,17 +138,23 @@ public class ReceiptBLImpl implements ReceiptBLService{
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> findByUser(String userId)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ReceiptVO> findByUser(String userId) throws RemoteException {
+		ArrayList<ReceiptVO> volist = new ArrayList<ReceiptVO>();
+		ArrayList<ReceiptPO> polist = receiptdata.findByPerNum(userId);
+		for (int i = 0; i < polist.size(); i++) {
+			volist.add(receiptInfo.toVO(polist.get(i)));
+		}
+		return volist;
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> findByOrgan(String organId)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ReceiptVO> findByOrgan(String organId) throws RemoteException {
+		ArrayList<ReceiptVO> volist = new ArrayList<ReceiptVO>();
+		ArrayList<ReceiptPO> polist = receiptdata.findByOrgNum(organId);
+		for (int i = 0; i < polist.size(); i++) {
+			volist.add(receiptInfo.toVO(polist.get(i)));
+		}
+		return volist;
 	}
 	
 }

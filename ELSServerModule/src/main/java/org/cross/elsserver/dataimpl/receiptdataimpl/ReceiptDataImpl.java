@@ -211,4 +211,38 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		return insert(po);
 	}
 
+	@Override
+	public ArrayList<ReceiptPO> findByPerNum(String perNum) throws RemoteException {
+		String sql = "select * from `receipt` where `perNum`='"+perNum+"'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<ReceiptPO> list = new ArrayList<ReceiptPO>();
+		try {
+			while (rs.next()) {
+				ReceiptPO po = findByNum(rs.getString("number"));
+				list.add(po);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public ArrayList<ReceiptPO> findByOrgNum(String orgNum) throws RemoteException {
+		String sql = "select * from `receipt` where `orgNum`='"+orgNum+"'";
+		ResultSet rs = mysql.query(sql);
+		ArrayList<ReceiptPO> list = new ArrayList<ReceiptPO>();
+		try {
+			while (rs.next()) {
+				ReceiptPO po = findByNum(rs.getString("number"));
+				list.add(po);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

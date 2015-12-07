@@ -38,7 +38,9 @@ public class StockBLTest {
 		StockInfo stockInfo = new StockInfoImpl(goodsInfo, orgInfo, dataFactoryService.getStockData());
 		SalaryInfo salaryInfo = new SalaryBLImpl(dataFactoryService.getSalaryData());
 		PersonnelInfo personnelInfo = new PersonnelInfoImpl(dataFactoryService.getPersonnelData(), salaryInfo);
-		ReceiptInfo receiptInfo = new ReceiptInfoImpl(dataFactoryService.getReceiptData(), stockInfo, personnelInfo);
+		ReceiptInfoImpl receiptInfo = new ReceiptInfoImpl(dataFactoryService.getReceiptData());
+		receiptInfo.stockInfo = stockInfo;
+		receiptInfo.goodsInfo = goodsInfo;
 		StockBLImpl stockBLImpl = new StockBLImpl(dataFactoryService.getStockData(), goodsInfo, stockInfo, receiptInfo);
 		StockAreaVO area1 = new StockAreaVO("SA00001", "S0032902", StockType.Fast, 100, 0, null);
 		StockAreaVO area2 = new StockAreaVO("SA00002", "S0032902", StockType.COMMON, 100, 0, null);

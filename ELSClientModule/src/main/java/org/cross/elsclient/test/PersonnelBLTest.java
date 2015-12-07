@@ -30,7 +30,7 @@ public class PersonnelBLTest {
 		SalaryInfo salaryInfo = new SalaryBLImpl(dataFactory.getSalaryData());
 		PersonnelInfoImpl personnelInfo = new PersonnelInfoImpl(
 				dataFactory.getPersonnelData(), salaryInfo);
-		ReceiptInfoImpl receiptInfo = new ReceiptInfoImpl();
+		ReceiptInfoImpl receiptInfo = new ReceiptInfoImpl(dataFactory.getReceiptData());
 		personnelInfo.receiptInfo = receiptInfo;
 		receiptInfo.personnelInfo = personnelInfo;
 		PersonnelBLImpl personnelBLImpl = new PersonnelBLImpl(

@@ -37,7 +37,9 @@ public class ReceiptBLTest {
 		PersonnelInfoImpl personnelInfo = new PersonnelInfoImpl(
 				dataFactory.getPersonnelData(), salaryInfo);
 		ReceiptInfoImpl receiptInfo = new ReceiptInfoImpl(
-				dataFactory.getReceiptData(), stockInfo, personnelInfo);
+				dataFactory.getReceiptData());
+		receiptInfo.goodsInfo = goodsInfo;
+		receiptInfo.stockInfo = stockInfo;
 		personnelInfo.receiptInfo = receiptInfo;
 		ReceiptBLImpl receiptBLImpl = new ReceiptBLImpl(
 				dataFactory.getReceiptData(), receiptInfo, goodsInfo);
