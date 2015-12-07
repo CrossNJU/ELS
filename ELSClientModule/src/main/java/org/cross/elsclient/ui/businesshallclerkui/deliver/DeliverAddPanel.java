@@ -16,6 +16,7 @@ import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_ArriveVO;
+import org.cross.elsclient.vo.Receipt_DeliverVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.Receipt_TransVO;
 import org.cross.elscommon.util.OrganizationType;
@@ -28,11 +29,11 @@ public class DeliverAddPanel extends ELSInfoPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Receipt_TransVO transvo;
-	ReceiptBLService bl;
+	Receipt_DeliverVO delvo;
+	ReceiptBLService receiptbl;
 
 	public DeliverAddPanel(ReceiptBLService receiptbl) {
-		this.bl = receiptbl;
+		this.receiptbl = receiptbl;
 		init();
 	}
 
@@ -42,6 +43,7 @@ public class DeliverAddPanel extends ELSInfoPanel {
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增派件单");
 		/* 0 */addEditableItem("派件单编号", ConstantValue.getReceiptNum(ReceiptType.TRANS), false);
+		addDateItem("派件时间", false);
 		addEditableItem("快件单编号", "", true);
 		addEditableItem("快递员工号", "", true);
 		addEditableItem("快递员姓名", "", true);
@@ -53,15 +55,8 @@ public class DeliverAddPanel extends ELSInfoPanel {
 
 	@Override
 	protected void confirm() throws RemoteException {
-		Receipt_OrderVO order = (Receipt_OrderVO) bl.findByID(itemLabels.get(0).toString());
-		ArrayList<String> goods = new ArrayList<String>();
-		goods.add(itemLabels.get(1).toString());
-		transvo = new Receipt_TransVO(itemLabels.get(0).toString(), ReceiptType.TRANS, ConstantValue.getTime(), goods,
-				order.cost, OrganizationType.BUSINESSHALL, "localNum", "null",
-				order.startPlace, order.targetPlace, new PersonnelVO(itemLabels.get(2).toString(),
-						itemLabels.get(2).toString(), PositionType.COURIER, OrganizationType.BUSINESSHALL, "localNum"),
-				null);
-		if (bl.add(transvo) == ResultMessage.SUCCESS) {
+		delvo = new Receipt_DeliverVO(itemLabels.get(0).toString(), itemLabels.get(1).toString(), itemLabels.get(2).toString(), itemLabels.get(4).toString(), itemLabels.get(3).toString());
+		if (receiptbl.add(delvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			parent.contentPanel.cl.show(parent.contentPanel, "receipts");

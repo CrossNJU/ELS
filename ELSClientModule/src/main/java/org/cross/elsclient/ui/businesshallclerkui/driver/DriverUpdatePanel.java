@@ -4,13 +4,14 @@ import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
+import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.PersonnelVO;
 
 public class DriverUpdatePanel extends ELSInfoPanel{
-	PersonnelVO vo;
+	DriverVO vo;
 	PersonnelBLService personnelBLService;
 
-	public DriverUpdatePanel(PersonnelVO vo, PersonnelBLService bl) {
+	public DriverUpdatePanel(DriverVO vo, PersonnelBLService bl) {
 		this.vo = vo;
 		this.personnelBLService = bl;
 		init();
@@ -21,15 +22,15 @@ public class DriverUpdatePanel extends ELSInfoPanel{
 		// TODO Auto-generated method stub
 		super.init();
 
-		setTitle("增加司机信息");
-		addEditableItem("司机编号", vo.id, false);
+		setTitle("更新司机信息");
+		addEditableItem("司机编号", vo.number, false);
 		addEditableItem("姓名", vo.name, true);
-		addEditableItem("性别", "男", true);
-		addEditableItem("身份证号码", "321838198801828381", true);
-		addEditableItem("手机", "18372681982", true);
-		addEditableItem("出生日期", "1978-10-11", true);
-		addEditableItem("车辆单位", "上海中转中心", true);
-		addEditableItem("行驶证期限", "2014-10-22", true);
+		addEditableItem("性别", vo.sex, true);
+		addEditableItem("身份证号码", vo.id, true);
+		addEditableItem("手机", vo.phone, true);
+		addEditableItem("出生日期", vo.birthday, true);
+		addEditableItem("车辆单位", vo.orgNum, true);
+		addEditableItem("行驶证期限", vo.licenceEnd, true);
 	}
 	
 	@Override

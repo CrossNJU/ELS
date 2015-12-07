@@ -30,6 +30,7 @@ public interface StockDataService extends Remote{
 	public ResultMessage insertStockOP(StockOperationPO po) throws RemoteException;
 	public ArrayList<StockOperationPO> findStockOPByStock(String stockNum) throws RemoteException;
 	public ArrayList<StockOperationPO> findStockOPByTime(String startTime, String endTime) throws RemoteException;
+	public ArrayList<StockOperationPO> findStockOPByTimeAndStock(String stockNum, String startTime, String endTime) throws RemoteException;
 	public ArrayList<StockOperationPO> showStockOP()throws RemoteException;
 }
 

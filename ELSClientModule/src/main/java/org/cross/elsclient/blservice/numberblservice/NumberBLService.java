@@ -11,10 +11,10 @@ public interface NumberBLService {
 	 * 
 	 * @throws RemoteException
 	 */
-	public String getNumber(NumberType type) throws RemoteException;
+	public String getNumber(NumberType type);
 
 	/**
 	 * 存储下一编号，输入当前编号即可
 	 */
-	public ResultMessage saveNextNumber(NumberType type, String currentNum) throws RemoteException;
+	public ResultMessage saveNextNumber(NumberType type, String currentNum);
 }

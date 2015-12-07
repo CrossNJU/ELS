@@ -18,8 +18,13 @@ public class NumberBLImpl implements NumberBLService{
 	}
 
 	@Override
-	public String getNumber(NumberType type) throws RemoteException {
-		numberpo = numberdata.show();
+	public String getNumber(NumberType type) {
+		try {
+			numberpo = numberdata.show();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 

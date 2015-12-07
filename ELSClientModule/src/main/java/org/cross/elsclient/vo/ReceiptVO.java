@@ -30,16 +30,22 @@ public class ReceiptVO {
 	 */
 	public ApproveType approveState;
 	
+	public String perNum;
+	
+	public String orgNum;
+	
 	/**
 	 * 构造方法
 	 * @param number
 	 * @param type
 	 * @param time
 	 */
-	public ReceiptVO(String number, ReceiptType type, String time){
+	public ReceiptVO(String number, ReceiptType type, String time, String perNum, String orgNum){
 		this.number = number;
 		this.type = type;
 		this.time = time;
+		this.perNum = perNum;
+		this.orgNum = orgNum;
 		
 		this.approveState = ApproveType.UNCHECKED;
 	}

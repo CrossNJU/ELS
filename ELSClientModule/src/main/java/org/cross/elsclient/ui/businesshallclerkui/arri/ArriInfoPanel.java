@@ -15,8 +15,10 @@ public class ArriInfoPanel extends ELSInfoPanel{
 	Receipt_ArriveVO vo;
 	public ReceiptBLService receiptbl;
 	
-	public ArriInfoPanel(Receipt_ArriveVO vo){
+	public ArriInfoPanel(Receipt_ArriveVO vo, ReceiptBLService receiptbl){
 		this.vo = vo;
+		this.receiptbl = receiptbl;
+		init();
 	}
 	
 	@Override
@@ -34,9 +36,9 @@ public class ArriInfoPanel extends ELSInfoPanel{
 		setTitle("创建到达单");
 		addNormalItem("到达单编号", vo.number);
 		addNormalItem("装车/中转单号", vo.transNum);
-		addNormalItem("出发地", vo.startPlace.toString());
+		addNormalItem("出发地", vo.startOrgID);
 		addNormalItem("出发时间", transvo.time);
-		addNormalItem("到达地", transvo.arriveCity.toString());
+		addNormalItem("到达地", transvo.arriveOrgID);
 		addNormalItem("到达时间", vo.time);
 		addNormalItem("货物到达状态", "完好");
 		

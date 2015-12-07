@@ -10,9 +10,9 @@ public class Receipt_DeliverVO extends ReceiptVO{
 
 	public String posterNum;
 
-	public Receipt_DeliverVO(String number, ReceiptType type, String time,
-			String orderNum, String name, String posterNum) {
-		super(number, type, time);
+	public Receipt_DeliverVO(String number, String time,
+			String orderNum, String name, String posterNum, String perNum, String orgNum) {
+		super(number, ReceiptType.DELIVER, time, perNum, orgNum);
 		this.orderNum = orderNum;
 		this.name = name;
 		this.posterNum = posterNum;

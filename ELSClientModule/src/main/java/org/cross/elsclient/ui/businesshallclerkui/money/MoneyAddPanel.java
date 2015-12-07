@@ -49,10 +49,7 @@ public class MoneyAddPanel extends ELSInfoPanel {
 
 	@Override
 	protected void confirm() throws RemoteException {
-		moneyinvo = new Receipt_MoneyInVO(itemLabels.get(2).toString(),
-				Double.parseDouble(itemLabels.get(4).toString()), new PersonnelVO(itemLabels.get(3).toString(), "name",
-						PositionType.COURIER, OrganizationType.BUSINESSHALL, "localnum"),
-				itemLabels.get(0).toString());
+		moneyinvo = new Receipt_MoneyInVO(itemLabels.get(2).toString(), Double.valueOf(itemLabels.get(4).toString()), person, number, orderNumbers, businessHallNameID)
 		if (bl.add(moneyinvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);

@@ -64,13 +64,11 @@ public class Receipt_OrderVO extends ReceiptVO {
 
 	public String receiverMobile;
 
-	public Receipt_OrderVO(String number, ReceiptType type, String time,
-			String goodsNum, double cost, String receiveTime,
-			String expectTime, String senderName, String senderMobile,
-			String senderPhone, String senderAdd, String senderOrg,
-			String receiverName, String receiverOrg, String receiverAdd,
-			String receiverPhone, String receiverMobile) {
-		super(number, type, time);
+	public Receipt_OrderVO(String number, String time, String goodsNum, double cost, String receiveTime,
+			String expectTime, String senderName, String senderMobile, String senderPhone, String senderAdd,
+			String senderOrg, String receiverName, String receiverOrg, String receiverAdd, String receiverPhone,
+			String receiverMobile, String perNum, String orgNum) {
+		super(number, ReceiptType.ORDER, time, perNum, orgNum);
 		this.goodsNum = goodsNum;
 		this.cost = cost;
 		this.receiveTime = receiveTime;

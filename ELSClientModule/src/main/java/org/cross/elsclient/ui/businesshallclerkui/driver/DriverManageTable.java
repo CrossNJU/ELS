@@ -6,21 +6,24 @@ import java.util.ArrayList;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
-import org.cross.elsclient.vo.PersonnelVO;
+import org.cross.elsclient.vo.DriverVO;
+import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
 
 public class DriverManageTable extends ELSManageTable{
 	PersonnelBLService personnelbl;
-	ArrayList<PersonnelVO> vos;
+	ArrayList<DriverVO> vos;
+	UserVO user;
 
 	public DriverManageTable() {
 		super();
 	}
 
 	public DriverManageTable(String[] name, int[] itemWidth,
-			PersonnelBLService personnelBLService) {
+			PersonnelBLService personnelBLService, UserVO user) {
 		super(name, itemWidth);
 		this.personnelbl = personnelBLService;
+		this.user = user;
 		init();
 	}
 
@@ -32,11 +35,11 @@ public class DriverManageTable extends ELSManageTable{
 		isUpdateAndDelete = true;
 	}
 
-	public void addItem(PersonnelVO vo) {
+	public void addItem(DriverVO vo) {
 		vos.add(vo);
 		int index = vos.indexOf(vo);
 
-		String[] item = { vo.id, vo.name, "男", "13902918321" + "上海中转中心" };
+		String[] item = { vo.id, vo.name, vo.sex, vo.phone + vo.orgNum };
 		addItemLabel(item);
 	}
 
@@ -44,8 +47,8 @@ public class DriverManageTable extends ELSManageTable{
 	public void infoBtn(int index) {
 		super.infoBtn(index);
 		ELSPanel contentPanel = (ELSPanel) getParent().getParent().getParent();
-		PersonnelVO vo = vos.get(index);
-		contentPanel.add(new DriverInfoPanel(vo), "info");
+		DriverVO vo = vos.get(index);
+		contentPanel.add(new DriverInfoPanel(vo, user), "info");
 		contentPanel.cl.show(contentPanel, "info");
 	}
 

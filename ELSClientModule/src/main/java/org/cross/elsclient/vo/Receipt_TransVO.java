@@ -22,16 +22,11 @@ public class Receipt_TransVO extends ReceiptVO {
 	 * 运费
 	 */
 	public double cost;
-
-	/**
-	 * 转运单所属机构
-	 */
-	public OrganizationType org;
-
+	
 	/**
 	 * 中转中心/营业厅汽运编号
 	 */
-	public String localNum;
+	public String transNum;
 
 	/**
 	 * 车次/航班号(车辆代号)
@@ -39,19 +34,9 @@ public class Receipt_TransVO extends ReceiptVO {
 	public String vehicleNum;
 
 	/**
-	 * 出发地(机构name)
-	 */
-	public String startOrgName;
-
-	/**
 	 * 出发地(机构ID)
 	 */
 	public String startOrgID;
-
-	/**
-	 * 到达地(机构name)
-	 */
-	public String arriveOrgName;
 
 	/**
 	 * 到达地(机构ID)
@@ -68,20 +53,17 @@ public class Receipt_TransVO extends ReceiptVO {
 	 */
 	public String driverName;
 
-	public Receipt_TransVO(String number, ReceiptType type, String time,
-			ArrayList<String> goodsID, double cost, OrganizationType org,
-			String localNum, String vehicleNum, String startOrgName,
-			String startOrgID, String arriveOrgName, String arriveOrgID,
+	public Receipt_TransVO(String number, String time,
+			ArrayList<String> goodsID, double cost, 
+			String transNum, String vehicleNum,
+			String startOrgID,  String arriveOrgID,
 			String observerName, String driverName) {
-		super(number, type, time);
+		super(number, ReceiptType.ARRIVE, time);
 		this.goodsID = goodsID;
 		this.cost = cost;
-		this.org = org;
-		this.localNum = localNum;
+		this.transNum = transNum;
 		this.vehicleNum = vehicleNum;
-		this.startOrgName = startOrgName;
 		this.startOrgID = startOrgID;
-		this.arriveOrgName = arriveOrgName;
 		this.arriveOrgID = arriveOrgID;
 		this.observerName = observerName;
 		this.driverName = driverName;

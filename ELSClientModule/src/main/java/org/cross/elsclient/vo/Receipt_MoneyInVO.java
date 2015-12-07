@@ -19,27 +19,21 @@ public class Receipt_MoneyInVO extends ReceiptVO {
 	/**
 	 * 收款快递员
 	 */
-	public PersonnelVO person;
+	public String person;
 
 	/**
 	 * 所有订单条形码号
 	 */
 	public ArrayList<String> orderNumbers;
 
-	/**
-	 * 收款营业厅+编号
-	 */
-	public String businessHallNameID;
-
 	public Receipt_MoneyInVO(String time,
-			double money, PersonnelVO person,String number,
+			double money, String person,String number,
 			ArrayList<String> orderNumbers,
-			String businessHallNameID) {
-		super(number, ReceiptType.MONEYIN, time);
+			String businessHallNameID, String perNum) {
+		super(number, ReceiptType.MONEYIN, time, perNum, businessHallNameID);
 		this.money = money;
 		this.person = person;
 		this.orderNumbers = orderNumbers;
-		this.businessHallNameID = businessHallNameID;
 	}
 
 }

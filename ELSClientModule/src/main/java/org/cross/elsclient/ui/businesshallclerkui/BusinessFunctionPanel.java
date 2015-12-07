@@ -6,6 +6,7 @@ import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
 import org.cross.elsclient.blservice.receiptblservice.Receipt_Stub;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService_Stub;
+import org.cross.elsclient.blservice.vehicleblservice.Vehicle_stub;
 import org.cross.elsclient.ui.businesshallclerkui.arri.ArriAddPanel;
 import org.cross.elsclient.ui.businesshallclerkui.deliver.DeliverAddPanel;
 import org.cross.elsclient.ui.businesshallclerkui.driver.DriverManagePanel;
@@ -23,7 +24,7 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 	public BusinessFunctionPanel() {
 		super();
 		receiptbl = new Receipt_Stub();
-		vehiclebl = new VehicleBLService_Stub();
+		vehiclebl = new Vehicle_stub();
 		init();
 	}
 	@Override

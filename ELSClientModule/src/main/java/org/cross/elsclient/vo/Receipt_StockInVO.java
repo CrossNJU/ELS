@@ -14,11 +14,6 @@ public class Receipt_StockInVO extends ReceiptVO {
 	public String goodsNumber;
 
 	/**
-	 * 目的地(营业厅name)
-	 */
-	public String targetOrgName;
-
-	/**
 	 * 目的地(营业厅ID)
 	 */
 	public String targetOrgID;
@@ -27,12 +22,11 @@ public class Receipt_StockInVO extends ReceiptVO {
 	 */
 	public String stockAreaNum;
 
-	public Receipt_StockInVO(String number, ReceiptType type, String time,
-			String goodsNumber, String targetOrgName, String targetOrgID,
-			String stockAreaNum) {
-		super(number, type, time);
+	public Receipt_StockInVO(String number,  String time,
+			String goodsNumber,  String targetOrgID,
+			String stockAreaNum, String perNum, String orgNum) {
+		super(number, ReceiptType.STOCKIN, time, perNum, orgNum);
 		this.goodsNumber = goodsNumber;
-		this.targetOrgName = targetOrgName;
 		this.targetOrgID = targetOrgID;
 		this.stockAreaNum = stockAreaNum;
 	}
