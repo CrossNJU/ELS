@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui.businesshallclerkui.money;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
@@ -13,6 +14,7 @@ import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
+import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ReceiptType;
@@ -25,9 +27,11 @@ public class MoneyAddPanel extends ELSInfoPanel {
 	private static final long serialVersionUID = 1L;
 	Receipt_MoneyInVO moneyinvo;
 	ReceiptBLService bl;
+	UserVO user;
 
-	public MoneyAddPanel(ReceiptBLService receiptbl) {
+	public MoneyAddPanel(ReceiptBLService receiptbl, UserVO user) {
 		this.bl = receiptbl;
+		this.user = user;
 		init();
 	}
 
@@ -39,7 +43,7 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		/* 0 */addEditableItem("收款单编号", ConstantValue.getReceiptNum(ReceiptType.MONEYIN), false);
 		addEditableItem("快件单编号", "", true);
 		addEditableItem("收款时间", "", true);
-		addEditableItem("收款快递员", "", true);
+		/*3*/addEditableItem("收款快递员", "", true);
 		addEditableItem("收款金额", "", true);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -49,7 +53,14 @@ public class MoneyAddPanel extends ELSInfoPanel {
 
 	@Override
 	protected void confirm() throws RemoteException {
-		moneyinvo = new Receipt_MoneyInVO(itemLabels.get(2).toString(), Double.valueOf(itemLabels.get(4).toString()), person, number, orderNumbers, businessHallNameID)
+		String[] orders = itemLabels.get(1).toString().split(";");
+		ArrayList<String> orderNums = new ArrayList<String>();
+		for (int i = 0; i < orders.length; i++) {
+			orderNums.add(orders[i]);
+		}
+		moneyinvo = new Receipt_MoneyInVO(itemLabels.get(2).toString(), Double.valueOf(itemLabels.get(4).toString()),
+				itemLabels.get(3).toString(), itemLabels.get(0).toString(), 
+				orderNums, user.orgNameID, user.number);
 		if (bl.add(moneyinvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);

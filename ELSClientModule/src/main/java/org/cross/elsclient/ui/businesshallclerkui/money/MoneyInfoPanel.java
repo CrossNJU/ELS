@@ -20,7 +20,7 @@ public class MoneyInfoPanel extends ELSInfoPanel{
 	public void init(){
 		super.init();
 		
-		setTitle("创建收款单");
+		setTitle("收款单");
 		addNormalItem("收款单编号", vo.number);
 		addNormalItem("收款时间", vo.orderNumbers.get(0));
 		addNormalItem("收款快递员", vo.person.name);

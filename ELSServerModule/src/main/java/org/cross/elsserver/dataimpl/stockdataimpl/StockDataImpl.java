@@ -206,4 +206,17 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		return po;
 	}
 
+	@Override
+	public ArrayList<StockOperationPO> findStockOPByTimeAndStock(String stockNum, String startTime, String endTime)
+			throws RemoteException {
+		ArrayList<StockOperationPO> list = findStockOPByTime(startTime, endTime);
+		for (int i = 0; i < list.size(); i++) {
+			StockOperationPO po = list.get(i);
+			if (po.getStockNum() != stockNum) {
+				list.remove(i);
+			}
+		}
+		return list;
+	}
+
 }

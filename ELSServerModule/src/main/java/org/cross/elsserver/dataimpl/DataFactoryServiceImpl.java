@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
+import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
@@ -91,6 +92,12 @@ public class DataFactoryServiceImpl extends UnicastRemoteObject implements DataF
 	@Override
 	public SalaryDataService getSalaryData() throws RemoteException {
 		return new SalaryDataImpl();
+	}
+
+	@Override
+	public ConstantDataService getConstantData() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -34,11 +34,6 @@ public class Receipt_TransVO extends ReceiptVO {
 	public String vehicleNum;
 
 	/**
-	 * 出发地(机构ID)
-	 */
-	public String startOrgID;
-
-	/**
 	 * 到达地(机构ID)
 	 */
 	public String arriveOrgID;
@@ -57,13 +52,12 @@ public class Receipt_TransVO extends ReceiptVO {
 			ArrayList<String> goodsID, double cost, 
 			String transNum, String vehicleNum,
 			String startOrgID,  String arriveOrgID,
-			String observerName, String driverName) {
-		super(number, ReceiptType.ARRIVE, time);
+			String observerName, String driverName, String perNum) {
+		super(number, ReceiptType.ARRIVE, time, perNum, startOrgID);
 		this.goodsID = goodsID;
 		this.cost = cost;
 		this.transNum = transNum;
 		this.vehicleNum = vehicleNum;
-		this.startOrgID = startOrgID;
 		this.arriveOrgID = arriveOrgID;
 		this.observerName = observerName;
 		this.driverName = driverName;

@@ -11,10 +11,13 @@ import org.cross.elsclient.ui.stockkeeperui.check.StockCheckManageTable;
 import org.cross.elsclient.ui.stockkeeperui.instock.StockInAddPanel;
 import org.cross.elsclient.ui.stockkeeperui.observe.StockSeeManagePanel;
 import org.cross.elsclient.ui.stockkeeperui.outstock.StockOutAddPanel;
+import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.vo.UserVO;
 
 public class StockFunctionPanel extends ELSFunctionPanel{
 	public ReceiptBLService receiptbl;
 	public StockBLService stockbl;
+	UserVO user;
 	
 	public StockFunctionPanel() {
 		super();
@@ -25,6 +28,8 @@ public class StockFunctionPanel extends ELSFunctionPanel{
 	public void init() {
 		super.init();
 
+		this.user = UIConstant.CURRENT_USER;
+		
 		String[] name = {"快件单编号","入库时间","目的地","所属小间"};
 		int[] itemWidth = {200,200,200,100};
 		
@@ -34,10 +39,10 @@ public class StockFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("库存盘点", "stockcheck");
 		addFunctionBtn("单据管理", "receipts");
 		
-		addFunctionPanel(new StockInAddPanel(stockbl, receiptbl), "add","stockin");
-		addFunctionPanel(new StockOutAddPanel(stockbl, receiptbl), "add","stockout");
-		addFunctionPanel(new StockSeeManagePanel(receiptbl), "manage", "stocksee");
-		addFunctionPanel(new StockCheckManageTable(name, itemWidth, stockbl), "manage", "stockcheck");
+		addFunctionPanel(new StockInAddPanel(stockbl, receiptbl ,user), "add","stockin");
+		addFunctionPanel(new StockOutAddPanel(stockbl, receiptbl, user), "add","stockout");
+		addFunctionPanel(new StockSeeManagePanel(stockbl,user), "manage", "stocksee");
+		addFunctionPanel(new StockCheckManageTable(name, itemWidth, stockbl,user), "manage", "stockcheck");
 		
 		addFunctionPanel(new ReceiptManagePanel(receiptbl), "manage", "receipts");
 	}

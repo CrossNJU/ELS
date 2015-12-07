@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui.stockkeeperui.outstock;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
@@ -13,6 +14,7 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.Receipt_StockOutVO;
+import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
 
 public class StockOutAddPanel extends ELSInfoPanel{
@@ -23,9 +25,12 @@ public class StockOutAddPanel extends ELSInfoPanel{
 	Receipt_StockOutVO stockoutvo;
 	StockBLService stockbl;
 	ReceiptBLService receiptbl;
+	UserVO user;
 	
-	public StockOutAddPanel(StockBLService stockbl, ReceiptBLService receiptbl){
+	public StockOutAddPanel(StockBLService stockbl, ReceiptBLService receiptbl, UserVO user){
 		this.stockbl = stockbl;
+		this.receiptbl = receiptbl;
+		this.user = user;
 		init();
 	}
 	
@@ -34,9 +39,9 @@ public class StockOutAddPanel extends ELSInfoPanel{
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增出库单");
-		addEditableItem("出库单编号", ConstantValue.getReceiptTransNum(), false);
+		/*0*/addEditableItem("出库单编号", ConstantValue.getReceiptTransNum(), false);
 		addEditableItem("快件单编号", "", true);
-		addEditableItem("出库时间", "", true);
+		addDateItem("出库时间", false);
 		addEditableItem("目的地", "", true);
 		addEditableItem("中转/装车单号", "", true);
 		addEditableItem("运输方式", "", true);
@@ -48,6 +53,15 @@ public class StockOutAddPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void confirm() throws RemoteException {
+		String[] orders = itemLabels.get(1).toString().split(";");
+		ArrayList<String> orderNums = new ArrayList<String>();
+		for (int i = 0; i < orders.length; i++) {
+			orderNums.add(orders[i]);
+		}
+		stockoutvo = new Receipt_StockOutVO(itemLabels.get(0).toString(),
+				itemLabels.get(2).toString(), orderNums, 
+				itemLabels.get(3).toString(), itemLabels.get(5).toString(), itemLabels.get(4).toString(),
+				user.number, user.orgNameID);
 		if(receiptbl.add(stockoutvo)==ResultMessage.SUCCESS){
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);

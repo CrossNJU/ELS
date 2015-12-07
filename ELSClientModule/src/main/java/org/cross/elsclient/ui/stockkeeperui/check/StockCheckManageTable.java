@@ -10,45 +10,41 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockCheckVO;
 import org.cross.elsclient.vo.StockVO;
+import org.cross.elsclient.vo.UserVO;
 
 public class StockCheckManageTable extends ELSManageTable{
 	StockBLService stockbl;
-	ArrayList<GoodsVO> goods;
+	StockVO stockvo;
+	UserVO user;
+	ArrayList<StockCheckVO> stockchecks;
 	
 	public StockCheckManageTable(){
 		super();
 	}
-	public StockCheckManageTable(String[] name, int[] itemWidth, StockBLService stockbl){
+	public StockCheckManageTable(String[] name, int[] itemWidth, StockBLService stockbl, UserVO user){
 		super(name, itemWidth);
 		this.stockbl = stockbl;
+		this.user = user;
+		try {
+			stockvo = stockbl.findStockByOrg(user.orgNameID);
+			stockchecks = stockbl.showStockCheck(stockvo.number);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		init();
 	}
 	
 	@Override
 	public void init(){
 		super.init();
-		goods = new ArrayList<GoodsVO>();
-		StockVO vo =  null;
-//		try {
-//			vo = new StockVO(number, totalAreas)
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		for (int i = 0; i < vo.stockAreas.size(); i++) {
-//			StockAreaVO area = vo.stockAreas.get(i);
-//			for (int j = 0; j < area.goodsList.size(); j++) {
-//				GoodsVO goods  = area.goodsList.get(j);
-//				addItem(goods, "time", "target place", area.number);
-//			}
-//		}
 		isUpdateAndDelete = false;
 	}
 	
-	public void addItem(GoodsVO vo , String time, String place, String areaNum){
-		goods.add(vo);
-		String[] item = {vo.number,time, place, areaNum};
+	public void addItem(StockCheckVO check){
+		String[] item = {check.goodsNumber, check.inTime, check.targetCity , check.stockAreaNum};
 		addItemLabel(item);
 	}
 

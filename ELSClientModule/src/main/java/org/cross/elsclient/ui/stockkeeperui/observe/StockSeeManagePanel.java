@@ -20,21 +20,34 @@ import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.Receipt_TransVO;
 import org.cross.elsclient.vo.StockAreaVO;
+import org.cross.elsclient.vo.StockCheckVO;
+import org.cross.elsclient.vo.StockSeeVO;
 import org.cross.elsclient.vo.StockVO;
+import org.cross.elsclient.vo.UserVO;
 
 public class StockSeeManagePanel extends ELSManagePanel{
-	ReceiptBLService receiptbl;
 	StockBLService stockbl;
-	StockVO stockvo;
-	StockSeeManageTable list;
+	StockSeeVO stocksee;
+	StockVO stock;
+	UserVO user;
+	
+	StockSeeManageTableFirst listFirst;
+	StockSeeManageTableSecond listSecond;
 	ELSDatePicker datePicker1;
 	ELSDatePicker datePicker2;
 	ELSButton addBtn;
 	
 	public StockSeeManagePanel(){}
-	public StockSeeManagePanel(ReceiptBLService receiptbl){
+	public StockSeeManagePanel(StockBLService stockbl, UserVO user){
 		super();
-		this.receiptbl = receiptbl;
+		this.stockbl = stockbl;
+		this.user = user;
+		try {
+			stock = stockbl.findStockByOrg(user.orgNameID);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		init();
 	}
 	
@@ -43,9 +56,14 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		super.setContentPanel();
 		String[] s = {"出库数量","出库金额","入库数量","入库金额","库存数量合计"};
 		int[] itemWidth = {100,100,100,100,100};
-		list = new StockSeeManageTable(s, itemWidth,receiptbl);
-		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
-		container.add(list);
+		listFirst = new StockSeeManageTableFirst(s, itemWidth);
+		listFirst.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		container.add(listFirst);
+		String[] s2 = {"快件单编号","存放位置"};
+		int[] itemWidth2 = {200,200};
+		listSecond = new StockSeeManageTableSecond(s2, itemWidth2);
+		listFirst.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*4+UIConstant.SEARCHPANEL_HEIGHT);
+		container.add(listSecond);
 	}
 	
 	@Override
@@ -77,11 +95,15 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			for (int i = 0; i < stockvo.stockAreas.size(); i++) {
-				StockAreaVO area  = stockvo.stockAreas.get(i);
-				for (int j = 0; j < area.goodsList.size(); j++) {
-					list.addItem(area.goodsList.get(j), area.number);
-				}
+			try {
+				stocksee = stockbl.showStockInfo(stock.number, datePicker1.getDateString(), datePicker2.getDateString());
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			listFirst.addItem(stocksee);
+			for (int i = 0; i < stocksee.goods.size(); i++) {
+				listSecond.addItem(stocksee.goods.get(i));
 			}
 		}
 

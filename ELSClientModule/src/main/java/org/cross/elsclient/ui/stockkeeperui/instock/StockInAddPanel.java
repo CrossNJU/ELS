@@ -13,6 +13,8 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.Receipt_StockInVO;
+import org.cross.elsclient.vo.UserVO;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class StockInAddPanel extends ELSInfoPanel{
@@ -23,8 +25,9 @@ public class StockInAddPanel extends ELSInfoPanel{
 	Receipt_StockInVO stockinvo;
 	StockBLService stockbl;
 	ReceiptBLService receiptbl;
+	UserVO user;
 	
-	public StockInAddPanel(StockBLService stockbl, ReceiptBLService receiptbl){
+	public StockInAddPanel(StockBLService stockbl, ReceiptBLService receiptbl, UserVO user){
 		this.stockbl = stockbl;
 		init();
 	}
@@ -34,9 +37,10 @@ public class StockInAddPanel extends ELSInfoPanel{
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增入库单");
-		addEditableItem("入库单编号", ConstantValue.getReceiptTransNum(), false);
+		/*0*/addEditableItem("入库单编号", numberbl.getNumber(NumberType.RECEIPT), false);
 		addEditableItem("快件单编号", "", true);
-		addEditableItem("入库时间", "", true);
+		addDateItem("入库时间", false);
+		addEditableItem("目的地", "", true);
 		addEditableItem("仓库区号", "", true);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -46,6 +50,9 @@ public class StockInAddPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void confirm() throws RemoteException {
+		stockinvo = new Receipt_StockInVO(itemLabels.get(0).toString(), itemLabels.get(2).toString(),
+				itemLabels.get(1).toString(), itemLabels.get(3).toString(), 
+				itemLabels.get(4).toString(), user.number, user.orgNameID);
 		if(receiptbl.add(stockinvo)==ResultMessage.SUCCESS){
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);

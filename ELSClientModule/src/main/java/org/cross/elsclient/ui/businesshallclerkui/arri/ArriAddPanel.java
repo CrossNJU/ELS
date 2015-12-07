@@ -13,6 +13,7 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.Receipt_ArriveVO;
+import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
@@ -26,9 +27,11 @@ public class ArriAddPanel extends ELSInfoPanel {
 	private static final long serialVersionUID = 1L;
 	Receipt_ArriveVO arrivo;
 	ReceiptBLService receiptbl;
+	UserVO user;
 
-	public ArriAddPanel(ReceiptBLService receiptbl) {
+	public ArriAddPanel(ReceiptBLService receiptbl, UserVO user) {
 		this.receiptbl = receiptbl;
+		this.user = user;
 		init();
 	}
 
@@ -57,7 +60,7 @@ public class ArriAddPanel extends ELSInfoPanel {
 	protected void confirm() throws RemoteException {
 		arrivo = new Receipt_ArriveVO(itemLabels.get(0).toString(), itemLabels.get(5).toString(),
 				itemLabels.get(2).toString(), itemLabels.get(1).toString(), itemLabels.get(3).toString(),
-				itemLabels.get(4).toString());
+				itemLabels.get(4).toString(), user.number);
 		if (receiptbl.add(arrivo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);

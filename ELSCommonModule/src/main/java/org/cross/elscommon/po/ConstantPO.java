@@ -3,6 +3,7 @@ package org.cross.elscommon.po;
 import java.io.Serializable;
 
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.UserType;
 
 public class ConstantPO implements Serializable {
@@ -87,6 +88,16 @@ public class ConstantPO implements Serializable {
 	 */
 	private double baseMoneyForDRIVER;
 
+	/**
+	 * 计次
+	 */
+	private double once;
+
+	/**
+	 * 提成
+	 */
+	private double num;
+
 	public double getTimeBykilo() {
 		return timeBykilo;
 	}
@@ -96,23 +107,17 @@ public class ConstantPO implements Serializable {
 	}
 
 	public double getDistance(City c1, City c2) {
-		if (c1 == City.BEIJING && c2 == City.GUANGZHOU || c2 == City.BEIJING
-				&& c1 == City.GUANGZHOU)
+		if (c1 == City.BEIJING && c2 == City.GUANGZHOU || c2 == City.BEIJING && c1 == City.GUANGZHOU)
 			return distance_Beijing_Guangzhou;
-		if (c1 == City.BEIJING && c2 == City.SHANGHAI || c2 == City.BEIJING
-				&& c1 == City.SHANGHAI)
+		if (c1 == City.BEIJING && c2 == City.SHANGHAI || c2 == City.BEIJING && c1 == City.SHANGHAI)
 			return distance_Beijing_Shanghai;
-		if (c1 == City.BEIJING && c2 == City.NANJING || c2 == City.BEIJING
-				&& c1 == City.NANJING)
+		if (c1 == City.BEIJING && c2 == City.NANJING || c2 == City.BEIJING && c1 == City.NANJING)
 			return distance_Beijing_Nanjing;
-		if (c1 == City.NANJING && c2 == City.GUANGZHOU || c2 == City.NANJING
-				&& c1 == City.GUANGZHOU)
+		if (c1 == City.NANJING && c2 == City.GUANGZHOU || c2 == City.NANJING && c1 == City.GUANGZHOU)
 			return distance_Nanjing_Guangzhou;
-		if (c1 == City.SHANGHAI && c2 == City.GUANGZHOU || c2 == City.SHANGHAI
-				&& c1 == City.GUANGZHOU)
+		if (c1 == City.SHANGHAI && c2 == City.GUANGZHOU || c2 == City.SHANGHAI && c1 == City.GUANGZHOU)
 			return distance_Shanghai_Guangzhou;
-		if (c1 == City.NANJING && c2 == City.SHANGHAI || c2 == City.NANJING
-				&& c1 == City.SHANGHAI)
+		if (c1 == City.NANJING && c2 == City.SHANGHAI || c2 == City.NANJING && c1 == City.SHANGHAI)
 			return distance_Nanjing_Shanghai;
 		return 0;
 	}
@@ -123,6 +128,22 @@ public class ConstantPO implements Serializable {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public double getOnce() {
+		return once;
+	}
+
+	public void setOnce(double once) {
+		this.once = once;
+	}
+
+	public double getNum() {
+		return num;
+	}
+
+	public void setNum(double num) {
+		this.num = num;
 	}
 
 	public double getDistance_Beijing_Shanghai() {
@@ -169,43 +190,46 @@ public class ConstantPO implements Serializable {
 		return distance_Shanghai_Guangzhou;
 	}
 
-	public void setDistance_Shanghai_Guangzhou(
-			double distance_Shanghai_Guangzhou) {
+	public void setDistance_Shanghai_Guangzhou(double distance_Shanghai_Guangzhou) {
 		this.distance_Shanghai_Guangzhou = distance_Shanghai_Guangzhou;
 	}
 
-	public void setBaseMoney(UserType user, double money) {
-		if (user == UserType.ADMINISTRATOR)
+	public void setBaseMoney(PositionType user, double money) {
+		if (user == PositionType.ADMINISTRATOR)
 			baseMoneyForADMINISTRATOR = money;
-		if (user == UserType.BUSINESSHALLCLERK)
+		if (user == PositionType.BUSINESSHALLCLERK)
 			baseMoneyForBUSINESSHALLCLERK = money;
-		if (user == UserType.COUNTER)
+		if (user == PositionType.COUNTER)
 			baseMoneyForCOUNTER = money;
-		if (user == UserType.COURIER)
+		if (user == PositionType.COURIER)
 			baseMoneyForCOURIER = money;
-		if (user == UserType.MANAGER)
+		if (user == PositionType.MANAGER)
 			baseMoneyForMANAGER = money;
-		if (user == UserType.STOCKKEEPER)
+		if (user == PositionType.STOCKKEEPER)
 			baseMoneyForSTOCKKEEPER = money;
-		if (user == UserType.TRANSITCENTERCLERK)
+		if (user == PositionType.TRANSITCENTERCLERK)
 			baseMoneyForTRANSITCENTERCLERK = money;
+		if (user == PositionType.DRIVER)
+			baseMoneyForDRIVER = money;
 	}
 
-	public double getBaseMoney(UserType user) {
-		if (user == UserType.ADMINISTRATOR)
+	public double getBaseMoney(PositionType user) {
+		if (user == PositionType.ADMINISTRATOR)
 			return baseMoneyForADMINISTRATOR;
-		if (user == UserType.BUSINESSHALLCLERK)
+		if (user == PositionType.BUSINESSHALLCLERK)
 			return baseMoneyForBUSINESSHALLCLERK;
-		if (user == UserType.COUNTER)
+		if (user == PositionType.COUNTER)
 			return baseMoneyForCOUNTER;
-		if (user == UserType.COURIER)
+		if (user == PositionType.COURIER)
 			return baseMoneyForCOURIER;
-		if (user == UserType.MANAGER)
+		if (user == PositionType.MANAGER)
 			return baseMoneyForMANAGER;
-		if (user == UserType.STOCKKEEPER)
+		if (user == PositionType.STOCKKEEPER)
 			return baseMoneyForSTOCKKEEPER;
-		if (user == UserType.TRANSITCENTERCLERK)
+		if (user == PositionType.TRANSITCENTERCLERK)
 			return baseMoneyForTRANSITCENTERCLERK;
+		if (user == PositionType.DRIVER)
+			return baseMoneyForDRIVER;
 		return 0;
 	}
 

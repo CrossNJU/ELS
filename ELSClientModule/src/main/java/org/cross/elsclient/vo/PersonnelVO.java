@@ -5,13 +5,11 @@
  */
 package org.cross.elsclient.vo;
 
-import java.util.ArrayList;
 
 import org.cross.elscommon.po.SalaryPO;
-import org.cross.elscommon.util.City;
-import org.cross.elscommon.util.OrganizationType;
+import org.cross.elscommon.util.ConstantVal;
 import org.cross.elscommon.util.PositionType;
-import org.omg.CORBA.PUBLIC_MEMBER;
+import org.cross.elscommon.util.SalaryType;
 
 public class PersonnelVO {
 
@@ -53,7 +51,7 @@ public class PersonnelVO {
 	public SalaryPO salary;
 
 	public PersonnelVO(String number, String name, PositionType position, String orgNum, String sex,
-			String id, String phone, String birthday, SalaryPO salary) {
+			String id, String phone, String birthday) {
 		super();
 		this.number = number;
 		this.name = name;
@@ -63,7 +61,25 @@ public class PersonnelVO {
 		this.position = position;
 		this.birthday = birthday;
 		this.orgNum = orgNum;
-		this.salary = salary;
+		
+		SalaryType type;
+		double once = 0;
+		double num = 0;
+		
+		switch (position) {
+		case DRIVER:
+			type = SalaryType.ADDONCE;
+			once = ConstantVal.constant.getOnce();
+			break;
+		case COURIER:
+			type = SalaryType.ADDNUM;
+			num = ConstantVal.constant.getNum();
+			break;
+		default:
+			type = SalaryType.BYMONTHONLY;
+		}
+		
+		this.salary = new SalaryPO(type, ConstantVal.constant.getBaseMoney(position), once, num, number);
 	}
 
 }

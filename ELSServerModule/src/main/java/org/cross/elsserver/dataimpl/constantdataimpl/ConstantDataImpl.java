@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.po.ConstantPO;
 import org.cross.elscommon.util.MySQL;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
 
@@ -45,10 +46,10 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 				+ "`baseMoneyForCOUNTER`, `baseMoneyForCOURIER`, `baseMoneyForSTOCKKEEPER`, `baseMoneyForMANGER`, `distance_Beijing_Guangzhou`, `distance_Beijing_Shanghai`, `distance_Beijing_Nanjing`,"
 				+ " `distance_Guangzhou_Shanghai`, `distance_Guangzhou_Nanjing`, `distance_Nanjing_Shanghai`) values ("
 				+ po.getPrice() + "," + po.getTimeBykilo() + "," + po.getBaseMoneyForDRIVER() + ","
-				+ po.getBaseMoney(UserType.ADMINISTRATOR) + "," + po.getBaseMoney(UserType.BUSINESSHALLCLERK) + ","
-				+ po.getBaseMoney(UserType.TRANSITCENTERCLERK) + "," + po.getBaseMoney(UserType.COUNTER) + ","
-				+ po.getBaseMoney(UserType.COURIER) + "," + po.getBaseMoney(UserType.STOCKKEEPER) + ","
-				+ po.getBaseMoney(UserType.MANAGER) + "," + po.getDistance_Beijing_Guangzhou() + ","
+				+ po.getBaseMoney(PositionType.ADMINISTRATOR) + "," + po.getBaseMoney(PositionType.BUSINESSHALLCLERK) + ","
+				+ po.getBaseMoney(PositionType.TRANSITCENTERCLERK) + "," + po.getBaseMoney(PositionType.COUNTER) + ","
+				+ po.getBaseMoney(PositionType.COURIER) + "," + po.getBaseMoney(PositionType.STOCKKEEPER) + ","
+				+ po.getBaseMoney(PositionType.MANAGER) + "," + po.getDistance_Beijing_Guangzhou() + ","
 				+ po.getDistance_Beijing_Nanjing() + "," + po.getDistance_Beijing_Shanghai() + ","
 				+ po.getDistance_Shanghai_Guangzhou() + "," + po.getDistance_Nanjing_Guangzhou() + ","
 				+ po.getDistance_Nanjing_Shanghai() + "')";
@@ -61,13 +62,13 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 		try {
 			if (rs.next()) {
 				po = new ConstantPO();
-				po.setBaseMoney(UserType.ADMINISTRATOR, rs.getDouble("baseMoneyForADMINITER"));
-				po.setBaseMoney(UserType.BUSINESSHALLCLERK, rs.getDouble("baseMoneyForBUSINESSHALLCLERK"));
-				po.setBaseMoney(UserType.COUNTER, rs.getDouble("baseMoneyForCOUNTER"));
-				po.setBaseMoney(UserType.COURIER, rs.getDouble("baseMoneyForCOURIER"));
-				po.setBaseMoney(UserType.MANAGER, rs.getDouble("baseMoneyForMANGER"));
-				po.setBaseMoney(UserType.STOCKKEEPER, rs.getDouble("baseMoneyForSTOCKKEEPER"));
-				po.setBaseMoney(UserType.TRANSITCENTERCLERK, rs.getDouble("baseMoneyForTRANSITCENTERCLERK"));
+				po.setBaseMoney(PositionType.ADMINISTRATOR, rs.getDouble("baseMoneyForADMINITER"));
+				po.setBaseMoney(PositionType.BUSINESSHALLCLERK, rs.getDouble("baseMoneyForBUSINESSHALLCLERK"));
+				po.setBaseMoney(PositionType.COUNTER, rs.getDouble("baseMoneyForCOUNTER"));
+				po.setBaseMoney(PositionType.COURIER, rs.getDouble("baseMoneyForCOURIER"));
+				po.setBaseMoney(PositionType.MANAGER, rs.getDouble("baseMoneyForMANGER"));
+				po.setBaseMoney(PositionType.STOCKKEEPER, rs.getDouble("baseMoneyForSTOCKKEEPER"));
+				po.setBaseMoney(PositionType.TRANSITCENTERCLERK, rs.getDouble("baseMoneyForTRANSITCENTERCLERK"));
 				po.setBaseMoneyForDRIVER(rs.getDouble("baseMoneyForDRIVER"));
 				
 				po.setPrice(rs.getDouble("price"));

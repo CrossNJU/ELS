@@ -21,13 +21,18 @@ public class StockOutInfoPanel extends ELSInfoPanel{
 	public void init(){
 		super.init();
 		
-		setTitle("创建出库单");
+		setTitle("出库单信息");
+		String goodsNum = "";
+		for (int i = 0; i < vo.goodsNumber.size()-1; i++) {
+			goodsNum+=vo.goodsNumber.get(i)+";";
+		}
+		goodsNum+=vo.goodsNumber.get(vo.goodsNumber.size()-1);
 		addNormalItem("出库单编号", vo.number);
-		addNormalItem("快件单编号", vo.goodsNumber);
+		addNormalItem("快件单编号", goodsNum);
 		addNormalItem("出库时间", vo.time);
-		addNormalItem("目的地", vo.city.toString());
+		addNormalItem("目的地", vo.targetOrgID);
 		addNormalItem("中转/装车单号", vo.transNumber);
-		addNormalItem("运输方式", vo.vehicle.toString());
+		addNormalItem("运输方式", vo.vehicle);
 		
 		container.packHeight();
 	}
