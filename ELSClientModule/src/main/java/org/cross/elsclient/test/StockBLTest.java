@@ -5,17 +5,24 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
+import org.cross.elsclient.blimpl.blUtility.OrganizationInfo;
+import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
+import org.cross.elsclient.blimpl.blUtility.SalaryInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blimpl.goodsblimpl.GoodsInfoImpl;
+import org.cross.elsclient.blimpl.organizationblimpl.OrganizationInfoImpl;
 import org.cross.elsclient.blimpl.personnelblimpl.PersonnelInfoImpl;
 import org.cross.elsclient.blimpl.receiptblimpl.ReceiptInfoImpl;
+import org.cross.elsclient.blimpl.salaryblimpl.SalaryBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockInfoImpl;
 import org.cross.elsclient.network.Datafactory;
+import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockCheckVO;
 import org.cross.elsclient.vo.StockOperationVO;
+import org.cross.elsclient.vo.StockSeeVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.util.ResultMessage;
@@ -27,19 +34,22 @@ public class StockBLTest {
 	public static void main(String[] args) throws RemoteException{
 		DataFactoryService dataFactoryService = new Datafactory();
 		GoodsInfo goodsInfo = new GoodsInfoImpl(dataFactoryService.getGoodsData());
-		StockInfo stockInfo = new StockInfoImpl(goodsInfo);
-		ReceiptInfo receiptInfo = new ReceiptInfoImpl(dataFactoryService.getReceiptData(), stockInfo, new PersonnelInfoImpl());
+		OrganizationInfo orgInfo = new OrganizationInfoImpl(dataFactoryService.getOrganizationData());
+		StockInfo stockInfo = new StockInfoImpl(goodsInfo, orgInfo, dataFactoryService.getStockData());
+		SalaryInfo salaryInfo = new SalaryBLImpl(dataFactoryService.getSalaryData());
+		PersonnelInfo personnelInfo = new PersonnelInfoImpl(dataFactoryService.getPersonnelData(), salaryInfo);
+		ReceiptInfo receiptInfo = new ReceiptInfoImpl(dataFactoryService.getReceiptData(), stockInfo, personnelInfo);
 		StockBLImpl stockBLImpl = new StockBLImpl(dataFactoryService.getStockData(), goodsInfo, stockInfo, receiptInfo);
-		StockVO stockVO = new StockVO("S0002", 3);
-		stockVO.usedAreas = 3;
-		StockAreaVO area1 = new StockAreaVO("000001", StockType.COMMON, 10);
-		StockAreaVO area2 = new StockAreaVO("000002", StockType.COMMON, 10);
-		StockAreaVO area3 = new StockAreaVO("000003", StockType.ECONOMICAL, 10);
-		StockAreaVO area4 = new StockAreaVO("000004", StockType.Fast, 10);
-		stockVO.stockAreas.add(area1);
-		stockVO.stockAreas.add(area2);
-		stockVO.stockAreas.add(area3);
-		stockVO.stockAreas.add(area4);
+		StockAreaVO area1 = new StockAreaVO("SA00001", "S0032902", StockType.Fast, 100, 0, null);
+		StockAreaVO area2 = new StockAreaVO("SA00002", "S0032902", StockType.COMMON, 100, 0, null);
+		StockAreaVO area3 = new StockAreaVO("SA00003", "S0032903", StockType.COMMON, 100, 0, null);
+		StockAreaVO area4 = new StockAreaVO("SA00004", "S0032904", StockType.ECONOMICAL, 100, 0, null);
+		ArrayList<StockAreaVO> areas = new ArrayList<StockAreaVO>();
+		areas.add(area1); 
+		areas.add(area2);
+		areas.add(area3);
+		areas.add(area4);
+		StockVO stockVO = new StockVO("S0032902", 10000, 0, 0, 0, 0, 0, 0, "O283789",areas);
 		
 		System.out.println("=======测试增加仓库（addStock）=======");
 		ResultMessage addResult = stockBLImpl.addStock(stockVO);
@@ -70,13 +80,13 @@ public class StockBLTest {
 			System.out.println("can not find it...");
 		}
 		System.out.println("=======测试库存查看（showStockInfo）=======");
-		ArrayList<StockOperationVO> stockOperationVOs = stockBLImpl.showStockInfo("S0002", "2015/10/23 10:12:01", "2015/10/12 10:20:01");
-		for (int i = 0; i < stockOperationVOs.size(); i++) {
-			System.out.println(stockOperationVOs.get(i).time + " " + stockOperationVOs.get(i).type);
-		}
-		
+		StockSeeVO seeVO = stockBLImpl.showStockInfo("S0002", "2015/10/23 10:12:01", "2015/10/12 10:20:01");
+		System.out.println(seeVO.goodsIn + " " + seeVO.goodsOut);
+		System.out.println(seeVO.moneyIn + " " + seeVO.moneyOut);
+		ArrayList<GoodsVO> goods = seeVO.goods;
+		System.out.println(goods.size());
 		System.out.println("=======测试快件入库（intoStock）=======");
-		ResultMessage intoStockMessage = stockBLImpl.intoStock("G002", "S0002","2015-11-2 11:34:21");
+		ResultMessage intoStockMessage = stockBLImpl.intoStock("G002", "S0032902","2015-11-2 11:34:21","SA00001");
 		if (intoStockMessage == ResultMessage.SUCCESS) {
 			System.out.println("入库成功");
 		}else {

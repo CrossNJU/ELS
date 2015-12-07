@@ -29,10 +29,12 @@ public interface GoodsInfo {
 	public GoodsVO searchGoods(String goodsID) throws RemoteException;
 
 	public ArrayList<GoodsVO> findGoodsFromArea(String stockAreaNum) throws RemoteException;
+	
+	public ArrayList<GoodsVO> findGoodsByStockNum(String stockNum) throws RemoteException;
 
 	public ArrayList<HistoryVO> toHistroyVO(ArrayList<HistoryPO> pos);
 	
-	public ResultMessage updateGoods(GoodsPO po);
+	public ResultMessage updateGoods(GoodsPO po) throws RemoteException;
 	
 	public String findStockAreaNum(String goodsID) throws RemoteException;
 	

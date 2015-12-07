@@ -23,6 +23,7 @@ import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class InitialBLTest {
@@ -47,23 +48,21 @@ public class InitialBLTest {
 
 		System.out.println("---test-add---");
 		ArrayList<OrganizationVO> orgVO = new ArrayList<OrganizationVO>();
-		orgVO.add(new OrganizationVO(City.BEIJING, "O00010272",
-				OrganizationType.BUSINESSHALL));
+		orgVO.add(new OrganizationVO(City.BEIJING,
+				OrganizationType.BUSINESSHALL, "O00010272"));
 		ArrayList<PersonnelVO> perVO = new ArrayList<PersonnelVO>();
-		perVO.add(new PersonnelVO("P00001", "chenr", "男", null, null, null,
-				null, "北京营业厅", "O00010272", null));
+		perVO.add(new PersonnelVO("P0001", "cr", PositionType.ADMINISTRATOR,
+				"O0002", "男", null, null, null, null));
 		ArrayList<VehicleVO> vehicleVOs = new ArrayList<VehicleVO>();
 		vehicleVOs.add(new VehicleVO("V00001", null, null, null, null,
 				"2015-01-01", "2019-01-01", null, false));
 		ArrayList<StockVO> stockVOs = new ArrayList<StockVO>();
-		stockVOs.add(new StockVO("S0001", 100, 0, 0, 0, 0, 0, 0, "O01111233",
-				"南京中转中心"));
+		stockVOs.add(new StockVO("S00023", 10000, 0, 0, 0, 0, 0, 0, "O02502837",null));
 		ArrayList<AccountVO> accountVOs = new ArrayList<AccountVO>();
 		accountVOs.add(new AccountVO("chenr", "26352717288939", 923726332));
 
-		InitialVO newVO = new InitialVO("In2222", "2015-01-01", "2015年账本",
-				"cdn", "P000000", orgVO, perVO, vehicleVOs, stockVOs,
-				accountVOs);
+		InitialVO newVO = new InitialVO("I928392", "2015账本", orgVO, perVO,
+				vehicleVOs, stockVOs, accountVOs, "2015-01-01", "cdn", "P00293");
 		ResultMessage addMessage = initialBLImpl.addInitial(newVO);
 		if (addMessage == ResultMessage.SUCCESS) {
 			System.out.println("增加成功");
@@ -95,7 +94,7 @@ public class InitialBLTest {
 		ArrayList<PersonnelVO> pers = initialBLImpl.showPersonnel("In2222");
 		for (int i = 0; i < pers.size(); i++) {
 			System.out.println(pers.get(i).name + " " + pers.get(i).birthday
-					+ " " + pers.get(i).orgName);
+					+ " " + pers.get(i).sex);
 		}
 		System.out.println("---test-showVehicle---");
 		ArrayList<VehicleVO> vehicle = initialBLImpl.showVehicle("In2222");
@@ -108,7 +107,7 @@ public class InitialBLTest {
 		ArrayList<StockVO> stock = initialBLImpl.showStock("In2222");
 		for (int i = 0; i < stock.size(); i++) {
 			System.out
-					.println(stock.get(i).number + " " + stock.get(i).orgName);
+					.println(stock.get(i).number + " " + stock.get(i).totalAreas);
 		}
 
 		System.out.println("---test-showAccount---");

@@ -4,8 +4,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
+import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
+import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
@@ -14,9 +16,15 @@ import org.cross.elscommon.util.ResultMessage;
 public class GoodsInfoImpl implements GoodsInfo {
 
 	GoodsDataService goodsData;
+	ReceiptInfo receiptInfo;
 
 	public GoodsInfoImpl(GoodsDataService goodsData) {
 		this.goodsData = goodsData;
+	}
+	
+	public GoodsInfoImpl(GoodsDataService goodsData,ReceiptInfo receiptInfo) {
+		this.goodsData = goodsData;
+		this.receiptInfo = receiptInfo;
 	}
 
 	@Override
@@ -31,6 +39,7 @@ public class GoodsInfoImpl implements GoodsInfo {
 		goodsVO.state = po.getState();
 		goodsVO.history = historyVOs;
 		goodsVO.orderNum = po.getOrderNum();
+		goodsVO.stockAreaNum = po.getStockAreaNum();
 		return goodsVO;
 	}
 
@@ -129,6 +138,31 @@ public class GoodsInfoImpl implements GoodsInfo {
 			vos.add(toHistroyVO(pos.get(i)));
 		}
 		return vos;
+	}
+
+	@Override
+	public String findStockAreaNum(String goodsID) throws RemoteException {
+		GoodsPO po = goodsData.findByNum(goodsID);
+		return po.getStockAreaNum();
+	}
+
+	@Override
+	public double getCost(String goodsID) throws RemoteException {
+		Receipt_OrderVO order = (Receipt_OrderVO) receiptInfo.findByID(goodsID);
+		return order.cost;
+	}
+
+	@Override
+	public ArrayList<GoodsVO> findGoodsByStockNum(String stockNum)
+			throws RemoteException {
+		ArrayList<GoodsPO> goodsPOs = goodsData.findByStockNum(stockNum);
+		ArrayList<GoodsVO> goodsVOs = toGoodsVO(goodsPOs);
+		return goodsVOs;
+	}
+
+	@Override
+	public ResultMessage updateGoods(GoodsPO po) throws RemoteException {
+		return goodsData.update(po);
 	}
 
 	
