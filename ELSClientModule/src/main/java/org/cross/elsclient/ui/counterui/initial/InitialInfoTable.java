@@ -20,7 +20,7 @@ public class InitialInfoTable extends InitialManageTable{
 	public void refresh() {
 		removeAll();
 		init();
-		String item[] = {vo.id,vo.name,vo.year+""};
+		String item[] = {vo.id,vo.initialName,vo.time};
 		addItemLabel(item);
 	}
 	

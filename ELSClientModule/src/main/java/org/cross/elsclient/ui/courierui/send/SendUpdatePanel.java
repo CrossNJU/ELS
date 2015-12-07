@@ -40,12 +40,9 @@ public class SendUpdatePanel extends ELSInfoPanel {
 	@Override
 	protected void confirm() throws RemoteException {
 		super.confirm();
-//		ReceiptVO receiptVO = bl.findByID(itemLabels.get(0).toString());
-//		if(receiptVO instanceof Receipt_OrderVO){
-//			vo = (Receipt_OrderVO)receiptVO;
-			vo = new Receipt_OrderVO(null, null, null, null, 0.0, null, null, null, null, null);
-//			vo.receiveTime = itemLabels.get(2).toString();
-//			vo.receivePeople.name = itemLabels.get(1).toString();
+		vo = (Receipt_OrderVO)bl.findByID(itemLabels.get(0).toString());
+		vo.receiveTime = itemLabels.get(2).toString();
+		vo.receiverName = itemLabels.get(1).toString();
 			if(bl.update(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"派件成功");
 				this.init();

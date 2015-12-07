@@ -17,7 +17,7 @@ public class OrganizationInfoPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("机构详细信息");
-		addNormalItem("机构编号", vo.id);
+		addNormalItem("机构编号", vo.number);
 		addNormalItem("地区", vo.city.toString());
 		addNormalItem("类型", vo.type.toString());
 		container.packHeight();

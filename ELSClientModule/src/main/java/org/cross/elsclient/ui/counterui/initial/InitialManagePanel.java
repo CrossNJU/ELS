@@ -38,7 +38,7 @@ public class InitialManagePanel extends ELSManagePanel{
 		int[] infoWidth = {150,200,200}; 
 		infoList = new InitialInfoTable(infoName, infoWidth,CurrentVO);
 		infoList.init();
-		infoList.addItemLabel(new String[]{CurrentVO.id,CurrentVO.name,CurrentVO.year+""});
+		infoList.addItemLabel(new String[]{CurrentVO.id,CurrentVO.initialName,CurrentVO.time});
 		infoList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, searchPanel.getHeight()+searchPanel.getLocation().y+10);
 		infoList.addBtn.setVisible(false);
 		

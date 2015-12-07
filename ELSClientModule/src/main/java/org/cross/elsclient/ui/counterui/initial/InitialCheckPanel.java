@@ -36,7 +36,7 @@ public class InitialCheckPanel extends InitialManagePanel {
 		modeBox.setPreferredSize(new Dimension(searchPanel.getWidth(), (int)(searchPanel.getHeight()*0.6)));
 		String[] items = new String[initialVOs.size()];
 		for(int i = 0;i<initialVOs.size();i++){
-			items[i] = initialVOs.get(i).year+"年账本";
+			items[i] = initialVOs.get(i).initialName;
 		}
 		modeBox.setModel(new DefaultComboBoxModel<>(items));
 		modeBox.addItemListener(new ModeListener());

@@ -52,7 +52,7 @@ public class InitialBLTest {
 				OrganizationType.BUSINESSHALL, "O00010272"));
 		ArrayList<PersonnelVO> perVO = new ArrayList<PersonnelVO>();
 		perVO.add(new PersonnelVO("P0001", "cr", PositionType.ADMINISTRATOR,
-				"O0002", "男", null, null, null, null));
+				"O0002", "男", null, null, null));
 		ArrayList<VehicleVO> vehicleVOs = new ArrayList<VehicleVO>();
 		vehicleVOs.add(new VehicleVO("V00001", null, null, null, null,
 				"2015-01-01", "2019-01-01", null, false));

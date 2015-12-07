@@ -45,10 +45,15 @@ public class VehicleAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			vo = new VehicleVO(itemLabels.get(0).toString(),
-					itemLabels.get(5).toString(), itemLabels.get(6).toString(), 
-					itemLabels.get(3).toString(), itemLabels.get(4).toString(), null, 
-					VehicleType.CAR);
+			String number = itemLabels.get(0).toString();
+			String licence = itemLabels.get(1).toString();
+			String orgNum = itemLabels.get(2).toString();
+			String buyTime = itemLabels.get(3).toString();
+			String lastTime = itemLabels.get(4).toString();
+			String engineNumber = itemLabels.get(5).toString();
+			String apparatusNumber = itemLabels.get(6).toString();
+			
+			vo = new VehicleVO(number, licence, orgNum, engineNumber, apparatusNumber, buyTime, lastTime, null, false);
 			vos.add(vo);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");

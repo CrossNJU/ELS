@@ -32,15 +32,13 @@ public class PerAddPanel extends ELSInfoPanel{
 		setTitle("新增人员");
 		addEditableItem("人员编号", "", true);
 		addEditableItem("姓名", "", true,InfoType.NAME);
-//		addComboxItem("性别",new String[]{"男","女"} , true);
-//		addEditableItem("身份证", "", true,InfoType.IDCARD);
-		String []items = OrganizationType.toStrings();
+		addComboxItem("性别",new String[]{"男","女"} , true);
+		addEditableItem("身份证", "", true,InfoType.IDCARD);
 		String []position = PositionType.toStrings();
-		addComboxItem("所属机构类型", items, true);
-		addEditableItem("所属机构ID", "", true,InfoType.NAME);
+		addEditableItem("所属机构ID", "", true,InfoType.ID);
 		addComboxItem("职位", position, true);
-//		addDateItem("出生日期", true);
-		
+		addDateItem("出生日期", true);
+		addEditableItem("手机", "", true,InfoType.TELEPHONE);
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -52,9 +50,17 @@ public class PerAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			vo = new PersonnelVO(itemLabels.get(0).toString(),itemLabels.get(1).toString() , 
-					StringToType.toPositionType(itemLabels.get(4).toString()), 
-					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(3).toString());
+			String id = itemLabels.get(0).toString();
+			String name = itemLabels.get(1).toString();
+			String sex = itemLabels.get(2).toString();
+			String idcard = itemLabels.get(3).toString();
+			String orgNum = itemLabels.get(4).toString();
+			PositionType position = StringToType.toPositionType(itemLabels.get(5).toString());
+			String birthday = itemLabels.get(6).toString();
+			String phone = itemLabels.get(7).toString();
+			
+			
+			vo = new PersonnelVO(id, name, position, orgNum, sex, id, phone, birthday);
 			vos.add(vo);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");

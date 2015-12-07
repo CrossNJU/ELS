@@ -36,6 +36,8 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 		addEditableItem("付款金额", "", true, InfoType.NUM);
 		addDateItem("付款时间", true);
 		addEditableItem("备注", "", true, InfoType.NAME);
+		addEditableItem("建单人", "", true,InfoType.ID);
+		addEditableItem("所属机构", "", true,InfoType.ID);
 		
 		titlePanel.backBtn.setVisible(false);
 //		titleLabel.setLocation(10, titleLabel.getLocation().y);
@@ -56,10 +58,10 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 			double money = Double.valueOf(itemLabels.get(4).toString());
 			String time = itemLabels.get(5).toString();
 			String comments = itemLabels.get(6).toString();
+			String perNum = itemLabels.get(7).toString();
+			String orgNum = itemLabels.get(8).toString();
 			
-			PersonnelVO receivePerson = personnelbl.findById(receivePersonID);
-			
-			vo = new Receipt_MoneyOutVO(number, time, money, receivePerson, iD, clause, comments);
+			vo = new Receipt_MoneyOutVO(number, time, money, receivePersonID, iD, clause, comments,perNum,orgNum);
 			
 			if(receiptbl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");

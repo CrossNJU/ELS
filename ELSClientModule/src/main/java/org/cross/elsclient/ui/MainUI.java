@@ -58,8 +58,7 @@ public class MainUI extends JFrame {
 		jf.setSize(UIConstant.WINDOW_WIDTH, UIConstant.WINDOW_HEIGHT);
 		FrameUtil.frameInit(jf);
 		com.sun.awt.AWTUtilities.setWindowOpaque(jf, false);
-//		mainPanel.add(new LoginPanel(), "login");
-		mainPanel.add(new ManagerFunctionPanel());
+		mainPanel.add(new LoginPanel(), "login");
 		mainPanel.setOpaque(false);
 		jf.getContentPane().add(mainPanel);	
 		jf.setVisible(true);

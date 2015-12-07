@@ -34,8 +34,7 @@ public class PaymentManageTable extends ELSManageTable{
 	public void addItem(PersonnelVO vo) {
 		vos.add(vo);
 
-		String item[] = { vo.id, vo.name, vo.position.toString(),
-				vo.payment+""};
+		String item[] = { vo.id, vo.name, vo.position.toString()};
 		addItemLabel(item);
 	}
 
