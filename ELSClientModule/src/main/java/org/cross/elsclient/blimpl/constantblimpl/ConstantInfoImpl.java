@@ -26,6 +26,8 @@ public class ConstantInfoImpl implements ConstantInfo{
 		vo.distance_Shanghai_Guangzhou = po.getDistance_Shanghai_Guangzhou();
 		vo.price = po.getPrice();
 		vo.timeBykilo = po.getTimeBykilo();
+		vo.once = po.getOnce();
+		vo.num = po.getNum();
 		return vo;
 	}
 
@@ -50,6 +52,9 @@ public class ConstantInfoImpl implements ConstantInfo{
 		po.setDistance_Nanjing_Guangzhou(vo.distance_Nanjing_Guangzhou);
 		po.setDistance_Nanjing_Shanghai(vo.distance_Nanjing_Shanghai);
 		po.setDistance_Shanghai_Guangzhou(vo.distance_Shanghai_Guangzhou);
+		
+		po.setOnce(vo.once);
+		po.setNum(vo.num);
 		return po;
 	}
 
