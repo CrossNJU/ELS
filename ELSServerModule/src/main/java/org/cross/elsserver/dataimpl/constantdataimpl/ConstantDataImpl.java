@@ -42,22 +42,24 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 	}
 
 	public ResultMessage insert(ConstantPO po) {
-		String sql = "insert ignore into `constant`(`price`, `timeByKilo`, `baseMoneyForDRIVER`, `baseMoneyForADMINITER`, `baseMoneyForBUSINESSHALLCLERK`, `baseMoneyForTRANSITCENTERCLERK`, "
+		String sql = "insert ignore into `constant`(`price`, `timeByKilo`, `once`, `num` ,`baseMoneyForDRIVER`, `baseMoneyForADMINITER`, `baseMoneyForBUSINESSHALLCLERK`, `baseMoneyForTRANSITCENTERCLERK`, "
 				+ "`baseMoneyForCOUNTER`, `baseMoneyForCOURIER`, `baseMoneyForSTOCKKEEPER`, `baseMoneyForMANGER`, `distance_Beijing_Guangzhou`, `distance_Beijing_Shanghai`, `distance_Beijing_Nanjing`,"
 				+ " `distance_Guangzhou_Shanghai`, `distance_Guangzhou_Nanjing`, `distance_Nanjing_Shanghai`) values ("
-				+ po.getPrice() + "," + po.getTimeBykilo() + "," + po.getBaseMoneyForDRIVER() + ","
-				+ po.getBaseMoney(PositionType.ADMINISTRATOR) + "," + po.getBaseMoney(PositionType.BUSINESSHALLCLERK) + ","
+				+ po.getPrice() + "," + po.getTimeBykilo() + "," + po.getOnce() + "," + po.getNum() + ","
+				+ po.getBaseMoneyForDRIVER() + "," + po.getBaseMoney(PositionType.ADMINISTRATOR) + ","
+				+ po.getBaseMoney(PositionType.BUSINESSHALLCLERK) + ","
 				+ po.getBaseMoney(PositionType.TRANSITCENTERCLERK) + "," + po.getBaseMoney(PositionType.COUNTER) + ","
 				+ po.getBaseMoney(PositionType.COURIER) + "," + po.getBaseMoney(PositionType.STOCKKEEPER) + ","
 				+ po.getBaseMoney(PositionType.MANAGER) + "," + po.getDistance_Beijing_Guangzhou() + ","
 				+ po.getDistance_Beijing_Nanjing() + "," + po.getDistance_Beijing_Shanghai() + ","
 				+ po.getDistance_Shanghai_Guangzhou() + "," + po.getDistance_Nanjing_Guangzhou() + ","
 				+ po.getDistance_Nanjing_Shanghai() + "')";
-		if(!mysql.execute(sql))return ResultMessage.FAILED;
+		if (!mysql.execute(sql))
+			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
 	}
 
-	public ConstantPO getFromDB(ResultSet rs){
+	public ConstantPO getFromDB(ResultSet rs) {
 		ConstantPO po = null;
 		try {
 			if (rs.next()) {
@@ -71,9 +73,12 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 				po.setBaseMoney(PositionType.TRANSITCENTERCLERK, rs.getDouble("baseMoneyForTRANSITCENTERCLERK"));
 				po.setBaseMoneyForDRIVER(rs.getDouble("baseMoneyForDRIVER"));
 				
+				po.setOnce(rs.getDouble("once"));
+				po.setNum(rs.getDouble("num"));
+
 				po.setPrice(rs.getDouble("price"));
 				po.setTimeBykilo(rs.getDouble("timeByKilo"));
-				
+
 				po.setDistance_Beijing_Guangzhou(rs.getDouble("distance_Beijing_Guangzhou"));
 				po.setDistance_Beijing_Nanjing(rs.getDouble("distance_Beijing_Nanjing"));
 				po.setDistance_Beijing_Shanghai(rs.getDouble("distance_Beijing_Shanghai"));
@@ -87,5 +92,5 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 		}
 		return po;
 	}
-	
+
 }

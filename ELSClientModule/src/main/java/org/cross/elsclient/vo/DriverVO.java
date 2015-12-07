@@ -16,7 +16,7 @@ public class DriverVO extends PersonnelVO {
 
 	public DriverVO(String number, String name, PositionType position, String orgNum, String sex, String id,
 			String phone, String birthday, SalaryPO salary, String licenceStart, String licenceEnd) {
-		super(number, name, position, orgNum, sex, id, phone, birthday, salary);
+		super(number, name, position, orgNum, sex, id, phone, birthday);
 		this.licenceStart = licenceStart;
 		this.licenceEnd = licenceEnd;
 	}

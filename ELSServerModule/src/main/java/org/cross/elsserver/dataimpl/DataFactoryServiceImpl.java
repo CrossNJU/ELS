@@ -9,6 +9,7 @@ import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
 import org.cross.elscommon.dataservice.logdataservice.LogDataService;
+import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
@@ -17,9 +18,11 @@ import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 import org.cross.elsserver.dataimpl.accountdataimpl.AccountDataImpl;
+import org.cross.elsserver.dataimpl.constantdataimpl.ConstantDataImpl;
 import org.cross.elsserver.dataimpl.goodsdataimpl.GoodsDataImpl;
 import org.cross.elsserver.dataimpl.initialdataimpl.InitialDataImpl;
 import org.cross.elsserver.dataimpl.logdataimpl.LogDataImpl;
+import org.cross.elsserver.dataimpl.numberdataimpl.NumberDataImpl;
 import org.cross.elsserver.dataimpl.organizationdataimpl.OrganizationDataImpl;
 import org.cross.elsserver.dataimpl.personneldataimpl.PersonnelDataImpl;
 import org.cross.elsserver.dataimpl.receiptdataimpl.ReceiptDataImpl;
@@ -96,8 +99,12 @@ public class DataFactoryServiceImpl extends UnicastRemoteObject implements DataF
 
 	@Override
 	public ConstantDataService getConstantData() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new ConstantDataImpl();
+	}
+
+	@Override
+	public NumberDataService getNumberDataService() throws RemoteException {
+		return new NumberDataImpl();
 	}
 
 }

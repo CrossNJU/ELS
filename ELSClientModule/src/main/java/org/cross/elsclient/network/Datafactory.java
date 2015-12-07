@@ -11,6 +11,7 @@ import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
 import org.cross.elscommon.dataservice.logdataservice.LogDataService;
+import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
@@ -179,6 +180,19 @@ public class Datafactory implements DataFactoryService{
 			e.printStackTrace();
 		}
 		return constantDataService;
+	}
+
+	@Override
+	public NumberDataService getNumberDataService() throws RemoteException {
+		NumberDataService numberdata = null;
+		try {
+			numberdata = (NumberDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/numberdata");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return numberdata;
 	}
 
 }

@@ -59,6 +59,8 @@ public class ConstantVO {
 	
 	public double baseMoneyForADMINISTRATOR;
 	
+	public double baseMoneyForDriver;
+	
 	public ConstantVO() {
 		price = 23;
 		distance_Beijing_Guangzhou = 1888.8;

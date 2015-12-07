@@ -15,16 +15,20 @@ import org.cross.elsclient.ui.businesshallclerkui.trans.TransAddPanel;
 import org.cross.elsclient.ui.businesshallclerkui.vehicle.VehicleManagePanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.vo.UserVO;
 
 public class BusinessFunctionPanel extends ELSFunctionPanel{
 	public ReceiptBLService receiptbl;
 	public VehicleBLService vehiclebl;
 	public PersonnelBLService personnelbl;
+	UserVO user;
 	
 	public BusinessFunctionPanel() {
 		super();
 		receiptbl = new Receipt_Stub();
 		vehiclebl = new Vehicle_stub();
+		user = UIConstant.CURRENT_USER;
 		init();
 	}
 	@Override
@@ -38,12 +42,12 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("司机管理", "driver");
 		addFunctionBtn("单据管理", "receipts");
 		
-		addFunctionPanel(new ArriAddPanel(receiptbl), "add","arrive");
-		addFunctionPanel(new TransAddPanel(receiptbl), "add","trans");
-		addFunctionPanel(new MoneyAddPanel(receiptbl), "add","moneyin");
-		addFunctionPanel(new DeliverAddPanel(receiptbl), "add","send");
+		addFunctionPanel(new ArriAddPanel(receiptbl, user), "add","arrive");
+		addFunctionPanel(new TransAddPanel(receiptbl, user), "add","trans");
+		addFunctionPanel(new MoneyAddPanel(receiptbl, user), "add","moneyin");
+		addFunctionPanel(new DeliverAddPanel(receiptbl, user), "add","send");
 		addFunctionPanel(new VehicleManagePanel(vehiclebl), "manage","vehicle");
-		addFunctionPanel(new DriverManagePanel(personnelbl), "manage","driver");
+		addFunctionPanel(new DriverManagePanel(personnelbl, user), "manage","driver");
 		
 		addFunctionPanel(new ReceiptManagePanel(receiptbl), "manage", "receipts");
 	}

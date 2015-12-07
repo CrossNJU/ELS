@@ -42,7 +42,7 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		}
 		PersonnelVO vo = new PersonnelVO(po.getNumber(), po.getName(),
 				po.getPosition(), po.getOrgNum(), sex, po.getId(),
-				po.getPhone(), po.getBirth(), salary);
+				po.getPhone(), po.getBirth());
 		return vo;
 	}
 

@@ -3,19 +3,21 @@ package org.cross.elsclient.blimpl.constantblimpl;
 import org.cross.elsclient.blimpl.blUtility.ConstantInfo;
 import org.cross.elsclient.vo.ConstantVO;
 import org.cross.elscommon.po.ConstantPO;
+import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.UserType;
 
 public class ConstantInfoImpl implements ConstantInfo{
 	@Override
 	public ConstantVO toConstantVO(ConstantPO po) {
 		ConstantVO vo = new ConstantVO();
-		vo.baseMoneyForADMINISTRATOR = po.getBaseMoney(UserType.ADMINISTRATOR);
-		vo.baseMoneyForBUSINESSHALLCLERK = po.getBaseMoney(UserType.BUSINESSHALLCLERK);
-		vo.baseMoneyForCOUNTER = po.getBaseMoney(UserType.COUNTER);
-		vo.baseMoneyForCOURIER = po.getBaseMoney(UserType.COURIER);
-		vo.baseMoneyForMANAGER = po.getBaseMoney(UserType.MANAGER);
-		vo.baseMoneyForSTOCKKEEPER = po.getBaseMoney(UserType.STOCKKEEPER);
-		vo.baseMoneyForTRANSITCENTERCLERK = po.getBaseMoney(UserType.TRANSITCENTERCLERK);
+		vo.baseMoneyForADMINISTRATOR = po.getBaseMoney(PositionType.ADMINISTRATOR);
+		vo.baseMoneyForBUSINESSHALLCLERK = po.getBaseMoney(PositionType.BUSINESSHALLCLERK);
+		vo.baseMoneyForCOUNTER = po.getBaseMoney(PositionType.COUNTER);
+		vo.baseMoneyForCOURIER = po.getBaseMoney(PositionType.COURIER);
+		vo.baseMoneyForMANAGER = po.getBaseMoney(PositionType.MANAGER);
+		vo.baseMoneyForSTOCKKEEPER = po.getBaseMoney(PositionType.STOCKKEEPER);
+		vo.baseMoneyForTRANSITCENTERCLERK = po.getBaseMoney(PositionType.TRANSITCENTERCLERK);
+		vo.baseMoneyForDriver = po.getBaseMoney(PositionType.DRIVER);
 		vo.distance_Beijing_Guangzhou = po.getDistance_Beijing_Guangzhou();
 		vo.distance_Beijing_Nanjing = po.getDistance_Beijing_Nanjing();
 		vo.distance_Beijing_Shanghai = po.getDistance_Beijing_Shanghai();
@@ -30,13 +32,14 @@ public class ConstantInfoImpl implements ConstantInfo{
 	@Override
 	public ConstantPO toConstantPO(ConstantVO vo) {
 		ConstantPO po = new ConstantPO();
-		po.setBaseMoney(UserType.ADMINISTRATOR, vo.baseMoneyForADMINISTRATOR);
-		po.setBaseMoney(UserType.BUSINESSHALLCLERK, vo.baseMoneyForBUSINESSHALLCLERK);
-		po.setBaseMoney(UserType.COUNTER, vo.baseMoneyForCOUNTER);
-		po.setBaseMoney(UserType.COURIER, vo.baseMoneyForCOURIER);
-		po.setBaseMoney(UserType.MANAGER, vo.baseMoneyForMANAGER);
-		po.setBaseMoney(UserType.STOCKKEEPER, vo.baseMoneyForSTOCKKEEPER);
-		po.setBaseMoney(UserType.TRANSITCENTERCLERK, vo.baseMoneyForTRANSITCENTERCLERK);
+		po.setBaseMoney(PositionType.ADMINISTRATOR, vo.baseMoneyForADMINISTRATOR);
+		po.setBaseMoney(PositionType.BUSINESSHALLCLERK, vo.baseMoneyForBUSINESSHALLCLERK);
+		po.setBaseMoney(PositionType.COUNTER, vo.baseMoneyForCOUNTER);
+		po.setBaseMoney(PositionType.COURIER, vo.baseMoneyForCOURIER);
+		po.setBaseMoney(PositionType.MANAGER, vo.baseMoneyForMANAGER);
+		po.setBaseMoney(PositionType.STOCKKEEPER, vo.baseMoneyForSTOCKKEEPER);
+		po.setBaseMoney(PositionType.TRANSITCENTERCLERK, vo.baseMoneyForTRANSITCENTERCLERK);
+		po.setBaseMoney(PositionType.DRIVER, vo.baseMoneyForDriver);
 		
 		po.setPrice(vo.price);
 		po.setTimeBykilo(vo.timeBykilo);
