@@ -18,6 +18,7 @@ import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StockOperationType;
 import org.cross.elscommon.util.StockState;
 import org.cross.elscommon.util.StockType;
+import org.cross.elsclient.network.Datafactory;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.StockAreaVO;
@@ -117,15 +118,24 @@ public class StockBLImpl implements StockBLService {
 		ArrayList<StockAreaVO> vo = new ArrayList<StockAreaVO>();
 		StockPO stock = stockData.findStockByNumber(id);
 		if (stock == null) {
+			System.out.println("stock null");
 			return null;
 		}
 		ArrayList<StockAreaPO> po = stockData.findStockAreaByStock(id);
 		if (po == null) {
+			System.out.println("null2");
 			return null;
 		}
 		int size = po.size();
+		System.out.println("size           " + size);
 		for (int i = 0; i < size; i++) {
+			System.out.println(type.toString() + "nnn");
+			if (po.get(i) != null) {
+				System.out.println(po.get(i).getStockType());
+			}
+			
 			if (po.get(i).getStockType() == type) {
+				System.out.println(po.get(i).getNumber());
 				vo.add(stockInfo.toStockAreaVO(po.get(i)));
 			}
 		}
@@ -148,7 +158,7 @@ public class StockBLImpl implements StockBLService {
 		if (stockPO == null) {
 			return ResultMessage.FAILED;
 		}
-		StockAreaPO areaPO = stockData.findStockAreaByNumber(areaNum);
+		StockAreaPO areaPO = stockData.findStockAreaByNumber(stockAreaNum);
 		if (areaPO == null) {
 			return ResultMessage.FAILED;
 		}
@@ -156,7 +166,6 @@ public class StockBLImpl implements StockBLService {
 				StockOperationType.STOCKIN, goodsID,
 				goodsInfo.getCost(goodsID), goodsVO.goodsType, stockID,
 				stockAreaNum);
-
 		updateMessage = stockData.insertStockOP(operationPO);
 		if (updateMessage != ResultMessage.SUCCESS)
 			return ResultMessage.FAILED;
@@ -243,7 +252,7 @@ public class StockBLImpl implements StockBLService {
 			total += areaVOs.get(i).totalCapacity;
 			used += areaVOs.get(i).usedCapacity;
 		}
-		if (10 * used > 9 * total) {
+		if (10 * used >= 9 * total) {
 			return StockState.ALERT;
 		}
 		return StockState.NORMAL;
@@ -253,6 +262,9 @@ public class StockBLImpl implements StockBLService {
 	public ResultMessage stockAdjust(String stockAreaID, StockType stockType)
 			throws RemoteException {
 		StockAreaPO areaPO = stockData.findStockAreaByNumber(stockAreaID);
+		if (areaPO == null) {
+			return ResultMessage.FAILED;
+		}
 		areaPO.setStockType(stockType);
 		return stockData.updateStockArea(areaPO);
 	}
@@ -301,5 +313,18 @@ public class StockBLImpl implements StockBLService {
 		StockPO po = stockData.findStockByOrg(orgNum);
 		return stockInfo.toStockVO(po);
 	}
+//	public static void main(String[] args){
+//		Datafactory datafactory = new Datafactory();
+//		StockDataService stockDataImpl = datafactory.getStockData();
+//		try {
+//			StockAreaPO po = stockDataImpl.findStockAreaByNumber("SA00001");
+//			StockPO stockPO = stockDataImpl.findStockByNumber("S001");
+//			System.out.println(po.getNumber());
+//			System.out.println(stockPO.getNumber());
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 }

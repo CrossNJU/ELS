@@ -148,8 +148,11 @@ public class GoodsInfoImpl implements GoodsInfo {
 
 	@Override
 	public double getCost(String goodsID) throws RemoteException {
+//		return 0;
+		double cost = 0;
 		Receipt_OrderVO order = (Receipt_OrderVO) receiptInfo.findByID(goodsID);
-		return order.cost;
+		cost = order.cost;
+		return cost;
 	}
 
 	@Override

@@ -177,9 +177,10 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		StockAreaPO po = null;
 		try {
 			if (rs.next()) {
-				po = new StockAreaPO(rs.getString("number"), StringToType.toGoodsType("type"),
+				po = new StockAreaPO(rs.getString("number"), StringToType.toGoodsType(rs.getString("type")),
 						rs.getInt("totalCapacity"), rs.getString("stockNum"));
 				po.setUsedCapacity(rs.getInt("usedCapacity"));
+//				System.out.println(po.getStockType());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -217,6 +218,20 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 			}
 		}
 		return list;
+	}
+	
+	public static void main(String[] args){
+		try {
+			StockDataImpl stockDataImpl = new StockDataImpl();
+			StockAreaPO po = stockDataImpl.findStockAreaByNumber("SA00001");
+			StockPO stockPO = stockDataImpl.findStockByNumber("S001");
+			System.out.println(po.getNumber() + " " + po.getStockType());
+			System.out.println(stockPO.getNumber());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
