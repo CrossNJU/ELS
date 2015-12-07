@@ -34,6 +34,7 @@ public class OrganizationManageTable extends ELSManageTable {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
+		isUpdateAndDelete = true;
 		vos = new ArrayList<>();
 	}
 	

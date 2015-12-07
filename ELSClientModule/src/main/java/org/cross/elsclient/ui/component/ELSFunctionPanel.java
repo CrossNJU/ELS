@@ -84,6 +84,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	public void addFunctionPanel(Container panel,String name, String functionName){
 		ELSPanel container = new ELSPanel();
 		container.setBackground(Color.white);
+		container.setName(functionName);
 		
 		functionPanels.add(container);
 		container.add(panel,name);

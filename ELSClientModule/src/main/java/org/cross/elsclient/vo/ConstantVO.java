@@ -1,5 +1,7 @@
 package org.cross.elsclient.vo;
 
+import org.cross.elscommon.util.PositionType;
+
 public class ConstantVO {
 	/**
 	 * 价格常量
@@ -73,5 +75,25 @@ public class ConstantVO {
 		distance_Nanjing_Guangzhou = 1132;
 		distance_Nanjing_Shanghai = 266;
 		distance_Shanghai_Guangzhou = 1213;
+	}
+	
+	public double getBaseMoney(PositionType user) {
+		if (user == PositionType.ADMINISTRATOR)
+			return baseMoneyForADMINISTRATOR;
+		if (user == PositionType.BUSINESSHALLCLERK)
+			return baseMoneyForBUSINESSHALLCLERK;
+		if (user == PositionType.COUNTER)
+			return baseMoneyForCOUNTER;
+		if (user == PositionType.COURIER)
+			return baseMoneyForCOURIER;
+		if (user == PositionType.MANAGER)
+			return baseMoneyForMANAGER;
+		if (user == PositionType.STOCKKEEPER)
+			return baseMoneyForSTOCKKEEPER;
+		if (user == PositionType.TRANSITCENTERCLERK)
+			return baseMoneyForTRANSITCENTERCLERK;
+		if (user == PositionType.DRIVER)
+			return baseMoneyForDriver;
+		return 0;
 	}
 }

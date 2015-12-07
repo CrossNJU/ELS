@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.util;
 
+import java.awt.Component;
 import java.awt.Window;
 
 import javax.swing.JComponent;
@@ -41,5 +42,16 @@ public class GetPanelUtil {
 		ELSPanel subFunctionPanel = (ELSPanel)((JPanel)functionPanel.getComponent(0)).getComponent(functionIndex);
 //		System.out.println(subFunctionPanel);
 		return subFunctionPanel;
+	}
+	
+	public static ELSPanel getSubFunctionPanel(JComponent c,String funcName){
+		ELSPanel mainPanel = (ELSPanel)getMainFrame(c).getContentPane().getComponent(0);
+		ELSFunctionPanel functionPanel = (ELSFunctionPanel)mainPanel.getComponent(1);
+		for (Component panel : ((JPanel)functionPanel.getComponent(0)).getComponents()) {
+			if(panel.getName().equals(funcName)){
+				return (ELSPanel)panel;
+			}
+		};
+		return null;
 	}
 }

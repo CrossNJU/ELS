@@ -31,7 +31,7 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 		String[] area = {"北京","上海", "南京","广州"};
 		
 		setTitle("机构详细信息");
-		addEditableItem("机构编号", vo.number,true,InfoType.NUM);
+		addEditableItem("机构编号", vo.number,true,InfoType.ID);
 		addComboxItem("机构地区", area,vo.city.toString() ,true);
 		addComboxItem("机构类型", types,vo.type.toString(),true);
 		

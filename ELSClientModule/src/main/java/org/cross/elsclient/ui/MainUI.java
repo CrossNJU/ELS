@@ -9,12 +9,15 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.FontUIResource;
 
+import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
+import org.cross.elsclient.blservice.constantblservice.ConstantBLService_Stub;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.managerui.ManagerFunctionPanel;
 import org.cross.elsclient.ui.util.FrameUtil;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ConstantVal;
 
 public class MainUI extends JFrame {
 
@@ -58,6 +61,9 @@ public class MainUI extends JFrame {
 		jf.setSize(UIConstant.WINDOW_WIDTH, UIConstant.WINDOW_HEIGHT);
 		FrameUtil.frameInit(jf);
 		com.sun.awt.AWTUtilities.setWindowOpaque(jf, false);
+		
+		ConstantBLService constantbl = new ConstantBLService_Stub();
+		ConstantVal.CONSTANT = constantbl.show();
 		mainPanel.add(new LoginPanel(), "login");
 		mainPanel.setOpaque(false);
 		jf.getContentPane().add(mainPanel);	

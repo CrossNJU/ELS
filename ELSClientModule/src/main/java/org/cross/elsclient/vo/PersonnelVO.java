@@ -6,8 +6,8 @@
 package org.cross.elsclient.vo;
 
 
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elscommon.po.SalaryPO;
-import org.cross.elscommon.util.ConstantVal;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.SalaryType;
 
@@ -69,17 +69,16 @@ public class PersonnelVO {
 		switch (position) {
 		case DRIVER:
 			type = SalaryType.ADDONCE;
-			once = ConstantVal.constant.getOnce();
+			once = ConstantVal.CONSTANT.once;
 			break;
 		case COURIER:
 			type = SalaryType.ADDNUM;
-			num = ConstantVal.constant.getNum();
-			break;
+			num = ConstantVal.CONSTANT.num;
 		default:
 			type = SalaryType.BYMONTHONLY;
 		}
 		
-		this.salary = new SalaryPO(type, ConstantVal.constant.getBaseMoney(position), once, num, number);
+		this.salary = new SalaryPO(type, ConstantVal.CONSTANT.getBaseMoney(position), once, num, number);
 	}
 
 }

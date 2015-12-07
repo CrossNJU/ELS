@@ -57,7 +57,7 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("机构管理", "organization");
 		addFunctionBtn("人员管理", "personnel");
 		addFunctionBtn("工资管理", "payment");
-		addFunctionBtn("账户查看", "accoutCheck");
+		addFunctionBtn("账户查看", "account");
 		addFunctionBtn("统计分析", "analysis");
 		addFunctionBtn("业务常量", "constant");
 		addFunctionBtn("系统日志", "log");
@@ -66,7 +66,7 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		addFunctionPanel(new OrganizationManagePanel(organizationbl),"manange", "organization");
 		addFunctionPanel(new PerManagePanel(personelbl),"manange", "personnel");
 		addFunctionPanel(new PaymentManagePanel(personelbl),"manange", "payment");
-		addFunctionPanel(new AccountManagePanel(accoutbl),"manange", "accoutCheck");
+		addFunctionPanel(new AccountManagePanel(accoutbl),"manange", "account");
 		addFunctionPanel(new AnalysisManagePanel(analysisbl),"manange", "analysis");
 		addFunctionPanel(new ConstantInfoPanel(constantbl),"info", "constant");
 		addFunctionPanel(new LogManagePanel(logbl),"manange", "log");

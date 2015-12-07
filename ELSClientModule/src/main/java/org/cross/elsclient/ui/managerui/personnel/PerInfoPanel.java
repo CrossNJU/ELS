@@ -30,12 +30,11 @@ public class PerInfoPanel extends ELSInfoPanel {
 		setTitle("人员信息");
 		addNormalItem("人员编号",vo.id);
 		addNormalItem("姓名", vo.name);
-//		addNormalItem("性别", );
-//		addNormalItem("身份证",vo.);
-		addNormalItem("所属机构类型", vo.organization.toString());
-		addNormalItem("所属机构ID", vo.organizationID);
+		addNormalItem("性别", vo.sex);
+		addNormalItem("身份证",vo.id);
+		addNormalItem("所属机构ID", vo.orgNum);
 		addNormalItem("职位", vo.position.toString());
-//		addNormalItem("出生日期", true);
-		
+		addNormalItem("出生日期", vo.birthday);
+		addNormalItem("手机号码", vo.phone);
 	}
 }

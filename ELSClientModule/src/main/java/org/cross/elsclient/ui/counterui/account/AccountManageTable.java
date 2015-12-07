@@ -53,7 +53,7 @@ public class AccountManageTable extends ELSManageTable{
 //		//界面统一添加到功能界面(managePanel的父容器)
 //		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 0);
 //		AccountVO vo = vos.get(index);
-////		contentPanel.add("info",new UserInfoPanel(vo));
+//		contentPanel.add("info",new Account(vo));
 //		contentPanel.cl.show(contentPanel, "info");
 //	}
 	
@@ -61,7 +61,7 @@ public class AccountManageTable extends ELSManageTable{
 	public void updateBtn(int index) {
 		super.updateBtn(index);
 		//界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 2);
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, "account");
 		
 		contentPanel.add("update",new AccountUpdatePanel(vos.get(index), accountbl));
 		contentPanel.cl.show(contentPanel, "update");

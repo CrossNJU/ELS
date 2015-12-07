@@ -29,7 +29,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("创建付款单");
-		addEditableItem("付款单编号", "", false, InfoType.NUM);
+		addEditableItem("付款单编号", "R000001", false);
 		addEditableItem("条目", "", true, InfoType.NAME);
 		addEditableItem("付款人", "", true,InfoType.NAME);
 		addEditableItem("付款账号", "", true,InfoType.NUM);
@@ -65,7 +65,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 			
 			if(receiptbl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
-				back();
+				init();
 			}else{
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
 			}

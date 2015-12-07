@@ -24,6 +24,7 @@ public class ConstantInfoPanel extends ELSInfoPanel{
 	@Override
 	public void init() {
 		super.init();
+		setTitle("业务常量");
 		addNormalItem("城市距离", "");
 		itemLabels.get(0).nameLabel.setFont(itemLabels.get(0).nameLabel.getFont().deriveFont(Font.BOLD));
 		addNormalItem("北京-上海", vo.distance_Beijing_Shanghai+"km");
@@ -34,7 +35,7 @@ public class ConstantInfoPanel extends ELSInfoPanel{
 		addNormalItem("广州-上海", vo.distance_Shanghai_Guangzhou+"km");
 		addNormalItem("", "");
 		addNormalItem("底薪    ","" );
-//		itemLabels.get(8).nameLabel.setHorizontalAlignment(JLabel.LEFT);
+		
 		itemLabels.get(8).nameLabel.setFont(itemLabels.get(8).nameLabel.getFont().deriveFont(Font.BOLD));
 		addNormalItem("快递员", vo.baseMoneyForCOURIER+"元/月");
 		addNormalItem("营业厅业务员", vo.baseMoneyForBUSINESSHALLCLERK+"元/月");
@@ -43,11 +44,13 @@ public class ConstantInfoPanel extends ELSInfoPanel{
 		addNormalItem("财务人员", vo.baseMoneyForCOUNTER+"元/月");
 		addNormalItem("总经理", vo.baseMoneyForMANAGER+"元/月");
 		addNormalItem("系统管理员", vo.baseMoneyForADMINISTRATOR+"元/月");
+		
 		addNormalItem("", "");
 		addNormalItem("价格", vo.price+"元/(kilo*kg)");
 		addNormalItem("预估每公里所花时间", vo.timeBykilo+"hour/km");
 		
 		addConfirmAndCancelBtn();
+		titlePanel.remove(titlePanel.backBtn);
 		confirmBtn.setText("修改常量");
 		cancelBtn.setVisible(false);
 		
@@ -56,7 +59,6 @@ public class ConstantInfoPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void confirm() throws RemoteException {
-		// TODO Auto-generated method stub
 		super.confirm();
 	}
 }

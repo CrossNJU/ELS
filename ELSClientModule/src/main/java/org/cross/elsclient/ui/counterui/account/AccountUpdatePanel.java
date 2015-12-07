@@ -40,9 +40,9 @@ public class AccountUpdatePanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
-			vo.name = itemLabels.get(0).getText();
-			vo.account = itemLabels.get(1).getText();
-			vo.balance = Double.valueOf(itemLabels.get(0).getText());
+			vo.name = itemLabels.get(0).toString();
+			vo.account = itemLabels.get(1).toString();
+			vo.balance = Double.valueOf(itemLabels.get(2).toString());
 			
 			if(bl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");

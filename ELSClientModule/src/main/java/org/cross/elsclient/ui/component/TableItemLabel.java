@@ -24,7 +24,7 @@ public class TableItemLabel extends ELSBox{
 		height = UIConstant.MANAGETABLE_ITEM_HEIGHT;
 		
 		this.setOpaque(true);
-		this.setBackground(Color.lightGray);
+		this.setBackground(Color.decode("#f4f5f7"));
 		this.setPreferredSize(new Dimension(width ,height));
 		this.setMaximumSize(new Dimension(width,height));
 		this.setMinimumSize(new Dimension(width,height));

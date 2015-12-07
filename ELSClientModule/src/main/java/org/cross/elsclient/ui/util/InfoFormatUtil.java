@@ -86,7 +86,9 @@ public class InfoFormatUtil {
 		 
 		 for (char ch : c) {
 			if(ch<'0'||ch>'9'){
-				return "包含非数字字符";
+				if(ch!='.'){
+					return "包含非数字字符";
+				}
 			}
 		}
 		return null;
