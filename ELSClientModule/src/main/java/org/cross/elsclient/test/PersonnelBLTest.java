@@ -39,8 +39,7 @@ public class PersonnelBLTest {
 
 		System.out.println("---test-add---");
 		PersonnelVO newVO = new PersonnelVO("P29839", "cdn",
-				PositionType.ADMINISTRATOR, "O00932", "女", null, null, null,
-				null);
+				PositionType.ADMINISTRATOR, "O00932", "女", null, null, null);
 		ResultMessage addMessage = personnelBLImpl.add(newVO);
 		if (addMessage == ResultMessage.SUCCESS) {
 			System.out.println("增加成功");
@@ -56,8 +55,7 @@ public class PersonnelBLTest {
 		}
 		System.out.println("---test-update---");
 		PersonnelVO updateVO = new PersonnelVO("P29839", "cdn",
-				PositionType.ADMINISTRATOR, "O00932", "女", "321287199999378", null, null,
-				null);
+				PositionType.ADMINISTRATOR, "O00932", "女", "321287199999378", null, null);
 		ResultMessage updateMessage = personnelBLImpl.update(updateVO);
 		if (updateMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");

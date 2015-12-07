@@ -29,7 +29,7 @@ public class InitialOrganizationTable extends InitialManageTable{
 		removeAll();
 		init();
 		for (OrganizationVO vo : vos) {
-			String item[] = {vo.id,vo.city.toString(),vo.type.toString()};
+			String item[] = {vo.number,vo.city.toString(),vo.type.toString()};
 			addItemLabel(item);
 		}
 		container.validate();

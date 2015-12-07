@@ -29,14 +29,14 @@ public class InitialBLService_Stub implements InitialBLService {
 		organizations.add(new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL, "O01001"));
 		
 		ArrayList<PersonnelVO> personnels = new ArrayList<PersonnelVO>();
-		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
 		
 		
 		ArrayList<VehicleVO> vehicles = new ArrayList<VehicleVO>();
@@ -69,12 +69,12 @@ public class InitialBLService_Stub implements InitialBLService {
 		
 		
 		ArrayList<PersonnelVO> personnels1 = new ArrayList<PersonnelVO>();
-		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
 		
 		ArrayList<VehicleVO> vehicles1 = new ArrayList<VehicleVO>();
 		vehicles1.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));

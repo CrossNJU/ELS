@@ -30,13 +30,13 @@ public class PersonnelBLService_Stub implements PersonnelBLService {
 	@Override
 	public ArrayList<PersonnelVO> findByName(String name) {
 		ArrayList<PersonnelVO> personnelList=new ArrayList<PersonnelVO>();
-		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", name, PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
 		
 		
 		return personnelList;
@@ -45,15 +45,15 @@ public class PersonnelBLService_Stub implements PersonnelBLService {
 	@Override
 	public ArrayList<PersonnelVO> show() {
 		ArrayList<PersonnelVO> personnelList=new ArrayList<PersonnelVO>();
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12"));
 		
 		return personnelList;
 	}
@@ -61,21 +61,21 @@ public class PersonnelBLService_Stub implements PersonnelBLService {
 	@Override
 	public PersonnelVO findById(String id) throws RemoteException {
 		
-		return new PersonnelVO(id, "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null);
+		return new PersonnelVO(id, "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12");
 	}
 
 	@Override
 	public ArrayList<PersonnelVO> findByOrg(String number)
 			throws RemoteException {
 		ArrayList<PersonnelVO> personnelList=new ArrayList<PersonnelVO>();
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12",null));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, number,"男","544540198512129231","110","1985-12-12"));
 		return personnelList;
 	}
 
@@ -83,13 +83,13 @@ public class PersonnelBLService_Stub implements PersonnelBLService {
 	public ArrayList<PersonnelVO> findByPosition(PositionType position)
 			throws RemoteException {
 		ArrayList<PersonnelVO> personnelList=new ArrayList<PersonnelVO>();
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12",null));
-		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12"));
+		personnelList.add(new PersonnelVO("P0000001", "汤姆", position, "O000001","男","544540198512129231","110","1985-12-12"));
 		return personnelList;
 	}
 

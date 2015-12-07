@@ -40,7 +40,7 @@ public class OrganizationManageTable extends ELSManageTable {
 	public void addItem(OrganizationVO vo){
 		vos.add(vo);
 		
-		String[] item = {vo.id,vo.city.toString(),vo.type.toString()};
+		String[] item = {vo.number,vo.city.toString(),vo.type.toString()};
 		addItemLabel(item);
 	}
 	
@@ -67,7 +67,7 @@ public class OrganizationManageTable extends ELSManageTable {
 	@Override
 	public void deleteBtn(int index) {
 		try {
-			if(organizationbl.delete(vos.get(index).id)==ResultMessage.SUCCESS){
+			if(organizationbl.delete(vos.get(index).number)==ResultMessage.SUCCESS){
 				//从展示层删除该项
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);

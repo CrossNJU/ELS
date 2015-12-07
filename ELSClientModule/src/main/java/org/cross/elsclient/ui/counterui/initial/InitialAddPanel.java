@@ -34,7 +34,8 @@ public class InitialAddPanel extends InitialManagePanel{
 	
 	public InitialAddPanel(InitialBLService initialbl) {
 		super(initialbl);
-		CurrentVO = new InitialVO("", "", 0, new ArrayList<OrganizationVO>(), new ArrayList<PersonnelVO>(), new ArrayList<VehicleVO>(), new ArrayList<StockVO>(),new ArrayList<AccountVO>());
+		CurrentVO = new InitialVO("", "", new ArrayList<OrganizationVO>(), new ArrayList<PersonnelVO>(), 
+				new ArrayList<VehicleVO>(), new ArrayList<StockVO>(),new ArrayList<AccountVO>(),"","","");
 		init();
 	}
 
