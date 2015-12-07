@@ -38,9 +38,9 @@ public class PersonnelBLTest {
 				salaryInfo);
 
 		System.out.println("---test-add---");
-		PersonnelVO newVO = new PersonnelVO("P0000001", "陈丹妮", "女",
-				"320229988787675", "1333333321", PositionType.ADMINISTRATOR,
-				"1996-01-01", "南京中转中心", "O02500111", null);
+		PersonnelVO newVO = new PersonnelVO("P29839", "cdn",
+				PositionType.ADMINISTRATOR, "O00932", "女", null, null, null,
+				null);
 		ResultMessage addMessage = personnelBLImpl.add(newVO);
 		if (addMessage == ResultMessage.SUCCESS) {
 			System.out.println("增加成功");
@@ -55,9 +55,9 @@ public class PersonnelBLTest {
 			System.out.println("删除失败");
 		}
 		System.out.println("---test-update---");
-		PersonnelVO updateVO = new PersonnelVO("P0000001", "陈丹妮", "女",
-				"320229988787675", "1333333321", PositionType.ADMINISTRATOR,
-				"1996-01-11", "南京中转中心", "O02500111", null);
+		PersonnelVO updateVO = new PersonnelVO("P29839", "cdn",
+				PositionType.ADMINISTRATOR, "O00932", "女", "321287199999378", null, null,
+				null);
 		ResultMessage updateMessage = personnelBLImpl.update(updateVO);
 		if (updateMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");
@@ -70,37 +70,35 @@ public class PersonnelBLTest {
 		int size = shows.size();
 		// System.out.println(size);
 		for (int i = 0; i < size; i++) {
-			System.out.println(shows.get(i).name + " "
-					+ shows.get(i).orgName);
+			System.out.println(shows.get(i).name + " " + shows.get(i).number);
 		}
 
 		System.out.println("---test-findById---");
 		PersonnelVO idvo = personnelBLImpl.findById("P0001");
-		System.out.println(idvo.name + " " + idvo.orgName);
+		System.out.println(idvo.name + " " + idvo.number);
 
 		System.out.println("---test-findByName---");
 		ArrayList<PersonnelVO> namevo = personnelBLImpl.findByName("crr");
 		int size2 = namevo.size();
 		System.out.println(size2);
 		for (int i = 0; i < size2; i++) {
-			System.out.println(namevo.get(i).name + " "
-					+ namevo.get(i).orgName);
+			System.out
+					.println(namevo.get(i).name + " " + namevo.get(i).number);
 		}
 
 		System.out.println("---test-findByOrg---");
 		ArrayList<PersonnelVO> orgvo = personnelBLImpl.findByOrg("O000001");
 		int size3 = orgvo.size();
 		for (int i = 0; i < size3; i++) {
-			System.out.println(orgvo.get(i).name + " "
-					+ orgvo.get(i).orgName);
+			System.out.println(orgvo.get(i).name + " " + orgvo.get(i).number);
 		}
-		
+
 		System.out.println("---test-findByPosition---");
-		ArrayList<PersonnelVO> povo = personnelBLImpl.findByPosition(PositionType.ADMINISTRATOR);
+		ArrayList<PersonnelVO> povo = personnelBLImpl
+				.findByPosition(PositionType.ADMINISTRATOR);
 		int size4 = povo.size();
 		for (int i = 0; i < size4; i++) {
-			System.out.println(povo.get(i).name + " "
-					+ povo.get(i).orgName);
+			System.out.println(povo.get(i).name + " " + povo.get(i).number);
 		}
 	}
 }

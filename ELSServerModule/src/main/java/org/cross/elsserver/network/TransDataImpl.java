@@ -28,6 +28,7 @@ public class TransDataImpl {
 			Naming.bind(NetWork.preAddress+NetWork.port+"/userdata",datafactory.getuserdaData());
 			Naming.bind(NetWork.preAddress+NetWork.port+"/personneldata",datafactory.getPersonnelData());
 			Naming.bind(NetWork.preAddress+NetWork.port+"/salarydata",datafactory.getSalaryData());
+			Naming.bind(NetWork.preAddress+NetWork.port+"/constantdata",datafactory.getConstantData());
 			System.out.println("server started successfully");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

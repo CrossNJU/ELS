@@ -55,10 +55,15 @@ public class StockVO {
 	 * 所属机构num
 	 */
 	public String orgNum;
+	
+	/**
+	 * 仓库中的小间间
+	 */
+	public ArrayList<StockAreaVO> stockAreaVOs;
 
 	public StockVO(String number, int totalAreas, int usedAreas, int outNum,
 			int inNum, double outMoney, double inMoney, int numInStock,
-			String orgNum) {
+			String orgNum,ArrayList<StockAreaVO> areaVOs) {
 		super();
 		this.number = number;
 		this.totalAreas = totalAreas;
@@ -69,6 +74,7 @@ public class StockVO {
 		this.inMoney = inMoney;
 		this.numInStock = numInStock;
 		this.orgNum = orgNum;
+		this.stockAreaVOs = areaVOs;
 	}
 
 }

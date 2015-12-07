@@ -14,6 +14,7 @@ import org.cross.elscommon.util.StockType;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockCheckVO;
 import org.cross.elsclient.vo.StockOperationVO;
+import org.cross.elsclient.vo.StockSeeVO;
 import org.cross.elsclient.vo.StockVO;
 
 public interface StockBLService {
@@ -22,13 +23,13 @@ public interface StockBLService {
 	 * @throws RemoteException 
 	 */
 	public ResultMessage addStock(StockVO vo) throws RemoteException;
-	
-	/**
-	 * 删除仓库
-	 * @throws RemoteException 
-	 */
-	public ResultMessage deleteStock(String stockID) throws RemoteException;
-	
+//	
+//	/**
+//	 * 删除仓库
+//	 * @throws RemoteException 
+//	 */
+//	public ResultMessage deleteStock(String stockID) throws RemoteException;
+//	
 	/**
 	 * 根据当前时间生成库存快照
 	 * @return 该时间节点的库存快照信息
@@ -43,7 +44,7 @@ public interface StockBLService {
 	 * @return 商品库存列表
 	 * @throws RemoteException 
 	 */
-	public ArrayList<StockOperationVO> showStockInfo(String stockID,String time1,String time2) throws RemoteException;
+	public StockSeeVO showStockInfo(String stockID,String time1,String time2) throws RemoteException;
 	
 	/**
 	 * 寻找仓库
@@ -73,7 +74,7 @@ public interface StockBLService {
 	 * @return 是否入库称成功
 	 * @throws RemoteException 
 	 */
-	public ResultMessage intoStock(String goodsID,String stockID,String time) throws RemoteException;
+	public ResultMessage intoStock(String goodsID,String stockID,String time,String stockAreaNum) throws RemoteException;
 	
 	/**
 	 * 快件出库
@@ -106,4 +107,10 @@ public interface StockBLService {
 	 * @throws RemoteException 
 	 */
 	public String getInTime(String stockNum,String goodsNum) throws RemoteException;
+	
+	/**
+	 * 根据机构查找仓库
+	 */
+	public StockVO findStockByOrg(String orgNum) throws RemoteException;
+	
 }

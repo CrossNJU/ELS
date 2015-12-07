@@ -7,7 +7,8 @@ import org.cross.elsclient.blimpl.blUtility.OrganizationInfo;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.po.OrganizationPO;
-import org.cross.elscommon.util.AnalyseID;
+import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.OrganizationType;
 
 public class OrganizationInfoImpl implements OrganizationInfo {
 
@@ -22,8 +23,7 @@ public class OrganizationInfoImpl implements OrganizationInfo {
 		if (po == null) {
 			return null;
 		}
-		OrganizationVO vo = new OrganizationVO(po.getCity(), po.getNumber(),
-				po.getType());
+		OrganizationVO vo = new OrganizationVO(City.NANJING, OrganizationType.BUSINESSHALL, "O0990907");
 		return vo;
 	}
 

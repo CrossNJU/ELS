@@ -3,6 +3,7 @@ package org.cross.elscommon.dataservice.datafactoryservice;
 import java.rmi.RemoteException;
 
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
+import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
 import org.cross.elscommon.dataservice.logdataservice.LogDataService;
@@ -37,4 +38,6 @@ public interface DataFactoryService {
 	public UserDataService getuserdaData() throws RemoteException;
 	
 	public SalaryDataService getSalaryData() throws RemoteException;
+	
+	public ConstantDataService getConstantData() throws RemoteException;
 }

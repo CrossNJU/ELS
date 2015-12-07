@@ -53,9 +53,7 @@ public class InitialInfoImpl implements InitialInfo {
 		ArrayList<StockVO> stockVOs = stockInfo.showStockVOs();
 		ArrayList<AccountVO> accountVOs = accountInfo.show();
 		String perName = personnelInfo.findNameById(po.getPerNum());
-		InitialVO vo = new InitialVO(po.getNumber(), po.getTime(),
-				po.getName(), perName, po.getPerNum(), orgVOs, personnelVOs,
-				vehicleVOs, stockVOs, accountVOs);
+		InitialVO vo = new InitialVO(po.getNumber(), po.getName(), orgVOs, personnelVOs, vehicleVOs, stockVOs, accountVOs, po.getTime(), perName, po.getPerNum());
 		return vo;
 	}
 

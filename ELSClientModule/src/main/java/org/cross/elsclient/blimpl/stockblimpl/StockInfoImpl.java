@@ -14,7 +14,6 @@ import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
-import org.cross.elscommon.util.AnalyseID;
 
 public class StockInfoImpl implements StockInfo {
 
@@ -26,23 +25,39 @@ public class StockInfoImpl implements StockInfo {
 		this.stockData = stockData;
 	}
 
-	public StockInfoImpl(GoodsInfo goodsInfo, OrganizationInfo orgInfo,StockDataService stockData) {
+	public StockInfoImpl(GoodsInfo goodsInfo, OrganizationInfo orgInfo,
+			StockDataService stockData) {
 		this.goodsInfo = goodsInfo;
 		this.orgInfo = orgInfo;
 		this.stockData = stockData;
 	}
 
 	@Override
-	public StockVO toStockVO(StockPO po) {
+	public StockVO toStockVO(StockPO po) throws RemoteException {
 		if (po == null) {
 			return null;
 		}
-		String orgName = AnalyseID.idToName(po.getOrgNum());
+		ArrayList<StockAreaPO> areaPOs = stockData.findStockAreaByStock(po
+				.getNumber());
+		ArrayList<StockAreaVO> areaVOs = toStockAreaVO(areaPOs);
 		StockVO stockVO = new StockVO(po.getNumber(), po.getTotalAreas(),
 				po.getUsedAreas(), po.getNumOut(), po.getNumIn(),
 				po.getMoneyOut(), po.getMoneyIn(), po.getNumInStock(),
-				po.getOrgNum(), orgName);
+				po.getOrgNum(), areaVOs);
 		return stockVO;
+	}
+
+	public ArrayList<StockAreaVO> toStockAreaVO(ArrayList<StockAreaPO> pos)
+			throws RemoteException {
+		ArrayList<StockAreaVO> vos = new ArrayList<StockAreaVO>();
+		if (pos == null) {
+			return vos;
+		}
+		int size = pos.size();
+		for (int i = 0; i < size; i++) {
+			vos.add(toStockAreaVO(pos.get(i)));
+		}
+		return vos;
 	}
 
 	@Override
@@ -84,7 +99,6 @@ public class StockInfoImpl implements StockInfo {
 		stockPO.setMoneyOut(vo.outMoney);
 		stockPO.setMoneyIn(vo.inMoney);
 		stockPO.setNumInStock(vo.numInStock);
-
 		return stockPO;
 	}
 
@@ -99,17 +113,18 @@ public class StockInfoImpl implements StockInfo {
 		return po;
 	}
 
-//	@Override
-//	public StockOperationPO toStockOperationPO(StockOperationVO vo) {
-//		if (vo == null) {
-//			return null;
-//		}
-//		StockOperationPO stockOperationPO = new StockOperationPO(vo.time, vo.type, vo.goodNum, vo.money, vo., vo.,vo.)
-//		return stockOperationPO;
-//	}
+	// @Override
+	// public StockOperationPO toStockOperationPO(StockOperationVO vo) {
+	// if (vo == null) {
+	// return null;
+	// }
+	// StockOperationPO stockOperationPO = new StockOperationPO(vo.time,
+	// vo.type, vo.goodNum, vo.money, vo., vo.,vo.)
+	// return stockOperationPO;
+	// }
 
 	@Override
-	public ArrayList<StockVO> toStoVOs(ArrayList<StockPO> pos) {
+	public ArrayList<StockVO> toStockVO(ArrayList<StockPO> pos) throws RemoteException {
 		if (pos == null) {
 			return null;
 		}
@@ -122,7 +137,7 @@ public class StockInfoImpl implements StockInfo {
 	}
 
 	@Override
-	public ArrayList<StockPO> toStoPOs(ArrayList<StockVO> vos) {
+	public ArrayList<StockPO> toStockPO(ArrayList<StockVO> vos) {
 		if (vos == null) {
 			return null;
 		}
@@ -137,8 +152,21 @@ public class StockInfoImpl implements StockInfo {
 	@Override
 	public ArrayList<StockVO> showStockVOs() throws RemoteException {
 		ArrayList<StockPO> pos = stockData.showStock();
-		ArrayList<StockVO> vos = toStoVOs(pos);
+		ArrayList<StockVO> vos = toStockVO(pos);
 		return vos;
+	}
+
+	@Override
+	public ArrayList<StockAreaPO> toStockAreaPO(ArrayList<StockAreaVO> vos) {
+		ArrayList<StockAreaPO> pos = new ArrayList<StockAreaPO>();
+		if (vos == null) {
+			return pos;
+		}
+		int size = vos.size();
+		for (int i = 0; i < size; i++) {
+			pos.add(toStockAreaPO(vos.get(i)));
+		}
+		return pos;
 	}
 
 }

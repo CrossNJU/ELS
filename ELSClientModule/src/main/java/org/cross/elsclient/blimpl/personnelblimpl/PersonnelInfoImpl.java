@@ -10,7 +10,6 @@ import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.SalaryPO;
-import org.cross.elscommon.util.AnalyseID;
 
 public class PersonnelInfoImpl implements PersonnelInfo {
 
@@ -41,9 +40,9 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		} else {
 			sex = "女";
 		}
-		PersonnelVO vo = new PersonnelVO(po.getNumber(), po.getName(), sex,
-				po.getId(), po.getPhone(), po.getPosition(), po.getBirth(),
-				AnalyseID.idToName(po.getOrgNum()), po.getOrgNum(), salary);
+		PersonnelVO vo = new PersonnelVO(po.getNumber(), po.getName(),
+				po.getPosition(), po.getOrgNum(), sex, po.getId(),
+				po.getPhone(), po.getBirth(), salary);
 		return vo;
 	}
 

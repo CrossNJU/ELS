@@ -14,6 +14,7 @@ import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
+import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
 
 public interface BLFactoryService {
@@ -30,5 +31,6 @@ public interface BLFactoryService {
 	public StockBLService stockBLService()throws RemoteException;
 	public VehicleBLService vehicleBLService()throws RemoteException;
 	public SalaryDataService salaryDataService()throws RemoteException;
+	public ConstantDataService constantDataService()throws RemoteException;
 	
 }

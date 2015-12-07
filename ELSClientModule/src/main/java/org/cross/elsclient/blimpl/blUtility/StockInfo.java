@@ -11,17 +11,19 @@ import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
 
 public interface StockInfo {
-	public StockVO toStockVO(StockPO po);
+	public StockVO toStockVO(StockPO po) throws RemoteException;
 	
 	public StockPO toStockPO(StockVO vo);
 	
-	public ArrayList<StockVO> toStoVOs(ArrayList<StockPO> pos);
+	public ArrayList<StockVO> toStockVO(ArrayList<StockPO> pos) throws RemoteException;
 	
-	public ArrayList<StockPO> toStoPOs(ArrayList<StockVO> vos);
+	public ArrayList<StockPO> toStockPO(ArrayList<StockVO> vos);
 	
 	public StockAreaVO toStockAreaVO(StockAreaPO po) throws RemoteException;
 	
 	public StockAreaPO toStockAreaPO(StockAreaVO vo);
+	
+	public ArrayList<StockAreaPO> toStockAreaPO(ArrayList<StockAreaVO> vos);
 	
 	public StockOperationVO toStockOperationVO(StockOperationPO po);
 

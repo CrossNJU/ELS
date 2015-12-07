@@ -108,7 +108,7 @@ public class InitialBLImpl implements InitialBLService {
 	public ArrayList<StockVO> showStock(String initialID)
 			throws RemoteException {
 		ArrayList<StockPO> stockPOs = initialData.findInitStocks(initialID);
-		ArrayList<StockVO> stockVOs = stockInfo.toStoVOs(stockPOs);
+		ArrayList<StockVO> stockVOs = stockInfo.toStockVO(stockPOs);
 
 		return stockVOs;
 	}

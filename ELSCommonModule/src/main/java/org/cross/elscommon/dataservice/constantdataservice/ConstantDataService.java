@@ -1,9 +1,11 @@
 package org.cross.elscommon.dataservice.constantdataservice;
 
+import java.rmi.Remote;
+
 import org.cross.elscommon.po.ConstantPO;
 import org.cross.elscommon.util.ResultMessage;
 
-public interface ConstantDataService {
+public interface ConstantDataService extends Remote{
 	
 	/**
 	 * 更新业务常量

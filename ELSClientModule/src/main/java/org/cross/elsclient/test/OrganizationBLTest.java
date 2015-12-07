@@ -23,7 +23,7 @@ public class OrganizationBLTest {
 		OrganizationBLImpl orgBLImpl = new OrganizationBLImpl(dataFactory.getOrganizationData(), orgInfo);
 		
 		System.out.println("========测试addOrg=======");
-		OrganizationVO newOrg = new OrganizationVO(City.BEIJING, "O0010222", OrganizationType.BUSINESSHALL);
+		OrganizationVO newOrg = new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL, "O0010222");
 		ResultMessage addMessage = orgBLImpl.add(newOrg);
 		if (addMessage == ResultMessage.SUCCESS) {
 			System.out.println("增加成功");
@@ -38,7 +38,7 @@ public class OrganizationBLTest {
 			System.out.println("删除失败");
 		}
 		System.out.println("========测试updateOrg=======");
-		OrganizationVO updateOrg = new OrganizationVO(City.GUANGZHOU, "O0010222", OrganizationType.BUSINESSHALL);
+		OrganizationVO updateOrg = new OrganizationVO(City.GUANGZHOU, OrganizationType.BUSINESSHALL, "O0010222");
 		ResultMessage updateMessage = orgBLImpl.update(updateOrg);
 		if (updateMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");

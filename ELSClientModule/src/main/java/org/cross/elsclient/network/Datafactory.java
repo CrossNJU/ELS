@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
+import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
@@ -165,6 +166,19 @@ public class Datafactory implements DataFactoryService{
 			e.printStackTrace();
 		}
 		return salaryDataService;
+	}
+
+	@Override
+	public ConstantDataService getConstantData() throws RemoteException {
+		ConstantDataService constantDataService = null;
+		try {
+			constantDataService = (ConstantDataService)Naming.lookup(NetWork.preAddress+NetWork.port+"/constantdata");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return constantDataService;
 	}
 
 }
