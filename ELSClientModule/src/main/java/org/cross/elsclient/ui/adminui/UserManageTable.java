@@ -54,7 +54,7 @@ public class UserManageTable extends ELSManageTable{
 	public void addItem(UserVO vo){
 		vos.add(vo);
 		
-		String[] item = {vo.id,vo.name,vo.type.toString()};
+		String[] item = {vo.number,vo.name,vo.userType.toString()};
 		addItemLabel(item);
 		
 	}
@@ -82,7 +82,7 @@ public class UserManageTable extends ELSManageTable{
 	@Override
 	public void deleteBtn(int index) {
 		try {
-			if(userbl.delete(vos.get(index).id)==ResultMessage.SUCCESS){
+			if(userbl.delete(vos.get(index).number)==ResultMessage.SUCCESS){
 				//从展示层删除该项
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);

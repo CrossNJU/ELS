@@ -21,11 +21,11 @@ public class UserVO {
 	/**
 	 * 用户职位
 	 */
-	public String userType;
+	public UserType userType;
 
 	public String password;
 
-	public UserVO(String number, String password, String name, String position, String orgNameID) {
+	public UserVO(String number, String password, String name, UserType position, String orgNameID) {
 		super();
 		this.number = number;
 		this.name = name;

@@ -45,11 +45,12 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	public ArrayList<ReceiptVO> show() {
 		// TODO Auto-generated method stub
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
-		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
-		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
-		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
-		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
-		list.add(new ReceiptVO("R120151023000002", ReceiptType.ORDER, "2015-10-23 10:23:22"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
 		list.get(0).approveState = ApproveType.APPROVED;
 		list.get(0).approveState = ApproveType.NOT_APPROVED;
 		return list;
@@ -58,7 +59,7 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	@Override
 	public ReceiptVO findByID(String id) {
 		// TODO Auto-generated method stub
-		ReceiptVO receipt = new ReceiptVO(id, ReceiptType.ORDER, "2015-10-22 10:23:22");
+		ReceiptVO receipt = new ReceiptVO(id, ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001");
 		return receipt;
 	}
 	
@@ -66,10 +67,12 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime) {
 		// TODO Auto-generated method stub
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
-		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
-		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
-		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
-		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
+		list.add(new ReceiptVO("R120151023000001", ReceiptType.ORDER, "2015-10-22 10:23:22","P000001","O000001"));
 		return list;
 	}
 
@@ -78,18 +81,19 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 		// TODO Auto-generated method stub
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
 		if(type == ReceiptType.MONEYIN){
-			PersonnelVO person = new PersonnelVO("111", "学睿", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "111111");
-			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
-			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
-			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
-			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-10-22 10:23:22", 2000.0, person, "R120151023000001"));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001",null, null, null));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001",null, null, null));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001",null, null, null));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001",null, null, null));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001",null, null, null));
+			list.add((ReceiptVO)new Receipt_MoneyInVO("2015-12-12 10:30", 2000, null, "R000001",null, null, null));
 		}else{
-			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
-			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
-			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
-			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
-			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
-			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22","P000001","O000001"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22","P000001","O000001"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22","P000001","O000001"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22","P000001","O000001"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22","P000001","O000001"));
+			list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22","P000001","O000001"));
 		}
 		return list;
 	}
@@ -98,7 +102,7 @@ public class ReceiptBLService_Stub implements ReceiptBLService{
 	public ArrayList<ReceiptVO> findByTimeAndType(String startTime, String endTime, ReceiptType type) {
 		// TODO Auto-generated method stub
 		ArrayList<ReceiptVO> list = new ArrayList<ReceiptVO>();
-		list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22"));
+		list.add(new ReceiptVO("R120151023000001", type, "2015-10-22 10:23:22","P000001","O000001"));
 		return list;
 	}
 

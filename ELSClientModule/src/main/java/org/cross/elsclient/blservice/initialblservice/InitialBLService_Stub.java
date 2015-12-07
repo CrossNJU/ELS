@@ -25,23 +25,36 @@ public class InitialBLService_Stub implements InitialBLService {
 	public ArrayList<InitialVO> show() {
 		ArrayList<OrganizationVO> organizations = new ArrayList<OrganizationVO>();
 		organizations.add(new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL, "O01001"));
+		organizations.add(new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL, "O01001"));
+		organizations.add(new OrganizationVO(City.BEIJING, OrganizationType.BUSINESSHALL, "O01001"));
 		
 		ArrayList<PersonnelVO> personnels = new ArrayList<PersonnelVO>();
-		personnels.add(new PersonnelVO("P000001", "汤姆", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "O000001"));
-		personnels.add(new PersonnelVO("P000001", "汤姆", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "O000001"));
-		personnels.add(new PersonnelVO("P000001", "汤姆", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "O000001"));
-		personnels.add(new PersonnelVO("P000001", "汤姆", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "O000001"));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
 		
 		
 		ArrayList<VehicleVO> vehicles = new ArrayList<VehicleVO>();
-		vehicles.add(new VehicleVO("V0100001"));
-		vehicles.add(new VehicleVO("V0100001"));
-		vehicles.add(new VehicleVO("V0100001"));
+		vehicles.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		
 		
 		ArrayList<StockVO> stocks = new ArrayList<StockVO>();
-		stocks.add(new StockVO("S00001", 5));
-		stocks.add(new StockVO("S00001", 5));
-		stocks.add(new StockVO("S00001", 5));
+		stocks.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
 		
 		ArrayList<AccountVO> accounts = new ArrayList<AccountVO>();
 		accounts.add(new AccountVO("ICBC账户", "6222201234567654321", 500000));
@@ -56,21 +69,26 @@ public class InitialBLService_Stub implements InitialBLService {
 		
 		
 		ArrayList<PersonnelVO> personnels1 = new ArrayList<PersonnelVO>();
-		personnels1.add(new PersonnelVO("P000001", "汤姆", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "O000001"));
-		personnels1.add(new PersonnelVO("P000001", "汤姆", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "O000001"));
-		personnels1.add(new PersonnelVO("P000001", "汤姆", PositionType.ADMINISTRATOR, OrganizationType.BUSINESSHALL, "O000001"));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
+		personnels1.add(new PersonnelVO("P0000001", "汤姆", PositionType.COUNTER, "O000001","男","544540198512129231","110","1985-12-12",null));
 		
 		ArrayList<VehicleVO> vehicles1 = new ArrayList<VehicleVO>();
-		vehicles1.add(new VehicleVO(number, licence, businessHallNum, engineNumber, apparatusNumber, buyTime, lastTime, image, inUse));
-		vehicles1.add(new VehicleVO("V0100001"));
-		vehicles1.add(new VehicleVO("V0100001"));
-		vehicles1.add(new VehicleVO("V0100001"));
+		vehicles1.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles1.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles1.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles1.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
+		vehicles1.add(new VehicleVO("V0000001", "粤U007456", "O000001", null, null, "2015-10-13", "2015-12-12", null, true));
 		
 		ArrayList<StockVO> stocks1 = new ArrayList<StockVO>();
-		stocks1.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 100, "O0000001"));
-		stocks1.add(new StockVO("S00001", 5));
-		stocks1.add(new StockVO("S00001", 5));
-		stocks1.add(new StockVO("S00001", 5));
+		stocks1.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks1.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks1.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks1.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
+		stocks1.add(new StockVO("S000001", 10, 10, 10, 10, 10, 10, 10, "O000001", null));
 		
 		ArrayList<AccountVO> accounts1 = new ArrayList<AccountVO>();
 		ArrayList<InitialVO> list = new ArrayList<InitialVO>();

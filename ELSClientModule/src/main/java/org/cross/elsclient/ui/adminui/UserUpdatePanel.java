@@ -34,9 +34,9 @@ public class UserUpdatePanel extends ELSInfoPanel{
 		setTitle("修改用户");
 		addEditableItem("用户名", "U000001", false);
 		addEditableItem("姓名", vo.name, true,InfoType.NAME);
-		addComboxItem("职位", items,vo.type.toString(), true);
+		addComboxItem("职位", items,vo.userType.toString(), true);
 		addEditableItem("密码", vo.password, true,InfoType.PASSWORD);
-		
+		addEditableItem("所属机构", vo.orgNameID, true,InfoType.NAME);
 		//添加确认和取消按钮
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认修改");
@@ -47,10 +47,11 @@ public class UserUpdatePanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		
 		if(isAllLegal()){
-			vo.id = itemLabels.get(0).toString();
+			vo.number = itemLabels.get(0).toString();
 			vo.name = itemLabels.get(1).toString();
 			vo.password = itemLabels.get(3).toString();
-			vo.type = StringToType.toUserType(itemLabels.get(2).toString());
+			vo.userType = StringToType.toUserType(itemLabels.get(2).toString());
+			vo.orgNameID = itemLabels.get(4).toString();
 			if(userbl.update(vo)==ResultMessage.SUCCESS){
 				System.out.println(itemLabels.get(0).toString());
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更新成功");

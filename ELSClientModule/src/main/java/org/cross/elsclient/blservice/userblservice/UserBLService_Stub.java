@@ -31,12 +31,12 @@ public class UserBLService_Stub implements UserBLService {
 	@Override
 	public ArrayList<UserVO> findByName(String name) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO(number, name, orgNameID, position, password));
-		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", name, UserType.COUNTER,"O0000001"));
 		
 		return list;
 	}
@@ -44,12 +44,14 @@ public class UserBLService_Stub implements UserBLService {
 	@Override
 	public ArrayList<UserVO> findByType(UserType type) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
-		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
-		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
-		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
-		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
-		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", type));
+		list.add(new UserVO("U0000001","12345678", "迪迦",type,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",type,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",type,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",type,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",type,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",type,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",type,"O0000001"));
+		
 		
 		return list;
 	}
@@ -59,25 +61,17 @@ public class UserBLService_Stub implements UserBLService {
 	@Override
 	public ArrayList<UserVO> show() {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(new UserVO("U0000001","12345678", "迪迦奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678","戴拿奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
-		list.add(new UserVO("U0000001","12345678", "盖亚奥特曼", UserType.COUNTER));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
+		list.add(new UserVO("U0000001","12345678", "迪迦",UserType.COUNTER,"O0000001"));
 		
 		
 		return list;
@@ -119,7 +113,7 @@ public class UserBLService_Stub implements UserBLService {
 	@Override
 	public UserVO findById(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new UserVO("U0000001","12345678", "迪迦奥特曼", UserType.COUNTER);
+		return new UserVO("U0000001","12345678", "迪迦奥特曼", UserType.COUNTER,"O000001");
 	}
 
 }
