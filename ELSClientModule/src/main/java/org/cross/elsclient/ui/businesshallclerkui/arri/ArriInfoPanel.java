@@ -40,7 +40,6 @@ public class ArriInfoPanel extends ELSInfoPanel{
 		addNormalItem("出发时间", transvo.time);
 		addNormalItem("到达地", transvo.arriveOrgID);
 		addNormalItem("到达时间", vo.time);
-		addNormalItem("货物到达状态", "完好");
 		
 		container.packHeight();
 	}

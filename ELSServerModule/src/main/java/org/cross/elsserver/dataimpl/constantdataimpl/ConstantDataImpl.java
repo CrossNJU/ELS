@@ -94,4 +94,16 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 		return po;
 	}
 
+	
+	public static void main(String [] args){
+		ConstantPO po = new ConstantPO();
+		ConstantDataImpl impl = null;
+		try {
+			impl = new ConstantDataImpl();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		impl.update(po);
+	}
 }

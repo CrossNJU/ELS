@@ -37,7 +37,9 @@ public class ConstantBLImpl implements ConstantBLService{
 	public ConstantVO show() {
 		ConstantVO vo = null;
 		try {
-			vo = constantInfo.toConstantVO(constantData.show());
+			ConstantPO po = constantData.show();
+			if(po == null) return null;
+			vo = constantInfo.toConstantVO(po);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

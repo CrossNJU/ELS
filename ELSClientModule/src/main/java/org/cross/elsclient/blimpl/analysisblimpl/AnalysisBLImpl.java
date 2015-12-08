@@ -21,8 +21,29 @@ public class AnalysisBLImpl implements AnalysisBLService {
 
 	@Override
 	public double[] showCostBenefitTable() {
-		// TODO Auto-generated method stub
-		return null;
+		int moneyIn = 0,moneyOut = 0,profit = 0;
+		try {
+			ArrayList<ReceiptVO> moneyInVOs = receiptInfo.findByType(ReceiptType.MONEYIN);
+			ArrayList<ReceiptVO> moneyOutVOs = receiptInfo.findByType(ReceiptType.MONEYOUT);
+			int inSize = moneyInVOs.size();
+			int outSize = moneyOutVOs.size();
+			for (int i = 0; i < inSize; i++) {
+				Receipt_MoneyInVO temp = (Receipt_MoneyInVO)moneyInVOs.get(i);
+				moneyIn += temp.money;
+			}
+			for (int i = 0; i < outSize; i++) {
+				Receipt_MoneyOutVO temp = (Receipt_MoneyOutVO)moneyOutVOs.get(i);
+				moneyOut += temp.money;
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		profit = moneyIn - moneyOut;
+		double[] d = new double[3];
+		d[0] = moneyOut;
+		d[1] = moneyIn;
+		d[2] = profit;
+		return d;
 	}
 
 	@Override

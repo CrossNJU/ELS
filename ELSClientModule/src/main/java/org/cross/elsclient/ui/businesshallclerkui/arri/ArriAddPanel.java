@@ -12,9 +12,15 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.vo.GoodsVO;
+import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.Receipt_ArriveVO;
+import org.cross.elsclient.vo.Receipt_TransVO;
 import org.cross.elsclient.vo.UserVO;
+import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.GoodsState;
 import org.cross.elscommon.util.NumberType;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
@@ -27,11 +33,13 @@ public class ArriAddPanel extends ELSInfoPanel {
 	private static final long serialVersionUID = 1L;
 	Receipt_ArriveVO arrivo;
 	ReceiptBLService receiptbl;
+	GoodsBLService goodsbl;
 	UserVO user;
 
-	public ArriAddPanel(ReceiptBLService receiptbl, UserVO user) {
+	public ArriAddPanel(ReceiptBLService receiptbl, UserVO user, GoodsBLService goodsbl) {
 		this.receiptbl = receiptbl;
 		this.user = user;
+		this.goodsbl = goodsbl;
 		init();
 	}
 
@@ -61,6 +69,13 @@ public class ArriAddPanel extends ELSInfoPanel {
 		arrivo = new Receipt_ArriveVO(itemLabels.get(0).toString(), itemLabels.get(5).toString(),
 				itemLabels.get(2).toString(), itemLabels.get(1).toString(), itemLabels.get(3).toString(),
 				itemLabels.get(4).toString(), user.number);
+		Receipt_TransVO transvo = (Receipt_TransVO) receiptbl.findByID(itemLabels.get(1).toString());
+		for (int i = 0; i < transvo.goodsID.size(); i++) {
+			GoodsVO goods = goodsbl.searchGoods(transvo.goodsID.get(i));
+			HistoryVO historyVO = new HistoryVO(itemLabels.get(5).toString(), City.BEIJING, OrganizationType.BUSINESSHALL, true);
+			goods.history.add(historyVO);
+			goodsbl.updateGoods(goods);
+		}
 		if (receiptbl.add(arrivo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);

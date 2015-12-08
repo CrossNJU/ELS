@@ -19,7 +19,7 @@ import org.cross.elsclient.vo.HistoryVO;
 public class GoodsBLService_Stub implements GoodsBLService{
 
 	@Override
-	public ResultMessage updateGoods(String id,HistoryVO nowHistory,GoodsState nowState) {
+	public ResultMessage updateGoods(GoodsVO vo) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
