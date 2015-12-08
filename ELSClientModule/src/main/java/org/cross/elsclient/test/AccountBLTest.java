@@ -21,20 +21,20 @@ public class AccountBLTest {
 		AccountInfo accountInfo = new AccountInfoImpl(dataFactory.getAccountData());
 		AccountBLImpl accountBLImpl = new AccountBLImpl(dataFactory.getAccountData(), accountInfo);
 		System.out.println("=======测试addAccount=======");
-		AccountVO vo1 = new AccountVO("hehe的账户", "87326483478800000", 11114.1);
+		AccountVO vo1 = new AccountVO("陈丹妮的账户", "80006483478800000", 11119.1);
 		ResultMessage addMessage = accountBLImpl.add(vo1);
 		if (addMessage == ResultMessage.SUCCESS) {
 			System.out.println("增加成功");
 		}else {
 			System.out.println("增加失败");
 		}
-//		System.out.println("=======测试deleteAccount=======");
-//		ResultMessage deleteMessage = accountBLImpl.delete("87326483478822221");
-//		if (deleteMessage == ResultMessage.SUCCESS) {
-//			System.out.println("删除成功");
-//		}else {
-//			System.out.println("删除失败");
-//		}
+		System.out.println("=======测试deleteAccount=======");
+		ResultMessage deleteMessage = accountBLImpl.delete("87326483478800000");
+		if (deleteMessage == ResultMessage.SUCCESS) {
+			System.out.println("删除成功");
+		}else {
+			System.out.println("删除失败");
+		}
 		
 //		
 		System.out.println("=======测试findByIDAccount=======");

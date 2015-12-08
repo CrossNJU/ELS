@@ -1,5 +1,7 @@
 package org.cross.elsclient.blimpl.constantblimpl;
 
+import java.rmi.RemoteException;
+
 import org.cross.elsclient.blimpl.blUtility.ConstantInfo;
 import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
 import org.cross.elsclient.vo.ConstantVO;
@@ -22,12 +24,24 @@ public class ConstantBLImpl implements ConstantBLService{
 	@Override
 	public ResultMessage update(ConstantVO vo) {
 		ConstantPO po = constantInfo.toConstantPO(vo);
-		return constantData.update(po);
+		try {
+			return constantData.update(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResultMessage.FAILED;
 	}
 
 	@Override
 	public ConstantVO show() {
-		ConstantVO vo = constantInfo.toConstantVO(constantData.show());
+		ConstantVO vo = null;
+		try {
+			vo = constantInfo.toConstantVO(constantData.show());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return vo;
 	}
 

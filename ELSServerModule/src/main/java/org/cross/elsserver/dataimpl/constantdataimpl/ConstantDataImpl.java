@@ -12,6 +12,7 @@ import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
 
+@SuppressWarnings("serial")
 public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDataService {
 
 	MySQL mysql;

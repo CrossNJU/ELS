@@ -1,6 +1,8 @@
 package org.cross.elscommon.po;
 
-public class NumberPO {
+import java.io.Serializable;
+
+public class NumberPO implements Serializable{
 
 	private String goodsNum;
 

@@ -1,5 +1,7 @@
 package org.cross.elsclient.blservice.constantblservice;
 
+import java.rmi.RemoteException;
+
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.vo.ConstantVO;
@@ -7,7 +9,7 @@ import org.omg.PortableInterceptor.SUCCESSFUL;
 
 public class ConstanceBLService_Driver {
 
-	public void drive(ConstantBLService constantBLService){
+	public void drive(ConstantBLService constantBLService) throws RemoteException{
 		System.out.println("制定业务常量返回信息：");
 		
 		System.out.println("更改业务常量：");

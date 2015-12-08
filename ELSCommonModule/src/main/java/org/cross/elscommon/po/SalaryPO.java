@@ -1,8 +1,11 @@
 package org.cross.elscommon.po;
 
+import java.io.Serializable;
+
 import org.cross.elscommon.util.SalaryType;
 
-public class SalaryPO {
+@SuppressWarnings("serial")
+public class SalaryPO implements Serializable{
 
 	private SalaryType type;
 

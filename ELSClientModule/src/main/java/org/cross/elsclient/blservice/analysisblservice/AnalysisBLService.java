@@ -1,5 +1,6 @@
 package org.cross.elsclient.blservice.analysisblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
@@ -18,8 +19,9 @@ public interface AnalysisBLService {
 	 * 展示收款单
 	 * @param beginTime, endTime
 	 * @return 收款单
+	 * @throws RemoteException 
 	 */
-	public ArrayList<Receipt_MoneyInVO> showMoneyinTable(String beginTime, String endTime);
+	public ArrayList<Receipt_MoneyInVO> showMoneyinTable(String beginTime, String endTime) throws RemoteException;
 	
 	/**
 	 * 展示付款单
