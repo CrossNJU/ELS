@@ -53,7 +53,7 @@ public class Receipt_TransVO extends ReceiptVO {
 			String transNum, String vehicleNum,
 			String startOrgID,  String arriveOrgID,
 			String observerName, String driverName, String perNum) {
-		super(number, ReceiptType.ARRIVE, time, perNum, startOrgID);
+		super(number, ReceiptType.TRANS, time, perNum, startOrgID);
 		this.goodsID = goodsID;
 		this.cost = cost;
 		this.transNum = transNum;

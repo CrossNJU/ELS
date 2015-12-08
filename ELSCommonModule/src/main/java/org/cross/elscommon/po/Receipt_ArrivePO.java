@@ -22,18 +22,12 @@ public class Receipt_ArrivePO extends ReceiptPO {
 	 */
 	private String transNum;
 
-	/**
-	 * 到达机构
-	 */
-	private String arriPlace;
-
 	public Receipt_ArrivePO(String number, ReceiptType type, String time, String orgNum, String perNum,
-			String startPlace, String startTime, String transNum, String arriPlace) {
+			String startPlace, String startTime, String transNum) {
 		super(number, type, time, orgNum, perNum);
 		this.startPlace = startPlace;
 		this.startTime = startTime;
 		this.transNum = transNum;
-		this.arriPlace = arriPlace;
 	}
 
 	public String getStartPlace() {
@@ -58,14 +52,6 @@ public class Receipt_ArrivePO extends ReceiptPO {
 
 	public void setTransNum(String transNum) {
 		this.transNum = transNum;
-	}
-
-	public String getArriPlace() {
-		return arriPlace;
-	}
-
-	public void setArriPlace(String arriPlace) {
-		this.arriPlace = arriPlace;
 	}
 
 }

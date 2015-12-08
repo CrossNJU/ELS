@@ -132,6 +132,7 @@ public class BLFactoryImpl implements BLFactoryService{
 		this.initialInfo.sal = salaryDataService;
 		this.logInfo = new LogInfoImpl();
 		
+		
 		this.receiptInfo.goodsInfo = this.goodsInfo;
 		this.receiptInfo.personnelInfo = this.personnelInfo;
 		this.receiptInfo.stockInfo = this.stockInfo;
@@ -174,7 +175,9 @@ public class BLFactoryImpl implements BLFactoryService{
 
 	@Override
 	public LogBLService logBLService() throws RemoteException {
-		return new LogBLImpl(logDataService);
+		LogBLImpl logbl = new LogBLImpl(logDataService);
+		logbl.logInfo = logInfo;
+		return logbl;
 	}
 
 	@Override

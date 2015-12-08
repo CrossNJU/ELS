@@ -9,6 +9,7 @@ import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.Receipt_ArriveVO;
+import org.cross.elsclient.vo.Receipt_DeliverVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
@@ -20,6 +21,7 @@ import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.po.Receipt_ArrivePO;
+import org.cross.elscommon.po.Receipt_DeliverPO;
 import org.cross.elscommon.po.Receipt_MoneyInPO;
 import org.cross.elscommon.po.Receipt_MoneyOutPO;
 import org.cross.elscommon.po.Receipt_OrderPO;
@@ -62,7 +64,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 		case ARRIVE:
 			Receipt_ArrivePO arripo = (Receipt_ArrivePO) po;
 			Receipt_ArriveVO arri = new Receipt_ArriveVO(arripo.getNumber(), arripo.getTime(), arripo.getStartPlace(),
-					arripo.getTransNum(), arripo.getStartTime(), arripo.getArriPlace(), arripo.getPerNum());
+					arripo.getTransNum(), arripo.getStartTime(), arripo.getOrgNum(), arripo.getPerNum());
 			arri.approveState = arripo.getApproveState();
 			return arri;
 		case TRANS:
@@ -132,6 +134,11 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					totalmoneyinpo.getPerNum(), totalmoneyinpo.getOrgNum());
 			totalMoneyInvo.approveState = totalmoneyinpo.getApproveState();
 			return totalMoneyInvo;
+		case DELIVER:
+			Receipt_DeliverPO delpo = (Receipt_DeliverPO) po;
+			Receipt_DeliverVO delvo = new Receipt_DeliverVO(delpo.getNumber(), delpo.getTime(), delpo.getOrderNum(), delpo.getName(), delpo.getPosterNum(), delpo.getPerNum(), delpo.getOrgNum());
+			delvo.approveState = delpo.getApproveState();
+			return delvo;
 		default:
 			return null;
 		}
@@ -164,8 +171,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 		case ARRIVE:
 			Receipt_ArriveVO arrivo = (Receipt_ArriveVO) vo;
 			Receipt_ArrivePO arripo = new Receipt_ArrivePO(arrivo.number, arrivo.type, arrivo.time, arrivo.orgNum,
-					arrivo.perNum, DeCodeString.idToName(arrivo.startOrgID), arrivo.startTime, arrivo.transNum,
-					arrivo.orgNum);// 到达的机构就是单据生成的机构。。
+					arrivo.perNum, arrivo.startOrgID, arrivo.startTime, arrivo.transNum);// 到达的机构就是单据生成的机构。。
 			arripo.setApproveState(vo.approveState);
 			return arripo;
 		case STOCKIN:
@@ -204,6 +210,11 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					totalmoneyinvo.sum, totalmoneyinvo.perNameID);
 			totalMoneyInpo.setApproveState(vo.approveState);
 			return totalMoneyInpo;
+		case DELIVER:
+			Receipt_DeliverVO delvo = (Receipt_DeliverVO) vo;
+			Receipt_DeliverPO delpo = new Receipt_DeliverPO(delvo.number, ReceiptType.DELIVER, delvo.time, delvo.orgNum, delvo.perNum, delvo.orderNum, delvo.name, delvo.posterNum);
+			delpo.setApproveState(vo.approveState);
+			return delpo;
 		default:
 			return null;
 		}

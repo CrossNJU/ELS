@@ -8,7 +8,10 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.po.Receipt_DeliverPO;
 import org.cross.elscommon.po.Receipt_OrderPO;
+import org.cross.elscommon.po.Receipt_StockOutPO;
+import org.cross.elscommon.po.Receipt_TransPO;
 import org.cross.elscommon.util.CompareTime;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
@@ -248,11 +251,15 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	
 	public static void main(String[] args) throws RemoteException{
 		ReceiptDataImpl impl = new ReceiptDataImpl();
-		Receipt_OrderPO order1 = new Receipt_OrderPO("R0000001",ReceiptType.ORDER, "2015-10-01 19:30", "O001","P001", 20, 
-				"2015-10-03", "陈丹妮", "陈睿", "南京大学", "南京大学","江苏省南京市南京大学仙林校区", "江苏省南京市南京大学仙林校区",
-				"934782738", "83247376", "13333333333", "18351000000");
-		if(impl.insert(order1) == ResultMessage.SUCCESS) System.out.println("su");
-		else System.out.println("fail");
+//		Receipt_OrderPO order1 = new Receipt_OrderPO("R0000001",ReceiptType.ORDER, "2015-10-01 19:30", "O001","P001", 20, 
+//				"2015-10-03", "陈丹妮", "陈睿", "南京大学", "南京大学","江苏省南京市南京大学仙林校区", "江苏省南京市南京大学仙林校区",
+//				"934782738", "83247376", "13333333333", "18351000000");
+//		Receipt_DeliverPO delpo = new Receipt_DeliverPO("R0000017", ReceiptType.DELIVER, "time", "org", "per", "order", "cr", "cdn");
+//		if(impl.insert(delpo) == ResultMessage.SUCCESS) System.out.println("su");
+//		else System.out.println("fail");
+//		Receipt_TransPO po = (Receipt_TransPO)impl.findByNum("R0000011");
+		Receipt_StockOutPO po = (Receipt_StockOutPO)impl.findByNum("R0000013");
+		System.out.println(po.getNumber());
 	}
 
 }

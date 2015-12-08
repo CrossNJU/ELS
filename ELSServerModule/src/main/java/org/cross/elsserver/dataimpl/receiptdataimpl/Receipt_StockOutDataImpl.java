@@ -35,7 +35,7 @@ public class Receipt_StockOutDataImpl implements ReceiptTool {
 	@Override
 	public ReceiptPO getFromDB(String number) {
 		Receipt_StockOutPO po = null;
-		String sql = "select from `receiptStockOut` where `number`='" + number + "'";
+		String sql = "select * from `receiptStockOut` where `number`='" + number + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			if (rs.next()) {

@@ -1,9 +1,12 @@
 package org.cross.elsserver.dataimpl.receiptdataimpl;
 
+import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.po.Receipt_DeliverPO;
+import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.po.Receipt_TransPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
@@ -22,7 +25,7 @@ public class Receipt_TransDataImpl implements ReceiptTool {
 	@Override
 	public ResultMessage insert(ReceiptPO po) {
 		Receipt_TransPO pos = (Receipt_TransPO) po;
-		String sql = "insert ignore into `receiptTrans`(`number`, `time`, `transNum`, `veNum`, `startPalce`, `endPlace`, `observer`, `driver`, `cost`) values ('"
+		String sql = "insert ignore into `receiptTrans`(`number`, `time`, `transNum`, `veNum`, `startPlace`, `endPlace`, `observer`, `driver`, `cost`) values ('"
 				+ pos.getNumber() + "','" + pos.getTime() + "','" + pos.getTransNum() + "','" + pos.getVeNum() + "','"
 				+ pos.getStartPlace() + "','" + pos.getArrivePlace() + "','" + pos.getObserver() + "','"
 				+ pos.getDriver() + "'," + pos.getCost() + ")";
@@ -60,6 +63,10 @@ public class Receipt_TransDataImpl implements ReceiptTool {
 			e.printStackTrace();
 		}
 		return po;
+	}
+	public static void main(String[] args) throws RemoteException{
+		Receipt_TransDataImpl impl = new Receipt_TransDataImpl();
+//		Receipt_TransPO po = impl.
 	}
 
 }

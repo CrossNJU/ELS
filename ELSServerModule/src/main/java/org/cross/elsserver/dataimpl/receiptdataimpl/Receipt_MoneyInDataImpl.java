@@ -1,10 +1,13 @@
 package org.cross.elsserver.dataimpl.receiptdataimpl;
 
+import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.po.Receipt_DeliverPO;
 import org.cross.elscommon.po.Receipt_MoneyInPO;
+import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
@@ -22,7 +25,7 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 	@Override
 	public ResultMessage insert(ReceiptPO po) {
 		Receipt_MoneyInPO realpo = (Receipt_MoneyInPO) po;
-		String sql = "insert ignore into `receiptMoneyIn`(`number`, `time`, `money`, `totalMoneyIn`, `person`) values ('"
+		String sql = "insert ignore into `receiptMoneyIn`(`number`, `time`, `money`, `totalMoneyInNum`, `person`) values ('"
 				+ realpo.getNumber() + "','" + realpo.getTime() + "'," + realpo.getMoney() + ",'"
 				+ realpo.getTotalMoneyInNum() +"','"+ realpo.getPerson()+"')";
 		if (!mysql.execute(sql))
@@ -57,6 +60,14 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 			e.printStackTrace();
 		}
 		return po;
+	}
+	
+	public static void main(String[] args) throws RemoteException{
+		Receipt_MoneyInDataImpl impl = new Receipt_MoneyInDataImpl();
+		
+		Receipt_MoneyInPO po = new Receipt_MoneyInPO("R0000009", ReceiptType.MONEYIN, "time", "org", "per", 20, null, "cr");
+		if(impl.insert(po) == ResultMessage.SUCCESS) System.out.println("su");
+		else System.out.println("fail");
 	}
 
 }

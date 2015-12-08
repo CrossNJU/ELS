@@ -19,13 +19,13 @@ public class LogBLTest {
 		LogInfo logInfo = new LogInfoImpl();
 		logBLImpl.logInfo = logInfo;
 
-//		System.out.println("test ---------- show");
-//		ArrayList<LogVO> show = logBLImpl.show("2015-10-1", "2015-10-2");
-//		System.out.println(show.size());
-//		for (int i = 0; i < show.size(); i++) {
-//			System.out.println(show.get(i).id + " " + show.get(i).operator
-//					+ " " + show.get(i).time);
-//		}
+		System.out.println("test ---------- show");
+		ArrayList<LogVO> show = logBLImpl.show("2015-10-1", "2015-10-2");
+		System.out.println(show.size());
+		for (int i = 0; i < show.size(); i++) {
+			System.out.println(show.get(i).id + " " + show.get(i).operator
+					+ " " + show.get(i).time);
+		}
 		
 //		System.out.println("test ---------- add");
 //		LogVO logVO = new LogVO("log002", "2015-10-1 19:12", "出库", "陈丹妮。。。");
