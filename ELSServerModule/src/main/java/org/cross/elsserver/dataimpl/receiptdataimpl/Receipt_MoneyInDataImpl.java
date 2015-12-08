@@ -22,9 +22,9 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 	@Override
 	public ResultMessage insert(ReceiptPO po) {
 		Receipt_MoneyInPO realpo = (Receipt_MoneyInPO) po;
-		String sql = "insert ignore into `receiptMoneyIn`(`number`, `time`, `money`, `totalMoneyIn`) values ('"
+		String sql = "insert ignore into `receiptMoneyIn`(`number`, `time`, `money`, `totalMoneyIn`, `person`) values ('"
 				+ realpo.getNumber() + "','" + realpo.getTime() + "'," + realpo.getMoney() + ",'"
-				+ realpo.getTotalMoneyInNum() + "')";
+				+ realpo.getTotalMoneyInNum() +"','"+ realpo.getPerson()+"')";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
@@ -38,7 +38,7 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 		try {
 			if (rs.next()) {
 				po = new Receipt_MoneyInPO(rs.getString("number"), ReceiptType.MONEYIN, rs.getString("time"), null,
-						null, rs.getDouble("money"), rs.getString("totalMoneyInNum"));
+						null, rs.getDouble("money"), rs.getString("totalMoneyInNum"), rs.getString("person"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
