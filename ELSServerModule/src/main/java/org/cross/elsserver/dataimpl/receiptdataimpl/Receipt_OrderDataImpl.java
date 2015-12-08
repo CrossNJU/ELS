@@ -1,5 +1,6 @@
 package org.cross.elsserver.dataimpl.receiptdataimpl;
 
+import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -22,11 +23,11 @@ public class Receipt_OrderDataImpl implements ReceiptTool {
 	public ResultMessage insert(ReceiptPO pop) {
 		Receipt_OrderPO po = (Receipt_OrderPO) pop;
 		String sql = "insert ignore into `receiptOrder`(`number`, `time`, `price`, `receiveTime`, `expectTime`, `moneyInNum`, `senderName`, `receiverName`, `senderAdd`, `receiverAdd`, `senderOrg`, `receiverOrg`, `senderPhone`, `receiverPhone`, `senderMobile`, `receiverMobile`) values ('"
-				+ po.getNumber() + "','" + po.getTime() + "','" + po.getPrice() + ",'" 
+				+ po.getNumber() + "','" + po.getTime() + "'," + po.getPrice() + ",'" 
 				+ po.getReceiveTime() + "','" + po.getExpectTime() + "','" + po.getMoneyInNum() + "','"
 				+ po.getSenderName() + "','" + po.getReceiverName() + "','" + po.getSenderAdd() + "','"
-				+ po.getReceiverName() + "','" + po.getSenderOrg() + "','" + po.getReceiverOrg() + "','"
-				+ po.getSenderPhone() + "','" + po.getSenderMobile() + "','" + po.getReceiverMobile() + "')";
+				+ po.getReceiverAdd() + "','" + po.getSenderOrg() + "','" + po.getReceiverOrg() + "','"
+				+ po.getSenderPhone() + "','" +po.getReceiverPhone()+"','"+ po.getSenderMobile() + "','" + po.getReceiverMobile() + "')";
 		if (!mysql.execute(sql)) {
 			return ResultMessage.FAILED;
 		} else
@@ -67,4 +68,13 @@ public class Receipt_OrderDataImpl implements ReceiptTool {
 		return po;
 	}
 
+	public static void main(String[] args) throws RemoteException{
+		Receipt_OrderDataImpl impl = new Receipt_OrderDataImpl();
+		Receipt_OrderPO order1 = new Receipt_OrderPO("R0000001",ReceiptType.ORDER, "2015-10-01 19:30", "O001","P001", 20, 
+				"2015-10-03", "陈丹妮", "陈睿", "南京大学", "南京大学","江苏省南京市南京大学仙林校区", "江苏省南京市南京大学仙林校区",
+				"934782738", "83247376", "13333333333", "18351000000");
+		if(impl.insert(order1) == ResultMessage.SUCCESS) System.out.println("su");
+		else System.out.println("fail");
+	}
+	
 }

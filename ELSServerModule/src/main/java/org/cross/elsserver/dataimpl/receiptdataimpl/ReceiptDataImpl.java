@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.po.ReceiptPO;
+import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.util.CompareTime;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
@@ -46,7 +47,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	public ResultMessage insert(ReceiptPO po) throws RemoteException {
 		String sql = "insert ignore into `receipt`(`number`, `type`, `time`, `approveState`, `perNum`, `orgNum`) values ('"
 				+po.getNumber()+"','"+po.getType().toString()+"','"+po.getTime()+"','"+po.getApproveState().toString()+
-				po.getPerNum()+"','"+po.getOrgNum()+"')";
+				"','"+po.getPerNum()+"','"+po.getOrgNum()+"')";
 		if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		switch (po.getType()) {
 		case ORDER:
@@ -70,7 +71,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		default:
 			break;
 		}
-		return ResultMessage.FAILED;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
@@ -243,6 +244,15 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public static void main(String[] args) throws RemoteException{
+		ReceiptDataImpl impl = new ReceiptDataImpl();
+		Receipt_OrderPO order1 = new Receipt_OrderPO("R0000001",ReceiptType.ORDER, "2015-10-01 19:30", "O001","P001", 20, 
+				"2015-10-03", "陈丹妮", "陈睿", "南京大学", "南京大学","江苏省南京市南京大学仙林校区", "江苏省南京市南京大学仙林校区",
+				"934782738", "83247376", "13333333333", "18351000000");
+		if(impl.insert(order1) == ResultMessage.SUCCESS) System.out.println("su");
+		else System.out.println("fail");
 	}
 
 }
