@@ -3,6 +3,8 @@ package org.cross.elsclient.blimpl.numberblimpl;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.numberblservice.NumberBLService;
+import org.cross.elsclient.network.Datafactory;
+import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
 import org.cross.elscommon.po.NumberPO;
 import org.cross.elscommon.util.NumberType;
@@ -22,50 +24,64 @@ public class NumberBLImpl implements NumberBLService{
 	public String getPostNumber(NumberType type) {
 		try {
 			numberpo = numberdata.show();
+			if (numberpo == null) {
+				numberpo = new NumberPO();
+				numberdata.update(numberpo);
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		switch (type) {
 		case USER:
-			returnS = "U"+numberpo.getUserNum();
+			returnS = numberpo.getUserNum();
 			numberpo.setUserNum(addOne(returnS));
+			returnS = "U"+ returnS;
 			break;
 		case ORGANIZATION:
-			returnS = "O"+numberpo.getOrgNum();
+			returnS = numberpo.getOrgNum();
 			numberpo.setOrgNum(addOne(returnS));
+			returnS = "O"+ returnS;
 			break;
 		case PERSONNEL:
-			returnS = "P"+numberpo.getPerNum();
+			returnS = numberpo.getPerNum();
 			numberpo.setPerNum(addOne(returnS));
+			returnS = "P"+ returnS;
 			break;
 		case RECEIPT:
-			returnS = "R"+numberpo.getReceiptNum();
+			returnS = numberpo.getReceiptNum();
 			numberpo.setReceiptNum(addOne(returnS));
+			returnS = "R"+ returnS;
 			break;
 		case STOCK:
-			returnS = "S"+numberpo.getStockAreaNum();
+			returnS = numberpo.getStockAreaNum();
 			numberpo.setStockNum(addOne(returnS));
+			returnS = "S"+ returnS;
 			break;
 		case STOCKAREA:
-			returnS = "SA"+numberpo.getStockAreaNum();
+			returnS = numberpo.getStockAreaNum();
 			numberpo.setStockAreaNum(addOne(returnS));
+			returnS = "SA"+ returnS;
 			break;
 		case GOODS:
-			returnS = "G"+numberpo.getGoodsNum();
+			returnS = numberpo.getGoodsNum();
 			numberpo.setGoodsNum(addOne(returnS));
+			returnS = "G"+ returnS;
 			break;
 		case VEHICLE:
-			returnS = "V"+numberpo.getVehicleNum();
+			returnS = numberpo.getVehicleNum();
 			numberpo.setVehicleNum(addOne(returnS));
+			returnS = "V"+ returnS;
 			break;
 		case LOG:
-			returnS = "L"+numberpo.getLogNum();
+			returnS = numberpo.getLogNum();
 			numberpo.setLogNum(addOne(returnS));
+			returnS = "L"+ returnS;
 			break;
 		case INITIAL:
-			returnS = "I"+numberpo.getInitNum();
+			returnS = numberpo.getInitNum();
 			numberpo.setInitNum(addOne(returnS));
+			returnS = "I"+ returnS;
 			break;
 			
 		default:
@@ -85,4 +101,5 @@ public class NumberBLImpl implements NumberBLService{
 		i ++;
 		return String.valueOf(i);
 	}
+
 }
