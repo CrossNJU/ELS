@@ -8,6 +8,7 @@ import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
+import org.cross.elsclient.blservice.numberblservice.NumberBLService;
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
@@ -32,5 +33,6 @@ public interface BLFactoryService {
 	public VehicleBLService vehicleBLService()throws RemoteException;
 	public SalaryDataService salaryDataService()throws RemoteException;
 	public ConstantDataService constantDataService()throws RemoteException;
+	public NumberBLService numberBLService()throws RemoteException;
 	
 }

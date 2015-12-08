@@ -11,6 +11,7 @@ import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blimpl.blUtility.UserInfo;
 import org.cross.elsclient.blimpl.blUtility.VehicleInfo;
 import org.cross.elsclient.blimpl.goodsblimpl.GoodsInfoImpl;
+import org.cross.elsclient.blimpl.numberblimpl.NumberBLImpl;
 import org.cross.elsclient.blimpl.organizationblimpl.OrganizationInfoImpl;
 import org.cross.elsclient.blimpl.personnelblimpl.PersonnelInfoImpl;
 import org.cross.elsclient.blimpl.receiptblimpl.ReceiptBLImpl;
@@ -29,6 +30,7 @@ import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
+import org.cross.elsclient.blservice.numberblservice.NumberBLService;
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
@@ -39,6 +41,7 @@ import org.cross.elsclient.network.Datafactory;
 import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
+import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
@@ -59,6 +62,7 @@ public class BLFactoryImpl implements BLFactoryService{
 	OrganizationDataService organizationDataService;
 	SalaryDataService salaryDataService;
 	VehicleDataService vehicleDataService;
+	NumberDataService numberDataService;
 
 	UserInfoImpl userInfo;
 	ReceiptInfoImpl receiptInfo;
@@ -80,6 +84,7 @@ public class BLFactoryImpl implements BLFactoryService{
 		this.organizationDataService = dataFactoryService.getOrganizationData();
 		this.salaryDataService = dataFactoryService.getSalaryData();
 		this.vehicleDataService = dataFactoryService.getVehicleData();
+		this.numberDataService = dataFactoryService.getNumberDataService();
 		
 		this.userInfo = new UserInfoImpl();
 		this.receiptInfo = new ReceiptInfoImpl(receiptDataService);
@@ -178,6 +183,11 @@ public class BLFactoryImpl implements BLFactoryService{
 	public ConstantDataService constantDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public NumberBLService numberBLService() throws RemoteException {
+		return new NumberBLImpl(this.numberDataService);
 	}
 
 }

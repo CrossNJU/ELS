@@ -17,6 +17,7 @@ import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
+import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
 import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.po.InitialPO;
 import org.cross.elscommon.po.OrganizationPO;
@@ -29,7 +30,7 @@ import org.cross.elscommon.util.ResultMessage;
 public class InitialBLImpl implements InitialBLService {
 
 	InitialDataService initialData;
-	InitialInfo initialInfo;
+	InitialInfoImpl initialInfo;
 	OrganizationInfo orgInfo;
 	PersonnelInfo personnelInfo;
 	VehicleInfo vehicleInfo;
@@ -38,9 +39,9 @@ public class InitialBLImpl implements InitialBLService {
 	SalaryInfo salaryInfo;
 
 	public InitialBLImpl(InitialDataService initialData,
-			InitialInfo initialInfo, OrganizationInfo organizationInfo,
+			InitialInfoImpl initialInfo, OrganizationInfo organizationInfo,
 			PersonnelInfo personnelInfo, VehicleInfo vehicleInfo,
-			StockInfo stockInfo, AccountInfo accountInfo, SalaryInfo salaryInfo) {
+			StockInfo stockInfo, AccountInfo accountInfo, SalaryInfo salaryInfo, SalaryDataService sal) {
 		this.initialData = initialData;
 		this.initialInfo = initialInfo;
 		this.orgInfo = organizationInfo;
@@ -49,6 +50,9 @@ public class InitialBLImpl implements InitialBLService {
 		this.stockInfo = stockInfo;
 		this.accountInfo = accountInfo;
 		this.salaryInfo = salaryInfo;
+		
+		this.initialInfo.initdata = initialData;
+		this.initialInfo.sal = sal;
 	}
 
 	@Override
@@ -68,6 +72,27 @@ public class InitialBLImpl implements InitialBLService {
 	@Override
 	public ResultMessage addInitial(InitialVO vo) throws RemoteException {
 		InitialPO po = initialInfo.toInitialPO(vo);
+		System.out.println("in1");
+		for (int i = 0; i < vo.accounts.size(); i++) {
+			initialData.insertInitAccount(accountInfo.toAccountPO(vo.accounts.get(i)), vo.id);
+		}
+		System.out.println("in2");
+		for (int i = 0; i < vo.stocks.size(); i++) {
+			initialData.insertInitStock(stockInfo.toStockPO(vo.stocks.get(i)), vo.id);
+		}
+		System.out.println("in3");
+		for (int i = 0; i < vo.vehicles.size(); i++) {
+			initialData.insertInitVehicle(vehicleInfo.toVehiclePO(vo.vehicles.get(i)), vo.id);
+		}
+		System.out.println("in4");
+		for (int i = 0; i < vo.personnels.size(); i++) {
+			initialData.insertInitPersonnel(personnelInfo.toPersonnelPO(vo.personnels.get(i)), vo.id);
+		}
+		System.out.println("in5");
+		for (int i = 0; i < vo.organizations.size(); i++) {
+			initialData.insertInitOrganization(orgInfo.toOrganizationPO(vo.organizations.get(i)), vo.id);
+		}
+		System.out.println("in6");
 		return initialData.insert(po);
 	}
 

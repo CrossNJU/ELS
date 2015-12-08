@@ -33,8 +33,8 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 
 	@Override
 	public ResultMessage insert(InitialPO po) throws RemoteException {
-		String sql = "insert igore into `initial`(``number`, `time`, `name`, `perNum`) values('" + po.getNumber() + "',"
-				+ po.getTime() + ",'" + po.getName() +"','"+po.getPerNum()+ "')";
+		String sql = "insert ignore into `initial`(`number`, `time`, `name`, `perNum`) values('" + po.getNumber() + "','"
+				+ po.getTime() + "','" + po.getName() +"','"+po.getPerNum()+ "')";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
@@ -75,7 +75,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 
 	public ArrayList<OrganizationPO> findInitOrganizations(String initialNum) {
 		ArrayList<OrganizationPO> orgs = new ArrayList<OrganizationPO>();
-		String sql = "select * from `initial_organization` where `inititalNum`='" + initialNum + "'";
+		String sql = "select * from `initial_organization` where `initialNum`='" + initialNum + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			while (rs.next()) {
@@ -92,7 +92,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 
 	public ArrayList<VehiclePO> findInitVehicles(String initialNum) {
 		ArrayList<VehiclePO> vehs = new ArrayList<VehiclePO>();
-		String sql = "select * from `initial_vehicle` where `inititalNum`='" + initialNum + "'";
+		String sql = "select * from `initial_vehicle` where `initialNum`='" + initialNum + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			while (rs.next()) {
@@ -110,7 +110,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 
 	public ArrayList<PersonnelPO> findInitPersonnels(String initialNum) {
 		ArrayList<PersonnelPO> pers = new ArrayList<PersonnelPO>();
-		String sql = "select * from `initial_personnel` where `inititalNum`='" + initialNum + "'";
+		String sql = "select * from `initial_personnel` where `initialNum`='" + initialNum + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			while (rs.next()) {
@@ -129,7 +129,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 
 	public ArrayList<StockPO> findInitStocks(String initialNum) {
 		ArrayList<StockPO> stos = new ArrayList<StockPO>();
-		String sql = "select * from `initial_stock` where `inititalNum`='" + initialNum + "'";
+		String sql = "select * from `initial_stock` where `initialNum`='" + initialNum + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			while (rs.next()) {
@@ -145,11 +145,11 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 
 	public ArrayList<AccountPO> findInitAccounts(String initialNum) {
 		ArrayList<AccountPO> accs = new ArrayList<AccountPO>();
-		String sql = "select * from `initial_account` where `inititalNum`='" + initialNum + "'";
+		String sql = "select * from `initial_account` where `initialNum`='" + initialNum + "'";
 		ResultSet rs = mysql.query(sql);
 		try {
 			while (rs.next()) {
-				AccountPO acc = new AccountPO(rs.getString("name"), rs.getString("number"), rs.getDouble("balance"));
+				AccountPO acc = new AccountPO(rs.getString("name"), rs.getString("accountNum"), rs.getDouble("balance"));
 				accs.add(acc);
 			}
 		} catch (SQLException e) {
@@ -171,7 +171,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 	@Override
 	public ResultMessage insertInitVehicle(VehiclePO veh, String initNum) throws RemoteException {
 		String sql = "insert ignore into `initial_vehicle`(`number`, `engineNum`, `baseNum`, `buyTime`, `lastTime`, `state`, `licence`, `orgNum`, `initialNum`) values ('"
-				+ veh.getNumber() + "','" + veh.getEngineNum() + "','" + veh.getBaseNum() + veh.getBuyTime() + "','"
+				+ veh.getNumber() + "','" + veh.getEngineNum() + "','" + veh.getBaseNum() +"','"+ veh.getBuyTime() + "','"
 				+ veh.getLastTime() + "'," + veh.isState() + ",'" + veh.getLicence() + "','" + veh.getOrgNum() + "','"
 				+ initNum + "')";
 		if (!mysql.execute(sql))
@@ -207,5 +207,17 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;
+	}
+	
+	public static void main(String[] args) throws RemoteException{
+		InitialDataImpl impl = new InitialDataImpl();
+		InitialPO po = new InitialPO("I001", "2012", "TTT", "CDN");
+		VehiclePO pp = new VehiclePO("v0001", null, null, null, null, null, false, null, null);
+//		if(impl.insertInitVehicle(pp, "I001") == ResultMessage.SUCCESS) System.out.println("su");
+//		else {
+//			System.out.println("fa");
+//		}
+		ArrayList<AccountPO> ppo = impl.findInitAccounts("I928392");
+		System.out.println(ppo.size());
 	}
 }
