@@ -16,7 +16,14 @@ import org.cross.elsclient.network.Datafactory;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.Receipt_ArriveVO;
+import org.cross.elsclient.vo.Receipt_DeliverVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
+import org.cross.elsclient.vo.Receipt_MoneyOutVO;
+import org.cross.elsclient.vo.Receipt_OrderVO;
+import org.cross.elsclient.vo.Receipt_StockInVO;
+import org.cross.elsclient.vo.Receipt_StockOutVO;
+import org.cross.elsclient.vo.Receipt_TotalMoneyInVO;
+import org.cross.elsclient.vo.Receipt_TransVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
@@ -26,7 +33,103 @@ import org.cross.elscommon.util.ResultMessage;
 
 public class ReceiptBLTest {
 	public static void main(String[] args) throws RemoteException {
+		// 新建单据
+		// ·订单
+		String goodsNum1 = "G0000000001";
+		String goodsNum2 = "G0000000002";
+		String courierNum = "U001"; // 建单快递员编号
+		String orgNum = "O001"; // 订单所属营业厅
+		Receipt_OrderVO order1 = new Receipt_OrderVO("R0000001",
+				"2015-10-01 19:30", goodsNum1, 20, "2015-10-01 18:00",
+				"2015-10-03", "陈丹妮", "13333333333", null, "江苏省南京市南京大学仙林校区",
+				"南京大学", "陈睿", "南京大学", "江苏省南京市南京大学仙林校区", "18351000000", null,
+				courierNum, orgNum);
+		Receipt_OrderVO order2 = new Receipt_OrderVO("R0000002",
+				"2015-10-01 19:31", goodsNum2, 30, "2015-10-01 18:01",
+				"2015-10-03", "陈丹妮", "13333333333", null, "江苏省南京市南京大学仙林校区",
+				"南京大学", "陈睿", "南京大学", "江苏省南京市南京大学仙林校区", "18351000000", null,
+				courierNum, orgNum);
+		// 到达单
+		String transNum = "T0000001";
+		String arriPerNum = "U002"; // 到达单生成者编号
+		Receipt_ArriveVO arrive1 = new Receipt_ArriveVO("R0000003",
+				"2015-12-08 23:58", "O001", "T0000001", "2015-12-08 20:01",
+				"2015-12-08 23:58", arriPerNum);
+		Receipt_ArriveVO arrive2 = new Receipt_ArriveVO("R0000004",
+				"2015-12-08 23:59", "O001", "T0000001", "2015-12-08 20:01",
+				"2015-12-08 23:58", arriPerNum);
 		DataFactoryService dataFactory = new Datafactory();
+
+		// 收款单
+		String moneyInPerNum = "U003";
+		ArrayList<String> orders = new ArrayList<String>();
+		orders.add("R0000001");
+		orders.add("R0000002");
+		Receipt_MoneyInVO moneyIn1 = new Receipt_MoneyInVO("2015-12-08 19:38",
+				20, courierNum, "R0000005", orders, orgNum, moneyInPerNum);
+
+		// 付款单
+		String receiverID1 = "332431425216241327";
+		String receiverID2 = "648327462854542689";
+		String senderID = "736287697009809809";
+		String moneyOutPerNum = "U004";
+		String headquatersNum = "O002";
+		Receipt_MoneyOutVO moneyOut1 = new Receipt_MoneyOutVO("R0000007",
+				"2015-12-09 14:00", 2000, receiverID1, senderID, "人员工资",
+				"快递员工资", moneyOutPerNum, headquatersNum);
+		Receipt_MoneyOutVO moneyOut2 = new Receipt_MoneyOutVO("R0000008",
+				"2015-12-09 14:01", 2100, receiverID2, senderID, "人员工资",
+				"快递员工资", moneyOutPerNum, headquatersNum);
+
+		// 入库单
+		String stockInPerNum = "U005";
+		String stockOrg = "O003";
+		String targetOrgID = "O004";
+		String commonAreaNum = "SA0000001";
+		String fastAreaNum = "SA0000002";
+		Receipt_StockInVO stockIn1 = new Receipt_StockInVO("R0000009",
+				"2015-12-09 00:07 ", goodsNum1, targetOrgID, commonAreaNum,
+				stockInPerNum, stockOrg);
+		Receipt_StockInVO stockIn2 = new Receipt_StockInVO("R0000010",
+				"2015-12-09 00:08 ", goodsNum2, targetOrgID, fastAreaNum,
+				stockInPerNum, stockOrg);
+
+		// 装车单
+		String transPerNum = "U006";
+		String observerNum = "U007";
+		String driverNum = "U008";
+		String vehicleNum = "V001";
+		Receipt_TransVO trans1 = new Receipt_TransVO("R0000011",
+				"2015-12-09 12:11", orders, 100, transNum, vehicleNum,
+				stockOrg, targetOrgID, observerNum, driverNum, transPerNum);
+
+		// 出库单
+		String stockOutPerNum = "U009";
+		String vehicle = "汽车";
+		Receipt_StockOutVO stockOut1 = new Receipt_StockOutVO("R0000013",
+				"2015-12-09 13:01", goodsNum1, targetOrgID, vehicle, transNum,
+				stockOutPerNum, stockOrg);
+		Receipt_StockOutVO stockOut2 = new Receipt_StockOutVO("R0000014",
+				"2015-12-09 13:01", goodsNum2, targetOrgID, vehicle, transNum,
+				stockOutPerNum, stockOrg);
+
+		// 总收款单
+		String totalMoneyPerNum = "U010";
+		String receiver = "3652653156928780187";
+		ArrayList<Receipt_MoneyInVO> receipt_Moneyins = new ArrayList<Receipt_MoneyInVO>();
+		receipt_Moneyins.add(moneyIn1);
+		Receipt_TotalMoneyInVO totalMoney1 = new Receipt_TotalMoneyInVO(
+				"R0000015", "2015-12-09 17:18", receiver, 100,
+				receipt_Moneyins, totalMoneyPerNum, headquatersNum);
+		// 派件单
+		String deliverPerNum = "U011";
+		String posterNum = "U012";
+		Receipt_DeliverVO deliver1 = new Receipt_DeliverVO("R0000017",
+				"2015-12-10 11:00", goodsNum1, "cdn", posterNum, deliverPerNum,
+				targetOrgID);	
+		Receipt_DeliverVO deliver2 = new Receipt_DeliverVO("R0000018",
+				"2015-12-10 11:01", goodsNum2, "cdn", posterNum, deliverPerNum,
+				targetOrgID);
 
 		GoodsInfoImpl goodsInfo = new GoodsInfoImpl(dataFactory.getGoodsData());
 		OrganizationInfo orgInfo = new OrganizationInfoImpl(
@@ -70,8 +173,8 @@ public class ReceiptBLTest {
 			System.out.println("删除失败");
 		}
 		System.out.println("---test - update---");
-		Receipt_MoneyInVO updateVO = new Receipt_MoneyInVO("2015-10-10-11:11", 80,
-				"灿海", "M00002", orderNumbers, "O0000001", "P00001");
+		Receipt_MoneyInVO updateVO = new Receipt_MoneyInVO("2015-10-10-11:11",
+				80, "灿海", "M00002", orderNumbers, "O0000001", "P00001");
 		ResultMessage updateMessage = receiptBLImpl.update(updateVO);
 		if (updateMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");
