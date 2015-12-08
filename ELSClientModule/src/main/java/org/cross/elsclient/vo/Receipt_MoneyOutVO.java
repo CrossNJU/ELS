@@ -25,6 +25,11 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 	public String receiveID;
 	
 	/**
+	 * 付出账号
+	 */
+	public String senderID;
+	
+	/**
 	 * 条目
 	 */
 	public String clause;
@@ -36,13 +41,14 @@ public class Receipt_MoneyOutVO extends ReceiptVO{
 
 	public Receipt_MoneyOutVO(String number, String time,
 			double money, String perNameID, String receiveID,
-			String clause, String comments,String orgNum) {
+			String clause, String comments,String orgNum, String senderID) {
 		super(number, ReceiptType.MONEYOUT, time, perNameID, orgNum);
 		this.money = money;
 		this.perNameID = perNameID;
 		this.receiveID = receiveID;
 		this.clause = clause;
 		this.comments = comments;
+		this.senderID = senderID;
 	}
 
 	

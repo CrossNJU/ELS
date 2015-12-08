@@ -22,9 +22,9 @@ public class Receipt_MoneyOutDataImpl implements ReceiptTool {
 	@Override
 	public ResultMessage insert(ReceiptPO po) {
 		Receipt_MoneyOutPO realpo = (Receipt_MoneyOutPO) po;
-		String sql = "insert ignore into `receiptMoneyOut`(`number`, `time`, `money`, `accountNum`, `clause`, `comments`) values ('"
+		String sql = "insert ignore into `receiptMoneyOut`(`number`, `time`, `money`, `accountNum`, `clause`, `comments`, `sender`) values ('"
 				+ realpo.getNumber() + "','" + realpo.getTime() + "'," + realpo.getMoney() + ",'"
-				+ realpo.getAccountNum() + "','" + realpo.getClause() + "','" + realpo.getComments() + "')";
+				+ realpo.getAccountNum() + "','" + realpo.getClause() + "','" + realpo.getComments() +"','"+realpo.getSenderNum()+ "')";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		else
@@ -40,7 +40,7 @@ public class Receipt_MoneyOutDataImpl implements ReceiptTool {
 			if (rs.next()) {
 				po = new Receipt_MoneyOutPO(rs.getString("number"), ReceiptType.MONEYOUT, rs.getString("time"), null,
 						null, rs.getDouble("money"), rs.getString("accountNum"), rs.getString("clause"),
-						rs.getString("comments"));
+						rs.getString("comments"), rs.getString("sender"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -20,7 +20,12 @@ public class Receipt_MoneyOutPO extends ReceiptPO implements Serializable {
 	 * 付款账号
 	 */
 	private String accountNum;
-
+	
+	/**
+	 * 付出账号
+	 */
+	private String senderNum;
+	
 	/**
 	 * 条目
 	 */
@@ -33,12 +38,13 @@ public class Receipt_MoneyOutPO extends ReceiptPO implements Serializable {
 
 	public Receipt_MoneyOutPO(String number, ReceiptType type, String time,
 			String orgNum, String perNum, double money, String accountNum,
-			String clause, String comments) {
+			String clause, String comments, String senderNum) {
 		super(number, type, time, orgNum, perNum);
 		this.money = money;
 		this.accountNum = accountNum;
 		this.clause = clause;
 		this.comments = comments;
+		this.senderNum = senderNum;
 	}
 
 	public double getMoney() {
@@ -71,6 +77,14 @@ public class Receipt_MoneyOutPO extends ReceiptPO implements Serializable {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public String getSenderNum() {
+		return senderNum;
+	}
+
+	public void setSenderNum(String senderNum) {
+		this.senderNum = senderNum;
 	}
 
 }
