@@ -10,7 +10,7 @@ public class AnalysisBLTest {
 	public static void main(String[] args) {
 
 		// DataFactoryService dataFactory = new Datafactory();
-		AnalysisBLImpl analysisBLImpl = new AnalysisBLImpl();
+		AnalysisBLImpl analysisBLImpl = new AnalysisBLImpl(null);
 
 		System.out.println("test ------- showCostBenefitTable");
 		double[] res = new double[3];
