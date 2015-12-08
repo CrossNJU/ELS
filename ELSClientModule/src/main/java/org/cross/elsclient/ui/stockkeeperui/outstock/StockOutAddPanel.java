@@ -53,13 +53,8 @@ public class StockOutAddPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void confirm() throws RemoteException {
-		String[] orders = itemLabels.get(1).toString().split(";");
-		ArrayList<String> orderNums = new ArrayList<String>();
-		for (int i = 0; i < orders.length; i++) {
-			orderNums.add(orders[i]);
-		}
 		stockoutvo = new Receipt_StockOutVO(itemLabels.get(0).toString(),
-				itemLabels.get(2).toString(), orderNums, 
+				itemLabels.get(2).toString(), itemLabels.get(1).toString(), 
 				itemLabels.get(3).toString(), itemLabels.get(5).toString(), itemLabels.get(4).toString(),
 				user.number, user.orgNameID);
 		if(receiptbl.add(stockoutvo)==ResultMessage.SUCCESS){

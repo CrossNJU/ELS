@@ -15,7 +15,7 @@ public class Receipt_StockOutVO extends ReceiptVO {
 	/**
 	 * 快递编号
 	 */
-	public ArrayList<String> goodsNumber;
+	public String goodsNum;
 
 	/**
 	 * 目的地(营业厅ID)
@@ -33,11 +33,11 @@ public class Receipt_StockOutVO extends ReceiptVO {
 	public String transNumber;
 
 	public Receipt_StockOutVO(String number,String time,
-			ArrayList<String> goodsNumber, 
+			String goodsNumber, 
 			String targetOrgID, String vehicle, String transNumber, String perNum, String orgNum
 			) {
 		super(number, ReceiptType.STOCKOUT, time, perNum, orgNum);
-		this.goodsNumber = goodsNumber;
+		this.goodsNum = goodsNumber;
 		this.targetOrgID = targetOrgID;
 		this.vehicle = vehicle;
 		this.transNumber = transNumber;

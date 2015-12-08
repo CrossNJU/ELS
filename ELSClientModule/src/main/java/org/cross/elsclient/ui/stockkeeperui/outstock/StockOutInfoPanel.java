@@ -22,13 +22,8 @@ public class StockOutInfoPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("出库单信息");
-		String goodsNum = "";
-		for (int i = 0; i < vo.goodsNumber.size()-1; i++) {
-			goodsNum+=vo.goodsNumber.get(i)+";";
-		}
-		goodsNum+=vo.goodsNumber.get(vo.goodsNumber.size()-1);
 		addNormalItem("出库单编号", vo.number);
-		addNormalItem("快件单编号", goodsNum);
+		addNormalItem("快件单编号", vo.goodsNum);
 		addNormalItem("出库时间", vo.time);
 		addNormalItem("目的地", vo.targetOrgID);
 		addNormalItem("中转/装车单号", vo.transNumber);
