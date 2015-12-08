@@ -14,6 +14,7 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.Receipt_StockOutVO;
+import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
 
@@ -26,11 +27,13 @@ public class StockOutAddPanel extends ELSInfoPanel{
 	StockBLService stockbl;
 	ReceiptBLService receiptbl;
 	UserVO user;
+	StockVO stockvo;
 	
-	public StockOutAddPanel(StockBLService stockbl, ReceiptBLService receiptbl, UserVO user){
+	public StockOutAddPanel(StockBLService stockbl, ReceiptBLService receiptbl, UserVO user, StockVO stockvo){
 		this.stockbl = stockbl;
 		this.receiptbl = receiptbl;
 		this.user = user;
+		this.stockvo = stockvo;
 		init();
 	}
 	
@@ -57,6 +60,7 @@ public class StockOutAddPanel extends ELSInfoPanel{
 				itemLabels.get(2).toString(), itemLabels.get(1).toString(), 
 				itemLabels.get(3).toString(), itemLabels.get(5).toString(), itemLabels.get(4).toString(),
 				user.number, user.orgNameID);
+		stockbl.outStock(itemLabels.get(1).toString(), stockvo.number, itemLabels.get(2).toString());
 		if(receiptbl.add(stockoutvo)==ResultMessage.SUCCESS){
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);

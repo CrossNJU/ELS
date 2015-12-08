@@ -1,6 +1,9 @@
 package org.cross.elsclient.ui.businesshallclerkui;
 
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Stub;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
+import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService_Stub;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
 import org.cross.elsclient.blservice.receiptblservice.Receipt_Stub;
@@ -21,6 +24,7 @@ import org.cross.elsclient.vo.UserVO;
 public class BusinessFunctionPanel extends ELSFunctionPanel{
 	public ReceiptBLService receiptbl;
 	public VehicleBLService vehiclebl;
+	public GoodsBLService goodsbl;
 	public PersonnelBLService personnelbl;
 	UserVO user;
 	
@@ -28,6 +32,8 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 		super();
 		receiptbl = new Receipt_Stub();
 		vehiclebl = new Vehicle_stub();
+		goodsbl = new GoodsBLService_Stub();
+		personnelbl = new PersonnelBLService_Stub();
 		user = UIConstant.CURRENT_USER;
 		init();
 	}
@@ -42,10 +48,10 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("司机管理", "driver");
 		addFunctionBtn("单据管理", "receipts");
 		
-		addFunctionPanel(new ArriAddPanel(receiptbl, user), "add","arrive");
-		addFunctionPanel(new TransAddPanel(receiptbl, user), "add","trans");
+		addFunctionPanel(new ArriAddPanel(receiptbl, user, goodsbl), "add","arrive");
+		addFunctionPanel(new TransAddPanel(receiptbl, user, goodsbl), "add","trans");
 		addFunctionPanel(new MoneyAddPanel(receiptbl, user), "add","moneyin");
-		addFunctionPanel(new DeliverAddPanel(receiptbl, user), "add","send");
+		addFunctionPanel(new DeliverAddPanel(receiptbl, user, goodsbl), "add","send");
 		addFunctionPanel(new VehicleManagePanel(vehiclebl), "manage","vehicle");
 		addFunctionPanel(new DriverManagePanel(personnelbl, user), "manage","driver");
 		

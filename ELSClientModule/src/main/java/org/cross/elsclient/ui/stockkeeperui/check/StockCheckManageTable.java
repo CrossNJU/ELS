@@ -23,17 +23,11 @@ public class StockCheckManageTable extends ELSManageTable{
 	public StockCheckManageTable(){
 		super();
 	}
-	public StockCheckManageTable(String[] name, int[] itemWidth, StockBLService stockbl, UserVO user){
+	public StockCheckManageTable(String[] name, int[] itemWidth, StockBLService stockbl, UserVO user, StockVO stock){
 		super(name, itemWidth);
 		this.stockbl = stockbl;
 		this.user = user;
-		try {
-			stockvo = stockbl.findStockByOrg(user.orgNameID);
-			stockchecks = stockbl.showStockCheck(stockvo.number);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.stockvo = stock;
 		init();
 	}
 	

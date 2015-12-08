@@ -57,6 +57,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					realpo.getReceiverName(), realpo.getReceiverOrg(), realpo.getReceiverAdd(),
 					realpo.getReceiverPhone(), realpo.getReceiverMobile(), realpo.getPerNum(), realpo.getOrgNum());
 			order.approveState = realpo.getApproveState();
+			order.moneyinNum = realpo.getMoneyInNum();
 			return order;
 		case ARRIVE:
 			Receipt_ArrivePO arripo = (Receipt_ArrivePO) po;
@@ -150,6 +151,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					ordervo.receiverAdd, ordervo.senderPhone, ordervo.receiverPhone, ordervo.senderMobile,
 					ordervo.receiverMobile);
 			orderpo.setReceiveTime(ordervo.receiveTime);
+			orderpo.setMoneyInNum(ordervo.moneyinNum);
 			orderpo.setApproveState(vo.approveState);
 			return orderpo;
 		case TRANS:
@@ -201,8 +203,6 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					totalmoneyinvo.type, totalmoneyinvo.time, totalmoneyinvo.orgNum, totalmoneyinvo.perNum,
 					totalmoneyinvo.sum, totalmoneyinvo.perNameID);
 			totalMoneyInpo.setApproveState(vo.approveState);
-			ArrayList<Receipt_MoneyInVO> receipt_MoneyInVOs = totalmoneyinvo.receipt_Moneyins;
-			ArrayList<Receipt_MoneyInPO> receipt_MoneyInPOs = new ArrayList<Receipt_MoneyInPO>();
 			return totalMoneyInpo;
 		default:
 			return null;

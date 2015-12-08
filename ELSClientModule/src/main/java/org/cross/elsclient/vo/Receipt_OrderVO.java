@@ -64,6 +64,8 @@ public class Receipt_OrderVO extends ReceiptVO {
 
 	public String receiverMobile;
 
+	public String moneyinNum;
+	
 	public Receipt_OrderVO(String number, String time, String goodsNum, double cost, String receiveTime,
 			String expectTime, String senderName, String senderMobile, String senderPhone, String senderAdd,
 			String senderOrg, String receiverName, String receiverOrg, String receiverAdd, String receiverPhone,
@@ -83,6 +85,8 @@ public class Receipt_OrderVO extends ReceiptVO {
 		this.receiverAdd = receiverAdd;
 		this.receiverPhone = receiverPhone;
 		this.receiverMobile = receiverMobile;
+		
+		this.moneyinNum = null;
 	}
 
 }

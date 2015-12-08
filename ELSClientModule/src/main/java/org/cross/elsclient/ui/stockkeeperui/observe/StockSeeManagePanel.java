@@ -38,16 +38,11 @@ public class StockSeeManagePanel extends ELSManagePanel{
 	ELSButton addBtn;
 	
 	public StockSeeManagePanel(){}
-	public StockSeeManagePanel(StockBLService stockbl, UserVO user){
+	public StockSeeManagePanel(StockBLService stockbl, UserVO user, StockVO stockvo){
 		super();
 		this.stockbl = stockbl;
 		this.user = user;
-		try {
-			stock = stockbl.findStockByOrg(user.orgNameID);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.stock = stockvo;
 		init();
 	}
 	
@@ -63,7 +58,7 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		int[] itemWidth2 = {200,200};
 		listSecond = new StockSeeManageTableSecond(s2, itemWidth2);
 		listFirst.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*4+UIConstant.SEARCHPANEL_HEIGHT);
-		container.add(listSecond);
+//		container.add(listSecond);
 	}
 	
 	@Override

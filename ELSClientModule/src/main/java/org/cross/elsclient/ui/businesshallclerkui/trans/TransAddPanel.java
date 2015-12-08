@@ -3,6 +3,7 @@ package org.cross.elsclient.ui.businesshallclerkui.trans;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
 import org.cross.elsclient.ui.component.ELSDialog;
@@ -12,6 +13,8 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.vo.GoodsVO;
+import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_TransVO;
 import org.cross.elsclient.vo.UserVO;
@@ -26,11 +29,13 @@ import org.cross.elscommon.util.StringToType;
 public class TransAddPanel extends ELSInfoPanel {
 	Receipt_TransVO vo;
 	ReceiptBLService bl;
+	GoodsBLService goodsbl;
 	UserVO user;
 
-	public TransAddPanel(ReceiptBLService receiptbl, UserVO user) {
+	public TransAddPanel(ReceiptBLService receiptbl, UserVO user, GoodsBLService goodsbl) {
 		this.bl = receiptbl;
 		this.user = user;
+		this.goodsbl = goodsbl;
 		init();
 	}
 
@@ -73,6 +78,12 @@ public class TransAddPanel extends ELSInfoPanel {
 				Double.valueOf(itemLabels.get(10).toString()), itemLabels.get(6).toString(),
 				itemLabels.get(7).toString(), itemLabels.get(2).toString(), itemLabels.get(3).toString(),
 				itemLabels.get(9).toString(), itemLabels.get(8).toString(), user.number);
+		for (int i = 0; i < goods.size(); i++) {
+			GoodsVO goodsvo = goodsbl.searchGoods(goods.get(i));
+			HistoryVO historyVO = new HistoryVO(itemLabels.get(5).toString(), City.BEIJING, OrganizationType.BUSINESSHALL, true);
+			goodsvo.history.add(historyVO);
+			goodsbl.updateGoods(goodsvo);
+		}
 		if (bl.add(vo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);

@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.transitcenterclerkui;
 
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
 import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
@@ -11,6 +12,7 @@ import org.cross.elsclient.vo.UserVO;
 
 public class TransmitFunctionPanel extends ELSFunctionPanel {
 	public ReceiptBLService receiptbl;
+	public GoodsBLService goodsbl;
 	UserVO user;
 	
 	public TransmitFunctionPanel() {
@@ -27,8 +29,8 @@ public class TransmitFunctionPanel extends ELSFunctionPanel {
 		addFunctionBtn("库存查看", "stocksee");
 		addFunctionBtn("单据管理", "receipts");
 		
-		addFunctionPanel(new ArriAddPanel(receiptbl, user), "add","arrive");
-		addFunctionPanel(new TransAddPanel(receiptbl, user), "add","trans");
+		addFunctionPanel(new ArriAddPanel(receiptbl, user, goodsbl), "add","arrive");
+		addFunctionPanel(new TransAddPanel(receiptbl, user, goodsbl), "add","trans");
 		
 		addFunctionPanel(new ReceiptManagePanel(receiptbl), "manage", "receipts");
 	}

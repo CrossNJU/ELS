@@ -28,8 +28,8 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 	@Override
 	public ResultMessage insert(VehiclePO veh) throws RemoteException {
 		String sql = "insert ignore into `vehicle`(`number`, `engineNum`, `baseNum`, `buyTime`, `lastTime`, `state`, `licence`, `orgNum`) values ('"
-				+ veh.getNumber() + "','" + veh.getEngineNum() + "','" + veh.getBaseNum() + veh.getBuyTime() + "','"
-				+ veh.getLastTime() + "'," + veh.isState() + ",'" + veh.getLicence() + "','" + veh.getOrgNum() +"')";
+				+ veh.getNumber() + "','" + veh.getEngineNum() + "','" + veh.getBaseNum() + "','"+veh.getBuyTime() + "','"
+				+ veh.getLastTime() + "',"+veh.isState()+",'" + veh.getLicence() + "','" + veh.getOrgNum() +"')";
 		if(mysql.execute(sql)) return ResultMessage.SUCCESS;
 		else return ResultMessage.FAILED;
 	}
@@ -89,10 +89,11 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 	}
 
 	public static void main(String[] args) throws RemoteException {
-//		VehiclePO vehiclePO = new VehiclePO("000000003", "EN000002", "BA000002", "2020-01-01", "2032-12-11", null,VehicleType.CAR);
+		VehiclePO vehiclePO = new VehiclePO("V000000003", "EN000002", "BA000002", "2020-01-01", "2032-12-11", null, false, "2010", "O00001");
 //		
 		VehicleDataImpl vehicleDataImpl = new VehicleDataImpl();
-		 VehiclePO po = vehicleDataImpl.findByID("V000001");
+		 if(vehicleDataImpl.insert(vehiclePO) == ResultMessage.SUCCESS) System.out.println("success");
+		 else System.out.println("fail");
 //		 System.out.println(po.getApparatusNumber());
 		// vehicleDataImpl.delete("V000001");
 //		vehicleDataImpl.;

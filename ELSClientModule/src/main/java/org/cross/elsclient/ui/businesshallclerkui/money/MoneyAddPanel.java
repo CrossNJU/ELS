@@ -14,6 +14,7 @@ import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
+import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
@@ -61,6 +62,11 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		moneyinvo = new Receipt_MoneyInVO(itemLabels.get(2).toString(), Double.valueOf(itemLabels.get(4).toString()),
 				itemLabels.get(3).toString(), itemLabels.get(0).toString(), 
 				orderNums, user.orgNameID, user.number);
+		for (int i = 0; i < orders.length; i++) {
+			Receipt_OrderVO order = (Receipt_OrderVO)bl.findByID(orders[i]);
+			order.moneyinNum = itemLabels.get(0).toString();
+			bl.update(order);
+		}
 		if (bl.add(moneyinvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
