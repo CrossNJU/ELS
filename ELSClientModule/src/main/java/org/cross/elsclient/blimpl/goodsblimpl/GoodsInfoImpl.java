@@ -59,7 +59,7 @@ public class GoodsInfoImpl implements GoodsInfo {
 			return null;
 		}
 		GoodsPO goodsPO = new GoodsPO(vo.goodsType, vo.placeCity, vo.placeOrg,
-				vo.state, vo.weight, vo.volume, vo.orderNum);
+				vo.state, vo.weight, vo.volume, vo.number);
 		return goodsPO;
 	}
 

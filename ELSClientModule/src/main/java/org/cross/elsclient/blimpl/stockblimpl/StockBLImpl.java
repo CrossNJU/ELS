@@ -55,6 +55,7 @@ public class StockBLImpl implements StockBLService {
 		for (int i = 0; i < size; i++) {
 			ArrayList<GoodsVO> goodsPOs = goodsInfo.findGoodsFromArea(areaPO
 					.get(i).getNumber());
+			if(goodsPOs == null) continue;
 			int size1 = goodsPOs.size();
 			for (int j = 0; j < size1; j++) {
 				String inTime = "";

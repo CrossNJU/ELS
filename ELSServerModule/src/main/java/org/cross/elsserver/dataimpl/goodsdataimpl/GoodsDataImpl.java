@@ -14,6 +14,7 @@ import org.cross.elscommon.util.GoodsState;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.StockType;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.HistoryTool;
 
@@ -36,7 +37,7 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	@Override
 	public ResultMessage insert(GoodsPO po) throws RemoteException {
 		String sql = "insert ignore into `goods`(`number`, `type`, `placeCity`, `placeOrg`, `state`, `weight`, `volume`) values ('"
-				+ po.getOrderNum() + "','" + po.getGoodsType().toString() + "','" + po.getPlaceCity().toString() + "','"
+				+ po.getOrderNum() + "','" + po.getGoodsType().toString() + "','" + po.getPlaceCity().toString() + "','"+po.getPlaceOrg().toString()+"','"
 				+ po.getState().toString() + "'," + po.getWeight() + "," + po.getVolume() + ")";
 		if (mysql.execute(sql)) {
 			return ResultMessage.SUCCESS;
@@ -45,26 +46,26 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 
 	@Override
 	public ResultMessage update(GoodsPO po) throws RemoteException {
-		String sql = "update `goods` set `state`='"+po.getState().toString()+"' where `number`='"+po.getOrderNum();
+		String sql = "update `goods` set `state`='"+po.getState().toString()+"' where `number`='"+po.getOrderNum()+"'";
 		if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		if (po.getStockAreaNum()!=null) {
-			sql = "update `goods` set `stockAreaNum`='"+po.getStockAreaNum()+"' where `number`='"+po.getOrderNum();
+			sql = "update `goods` set `stockAreaNum`='"+po.getStockAreaNum()+"' where `number`='"+po.getOrderNum()+"'";
 			if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		}
 		if (po.getStockNum()!=null) {
-			sql = "update `goods` set `stockNum`='"+po.getStockNum()+"' where `number`='"+po.getOrderNum();
+			sql = "update `goods` set `stockNum`='"+po.getStockNum()+"' where `number`='"+po.getOrderNum()+"'";
 			if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		}
 		if (po.getArriNum()!=null) {
-			sql = "update `goods` set `arriNum`='"+po.getArriNum()+"' where `number`='"+po.getOrderNum();
+			sql = "update `goods` set `arriNum`='"+po.getArriNum()+"' where `number`='"+po.getOrderNum()+"'";
 			if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		}
 		if (po.getTransNum()!=null) {
-			sql = "update `goods` set `transNum`='"+po.getTransNum()+"' where `number`='"+po.getOrderNum();
+			sql = "update `goods` set `transNum`='"+po.getTransNum()+"' where `number`='"+po.getOrderNum()+"'";
 			if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		}
 		if (po.getDelNum()!=null) {
-			sql = "update `goods` set `delNum`='"+po.getDelNum()+"' where `number`='"+po.getOrderNum();
+			sql = "update `goods` set `delNum`='"+po.getDelNum()+"' where `number`='"+po.getOrderNum()+"'";
 			if(!mysql.execute(sql)) return ResultMessage.FAILED;
 		}
 		return ResultMessage.SUCCESS;
@@ -79,27 +80,27 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 
 	@Override
 	public ArrayList<GoodsPO> findByStockAreaNum(String stockAreaNum) throws RemoteException {
-		return findGoods(stockAreaNum);
+		return findGoods("stockAreaNum",stockAreaNum);
 	}
 
 	@Override
 	public ArrayList<GoodsPO> findByStockNum(String stockNum) throws RemoteException {
-		return findGoods(stockNum);
+		return findGoods("stockNum",stockNum);
 	}
 
 	@Override
 	public ArrayList<GoodsPO> findByTransNum(String transNum) throws RemoteException {
-		return findGoods(transNum);
+		return findGoods("transNum",transNum);
 	}
 
 	@Override
 	public ArrayList<GoodsPO> findByArriNum(String arriNum) throws RemoteException {
-		return findGoods(arriNum);
+		return findGoods("arriNum",arriNum);
 	}
 
 	@Override
 	public ArrayList<GoodsPO> findByDelNum(String delNum) throws RemoteException {
-		return findGoods(delNum);
+		return findGoods("delNum",delNum);
 	}
 
 	@Override
@@ -107,9 +108,9 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 		return historyTool.findByOrderNum(number);
 	}
 	
-	public ArrayList<GoodsPO> findGoods(String number){
+	public ArrayList<GoodsPO> findGoods(String tableNum, String number){
 		ArrayList<GoodsPO> list = new ArrayList<GoodsPO>();
-		String sql = "select * from `goods` where `"+number+"` ='"+number+"'";
+		String sql = "select * from `goods` where `"+tableNum+"` ='"+number+"'";
 		ResultSet rs = mysql.query(sql);
 		GoodsPO po = null;
 		while ((po=getGoodsFromDB(rs))!=null) list.add(po);
@@ -136,6 +137,13 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 			e.printStackTrace();
 		}
 		return po;
+	}
+	
+	public static void main(String[] args) throws RemoteException{
+		GoodsPO goods = new GoodsPO(StockType.COMMON, City.NANJING,OrganizationType.BUSINESSHALL, GoodsState.LITTLEDIE, 20, 20, "100");
+		GoodsDataImpl impl = new GoodsDataImpl();
+		goods.setPlaceCity(City.BEIJING);
+		impl.update(goods);
 	}
 
 }
