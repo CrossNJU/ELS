@@ -2,6 +2,7 @@ package org.cross.elsclient.blservice.numberblservice;
 
 import java.rmi.RemoteException;
 
+import org.cross.elscommon.po.NumberPO;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 
@@ -45,6 +46,12 @@ public class NumberBLService_Stub implements NumberBLService {
 			break;
 		}
 		return s+"000001";
+	}
+
+	@Override
+	public NumberPO getPO() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

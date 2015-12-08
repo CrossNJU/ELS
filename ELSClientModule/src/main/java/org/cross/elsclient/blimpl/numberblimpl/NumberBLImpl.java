@@ -54,7 +54,7 @@ public class NumberBLImpl implements NumberBLService{
 			returnS = "R"+ returnS;
 			break;
 		case STOCK:
-			returnS = numberpo.getStockAreaNum();
+			returnS = numberpo.getStockNum();
 			numberpo.setStockNum(addOne(returnS));
 			returnS = "S"+ returnS;
 			break;
@@ -107,6 +107,10 @@ public class NumberBLImpl implements NumberBLService{
 		}
 		ans+=left;
 		return ans;
+	}
+	
+	public NumberPO getPO() throws RemoteException{
+		return numberdata.show();
 	}
 	
 	public static void main(String [] args)throws RemoteException{

@@ -15,6 +15,7 @@ import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
 import org.cross.elscommon.po.ConstantPO;
 import org.cross.elscommon.po.NumberPO;
+import org.cross.elscommon.util.NumberType;
 
 public class ConstantVal {
 	public static ConstantVO CONSTANT;
@@ -45,5 +46,11 @@ public class ConstantVal {
 			e.printStackTrace();
 		}
 		return blService;
+	}
+	
+	public static void main(String[] args)throws RemoteException{
+		numberbl = getNumber();
+		NumberPO po = numberbl.getPO();
+		System.out.println(numberbl.getPostNumber(NumberType.STOCK));
 	}
 }
