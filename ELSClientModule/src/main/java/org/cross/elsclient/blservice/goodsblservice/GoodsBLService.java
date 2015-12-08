@@ -25,7 +25,7 @@ public interface GoodsBLService {
 	 * @return 是否跟新成功（当前位置和状态）
 	 * @throws RemoteException 
 	 */
-	public ResultMessage updateGoods(String id,HistoryVO nowHistory,GoodsState nowState) throws RemoteException;
+	public ResultMessage updateGoods(GoodsVO goodsvo) throws RemoteException;
 	
 	/**
 	 * 查询快件信息
