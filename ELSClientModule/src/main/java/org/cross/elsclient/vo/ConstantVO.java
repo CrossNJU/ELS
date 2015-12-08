@@ -4,8 +4,7 @@ import org.cross.elscommon.util.PositionType;
 
 public class ConstantVO {
 	/**
-	 * 价格常量
-	 * 单位：每公里公斤
+	 * 价格常量 单位：每公里公斤
 	 */
 	public double price;
 
@@ -43,30 +42,30 @@ public class ConstantVO {
 	 * 预计每公里时间
 	 */
 	public double timeBykilo;
-	
+
 	/**
 	 * 底薪
 	 */
 	public double baseMoneyForCOURIER;
-	
+
 	public double baseMoneyForBUSINESSHALLCLERK;
-	
+
 	public double baseMoneyForTRANSITCENTERCLERK;
-	
+
 	public double baseMoneyForSTOCKKEEPER;
-	
+
 	public double baseMoneyForCOUNTER;
-	
+
 	public double baseMoneyForMANAGER;
-	
+
 	public double baseMoneyForADMINISTRATOR;
-	
+
 	public double baseMoneyForDriver;
-	
+
 	public double num;
-	
+
 	public double once;
-	
+
 	public ConstantVO() {
 		price = 23;
 		distance_Beijing_Guangzhou = 1888.8;
@@ -75,8 +74,20 @@ public class ConstantVO {
 		distance_Nanjing_Guangzhou = 1132;
 		distance_Nanjing_Shanghai = 266;
 		distance_Shanghai_Guangzhou = 1213;
+		timeBykilo = 1;
+		baseMoneyForCOURIER = 0;
+		baseMoneyForBUSINESSHALLCLERK = 0;
+		baseMoneyForTRANSITCENTERCLERK = 0;
+		baseMoneyForSTOCKKEEPER = 0;
+		baseMoneyForCOUNTER = 0;
+		baseMoneyForMANAGER = 0;
+		baseMoneyForADMINISTRATOR = 0;
+		baseMoneyForDriver = 0;
+		num = 0;
+		once = 0;
+
 	}
-	
+
 	public double getBaseMoney(PositionType user) {
 		if (user == PositionType.ADMINISTRATOR)
 			return baseMoneyForADMINISTRATOR;

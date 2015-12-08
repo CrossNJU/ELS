@@ -54,7 +54,7 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 				+ po.getBaseMoney(PositionType.MANAGER) + "," + po.getDistance_Beijing_Guangzhou() + ","
 				+ po.getDistance_Beijing_Nanjing() + "," + po.getDistance_Beijing_Shanghai() + ","
 				+ po.getDistance_Shanghai_Guangzhou() + "," + po.getDistance_Nanjing_Guangzhou() + ","
-				+ po.getDistance_Nanjing_Shanghai() + "')";
+				+ po.getDistance_Nanjing_Shanghai() + ")";
 		if (!mysql.execute(sql))
 			return ResultMessage.FAILED;
 		return ResultMessage.SUCCESS;

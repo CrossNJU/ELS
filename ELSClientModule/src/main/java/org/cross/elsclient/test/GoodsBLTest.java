@@ -52,7 +52,8 @@ public class GoodsBLTest {
 		
 		System.out.println("=======测试更新快件信息（位置和状态）(updateGoods)=======");
 		HistoryVO newHistroy = new HistoryVO("2015-11-2 12:39:10", City.BEIJING, OrganizationType.BUSINESSHALL, true);
-		ResultMessage resultMessage = goodsBLImpl.updateGoods("G002", newHistroy, GoodsState.DIE);
+		goodsVO.history.add(newHistroy);
+		ResultMessage resultMessage = goodsBLImpl.updateGoods(goodsVO);
 		if (resultMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");
 		}else {

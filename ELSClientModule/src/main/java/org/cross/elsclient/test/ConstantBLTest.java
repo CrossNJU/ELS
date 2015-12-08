@@ -22,7 +22,7 @@ public class ConstantBLTest {
 		System.out.println("test ------- update");
 		ConstantVO newVO = new ConstantVO();
 		newVO.baseMoneyForADMINISTRATOR = 50001;
-		ResultMessage updateMessage = constantBLImpl.update(newVO);
+		ResultMessage updateMessage = constantBLImpl.update(newVO); 
 		if (updateMessage == ResultMessage.SUCCESS) {
 			System.out.println("更新成功");
 		} else {
@@ -30,8 +30,9 @@ public class ConstantBLTest {
 		}
 		System.out.println("test ------- show");
 		ConstantVO show = constantBLImpl.show();
+		if(show == null) System.out.println("fail");else 
 		System.out.println(show.baseMoneyForADMINISTRATOR + " "
 				+ show.distance_Beijing_Guangzhou + " " + show.price);
-	}
+	} 
 
 }

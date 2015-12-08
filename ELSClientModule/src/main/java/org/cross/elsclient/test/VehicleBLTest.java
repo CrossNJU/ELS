@@ -37,30 +37,30 @@ public class VehicleBLTest {
 //		}else {
 //			System.out.println("删除失败");
 //		}
-		System.out.println("=======测试更新车辆信息（update）=======");
-		VehicleVO vehicleVO3 = new VehicleVO("V000001","L1111", "O02501112", "3265732752", "B6526", "2011-10-2", "2019-2-1", null, false);
-		ResultMessage resultMessage3 = vehicleBLImpl.update(vehicleVO3);
-		if (resultMessage3 == ResultMessage.SUCCESS) {
-			System.out.println("更新成功");
-		}else {
-			System.out.println("更新失败");
-		}
-		System.out.println("=======测试显示车辆信息（show）=======");
-		ArrayList<VehicleVO> vos = vehicleBLImpl.show();
-		int size = vos.size();
-		for (int i = 0; i < size; i++) {
-			System.out.println(vos.get(i).baseNumber + " " + vos.get(i).buyTime + " " + vos.get(i).lastTime);
-		}
-		System.out.println("=======测试查找车辆信息（findByID）=======");
-		ArrayList<VehicleVO> vos2 = vehicleBLImpl.find("000000004");
-		if (vos2 == null) {
-			System.out.println("未找到");
-		}else {
-			int size2 = vos2.size();
-			for (int i = 0; i < size2; i++) {
-				System.out.println(vos2.get(i).baseNumber + " " + vos2.get(i).buyTime + " " + vos2.get(i).lastTime);
-			}
-		}
-		
+//		System.out.println("=======测试更新车辆信息（update）=======");
+//		VehicleVO vehicleVO3 = new VehicleVO("V000001","L1111", "O02501112", "3265732752", "B6526", "2011-10-2", "2019-2-1", null, false);
+//		ResultMessage resultMessage3 = vehicleBLImpl.update(vehicleVO3);
+//		if (resultMessage3 == ResultMessage.SUCCESS) {
+//			System.out.println("更新成功");
+//		}else {
+//			System.out.println("更新失败");
+//		}
+//		System.out.println("=======测试显示车辆信息（show）=======");
+//		ArrayList<VehicleVO> vos = vehicleBLImpl.show();
+//		int size = vos.size();
+//		for (int i = 0; i < size; i++) {
+//			System.out.println(vos.get(i).baseNumber + " " + vos.get(i).buyTime + " " + vos.get(i).lastTime);
+//		}
+//		System.out.println("=======测试查找车辆信息（findByID）=======");
+//		ArrayList<VehicleVO> vos2 = vehicleBLImpl.find("000000004");
+//		if (vos2 == null) {
+//			System.out.println("未找到");
+//		}else {
+//			int size2 = vos2.size();
+//			for (int i = 0; i < size2; i++) {
+//				System.out.println(vos2.get(i).baseNumber + " " + vos2.get(i).buyTime + " " + vos2.get(i).lastTime);
+//			}
+//		}
+//		
 	}
 }
