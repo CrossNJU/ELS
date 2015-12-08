@@ -20,6 +20,7 @@ import javax.swing.plaf.multi.MultiTextUI;
 import javax.swing.plaf.synth.SynthTextFieldUI;
 
 import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
+import org.cross.elsclient.blimpl.constantblimpl.ConstantBLImpl;
 import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Stub;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
@@ -39,6 +40,8 @@ import org.cross.elsclient.ui.transitcenterclerkui.TransmitFunctionPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.Images;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ConstantVal;
+import org.cross.elsclient.vo.ConstantVO;
 import org.cross.elscommon.util.UserType;
 
 public class LoginPanel extends ELSPanel{
@@ -56,7 +59,8 @@ public class LoginPanel extends ELSPanel{
 	
 	public LoginPanel() {
 		init();
-		
+		ConstantVal.CONSTANT = new ConstantVO();
+		ConstantVal.constantbl = ConstantVal.getConstant();
 	}
 	public void init(){
 		

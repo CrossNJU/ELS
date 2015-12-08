@@ -9,6 +9,7 @@ import org.cross.elsclient.blimpl.blUtility.SalaryInfo;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
+import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.util.PositionType;
@@ -17,17 +18,19 @@ import org.cross.elscommon.util.ResultMessage;
 public class PersonnelBLImpl implements PersonnelBLService {
 
 	public PersonnelDataService personnelData;
+	SalaryDataService salaryDataService;
 	ReceiptInfo receiptInfo;
 	PersonnelInfo personnelInfo;
 	SalaryInfo salaryInfo;
 
 	public PersonnelBLImpl(PersonnelDataService personnelData,
 			PersonnelInfo personnelInfo, ReceiptInfo receiptInfo,
-			SalaryInfo salaryInfo) {
+			SalaryInfo salaryInfo, SalaryDataService salaryDataService) {
 		this.personnelData = personnelData;
 		this.personnelInfo = personnelInfo;
 		this.receiptInfo = receiptInfo;
 		this.salaryInfo = salaryInfo;
+		this.salaryDataService = salaryDataService;
 	}
 
 	@Override
@@ -56,17 +59,20 @@ public class PersonnelBLImpl implements PersonnelBLService {
 	@Override
 	public ResultMessage add(PersonnelVO vo) throws RemoteException {
 		PersonnelPO po = personnelInfo.toPersonnelPO(vo);
+		this.salaryDataService.insert(vo.salary);
 		return personnelData.insert(po);
 	}
 
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
+		this.salaryDataService.delete(id);
 		return personnelData.delete(id);
 	}
 
 	@Override
 	public ResultMessage update(PersonnelVO vo) throws RemoteException {
 		PersonnelPO po = personnelInfo.toPersonnelPO(vo);
+		salaryDataService.update(vo.salary);
 		return personnelData.update(po);
 	}
 

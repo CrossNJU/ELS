@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.stockkeeperui.observe;
 
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
@@ -31,6 +32,9 @@ public class StockSeeManagePanel extends ELSManagePanel{
 	StockVO stock;
 	UserVO user;
 	
+	ELSDatePicker beginDate;
+	ELSDatePicker endDate;
+	
 	StockSeeManageTableFirst listFirst;
 	StockSeeManageTableSecond listSecond;
 	ELSDatePicker datePicker1;
@@ -47,43 +51,46 @@ public class StockSeeManagePanel extends ELSManagePanel{
 	}
 	
 	@Override
+	public void setSearchPanel(){
+		super.setSearchPanel();
+		beginDate = ComponentFactory.createDatePicker();
+		endDate = ComponentFactory.createDatePicker();
+
+		searchBtn.setText("查看库存情况");
+		searchBtn.setMaximumSize(new Dimension(250,
+				UIConstant.SEARCHPANEL_HEIGHT));
+		searchBtn.addMouseListener(new BtnListener());
+
+		beginDate.setMaximumSize(new Dimension(300,
+				UIConstant.SEARCHPANEL_HEIGHT));
+		endDate.setMaximumSize(new Dimension(300, UIConstant.SEARCHPANEL_HEIGHT));
+
+		searchPanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, UIConstant.CONTENTPANEL_MARGIN_TOP);
+		searchPanel.removeAll();
+		searchPanel.add(beginDate);
+		searchPanel.add(Box.createHorizontalStrut(10));
+		searchPanel.add(endDate);
+		searchPanel.add(Box.createHorizontalStrut(10));
+		searchPanel.add(searchBtn);
+
+		searchPanel.validate();
+	}
+	
+	@Override
 	public void setContentPanel(){
 		super.setContentPanel();
 		String[] s = {"出库数量","出库金额","入库数量","入库金额","库存数量合计"};
 		int[] itemWidth = {100,100,100,100,100};
 		listFirst = new StockSeeManageTableFirst(s, itemWidth);
-		listFirst.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		listFirst.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,searchPanel.getLocation().y+searchPanel.getHeight()+15);
 		container.add(listFirst);
 		String[] s2 = {"快件单编号","存放位置"};
 		int[] itemWidth2 = {200,200};
 		listSecond = new StockSeeManageTableSecond(s2, itemWidth2);
-		listFirst.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*4+UIConstant.SEARCHPANEL_HEIGHT);
-//		container.add(listSecond);
+		listSecond.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,listFirst.getHeight()+listFirst.getLocation().y+15);
+		container.add(listSecond);
 	}
 	
-	@Override
-	public void setSearchPanel(){
-		datePicker1 = ComponentFactory.createDatePicker();
-		datePicker2 = ComponentFactory.createDatePicker();
-
-//		String[] s = {"按单据编号查询", "按时间查询"};
-//		modeBox.setModel(new DefaultComboBoxModel<String>(s));
-//		modeBox.addItemListener(new ModeBoxItemListener());
-		
-		searchBtn.setText("查看库存情况");
-		searchBtn.addMouseListener(new BtnListener());
-		
-		searchPanel.add(Box.createHorizontalStrut(10));
-		
-		datePicker1.setVisible(true);
-		datePicker2.setVisible(true);
-		
-		searchPanel.remove(modeBox);
-		searchPanel.remove(searchTextField);
-		searchPanel.add(datePicker1,3);
-		searchPanel.add(datePicker2,3);
-		searchPanel.validate();
-	}
 
 	class BtnListener implements MouseListener{
 

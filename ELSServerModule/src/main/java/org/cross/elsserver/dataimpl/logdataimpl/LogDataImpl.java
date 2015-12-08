@@ -77,4 +77,12 @@ public class LogDataImpl extends UnicastRemoteObject implements LogDataService {
 		return po;
 	}
 
+	public static void main(String[] args) throws RemoteException{
+		LogDataImpl impl = new LogDataImpl();
+		ArrayList<LogPO> show = impl.find("2015-10-1", "2015-10-2");
+		for (int i = 0; i < show.size(); i++) {
+			System.out.println(show.get(i).getNumber() + " " + show.get(i).getOperation()
+					+ " " + show.get(i).getTime());
+		}
+	}
 }

@@ -14,7 +14,7 @@ import org.cross.elscommon.util.ResultMessage;
 public class LogBLImpl implements LogBLService{
 	
 	public LogDataService logData;
-	public LogInfoImpl logInfo;
+	public LogInfo logInfo;
 	
 	public LogBLImpl(LogDataService logData){
 		this.logData = logData;

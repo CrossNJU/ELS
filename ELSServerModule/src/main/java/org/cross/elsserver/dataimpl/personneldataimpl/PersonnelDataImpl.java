@@ -68,8 +68,9 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 
 	@Override
 	public ResultMessage update(PersonnelPO po) throws RemoteException {
-		if (delete(po.getId()) == ResultMessage.FAILED)
+		if (delete(po.getNumber()) == ResultMessage.FAILED)
 			return ResultMessage.FAILED;
+		System.out.println("con");
 		return insert(po);
 	}
 
@@ -121,5 +122,14 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 			pos.add(po);
 		return pos;
 	}
+	
+//	public static void main(String[] args) throws RemoteException{
+//
+//		PersonnelPO updateVO = new PersonnelPO("P29839", "cdn",
+//				PositionType.ADMINISTRATOR, "O00932",0, 1, "321287199999378", null, null);
+//		PersonnelDataImpl impl = new PersonnelDataImpl();
+//		if(impl.update(updateVO) == ResultMessage.SUCCESS) System.out.println("success");
+//		else System.out.println("fail");
+//	}
 
 }

@@ -46,6 +46,7 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		PersonnelVO vo = new PersonnelVO(po.getNumber(), po.getName(),
 				po.getPosition(), po.getOrgNum(), sex, po.getId(),
 				po.getPhone(), po.getBirth());
+		vo.salary = salary;
 		if (po.getPosition() == PositionType.DRIVER) {
 			DriverVO driverVO = (DriverVO)vo;
 			DriverPO driverPO = (DriverPO)po;
