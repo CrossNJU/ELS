@@ -21,7 +21,7 @@ public class AccountBLTest {
 		AccountInfo accountInfo = new AccountInfoImpl(dataFactory.getAccountData());
 		AccountBLImpl accountBLImpl = new AccountBLImpl(dataFactory.getAccountData(), accountInfo);
 		System.out.println("=======测试addAccount=======");
-		AccountVO vo1 = new AccountVO("陈丹妮的账户", "80006483478800000", 11119.1);
+		AccountVO vo1 = new AccountVO("陈睿的账户", "80006483478800001", 11119.1);
 		ResultMessage addMessage = accountBLImpl.add(vo1);
 		if (addMessage == ResultMessage.SUCCESS) {
 			System.out.println("增加成功");

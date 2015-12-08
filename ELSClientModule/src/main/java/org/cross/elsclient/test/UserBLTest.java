@@ -1,5 +1,5 @@
 /**
- * user全部写好了
+ * user真的全部写好了
  */
 package org.cross.elsclient.test;
 
@@ -33,13 +33,13 @@ public class UserBLTest {
 		} else {
 			System.out.println("增加失败");
 		}
-		// System.out.println("=======测试deleteUser========");
-		// ResultMessage delMessage = userBLImpl.delete("U01025001");
-		// if (delMessage == ResultMessage.SUCCESS) {
-		// System.out.println("删除成功");
-		// }else {
-		// System.out.println("删除失败");
-		// }
+//		 System.out.println("=======测试deleteUser========");
+//		 ResultMessage delMessage = userBLImpl.delete("U01025003");
+//		 if (delMessage == ResultMessage.SUCCESS) {
+//		 System.out.println("删除成功");
+//		 }else {
+//		 System.out.println("删除失败");
+//		 }
 		System.out.println("=======测试updateUser========");
 		UserVO upDateVo = new UserVO("U01025003", "123321", "陈丹妮",
 				UserType.BUSINESSHALLCLERK, "O02501002");
@@ -50,7 +50,7 @@ public class UserBLTest {
 			System.out.println("更新失败");
 		}
 		System.out.println("=======测试findByName========");
-		ArrayList<UserVO> nameVo = userBLImpl.findByName("陈丹妮1");
+		ArrayList<UserVO> nameVo = userBLImpl.findByName("陈丹妮");
 		int size = nameVo.size();
 		for (int i = 0; i < size; i++) {
 			System.out.println(nameVo.get(i).number + " " + nameVo.get(i).name
@@ -91,7 +91,7 @@ public class UserBLTest {
 			System.out.println("空的");
 		}
 		System.out.println("=======测试login========");
-		UserType userType = userBLImpl.login("U01025001", "123321");
+		UserType userType = userBLImpl.login("U01025003", "123321");
 		if (userType == null) {
 			System.out.println("登陆失败");
 		} else {

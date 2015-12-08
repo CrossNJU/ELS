@@ -25,7 +25,6 @@ public class VehicleBLImpl implements VehicleBLService{
 	@Override
 	public ResultMessage add(VehicleVO vo) throws RemoteException {
 		VehiclePO po = vehicleInfo.toVehiclePO(vo);
-		System.out.println(po.getNumber());
 		return vehicleData.insert(po);
 	}
 
@@ -37,7 +36,6 @@ public class VehicleBLImpl implements VehicleBLService{
 	@Override
 	public ResultMessage update(VehicleVO vo) throws RemoteException {
 		VehiclePO po = vehicleInfo.toVehiclePO(vo);
-		System.out.println(po.getNumber());
 		return vehicleData.update(po);
 	}
 
@@ -57,14 +55,24 @@ public class VehicleBLImpl implements VehicleBLService{
 		VehiclePO po = vehicleData.findByID(id);
 		VehicleVO vo = vehicleInfo.toVehicleVO(po);
 		ArrayList<VehicleVO> vos = new ArrayList<VehicleVO>();
+		if (vo == null) {
+			return null;
+		}
 		vos.add(vo);
 		return vos;
 	}
 
 	@Override
 	public ArrayList<VehicleVO> findByOrg(String orgNum) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<VehiclePO> pos = vehicleData.show();
+		ArrayList<VehicleVO> vos = new ArrayList<VehicleVO>();
+		int size = pos.size();
+		for (int i = 0; i < size; i++) {
+			if (pos.get(i).getOrgNum().equals(orgNum)) {
+				vos.add(vehicleInfo.toVehicleVO(pos.get(i)));
+			}
+		}
+		return vos;
 	}
 
 }
