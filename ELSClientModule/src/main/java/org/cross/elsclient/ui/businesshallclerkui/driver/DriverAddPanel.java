@@ -30,7 +30,7 @@ public class DriverAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("增加司机信息");
-		/*0*/addEditableItem("司机编号", numberbl.getNumber(NumberType.PERSONNEL), false);
+		/*0*/addEditableItem("司机编号", numberbl.getPostNumber(NumberType.PERSONNEL), false);
 		addEditableItem("姓名", "", true);
 		addEditableItem("性别", "", true);
 		addEditableItem("身份证号码", "", true);

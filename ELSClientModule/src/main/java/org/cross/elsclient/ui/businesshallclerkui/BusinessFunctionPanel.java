@@ -1,5 +1,9 @@
 package org.cross.elsclient.ui.businesshallclerkui;
 
+import java.rmi.RemoteException;
+
+import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
+import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Stub;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
@@ -26,14 +30,22 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 	public VehicleBLService vehiclebl;
 	public GoodsBLService goodsbl;
 	public PersonnelBLService personnelbl;
+	BLFactoryService blFactoryService;
 	UserVO user;
 	
 	public BusinessFunctionPanel() {
 		super();
-		receiptbl = new Receipt_Stub();
-		vehiclebl = new Vehicle_stub();
-		goodsbl = new GoodsBLService_Stub();
-		personnelbl = new PersonnelBLService_Stub();
+		
+		try {
+			this.blFactoryService = new BLFactoryImpl();
+			receiptbl = blFactoryService.receiptBLService();
+			vehiclebl = blFactoryService.vehicleBLService();
+			goodsbl = blFactoryService.goodsBLService();
+			personnelbl = blFactoryService.personnelBLService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		user = UIConstant.CURRENT_USER;
 		init();
 	}

@@ -52,7 +52,7 @@ public class ArriAddPanel extends ELSInfoPanel {
 		String it1[] = { "南京", "北京", "上海", "广州" };
 
 		setTitle("新增到达单");
-		/* 0 */addEditableItem("到达单编号", numberbl.getNumber(NumberType.RECEIPT), false);
+		/* 0 */addEditableItem("到达单编号", numberbl.getPostNumber(NumberType.RECEIPT), false);
 		/* 1 */addEditableItem("装车/中转单号", "", true);
 		/* 2 */addComboxItem("出发地", it1, true);
 		/* 3 */addDateItem("出发时间", true);

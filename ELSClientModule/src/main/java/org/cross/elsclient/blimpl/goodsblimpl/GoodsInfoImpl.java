@@ -16,7 +16,7 @@ import org.cross.elscommon.util.ResultMessage;
 public class GoodsInfoImpl implements GoodsInfo {
 
 	GoodsDataService goodsData;
-	ReceiptInfo receiptInfo;
+	public ReceiptInfo receiptInfo;
 
 	public GoodsInfoImpl(GoodsDataService goodsData) {
 		this.goodsData = goodsData;

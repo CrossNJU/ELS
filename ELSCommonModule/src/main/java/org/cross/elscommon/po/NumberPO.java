@@ -4,25 +4,25 @@ import java.io.Serializable;
 
 public class NumberPO implements Serializable{
 
-	private String goodsNum;
+	private String goodsNum = "0000000000";
 
-	private String initNum;
+	private String initNum = "000000000";
 
-	private String logNum;
+	private String logNum = "0000000000";
 
-	private String orgNum;
+	private String orgNum = "000";
 
-	private String perNum;
+	private String perNum = "000";
 
-	private String userNum;
+	private String userNum = "000";
 
-	private String receiptNum;
+	private String receiptNum = "0000000";
 
-	private String stockNum;
+	private String stockNum = "000";
 
-	private String stockAreaNum;
+	private String stockAreaNum = "0000000";
 
-	private String vehicleNum;
+	private String vehicleNum = "000";
 
 	public NumberPO(String goodsNum, String initNum, String logNum,
 			String orgNum, String perNum, String userNum, String receiptNum,
@@ -38,6 +38,10 @@ public class NumberPO implements Serializable{
 		this.stockNum = stockNum;
 		this.stockAreaNum = stockAreaNum;
 		this.vehicleNum = vehicleNum;
+	}
+	
+	public NumberPO(){
+		
 	}
 
 	public String getGoodsNum() {

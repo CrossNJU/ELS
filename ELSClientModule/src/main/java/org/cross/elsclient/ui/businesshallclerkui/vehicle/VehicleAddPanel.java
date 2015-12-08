@@ -21,7 +21,7 @@ public class VehicleAddPanel extends ELSInfoPanel {
 		super.init();
 		
 		setTitle("修改车辆信息");
-		addEditableItem("车牌编号", "",true);
+		/*0*/addEditableItem("车牌编号", "",true);
 		addEditableItem("车牌号", "",true);
 		addEditableItem("营业厅编号", "",true);
 		addEditableItem("购买时间", "",true);
@@ -39,6 +39,9 @@ public class VehicleAddPanel extends ELSInfoPanel {
 	@Override
 	protected void confirm() throws RemoteException {
 		super.confirm();
+		vo = new VehicleVO(itemLabels.get(0).toString(), itemLabels.get(1).toString(), itemLabels.get(2).toString(), 
+				itemLabels.get(5).toString(), itemLabels.get(6).toString(), itemLabels.get(3).toString(), 
+				itemLabels.get(4).toString(), null, false);
 		vehiclebl.add(vo);
 		back();
 	}

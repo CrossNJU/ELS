@@ -41,7 +41,7 @@ public class StockInAddPanel extends ELSInfoPanel{
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增入库单");
-		/*0*/addEditableItem("入库单编号", numberbl.getNumber(NumberType.RECEIPT), false);
+		/*0*/addEditableItem("入库单编号", numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("快件单编号", "", true);
 		addDateItem("入库时间", false);
 		addEditableItem("目的地", "", true);

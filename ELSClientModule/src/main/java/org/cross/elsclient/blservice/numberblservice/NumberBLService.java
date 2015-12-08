@@ -11,10 +11,6 @@ public interface NumberBLService {
 	 * 
 	 * @throws RemoteException
 	 */
-	public String getNumber(NumberType type);
-
-	/**
-	 * 存储下一编号，输入当前编号即可
-	 */
-	public ResultMessage saveNextNumber(NumberType type, String currentNum);
+	public String getPostNumber(NumberType type);
+	
 }

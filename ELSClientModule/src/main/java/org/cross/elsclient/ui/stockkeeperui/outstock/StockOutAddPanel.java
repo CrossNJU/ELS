@@ -16,6 +16,7 @@ import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.Receipt_StockOutVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.UserVO;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class StockOutAddPanel extends ELSInfoPanel{
@@ -42,7 +43,7 @@ public class StockOutAddPanel extends ELSInfoPanel{
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增出库单");
-		/*0*/addEditableItem("出库单编号", ConstantValue.getReceiptTransNum(), false);
+		/*0*/addEditableItem("出库单编号", numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("快件单编号", "", true);
 		addDateItem("出库时间", false);
 		addEditableItem("目的地", "", true);

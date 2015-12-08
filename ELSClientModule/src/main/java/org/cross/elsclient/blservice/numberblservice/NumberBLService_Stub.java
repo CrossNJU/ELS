@@ -8,7 +8,7 @@ import org.cross.elscommon.util.ResultMessage;
 public class NumberBLService_Stub implements NumberBLService {
 
 	@Override
-	public String getNumber(NumberType type) {
+	public String getPostNumber(NumberType type) {
 		String s = "";
 		switch (type) {
 		case GOODS:
@@ -45,13 +45,6 @@ public class NumberBLService_Stub implements NumberBLService {
 			break;
 		}
 		return s+"000001";
-	}
-
-	@Override
-	public ResultMessage saveNextNumber(NumberType type, String currentNum)
-			 {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
 	}
 
 }

@@ -50,7 +50,7 @@ public class TransAddPanel extends ELSInfoPanel {
 		String it5[] = ConstantValue.getUnusedObserver();
 
 		setTitle("新增装车单");
-		/* 0 */addEditableItem("装车单编号", numberbl.getNumber(NumberType.RECEIPT), false);
+		/* 0 */addEditableItem("装车单编号", numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("快件单编号", "", true);
 		addComboxItem("出发地", it1, true);
 		addComboxItem("到达城市", it1, true);
