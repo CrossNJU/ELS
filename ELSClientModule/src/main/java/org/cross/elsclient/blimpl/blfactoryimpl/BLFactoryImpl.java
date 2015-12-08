@@ -2,7 +2,13 @@ package org.cross.elsclient.blimpl.blfactoryimpl;
 
 import java.rmi.RemoteException;
 
+import org.cross.elsclient.blimpl.accountblimpl.AccountBLImpl;
+import org.cross.elsclient.blimpl.accountblimpl.AccountInfoImpl;
+import org.cross.elsclient.blimpl.analysisblimpl.AnalysisBLImpl;
+import org.cross.elsclient.blimpl.blUtility.AccountInfo;
+import org.cross.elsclient.blimpl.blUtility.ConstantInfo;
 import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
+import org.cross.elsclient.blimpl.blUtility.LogInfo;
 import org.cross.elsclient.blimpl.blUtility.OrganizationInfo;
 import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
@@ -10,9 +16,19 @@ import org.cross.elsclient.blimpl.blUtility.SalaryInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blimpl.blUtility.UserInfo;
 import org.cross.elsclient.blimpl.blUtility.VehicleInfo;
+import org.cross.elsclient.blimpl.constantblimpl.ConstantBLImpl;
+import org.cross.elsclient.blimpl.constantblimpl.ConstantInfoImpl;
+import org.cross.elsclient.blimpl.goodsblimpl.GoodsBLImpl;
 import org.cross.elsclient.blimpl.goodsblimpl.GoodsInfoImpl;
+import org.cross.elsclient.blimpl.initialblimpl.InitialBLImpl;
+import org.cross.elsclient.blimpl.initialblimpl.InitialInfo;
+import org.cross.elsclient.blimpl.initialblimpl.InitialInfoImpl;
+import org.cross.elsclient.blimpl.logblimpl.LogBLImpl;
+import org.cross.elsclient.blimpl.logblimpl.LogInfoImpl;
 import org.cross.elsclient.blimpl.numberblimpl.NumberBLImpl;
+import org.cross.elsclient.blimpl.organizationblimpl.OrganizationBLImpl;
 import org.cross.elsclient.blimpl.organizationblimpl.OrganizationInfoImpl;
+import org.cross.elsclient.blimpl.personnelblimpl.PersonnelBLImpl;
 import org.cross.elsclient.blimpl.personnelblimpl.PersonnelInfoImpl;
 import org.cross.elsclient.blimpl.receiptblimpl.ReceiptBLImpl;
 import org.cross.elsclient.blimpl.receiptblimpl.ReceiptInfoImpl;
@@ -38,9 +54,12 @@ import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.network.Datafactory;
+import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
 import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
+import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
+import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
@@ -63,6 +82,10 @@ public class BLFactoryImpl implements BLFactoryService{
 	SalaryDataService salaryDataService;
 	VehicleDataService vehicleDataService;
 	NumberDataService numberDataService;
+	AccountDataService accountDataService;
+	ConstantDataService constantDataService;
+	InitialDataService initialDataService;
+	LogDataService logDataService;
 
 	UserInfoImpl userInfo;
 	ReceiptInfoImpl receiptInfo;
@@ -72,6 +95,10 @@ public class BLFactoryImpl implements BLFactoryService{
 	OrganizationInfoImpl organizationInfo;
 	SalaryBLImpl salaryInfo;
 	VehicleInfoImpl vehicleInfo;
+	AccountInfo accountInfo;
+	ConstantInfo constantInfo;
+	InitialInfoImpl initialInfo;
+	LogInfo logInfo;
 	
 	public BLFactoryImpl() throws RemoteException{
 		this.dataFactoryService = new Datafactory();
@@ -85,6 +112,10 @@ public class BLFactoryImpl implements BLFactoryService{
 		this.salaryDataService = dataFactoryService.getSalaryData();
 		this.vehicleDataService = dataFactoryService.getVehicleData();
 		this.numberDataService = dataFactoryService.getNumberDataService();
+		this.accountDataService = dataFactoryService.getAccountData();
+		this.constantDataService = dataFactoryService.getConstantData();
+		this.initialDataService = dataFactoryService.getinInitialData();
+		this.logDataService = dataFactoryService.getlogData();
 		
 		this.userInfo = new UserInfoImpl();
 		this.receiptInfo = new ReceiptInfoImpl(receiptDataService);
@@ -94,6 +125,12 @@ public class BLFactoryImpl implements BLFactoryService{
 		this.personnelInfo = new PersonnelInfoImpl(personnelDataService, salaryInfo);
 		this.organizationInfo = new OrganizationInfoImpl(organizationDataService);
 		this.vehicleInfo = new VehicleInfoImpl(vehicleDataService);
+		this.accountInfo = new AccountInfoImpl(accountDataService);
+		this.constantInfo = new ConstantInfoImpl();
+		this.initialInfo = new InitialInfoImpl(organizationInfo, personnelInfo, vehicleInfo, stockInfo, accountInfo);
+		this.initialInfo.initdata = initialDataService;
+		this.initialInfo.sal = salaryDataService;
+		this.logInfo = new LogInfoImpl();
 		
 		this.receiptInfo.goodsInfo = this.goodsInfo;
 		this.receiptInfo.personnelInfo = this.personnelInfo;
@@ -112,50 +149,42 @@ public class BLFactoryImpl implements BLFactoryService{
 
 	@Override
 	public AccountBLService getAccountBLService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new AccountBLImpl(accountDataService, accountInfo);
 	}
 
 	@Override
 	public AnalysisBLService analysisBLService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new AnalysisBLImpl(receiptInfo);
 	}
 
 	@Override
 	public ConstantBLService constantBLService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new ConstantBLImpl(constantDataService, constantInfo);
 	}
 
 	@Override
 	public GoodsBLService goodsBLService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new GoodsBLImpl(goodsDataService, goodsInfo);
 	}
 
 	@Override
 	public InitialBLService initialBLService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new InitialBLImpl(initialDataService, initialInfo, organizationInfo, personnelInfo, vehicleInfo, stockInfo, accountInfo, salaryInfo, salaryDataService);
 	}
 
 	@Override
 	public LogBLService logBLService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new LogBLImpl(logDataService);
 	}
 
 	@Override
 	public OrganizationBLService organizationBLService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new OrganizationBLImpl(organizationDataService, organizationInfo);
 	}
 
 	@Override
 	public PersonnelBLService personnelBLService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new PersonnelBLImpl(personnelDataService, personnelInfo, receiptInfo, salaryInfo, salaryDataService);
 	}
 
 	@Override
@@ -175,14 +204,12 @@ public class BLFactoryImpl implements BLFactoryService{
 
 	@Override
 	public SalaryDataService salaryDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return salaryDataService;
 	}
 
 	@Override
 	public ConstantDataService constantDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return constantDataService;
 	}
 
 	@Override
