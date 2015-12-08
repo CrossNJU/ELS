@@ -51,7 +51,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 		switch (po.getType()) {
 		case ORDER:
 			Receipt_OrderPO realpo = (Receipt_OrderPO) po;
-			Receipt_OrderVO order = new Receipt_OrderVO(realpo.getNumber(), realpo.getTime(), realpo.getGoodsNum(),
+			Receipt_OrderVO order = new Receipt_OrderVO(realpo.getNumber(), realpo.getTime(), 
 					realpo.getPrice(), realpo.getReceiveTime(), realpo.getExpectTime(), realpo.getSenderName(),
 					realpo.getSenderMobile(), realpo.getSenderPhone(), realpo.getSenderAdd(), realpo.getSenderOrg(),
 					realpo.getReceiverName(), realpo.getReceiverOrg(), realpo.getReceiverAdd(),
@@ -146,7 +146,7 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 		case ORDER:
 			Receipt_OrderVO ordervo = (Receipt_OrderVO) vo;
 			Receipt_OrderPO orderpo = new Receipt_OrderPO(ordervo.number, ordervo.type, ordervo.time, ordervo.orgNum,
-					ordervo.perNum, ordervo.goodsNum, ordervo.cost, ordervo.expectTime, ordervo.senderName,
+					ordervo.perNum,  ordervo.cost, ordervo.expectTime, ordervo.senderName,
 					ordervo.receiverName, ordervo.senderOrg, ordervo.receiverOrg, ordervo.senderAdd,
 					ordervo.receiverAdd, ordervo.senderPhone, ordervo.receiverPhone, ordervo.senderMobile,
 					ordervo.receiverMobile);

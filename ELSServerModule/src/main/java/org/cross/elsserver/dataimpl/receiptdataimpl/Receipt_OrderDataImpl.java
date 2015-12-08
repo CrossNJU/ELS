@@ -21,8 +21,8 @@ public class Receipt_OrderDataImpl implements ReceiptTool {
 
 	public ResultMessage insert(ReceiptPO pop) {
 		Receipt_OrderPO po = (Receipt_OrderPO) pop;
-		String sql = "insert ignore into `receiptOrder`(`number`, `time`, `price`, `goodsNum`, `receiveTime`, `expectTime`, `moneyInNum`, `senderName`, `receiverName`, `senderAdd`, `receiverAdd`, `senderOrg`, `receiverOrg`, `senderPhone`, `receiverPhone`, `senderMobile`, `receiverMobile`) values ('"
-				+ po.getNumber() + "','" + po.getTime() + "','" + po.getPrice() + ",'" + po.getGoodsNum() + "','"
+		String sql = "insert ignore into `receiptOrder`(`number`, `time`, `price`, `receiveTime`, `expectTime`, `moneyInNum`, `senderName`, `receiverName`, `senderAdd`, `receiverAdd`, `senderOrg`, `receiverOrg`, `senderPhone`, `receiverPhone`, `senderMobile`, `receiverMobile`) values ('"
+				+ po.getNumber() + "','" + po.getTime() + "','" + po.getPrice() + ",'" 
 				+ po.getReceiveTime() + "','" + po.getExpectTime() + "','" + po.getMoneyInNum() + "','"
 				+ po.getSenderName() + "','" + po.getReceiverName() + "','" + po.getSenderAdd() + "','"
 				+ po.getReceiverName() + "','" + po.getSenderOrg() + "','" + po.getReceiverOrg() + "','"
@@ -40,7 +40,7 @@ public class Receipt_OrderDataImpl implements ReceiptTool {
 		try {
 			if (rs.next()) {
 				po = new Receipt_OrderPO(rs.getString("number"), ReceiptType.ORDER, rs.getString("time"), null, null,
-						rs.getString("goodsNum"), rs.getDouble("price"), rs.getString("expectTime"),
+						rs.getDouble("price"), rs.getString("expectTime"),
 						rs.getString("senderName"), rs.getString("receiverName"), rs.getString("senderOrg"),
 						rs.getString("receiverOrg"), rs.getString("senderAdd"), rs.getString("receiverAdd"),
 						rs.getString("senderPhone"), rs.getString("receiverPhone"), rs.getString("senderMobile"),

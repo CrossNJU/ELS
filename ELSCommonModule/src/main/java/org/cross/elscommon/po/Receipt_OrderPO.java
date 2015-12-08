@@ -10,11 +10,6 @@ import org.cross.elscommon.util.ReceiptType;
 public class Receipt_OrderPO extends ReceiptPO {
 
 	/**
-	 * 快件信息
-	 */
-	private String goodsNum;
-
-	/**
 	 * 费用
 	 */
 	private double price;
@@ -52,13 +47,12 @@ public class Receipt_OrderPO extends ReceiptPO {
 	private String moneyInNum;
 
 	public Receipt_OrderPO(String number, ReceiptType type, String time,
-			String orgNum, String perNum, String goodsNum, double price,
+			String orgNum, String perNum, double price,
 			String expectTime, String senderName,
 			String receiverName, String senderOrg, String receiverOrg,
 			String senderAdd, String receiverAdd, String senderPhone,
 			String receiverPhone, String senderMobile, String receiverMobile) {
 		super(number, type, time, orgNum, perNum);
-		this.goodsNum = goodsNum;
 		this.price = price;
 		this.receiveTime = null;
 		this.expectTime = expectTime;
@@ -73,14 +67,6 @@ public class Receipt_OrderPO extends ReceiptPO {
 		this.senderMobile = senderMobile;
 		this.receiverMobile = receiverMobile;
 		this.moneyInNum = null;
-	}
-
-	public String getGoodsNum() {
-		return goodsNum;
-	}
-
-	public void setGoodsNum(String goodsNum) {
-		this.goodsNum = goodsNum;
 	}
 
 	public double getPrice() {

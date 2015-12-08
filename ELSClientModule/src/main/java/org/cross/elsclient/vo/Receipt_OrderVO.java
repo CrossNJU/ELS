@@ -12,11 +12,6 @@ import org.cross.elscommon.util.ReceiptType;
 public class Receipt_OrderVO extends ReceiptVO {
 
 	/**
-	 * 快件单号
-	 */
-	public String goodsNum;
-
-	/**
 	 * 费用
 	 */
 	public double cost;
@@ -66,12 +61,11 @@ public class Receipt_OrderVO extends ReceiptVO {
 
 	public String moneyinNum;
 	
-	public Receipt_OrderVO(String number, String time, String goodsNum, double cost, String receiveTime,
+	public Receipt_OrderVO(String number, String time, double cost, String receiveTime,
 			String expectTime, String senderName, String senderMobile, String senderPhone, String senderAdd,
 			String senderOrg, String receiverName, String receiverOrg, String receiverAdd, String receiverPhone,
 			String receiverMobile, String perNum, String orgNum) {
 		super(number, ReceiptType.ORDER, time, perNum, orgNum);
-		this.goodsNum = goodsNum;
 		this.cost = cost;
 		this.receiveTime = receiveTime;
 		this.expectTime = expectTime;
