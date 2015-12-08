@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blimpl.blUtility.SalaryInfo;
+import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
+import org.cross.elscommon.po.DriverPO;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.SalaryPO;
+import org.cross.elscommon.util.PositionType;
 
 public class PersonnelInfoImpl implements PersonnelInfo {
 
@@ -43,6 +46,13 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		PersonnelVO vo = new PersonnelVO(po.getNumber(), po.getName(),
 				po.getPosition(), po.getOrgNum(), sex, po.getId(),
 				po.getPhone(), po.getBirth());
+		if (po.getPosition() == PositionType.DRIVER) {
+			DriverVO driverVO = (DriverVO)vo;
+			DriverPO driverPO = (DriverPO)po;
+			driverVO.licenceStart = driverPO.getLicenceStart();
+			driverVO.licenceEnd = driverPO.getLicenceEnd();
+			return driverVO;
+		}
 		return vo;
 	}
 
@@ -60,6 +70,13 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		PersonnelPO po = new PersonnelPO(vo.number, vo.name, vo.position,
 				vo.orgNum, vo.salary.getSalaryByMonth(), s, vo.id, vo.phone,
 				vo.birthday);
+		if (po.getPosition() == PositionType.DRIVER) {
+			DriverVO driverVO = (DriverVO)vo;
+			DriverPO driverPO = (DriverPO)po;
+			driverPO.setLicenceEnd(driverVO.licenceEnd);
+			driverPO.setLicenceStart(driverVO.licenceStart);
+			return driverPO;
+		}
 		return po;
 	}
 
