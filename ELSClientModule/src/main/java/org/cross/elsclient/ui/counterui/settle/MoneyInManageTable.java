@@ -15,6 +15,7 @@ import org.cross.elsclient.ui.component.ManageTableItemLabel;
 import org.cross.elsclient.ui.component.ELSManageTable.BtnListener;
 import org.cross.elsclient.ui.component.ELSManageTable.ItemListener;
 import org.cross.elsclient.ui.component.TableItemLabel;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
 
 public class MoneyInManageTable extends ELSManageTable {
@@ -36,7 +37,7 @@ public class MoneyInManageTable extends ELSManageTable {
 		checkBoxHeader = new CheckBoxItemLabel();
 		checkBoxHeader.init(name,itemWidth,false);
 		checkBoxHeader.setFont(font);
-		checkBoxHeader.setBackground(Color.gray);
+		checkBoxHeader.setBackground(UIConstant.MAINCOLOR);
 		checkBoxHeader.checkBox.addItemListener(new checkBoxListener());
 		container.remove(header);
 		container.add(checkBoxHeader,0);

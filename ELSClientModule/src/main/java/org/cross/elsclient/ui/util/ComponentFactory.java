@@ -180,4 +180,15 @@ public class ComponentFactory {
 		
 		return btn;
 	}
+	
+	public static ELSButton createInitialAddBtn(){
+		ELSButton addBtn = new ELSButton();
+		addBtn.setOpaque(false);
+		addBtn.setFocusable(false);
+		addBtn.setIcon(Images.ADD_IMAGEICON);
+		addBtn.setPreferredSize(new Dimension(30,30));
+		addBtn.setMaximumSize(new Dimension(30,30));
+		addBtn.setMinimumSize(new Dimension(30,30));
+		return addBtn;
+	}
 }

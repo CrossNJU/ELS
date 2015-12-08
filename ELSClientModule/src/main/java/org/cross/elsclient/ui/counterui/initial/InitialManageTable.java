@@ -8,6 +8,7 @@ import javax.swing.Box;
 
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManageTable;
+import org.cross.elsclient.ui.util.ComponentFactory;
 
 public class InitialManageTable extends ELSManageTable{
 	public ELSButton addBtn;
@@ -20,10 +21,7 @@ public class InitialManageTable extends ELSManageTable{
 	@Override
 	public void init() {
 		super.init();
-		addBtn = new ELSButton("+");
-		addBtn.setPreferredSize(new Dimension(30,30));
-		addBtn.setMaximumSize(new Dimension(30,30));
-		addBtn.setMinimumSize(new Dimension(30,30));
+		addBtn = ComponentFactory.createInitialAddBtn();
 		addBtn.addMouseListener(new AddBtnListener());
 		addBtn.setVisible(isAddBtnVisible);
 		header.add(Box.createHorizontalGlue());

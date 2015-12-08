@@ -14,13 +14,12 @@ public class AdminFunctionPanel extends ELSFunctionPanel{
 	
 	public AdminFunctionPanel() {
 		super();
-//		try {
-//			userbl = new BLFactoryImpl().getUserBLService();
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		userbl = new UserBLService_Stub();
+		try {
+			userbl = new BLFactoryImpl().getUserBLService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		init();
 	}
 	

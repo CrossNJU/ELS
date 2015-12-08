@@ -106,15 +106,18 @@ public class UserManagePanel extends ELSManagePanel {
 					String id = searchTextField.getText();
 					userVOs = new ArrayList<>();
 					try {
-						userVOs.add(userbl.findById(id));
-//						userVOs = userbl.show();
+						UserVO vo = userbl.findById(id);
+						if(vo!=null){
+							userVOs.add(vo);
+						}
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					list.init();
-					for (UserVO userVO : userVOs) {
-						list.addItem(userVO);
+					if(!userVOs.isEmpty()){
+						for (UserVO userVO : userVOs) {
+							list.addItem(userVO);
+						}
 					}
 					//容器自适应高度
 					container.packHeight();

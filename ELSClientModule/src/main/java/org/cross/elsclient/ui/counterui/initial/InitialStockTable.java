@@ -2,6 +2,8 @@ package org.cross.elsclient.ui.counterui.initial;
 
 import java.util.ArrayList;
 
+import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elsclient.vo.StockVO;
 
@@ -24,10 +26,18 @@ public class InitialStockTable extends InitialManageTable {
 	public void refresh(){
 		removeAll();
 		init();
-//		for (StockVO vo : vos) {
-//			String item[] = {vo.id,vo.city.toString(),vo.type.toString()};
-//			addItemLabel(item);
-//		}
+		for (StockVO vo : vos) {
+			String item[] = {vo.number,vo.totalAreas+""};
+			addItemLabel(item);
+		}
+	}
+	
+	@Override
+	public void addBtn() {
+		super.addBtn();
+		ELSPanel parent = GetPanelUtil.getSubFunctionPanel(this, "initial");
+		parent.add("addStock",new StockAddPanel(vos));
+		parent.cl.show(parent, "addStock");
 	}
 
 }

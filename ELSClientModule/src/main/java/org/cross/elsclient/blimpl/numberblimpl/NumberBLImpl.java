@@ -114,6 +114,7 @@ public class NumberBLImpl implements NumberBLService{
 		NumberDataService numberdata = dataFactoryService.getNumberDataService();
 		NumberBLImpl impl = new NumberBLImpl(numberdata);
 		String p1 = impl.getPostNumber(NumberType.RECEIPT);
+		impl = new NumberBLImpl(dataFactoryService.getNumberDataService());
 		String p2 = impl.getPostNumber(NumberType.RECEIPT);
 		System.out.println(p1+" "+p2);
 	}

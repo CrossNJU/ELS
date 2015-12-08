@@ -58,7 +58,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 		typeCombobox = ComponentFactory.createSearchBox();
 
 		// 设置搜索模式
-		String[] s = { "按单据编号查找", "按单据类型查找", "按建单时间查找" };
+		String[] s = { "按单据编号查找", "按单据类型查找" };
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
 		modeBox.addItemListener(new ModeBoxItemListener());
 

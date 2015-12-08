@@ -1,9 +1,13 @@
 package org.cross.elsclient.ui.counterui;
 
+import java.rmi.RemoteException;
+
+import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.blservice.accountblservice.AccountBLService_Stub;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService_Stub;
+import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService_Stub;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
@@ -35,6 +39,17 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 		initialbl = new InitialBLService_Stub();
 		logbl = new LogBLService_Stub();
 		accountbl = new AccountBLService_Stub();
+//		try {
+//			BLFactoryService blFactory = new BLFactoryImpl();
+//			receiptbl = blFactory.receiptBLService();
+//			analysisbl = blFactory.analysisBLService();
+//			initialbl = blFactory.initialBLService();
+//			logbl = blFactory.logBLService();
+//			accountbl = blFactory.getAccountBLService();
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		init();
 	}
 	

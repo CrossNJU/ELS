@@ -33,7 +33,7 @@ public class CourierFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("派送快递", "expressSend");
 		addFunctionBtn("查看订单", "goodsCheck");
 		
-		addFunctionPanel(new ExpressReceivePanel(receiptbl), "manage","expressReceive");
+		addFunctionPanel(new ExpressReceivePanel(receiptbl,goodsbl), "manage","expressReceive");
 		addFunctionPanel(new SendUpdatePanel(receiptbl), "manage","expressSend");
 		addFunctionPanel(new GoodsCheckPanel(goodsbl), "manage","goodsCheck");
 		addFunctionPanel(new ReceiptManagePanel(receiptbl), "manage", "checkReceipt");

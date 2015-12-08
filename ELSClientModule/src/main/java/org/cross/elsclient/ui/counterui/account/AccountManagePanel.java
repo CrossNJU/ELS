@@ -95,22 +95,27 @@ public class AccountManagePanel extends ELSManagePanel {
 					}
 					//容器自适应高度
 					container.packHeight();
-				}else if(((String)modeBox.getSelectedItem()).equals("按账户卡号查询")){
+				} else if(((String)modeBox.getSelectedItem()).equals("按账户卡号查询")){
 					String id = searchTextField.getText();
 					accountVOs = new ArrayList<>();
 					try {
-//						userVOs.add(userbl.findById(id));
-						accountVOs.add(accountbl.findByID(id));
+						AccountVO vo = accountbl.findByID(id);
+						if(vo!=null){
+							accountVOs.add(vo);
+						}
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					list.init();
-					for (AccountVO accountVO : accountVOs) {
-						list.addItem(accountVO);
+					if(!accountVOs.isEmpty()){
+						list.init();
+						for (AccountVO accountVO : accountVOs) {
+							list.addItem(accountVO);
+						}
+						//容器自适应高度
+						container.packHeight();
 					}
-					//容器自适应高度
-					container.packHeight();
+					
 				}
 			}
 			

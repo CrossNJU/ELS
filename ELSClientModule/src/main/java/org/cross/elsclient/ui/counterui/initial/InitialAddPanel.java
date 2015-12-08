@@ -44,7 +44,7 @@ public class InitialAddPanel extends InitialManagePanel{
 		cancelBtn = ComponentFactory.createSearchBtn();
 		titleLabel = new ELSLabel("创建新账本");
 		
-//		titleLabel.setMaximumSize(new Dimension(150, searchPanel.getHeight()));
+		titleLabel.setMaximumSize(new Dimension(150, 48));
 		titleLabel.setPreferredSize(new Dimension(150, 48));
 		titleLabel.setMinimumSize(new Dimension(150, 48));
 		titleLabel.setOpaque(true);
@@ -72,6 +72,10 @@ public class InitialAddPanel extends InitialManagePanel{
 			initialManageTable.isAddBtnVisible = true;
 			initialManageTable.addBtn.setVisible(true);
 		}
+		infoList.isEditable = true;
+		infoList.refresh();
+		infoList.addBtn.setVisible(false);
+		infoList.validate();
 	}
 	
 	public class BtnListener implements MouseListener{
@@ -80,6 +84,9 @@ public class InitialAddPanel extends InitialManagePanel{
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource()==searchBtn){
 				try {
+					CurrentVO.id = infoList.label.labels.get(0).getText();
+					CurrentVO.initialName = infoList.label.labels.get(1).getText();
+					CurrentVO.time = infoList.label.labels.get(2).getText();
 					if(initialbl.addInitial(CurrentVO)==ResultMessage.SUCCESS){
 						ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, 3);
 						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(InitialAddPanel.this), "建账成功");

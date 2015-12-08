@@ -64,14 +64,14 @@ public class OrganizationManagePanel extends ELSManagePanel{
 		String[] area = {"北京","上海", "南京","广州"};
 		areaComboBox.setModel(new DefaultComboBoxModel<String>(area));
 		
-		searchBtn.setText("查找用户");
+		searchBtn.setText("查找机构");
 		searchBtn.addMouseListener(new BtnListener());
 		
 		typeComboBox.setVisible(false);
 		areaComboBox.setVisible(false);
 		
 		addBtn = ComponentFactory.createSearchBtn();
-		addBtn.setText("添加用户");
+		addBtn.setText("添加机构");
 		addBtn.addMouseListener(new BtnListener());
 		
 		searchPanel.add(areaComboBox,3);
@@ -108,6 +108,7 @@ public class OrganizationManagePanel extends ELSManagePanel{
 					String area = (String)areaComboBox.getSelectedItem();
 					organizationVOs = new ArrayList<>();
 					try {
+						System.out.println(StringToType.toCity(area));
 						organizationVOs = organizationbl.findByCity(StringToType.toCity(area));
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block

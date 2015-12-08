@@ -343,7 +343,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (e.getSource() == titlePanel.backBtn) {
-				System.out.println("Pressed");
+//				System.out.println("Pressed");
 				if (ELSDialog.showConfirmDlg(
 						GetPanelUtil.getMainFrame(ELSInfoPanel.this), "退出",
 						"确认退出？")) {

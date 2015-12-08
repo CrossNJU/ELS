@@ -1,9 +1,13 @@
 package org.cross.elsclient.ui.managerui;
 
+import java.rmi.RemoteException;
+
+import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.blservice.accountblservice.AccountBLService_Stub;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService_Stub;
+import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
 import org.cross.elsclient.blservice.constantblservice.ConstantBLService_Stub;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
@@ -45,6 +49,14 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		constantbl = new ConstantBLService_Stub();
 		logbl = new LogBLService_Stub();
 		personelbl = new PersonnelBLService_Stub();
+		
+		try {
+			BLFactoryService blFactory = new BLFactoryImpl();
+			organizationbl = blFactory.organizationBLService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		init();
 	}
 	

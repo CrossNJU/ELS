@@ -29,6 +29,7 @@ public class Images {
 	public final static ImageIcon WARNING_IMAGEICON = createImageIcon("img/icons/Common/Icon Warning.png");
 	public final static ImageIcon LOGO_IMAGEICON = createImageIcon("img/Logo.png");
 	public final static ImageIcon EXIT_IMAGEICON = createImageIcon("img/icons/Common/Icon Close.png");
+	public final static ImageIcon ADD_IMAGEICON = createImageIcon("img/icons/Common/Icon Add.png");
 	
 	public static ImageIcon getImageIcon(String name){
 		switch (name) {

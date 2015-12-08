@@ -60,7 +60,7 @@ public class PerAddPanel extends ELSInfoPanel{
 			String phone = itemLabels.get(7).toString();
 			
 			
-			vo = new PersonnelVO(id, name, position, orgNum, sex, id, phone, birthday);
+			vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
 			vos.add(vo);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
