@@ -6,10 +6,16 @@
 package org.cross.elscommon.util;
 
 public enum City {
-	BEIJING, // 北京
-	SHANGHAI, // 上海
-	NANJING, // 南京
-	GUANGZHOU; // 广州
+	BEIJING(0) , // 北京
+	SHANGHAI(1), // 上海
+	NANJING(3), // 南京
+	GUANGZHOU(6); // 广州
+	
+	public int value;
+	
+	City(int value) {  
+        this.value = value;  
+    }
 
 	public String toString() {
 		switch (this) {

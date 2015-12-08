@@ -18,5 +18,10 @@ public enum StockType {
 			return null;
 		}
 	}
+	
+	public static String[] toStrings(){
+		String result[] = {Fast.toString(),COMMON.toString(),ECONOMICAL.toString()};
+		return result;
+	}
 
 }

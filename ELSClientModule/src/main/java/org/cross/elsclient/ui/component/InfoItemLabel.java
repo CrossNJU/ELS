@@ -174,12 +174,8 @@ public class InfoItemLabel extends ELSLabel{
 	}
 	
 	public void initAuto(String name, String defaultValue,
-			boolean isEditable){
-		initEditable(name, defaultValue, isEditable);
-		autoBtn.setPreferredSize(new Dimension(UIConstant.MANAGETABLE_ITEM_HEIGHT, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		autoBtn.setMaximumSize(new Dimension(UIConstant.MANAGETABLE_ITEM_HEIGHT, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		this.add(Box.createHorizontalStrut(10));
-		this.add(autoBtn);
+			boolean isEditable,InfoType type){
+		initEditable(name, defaultValue, isEditable,type);
 	}
 	
 	@Override

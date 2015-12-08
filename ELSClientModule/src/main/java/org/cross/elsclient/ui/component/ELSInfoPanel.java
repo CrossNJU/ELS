@@ -171,12 +171,12 @@ public class ELSInfoPanel extends ELSScrollPane {
 	}
 	
 	public void addAutoItem(String name, String defaultValue,
-			boolean isEditable){
+			boolean isEditable,InfoType type){
 		InfoItemLabel itemLabel = new InfoItemLabel();
-		itemLabel.initAuto(name, defaultValue, isEditable);
+		itemLabel.initAuto(name, defaultValue, isEditable,type);
 		
 		itemLabels.add(itemLabel);
-		itemLabel.autoBtn.addMouseListener(new AutoBtnListener(itemLabel));
+		itemLabel.inputLabel.addFocusListener(new AutoListener(itemLabel));;
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 				+ itemHeight);
@@ -310,45 +310,30 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 */
 	protected void cancel() {}
 	
-	public void autoBtn(String text){}
+	/**
+	 * 自动生成item失去焦点是调用的方法
+	 * @para text-该item的内容
+	 * @return void
+	 */
+	public void auto(String text){}
 	
-	class AutoBtnListener implements MouseListener{
+	class AutoListener implements FocusListener{
 		InfoItemLabel label;
 		
-		public AutoBtnListener(InfoItemLabel label) {
+		public AutoListener(InfoItemLabel label) {
 			this.label = label;
 		}
+		@Override
+		public void focusGained(FocusEvent e) {}
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			autoBtn(label.toString());
-			for (InfoItemLabel infoItemLabel : itemLabels) {
-				infoItemLabel.validate();
+		public void focusLost(FocusEvent e) {
+			if(label.checkFormat()){
+				auto(label.toString());
+				for (InfoItemLabel infoItemLabel : itemLabels) {
+					infoItemLabel.validate();
+				}
 			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 		
 	}

@@ -53,7 +53,6 @@ public class UserUpdatePanel extends ELSInfoPanel{
 			vo.userType = StringToType.toUserType(itemLabels.get(2).toString());
 			vo.orgNameID = itemLabels.get(4).toString();
 			if(userbl.update(vo)==ResultMessage.SUCCESS){
-				System.out.println(itemLabels.get(0).toString());
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更新成功");
 				back();
 			}else{

@@ -115,7 +115,13 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		public void mouseClicked(MouseEvent e) {
 			if(beginDate.getDate().compareTo(endDate.getDate())<1){
 				receiptVOs = new ArrayList<>();
-				receiptVOs.addAll(analysisbl.showMoneyinTable(beginDate.getDateString(), endDate.getDateString()));
+				list2.init();
+				try {
+					receiptVOs.addAll(analysisbl.showMoneyinTable(beginDate.getDateString(), endDate.getDateString()));
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				receiptVOs.addAll(analysisbl.showMoneyoutTable(beginDate.getDateString(), endDate.getDateString()));
 				for (ReceiptVO receiptVO : receiptVOs) {
 					list2.addItem(receiptVO);

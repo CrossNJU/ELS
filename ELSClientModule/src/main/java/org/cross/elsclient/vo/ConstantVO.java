@@ -1,5 +1,6 @@
 package org.cross.elsclient.vo;
 
+import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.PositionType;
 
 public class ConstantVO {
@@ -107,4 +108,25 @@ public class ConstantVO {
 			return baseMoneyForDriver;
 		return 0;
 	}
+	
+	public double getDistance(City c1, City c2) {
+		if (c1 == City.BEIJING && c2 == City.GUANGZHOU || c2 == City.BEIJING && c1 == City.GUANGZHOU)
+			return distance_Beijing_Guangzhou;
+		if (c1 == City.BEIJING && c2 == City.SHANGHAI || c2 == City.BEIJING && c1 == City.SHANGHAI)
+			return distance_Beijing_Shanghai;
+		if (c1 == City.BEIJING && c2 == City.NANJING || c2 == City.BEIJING && c1 == City.NANJING)
+			return distance_Beijing_Nanjing;
+		if (c1 == City.NANJING && c2 == City.GUANGZHOU || c2 == City.NANJING && c1 == City.GUANGZHOU)
+			return distance_Nanjing_Guangzhou;
+		if (c1 == City.SHANGHAI && c2 == City.GUANGZHOU || c2 == City.SHANGHAI && c1 == City.GUANGZHOU)
+			return distance_Shanghai_Guangzhou;
+		if (c1 == City.NANJING && c2 == City.SHANGHAI || c2 == City.NANJING && c1 == City.SHANGHAI)
+			return distance_Nanjing_Shanghai;
+		return 0;
+	}
 }
+
+
+	
+
+

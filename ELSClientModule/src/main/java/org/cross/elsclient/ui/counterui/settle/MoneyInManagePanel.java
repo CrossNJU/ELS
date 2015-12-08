@@ -96,6 +96,7 @@ public class MoneyInManagePanel extends ELSManagePanel {
 			if (e.getSource() == searchBtn) {
 				if (((String) modeBox.getSelectedItem()).equals("按单据编号查找")) {
 					String id = searchTextField.getText();
+					list.init();
 					moneyInVOs = new ArrayList<>();
 					// 需修改
 					// moneyInVOs.add((Receipt_MoneyInVO)receiptbl.findByID(searchTextField.getText()));

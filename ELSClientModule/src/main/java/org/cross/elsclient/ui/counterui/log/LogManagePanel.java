@@ -80,6 +80,7 @@ public class LogManagePanel extends ELSManagePanel{
 		public void mouseClicked(MouseEvent e) {
 			if(beginDate.getDate().compareTo(endDate.getDate())<1){
 				logvos = new ArrayList<>();
+				list.init();
 				try {
 					logvos = logbl.show(beginDate.getDateString(), endDate.getDateString());
 				} catch (RemoteException e1) {
