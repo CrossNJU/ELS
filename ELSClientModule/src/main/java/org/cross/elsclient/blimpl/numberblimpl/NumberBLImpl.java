@@ -88,7 +88,7 @@ public class NumberBLImpl implements NumberBLService{
 			return null;
 		}
 		try {
-			numberdata.insert(numberpo);
+			numberdata.update(numberpo);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,8 +98,24 @@ public class NumberBLImpl implements NumberBLService{
 	
 	public String addOne(String number){
 		int i = Integer.valueOf(number);
+		int l = number.length();
 		i ++;
-		return String.valueOf(i);
+		String left = String.valueOf(i);
+		String ans = "";
+		for (int j = 0; j < l-left.length(); j++) {
+			ans+="0";
+		}
+		ans+=left;
+		return ans;
+	}
+	
+	public static void main(String [] args)throws RemoteException{
+		DataFactoryService dataFactoryService = new Datafactory();
+		NumberDataService numberdata = dataFactoryService.getNumberDataService();
+		NumberBLImpl impl = new NumberBLImpl(numberdata);
+		String p1 = impl.getPostNumber(NumberType.RECEIPT);
+		String p2 = impl.getPostNumber(NumberType.RECEIPT);
+		System.out.println(p1+" "+p2);
 	}
 
 }
