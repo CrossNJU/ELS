@@ -27,9 +27,15 @@ public class AnalysisBLImpl implements AnalysisBLService {
 
 	@Override
 	public ArrayList<Receipt_MoneyInVO> showMoneyinTable(String beginTime,
-			String endTime) throws RemoteException {
-		ArrayList<ReceiptVO> receiptVOs = receiptInfo.findByTimeAndType(
-				ReceiptType.MONEYIN, beginTime, endTime);
+			String endTime) {
+		ArrayList<ReceiptVO> receiptVOs = null;
+		try {
+			receiptVOs = receiptInfo.findByTimeAndType(
+					ReceiptType.MONEYIN, beginTime, endTime);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int size = receiptVOs.size();
 		ArrayList<Receipt_MoneyInVO> moneyInVOs = new ArrayList<Receipt_MoneyInVO>();
 		for (int i = 0; i < size; i++) {
@@ -41,8 +47,19 @@ public class AnalysisBLImpl implements AnalysisBLService {
 	@Override
 	public ArrayList<Receipt_MoneyOutVO> showMoneyoutTable(String beginTime,
 			String endTime) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ReceiptVO> receiptVOs = null;
+		try {
+			receiptVOs = receiptInfo.findByTimeAndType(ReceiptType.MONEYOUT, beginTime, endTime);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int size = receiptVOs.size();
+		ArrayList<Receipt_MoneyOutVO> moneyOutVOs = new ArrayList<Receipt_MoneyOutVO>();
+		for (int i = 0; i < size; i++) {
+			moneyOutVOs.add((Receipt_MoneyOutVO)receiptVOs.get(i));
+		}
+		return moneyOutVOs;
 	}
 
 }
