@@ -89,7 +89,11 @@ public class GoodsCheckPanel extends ELSManagePanel{
 				});
 				list.init();
 				for(int i = 0;i<historyVOs.size();i=i+2){
-					list.addItem(historyVOs.get(i), historyVOs.get(i+1));
+					if(i+1==historyVOs.size()){
+						list.addItem(historyVOs.get(i), null);
+					}else{
+						list.addItem(historyVOs.get(i), historyVOs.get(i+1));
+					}
 				}
 				container.packHeight();
 			}

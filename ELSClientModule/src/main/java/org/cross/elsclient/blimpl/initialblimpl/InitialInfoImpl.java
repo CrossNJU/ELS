@@ -84,6 +84,7 @@ public class InitialInfoImpl implements InitialInfo {
 		for (int i = 0; i < accpos.size(); i++) {
 			accountVOs.add(accountInfo.toAccountVO(accpos.get(i)));
 		}
+		System.out.println("in:"+po.getPerNum());
 		UserVO uservo = userinfo.findUserByNum(po.getPerNum());
 		String perName = uservo.name;
 		InitialVO vo = new InitialVO(po.getNumber(), po.getName(), orgVOs, personnelVOs, vehicleVOs, stockVOs, accountVOs, po.getTime(), perName, po.getPerNum());

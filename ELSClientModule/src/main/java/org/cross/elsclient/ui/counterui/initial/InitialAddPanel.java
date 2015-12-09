@@ -83,6 +83,7 @@ public class InitialAddPanel extends InitialManagePanel{
 		
 		currentVO.id = ConstantVal.numberbl.getPostNumber(NumberType.INITIAL);
 		currentVO.perNumber = UIConstant.CURRENT_USER.number;
+		System.out.println(currentVO.perNumber);
 		currentVO.time = TimeUtil.getCurrentTime();
 		infoList.isEditable = true;
 		infoList.refresh();

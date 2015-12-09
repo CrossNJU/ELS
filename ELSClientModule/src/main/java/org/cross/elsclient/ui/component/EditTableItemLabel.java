@@ -19,7 +19,7 @@ public class EditTableItemLabel extends TableItemLabel{
 		ELSTextField tempLabel = new ELSTextField();
 		
 		for (int i = 0; i < item.length; i++) {
-			tempLabel = new ELSTextField(" " + item[i]);
+			tempLabel = new ELSTextField("" + item[i]);
 			tempLabel.setFont(tempLabel.getFont().deriveFont(18f));
 			tempLabel.setPreferredSize(new Dimension(itemWidth[i]-10,UIConstant.MANAGETABLE_ITEM_HEIGHT));
 			tempLabel.setMaximumSize(new Dimension(itemWidth[i]-10,UIConstant.MANAGETABLE_ITEM_HEIGHT));

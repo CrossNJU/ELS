@@ -114,7 +114,7 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 			goodsVO = new GoodsVO(number, goodsType,startCity, OrganizationType.BUSINESSHALL, weight, volume);
 			orderVO = new Receipt_OrderVO(number, TimeUtil.getCurrentTime(), cost, TimeUtil.getCurrentTime(), null, senderName, senderMobile, senderPhone, senderAdd, senderOrg, receiverName, receiverOrg, receiverAdd, receiverPhone, receiverMobile, perNum, orgNum);
 			goodsVO.history.add(new HistoryVO(TimeUtil.getCurrentTime(), startCity, OrganizationType.BUSINESSHALL, false));
-			if(receiptbl.add(orderVO)==ResultMessage.SUCCESS&&goodsbl.addGoods(goodsVO)==ResultMessage.SUCCESS){
+			if(receiptbl.add(orderVO)==ResultMessage.SUCCESS&&goodsbl.addGoods(goodsVO)==ResultMessage.SUCCESS&&goodsbl.updateGoods(goodsVO)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 				init();
 			}else{

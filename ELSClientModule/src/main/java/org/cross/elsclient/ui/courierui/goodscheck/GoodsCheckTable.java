@@ -15,12 +15,15 @@ public class GoodsCheckTable extends ELSManageTable{
 	
 	public void addItem(HistoryVO vo1, HistoryVO vo2){
 		String triggerPlace = vo1.placeCity.toString()+vo1.placeOrg.toString();
-		String arrivePlace = vo2.placeCity.toString()+vo2.placeOrg.toString();
 		String triggerTime = vo1.time;
-		String arriveTime = vo2.time;
-		
-		if(arriveTime==null){
-			arriveTime = "未到达";
+		String arrivePlace = "";
+		String arriveTime = "";
+		if(vo2!=null){
+			arrivePlace = vo2.placeCity.toString()+vo2.placeOrg.toString();
+			arriveTime = vo2.time;
+			if(arriveTime==null){
+				arriveTime = "未到达";
+			}
 		}
 		
 		String []item = {triggerPlace,triggerTime,arrivePlace,arriveTime};
