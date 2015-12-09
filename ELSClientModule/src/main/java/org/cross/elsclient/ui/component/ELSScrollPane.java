@@ -28,6 +28,8 @@ public class ELSScrollPane extends JScrollPane{
 		initComponent();
 	}
 
+	public void init(){}
+	
 	public void initComponent(){
 		setBorder(null);
 	}

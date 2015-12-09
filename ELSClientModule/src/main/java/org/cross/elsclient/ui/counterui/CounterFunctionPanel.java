@@ -34,22 +34,22 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 	InitialBLService initialbl;
 	
 	public CounterFunctionPanel() {
-		receiptbl = new ReceiptBLService_Stub();
-		analysisbl = new AnalysisBLService_Stub();
+//		receiptbl = new ReceiptBLService_Stub();
+//		analysisbl = new AnalysisBLService_Stub();
 		initialbl = new InitialBLService_Stub();
-		logbl = new LogBLService_Stub();
-		accountbl = new AccountBLService_Stub();
-//		try {
-//			BLFactoryService blFactory = new BLFactoryImpl();
-//			receiptbl = blFactory.receiptBLService();
-//			analysisbl = blFactory.analysisBLService();
+//		logbl = new LogBLService_Stub();
+//		accountbl = new AccountBLService_Stub();
+		try {
+			BLFactoryService blFactory = new BLFactoryImpl();
+			receiptbl = blFactory.receiptBLService();
+			analysisbl = blFactory.analysisBLService();
 //			initialbl = blFactory.initialBLService();
-//			logbl = blFactory.logBLService();
-//			accountbl = blFactory.getAccountBLService();
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+			logbl = blFactory.logBLService();
+			accountbl = blFactory.getAccountBLService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		init();
 	}
 	

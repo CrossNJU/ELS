@@ -91,6 +91,16 @@ public class ELSFunctionPanel extends ELSPanel {
 		contentPanel.add(container,functionName);
 	}
 	
+	public void setChosenFunction(String functionName){
+		for (FunctionBtn elsButton : functionBtns) {
+			if(elsButton.getName()!=functionName){
+				elsButton.setArchive(false);
+			}else {
+				elsButton.setArchive(true);
+			}
+		}
+		contentPanel.cl.show(contentPanel, functionName);
+	}
 	
 	class FuncBtnListener implements MouseListener{
 		
@@ -98,12 +108,7 @@ public class ELSFunctionPanel extends ELSPanel {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			FunctionBtn btn = (FunctionBtn)e.getSource();
-			for (FunctionBtn elsButton : functionBtns) {
-				elsButton.setArchive(false);
-			}
-			btn.setArchive(true);
-			String text = btn.getName();
-			contentPanel.cl.show(contentPanel, text);
+			setChosenFunction(btn.getName());
 		}
 		@Override
 		public void mousePressed(MouseEvent e) {

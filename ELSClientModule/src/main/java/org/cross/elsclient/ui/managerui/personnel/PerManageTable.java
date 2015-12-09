@@ -32,7 +32,7 @@ public class PerManageTable extends ELSManageTable {
 	public void addItem(PersonnelVO vo) {
 		vos.add(vo);
 
-		String item[] = { vo.id, vo.name, vo.position.toString(),
+		String item[] = { vo.number, vo.name, vo.position.toString(),
 				vo.orgNum};
 		addItemLabel(item);
 	}

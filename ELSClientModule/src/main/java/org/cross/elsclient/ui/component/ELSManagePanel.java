@@ -30,7 +30,7 @@ public class ELSManagePanel extends ELSScrollPane {
 //	public ELSManagePanel() {
 //		init();
 //	}
-	
+	@Override
 	public void init() {
 		setSize(UIConstant.CONTAINER_WIDTH,UIConstant.CONTAINER_WIDTH);
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

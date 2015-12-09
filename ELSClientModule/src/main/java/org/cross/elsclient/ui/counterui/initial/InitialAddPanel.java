@@ -20,12 +20,14 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.InitialVO;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.VehicleVO;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class InitialAddPanel extends InitialManagePanel{
@@ -34,7 +36,7 @@ public class InitialAddPanel extends InitialManagePanel{
 	
 	public InitialAddPanel(InitialBLService initialbl) {
 		super(initialbl);
-		CurrentVO = new InitialVO("", "", new ArrayList<OrganizationVO>(), new ArrayList<PersonnelVO>(), 
+		currentVO = new InitialVO("", "", new ArrayList<OrganizationVO>(), new ArrayList<PersonnelVO>(), 
 				new ArrayList<VehicleVO>(), new ArrayList<StockVO>(),new ArrayList<AccountVO>(),"","","");
 		init();
 	}
@@ -72,6 +74,8 @@ public class InitialAddPanel extends InitialManagePanel{
 			initialManageTable.isAddBtnVisible = true;
 			initialManageTable.addBtn.setVisible(true);
 		}
+		
+		currentVO.id = ConstantVal.getNumber().getPostNumber(NumberType.INITIAL);
 		infoList.isEditable = true;
 		infoList.refresh();
 		infoList.addBtn.setVisible(false);
@@ -84,10 +88,10 @@ public class InitialAddPanel extends InitialManagePanel{
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource()==searchBtn){
 				try {
-					CurrentVO.id = infoList.label.labels.get(0).getText();
-					CurrentVO.initialName = infoList.label.labels.get(1).getText();
-					CurrentVO.time = infoList.label.labels.get(2).getText();
-					if(initialbl.addInitial(CurrentVO)==ResultMessage.SUCCESS){
+					currentVO.id = infoList.label.labels.get(0).getText();
+					currentVO.initialName = infoList.label.labels.get(1).getText();
+					currentVO.time = infoList.label.labels.get(2).getText();
+					if(initialbl.addInitial(currentVO)==ResultMessage.SUCCESS){
 						ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, 3);
 						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(InitialAddPanel.this), "建账成功");
 						InitialCheckPanel checkPanel = (InitialCheckPanel)parent.getComponent(0);

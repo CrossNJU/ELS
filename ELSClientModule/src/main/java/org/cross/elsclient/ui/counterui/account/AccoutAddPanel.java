@@ -7,8 +7,11 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class AccoutAddPanel extends ELSInfoPanel{
@@ -26,7 +29,7 @@ public class AccoutAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("新增账户");
-		addEditableItem("账户名称", "", true,InfoType.NAME);
+		addEditableItem("账户名称","", true,InfoType.NAME);
 		addEditableItem("账户卡号", "", true,InfoType.NUM);
 		addEditableItem("账户余额", "", true,InfoType.NUM);
 		

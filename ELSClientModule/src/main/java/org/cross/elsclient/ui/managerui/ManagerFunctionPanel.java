@@ -53,6 +53,12 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		try {
 			BLFactoryService blFactory = new BLFactoryImpl();
 			organizationbl = blFactory.organizationBLService();
+			receiptbl = blFactory.receiptBLService();
+			accoutbl = blFactory.getAccountBLService();
+			analysisbl = blFactory.analysisBLService();
+			constantbl = blFactory.constantBLService();
+			logbl = blFactory.logBLService();
+			personelbl = blFactory.personnelBLService();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -33,8 +33,8 @@ public class AccountUpdatePanel extends ELSInfoPanel{
 		addEditableItem("账户余额", String.valueOf(vo.balance), true,InfoType.NUM);
 		
 		addConfirmAndCancelBtn();
-		confirmBtn.setText("确认添加");
-		cancelBtn.setText("取消添加");
+		confirmBtn.setText("确认修改");
+		cancelBtn.setText("取消修改");
 	}
 	
 	@Override

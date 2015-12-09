@@ -8,9 +8,11 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class TotalAddPanel extends ELSInfoPanel{
@@ -29,7 +31,7 @@ public class TotalAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("创建总收款款单");
-		addEditableItem("总收款单编号", "R00001", false, InfoType.NAME);
+		addEditableItem("总收款单编号", ConstantVal.getNumber().getPostNumber(NumberType.RECEIPT), false, InfoType.NAME);
 		addEditableItem("收款单数量", ""+vos.size(), false, InfoType.NAME);
 		addEditableItem("收款人", "", true,InfoType.NAME);
 		addEditableItem("收款账号", "", true,InfoType.NUM);

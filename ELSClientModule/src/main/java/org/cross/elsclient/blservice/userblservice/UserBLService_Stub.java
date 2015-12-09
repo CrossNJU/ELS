@@ -112,7 +112,6 @@ public class UserBLService_Stub implements UserBLService {
 
 	@Override
 	public UserVO findById(String id) throws RemoteException {
-		// TODO Auto-generated method stub
 		return new UserVO("U0000001","12345678", "迪迦奥特曼", UserType.COUNTER,"O000001");
 	}
 

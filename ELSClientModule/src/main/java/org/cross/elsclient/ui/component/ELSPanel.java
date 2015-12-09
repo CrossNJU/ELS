@@ -14,6 +14,8 @@ public class ELSPanel extends JPanel {
 		setLayout(cl);
 	}
 	
+	public void init(){}
+	
 	/**
 	 * 使容器高度自适应组件的大小
 	 * @para 

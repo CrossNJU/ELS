@@ -45,6 +45,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 	protected ELSBox btnBox;
 	protected NumberBLService numberbl;
 
+	@Override
 	public void init() {
 		itemHeight = 50;
 		itemLabels = new ArrayList<>();
@@ -271,6 +272,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 		ELSPanel parent = (ELSPanel) getParent();
 		if (backName == null) {
 			parent.cl.first(parent);
+//			if(parent.getComponent(0)).init();
 		} else {
 			parent.cl.show(parent, backName);
 		}

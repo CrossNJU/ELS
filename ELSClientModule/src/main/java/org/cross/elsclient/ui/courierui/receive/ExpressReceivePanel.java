@@ -18,9 +18,11 @@ import org.cross.elsclient.util.CalcuteUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.util.TimeUtil;
 import org.cross.elsclient.vo.GoodsVO;
+import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StockType;
@@ -45,7 +47,7 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		String packType[] = {"纸箱(5元)","木箱(10元)","快递袋(1元)"};
 		
 		setTitle("创建快件单");
-		addEditableItem("快件单编号", "R000001", false);
+		addEditableItem("快件单编号", ConstantVal.getNumber().getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("寄件人姓名", "", true);
 		addEditableItem("寄件人地址", "", true);
 		addEditableItem("寄件人单位", "", true);
@@ -109,7 +111,8 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 			
 			
 			goodsVO = new GoodsVO(number, goodsType,startCity, OrganizationType.BUSINESSHALL, weight, volume);
-//			orderVO = new Receipt_OrderVO(number, TimeUtil.getCurrentTime(), number, cost, TimeUtil.getCurrentTime(), null, senderName, senderMobile, senderPhone, senderAdd, senderOrg, receiverName, receiverOrg, receiverAdd, receiverPhone, receiverMobile, perNum, orgNum);
+			orderVO = new Receipt_OrderVO(number, TimeUtil.getCurrentTime(), cost, TimeUtil.getCurrentTime(), null, senderName, senderMobile, senderPhone, senderAdd, senderOrg, receiverName, receiverOrg, receiverAdd, receiverPhone, receiverMobile, perNum, orgNum);
+			goodsVO.history.add(new HistoryVO(TimeUtil.getCurrentTime(), startCity, OrganizationType.BUSINESSHALL, false));
 			if(receiptbl.add(orderVO)==ResultMessage.SUCCESS&&goodsbl.addGoods(goodsVO)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 				init();

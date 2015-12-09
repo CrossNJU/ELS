@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.component.CheckBoxItemLabel;
 import org.cross.elsclient.ui.component.ELSCheckBox;
+import org.cross.elsclient.ui.component.ELSLabel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.InfoItemLabel;
 import org.cross.elsclient.ui.component.ManageTableItemLabel;
@@ -38,6 +39,9 @@ public class MoneyInManageTable extends ELSManageTable {
 		checkBoxHeader.init(name,itemWidth,false);
 		checkBoxHeader.setFont(font);
 		checkBoxHeader.setBackground(UIConstant.MAINCOLOR);
+		for (ELSLabel label : checkBoxHeader.labels) {
+			label.setForeground(Color.WHITE);
+		}
 		checkBoxHeader.checkBox.addItemListener(new checkBoxListener());
 		container.remove(header);
 		container.add(checkBoxHeader,0);

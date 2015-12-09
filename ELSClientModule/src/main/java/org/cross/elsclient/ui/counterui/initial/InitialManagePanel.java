@@ -17,7 +17,7 @@ import org.cross.elsclient.vo.InitialVO;
 
 public class InitialManagePanel extends ELSManagePanel{
 	InitialBLService initialbl;
-	InitialVO CurrentVO;
+	InitialVO currentVO;
 	ArrayList<InitialManageTable> lists;
 	InitialInfoTable infoList;
 	InitialOrganizationTable organList;
@@ -36,7 +36,7 @@ public class InitialManagePanel extends ELSManagePanel{
 		super.setContentPanel();
 		String[] infoName = {"账本编号","建账人","建账时间"};
 		int[] infoWidth = {200,200,200}; 
-		infoList = new InitialInfoTable(infoName, infoWidth,CurrentVO);
+		infoList = new InitialInfoTable(infoName, infoWidth,currentVO);
 		infoList.refresh();
 //		infoList.addItemLabel(new String[]{CurrentVO.id,CurrentVO.initialName,CurrentVO.time});
 		infoList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, searchPanel.getHeight()+searchPanel.getLocation().y+10);
@@ -44,28 +44,28 @@ public class InitialManagePanel extends ELSManagePanel{
 		
 		String[] organName = {"机构编号","地区","类型"};
 		int[] organWidth = {200,100,100}; 
-		organList = new InitialOrganizationTable(organName, organWidth,CurrentVO.organizations);
+		organList = new InitialOrganizationTable(organName, organWidth,currentVO.organizations);
 		organList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, infoList.getHeight()+infoList.getLocation().y+10);
 		
 		String[] personName = {"人员编号","姓名","职位","所属机构"};
 		int[] personWidth = {200,100,100,200};
-		personnelList = new InitialPersonnelTable(personName,personWidth, CurrentVO.personnels);
+		personnelList = new InitialPersonnelTable(personName,personWidth, currentVO.personnels);
 		personnelList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, organList.getHeight()+organList.getLocation().y+10);
 		
 		String[] vehicleName = {"车辆编号","车辆号","服役时间"};
 		int[] vehicleWidth = {200,100,200};
-		veList = new InitialVehicleTable(vehicleName,vehicleWidth, CurrentVO.vehicles);
+		veList = new InitialVehicleTable(vehicleName,vehicleWidth, currentVO.vehicles);
 		veList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, personnelList.getHeight()+personnelList.getLocation().y+10);
 		
 		String[] accountName = {"账户名称","账户卡号","账户余额"};
 		int[] accountWidth = {200,300,150};
-		accountList = new InitialAccountTable(accountName,accountWidth, CurrentVO.accounts);
+		accountList = new InitialAccountTable(accountName,accountWidth, currentVO.accounts);
 		accountList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, veList.getHeight()+veList.getLocation().y+10);
 		
 		//库存表待定
 		String[] stockName = {"仓库编号","库存空间"};
 		int[] stockWidth = {200,100};
-		stockList = new InitialStockTable(stockName,stockWidth, CurrentVO.stocks);
+		stockList = new InitialStockTable(stockName,stockWidth, currentVO.stocks);
 		stockList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, accountList.getHeight()+accountList.getLocation().y+10);
 		
 		lists = new ArrayList<>();
@@ -86,12 +86,12 @@ public class InitialManagePanel extends ELSManagePanel{
 	}
 	
 	public void refresh(){
-		infoList.vo = CurrentVO;
-		organList.vos = CurrentVO.organizations;
-		personnelList.vos = CurrentVO.personnels;
-		accountList.vos = CurrentVO.accounts;
-		veList.vos = CurrentVO.vehicles;
-		stockList.vos = CurrentVO.stocks;
+		infoList.vo = currentVO;
+		organList.vos = currentVO.organizations;
+		personnelList.vos = currentVO.personnels;
+		accountList.vos = currentVO.accounts;
+		veList.vos = currentVO.vehicles;
+		stockList.vos = currentVO.stocks;
 		
 		for (InitialManageTable initialManageTable : lists) {
 			initialManageTable.refresh();

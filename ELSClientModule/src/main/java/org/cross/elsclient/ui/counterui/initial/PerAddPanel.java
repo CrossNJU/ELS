@@ -7,9 +7,11 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.StringToType;
@@ -30,7 +32,7 @@ public class PerAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("新增人员");
-		addEditableItem("人员编号", "", true);
+		addEditableItem("人员编号", ConstantVal.getNumber().getPostNumber(NumberType.PERSONNEL), true);
 		addEditableItem("姓名", "", true,InfoType.NAME);
 		addComboxItem("性别",new String[]{"男","女"} , true);
 		addEditableItem("身份证", "", true,InfoType.IDCARD);

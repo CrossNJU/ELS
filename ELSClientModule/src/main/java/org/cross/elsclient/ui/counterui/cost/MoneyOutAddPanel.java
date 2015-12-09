@@ -8,9 +8,11 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 
 public class MoneyOutAddPanel extends ELSInfoPanel{
@@ -29,7 +31,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("创建付款单");
-		addEditableItem("付款单编号", "R000001", false);
+		addEditableItem("付款单编号", ConstantVal.getNumber().getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("条目", "", true, InfoType.NAME);
 		addEditableItem("付款人", "", true,InfoType.NAME);
 		addEditableItem("付款账号", "", true,InfoType.NUM);

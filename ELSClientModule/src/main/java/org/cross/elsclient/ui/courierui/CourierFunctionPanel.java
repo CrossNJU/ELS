@@ -1,6 +1,10 @@
 package org.cross.elsclient.ui.courierui;
 
+import java.rmi.RemoteException;
+
+import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
 import org.cross.elsclient.blimpl.goodsblimpl.GoodsBLImpl;
+import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Driver;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Stub;
@@ -20,8 +24,17 @@ public class CourierFunctionPanel extends ELSFunctionPanel{
 	
 	public CourierFunctionPanel() {
 		super();
-		receiptbl = new ReceiptBLService_Stub();
-		goodsbl = new GoodsBLService_Stub();
+//		receiptbl = new ReceiptBLService_Stub();
+//		goodsbl = new GoodsBLService_Stub();
+		BLFactoryService blFactory;
+		try {
+			blFactory = new BLFactoryImpl();
+			receiptbl = blFactory.receiptBLService();
+			goodsbl = blFactory.goodsBLService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		init();
 	}
 	

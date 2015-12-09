@@ -326,14 +326,14 @@ public class ELSDatePicker extends JPanel {
 
 	public String getDateString() {
 		Calendar cal = Calendar.getInstance();
-		cal.set(this.year, this.month, this.date);
+		cal.set(this.year, this.month-1, this.date);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(cal.getTime());
 	}
 	
 	public Date getDate(){
 		Calendar cal = Calendar.getInstance();
-		cal.set(this.year, this.month, this.date);
+		cal.set(this.year, this.month-1, this.date);
 		return cal.getTime();
 	}
 	

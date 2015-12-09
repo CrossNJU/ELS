@@ -1,5 +1,7 @@
 package org.cross.elsclient.ui.component;
 
+import java.awt.Color;
+
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 

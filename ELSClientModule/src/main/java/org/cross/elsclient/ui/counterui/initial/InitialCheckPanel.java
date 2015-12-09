@@ -46,7 +46,7 @@ public class InitialCheckPanel extends InitialManagePanel {
 		searchBtn.addMouseListener(new BtnListener());
 		searchPanel.remove(searchTextField);
 		
-		CurrentVO = initialVOs.get(0);
+		currentVO = initialVOs.get(0);
 	}
 	
 	public class ModeListener implements ItemListener{
@@ -55,7 +55,7 @@ public class InitialCheckPanel extends InitialManagePanel {
 		public void itemStateChanged(ItemEvent e) {
 			if(e.getStateChange()==ItemEvent.SELECTED){
 				int index = modeBox.getSelectedIndex();
-				CurrentVO = initialVOs.get(index);
+				currentVO = initialVOs.get(index);
 				refresh();
 			}
 			

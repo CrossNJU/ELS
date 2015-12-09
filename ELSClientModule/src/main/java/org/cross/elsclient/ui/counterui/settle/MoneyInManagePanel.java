@@ -99,18 +99,22 @@ public class MoneyInManagePanel extends ELSManagePanel {
 					list.init();
 					moneyInVOs = new ArrayList<>();
 					// 需修改
-					// moneyInVOs.add((Receipt_MoneyInVO)receiptbl.findByID(searchTextField.getText()));
-					try {
-						moneyInVOs = receiptbl.findByType(ReceiptType.MONEYIN);
-					} catch (RemoteException e1) {
+					 try {
+						ReceiptVO receiptVO = receiptbl.findByID(searchTextField.getText());
+						if(receiptVO!=null){
+							if(receiptVO instanceof Receipt_MoneyInVO){
+								moneyInVOs.add(receiptbl.findByID(searchTextField.getText()));
+							}
+						}
+					} catch (RemoteException e2) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e2.printStackTrace();
 					}
 					for (ReceiptVO receipt : moneyInVOs) {
 						Receipt_MoneyInVO receipt_MoneyInVO = (Receipt_MoneyInVO) receipt;
 						String[] item = { "" + receipt.number,
 								receipt.time,
-								"" + "2000" };
+								receipt_MoneyInVO.money+"" };
 						list.addItemLabel(item);
 					}
 					list.validate();
@@ -120,7 +124,7 @@ public class MoneyInManagePanel extends ELSManagePanel {
 
 				} else if (((String) modeBox.getSelectedItem())
 						.equals("按营业厅查询")) {
-
+					
 				}
 			}
 			if (e.getSource() == addBtn) {

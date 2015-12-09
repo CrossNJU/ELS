@@ -82,6 +82,7 @@ public class LogManagePanel extends ELSManagePanel{
 				logvos = new ArrayList<>();
 				list.init();
 				try {
+//					System.out.println(beginDate.getDateString()+" 00:00"+endDate.getDateString()+" 23:59");
 					logvos = logbl.show(beginDate.getDateString(), endDate.getDateString());
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block

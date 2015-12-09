@@ -155,6 +155,7 @@ public class LoginPanel extends ELSPanel{
 			type = userbl.login(id, pw);
 			if(type!=null){
 				UIConstant.CURRENT_USER = userbl.findById(id);
+				System.out.println(UIConstant.CURRENT_USER);
 			}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();

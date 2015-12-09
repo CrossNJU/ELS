@@ -9,8 +9,10 @@ import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.counterui.initial.InitialManagePanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
@@ -30,7 +32,7 @@ public class PerAddPanel extends ELSInfoPanel {
 	public void init() {
 		super.init();
 		
-		addEditableItem("人员编号", "", true);
+		addEditableItem("人员编号", ConstantVal.getNumber().getPostNumber(NumberType.PERSONNEL), true);
 		addEditableItem("姓名", "", true,InfoType.NAME);
 		addComboxItem("性别",new String[]{"男","女"} , true);
 		addEditableItem("身份证", "", true,InfoType.IDCARD);
@@ -60,7 +62,7 @@ public class PerAddPanel extends ELSInfoPanel {
 			String birthday = itemLabels.get(6).toString();
 			String phone = itemLabels.get(7).toString();
 			
-			vo = new PersonnelVO(id, name, position, orgNum, sex, id, phone, birthday);
+			vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
 			if(personelbl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 				back();
