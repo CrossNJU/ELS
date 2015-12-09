@@ -13,8 +13,10 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.GoodsVO;
+import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.Receipt_StockInVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.UserVO;
@@ -40,6 +42,7 @@ public class StockInAddPanel extends ELSInfoPanel {
 		this.receiptbl = receiptbl;
 		this.stockvo = stockvo;
 		this.goodsbl = goodsbl;
+		this.user = user;
 		init();
 	}
 
@@ -67,6 +70,8 @@ public class StockInAddPanel extends ELSInfoPanel {
 		stockbl.intoStock(itemLabels.get(1).toString(), stockvo.number, itemLabels.get(2).toString(),
 				itemLabels.get(4).toString());
 		GoodsVO goodsvo = goodsbl.searchGoods(itemLabels.get(1).toString());
+		HistoryVO newhistory = new HistoryVO(itemLabels.get(2).toString(), UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type, true);
+		goodsvo.history.add(newhistory);
 		goodsvo.stockAreaNum = itemLabels.get(4).toString();
 		goodsvo.stockNum = stockvo.number;
 		goodsbl.updateGoods(goodsvo);
@@ -75,6 +80,7 @@ public class StockInAddPanel extends ELSInfoPanel {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
+			init();
 		} else {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
 		}
@@ -86,7 +92,8 @@ public class StockInAddPanel extends ELSInfoPanel {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
+			init();
 		}
 	}
-
+	
 }

@@ -74,6 +74,7 @@ public class ArriAddPanel extends ELSInfoPanel {
 				itemLabels.get(2).toString(), itemLabels.get(1).toString(), itemLabels.get(3).toString(),
 				user.orgNameID, user.number);
 		Receipt_TransVO transvo = (Receipt_TransVO) receiptbl.findByID(itemLabels.get(1).toString());
+		
 		for (int i = 0; i < transvo.goodsID.size(); i++) {
 			GoodsVO goods = goodsbl.searchGoods(transvo.goodsID.get(i));
 			//更新goods

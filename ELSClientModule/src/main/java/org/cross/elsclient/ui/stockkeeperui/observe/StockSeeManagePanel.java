@@ -37,8 +37,6 @@ public class StockSeeManagePanel extends ELSManagePanel{
 	
 	StockSeeManageTableFirst listFirst;
 	StockSeeManageTableSecond listSecond;
-	ELSDatePicker datePicker1;
-	ELSDatePicker datePicker2;
 	ELSButton addBtn;
 	
 	public StockSeeManagePanel(){}
@@ -99,11 +97,12 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			try {
-				stocksee = stockbl.showStockInfo(stock.number, datePicker1.getDateString(), datePicker2.getDateString());
+				stocksee = stockbl.showStockInfo(stock.number, beginDate.getDateString(), endDate.getDateString());
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			listFirst.init();
 			listFirst.addItem(stocksee);
 			for (int i = 0; i < stocksee.goods.size(); i++) {
 				listSecond.addItem(stocksee.goods.get(i));

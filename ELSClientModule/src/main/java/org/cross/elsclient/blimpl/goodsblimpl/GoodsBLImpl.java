@@ -14,21 +14,25 @@ import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 
-public class GoodsBLImpl implements GoodsBLService{
+public class GoodsBLImpl implements GoodsBLService {
 
 	public GoodsDataService goodsData;
 	public GoodsInfo goodsInfo;
-	
-	public GoodsBLImpl(GoodsDataService goodsData,GoodsInfo goodsInfo){
+
+	public GoodsBLImpl(GoodsDataService goodsData, GoodsInfo goodsInfo) {
 		this.goodsData = goodsData;
 		this.goodsInfo = goodsInfo;
 	}
-	
-		@Override
+
+	@Override
 	public ResultMessage updateGoods(GoodsVO goods) throws RemoteException {
-		ResultMessage addHistroy = goodsData.addHistory(goods.number, goodsInfo.toHistroyPO(goods.history.get(goods.history.size()-1),goods.number));
-		ResultMessage updateMessage = goodsData.update(goodsInfo.toGoodsPO(goods)); 
-		if (updateMessage == ResultMessage.SUCCESS && addHistroy == ResultMessage.SUCCESS) {
+		ResultMessage addHistroy = goodsData.addHistory(goods.number, goodsInfo
+				.toHistroyPO(goods.history.get(goods.history.size() - 1),
+						goods.number));
+		ResultMessage updateMessage = goodsData.update(goodsInfo
+				.toGoodsPO(goods));
+		if (updateMessage == ResultMessage.SUCCESS
+				&& addHistroy == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
 		}
 		return ResultMessage.FAILED;
@@ -54,7 +58,7 @@ public class GoodsBLImpl implements GoodsBLService{
 		for (int i = 0; i < size; i++) {
 			historyVOs.add(goodsInfo.toHistroyVO(historyPOs.get(i)));
 		}
-		GoodsVO vo = goodsInfo.toGoodsVO(po,historyVOs);
+		GoodsVO vo = goodsInfo.toGoodsVO(po, historyVOs);
 		return vo;
 	}
 

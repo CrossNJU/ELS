@@ -37,7 +37,7 @@ public class GoodsBLTest {
 				goodsInfo);
 
 		System.out.println("=======增加快件（addGoods）=======");
-		GoodsVO goodsVO = new GoodsVO("G009", StockType.COMMON, City.NANJING,
+		GoodsVO goodsVO = new GoodsVO("R0000003", StockType.COMMON, City.NANJING,
 				OrganizationType.BUSINESSHALL, 12, 22);
 		ResultMessage addResultMessage = goodsBLImpl.addGoods(goodsVO);
 		if (addResultMessage == ResultMessage.SUCCESS) {

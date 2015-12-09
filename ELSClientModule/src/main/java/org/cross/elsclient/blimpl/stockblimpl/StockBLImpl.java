@@ -66,7 +66,7 @@ public class StockBLImpl implements StockBLService {
 			for (int j = 0; j < size1; j++) {
 				String inTime = "";
 				for (int j2 = 0; j2 < operationPOs.size(); j2++) {
-					if (operationPOs.get(j2).getGoodsNum() == goodsPOs.get(j).number)
+					if (operationPOs.get(j2).getGoodsNum().equals(goodsPOs.get(j).number))
 						inTime = operationPOs.get(i).getTime();
 				}
 

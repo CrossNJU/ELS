@@ -14,6 +14,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.Receipt_StockOutVO;
 import org.cross.elsclient.vo.StockVO;
@@ -50,7 +51,7 @@ public class StockOutAddPanel extends ELSInfoPanel {
 		titlePanel.remove(titlePanel.backBtn);
 		String[] it1 = { "汽车", "飞机", "火车" };
 		setTitle("新增出库单");
-		/* 0 */addEditableItem("出库单编号", numberbl.getPostNumber(NumberType.RECEIPT), false);
+		/* 0 */addEditableItem("出库单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("快件单编号", "", true, InfoType.NAME);
 		addDateItem("出库时间", false);
 		addEditableItem("目的地", "", true, InfoType.NAME);
@@ -77,6 +78,7 @@ public class StockOutAddPanel extends ELSInfoPanel {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
+			init();
 		} else {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
 		}
@@ -88,6 +90,7 @@ public class StockOutAddPanel extends ELSInfoPanel {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
+			init();
 		}
 	}
 

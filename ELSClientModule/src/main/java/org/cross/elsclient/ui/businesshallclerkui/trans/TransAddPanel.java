@@ -14,6 +14,7 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.PersonnelVO;
@@ -52,7 +53,7 @@ public class TransAddPanel extends ELSInfoPanel {
 //		String it5[] = ConstantValue.getUnusedObserver();
 
 		setTitle("新增装车单");
-		/* 0 */addEditableItem("装车单编号", numberbl.getPostNumber(NumberType.RECEIPT), false);
+		/* 0 */addEditableItem("装车单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("快件单编号", "", true, InfoType.NAME);
 		addEditableItem("出发地", user.orgNameID, false);
 		addComboxItem("到达城市", it1, true);
@@ -80,7 +81,14 @@ public class TransAddPanel extends ELSInfoPanel {
 				Double.valueOf(itemLabels.get(10).toString()), itemLabels.get(6).toString(),
 				itemLabels.get(7).toString(), itemLabels.get(2).toString(), itemLabels.get(3).toString(),
 				itemLabels.get(9).toString(), itemLabels.get(8).toString(), user.number);
+		System.out.println(goods.size());
+		if (goodsbl == null) {
+			System.out.println("null");
+		} else {
+			System.out.println("in");
+		}
 		for (int i = 0; i < goods.size(); i++) {
+			System.out.println(goods.get(i));
 			GoodsVO goodsvo = goodsbl.searchGoods(goods.get(i));
 			HistoryVO historyVO = new HistoryVO(itemLabels.get(5).toString(), UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type, true);
 			goodsvo.history.add(historyVO);
