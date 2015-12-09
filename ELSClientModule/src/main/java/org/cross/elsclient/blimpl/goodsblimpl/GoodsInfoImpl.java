@@ -118,7 +118,7 @@ public class GoodsInfoImpl implements GoodsInfo {
 			ArrayList<HistoryPO> histroy = goodsData.findHistory(pos.get(i).getOrderNum());
 			vos.add(toGoodsVO(pos.get(i),toHistroyVO(histroy)));
 		}
-		return null;
+		return vos;
 	}
 	
 	@Override
@@ -151,7 +151,9 @@ public class GoodsInfoImpl implements GoodsInfo {
 //		return 0;
 		double cost = 0;
 		Receipt_OrderVO order = (Receipt_OrderVO) receiptInfo.findByID(goodsID);
-		cost = order.cost;
+		if (order != null) {
+			cost = order.cost;
+		}
 		return cost;
 	}
 

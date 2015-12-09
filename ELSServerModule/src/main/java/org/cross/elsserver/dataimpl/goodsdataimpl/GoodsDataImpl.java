@@ -140,10 +140,15 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	}
 	
 	public static void main(String[] args) throws RemoteException{
-		GoodsPO goods = new GoodsPO(StockType.COMMON, City.NANJING,OrganizationType.BUSINESSHALL, GoodsState.LITTLEDIE, 20, 20, "100");
+		GoodsPO goods = new GoodsPO(StockType.COMMON, City.NANJING,OrganizationType.BUSINESSHALL, GoodsState.LITTLEDIE, 20, 20, "G009");
+		goods.setStockNum("null");
 		GoodsDataImpl impl = new GoodsDataImpl();
 		goods.setPlaceCity(City.BEIJING);
-		impl.update(goods);
+		if(impl.update(goods) == ResultMessage.SUCCESS) System.out.println("su");
+		else System.out.println("fa");
+		
+		ArrayList<GoodsPO> goodsPOs = impl.findByStockAreaNum("SA00002");
+		System.out.println(goodsPOs.size());
 	}
 
 }

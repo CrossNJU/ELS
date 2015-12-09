@@ -48,7 +48,7 @@ public class GoodsBLTest {
 
 		System.out.println("=======测试快件查询（findGoods）=======");
 		GoodsVO vo = goodsBLImpl.searchGoods("G002");
-		System.out.println(vo.number);
+//		System.out.println(vo.number);
 		ArrayList<HistoryVO> history = goodsBLImpl.findGoods("G001");
 		if (history == null) {
 			System.out.println("查找失败");

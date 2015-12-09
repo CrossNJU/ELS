@@ -195,7 +195,7 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 		StockOperationPO po = null;
 		try {
 			if (rs.next()) {
-				po = new StockOperationPO(rs.getString("time"), StringToType.toStockOperation(rs.getString("")),
+				po = new StockOperationPO(rs.getString("time"), StringToType.toStockOperation(rs.getString("opType")),
 						rs.getString("goodsNum"), rs.getDouble("money"),
 						StringToType.toGoodsType(rs.getString("stockType")), rs.getString("stockNum"),
 						rs.getString("stockAreaNum"));
@@ -210,7 +210,8 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 	@Override
 	public ArrayList<StockOperationPO> findStockOPByTimeAndStock(String stockNum, String startTime, String endTime)
 			throws RemoteException {
-		ArrayList<StockOperationPO> list = findStockOPByTime(startTime, endTime);
+		ArrayList<StockOperationPO> list = new ArrayList<StockOperationPO>();
+		list = findStockOPByTime(startTime, endTime);
 		for (int i = 0; i < list.size(); i++) {
 			StockOperationPO po = list.get(i);
 			if (po.getStockNum() != stockNum) {
@@ -223,10 +224,14 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 	public static void main(String[] args){
 		try {
 			StockDataImpl stockDataImpl = new StockDataImpl();
-			StockAreaPO po = stockDataImpl.findStockAreaByNumber("SA00001");
-			StockPO stockPO = stockDataImpl.findStockByNumber("S001");
-			System.out.println(po.getNumber() + " " + po.getStockType());
-			System.out.println(stockPO.getNumber());
+//			StockAreaPO po = stockDataImpl.findStockAreaByNumber("SA00001");
+//			StockPO stockPO = stockDataImpl.findStockByNumber("S001");
+//			System.out.println(po.getNumber() + " " + po.getStockType());
+//			System.out.println(stockPO.getNumber());
+			ArrayList<StockOperationPO> operationPOs = stockDataImpl.findStockOPByStock("S0032902");
+			ArrayList<StockAreaPO> areaPOs = stockDataImpl.findStockAreaByStock("S0032902");
+			System.out.println("areapo size  " + areaPOs.size());
+			System.out.println(operationPOs.size());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

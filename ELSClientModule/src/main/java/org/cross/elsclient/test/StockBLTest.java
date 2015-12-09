@@ -18,11 +18,8 @@ import org.cross.elsclient.blimpl.salaryblimpl.SalaryBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockInfoImpl;
 import org.cross.elsclient.network.Datafactory;
-import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockCheckVO;
-import org.cross.elsclient.vo.StockOperationVO;
-import org.cross.elsclient.vo.StockSeeVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.util.ResultMessage;
@@ -33,12 +30,12 @@ public class StockBLTest {
 	
 	public static void main(String[] args) throws RemoteException{
 		DataFactoryService dataFactoryService = new Datafactory();
-		GoodsInfo goodsInfo = new GoodsInfoImpl(dataFactoryService.getGoodsData());
+		ReceiptInfoImpl receiptInfo = new ReceiptInfoImpl(dataFactoryService.getReceiptData());
+		GoodsInfo goodsInfo = new GoodsInfoImpl(dataFactoryService.getGoodsData(),receiptInfo);
 		OrganizationInfo orgInfo = new OrganizationInfoImpl(dataFactoryService.getOrganizationData());
 		StockInfo stockInfo = new StockInfoImpl(goodsInfo, orgInfo, dataFactoryService.getStockData());
 		SalaryInfo salaryInfo = new SalaryBLImpl(dataFactoryService.getSalaryData());
 		PersonnelInfo personnelInfo = new PersonnelInfoImpl(dataFactoryService.getPersonnelData(), salaryInfo);
-		ReceiptInfoImpl receiptInfo = new ReceiptInfoImpl(dataFactoryService.getReceiptData());
 		receiptInfo.stockInfo = stockInfo;
 		receiptInfo.goodsInfo = goodsInfo;
 		StockBLImpl stockBLImpl = new StockBLImpl(dataFactoryService.getStockData(), goodsInfo, stockInfo, receiptInfo);
@@ -61,16 +58,10 @@ public class StockBLTest {
 		}else {
 			System.out.println("增加失败");
 		}
-//		System.out.println("=======测试删除仓库（addStock）=======");
-//		ResultMessage deleteMessage = stockBLImpl.deleteStock("S0002");
-//		if (deleteMessage == ResultMessage.SUCCESS) {
-//			System.out.println("删除成功");
-//		}else{
-//			System.out.println("删除失败");
-//		}
 		System.out.println("=======测试库存盘点（生成库存快照）（showStockCheck）=======");
-		ArrayList<StockCheckVO> checkVOs = stockBLImpl.showStockCheck("S001");
+		ArrayList<StockCheckVO> checkVOs = stockBLImpl.showStockCheck("S0032902");
 		int len = checkVOs.size();
+		System.out.println("size    " + len);
 		for (int i = 0; i < len; i++) {
 			System.out.println(checkVOs.get(i).goodsNumber + " " + checkVOs.get(i).inTime + " " + checkVOs.get(i).targetCity + " " +
 					checkVOs.get(i).stockAreaNum);
@@ -82,23 +73,23 @@ public class StockBLTest {
 		}else {
 			System.out.println("can not find it...");
 		}
-		System.out.println("=======测试库存查看（showStockInfo）=======");
-		StockSeeVO seeVO = stockBLImpl.showStockInfo("S001", "2015/10/23 10:12:01", "2015/10/12 10:20:01");
-		System.out.println(seeVO.goodsIn + " " + seeVO.goodsOut);
-		System.out.println(seeVO.moneyIn + " " + seeVO.moneyOut);
-		ArrayList<GoodsVO> goods = seeVO.goods;
-		
-		if(goods!=null) System.out.println(goods.size());
-//		System.out.println("=======测试快件入库（intoStock）=======");
-//		ResultMessage intoStockMessage = stockBLImpl.intoStock("G001", "S0032902","2015-11-2 11:37:21","SA00002");
-//		if (intoStockMessage == ResultMessage.SUCCESS) {
-//			System.out.println("入库成功");
-//		}else {
-//			System.out.println("入库失败");
-//		}
+//		System.out.println("=======测试库存查看（showStockInfo）=======");
+//		StockSeeVO seeVO = stockBLImpl.showStockInfo("S001", "2015/10/23 10:12:01", "2015/10/12 10:20:01");
+//		System.out.println(seeVO.goodsIn + " " + seeVO.goodsOut);
+//		System.out.println(seeVO.moneyIn + " " + seeVO.moneyOut);
+//		ArrayList<GoodsVO> goods = seeVO.goods;
 //		
+//		if(goods!=null) System.out.println(goods.size());
+		System.out.println("=======测试快件入库（intoStock）=======");
+		ResultMessage intoStockMessage = stockBLImpl.intoStock("R0000002", "S0032902","2015-11-2 11:37:42","SA00002");
+		if (intoStockMessage == ResultMessage.SUCCESS) {
+			System.out.println("入库成功");
+		}else {
+			System.out.println("入库失败");
+		}
+		
 //		System.out.println("=======测试快件出库（outStock）=======");
-//		ResultMessage outStockMessage = stockBLImpl.outStock("G002", "S0002","2015-11-2 11:34:19");
+//		ResultMessage outStockMessage = stockBLImpl.outStock("R0000002", "S0032902","2015-11-3 11:44:19");
 //		if (outStockMessage == ResultMessage.SUCCESS) {
 //			System.out.println("出库成功");
 //		}else {
@@ -107,7 +98,7 @@ public class StockBLTest {
 		
 		System.out.println("=======测试查询特定仓库容量信息（stockCapacity）=======");
 		int total = 0,used = 0;
-		ArrayList<StockAreaVO> stockAreaVOs = stockBLImpl.stockCapacity("S001", StockType.COMMON);
+		ArrayList<StockAreaVO> stockAreaVOs = stockBLImpl.stockCapacity("S0032902", StockType.COMMON);
 		if (stockAreaVOs == null) {
 			System.out.println("未找到该仓库中的该区域");
 		}else {
@@ -123,17 +114,17 @@ public class StockBLTest {
 				System.out.println("已用百分比为 ： " + (double)used*100/total + "%");
 		}
 		System.out.println("=======测试库存报警（StockAlert）=======");
-		StockState state = stockBLImpl.stockAlert("S001", StockType.Fast);
+		StockState state = stockBLImpl.stockAlert("S0032902", StockType.Fast);
 		System.out.println(state.toString());
 		System.out.println("=======测试库存调整（StockAdjust）=======");
-		ResultMessage adjustMessage = stockBLImpl.stockAdjust("S0032902", StockType.Fast);
+		ResultMessage adjustMessage = stockBLImpl.stockAdjust("SA00002", StockType.Fast);
 		if (adjustMessage == ResultMessage.SUCCESS) {
 			System.out.println("调整成功");
 		}else {
 			System.out.println("调整失败");
 		}
 		System.out.println("=======测试得到可调整的仓库（getChangeableArea）=======");
-		ArrayList<String> changeable = stockBLImpl.getChangeableArea("S001");
+		ArrayList<String> changeable = stockBLImpl.getChangeableArea("S0032902");
 		if (changeable != null) {
 			int size3 = changeable.size();
 			for (int i = 0; i < size3; i++) {

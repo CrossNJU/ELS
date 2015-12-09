@@ -44,19 +44,30 @@ public class StockBLImpl implements StockBLService {
 	@Override
 	public ArrayList<StockCheckVO> showStockCheck(String stockID)
 			throws RemoteException {
-		Calendar c = Calendar.getInstance();
-		SimpleDateFormat smd = new SimpleDateFormat("y-MM-dd");
-		String time = smd.format(c.getTime());
+//		Calendar c = Calendar.getInstance();
+//		SimpleDateFormat smd = new SimpleDateFormat("y-MM-dd");
+//		String time = smd.format(c.getTime());
 		ArrayList<StockCheckVO> checkVOs = new ArrayList<StockCheckVO>();
 		ArrayList<StockOperationPO> operationPOs = stockData
-				.findStockOPByTimeAndStock(stockID, time, time);
+				.findStockOPByStock(stockID);
 
 		ArrayList<StockAreaPO> areaPO = stockData.findStockAreaByStock(stockID);
 		int size = areaPO.size();
+		
+		System.out.println("ssssssssssize  " + size);
+		
 		for (int i = 0; i < size; i++) {
+		
+			System.out.println("areaPO num " + areaPO
+					.get(i).getNumber());
+			
 			ArrayList<GoodsVO> goodsPOs = goodsInfo.findGoodsFromArea(areaPO
 					.get(i).getNumber());
+			
 			if(goodsPOs == null) continue;
+			
+			System.out.println("goodspo size " + goodsPOs.size());
+			
 			int size1 = goodsPOs.size();
 			for (int j = 0; j < size1; j++) {
 				String inTime = "";
@@ -64,8 +75,16 @@ public class StockBLImpl implements StockBLService {
 					if (operationPOs.get(j2).getGoodsNum() == goodsPOs.get(j).number)
 						inTime = operationPOs.get(i).getTime();
 				}
+				
+				
 				Receipt_OrderVO order = (Receipt_OrderVO) receiptInfo
 						.findByID(goodsPOs.get(j).number);
+				if (order == null) {
+					continue;
+				}
+				
+				System.out.println("ooooooooorder      " + order.number);
+				
 				String targetCity = order.receiverAdd;
 				StockCheckVO check = new StockCheckVO(goodsPOs.get(j).number,
 						inTime, targetCity, areaPO.get(i).getNumber());
@@ -127,9 +146,9 @@ public class StockBLImpl implements StockBLService {
 			return null;
 		}
 		int size = po.size();
-		System.out.println("size           " + size);
+//		System.out.println("size           " + size);
 		for (int i = 0; i < size; i++) {
-			System.out.println(type.toString() + "nnn");
+//			System.out.println(type.toString() + "nnn");
 			if (po.get(i) != null) {
 				System.out.println(po.get(i).getStockType());
 			}
@@ -152,9 +171,10 @@ public class StockBLImpl implements StockBLService {
 			return ResultMessage.FAILED;
 		}
 		String areaNum = goodsInfo.findStockAreaNum(goodsID);
-		if (areaNum != null)
+		if ((areaNum != null)&&(!areaNum.equals("null")))
 			return ResultMessage.FAILED;
 		StockPO stockPO = stockData.findStockByNumber(stockID);
+		
 		if (stockPO == null) {
 			return ResultMessage.FAILED;
 		}
@@ -185,6 +205,7 @@ public class StockBLImpl implements StockBLService {
 		stockPO.setMoneyIn(stockPO.getMoneyIn() + goodsInfo.getCost(goodsID));
 		stockPO.setNumIn(stockPO.getNumIn() + 1);
 		stockPO.setNumInStock(stockPO.getNumInStock() + 1);
+		updateMessage = stockData.updateStock(stockPO);
 		if (updateMessage != ResultMessage.SUCCESS)
 			return ResultMessage.FAILED;
 
@@ -198,15 +219,23 @@ public class StockBLImpl implements StockBLService {
 		String areaNum = goodsInfo.findStockAreaNum(goodsID);
 		if (areaNum == null)
 			return ResultMessage.FAILED;
+		
 		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
 		if (goodsVO == null)
 			return ResultMessage.FAILED;
 		StockAreaPO areaPO = stockData.findStockAreaByNumber(areaNum);
 		if (areaPO == null)
 			return ResultMessage.FAILED;
-		if (areaPO.getStockNum() != stockID) {
+		
+		System.out.println("areapo stockNum     " + areaPO.getStockNum());
+		
+		if (!areaPO.getStockNum().equals(stockID)) {
 			return ResultMessage.FAILED;
 		}
+		
+		
+		
+		
 		StockOperationPO operationPO = new StockOperationPO(time,
 				StockOperationType.STOCKOUT, goodsID,
 				goodsInfo.getCost(goodsID), goodsVO.goodsType, stockID, areaNum);
@@ -215,8 +244,8 @@ public class StockBLImpl implements StockBLService {
 			return ResultMessage.FAILED;
 
 		GoodsPO goodsPO = goodsInfo.toGoodsPO(goodsVO);
-		goodsPO.setStockAreaNum(null);
-		goodsPO.setStockNum(null);
+		goodsPO.setStockAreaNum("null");
+		goodsPO.setStockNum("null");
 		stockOut = goodsInfo.updateGoods(goodsPO);
 		if (stockOut != ResultMessage.SUCCESS)
 			return ResultMessage.FAILED;
@@ -229,7 +258,7 @@ public class StockBLImpl implements StockBLService {
 		StockPO stockPO = stockData.findStockByNumber(stockID);
 		stockPO.setMoneyOut(stockPO.getMoneyOut() + goodsInfo.getCost(goodsID));
 		stockPO.setNumOut(stockPO.getNumOut() + 1);
-		stockPO.setUsedAreas(stockPO.getUsedAreas() - 1);
+		stockPO.setNumInStock(stockPO.getNumInStock() - 1);
 		stockOut = stockData.updateStock(stockPO);
 		if (stockOut != ResultMessage.SUCCESS)
 			return ResultMessage.FAILED;
