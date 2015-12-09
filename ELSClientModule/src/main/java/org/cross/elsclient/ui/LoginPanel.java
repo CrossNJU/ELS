@@ -61,6 +61,7 @@ public class LoginPanel extends ELSPanel{
 		init();
 		ConstantVal.CONSTANT = new ConstantVO();
 		ConstantVal.constantbl = ConstantVal.getConstant();
+		ConstantVal.numberbl = ConstantVal.getNumber();
 	}
 	public void init(){
 		
@@ -71,7 +72,13 @@ public class LoginPanel extends ELSPanel{
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		userbl = new UserBLService_Stub();
+		try {
+			BLFactoryService blFactory = new BLFactoryImpl();
+			userbl = blFactory.getUserBLService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
@@ -155,7 +162,7 @@ public class LoginPanel extends ELSPanel{
 			type = userbl.login(id, pw);
 			if(type!=null){
 				UIConstant.CURRENT_USER = userbl.findById(id);
-				System.out.println(UIConstant.CURRENT_USER);
+//				System.out.println(UIConstant.CURRENT_USER);
 			}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();

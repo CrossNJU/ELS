@@ -123,8 +123,28 @@ public class MoneyInManagePanel extends ELSManagePanel {
 				} else if (((String) modeBox.getSelectedItem()).equals("按时间查询")) {
 
 				} else if (((String) modeBox.getSelectedItem())
-						.equals("按营业厅查询")) {
-					
+						.equals("按营业厅查找")) {
+					String orgNum = searchTextField.getText();
+					moneyInVOs = new ArrayList<>();
+					try {
+						moneyInVOs = receiptbl.findByOrgan(orgNum);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					for (ReceiptVO receipt : moneyInVOs) {
+						if(receipt instanceof Receipt_MoneyInVO){
+							Receipt_MoneyInVO receipt_MoneyInVO = (Receipt_MoneyInVO) receipt;
+							String[] item = { "" + receipt.number,
+									receipt.time,
+									receipt_MoneyInVO.money+"" };
+							list.addItemLabel(item);
+						}else{
+							moneyInVOs.remove(receipt);
+						}
+					}
+					list.validate();
+					container.packHeight();
 				}
 			}
 			if (e.getSource() == addBtn) {

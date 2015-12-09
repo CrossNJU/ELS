@@ -8,6 +8,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_MoneyOutVO;
@@ -38,8 +39,8 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 		addEditableItem("付款金额", "", true, InfoType.NUM);
 		addDateItem("付款时间", true);
 		addEditableItem("备注", "", true, InfoType.NAME);
-		addEditableItem("建单人", "", true,InfoType.ID);
-		addEditableItem("所属机构", "", true,InfoType.ID);
+		addEditableItem("建单人",UIConstant.CURRENT_USER.number, false,InfoType.ID);
+		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false,InfoType.ID);
 		
 		titlePanel.backBtn.setVisible(false);
 //		titleLabel.setLocation(10, titleLabel.getLocation().y);
