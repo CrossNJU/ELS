@@ -40,6 +40,7 @@ public class ReceiptManagePanel extends ELSManagePanel{
 	@Override
 	public void setContentPanel(){
 		super.setContentPanel();
+		System.out.println("in");
 		String[] s = {"单据编号","单据类型","建单时间","单据状态"};
 		int[] itemWidth = {200,100,200,100};
 		list = new ReceiptManageTable(s, itemWidth,receiptbl);

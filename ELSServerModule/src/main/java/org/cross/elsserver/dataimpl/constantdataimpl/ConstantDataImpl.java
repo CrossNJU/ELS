@@ -30,14 +30,14 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 	}
 
 	@Override
-	public ResultMessage update(ConstantPO po) {
+	public ResultMessage update(ConstantPO po) throws RemoteException{
 		String sql = "delete from `constant` where 1";
 		mysql.execute(sql);
 		return insert(po);
 	}
 
 	@Override
-	public ConstantPO show() {
+	public ConstantPO show() throws RemoteException{
 		ResultSet rs = mysql.query("select * from `constant`");
 		return getFromDB(rs);
 	}
@@ -95,7 +95,7 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 	}
 
 	
-	public static void main(String [] args){
+	public static void main(String [] args) throws RemoteException{
 		ConstantPO po = new ConstantPO();
 		ConstantDataImpl impl = null;
 		try {

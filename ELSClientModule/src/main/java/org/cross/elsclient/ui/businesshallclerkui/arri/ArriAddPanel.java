@@ -12,6 +12,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.Receipt_ArriveVO;
@@ -52,7 +53,7 @@ public class ArriAddPanel extends ELSInfoPanel {
 		String it1[] = { "南京", "北京", "上海", "广州" };
 
 		setTitle("新增到达单");
-		/* 0 */addEditableItem("到达单编号", numberbl.getPostNumber(NumberType.RECEIPT), false);
+		/* 0 */addEditableItem("到达单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
 		/* 1 */addEditableItem("装车/中转单号", "", true);
 		/* 2 */addComboxItem("出发地", it1, true);
 		/* 3 */addDateItem("出发时间", true);
