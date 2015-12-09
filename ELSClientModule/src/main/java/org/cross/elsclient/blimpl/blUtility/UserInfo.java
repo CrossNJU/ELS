@@ -9,4 +9,5 @@ public interface UserInfo {
 	
 	public UserPO toUserPO(UserVO vo);
 	
+	public UserVO findUserByNum(String number);
 }

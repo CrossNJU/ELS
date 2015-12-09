@@ -117,7 +117,7 @@ public class BLFactoryImpl implements BLFactoryService{
 		this.initialDataService = dataFactoryService.getinInitialData();
 		this.logDataService = dataFactoryService.getlogData();
 		
-		this.userInfo = new UserInfoImpl();
+		this.userInfo = new UserInfoImpl(userDataService);
 		this.receiptInfo = new ReceiptInfoImpl(receiptDataService);
 		this.goodsInfo = new GoodsInfoImpl(goodsDataService);
 		this.stockInfo = new StockInfoImpl(stockDataService);
@@ -130,6 +130,7 @@ public class BLFactoryImpl implements BLFactoryService{
 		this.initialInfo = new InitialInfoImpl(organizationInfo, personnelInfo, vehicleInfo, stockInfo, accountInfo);
 		this.initialInfo.initdata = initialDataService;
 		this.initialInfo.sal = salaryDataService;
+		this.initialInfo.userinfo = userInfo;
 		this.logInfo = new LogInfoImpl();
 		
 		this.receiptInfo.goodsInfo = this.goodsInfo;

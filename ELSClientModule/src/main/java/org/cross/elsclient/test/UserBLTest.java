@@ -20,7 +20,7 @@ public class UserBLTest {
 
 	public static void main(String[] args) throws RemoteException {
 		DataFactoryService dataFactory = new Datafactory();
-		UserInfo userInfo = new UserInfoImpl();
+		UserInfo userInfo = new UserInfoImpl(dataFactory.getuserdaData());
 		UserBLImpl userBLImpl = new UserBLImpl(dataFactory.getuserdaData(),
 				userInfo);
 

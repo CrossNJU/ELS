@@ -7,12 +7,15 @@ import org.cross.elsclient.blimpl.blUtility.AccountInfo;
 import org.cross.elsclient.blimpl.blUtility.OrganizationInfo;
 import org.cross.elsclient.blimpl.blUtility.PersonnelInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
+import org.cross.elsclient.blimpl.blUtility.UserInfo;
 import org.cross.elsclient.blimpl.blUtility.VehicleInfo;
+import org.cross.elsclient.blimpl.userblimpl.UserInfoImpl;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.InitialVO;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.StockVO;
+import org.cross.elsclient.vo.UserVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.dataservice.initialdataservice.InitialDataService;
 import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
@@ -30,6 +33,7 @@ public class InitialInfoImpl implements InitialInfo {
 	public VehicleInfo vehicleInfo;
 	public StockInfo stockInfo;
 	public AccountInfo accountInfo;
+	public UserInfo userinfo;
 	
 	public InitialDataService initdata;
 	public SalaryDataService sal;
@@ -80,7 +84,8 @@ public class InitialInfoImpl implements InitialInfo {
 		for (int i = 0; i < accpos.size(); i++) {
 			accountVOs.add(accountInfo.toAccountVO(accpos.get(i)));
 		}
-		String perName = personnelInfo.findNameById(po.getPerNum());
+		UserVO uservo = userinfo.findUserByNum(po.getPerNum());
+		String perName = uservo.name;
 		InitialVO vo = new InitialVO(po.getNumber(), po.getName(), orgVOs, personnelVOs, vehicleVOs, stockVOs, accountVOs, po.getTime(), perName, po.getPerNum());
 		return vo;
 	}
