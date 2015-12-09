@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.managerui.constant;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.rmi.RemoteException;
 
@@ -7,7 +8,9 @@ import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.component.InfoItemLabel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.ConstantVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.ResultMessage;
@@ -37,7 +40,11 @@ public class ConstantUpdatePanel extends ELSInfoPanel {
 		addEditableItem("广州-上海", vo.distance_Shanghai_Guangzhou+"",true,InfoType.NUM);
 		addNormalItem("", "");
 		addEditableItem("价格(元/(kilo*kg))", vo.price+"",true,InfoType.NUM);
-		addEditableItem("预估每公里所花时间(hour/km)", vo.timeBykilo+"",true,InfoType.NUM);
+		addEditableItem("预估时间(hour/km)", vo.timeBykilo+"",true,InfoType.NUM);
+		
+		for (InfoItemLabel infoItemLabel : itemLabels) {
+			infoItemLabel.nameLabel.setMaximumSize(new Dimension(170, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		}
 	
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认修改");

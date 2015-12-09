@@ -7,8 +7,10 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 
@@ -30,7 +32,7 @@ public class OrganizationAddPanel extends ELSInfoPanel{
 		String[] area = {"北京","上海", "南京","广州"};
 		
 		setTitle("机构详细信息");
-		addEditableItem("机构编号", "",true,InfoType.NUM);
+		addEditableItem("机构编号", ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION),true,InfoType.NUM);
 		addComboxItem("机构地区", area, true);
 		addComboxItem("机构类型", types,true);
 		

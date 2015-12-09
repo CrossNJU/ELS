@@ -62,36 +62,37 @@ public class GoodsCheckPanel extends ELSManagePanel{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-			Collections.sort(historyVOs, new Comparator<HistoryVO>() {
+			if(!historyVOs.isEmpty()){
+				Collections.sort(historyVOs, new Comparator<HistoryVO>() {
 
-				@Override
-				public int compare(HistoryVO o1, HistoryVO o2) {
-					SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
-					Date date1;
-					Date date2;
-					if(o1.time==null){
-						return 1;
-					}else if(o2.time==null){
-						return -1;
+					@Override
+					public int compare(HistoryVO o1, HistoryVO o2) {
+						SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
+						Date date1;
+						Date date2;
+						if(o1.time==null){
+							return 1;
+						}else if(o2.time==null){
+							return -1;
+						}
+						
+						try {
+							date1 = sdf.parse(o1.time);
+							date2 = sdf.parse(o2.time);
+							return date1.compareTo(date2);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return 0;
 					}
-					
-					try {
-						date1 = sdf.parse(o1.time);
-						date2 = sdf.parse(o2.time);
-						return date1.compareTo(date2);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					return 0;
+				});
+				list.init();
+				for(int i = 0;i<historyVOs.size();i=i+2){
+					list.addItem(historyVOs.get(i), historyVOs.get(i+1));
 				}
-			});
-			
-			for(int i = 0;i<historyVOs.size();i=i+2){
-				list.addItem(historyVOs.get(i), historyVOs.get(i+1));
+				container.packHeight();
 			}
-			container.packHeight();
 		}
 
 		@Override

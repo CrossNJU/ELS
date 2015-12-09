@@ -80,7 +80,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 		try {
 			while (rs.next()) {
 				OrganizationPO org = new OrganizationPO(StringToType.toCity(rs.getString("city")),
-						rs.getString("number"), StringToType.toOrg(rs.getString("number")));
+						rs.getString("number"), StringToType.toOrg(rs.getString("type")));
 				orgs.add(org);
 			}
 		} catch (SQLException e) {

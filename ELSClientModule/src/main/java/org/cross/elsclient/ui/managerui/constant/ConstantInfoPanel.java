@@ -48,7 +48,7 @@ public class ConstantInfoPanel extends ELSInfoPanel{
 		
 		addNormalItem("", "");
 		addNormalItem("价格", vo.price+"元/(kilo*kg)");
-		addNormalItem("预估每公里所花时间", vo.timeBykilo+"hour/km");
+		addNormalItem("预估时间", vo.timeBykilo+"hour/km");
 		
 		addConfirmAndCancelBtn();
 		titlePanel.remove(titlePanel.backBtn);

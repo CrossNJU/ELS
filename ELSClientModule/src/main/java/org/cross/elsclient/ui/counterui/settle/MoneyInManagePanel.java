@@ -127,21 +127,23 @@ public class MoneyInManagePanel extends ELSManagePanel {
 					String orgNum = searchTextField.getText();
 					moneyInVOs = new ArrayList<>();
 					try {
-						moneyInVOs = receiptbl.findByOrgan(orgNum);
+						ArrayList<ReceiptVO> tempvos = receiptbl.findByOrgan(orgNum);
+						for (ReceiptVO receiptVO : tempvos) {
+							if(receiptVO instanceof Receipt_MoneyInVO){
+								moneyInVOs.add(receiptVO);
+							}
+						}
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					list.init();
 					for (ReceiptVO receipt : moneyInVOs) {
-						if(receipt instanceof Receipt_MoneyInVO){
-							Receipt_MoneyInVO receipt_MoneyInVO = (Receipt_MoneyInVO) receipt;
-							String[] item = { "" + receipt.number,
-									receipt.time,
-									receipt_MoneyInVO.money+"" };
-							list.addItemLabel(item);
-						}else{
-							moneyInVOs.remove(receipt);
-						}
+						Receipt_MoneyInVO receipt_MoneyInVO = (Receipt_MoneyInVO) receipt;
+						String[] item = { "" + receipt.number,
+								receipt.time,
+								receipt_MoneyInVO.money+"" };
+						list.addItemLabel(item);
 					}
 					list.validate();
 					container.packHeight();

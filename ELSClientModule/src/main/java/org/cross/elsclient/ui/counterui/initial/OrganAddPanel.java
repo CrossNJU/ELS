@@ -32,7 +32,7 @@ public class OrganAddPanel extends ELSInfoPanel{
 		String organs[] = OrganizationType.toStrings();
 		
 		setTitle("新增机构");
-		addEditableItem("机构编号", ConstantVal.getNumber().getPostNumber(NumberType.ORGANIZATION),false);
+		addEditableItem("机构编号", ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION),false);
 		addComboxItem("地区", citys, true);
 		addComboxItem("机构", organs, true);
 	

@@ -78,7 +78,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 		titlePanel.backBtn.addMouseListener(new BtnListener());
 
 		infoPanel.setSize(getWidth(), 20);
-		infoPanel.setLocation(0, 70);
+		infoPanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, 70);
 
 
 		container.add(titlePanel);
@@ -219,21 +219,21 @@ public class ELSInfoPanel extends ELSScrollPane {
 		// itemLabel.setOpaque(true);
 		// itemLabel.setBackground(Color.white);
 
-		confirmBtn.setPreferredSize(new Dimension(100, 50));
-		confirmBtn.setMaximumSize(new Dimension(100, 50));
-		confirmBtn.setMinimumSize(new Dimension(100, 50));
+		confirmBtn.setPreferredSize(new Dimension(141, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		confirmBtn.setMaximumSize(new Dimension(141,  UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		confirmBtn.setMinimumSize(new Dimension(141,  UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		confirmBtn.addMouseListener(new BtnListener());
 		confirmBtn.setColor(UIConstant.COMFIRM_BTN_COLOR);
 
-		cancelBtn.setPreferredSize(new Dimension(100, 50));
-		cancelBtn.setMaximumSize(new Dimension(100, 50));
-		cancelBtn.setMinimumSize(new Dimension(100, 50));
+		cancelBtn.setPreferredSize(new Dimension(141, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		cancelBtn.setMaximumSize(new Dimension(141,  UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		cancelBtn.setMinimumSize(new Dimension(141,  UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		cancelBtn.addMouseListener(new BtnListener());
 		cancelBtn.setColor(UIConstant.NORMAL_BTN_COLOR);
 		
-		itemLabel.add(Box.createHorizontalStrut(20));
+		itemLabel.add(Box.createHorizontalStrut(8));
 		itemLabel.add(confirmBtn);
-		itemLabel.add(Box.createHorizontalStrut(20));
+		itemLabel.add(Box.createHorizontalStrut(8));
 		itemLabel.add(cancelBtn);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()

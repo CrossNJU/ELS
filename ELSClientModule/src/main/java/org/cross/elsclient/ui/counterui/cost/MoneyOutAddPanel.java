@@ -32,7 +32,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("创建付款单");
-		addEditableItem("付款单编号", ConstantVal.getNumber().getPostNumber(NumberType.RECEIPT), false);
+		addEditableItem("付款单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("条目", "", true, InfoType.NAME);
 		addEditableItem("付款人", "", true,InfoType.NAME);
 		addEditableItem("付款账号", "", true,InfoType.NUM);

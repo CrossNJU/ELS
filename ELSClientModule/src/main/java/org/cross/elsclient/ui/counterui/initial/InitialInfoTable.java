@@ -23,7 +23,7 @@ public class InitialInfoTable extends InitialManageTable{
 	public void refresh() {
 		removeAll();
 		init();
-		String item[] = {vo.id,vo.initialName,vo.time};
+		String item[] = {vo.id,vo.perNumber,vo.time};
 		if(isEditable){
 			label = new EditTableItemLabel();
 			label.init(item, itemWidth);

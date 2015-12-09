@@ -38,7 +38,7 @@ public class TotalAddPanel extends ELSInfoPanel{
 		}
 		
 		setTitle("创建总收款款单");
-		addEditableItem("总收款单编号", ConstantVal.getNumber().getPostNumber(NumberType.RECEIPT), false, InfoType.NAME);
+		addEditableItem("总收款单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false, InfoType.NAME);
 		addEditableItem("收款单数量", ""+vos.size(), false, InfoType.NAME);
 		addEditableItem("收款人", "", true,InfoType.NAME);
 //		addEditableItem("收款账号", "", true,InfoType.NUM);

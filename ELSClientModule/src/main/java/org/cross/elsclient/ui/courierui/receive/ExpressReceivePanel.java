@@ -14,6 +14,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.CalcuteUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.util.TimeUtil;
@@ -47,7 +48,7 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		String packType[] = {"纸箱(5元)","木箱(10元)","快递袋(1元)"};
 		
 		setTitle("创建快件单");
-		addEditableItem("快件单编号", ConstantVal.getNumber().getPostNumber(NumberType.RECEIPT), false);
+		addEditableItem("快件单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("寄件人姓名", "", true);
 		addEditableItem("寄件人地址", "", true);
 		addEditableItem("寄件人单位", "", true);
@@ -69,9 +70,9 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		addComboxItem("包装类型",packType, true);
 		addEditableItem("价格", "", false);
 		addEditableItem("预计到达时间", "", false);
-		addEditableItem("建单人编号", "", false,InfoType.ID);
+		addEditableItem("建单人编号", UIConstant.CURRENT_USER.number, false,InfoType.ID);
 		//20
-		addEditableItem("所属机构", "", false,InfoType.ID);
+		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false,InfoType.ID);
 		
 		itemLabels.get(15).inputLabel.addFocusListener(new PriceListener());
 		itemLabels.get(11).comboBox.addItemListener(new PriceItemListener());

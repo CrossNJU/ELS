@@ -31,6 +31,8 @@ public class Images {
 	public final static ImageIcon EXIT_IMAGEICON = createImageIcon("img/icons/Common/Icon Close.png");
 	public final static ImageIcon ADD_IMAGEICON = createImageIcon("img/icons/Common/Icon Add.png");
 	
+	public final static ImageIcon USER_FUNC_ICON = createImageIcon("img/icons/Nav/Icon People.png");
+	
 	public static ImageIcon getImageIcon(String name){
 		switch (name) {
 		case "back":
@@ -39,7 +41,8 @@ public class Images {
 			return UPDATE_IMAGEICON;
 		case "delete":
 			return DELETE_IMAGEICON;
-			
+		case "user":
+			return USER_FUNC_ICON;
 		default:
 			return null;
 		}

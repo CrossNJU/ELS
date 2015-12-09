@@ -21,6 +21,8 @@ import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ApproveType;
+import org.cross.elscommon.util.ReceiptType;
+import org.cross.elscommon.util.StringToType;
 import org.cross.elscommon.util.UserType;
 
 
@@ -58,7 +60,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 		typeCombobox = ComponentFactory.createSearchBox();
 
 		// 设置搜索模式
-		String[] s = { "按单据编号查找", "按单据类型查找" };
+		String[] s = {"所有单据","按单据编号查找", "按单据类型查找" };
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
 		modeBox.addItemListener(new ModeBoxItemListener());
 
@@ -80,6 +82,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 		searchPanel.add(checkBtn);
 		
 		searchPanel.add(typeCombobox,3);
+		searchTextField.setEditable(false);
 		searchPanel.validate();
 		
 	}
@@ -95,8 +98,10 @@ public class ApprovalManagePanel extends ELSManagePanel {
 					String id = searchTextField.getText();
 					receiptVOs = new ArrayList<>();
 					try {
-//						userVOs.add(userbl.findById(id));
-						receiptVOs.add(receiptbl.findByID(id));
+						ReceiptVO vo = receiptbl.findByID(id);
+						if(vo!=null){
+							receiptVOs.add(vo);
+						}
 					} catch (RemoteException e1) {
 						e1.printStackTrace();
 					}
@@ -108,6 +113,19 @@ public class ApprovalManagePanel extends ELSManagePanel {
 				}else if(((String)modeBox.getSelectedItem()).equals("按单据类型查找")){
 					String type = (String)typeCombobox.getSelectedItem();
 					receiptVOs = new ArrayList<>();
+					ReceiptType receiptType = StringToType.toReceiptType((String)typeCombobox.getSelectedItem());
+					try {
+						receiptVOs = receiptbl.findByType(receiptType);
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
+					list.init();
+					for (ReceiptVO receiptVO : receiptVOs) {
+						list.addItem(receiptVO);
+					}
+					container.packHeight();
+				}else if(((String)modeBox.getSelectedItem()).equals("所有单据")){
+					receiptVOs = new ArrayList<>();
 					try {
 						receiptVOs = receiptbl.show();
 					} catch (RemoteException e1) {
@@ -118,7 +136,6 @@ public class ApprovalManagePanel extends ELSManagePanel {
 						list.addItem(receiptVO);
 					}
 					container.packHeight();
-				}else {
 				}
 			}
 			if (e.getSource() == checkBtn){
@@ -174,14 +191,16 @@ public class ApprovalManagePanel extends ELSManagePanel {
 				switch (item) {
 				case "按单据编号查找":
 					searchTextField.setVisible(true);
+					searchTextField.setEditable(true);
 					typeCombobox.setVisible(false);
 					break;
 				case "按单据类型查找":
 					searchTextField.setVisible(false);
 					typeCombobox.setVisible(true);
 					break;
-				case "按建单时间查找":
-					searchTextField.setVisible(false);
+				case "所有单据":
+					searchTextField.setVisible(true);
+					searchTextField.setEditable(false);
 					typeCombobox.setVisible(false);
 					break;
 				default:

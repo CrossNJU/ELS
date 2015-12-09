@@ -11,7 +11,12 @@ import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
+import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
+import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
+import org.cross.elsclient.blservice.stockblservice.StockBLService;
+import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSLabel;
@@ -21,6 +26,7 @@ import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
+import org.cross.elsclient.util.TimeUtil;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.InitialVO;
 import org.cross.elsclient.vo.OrganizationVO;
@@ -75,7 +81,9 @@ public class InitialAddPanel extends InitialManagePanel{
 			initialManageTable.addBtn.setVisible(true);
 		}
 		
-		currentVO.id = ConstantVal.getNumber().getPostNumber(NumberType.INITIAL);
+		currentVO.id = ConstantVal.numberbl.getPostNumber(NumberType.INITIAL);
+		currentVO.perNumber = UIConstant.CURRENT_USER.number;
+		currentVO.time = TimeUtil.getCurrentTime();
 		infoList.isEditable = true;
 		infoList.refresh();
 		infoList.addBtn.setVisible(false);
@@ -89,7 +97,8 @@ public class InitialAddPanel extends InitialManagePanel{
 			if(e.getSource()==searchBtn){
 				try {
 					currentVO.id = infoList.label.labels.get(0).getText();
-					currentVO.initialName = infoList.label.labels.get(1).getText();
+					currentVO.initialName = searchTextField.getText();
+					currentVO.perNumber = infoList.label.labels.get(1).getText();
 					currentVO.time = infoList.label.labels.get(2).getText();
 					if(initialbl.addInitial(currentVO)==ResultMessage.SUCCESS){
 						ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, 3);

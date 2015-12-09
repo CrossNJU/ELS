@@ -2,12 +2,15 @@ package org.cross.elsclient.ui.component;
 
 import java.awt.Color;
 
+import org.cross.elsclient.ui.util.Images;
 import org.cross.elsclient.ui.util.UIConstant;
 
 public class FunctionBtn extends ELSButton {
 	Color archiveColor;
 	Color archiveFont;
 	public boolean isArchive;
+	ELSLabel text;
+	ELSLabel icon;
 	
 	@Override
 	public void init() {
@@ -30,5 +33,11 @@ public class FunctionBtn extends ELSButton {
 			setBackground(backColor);
 			setForeground(Color.white);
 		}
+	}
+	
+	@Override
+	public void setName(String name) {
+		super.setName(name);
+		setIcon(Images.getImageIcon(name));
 	}
 }

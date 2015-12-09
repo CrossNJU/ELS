@@ -24,7 +24,7 @@ public class ApprovalInfoPanel extends ELSInfoPanel {
 	@Override
 	public void init() {
 		super.init();
-		
+		setTitle("审批单据");
 		addNormalItem("单据编号", vo.number);
 		addNormalItem("单据类型", vo.type.toString());
 		addNormalItem("建单时间", vo.time);

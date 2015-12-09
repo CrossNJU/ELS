@@ -29,7 +29,7 @@ public class VehicleAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("新增车辆");
-		addEditableItem("车牌编号", ConstantVal.getNumber().getPostNumber(NumberType.VEHICLE),true,InfoType.NUM);
+		addEditableItem("车牌编号", ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE),true,InfoType.NUM);
 		addEditableItem("车牌号", "",true,InfoType.NUM);
 		addEditableItem("营业厅编号", "",true,InfoType.NUM);
 		addDateItem("购买时间",true);

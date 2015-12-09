@@ -36,6 +36,7 @@ import org.cross.elsclient.ui.counterui.CounterFunctionPanel;
 import org.cross.elsclient.ui.courierui.CourierFunctionPanel;
 import org.cross.elsclient.ui.courierui.goodscheck.GoodsCheckPanel;
 import org.cross.elsclient.ui.managerui.ManagerFunctionPanel;
+import org.cross.elsclient.ui.publicui.CheckFunctionPanel;
 import org.cross.elsclient.ui.stockkeeperui.StockFunctionPanel;
 import org.cross.elsclient.ui.transitcenterclerkui.TransmitFunctionPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
@@ -225,7 +226,12 @@ public class LoginPanel extends ELSPanel{
 				login();
 			}else {
 				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
-				parentContainer.add("check",new GoodsCheckPanel(new GoodsBLService_Stub()));
+				try {
+					parentContainer.add("check",new CheckFunctionPanel(blFactory.goodsBLService()));
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				parentContainer.cl.show(parentContainer, "check");
 			}
 				

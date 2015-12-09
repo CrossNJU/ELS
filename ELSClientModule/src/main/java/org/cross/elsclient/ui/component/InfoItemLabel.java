@@ -32,17 +32,19 @@ public class InfoItemLabel extends ELSLabel{
 	public int textItemWidth;
 	public int boxItemWidth;
 	public int dateItemWidth;
+	public int gap;
 	
 	
 	public InfoItemLabel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.setMaximumSize(new Dimension(UIConstant.CONTAINER_WIDTH, UIConstant.MANAGETABLE_ITEM_HEIGHT));
-		this.setMinimumSize(new Dimension(UIConstant.CONTAINER_WIDTH, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		this.setMaximumSize(new Dimension(UIConstant.CONTENTPANEL_WIDTH, UIConstant.MANAGETABLE_ITEM_HEIGHT));
+		this.setMinimumSize(new Dimension(UIConstant.CONTENTPANEL_WIDTH, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		this.isLegal = true;
-		nameItemWidth = 100;
-		textItemWidth = 200;
+		nameItemWidth = 130;
+		textItemWidth = 300;
 		boxItemWidth = 200;
 		dateItemWidth = 200;
+		gap = 25;
 	}
 	
 	public void initNormal(String name, String content){
@@ -54,17 +56,17 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel.setMaximumSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
+		nameLabel.setFont(nameLabel.getFont().deriveFont(18f));
 
 		contentLabel.setPreferredSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		contentLabel.setMaximumSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		contentLabel.setVerticalAlignment(JLabel.CENTER);
 		contentLabel.setHorizontalAlignment(JLabel.LEFT);
-		contentLabel.setFont(getFont().deriveFont(20f));
+		contentLabel.setFont(getFont().deriveFont(18f));
 
-		this.add(Box.createHorizontalStrut(30));
+//		this.add(Box.createHorizontalStrut(30));
 		this.add(nameLabel);
-		this.add(Box.createHorizontalStrut(10));
+		this.add(Box.createHorizontalStrut(gap));
 		this.add(contentLabel);
 	}
 	
@@ -80,15 +82,15 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel.setMaximumSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
+		nameLabel.setFont(nameLabel.getFont().deriveFont(18f));
 
 		inputLabel.setPreferredSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		inputLabel.setMaximumSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		inputLabel.setHorizontalAlignment(JTextField.LEFT);
-		inputLabel.setFont(getFont().deriveFont(20f));
-		this.add(Box.createHorizontalStrut(30));
+		inputLabel.setFont(getFont().deriveFont(18f));
+//		this.add(Box.createHorizontalStrut(30));
 		this.add(nameLabel);
-		this.add(Box.createHorizontalStrut(10));
+		this.add(Box.createHorizontalStrut(gap));
 		this.add(inputLabel);
 	}
 	
@@ -128,16 +130,16 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel.setMaximumSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
+		nameLabel.setFont(nameLabel.getFont().deriveFont(18f));
 
 		comboBox.setModel(new DefaultComboBoxModel<>(items));
 		comboBox.setPreferredSize(new Dimension(boxItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		comboBox.setMaximumSize(new Dimension(boxItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		comboBox.setFont(getFont().deriveFont(20f));
 
-		this.add(Box.createHorizontalStrut(30));
+//		this.add(Box.createHorizontalStrut(30));
 		this.add(nameLabel);
-		this.add(Box.createHorizontalStrut(10));
+		this.add(Box.createHorizontalStrut(gap));
 		this.add(comboBox);
 	}
 	
@@ -161,15 +163,15 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel.setMaximumSize(new Dimension(nameItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nameLabel.setFont(nameLabel.getFont().deriveFont(20f));
+		nameLabel.setFont(nameLabel.getFont().deriveFont(18f));
 
 		datePicker.setPreferredSize(new Dimension(dateItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		datePicker.setMaximumSize(new Dimension(dateItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		datePicker.setFont(getFont().deriveFont(20f));
+		datePicker.setFont(getFont().deriveFont(18f));
 
-		this.add(Box.createHorizontalStrut(30));
+//		this.add(Box.createHorizontalStrut(30));
 		this.add(nameLabel);
-		this.add(Box.createHorizontalStrut(10));
+		this.add(Box.createHorizontalStrut(gap));
 		this.add(datePicker);
 	}
 	

@@ -10,7 +10,12 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 
+import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
+import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
+import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
+import org.cross.elsclient.blservice.stockblservice.StockBLService;
+import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.InitialVO;
@@ -34,19 +39,23 @@ public class InitialCheckPanel extends InitialManagePanel {
 		super.setSearchPanel();
 		modeBox.setMaximumSize(new Dimension(searchPanel.getWidth(), searchPanel.getHeight()));
 		modeBox.setPreferredSize(new Dimension(searchPanel.getWidth(), (int)(searchPanel.getHeight()*0.6)));
-		String[] items = new String[initialVOs.size()];
-		for(int i = 0;i<initialVOs.size();i++){
-			items[i] = initialVOs.get(i).initialName;
+		if(initialVOs!=null){
+			String[] items = new String[initialVOs.size()];
+			for(int i = 0;i<initialVOs.size();i++){
+				items[i] = initialVOs.get(i).initialName;
+				modeBox.setModel(new DefaultComboBoxModel<>(items));
+			}
+			currentVO = initialVOs.get(0);
+			System.out.println(currentVO.organizations);
+		}else {
+			currentVO = new InitialVO("", "", null, null, null, null, null, "", "", "");
 		}
-		modeBox.setModel(new DefaultComboBoxModel<>(items));
 		modeBox.addItemListener(new ModeListener());
 		
 		searchBtn.setPreferredSize(new Dimension(250, searchPanel.getHeight()));
 		searchBtn.setText("期初建账");
 		searchBtn.addMouseListener(new BtnListener());
 		searchPanel.remove(searchTextField);
-		
-		currentVO = initialVOs.get(0);
 	}
 	
 	public class ModeListener implements ItemListener{

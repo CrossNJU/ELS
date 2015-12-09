@@ -12,9 +12,12 @@ import org.cross.elsclient.blservice.initialblservice.InitialBLService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService_Stub;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
 import org.cross.elsclient.blservice.logblservice.LogBLService_Stub;
+import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
+import org.cross.elsclient.blservice.stockblservice.StockBLService;
+import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.counterui.account.AccountManagePanel;
@@ -32,18 +35,21 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 	LogBLService logbl;
 	AnalysisBLService analysisbl;
 	InitialBLService initialbl;
+	OrganizationBLService organizationbl;
+	StockBLService stockbl;
+	VehicleBLService vehiclebl;
 	
 	public CounterFunctionPanel() {
 //		receiptbl = new ReceiptBLService_Stub();
 //		analysisbl = new AnalysisBLService_Stub();
-		initialbl = new InitialBLService_Stub();
+//		initialbl = new InitialBLService_Stub();
 //		logbl = new LogBLService_Stub();
 //		accountbl = new AccountBLService_Stub();
 		try {
 			BLFactoryService blFactory = new BLFactoryImpl();
 			receiptbl = blFactory.receiptBLService();
 			analysisbl = blFactory.analysisBLService();
-//			initialbl = blFactory.initialBLService();
+			initialbl = blFactory.initialBLService();
 			logbl = blFactory.logBLService();
 			accountbl = blFactory.getAccountBLService();
 		} catch (RemoteException e) {

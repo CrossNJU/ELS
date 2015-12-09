@@ -27,9 +27,9 @@ public class AdminFunctionPanel extends ELSFunctionPanel{
 	public void init() {
 		super.init();
 		
-		addFunctionBtn("用户管理", "userManagement");
+		addFunctionBtn("用户管理", "user");
 		
-		addFunctionPanel(new UserManagePanel(userbl),"manage", "userManagement");
+		addFunctionPanel(new UserManagePanel(userbl),"manage", "user");
 		
 		validate();
 	}

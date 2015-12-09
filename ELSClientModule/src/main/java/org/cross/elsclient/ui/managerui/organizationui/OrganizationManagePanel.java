@@ -108,7 +108,7 @@ public class OrganizationManagePanel extends ELSManagePanel{
 					String area = (String)areaComboBox.getSelectedItem();
 					organizationVOs = new ArrayList<>();
 					try {
-						System.out.println(StringToType.toCity(area));
+//						System.out.println(StringToType.toCity(area));
 						organizationVOs = organizationbl.findByCity(StringToType.toCity(area));
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block

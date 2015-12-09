@@ -27,7 +27,7 @@ public class InitialPersonnelTable extends InitialManageTable{
 		removeAll();
 		init();
 		for (PersonnelVO vo : vos) {
-			String item[] = {vo.id,vo.name,vo.position.toString(),vo.orgNum};
+			String item[] = {vo.number,vo.name,vo.position.toString(),vo.orgNum};
 			addItemLabel(item);
 		}
 		container.validate();
