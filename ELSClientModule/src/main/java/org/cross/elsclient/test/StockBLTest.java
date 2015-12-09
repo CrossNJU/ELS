@@ -18,8 +18,10 @@ import org.cross.elsclient.blimpl.salaryblimpl.SalaryBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockBLImpl;
 import org.cross.elsclient.blimpl.stockblimpl.StockInfoImpl;
 import org.cross.elsclient.network.Datafactory;
+import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockCheckVO;
+import org.cross.elsclient.vo.StockSeeVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elscommon.dataservice.datafactoryservice.DataFactoryService;
 import org.cross.elscommon.util.ResultMessage;
@@ -64,7 +66,7 @@ public class StockBLTest {
 		System.out.println("size    " + len);
 		for (int i = 0; i < len; i++) {
 			System.out.println(checkVOs.get(i).goodsNumber + " " + checkVOs.get(i).inTime + " " + checkVOs.get(i).targetCity + " " +
-					checkVOs.get(i).stockAreaNum);
+					checkVOs.get(i).stockAreaNum + " " + checkVOs.get(i).inTime);
 		}
 		System.out.println("=======测试寻找仓库（findStock）=======");
 		StockVO stockVO1 = stockBLImpl.findStock("S0032902");
@@ -73,12 +75,18 @@ public class StockBLTest {
 		}else {
 			System.out.println("can not find it...");
 		}
-//		System.out.println("=======测试库存查看（showStockInfo）=======");
-//		StockSeeVO seeVO = stockBLImpl.showStockInfo("S001", "2015/10/23 10:12:01", "2015/10/12 10:20:01");
-//		System.out.println(seeVO.goodsIn + " " + seeVO.goodsOut);
-//		System.out.println(seeVO.moneyIn + " " + seeVO.moneyOut);
-//		ArrayList<GoodsVO> goods = seeVO.goods;
-//		
+		System.out.println("=======测试库存查看（showStockInfo）=======");
+		StockSeeVO seeVO = stockBLImpl.showStockInfo("S0032902", "2015-10-23 10:12", "2015-12-12 10:20");
+		System.out.println(seeVO.goodsIn + " " + seeVO.goodsOut);
+		System.out.println(seeVO.moneyIn + " " + seeVO.moneyOut);
+		ArrayList<GoodsVO> goods = seeVO.goods;
+		if (goods != null) {
+			int size = goods.size();
+			for (int i = 0; i < size; i++) {
+				System.out.println(goods.get(i).number + " " + goods.get(i).stockAreaNum);
+			}
+		}
+		
 //		if(goods!=null) System.out.println(goods.size());
 		System.out.println("=======测试快件入库（intoStock）=======");
 		ResultMessage intoStockMessage = stockBLImpl.intoStock("R0000002", "S0032902","2015-11-2 11:37:42","SA00002");

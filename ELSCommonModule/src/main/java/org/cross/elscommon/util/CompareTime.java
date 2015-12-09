@@ -26,4 +26,8 @@ public class CompareTime {
 				Integer.parseInt(temp1[2]), Integer.parseInt(temp2[0]), 
 				Integer.parseInt(temp2[1]), Integer.parseInt(temp2[2]));
 	}
+	
+//	public static void main(String[] args){
+//		System.out.println(compare("2015/10/23 10:12:01", "2015/12/12 10:20:01"));
+//	}
 }
