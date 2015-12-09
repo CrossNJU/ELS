@@ -7,6 +7,7 @@ import org.cross.elsclient.blimpl.blUtility.AccountInfo;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
 import org.cross.elscommon.po.AccountPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class AccountInfoImpl implements AccountInfo {
 	AccountDataService accountData;
@@ -69,5 +70,16 @@ public class AccountInfoImpl implements AccountInfo {
 			vos.add(toAccountVO(pos.get(i)));
 		}
 		return vos;
+	}
+
+	@Override
+	public ResultMessage addacc(AccountPO po) {
+		try {
+			return accountData.insert(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResultMessage.FAILED;
 	}
 }

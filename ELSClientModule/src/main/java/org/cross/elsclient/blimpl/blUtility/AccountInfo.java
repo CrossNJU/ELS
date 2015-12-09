@@ -7,6 +7,7 @@ import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.po.VehiclePO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface AccountInfo {
 	public AccountVO toAccountVO(AccountPO po);
@@ -24,5 +25,7 @@ public interface AccountInfo {
 	 * @throws RemoteException
 	 */
 	public ArrayList<AccountVO> show() throws RemoteException;
+	
+	public ResultMessage addacc(AccountPO po);
 
 }

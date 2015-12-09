@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.po.VehiclePO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface VehicleInfo {
 
@@ -24,4 +25,5 @@ public interface VehicleInfo {
 	 */
 	public ArrayList<VehicleVO> show() throws RemoteException;
 
+	public ResultMessage addVeh(VehiclePO veh);
 }

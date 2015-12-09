@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import org.cross.elsclient.blimpl.blUtility.OrganizationInfo;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
+import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
+import org.cross.elscommon.util.ResultMessage;
 
 public class OrganizationInfoImpl implements OrganizationInfo {
 
@@ -69,6 +71,17 @@ public class OrganizationInfoImpl implements OrganizationInfo {
 		ArrayList<OrganizationPO> pos = orgData.show();
 		ArrayList<OrganizationVO> vos = toOrgVOs(pos);
 		return vos;
+	}
+
+	@Override
+	public ResultMessage addOrg(OrganizationPO org) {
+		try {
+			return orgData.insert(org);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResultMessage.FAILED;
 	}
 
 }

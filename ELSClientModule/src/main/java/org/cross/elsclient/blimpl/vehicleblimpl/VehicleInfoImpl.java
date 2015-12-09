@@ -7,6 +7,7 @@ import org.cross.elsclient.blimpl.blUtility.VehicleInfo;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 import org.cross.elscommon.po.VehiclePO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class VehicleInfoImpl implements VehicleInfo{
 
@@ -69,6 +70,17 @@ public class VehicleInfoImpl implements VehicleInfo{
 			vos.add(toVehicleVO(pos.get(i)));
 		}
 		return vos;
+	}
+
+	@Override
+	public ResultMessage addVeh(VehiclePO veh) {
+		try {
+			return vehicleData.insert(veh);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResultMessage.FAILED;
 	}
 
 }

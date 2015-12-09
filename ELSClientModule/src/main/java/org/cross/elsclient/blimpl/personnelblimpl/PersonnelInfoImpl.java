@@ -13,6 +13,7 @@ import org.cross.elscommon.po.DriverPO;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.util.PositionType;
+import org.cross.elscommon.util.ResultMessage;
 
 public class PersonnelInfoImpl implements PersonnelInfo {
 
@@ -98,5 +99,18 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		PersonnelPO po = persinnelData.findById(id);
 		String name = po.getName();
 		return name;
+	}
+
+	@Override
+	public ResultMessage addPer(PersonnelVO per) {
+		PersonnelPO po = toPersonnelPO(per);
+		salaryInfo.addsal(per.salary);
+		try {
+			return persinnelData.insert(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResultMessage.FAILED;
 	}
 }

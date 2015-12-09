@@ -14,6 +14,7 @@ import org.cross.elscommon.dataservice.stockdataservice.StockDataService;
 import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class StockInfoImpl implements StockInfo {
 
@@ -167,6 +168,27 @@ public class StockInfoImpl implements StockInfo {
 			pos.add(toStockAreaPO(vos.get(i)));
 		}
 		return pos;
+	}
+
+	@Override
+	public ResultMessage addsto(StockVO sto) {
+		StockPO po = toStockPO(sto);
+		ArrayList<StockAreaPO> areapos = toStockAreaPO(sto.stockAreaVOs);
+		ResultMessage addStock = ResultMessage.FAILED;
+		try {
+			addStock = stockData.insertStock(po);
+			ResultMessage addArea = ResultMessage.SUCCESS;
+			for (int i = 0; i < areapos.size(); i++) {
+				addArea = stockData.insertStockArea(areapos.get(i));
+				if (addArea != ResultMessage.SUCCESS) {
+					return ResultMessage.FAILED;
+				}
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return addStock;
 	}
 
 }

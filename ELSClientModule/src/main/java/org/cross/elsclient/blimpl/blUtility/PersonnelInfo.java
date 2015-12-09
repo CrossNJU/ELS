@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.SalaryPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface PersonnelInfo {
 
@@ -29,5 +30,7 @@ public interface PersonnelInfo {
 	 * @throws RemoteException
 	 */
 	public String findNameById(String id) throws RemoteException;
+	
+	public ResultMessage addPer(PersonnelVO per);
 
 }

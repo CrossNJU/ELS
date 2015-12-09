@@ -9,6 +9,7 @@ import org.cross.elsclient.vo.StockVO;
 import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockOperationPO;
 import org.cross.elscommon.po.StockPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface StockInfo {
 	public StockVO toStockVO(StockPO po) throws RemoteException;
@@ -30,4 +31,6 @@ public interface StockInfo {
 //	public StockOperationPO toStockOperationPO(StockOperationVO vo);
 	
 	public ArrayList<StockVO> showStockVOs() throws RemoteException;
+	
+	public ResultMessage addsto(StockVO sto);
 }

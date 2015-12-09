@@ -31,6 +31,7 @@ public class InitialBLImpl implements InitialBLService {
 
 	InitialDataService initialData;
 	InitialInfoImpl initialInfo;
+	
 	OrganizationInfo orgInfo;
 	PersonnelInfo personnelInfo;
 	VehicleInfo vehicleInfo;
@@ -72,27 +73,26 @@ public class InitialBLImpl implements InitialBLService {
 	@Override
 	public ResultMessage addInitial(InitialVO vo) throws RemoteException {
 		InitialPO po = initialInfo.toInitialPO(vo);
-		System.out.println("in1");
 		for (int i = 0; i < vo.accounts.size(); i++) {
+			accountInfo.addacc(accountInfo.toAccountPO(vo.accounts.get(i)));
 			initialData.insertInitAccount(accountInfo.toAccountPO(vo.accounts.get(i)), vo.id);
 		}
-		System.out.println("in2");
 		for (int i = 0; i < vo.stocks.size(); i++) {
+			stockInfo.addsto(vo.stocks.get(i));
 			initialData.insertInitStock(stockInfo.toStockPO(vo.stocks.get(i)), vo.id);
 		}
-		System.out.println("in3");
 		for (int i = 0; i < vo.vehicles.size(); i++) {
+			vehicleInfo.addVeh(vehicleInfo.toVehiclePO(vo.vehicles.get(i)));
 			initialData.insertInitVehicle(vehicleInfo.toVehiclePO(vo.vehicles.get(i)), vo.id);
 		}
-		System.out.println("in4");
 		for (int i = 0; i < vo.personnels.size(); i++) {
+			personnelInfo.addPer(vo.personnels.get(i));
 			initialData.insertInitPersonnel(personnelInfo.toPersonnelPO(vo.personnels.get(i)), vo.id);
 		}
-		System.out.println("in5");
 		for (int i = 0; i < vo.organizations.size(); i++) {
+			orgInfo.addOrg(orgInfo.toOrganizationPO(vo.organizations.get(i)));
 			initialData.insertInitOrganization(orgInfo.toOrganizationPO(vo.organizations.get(i)), vo.id);
 		}
-		System.out.println("in6");
 		return initialData.insert(po);
 	}
 

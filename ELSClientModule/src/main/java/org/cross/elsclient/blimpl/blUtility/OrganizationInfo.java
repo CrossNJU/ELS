@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elscommon.po.OrganizationPO;
+import org.cross.elscommon.util.ResultMessage;
 
 public interface OrganizationInfo {
 
@@ -23,4 +24,6 @@ public interface OrganizationInfo {
 	 * @throws RemoteException 
 	 */
 	public ArrayList<OrganizationVO> show() throws RemoteException;
+	
+	public ResultMessage addOrg(OrganizationPO org);
 }
