@@ -23,6 +23,7 @@ import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
 import org.cross.elsclient.blimpl.constantblimpl.ConstantBLImpl;
 import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Stub;
+import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
@@ -46,6 +47,8 @@ import org.cross.elscommon.util.UserType;
 
 public class LoginPanel extends ELSPanel{
 	UserBLService userbl;
+	BLFactoryService blFactory;
+	OrganizationBLService organbl;
 	JPanel inputPanel;
 	ELSTextField idTextField;
 	JPasswordField pwTextField;
@@ -73,8 +76,9 @@ public class LoginPanel extends ELSPanel{
 //			e.printStackTrace();
 //		}
 		try {
-			BLFactoryService blFactory = new BLFactoryImpl();
+			blFactory = new BLFactoryImpl();
 			userbl = blFactory.getUserBLService();
+			organbl = blFactory.organizationBLService();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -162,6 +166,7 @@ public class LoginPanel extends ELSPanel{
 			type = userbl.login(id, pw);
 			if(type!=null){
 				UIConstant.CURRENT_USER = userbl.findById(id);
+				UIConstant.CURRENT_ORG = organbl.findById(UIConstant.CURRENT_USER.orgNameID);
 //				System.out.println(UIConstant.CURRENT_USER);
 			}
 		} catch (RemoteException e1) {

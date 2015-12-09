@@ -3,6 +3,7 @@ package org.cross.elsclient.ui.util;
 import java.awt.Color;
 import java.awt.Font;
 
+import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elsclient.vo.UserVO;
 
 public class UIConstant {
@@ -36,4 +37,5 @@ public class UIConstant {
 	public static Font MainFont = new Font("Microsoft YaHei UI",Font.TRUETYPE_FONT, 15);
 	
 	public static UserVO CURRENT_USER;
+	public static OrganizationVO CURRENT_ORG;
 }

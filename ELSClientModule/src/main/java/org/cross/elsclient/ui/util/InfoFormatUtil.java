@@ -64,15 +64,15 @@ public class InfoFormatUtil {
 	public static String CheckPasswordFormat(String src){
 		String result = "";
 		
-		if(!isContainUppercase(src)){
-			result += "不包含大写字母 ";
-		}
-		if(!isContainLowwercase(src)){
-			result += "不包含小写字母 ";
-		}
-		if(!isContainNum(src)){
-			result += "不包含数字 ";
-		}
+//		if(!isContainUppercase(src)){
+//			result += "不包含大写字母 ";
+//		}
+//		if(!isContainLowwercase(src)){
+//			result += "不包含小写字母 ";
+//		}
+//		if(!isContainNum(src)){
+//			result += "不包含数字 ";
+//		}
 		
 		if(result.equals("")){
 			return null;
