@@ -15,6 +15,7 @@ public class StockOutInfoPanel extends ELSInfoPanel{
 	
 	public StockOutInfoPanel(Receipt_StockOutVO vo){
 		this.vo = vo;
+		init();
 	}
 	
 	@Override

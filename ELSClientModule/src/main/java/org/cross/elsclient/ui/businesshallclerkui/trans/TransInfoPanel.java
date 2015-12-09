@@ -12,6 +12,7 @@ public class TransInfoPanel extends ELSInfoPanel{
 	
 	public TransInfoPanel(Receipt_TransVO vo){
 		this.vo = vo;
+		init();
 	}
 	
 	@Override

@@ -12,6 +12,7 @@ public class MoneyInfoPanel extends ELSInfoPanel{
 	
 	public MoneyInfoPanel(Receipt_MoneyInVO vo){
 		this.vo = vo;
+		init();
 	}
 	
 	@Override
@@ -23,7 +24,7 @@ public class MoneyInfoPanel extends ELSInfoPanel{
 			goodsNum+=vo.orderNumbers.get(i)+";";
 		}
 		
-		setTitle("收款单");
+		setTitle("收款单信息");
 		addNormalItem("收款单编号", vo.number);
 		addNormalItem("快件单号", goodsNum);
 		addNormalItem("收款时间", vo.time);

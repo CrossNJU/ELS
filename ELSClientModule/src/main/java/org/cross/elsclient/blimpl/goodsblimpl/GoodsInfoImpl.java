@@ -40,6 +40,10 @@ public class GoodsInfoImpl implements GoodsInfo {
 		goodsVO.history = historyVOs;
 		goodsVO.orderNum = po.getOrderNum();
 		goodsVO.stockAreaNum = po.getStockAreaNum();
+		goodsVO.stockNum = po.getStockNum();
+		goodsVO.delNum = po.getDelNum();
+		goodsVO.arriNum = po.getArriNum();
+		goodsVO.transNum = po.getTransNum();
 		return goodsVO;
 	}
 
@@ -60,6 +64,12 @@ public class GoodsInfoImpl implements GoodsInfo {
 		}
 		GoodsPO goodsPO = new GoodsPO(vo.goodsType, vo.placeCity, vo.placeOrg,
 				vo.state, vo.weight, vo.volume, vo.number);
+		goodsPO.setArriNum(vo.arriNum);
+		goodsPO.setDelNum(vo.delNum);
+		goodsPO.setTransNum(vo.transNum);
+		goodsPO.setStockAreaNum(vo.stockAreaNum);
+		goodsPO.setStockNum(vo.stockNum);
+		goodsPO.setState(vo.state);
 		return goodsPO;
 	}
 

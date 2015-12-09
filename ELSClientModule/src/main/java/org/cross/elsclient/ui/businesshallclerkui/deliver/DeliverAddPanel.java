@@ -16,6 +16,8 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.PersonnelVO;
@@ -25,6 +27,8 @@ import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.Receipt_TransVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.City;
+import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ReceiptType;
@@ -52,11 +56,11 @@ public class DeliverAddPanel extends ELSInfoPanel {
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增派件单");
-		/* 0 */addEditableItem("派件单编号", ConstantValue.getReceiptNum(ReceiptType.TRANS), false);
+		/* 0 */addEditableItem("派件单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addDateItem("派件时间", false);
-		addEditableItem("快件单编号", "", true);
-		addEditableItem("快递员工号", "", true);
-		addEditableItem("快递员姓名", "", true);
+		addEditableItem("快件单编号", "", true,InfoType.ID);
+		addEditableItem("快递员工号", "", true,InfoType.ID);
+		addEditableItem("快递员姓名", "", true,InfoType.NAME);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");
@@ -68,13 +72,18 @@ public class DeliverAddPanel extends ELSInfoPanel {
 		delvo = new Receipt_DeliverVO(itemLabels.get(0).toString(), itemLabels.get(1).toString(), itemLabels.get(2).toString(), itemLabels.get(4).toString(),
 				itemLabels.get(3).toString(),user.number, user.orgNameID);
 		GoodsVO goods = goodsbl.searchGoods(itemLabels.get(2).toString());
-		HistoryVO historyVO = new HistoryVO(itemLabels.get(1).toString(), City.BEIJING, OrganizationType.BUSINESSHALL, false);
+		//要获得当前用户的信息
+		HistoryVO historyVO = new HistoryVO(itemLabels.get(1).toString(),  UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type, false);
 		goods.history.add(historyVO);
+		goods.placeCity =   UIConstant.CURRENT_ORG.city;
+		goods.placeOrg = UIConstant.CURRENT_ORG.type;
+		goods.delNum = itemLabels.get(0).toString();
 		goodsbl.updateGoods(goods);
 		if (receiptbl.add(delvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+			parent.setChosenFunction("receipts");
 		} else {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
 		}
@@ -84,7 +93,8 @@ public class DeliverAddPanel extends ELSInfoPanel {
 	protected void cancel() {
 		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")) {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+			parent.setChosenFunction("receipts");
 		}
 	}
 

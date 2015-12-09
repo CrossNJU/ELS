@@ -132,7 +132,6 @@ public class BLFactoryImpl implements BLFactoryService{
 		this.initialInfo.sal = salaryDataService;
 		this.logInfo = new LogInfoImpl();
 		
-		
 		this.receiptInfo.goodsInfo = this.goodsInfo;
 		this.receiptInfo.personnelInfo = this.personnelInfo;
 		this.receiptInfo.stockInfo = this.stockInfo;

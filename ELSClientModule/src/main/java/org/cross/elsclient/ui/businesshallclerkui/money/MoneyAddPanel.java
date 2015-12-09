@@ -12,10 +12,12 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.UserVO;
+import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ReceiptType;
@@ -41,10 +43,10 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增收款单");
-		/* 0 */addEditableItem("收款单编号", ConstantValue.getReceiptNum(ReceiptType.MONEYIN), false);
+		/* 0 */addEditableItem("收款单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
 		addEditableItem("快件单编号", "", true);
-		addEditableItem("收款时间", "", true);
-		/*3*/addEditableItem("收款快递员", "", true);
+		addDateItem("收款时间", false);
+		/*3*/addEditableItem("收款快递员ID", "", true);
 		addEditableItem("收款金额", "", true);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -70,7 +72,8 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		if (bl.add(moneyinvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+			parent.setChosenFunction("receipts");
 		} else {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
 		}
@@ -80,7 +83,8 @@ public class MoneyAddPanel extends ELSInfoPanel {
 	protected void cancel() {
 		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")) {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");?
+			parent.setChosenFunction("receipts");
 		}
 	}
 

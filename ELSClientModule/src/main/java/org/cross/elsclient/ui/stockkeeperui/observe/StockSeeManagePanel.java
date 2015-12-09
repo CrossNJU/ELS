@@ -82,6 +82,7 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		String[] s = {"出库数量","出库金额","入库数量","入库金额","库存数量合计"};
 		int[] itemWidth = {100,100,100,100,100};
 		listFirst = new StockSeeManageTableFirst(s, itemWidth);
+		listFirst.addItem(new StockSeeVO(0, 0, 0, 0, 0, null));
 		listFirst.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,searchPanel.getLocation().y+searchPanel.getHeight()+15);
 		container.add(listFirst);
 		String[] s2 = {"快件单编号","存放位置"};

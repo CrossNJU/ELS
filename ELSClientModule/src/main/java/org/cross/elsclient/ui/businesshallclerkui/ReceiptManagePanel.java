@@ -27,7 +27,8 @@ public class ReceiptManagePanel extends ELSManagePanel{
 	ReceiptBLService receiptbl;
 	ArrayList<ReceiptVO> receiptvos;
 	ReceiptManageTable list;
-	ELSDatePicker datePicker;
+	ELSDatePicker datePicker1;
+	ELSDatePicker datePicker2;
 	ELSButton addBtn;
 	
 	public ReceiptManagePanel(){}
@@ -40,10 +41,9 @@ public class ReceiptManagePanel extends ELSManagePanel{
 	@Override
 	public void setContentPanel(){
 		super.setContentPanel();
-		System.out.println("in");
 		String[] s = {"单据编号","单据类型","建单时间","单据状态"};
 		int[] itemWidth = {200,100,200,100};
-		list = new ReceiptManageTable(s, itemWidth,receiptbl);
+		list = new ReceiptManageTable(s, itemWidth);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		try {
 			receiptvos = receiptbl.show();
@@ -51,7 +51,6 @@ public class ReceiptManagePanel extends ELSManagePanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(receiptvos.size());
 		for (int i = 0; i < receiptvos.size(); i++) {
 			list.addItem(receiptvos.get(i));
 		}
@@ -61,7 +60,8 @@ public class ReceiptManagePanel extends ELSManagePanel{
 	
 	@Override
 	public void setSearchPanel(){
-		datePicker = ComponentFactory.createDatePicker();
+		datePicker1 = ComponentFactory.createDatePicker();
+		datePicker2 = ComponentFactory.createDatePicker();
 
 		String[] s = {"按单据编号查询", "按时间查询"};
 		modeBox.setModel(new DefaultComboBoxModel<String>(s));
@@ -72,9 +72,11 @@ public class ReceiptManagePanel extends ELSManagePanel{
 		
 		searchPanel.add(Box.createHorizontalStrut(10));
 		
-		datePicker.setVisible(false);
+		datePicker1.setVisible(false);
+		datePicker2.setVisible(false);
 		
-		searchPanel.add(datePicker,3);
+		searchPanel.add(datePicker2,3);
+		searchPanel.add(datePicker1,3);
 		searchPanel.validate();
 	}
 
@@ -89,16 +91,34 @@ public class ReceiptManagePanel extends ELSManagePanel{
 					String id = searchTextField.getText();
 					ReceiptVO vo = null;
 					try {
-						vo = receiptbl.findByID(id);
+						if(id.equals("")){
+							receiptvos = receiptbl.show();
+						}else vo = receiptbl.findByID(id);
 						
 					} catch (RemoteException e1) {
 						e1.printStackTrace();
 					}
 					list.init();
-					list.addItem(vo);
+					if(id.equals(""))
+						for (ReceiptVO showvo :receiptvos) {
+							list.addItem(showvo);
+						}
+					else list.addItem(vo);
 					container.packHeight();
 				}else if(((String)modeBox.getSelectedItem()).equals("按时间查询")){
-					
+					String time1 = datePicker1.getDateString();
+					String time2 = datePicker2.getDateString();
+					try {
+						receiptvos = receiptbl.findByTime(time1, time2);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					list.init();
+					for(ReceiptVO showvo : receiptvos){
+						list.addItem(showvo);
+					}
+					container.packHeight();
 				}
 			}
 		}
@@ -143,11 +163,13 @@ public class ReceiptManagePanel extends ELSManagePanel{
 				switch (item) {
 				case "按单据编号查询":
 					searchTextField.setVisible(true);
-					datePicker.setVisible(false);
+					datePicker1.setVisible(false);
+					datePicker2.setVisible(false);
 					break;
 				case "按时间查询":
 					searchTextField.setVisible(false);
-					datePicker.setVisible(true);
+					datePicker1.setVisible(true);
+					datePicker2.setVisible(true);
 					break;
 				default:
 					searchTextField.setVisible(false);

@@ -63,6 +63,14 @@ public class GoodsVO {
 	 */
 	public String stockAreaNum;
 	
+	public String stockNum;
+	
+	public String delNum;
+	
+	public String transNum;
+	
+	public String arriNum;
+	
 	/**
 	 * 构造方法
 	 * 

@@ -44,6 +44,15 @@ public class VehicleManagePanel extends ELSManagePanel{
 		String[] s = {"车辆编号","车牌号","服役时间"};
 		int[] itemWidth = {100,100,200};
 		list= new VehicleManageTable(s,itemWidth,vehiclebl);
+		try {
+			vehicleVOs = vehiclebl.show();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(VehicleVO vo: vehicleVOs){
+			list.addItem(vo);
+		}
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
 	}
@@ -76,9 +85,10 @@ public class VehicleManagePanel extends ELSManagePanel{
 			if(((String)modeBox.getSelectedItem()).equals("按车辆编号查询")){
 				if(e.getSource()==searchBtn){
 					String id = searchTextField.getText();
-					vehicleVOs = new ArrayList<>();
+					vehicleVOs = new ArrayList<VehicleVO>();
 					try {
-						vehicleVOs = vehiclebl.find(id);
+						if(id.equals("")) vehicleVOs = vehiclebl.show();
+						else vehicleVOs = vehiclebl.find(id);
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

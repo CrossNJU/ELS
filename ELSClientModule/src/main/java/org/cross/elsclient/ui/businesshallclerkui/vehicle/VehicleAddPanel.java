@@ -4,7 +4,10 @@ import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.VehicleVO;
+import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.NumberType;
 
 public class VehicleAddPanel extends ELSInfoPanel {
 	VehicleBLService vehiclebl;
@@ -20,14 +23,14 @@ public class VehicleAddPanel extends ELSInfoPanel {
 		// TODO Auto-generated method stub
 		super.init();
 		
-		setTitle("修改车辆信息");
-		/*0*/addEditableItem("车牌编号", "",true);
-		addEditableItem("车牌号", "",true);
-		addEditableItem("营业厅编号", "",true);
-		addEditableItem("购买时间", "",true);
-		addEditableItem("服役时间", "",true);
-		addEditableItem("发动机号", "",true);
-		addEditableItem("底盘号", "",true);
+		setTitle("新增车辆信息");
+		/*0*/addEditableItem("车辆编号", ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE), false);
+		addEditableItem("车牌号", "",true,InfoType.NAME);
+		addEditableItem("营业厅编号", "",true,InfoType.NAME);
+		addDateItem("购买时间", true);
+		addDateItem("服役时间", true);
+		addEditableItem("发动机号", "",true,InfoType.NAME);
+		addEditableItem("底盘号", "",true,InfoType.NAME);
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");

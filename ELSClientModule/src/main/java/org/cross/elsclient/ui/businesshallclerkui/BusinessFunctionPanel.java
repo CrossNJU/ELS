@@ -3,9 +3,11 @@ package org.cross.elsclient.ui.businesshallclerkui;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
+import org.cross.elsclient.blimpl.organizationblimpl.OrganizationBLImpl;
 import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService_Stub;
+import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService_Stub;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
@@ -30,6 +32,7 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 	public VehicleBLService vehiclebl;
 	public GoodsBLService goodsbl;
 	public PersonnelBLService personnelbl;
+	public OrganizationBLService organizationbl;
 	BLFactoryService blFactoryService;
 	UserVO user;
 	
@@ -42,6 +45,7 @@ public class BusinessFunctionPanel extends ELSFunctionPanel{
 			vehiclebl = blFactoryService.vehicleBLService();
 			goodsbl = blFactoryService.goodsBLService();
 			personnelbl = blFactoryService.personnelBLService();
+			organizationbl = blFactoryService.organizationBLService();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

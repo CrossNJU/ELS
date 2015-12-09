@@ -11,11 +11,9 @@ public class DeliverInfoPanel extends ELSInfoPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	Receipt_DeliverVO delvo;
-	public ReceiptBLService receiptbl;
 	
-	public DeliverInfoPanel(Receipt_DeliverVO vo, ReceiptBLService receiptbl){
+	public DeliverInfoPanel(Receipt_DeliverVO vo){
 		this.delvo = vo;
-		this.receiptbl = receiptbl;
 		init();
 	}
 	
@@ -23,7 +21,7 @@ public class DeliverInfoPanel extends ELSInfoPanel{
 	public void init(){
 		super.init();
 		
-		setTitle("派件单");
+		setTitle("派件单信息");
 		addNormalItem("派件单编号", delvo.number);
 		addNormalItem("快递员编号", delvo.posterNum);
 		addNormalItem("快递员姓名", delvo.name);

@@ -92,8 +92,8 @@ public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataS
 		VehiclePO vehiclePO = new VehiclePO("V000000003", "EN000002", "BA000002", "2020-01-01", "2032-12-11", null, false, "2010", "O00001");
 //		
 		VehicleDataImpl vehicleDataImpl = new VehicleDataImpl();
-		 if(vehicleDataImpl.insert(vehiclePO) == ResultMessage.SUCCESS) System.out.println("success");
-		 else System.out.println("fail");
+		 vehiclePO = vehicleDataImpl.findByID("1");
+		 System.out.println(vehiclePO.getBaseNum());
 //		 System.out.println(po.getApparatusNumber());
 		// vehicleDataImpl.delete("V000001");
 //		vehicleDataImpl.;

@@ -38,13 +38,12 @@ public class VehicleManageTable extends ELSManageTable {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		vos = new ArrayList<>();
+		vos = new ArrayList<VehicleVO>();
 		isUpdateAndDelete = true;
 	}
 
 	public void addItem(VehicleVO vo) {
 		vos.add(vo);
-		int index = vos.indexOf(vo);
 
 		String[] item = { vo.number, vo.number, vo.buyTime + "~" + vo.lastTime };
 		addItemLabel(item);
