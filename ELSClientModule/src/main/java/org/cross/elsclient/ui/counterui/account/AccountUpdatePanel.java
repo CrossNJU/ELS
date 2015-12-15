@@ -27,9 +27,9 @@ public class AccountUpdatePanel extends ELSInfoPanel{
 		// TODO Auto-generated method stub
 		super.init();
 		
-		setTitle("新增账户");
+		setTitle("修改账户");
 		addEditableItem("账户名称", vo.name, true,InfoType.NAME);
-		addEditableItem("账户卡号", vo.account, true,InfoType.NUM);
+		addEditableItem("账户卡号", vo.account, false);
 		addEditableItem("账户余额", String.valueOf(vo.balance), true,InfoType.NUM);
 		
 		addConfirmAndCancelBtn();
@@ -44,18 +44,18 @@ public class AccountUpdatePanel extends ELSInfoPanel{
 			vo.account = itemLabels.get(1).toString();
 			vo.balance = Double.valueOf(itemLabels.get(2).toString());
 			
-			if(bl.add(vo)==ResultMessage.SUCCESS){
-				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+			if(bl.update(vo)==ResultMessage.SUCCESS){
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"修改成功");
 				back();
 			}else{
-				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"修改失败");
 			}
 		}
 	}
 	
 	@Override
 	protected void cancel() {
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
+		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消修改", "确认退出修改界面？")){
 			back();
 		}
 	}

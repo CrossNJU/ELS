@@ -32,7 +32,7 @@ public class OrganizationAddPanel extends ELSInfoPanel{
 		String[] area = {"北京","上海", "南京","广州"};
 		
 		setTitle("机构详细信息");
-		addEditableItem("机构编号", ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION),true,InfoType.NUM);
+		addEditableItem("机构编号", ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION),false);
 		addComboxItem("机构地区", area, true);
 		addComboxItem("机构类型", types,true);
 		

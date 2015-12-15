@@ -28,7 +28,7 @@ public class PerInfoPanel extends ELSInfoPanel {
 		super.init();
 		
 		setTitle("人员信息");
-		addNormalItem("人员编号",vo.id);
+		addNormalItem("人员编号",vo.number);
 		addNormalItem("姓名", vo.name);
 		addNormalItem("性别", vo.sex);
 		addNormalItem("身份证",vo.id);

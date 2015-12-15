@@ -62,10 +62,10 @@ public class PerManagePanel extends ELSManagePanel {
 				"高级财务人员", "总经理", "系统管理员","司机" };
 		typeCombobox.setModel(new DefaultComboBoxModel<String>(types));
 
-		searchBtn.setText("查找用户");
+		searchBtn.setText("查找人员");
 		searchBtn.addMouseListener(new BtnListener());
 
-		addBtn.setText("添加用户");
+		addBtn.setText("添加人员");
 		addBtn.addMouseListener(new BtnListener());
 
 		searchPanel.add(Box.createHorizontalStrut(10));

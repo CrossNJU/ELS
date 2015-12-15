@@ -26,6 +26,9 @@ public class InitialStockTable extends InitialManageTable {
 	public void refresh(){
 		removeAll();
 		init();
+		if (vos == null) {
+			return;
+		}
 		for (StockVO vo : vos) {
 			String item[] = {vo.number,vo.totalAreas+""};
 			addItemLabel(item);

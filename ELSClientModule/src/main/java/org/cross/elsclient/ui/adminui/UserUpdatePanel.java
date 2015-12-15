@@ -32,7 +32,7 @@ public class UserUpdatePanel extends ELSInfoPanel{
 		//ELSInfoPanel提供了三种添加条目的类型:文字，编辑框，下拉框
 		//要拿到其中的信息，要调用对应的itemLabel.toString()的方法
 		setTitle("修改用户");
-		addEditableItem("用户名", "U000001", false);
+		addEditableItem("用户名", vo.number, false);
 		addEditableItem("姓名", vo.name, true,InfoType.NAME);
 		addComboxItem("职位", items,vo.userType.toString(), true);
 		addEditableItem("密码", vo.password, true,InfoType.PASSWORD);

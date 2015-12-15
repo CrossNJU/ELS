@@ -32,7 +32,7 @@ public class PaymentUpdatePanel extends ELSInfoPanel{
 		type = vo.salary.getType();
 		
 		setTitle("制定薪资策略");
-		addEditableItem("人员编号", vo.id, false);
+		addEditableItem("人员编号", vo.number, false);
 		addEditableItem("姓名", vo.name, false,InfoType.NAME);
 		addEditableItem("工资类型", vo.salary.getType().toString(), false);
 		addEditableItem("基础工资", vo.salary.getSalaryByMonth()+"", true,InfoType.NUM);

@@ -26,6 +26,9 @@ public class InitialPersonnelTable extends InitialManageTable{
 	public void refresh(){
 		removeAll();
 		init();
+		if (vos == null) {
+			return;
+		}
 		for (PersonnelVO vo : vos) {
 			String item[] = {vo.number,vo.name,vo.position.toString(),vo.orgNum};
 			addItemLabel(item);

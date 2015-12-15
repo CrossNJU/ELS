@@ -39,7 +39,7 @@ public class InitialCheckPanel extends InitialManagePanel {
 		super.setSearchPanel();
 		modeBox.setMaximumSize(new Dimension(searchPanel.getWidth(), searchPanel.getHeight()));
 		modeBox.setPreferredSize(new Dimension(searchPanel.getWidth(), (int)(searchPanel.getHeight()*0.6)));
-		if(initialVOs!=null){
+		if(initialVOs.size()>0){
 			String[] items = new String[initialVOs.size()];
 			for(int i = 0;i<initialVOs.size();i++){
 				items[i] = initialVOs.get(i).initialName;

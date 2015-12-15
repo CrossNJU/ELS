@@ -26,6 +26,9 @@ public class InitialAccountTable extends InitialManageTable {
 	public void refresh(){
 		removeAll();
 		init();
+		if (vos == null) {
+			return;
+		}
 		for (AccountVO vo : vos) {
 			String item[] = {vo.name,vo.account,vo.balance+""};
 			addItemLabel(item);

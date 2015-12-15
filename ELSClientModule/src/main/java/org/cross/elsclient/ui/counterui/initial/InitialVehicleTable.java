@@ -26,6 +26,9 @@ public class InitialVehicleTable extends InitialManageTable {
 	public void refresh(){
 		removeAll();
 		init();
+		if (vos == null) {
+			return;
+		}
 		for (VehicleVO vo : vos) {
 			String item[] = {vo.number,vo.number,vo.buyTime+"~"+vo.lastTime};
 			addItemLabel(item);

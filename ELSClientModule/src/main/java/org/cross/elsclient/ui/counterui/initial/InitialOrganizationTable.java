@@ -28,6 +28,9 @@ public class InitialOrganizationTable extends InitialManageTable{
 	public void refresh(){
 		removeAll();
 		init();
+		if (vos == null) {
+			return;
+		}
 		for (OrganizationVO vo : vos) {
 			System.out.println(vo.type.toString());
 			String item[] = {vo.number,vo.city.toString(),vo.type.toString()};

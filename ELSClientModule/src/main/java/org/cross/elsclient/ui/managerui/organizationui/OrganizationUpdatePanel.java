@@ -31,13 +31,13 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 		String[] area = {"北京","上海", "南京","广州"};
 		
 		setTitle("机构详细信息");
-		addEditableItem("机构编号", vo.number,true,InfoType.ID);
+		addEditableItem("机构编号", vo.number,false);
 		addComboxItem("机构地区", area,vo.city.toString() ,true);
 		addComboxItem("机构类型", types,vo.type.toString(),true);
 		
 		addConfirmAndCancelBtn();
-		confirmBtn.setText("确认添加");
-		cancelBtn.setText("取消添加");
+		confirmBtn.setText("确认更改");
+		cancelBtn.setText("放弃更改");
 	}
 	
 	@Override
@@ -46,11 +46,11 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 			vo = new OrganizationVO(StringToType.toCity(itemLabels.get(1).toString()),
 					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(0).toString());
 			try {
-				if(bl.add(vo)==ResultMessage.SUCCESS){
-					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+				if(bl.update(vo)==ResultMessage.SUCCESS){
+					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更改成功");
 					back();
 				}else{
-					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
+					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更改失败");
 				}
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
@@ -61,7 +61,7 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 	
 	@Override
 	protected void cancel() {
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
+		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消", "确认退出修改界面？")){
 			back();
 		}
 	}
