@@ -34,6 +34,7 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 	GoodsVO goodsVO;
 	ReceiptBLService receiptbl;
 	GoodsBLService goodsbl;
+	String number;
 	
 	public ExpressReceivePanel(ReceiptBLService receiptbl,GoodsBLService goodsbl) {
 		this.receiptbl = receiptbl;
@@ -48,7 +49,8 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		String packType[] = {"纸箱(5元)","木箱(10元)","快递袋(1元)"};
 		
 		setTitle("创建快件单");
-		addEditableItem("快件单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
+		addEditableItem("快件单编号",number , false);
 		addEditableItem("寄件人姓名", "", true);
 		addEditableItem("寄件人地址", "", true);
 		addEditableItem("寄件人单位", "", true);
@@ -116,6 +118,7 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 			goodsVO.history.add(new HistoryVO(TimeUtil.getCurrentTime(), startCity, OrganizationType.BUSINESSHALL, false));
 			if(receiptbl.add(orderVO)==ResultMessage.SUCCESS&&goodsbl.addGoods(goodsVO)==ResultMessage.SUCCESS&&goodsbl.updateGoods(goodsVO)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 				init();
 			}else{
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");

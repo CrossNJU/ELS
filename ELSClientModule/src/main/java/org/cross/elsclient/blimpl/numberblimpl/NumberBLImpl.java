@@ -137,4 +137,11 @@ public class NumberBLImpl implements NumberBLService{
 		}
 	}
 
+	@Override
+	public void addsome(NumberType type, String number, int num) {
+		for (int i = 0; i < num; i++) {
+			addone(type, number);
+		}
+	}
+
 }

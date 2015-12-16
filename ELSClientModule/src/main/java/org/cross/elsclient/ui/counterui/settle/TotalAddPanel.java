@@ -22,6 +22,7 @@ public class TotalAddPanel extends ELSInfoPanel{
 	Receipt_TotalMoneyInVO vo;
 	ArrayList<Receipt_MoneyInVO> vos;
 	ReceiptBLService bl;
+	String number;
 	
 	public TotalAddPanel(ReceiptBLService bl, ArrayList<Receipt_MoneyInVO> vos) {
 		this.bl = bl;
@@ -38,7 +39,8 @@ public class TotalAddPanel extends ELSInfoPanel{
 		}
 		
 		setTitle("创建总收款款单");
-		addEditableItem("总收款单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false, InfoType.NAME);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
+		addEditableItem("总收款单编号", number, false, InfoType.NAME);
 		addEditableItem("收款单数量", ""+vos.size(), false, InfoType.NAME);
 		addEditableItem("收款人", "", true,InfoType.NAME);
 //		addEditableItem("收款账号", "", true,InfoType.NUM);
@@ -65,6 +67,7 @@ public class TotalAddPanel extends ELSInfoPanel{
 			String orgNum = itemLabels.get(5).toString();
 			vo = new Receipt_TotalMoneyInVO(number, TimeUtil.getCurrentTime(), perNameID, sum, vos, perNum,orgNum);
 			if(bl.add(vo)==ResultMessage.SUCCESS){
+				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 				back();
 			}else{

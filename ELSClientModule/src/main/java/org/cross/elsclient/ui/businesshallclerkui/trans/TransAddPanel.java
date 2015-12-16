@@ -34,6 +34,7 @@ public class TransAddPanel extends ELSInfoPanel {
 	ReceiptBLService bl;
 	GoodsBLService goodsbl;
 	UserVO user;
+	String number;
 
 	public TransAddPanel(ReceiptBLService receiptbl, UserVO user, GoodsBLService goodsbl) {
 		this.bl = receiptbl;
@@ -53,7 +54,8 @@ public class TransAddPanel extends ELSInfoPanel {
 //		String it5[] = ConstantValue.getUnusedObserver();
 
 		setTitle("新增装车单");
-		/* 0 */addEditableItem("装车单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
+		/* 0 */addEditableItem("装车单编号", number, false);
 		addEditableItem("快件单编号", "", true, InfoType.NAME);
 		addEditableItem("出发地", user.orgNameID, false);
 		addComboxItem("到达城市", it1, true);
@@ -82,11 +84,6 @@ public class TransAddPanel extends ELSInfoPanel {
 				itemLabels.get(7).toString(), itemLabels.get(2).toString(), itemLabels.get(3).toString(),
 				itemLabels.get(9).toString(), itemLabels.get(8).toString(), user.number);
 		System.out.println(goods.size());
-		if (goodsbl == null) {
-			System.out.println("null");
-		} else {
-			System.out.println("in");
-		}
 		for (int i = 0; i < goods.size(); i++) {
 			System.out.println(goods.get(i));
 			GoodsVO goodsvo = goodsbl.searchGoods(goods.get(i));
@@ -100,6 +97,7 @@ public class TransAddPanel extends ELSInfoPanel {
 		if (bl.add(vo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
 		} else {

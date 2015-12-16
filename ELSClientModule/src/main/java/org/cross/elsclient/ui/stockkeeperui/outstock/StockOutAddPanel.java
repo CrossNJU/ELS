@@ -34,6 +34,7 @@ public class StockOutAddPanel extends ELSInfoPanel {
 	GoodsBLService goodsbl;
 	UserVO user;
 	StockVO stockvo;
+	String number;
 
 	public StockOutAddPanel(StockBLService stockbl, ReceiptBLService receiptbl, UserVO user, StockVO stockvo,
 			GoodsBLService goodsbl) {
@@ -51,7 +52,8 @@ public class StockOutAddPanel extends ELSInfoPanel {
 		titlePanel.remove(titlePanel.backBtn);
 		String[] it1 = { "汽车", "飞机", "火车" };
 		setTitle("新增出库单");
-		/* 0 */addEditableItem("出库单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
+		/* 0 */addEditableItem("出库单编号", number, false);
 		addEditableItem("快件单编号", "", true, InfoType.NAME);
 		addDateItem("出库时间", false);
 		addEditableItem("目的地", "", true, InfoType.NAME);
@@ -76,6 +78,7 @@ public class StockOutAddPanel extends ELSInfoPanel {
 		if (receiptbl.add(stockoutvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
 			init();

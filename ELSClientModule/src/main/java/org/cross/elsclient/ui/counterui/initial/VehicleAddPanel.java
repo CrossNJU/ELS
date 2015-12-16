@@ -17,6 +17,7 @@ import org.cross.elscommon.util.VehicleType;
 public class VehicleAddPanel extends ELSInfoPanel{
 	ArrayList<VehicleVO> vos;
 	VehicleVO vo;
+	String number;
 	
 	public VehicleAddPanel(ArrayList<VehicleVO> vos) {
 		super();
@@ -29,7 +30,8 @@ public class VehicleAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("新增车辆");
-		addEditableItem("车牌编号", ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE),true,InfoType.NUM);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE);
+		addEditableItem("车牌编号",number ,true,InfoType.NUM);
 		addEditableItem("车牌号", "",true,InfoType.NUM);
 		addEditableItem("营业厅编号", "",true,InfoType.NUM);
 		addDateItem("购买时间",true);
@@ -57,6 +59,7 @@ public class VehicleAddPanel extends ELSInfoPanel{
 			
 			vo = new VehicleVO(number, licence, orgNum, engineNumber, apparatusNumber, buyTime, lastTime, null, false);
 			vos.add(vo);
+			ConstantVal.numberbl.addone(NumberType.VEHICLE, number);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			back();

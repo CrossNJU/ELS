@@ -20,6 +20,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 	Receipt_MoneyOutVO vo;
 	ReceiptBLService receiptbl;
 	PersonnelBLService personnelbl;
+	String number;
 	
 	public MoneyOutAddPanel(ReceiptBLService receiptbl, PersonnelBLService personnelbl) {
 		this.receiptbl = receiptbl;
@@ -32,7 +33,8 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("创建付款单");
-		addEditableItem("付款单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
+		addEditableItem("付款单编号", number, false);
 		addEditableItem("条目", "", true, InfoType.NAME);
 		addEditableItem("付款人", "", true,InfoType.NAME);
 		addEditableItem("付款账号", "", true,InfoType.NUM);
@@ -68,6 +70,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 			
 			if(receiptbl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 				init();
 			}else{
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");

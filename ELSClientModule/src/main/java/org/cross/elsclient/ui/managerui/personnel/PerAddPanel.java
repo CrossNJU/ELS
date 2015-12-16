@@ -21,6 +21,7 @@ import org.cross.elscommon.util.StringToType;
 public class PerAddPanel extends ELSInfoPanel {
 	PersonnelVO vo;
 	PersonnelBLService personelbl;
+	String number;
 	
 	public PerAddPanel(PersonnelBLService personnelbl) {
 		super();
@@ -32,7 +33,8 @@ public class PerAddPanel extends ELSInfoPanel {
 	public void init() {
 		super.init();
 		setTitle("新增人员");
-		addEditableItem("人员编号", ConstantVal.numberbl.getPostNumber(NumberType.PERSONNEL), true);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.PERSONNEL);
+		addEditableItem("人员编号", number, true);
 		addEditableItem("姓名", "", true,InfoType.NAME);
 		addComboxItem("性别",new String[]{"男","女"} , true);
 		addEditableItem("身份证", "", true,InfoType.IDCARD);
@@ -65,6 +67,7 @@ public class PerAddPanel extends ELSInfoPanel {
 			vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
 			if(personelbl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
+				ConstantVal.numberbl.addone(NumberType.PERSONNEL, number);
 				back();
 			}else {
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");

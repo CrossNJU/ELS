@@ -20,6 +20,7 @@ import org.cross.elscommon.util.VehicleType;
 public class PerAddPanel extends ELSInfoPanel{
 	ArrayList<PersonnelVO> vos;
 	PersonnelVO vo;
+	String number;
 	
 	public PerAddPanel(ArrayList<PersonnelVO> vos) {
 		super();
@@ -32,7 +33,8 @@ public class PerAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("新增人员");
-		addEditableItem("人员编号", ConstantVal.numberbl.getPostNumber(NumberType.PERSONNEL), true);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.PERSONNEL);
+		addEditableItem("人员编号", number, true);
 		addEditableItem("姓名", "", true,InfoType.NAME);
 		addComboxItem("性别",new String[]{"男","女"} , true);
 		addEditableItem("身份证", "", true,InfoType.IDCARD);
@@ -64,6 +66,7 @@ public class PerAddPanel extends ELSInfoPanel{
 			
 			vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
 			vos.add(vo);
+			ConstantVal.numberbl.addone(NumberType.PERSONNEL, number);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			back();

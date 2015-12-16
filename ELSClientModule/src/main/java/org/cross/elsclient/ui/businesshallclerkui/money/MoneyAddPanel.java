@@ -31,6 +31,7 @@ public class MoneyAddPanel extends ELSInfoPanel {
 	Receipt_MoneyInVO moneyinvo;
 	ReceiptBLService bl;
 	UserVO user;
+	String number;
 
 	public MoneyAddPanel(ReceiptBLService receiptbl, UserVO user) {
 		this.bl = receiptbl;
@@ -43,7 +44,8 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增收款单");
-		/* 0 */addEditableItem("收款单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
+		/* 0 */addEditableItem("收款单编号", number, false);
 		addEditableItem("快件单编号", "", true);
 		addDateItem("收款时间", false);
 		/*3*/addEditableItem("收款快递员ID", "", true);
@@ -72,6 +74,7 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		if (bl.add(moneyinvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 //			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
 		} else {

@@ -3,11 +3,15 @@ package org.cross.elsclient.ui.businesshallclerkui.vehicle;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
+import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
+import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.NumberType;
+import org.cross.elscommon.util.ResultMessage;
 
 public class VehicleAddPanel extends ELSInfoPanel {
 	VehicleBLService vehiclebl;
@@ -47,13 +51,19 @@ public class VehicleAddPanel extends ELSInfoPanel {
 		vo = new VehicleVO(itemLabels.get(0).toString(), itemLabels.get(1).toString(), itemLabels.get(2).toString(), 
 				itemLabels.get(5).toString(), itemLabels.get(6).toString(), itemLabels.get(3).toString(), 
 				itemLabels.get(4).toString(), null, false);
-		vehiclebl.add(vo);
-		back();
+		if(vehiclebl.add(vo) == ResultMessage.SUCCESS){
+			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
+			ConstantVal.numberbl.addone(NumberType.VEHICLE, number);
+			back();
+		}else {
+			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
+		}
 	}
 	
 	@Override
 	protected void cancel() {
-		super.cancel();
-		back();
+		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")) {
+			back();
+		}
 	}
 }

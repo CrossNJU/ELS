@@ -39,6 +39,7 @@ import org.cross.elscommon.util.ResultMessage;
 public class InitialAddPanel extends InitialManagePanel{
 	ELSButton cancelBtn;
 	ELSLabel titleLabel;
+	String number;
 	
 	public InitialAddPanel(InitialBLService initialbl) {
 		super(initialbl);
@@ -81,7 +82,8 @@ public class InitialAddPanel extends InitialManagePanel{
 			initialManageTable.addBtn.setVisible(true);
 		}
 		
-		currentVO.id = ConstantVal.numberbl.getPostNumber(NumberType.INITIAL);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.INITIAL);
+		currentVO.id = number;
 		currentVO.perNumber = UIConstant.CURRENT_USER.number;
 		System.out.println(currentVO.perNumber);
 		currentVO.time = TimeUtil.getCurrentTime();
@@ -102,6 +104,7 @@ public class InitialAddPanel extends InitialManagePanel{
 					currentVO.perNumber = infoList.label.labels.get(1).getText();
 					currentVO.time = infoList.label.labels.get(2).getText();
 					if(initialbl.addInitial(currentVO)==ResultMessage.SUCCESS){
+						ConstantVal.numberbl.addone(NumberType.INITIAL, number);
 						ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, 3);
 						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(InitialAddPanel.this), "建账成功");
 						InitialCheckPanel checkPanel = (InitialCheckPanel)parent.getComponent(0);

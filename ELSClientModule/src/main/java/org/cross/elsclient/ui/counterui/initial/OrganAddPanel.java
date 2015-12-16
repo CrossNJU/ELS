@@ -17,6 +17,7 @@ import org.cross.elscommon.util.StringToType;
 public class OrganAddPanel extends ELSInfoPanel{
 	ArrayList<OrganizationVO> vos;
 	OrganizationVO vo;
+	String number;
 	
 	public OrganAddPanel(ArrayList<OrganizationVO> vos) {
 		super();
@@ -32,7 +33,8 @@ public class OrganAddPanel extends ELSInfoPanel{
 		String organs[] = OrganizationType.toStrings();
 		
 		setTitle("新增机构");
-		addEditableItem("机构编号", ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION),false);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION);
+		addEditableItem("机构编号",number ,false);
 		addComboxItem("地区", citys, true);
 		addComboxItem("机构", organs, true);
 	
@@ -49,6 +51,7 @@ public class OrganAddPanel extends ELSInfoPanel{
 			vo = new OrganizationVO(StringToType.toCity(itemLabels.get(1).toString()),
 					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(0).toString());
 			vos.add(vo);
+			ConstantVal.numberbl.addone(NumberType.ORGANIZATION, number);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			back();

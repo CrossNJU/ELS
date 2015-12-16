@@ -17,6 +17,7 @@ import org.cross.elscommon.util.StringToType;
 public class OrganizationAddPanel extends ELSInfoPanel{
 	OrganizationVO vo;
 	OrganizationBLService bl;
+	String number;
 	
 	public OrganizationAddPanel(OrganizationBLService bl){
 		this.bl = bl;
@@ -32,7 +33,8 @@ public class OrganizationAddPanel extends ELSInfoPanel{
 		String[] area = {"北京","上海", "南京","广州"};
 		
 		setTitle("机构详细信息");
-		addEditableItem("机构编号", ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION),false);
+		number =  ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION);
+		addEditableItem("机构编号",number,false);
 		addComboxItem("机构地区", area, true);
 		addComboxItem("机构类型", types,true);
 		
@@ -49,6 +51,7 @@ public class OrganizationAddPanel extends ELSInfoPanel{
 			try {
 				if(bl.add(vo)==ResultMessage.SUCCESS){
 					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+					ConstantVal.numberbl.addone(NumberType.ORGANIZATION, number);
 					back();
 				}else{
 					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
