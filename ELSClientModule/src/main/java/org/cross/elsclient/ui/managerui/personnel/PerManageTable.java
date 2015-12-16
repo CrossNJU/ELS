@@ -61,7 +61,7 @@ public class PerManageTable extends ELSManageTable {
 	public void deleteBtn(int index) {
 		super.deleteBtn(index);
 		try {
-			if(personnelbl.delete(vos.get(index).id)==ResultMessage.SUCCESS){
+			if(personnelbl.delete(vos.get(index).number)==ResultMessage.SUCCESS){
 				//从展示层删除该项
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);

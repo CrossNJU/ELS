@@ -30,8 +30,8 @@ public class AccountUpdatePanel extends ELSInfoPanel{
 		setTitle("修改账户");
 		addEditableItem("账户名称", vo.name, true,InfoType.NAME);
 		addEditableItem("账户卡号", vo.account, false);
-		addEditableItem("账户余额", String.valueOf(vo.balance), true,InfoType.NUM);
-		
+//		addEditableItem("账户余额", String.valueOf(vo.balance), true,InfoType.NUM);
+		addEditableItem("账户余额", String.valueOf(vo.balance), false);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认修改");
 		cancelBtn.setText("取消修改");

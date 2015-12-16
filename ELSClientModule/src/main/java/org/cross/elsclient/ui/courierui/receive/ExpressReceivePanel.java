@@ -63,7 +63,7 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		addEditableItem("收件人手机", "", true);
 		addComboxItem("出发城市", City.toStrings(), true);
 		addComboxItem("到达城市", City.toStrings(), true);
-		addComboxItem("快递类型", StockType.toStrings(), true);
+		addComboxItem("快递类型", StockType.toGoodsStrings(), true);
 		addEditableItem("货物件数", "1", true,InfoType.NUM);
 		//15
 		addAutoItem("货物重量(kg)", "", true,InfoType.NUM);

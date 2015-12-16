@@ -75,7 +75,7 @@ public class ConstantVO {
 		distance_Nanjing_Guangzhou = 1132;
 		distance_Nanjing_Shanghai = 266;
 		distance_Shanghai_Guangzhou = 1213;
-		timeBykilo = 1;
+		timeBykilo = 0.06;
 		baseMoneyForCOURIER = 0;
 		baseMoneyForBUSINESSHALLCLERK = 0;
 		baseMoneyForTRANSITCENTERCLERK = 0;

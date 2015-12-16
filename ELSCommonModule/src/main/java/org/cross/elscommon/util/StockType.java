@@ -19,9 +19,28 @@ public enum StockType {
 		}
 	}
 	
+	public String toGoodsString() {
+		switch (this) {
+		case Fast:
+			return "特快快件";
+		case COMMON:
+			return "标准快件";
+		case ECONOMICAL:
+			return "经济快件";
+		default:
+			return null;
+		}
+	}
+	
 	public static String[] toStrings(){
 		String result[] = {Fast.toString(),COMMON.toString(),ECONOMICAL.toString()};
 		return result;
 	}
+	
+	public static String[] toGoodsStrings(){
+		String result[] = {Fast.toGoodsString(),COMMON.toGoodsString(),ECONOMICAL.toGoodsString()};
+		return result;
+	}
+	
 
 }

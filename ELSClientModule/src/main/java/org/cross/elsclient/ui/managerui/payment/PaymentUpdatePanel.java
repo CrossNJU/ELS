@@ -47,7 +47,7 @@ public class PaymentUpdatePanel extends ELSInfoPanel{
 		
 		
 		addConfirmAndCancelBtn();
-		confirmBtn.setText("确认添加");
+		confirmBtn.setText("确认修改");
 		cancelBtn.setText("取消添加");
 		setBackPanel("add");
 	}
