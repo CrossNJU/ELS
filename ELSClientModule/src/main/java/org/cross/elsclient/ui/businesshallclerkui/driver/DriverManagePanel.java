@@ -14,6 +14,7 @@ import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.PersonnelVO;
@@ -31,6 +32,7 @@ public class DriverManagePanel extends ELSManagePanel{
 	public DriverManagePanel(PersonnelBLService personnelbl, UserVO user) {
 		super();
 		this.personnelbl = personnelbl;
+		this.user = user;
 		init();
 	}
 	
@@ -54,7 +56,7 @@ public class DriverManagePanel extends ELSManagePanel{
 		searchBtn.setText("查找司机");
 		searchBtn.addMouseListener(new BtnListener());
 		
-		addBtn = new ELSButton();
+		addBtn = ComponentFactory.createSearchBtn();
 		addBtn.setText("添加司机");
 		addBtn.addMouseListener(new BtnListener());
 		

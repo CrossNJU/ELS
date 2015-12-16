@@ -14,4 +14,5 @@ public interface NumberBLService {
 	 */
 	public String getPostNumber(NumberType type);
 	public NumberPO getPO()throws RemoteException;
+	public void addone(NumberType type,String number);
 }

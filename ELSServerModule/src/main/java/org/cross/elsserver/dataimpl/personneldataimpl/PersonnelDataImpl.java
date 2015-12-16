@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
+import org.cross.elscommon.po.DriverPO;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.PositionType;
@@ -21,10 +22,12 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 	private static final long serialVersionUID = 1L;
 
 	MySQL mysql;
-
+	DriverDataImpl driverDataImpl;
+	
 	public PersonnelDataImpl() throws RemoteException {
 		super();
 		this.mysql = new MySQL();
+		driverDataImpl = new DriverDataImpl();
 	}
 
 	@Override
@@ -54,15 +57,20 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 		if (!mysql.execute(sql)) {
 			return ResultMessage.FAILED;
 		}
+		if (po.getPosition() == PositionType.DRIVER) {
+			return driverDataImpl.insert(po);
+		}
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
 		String sql = "delete from `personnel` where `number`='" + id + "'";
+		
 		if (!mysql.execute(sql)) {
 			return ResultMessage.FAILED;
 		}
+		driverDataImpl.delete(id);
 		return ResultMessage.SUCCESS;
 	}
 
@@ -89,6 +97,9 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 		PersonnelPO po = null;
 		try {
 			if (rs.next()) {
+				if (StringToType.toPositionType(rs.getString("position")) == PositionType.DRIVER) {
+					return driverDataImpl.getFromDB(rs.getString("number"));
+				}
 				po = new PersonnelPO(rs.getString("number"), rs.getString("name"),
 						StringToType.toPositionType(rs.getString("position")), rs.getString("orgNum"),
 						rs.getDouble("payment"), rs.getInt("sex"), rs.getString("id"), rs.getString("phone"),
@@ -123,13 +134,14 @@ public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelD
 		return pos;
 	}
 	
-//	public static void main(String[] args) throws RemoteException{
-//
-//		PersonnelPO updateVO = new PersonnelPO("P29839", "cdn",
-//				PositionType.ADMINISTRATOR, "O00932",0, 1, "321287199999378", null, null);
-//		PersonnelDataImpl impl = new PersonnelDataImpl();
-//		if(impl.update(updateVO) == ResultMessage.SUCCESS) System.out.println("success");
-//		else System.out.println("fail");
-//	}
+	public static void main(String[] args) throws RemoteException{
+
+		DriverPO dpo = new DriverPO("P29839", "cdn",
+				PositionType.DRIVER, "O00932",0, 1, "321287199999378", null, null,null,null);
+		PersonnelDataImpl impl = new PersonnelDataImpl();
+		if(impl.insert(dpo)== ResultMessage.SUCCESS) System.out.println("success");
+		else System.out.println("fail");
+		
+	}
 
 }

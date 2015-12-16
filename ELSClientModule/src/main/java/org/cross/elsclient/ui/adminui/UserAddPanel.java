@@ -19,6 +19,7 @@ import org.cross.elscommon.util.StringToType;
 public class UserAddPanel extends ELSInfoPanel{
 	UserVO vo;
 	UserBLService bl;
+	String getone;
 	
 	public UserAddPanel(UserBLService bl) {
 		this.bl = bl;
@@ -33,7 +34,8 @@ public class UserAddPanel extends ELSInfoPanel{
 		//ELSInfoPanel提供了三种添加条目的类型:文字，编辑框，下拉框
 		//要拿到其中的信息，要调用对应的itemLabel.toString()的方法
 		setTitle("新增用户");
-		addEditableItem("用户名", ConstantVal.getNumber().getPostNumber(NumberType.USER), false);
+		getone = ConstantVal.getNumber().getPostNumber(NumberType.USER);
+		addEditableItem("用户名",getone , false);
 		addEditableItem("姓名","", true,InfoType.NAME);
 		String items[] = {"快递员", "营业厅业务员","中转中心业务员","仓库管理人员","财务人员","高级财务人员","总经理","系统管理员"};
 		addComboxItem("职位", items, true);
@@ -52,6 +54,7 @@ public class UserAddPanel extends ELSInfoPanel{
 			vo = new UserVO(itemLabels.get(0).toString(), itemLabels.get(3).toString(),itemLabels.get(1).toString(), 
 					StringToType.toUserType(itemLabels.get(2).toString()),itemLabels.get(4).toString());
 			if(bl.add(vo)==ResultMessage.SUCCESS){
+				ConstantVal.numberbl.addone(NumberType.USER, getone);
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 				back();
 			}else{

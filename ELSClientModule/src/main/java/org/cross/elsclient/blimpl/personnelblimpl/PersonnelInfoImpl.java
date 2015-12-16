@@ -44,18 +44,19 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		} else {
 			sex = "女";
 		}
-		PersonnelVO vo = new PersonnelVO(po.getNumber(), po.getName(),
-				po.getPosition(), po.getOrgNum(), sex, po.getId(),
-				po.getPhone(), po.getBirth());
-		vo.salary = salary;
 		if (po.getPosition() == PositionType.DRIVER) {
-			DriverVO driverVO = (DriverVO)vo;
-			DriverPO driverPO = (DriverPO)po;
-			driverVO.licenceStart = driverPO.getLicenceStart();
-			driverVO.licenceEnd = driverPO.getLicenceEnd();
-			return driverVO;
+			DriverPO driverPO = (DriverPO) po;
+			DriverVO dvo = new DriverVO(driverPO.getNumber(), driverPO.getName(), driverPO.getPosition(), driverPO.getOrgNum(), sex, driverPO.getId(), driverPO.getPhone(), driverPO.getBirth(), null, driverPO.getLicenceStart(), driverPO.getLicenceEnd());
+			dvo.salary = salary;
+			return dvo;
+		}else {
+			PersonnelVO vo = new PersonnelVO(po.getNumber(), po.getName(),
+					po.getPosition(), po.getOrgNum(), sex, po.getId(),
+					po.getPhone(), po.getBirth());
+			vo.salary = salary;
+			return vo;
+			
 		}
-		return vo;
 	}
 
 	@Override
@@ -69,15 +70,18 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		} else {
 			s = 0;
 		}
-		PersonnelPO po = new PersonnelPO(vo.number, vo.name, vo.position,
-				vo.orgNum, vo.salary.getSalaryByMonth(), s, vo.id, vo.phone,
-				vo.birthday);
-		if (po.getPosition() == PositionType.DRIVER) {
-			DriverVO driverVO = (DriverVO)vo;
-			DriverPO driverPO = (DriverPO)po;
-			driverPO.setLicenceEnd(driverVO.licenceEnd);
-			driverPO.setLicenceStart(driverVO.licenceStart);
-			return driverPO;
+		PersonnelPO po = null;
+		DriverPO dpo = null;
+		if (vo.position == PositionType.DRIVER) {
+			DriverVO dvo = (DriverVO) vo;
+			dpo = new DriverPO(dvo.number, dvo.name, dvo.position, dvo.orgNum,
+					dvo.salary.getAddOnce(), s, dvo.id, dvo.phone,
+					dvo.birthday, dvo.licenceStart, dvo.licenceEnd);
+			return dpo;
+		} else {
+			po = new PersonnelPO(vo.number, vo.name, vo.position, vo.orgNum,
+					vo.salary.getSalaryByMonth(), s, vo.id, vo.phone,
+					vo.birthday);
 		}
 		return po;
 	}

@@ -12,7 +12,8 @@ import org.cross.elscommon.util.NumberType;
 public class VehicleAddPanel extends ELSInfoPanel {
 	VehicleBLService vehiclebl;
 	VehicleVO vo;
-
+	String number;
+	
 	public VehicleAddPanel(VehicleBLService bl) {
 		this.vehiclebl = bl;
 		init();
@@ -23,6 +24,7 @@ public class VehicleAddPanel extends ELSInfoPanel {
 		// TODO Auto-generated method stub
 		super.init();
 		
+		number = ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE);
 		setTitle("新增车辆信息");
 		/*0*/addEditableItem("车辆编号", ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE), false);
 		addEditableItem("车牌号", "",true,InfoType.NAME);

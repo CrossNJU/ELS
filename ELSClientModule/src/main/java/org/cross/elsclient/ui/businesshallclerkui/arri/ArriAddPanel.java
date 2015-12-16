@@ -39,6 +39,7 @@ public class ArriAddPanel extends ELSInfoPanel {
 	ReceiptBLService receiptbl;
 	GoodsBLService goodsbl;
 	UserVO user;
+	String number;
 
 	public ArriAddPanel(ReceiptBLService receiptbl, UserVO user, GoodsBLService goodsbl) {
 		this.receiptbl = receiptbl;
@@ -55,8 +56,9 @@ public class ArriAddPanel extends ELSInfoPanel {
 
 		String it1[] = { "南京", "北京", "上海", "广州" };
 
+		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
 		setTitle("新增到达单");
-		/* 0 */addEditableItem("到达单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
+		/* 0 */addEditableItem("到达单编号",number , false);
 		/* 1 */addEditableItem("装车/中转单号", "", true, InfoType.NAME);
 		/* 2 */addEditableItem("出发机构", "", true, InfoType.NAME);
 		/* 3 */addDateItem("出发时间", true);
@@ -87,6 +89,7 @@ public class ArriAddPanel extends ELSInfoPanel {
 		}
 		if (receiptbl.add(arrivo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
+			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 //			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");

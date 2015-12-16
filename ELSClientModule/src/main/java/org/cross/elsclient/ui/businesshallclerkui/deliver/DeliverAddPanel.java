@@ -43,6 +43,7 @@ public class DeliverAddPanel extends ELSInfoPanel {
 	ReceiptBLService receiptbl;
 	GoodsBLService goodsbl;
 	UserVO user;
+	String number;
 
 	public DeliverAddPanel(ReceiptBLService receiptbl, UserVO user, GoodsBLService goodsbl) {
 		this.receiptbl = receiptbl;
@@ -56,7 +57,8 @@ public class DeliverAddPanel extends ELSInfoPanel {
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增派件单");
-		/* 0 */addEditableItem("派件单编号", ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT), false);
+		number =  ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
+		/* 0 */addEditableItem("派件单编号",number, false);
 		addDateItem("派件时间", false);
 		addEditableItem("快件单编号", "", true,InfoType.ID);
 		addEditableItem("快递员工号", "", true,InfoType.ID);
@@ -81,6 +83,7 @@ public class DeliverAddPanel extends ELSInfoPanel {
 		goodsbl.updateGoods(goods);
 		if (receiptbl.add(delvo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
+			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 //			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");

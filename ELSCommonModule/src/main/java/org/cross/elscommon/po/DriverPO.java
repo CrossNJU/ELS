@@ -3,10 +3,6 @@ package org.cross.elscommon.po;
 import org.cross.elscommon.util.PositionType;
 
 public class DriverPO extends PersonnelPO {
-	/**
-	 * 司机编号
-	 */
-	private String number;
 
 	/**
 	 * 行驶证开始时间
@@ -20,19 +16,10 @@ public class DriverPO extends PersonnelPO {
 
 	public DriverPO(String number, String name, PositionType position,
 			String orgNum, double payment, int sex, String id, String phone,
-			String birth, String number2, String licenceStart, String licenceEnd) {
+			String birth, String licenceStart, String licenceEnd) {
 		super(number, name, position, orgNum, payment, sex, id, phone, birth);
-		number = number2;
 		this.licenceStart = licenceStart;
 		this.licenceEnd = licenceEnd;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 	public String getLicenceStart() {

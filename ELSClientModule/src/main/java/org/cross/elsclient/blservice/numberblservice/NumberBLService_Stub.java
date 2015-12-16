@@ -54,4 +54,10 @@ public class NumberBLService_Stub implements NumberBLService {
 		return null;
 	}
 
+	@Override
+	public void addone(NumberType type, String number) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
