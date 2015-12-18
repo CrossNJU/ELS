@@ -55,7 +55,9 @@ public class MoneyInManagePanel extends ELSManagePanel {
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2
 						+ UIConstant.SEARCHPANEL_HEIGHT);
+		
 		container.add(list);
+		show();
 	}
 
 	@Override
@@ -85,6 +87,33 @@ public class MoneyInManagePanel extends ELSManagePanel {
 		searchPanel.add(Box.createHorizontalStrut(5), 3);
 		searchPanel.add(beginDate, 3);
 		searchPanel.validate();
+	}
+	
+	public void show(){
+		list.init();
+		moneyInVOs = new ArrayList<>();
+		// 需修改
+		 try {
+			ArrayList<ReceiptVO> receiptVOs = receiptbl.show();
+			for (ReceiptVO receiptVO : receiptVOs) {
+				if(receiptVO!=null){
+					if(receiptVO instanceof Receipt_MoneyInVO){
+						moneyInVOs.add(receiptVO); 
+					}
+				}
+			}
+		} catch (RemoteException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		for (ReceiptVO receipt : moneyInVOs) {
+			Receipt_MoneyInVO receipt_MoneyInVO = (Receipt_MoneyInVO) receipt;
+			String[] item = { "" + receipt.number,
+					receipt.time,
+					receipt_MoneyInVO.money+"" };
+			list.addItemLabel(item);
+		}
+		container.packHeight();
 	}
 
 	class BtnListener implements MouseListener {
@@ -121,6 +150,24 @@ public class MoneyInManagePanel extends ELSManagePanel {
 					
 					container.packHeight();
 				} else if (((String) modeBox.getSelectedItem()).equals("按时间查询")) {
+					moneyInVOs = new ArrayList<>();
+					try {
+						moneyInVOs = receiptbl.findByTimeAndType(beginDate.getDateString(), endDate.getDateString(), ReceiptType.MONEYIN);
+						
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					list.init();
+					for (ReceiptVO receipt : moneyInVOs) {
+						Receipt_MoneyInVO receipt_MoneyInVO = (Receipt_MoneyInVO) receipt;
+						String[] item = { "" + receipt.number,
+								receipt.time,
+								receipt_MoneyInVO.money+"" };
+						list.addItemLabel(item);
+					}
+					list.validate();
+					container.packHeight();
 
 				} else if (((String) modeBox.getSelectedItem())
 						.equals("按营业厅查找")) {

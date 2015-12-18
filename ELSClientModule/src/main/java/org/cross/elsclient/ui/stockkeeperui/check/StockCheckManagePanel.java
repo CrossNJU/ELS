@@ -37,10 +37,9 @@ public class StockCheckManagePanel extends ELSManagePanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		init();
-		container.remove(searchPanel);
 	}
+	
 
 	@Override
 	public void setContentPanel(){
@@ -53,6 +52,7 @@ public class StockCheckManagePanel extends ELSManagePanel{
 			list.addItem(check);
 		}
 		container.add(list);
+		container.remove(searchPanel);
 	}
 	
 }

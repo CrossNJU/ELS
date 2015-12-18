@@ -69,6 +69,7 @@ public class TotalAddPanel extends ELSInfoPanel{
 			if(bl.add(vo)==ResultMessage.SUCCESS){
 				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+				init();
 				back();
 			}else{
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");

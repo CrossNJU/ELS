@@ -45,7 +45,19 @@ public class AccountManagePanel extends ELSManagePanel {
 		int[] itemWidth = {200,300,150};
 		list= new AccountManageTable(s,itemWidth,accountbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		
+		try {
+			accountVOs = accountbl.show();
+			list.init();
+			for (AccountVO accountVO : accountVOs) {
+				list.addItem(accountVO);
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		container.add(list);
+		container.packHeight();
 	}
 	
 	@Override

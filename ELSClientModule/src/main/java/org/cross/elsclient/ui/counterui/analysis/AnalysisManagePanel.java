@@ -1,3 +1,5 @@
+
+
 package org.cross.elsclient.ui.counterui.analysis;
 
 import java.awt.Dimension;
@@ -22,6 +24,8 @@ import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.ReceiptVO;
+import org.cross.elsclient.vo.Receipt_MoneyInVO;
+import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 
 public class AnalysisManagePanel extends ELSManagePanel {
 	AnalysisBLService analysisbl;
@@ -87,9 +91,28 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		int[] itemWidth2 = {150,100,150,100};
 		list2 = new AnalysisManageTable(name2, itemWidth2, analysisbl);
 		list2.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, searchPanel.getHeight()+searchPanel.getLocation().y+15);
+		list2.init();
+		try {
+			receiptVOs = new ArrayList<>();
+			ArrayList<Receipt_MoneyInVO> tempInVos = analysisbl.showMoneyinTable("1000-01-01", "3000-01-01");
+			if(tempInVos!=null){
+				receiptVOs.addAll(tempInVos);
+			}
+			ArrayList<Receipt_MoneyInVO> tempOutVos = analysisbl.showMoneyinTable("1000-01-01", "3000-01-01");
+			if(tempOutVos!=null){
+				receiptVOs.addAll(tempOutVos);
+			}
+			for (ReceiptVO receiptVO : receiptVOs) {
+				list2.addItem(receiptVO);
+			}
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		this.container.add(list1);
 		this.container.add(list2);
+		container.packHeight();
 	
 	}
 	
