@@ -3,7 +3,6 @@ package org.cross.elscommon.util;
 public class CompareTime {
 	
 	public static int compare(String first, String second){
-		System.out.println(first+" "+second);
 		MyTime time1 = getTime(first);
 		MyTime time2 = getTime(second);
 		return time1.compareWith(time2);
@@ -11,7 +10,7 @@ public class CompareTime {
 	}
 	
 	public static MyTime getTime(String time){
-		System.out.println(time);
+//		System.out.println(time);
 		String[] temp = time.split(" ");
 		String[] temp1 = temp[0].split("-");
 		String[] temp2 = new String[3];
