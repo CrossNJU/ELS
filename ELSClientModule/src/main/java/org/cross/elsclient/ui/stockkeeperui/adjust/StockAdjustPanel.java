@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui.stockkeeperui.adjust;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
@@ -27,15 +28,33 @@ public class StockAdjustPanel extends ELSInfoPanel{
 	
 	@Override
 	public void init(){
+		System.out.println("in");
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		
 		//需呀find
-		String[] it1 = {"S0001-特快"};
-		String[] it2 = {"S0002"};
+		String[] it1 = null;
+		String[] it2 = null;
+		ArrayList<String> it1s;
+		ArrayList<String> it2s;
+		try {
+			it2s = stockbl.getChangeableArea(stockvo.number);
+			it2 = new String[it2s.size()];
+			for (int i = 0; i < it2.length; i++) {
+				it2[i] = it2s.get(i);
+			}
+			it1s = stockbl.getNeedChange(stockvo.number);
+			it1 = new String[it1s.size()];
+			for (int i = 0; i < it1.length; i++) {
+				it1[i] = it1s.get(i);
+			}
+			
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		
 		setTitle("调整库存");
-		/*0*/addComboxItem("需要调整的仓库", it1, true);
+		/*0*/addComboxItem("需要调整的类型", it1, true);
 		addComboxItem("需要配合的仓库", it2, true);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认调整");

@@ -106,5 +106,8 @@ public interface StockBLService {
 	 * 根据机构查找仓库
 	 */
 	public StockVO findStockByOrg(String orgNum) throws RemoteException;
-	
+	/**
+	 * 得到需要调整的仓库
+	 */
+	public ArrayList<String> getNeedChange(String stockID) throws RemoteException;
 }

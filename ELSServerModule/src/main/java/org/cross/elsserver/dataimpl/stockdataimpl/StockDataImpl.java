@@ -228,10 +228,11 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 //			StockPO stockPO = stockDataImpl.findStockByNumber("S001");
 //			System.out.println(po.getNumber() + " " + po.getStockType());
 //			System.out.println(stockPO.getNumber());
-			ArrayList<StockOperationPO> operationPOs = stockDataImpl.findStockOPByTime("2015-10-23 10:12", "2015-12-12 10:20");
+//			ArrayList<StockOperationPO> operationPOs = stockDataImpl.findStockOPByTime("2015-10-23 10:12:01", "2015-12-12 10:20:01");
 //			ArrayList<StockAreaPO> areaPOs = stockDataImpl.findStockAreaByStock("S0032902");
+			System.out.println(CompareTime.compare("2015-10-23 10:12:01", "2015-12-12 10:20:01"));
 //			System.out.println(CompareTime.compare("2015-10-23 10:12",operationPOs.get(0).getTime()));
-			System.out.println(operationPOs.size());
+//			System.out.println(operationPOs.size());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -96,6 +96,8 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			System.out.println("begin : " + beginDate.getDateString());
+			System.out.println("end : " + endDate.getDateString());
 			try {
 				stocksee = stockbl.showStockInfo(stock.number, beginDate.getDateString(), endDate.getDateString());
 			} catch (RemoteException e1) {

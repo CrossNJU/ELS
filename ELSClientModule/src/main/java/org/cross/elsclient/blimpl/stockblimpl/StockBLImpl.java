@@ -55,7 +55,7 @@ public class StockBLImpl implements StockBLService {
 		int size = areaPO.size();
 
 		for (int i = 0; i < size; i++) {
-
+			System.out.println("area num :" + areaPO.get(i).getNumber());
 			ArrayList<GoodsVO> goodsPOs = goodsInfo.findGoodsFromArea(areaPO
 					.get(i).getNumber());
 
@@ -63,11 +63,13 @@ public class StockBLImpl implements StockBLService {
 				continue;
 
 			int size1 = goodsPOs.size();
+			System.out.println("goods size : " + size1);
 			for (int j = 0; j < size1; j++) {
+//				System.out.println("instock:"+goodsPOs.get(j).number+" "+areaPO.get(i).getNumber());
 				String inTime = "";
 				for (int j2 = 0; j2 < operationPOs.size(); j2++) {
 					if (operationPOs.get(j2).getGoodsNum().equals(goodsPOs.get(j).number))
-						inTime = operationPOs.get(i).getTime();
+						inTime = operationPOs.get(j2).getTime();
 				}
 
 				Receipt_OrderVO order = (Receipt_OrderVO) receiptInfo
@@ -79,6 +81,7 @@ public class StockBLImpl implements StockBLService {
 				StockCheckVO check = new StockCheckVO(goodsPOs.get(j).number,
 						inTime, targetCity, areaPO.get(i).getNumber());
 				checkVOs.add(check);
+				System.out.println("checkvos size : " + checkVOs.size());
 			}
 		}
 		return checkVOs;
@@ -322,18 +325,22 @@ public class StockBLImpl implements StockBLService {
 		StockPO po = stockData.findStockByOrg(orgNum);
 		return stockInfo.toStockVO(po);
 	}
-	// public static void main(String[] args){
-	// Datafactory datafactory = new Datafactory();
-	// StockDataService stockDataImpl = datafactory.getStockData();
-	// try {
-	// StockAreaPO po = stockDataImpl.findStockAreaByNumber("SA00001");
-	// StockPO stockPO = stockDataImpl.findStockByNumber("S001");
-	// System.out.println(po.getNumber());
-	// System.out.println(stockPO.getNumber());
-	// } catch (RemoteException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
+	
+
+	@Override
+	public ArrayList<String> getNeedChange(String stockID)
+			throws RemoteException {
+		ArrayList<String> type = new ArrayList<String>();
+		if (stockAlert(stockID, StockType.COMMON) == StockState.ALERT) {
+			type.add("标准快递仓库");
+		}
+		if (stockAlert(stockID, StockType.Fast) == StockState.ALERT) {
+			type.add("特快仓库");
+		}
+		if (stockAlert(stockID, StockType.ECONOMICAL) == StockState.ALERT) {
+			type.add("经济快递仓库");
+		}
+		return type;
+	}
 
 }
