@@ -86,4 +86,10 @@ public class StockBL_stub implements StockBLService{
 		return null;
 	}
 
+	@Override
+	public ArrayList<String> getNeedChange(String stockID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -14,7 +14,9 @@ import org.cross.elsclient.ui.adminui.UserUpdatePanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.util.ResultMessage;
@@ -52,38 +54,40 @@ public class VehicleManageTable extends ELSManageTable {
 
 	@Override
 	public void infoBtn(int index) {
+		System.out.println("in");
 		super.infoBtn(index);
-		ELSPanel contentPanel = (ELSPanel) getParent().getParent().getParent();
+		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this,"vehicle");
 		VehicleVO vo = vos.get(index);
-		contentPanel.add(new VehicleInfoPanel(vo), "info");
+		contentPanel.add("info",new VehicleInfoPanel(vo));
 		contentPanel.cl.show(contentPanel, "info");
 	}
 
 	@Override
 	public void updateBtn(int index) {
 		super.updateBtn(index);
-		ELSPanel contentPanel = (ELSPanel) getParent().getParent().getParent();
-		VehicleManagePanel parent = (VehicleManagePanel) getParent()
-				.getParent();
+		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, "vehicle");
 
-		contentPanel.add(new VehicleUpdatePanel(vos.get(index),
-				parent.vehiclebl), "update");
+		contentPanel.add("update",new VehicleUpdatePanel(vos.get(index),
+				vehiclebl));
 		contentPanel.cl.show(contentPanel, "update");
 	}
 
 	@Override
 	public void deleteBtn(int index) {
-		super.deleteBtn(index);
-		VehicleManagePanel parent = (VehicleManagePanel) getParent()
-				.getParent();
 		try {
-			if (parent.vehiclebl.delete(vos.get(index).number) == ResultMessage.SUCCESS) {
+			if (vehiclebl.delete(vos.get(index).number) == ResultMessage.SUCCESS) {
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);
 
 				vos.remove(index);
+				packHeight();
+				((ELSPanel)getParent()).packHeight();
 				container.validate();
 				container.repaint();
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除成功");
+			}
+			else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除失败");
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

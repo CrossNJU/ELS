@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.util.InfoType;
@@ -32,7 +33,7 @@ public class VehicleAddPanel extends ELSInfoPanel {
 		setTitle("新增车辆信息");
 		/*0*/addEditableItem("车辆编号", ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE), false);
 		addEditableItem("车牌号", "",true,InfoType.NAME);
-		addEditableItem("营业厅编号", "",true,InfoType.NAME);
+		addEditableItem("营业厅编号", UIConstant.CURRENT_USER.orgNameID ,false);
 		addDateItem("购买时间", true);
 		addDateItem("服役时间", true);
 		addEditableItem("发动机号", "",true,InfoType.NAME);
