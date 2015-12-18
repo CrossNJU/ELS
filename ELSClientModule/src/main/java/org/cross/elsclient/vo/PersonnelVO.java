@@ -78,7 +78,7 @@ public class PersonnelVO {
 			type = SalaryType.BYMONTHONLY;
 		}
 		
-		this.salary = new SalaryPO(type, ConstantVal.CONSTANT.getBaseMoney(position), once, num, number);
+		this.salary = new SalaryPO(type, ConstantVal.constantbl.show().getBaseMoney(position), once, num, number);
 	}
 
 }

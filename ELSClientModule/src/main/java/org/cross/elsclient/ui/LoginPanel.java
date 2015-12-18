@@ -63,7 +63,6 @@ public class LoginPanel extends ELSPanel{
 	
 	public LoginPanel() {
 		init();
-		ConstantVal.CONSTANT = new ConstantVO();
 		ConstantVal.constantbl = ConstantVal.getConstant();
 		ConstantVal.numberbl = ConstantVal.getNumber();
 	}

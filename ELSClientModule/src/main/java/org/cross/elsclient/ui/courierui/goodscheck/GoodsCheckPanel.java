@@ -59,7 +59,8 @@ public class GoodsCheckPanel extends ELSManagePanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			try {
-				historyVOs = goodsbl.findGoods(searchTextField.getText());
+				historyVOs = new ArrayList<>();
+				historyVOs.addAll(goodsbl.findGoods(searchTextField.getText()));
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

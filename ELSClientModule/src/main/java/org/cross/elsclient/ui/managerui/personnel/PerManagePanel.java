@@ -88,7 +88,10 @@ public class PerManagePanel extends ELSManagePanel {
 					String id = searchTextField.getText();
 					personnelVOs = new ArrayList<>();
 					try {
-						personnelVOs.add(personnelbl.findById(id));
+						PersonnelVO vo = personnelbl.findById(id);
+						if(vo!=null){
+							personnelVOs.add(vo);
+						}
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

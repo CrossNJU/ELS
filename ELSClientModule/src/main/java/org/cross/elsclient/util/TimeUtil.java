@@ -13,5 +13,14 @@ public class TimeUtil {
 		return sdf.format(date);
 	}
 	
+	public static String getAfterTime(int hour){
+		TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR_OF_DAY, hour);
+		Date date = cal.getTime();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(date);
+	}
+	
 	
 }

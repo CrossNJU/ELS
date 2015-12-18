@@ -234,8 +234,8 @@ public class ConstantPO implements Serializable {
 	}
 
 	public ConstantPO() {
-		price = 23;
-		timeBykilo = 100;
+		price = 1;
+		timeBykilo = 1;
 		baseMoneyForADMINISTRATOR = 4000;
 		baseMoneyForBUSINESSHALLCLERK = 5000;
 		baseMoneyForCOUNTER = 6000;

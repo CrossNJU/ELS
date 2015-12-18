@@ -41,6 +41,17 @@ public class ConstantUpdatePanel extends ELSInfoPanel {
 		addNormalItem("", "");
 		addEditableItem("价格(元/(kilo*kg))", vo.price+"",true,InfoType.NUM);
 		addEditableItem("预估时间(hour/km)", vo.timeBykilo+"",true,InfoType.NUM);
+		addNormalItem("", "");
+		addNormalItem("初始工资(元/月)", "");
+		itemLabels.get(11).nameLabel.setFont(itemLabels.get(11).nameLabel.getFont().deriveFont(Font.BOLD));
+		addEditableItem("快递员", vo.baseMoneyForCOURIER+"",true,InfoType.NUM);
+		addEditableItem("营业厅业务员", vo.baseMoneyForBUSINESSHALLCLERK+"",true,InfoType.NUM);
+		addEditableItem("中转中心业务员", vo.baseMoneyForTRANSITCENTERCLERK+"",true,InfoType.NUM);
+		addEditableItem("仓库管理员", vo.baseMoneyForSTOCKKEEPER+"",true,InfoType.NUM);
+		addEditableItem("财务人员", vo.baseMoneyForCOUNTER+"",true,InfoType.NUM);
+		addEditableItem("总经理", vo.baseMoneyForMANAGER+"",true,InfoType.NUM);
+		addEditableItem("系统管理员", vo.baseMoneyForADMINISTRATOR+"",true,InfoType.NUM);
+		
 		
 		for (InfoItemLabel infoItemLabel : itemLabels) {
 			infoItemLabel.nameLabel.setMaximumSize(new Dimension(170, UIConstant.MANAGETABLE_ITEM_HEIGHT));
@@ -66,8 +77,18 @@ public class ConstantUpdatePanel extends ELSInfoPanel {
 			vo.distance_Nanjing_Guangzhou = Double.valueOf(itemLabels.get(4).toString());
 			vo.distance_Nanjing_Shanghai = Double.valueOf(itemLabels.get(5).toString());
 			vo.distance_Shanghai_Guangzhou = Double.valueOf(itemLabels.get(6).toString());
+			
 			vo.price = Double.valueOf(itemLabels.get(8).toString());
 			vo.timeBykilo = Double.valueOf(itemLabels.get(9).toString());
+			
+			vo.baseMoneyForCOURIER = Double.valueOf(itemLabels.get(12).toString());
+			vo.baseMoneyForBUSINESSHALLCLERK = Double.valueOf(itemLabels.get(13).toString());
+			vo.baseMoneyForTRANSITCENTERCLERK = Double.valueOf(itemLabels.get(14).toString());
+			vo.baseMoneyForSTOCKKEEPER = Double.valueOf(itemLabels.get(15).toString());
+			vo.baseMoneyForCOUNTER = Double.valueOf(itemLabels.get(16).toString());
+			vo.baseMoneyForMANAGER = Double.valueOf(itemLabels.get(17).toString());
+			vo.baseMoneyForADMINISTRATOR = Double.valueOf(itemLabels.get(18).toString());
+			
 			if(bl.update(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更新成功");
 				back();

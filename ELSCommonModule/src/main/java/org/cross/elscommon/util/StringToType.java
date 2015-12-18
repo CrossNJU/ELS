@@ -35,10 +35,13 @@ public class StringToType {
 	public static StockType toGoodsType(String goodsType){
 		switch (goodsType) {
 		case "标准快递仓库":
+		case "标准快件":
 			return StockType.COMMON;
 		case "特快仓库":
+		case "特快快件":
 			return StockType.Fast;
 		case "经济快递仓库":
+		case "经济快件":
 			return StockType.ECONOMICAL;
 		default:
 			return null;

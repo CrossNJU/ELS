@@ -54,8 +54,8 @@ public class ReceiptManagePanel extends ELSManagePanel{
 		for (int i = 0; i < receiptvos.size(); i++) {
 			list.addItem(receiptvos.get(i));
 		}
-		container.packHeight();
 		container.add(list);
+		container.packHeight();
 	}
 	
 	@Override

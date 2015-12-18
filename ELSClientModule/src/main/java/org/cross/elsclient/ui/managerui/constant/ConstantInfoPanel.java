@@ -10,6 +10,7 @@ import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.vo.ConstantVO;
+import org.cross.elscommon.util.InfoType;
 
 public class ConstantInfoPanel extends ELSInfoPanel{
 	ConstantBLService constantbl;
@@ -34,21 +35,21 @@ public class ConstantInfoPanel extends ELSInfoPanel{
 		addNormalItem("南京-广州", vo.distance_Nanjing_Guangzhou+"km");
 		addNormalItem("南京-上海", vo.distance_Nanjing_Shanghai+"km");
 		addNormalItem("广州-上海", vo.distance_Shanghai_Guangzhou+"km");
-//		addNormalItem("", "");
-//		addNormalItem("底薪    ","" );
-//		
-//		itemLabels.get(8).nameLabel.setFont(itemLabels.get(8).nameLabel.getFont().deriveFont(Font.BOLD));
-//		addNormalItem("快递员", vo.baseMoneyForCOURIER+"元/月");
-//		addNormalItem("营业厅业务员", vo.baseMoneyForBUSINESSHALLCLERK+"元/月");
-//		addNormalItem("中转中心业务员", vo.baseMoneyForTRANSITCENTERCLERK+"元/月");
-//		addNormalItem("仓库管理员", vo.baseMoneyForSTOCKKEEPER+"元/月");
-//		addNormalItem("财务人员", vo.baseMoneyForCOUNTER+"元/月");
-//		addNormalItem("总经理", vo.baseMoneyForMANAGER+"元/月");
-//		addNormalItem("系统管理员", vo.baseMoneyForADMINISTRATOR+"元/月");
-		
+
 		addNormalItem("", "");
 		addNormalItem("价格", vo.price+"元/(kilo*kg)");
 		addNormalItem("预估时间", vo.timeBykilo+"hour/km");
+		
+		addNormalItem("", "");
+		addNormalItem("初始工资(元)", "");
+		itemLabels.get(11).nameLabel.setFont(itemLabels.get(11).nameLabel.getFont().deriveFont(Font.BOLD));
+		addNormalItem("快递员", vo.baseMoneyForCOURIER+"");
+		addNormalItem("营业厅业务员", vo.baseMoneyForBUSINESSHALLCLERK+"");
+		addNormalItem("中转中心业务员", vo.baseMoneyForTRANSITCENTERCLERK+"");
+		addNormalItem("仓库管理员", vo.baseMoneyForSTOCKKEEPER+"");
+		addNormalItem("财务人员", vo.baseMoneyForCOUNTER+"");
+		addNormalItem("总经理", vo.baseMoneyForMANAGER+"");
+		addNormalItem("系统管理员", vo.baseMoneyForADMINISTRATOR+"");
 		
 		addConfirmAndCancelBtn();
 		titlePanel.remove(titlePanel.backBtn);

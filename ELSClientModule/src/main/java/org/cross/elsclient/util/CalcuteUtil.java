@@ -9,7 +9,7 @@ public class CalcuteUtil {
 	
 	public static double calcutePrice(StockType type,double distance,double weight, String packCost){
 		double result;
-		result = ConstantVal.CONSTANT.price*distance*weight;
+		result = ConstantVal.constantbl.show().price*distance*weight;
 		switch (type) {
 		case Fast:
 			result*=1.2;

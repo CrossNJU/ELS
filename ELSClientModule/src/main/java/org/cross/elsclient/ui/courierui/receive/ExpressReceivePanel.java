@@ -5,6 +5,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.rmi.RemoteException;
+import java.util.Calendar;
 
 import javax.rmi.CORBA.Tie;
 
@@ -148,7 +149,7 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		City startCity = StringToType.toCity(itemLabels.get(11).toString());
 		City endCity = StringToType.toCity(itemLabels.get(12).toString());
 		int result = (int)(ConstantVal.CONSTANT.getDistance(startCity, endCity)*ConstantVal.CONSTANT.timeBykilo);
-		itemLabels.get(18).inputLabel.setText(result+" 小时后");
+		itemLabels.get(18).inputLabel.setText(TimeUtil.getAfterTime(result));
 	}
 	
 	class PriceListener implements FocusListener{
