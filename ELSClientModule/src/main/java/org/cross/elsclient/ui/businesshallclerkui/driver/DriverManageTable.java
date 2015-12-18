@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
@@ -67,16 +69,21 @@ public class DriverManageTable extends ELSManageTable{
 	@Override
 	public void deleteBtn(int index) {
 		super.deleteBtn(index);
-		DriverManagePanel parent = (DriverManagePanel) getParent()
-				.getParent();
 		try {
-			if (parent.personnelbl.delete(vos.get(index).id) == ResultMessage.SUCCESS) {
+			if (personnelbl.delete(vos.get(index).number) == ResultMessage.SUCCESS) {
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);
-
 				vos.remove(index);
+				
+				//自适应高度
+				packHeight();
+				((ELSPanel)getParent()).packHeight();
+				
 				container.validate();
 				container.repaint();
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除成功");
+			}else{
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除失败");
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
