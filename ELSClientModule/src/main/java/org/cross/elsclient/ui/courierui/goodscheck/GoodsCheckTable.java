@@ -29,4 +29,19 @@ public class GoodsCheckTable extends ELSManageTable{
 		String []item = {triggerPlace,triggerTime,arrivePlace,arriveTime};
 		addItemLabel(item);
 	}
+	
+	public void addItem(HistoryVO vo){
+		String place = vo.placeCity.toString()+vo.placeOrg.toString();
+		String time = vo.time;
+		String isArrive;
+		
+		if(vo.isArrive){
+			isArrive = "到达";
+		}else{
+			isArrive = "出发";
+		}
+		
+		String []item = {place,time,isArrive};
+		addItemLabel(item);
+	}
 }

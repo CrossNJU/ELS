@@ -29,7 +29,6 @@ public class UserAddPanel extends ELSInfoPanel{
 	@Override
 	public void init() {
 		super.init();
-//		vo = new UserVO("", "", null);
 		
 		//ELSInfoPanel提供了三种添加条目的类型:文字，编辑框，下拉框
 		//要拿到其中的信息，要调用对应的itemLabel.toString()的方法

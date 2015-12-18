@@ -18,12 +18,12 @@ public class ConstantInfoPanel extends ELSInfoPanel{
 	//城市间距离
 	public ConstantInfoPanel(ConstantBLService constantbl) {
 		this.constantbl = constantbl;
-		vo = constantbl.show();
 		init();
 	}
 	
 	@Override
 	public void init() {
+		vo = constantbl.show();
 		super.init();
 		setTitle("业务常量");
 		addNormalItem("城市距离", "");

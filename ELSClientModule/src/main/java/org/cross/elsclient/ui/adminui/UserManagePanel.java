@@ -57,7 +57,21 @@ public class UserManagePanel extends ELSManagePanel {
 		int[] itemWidth = {100,100,200};
 		list= new UserManageTable(s,itemWidth,userbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
+		try {
+			userVOs = userbl.show();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		list.init();
+		if(!userVOs.isEmpty()){
+			for (UserVO userVO : userVOs) {
+				list.addItem(userVO);
+			}
+		}
 		container.add(list);
+		container.packHeight();
+		validate();
 	}
 	
 	@Override

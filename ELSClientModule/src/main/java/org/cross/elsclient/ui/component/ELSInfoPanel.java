@@ -270,13 +270,21 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 */
 	public void back() {
 		ELSPanel parent = (ELSPanel) getParent();
+		Component cs[] = parent.getComponents();
+		for (Component component : cs) {
+			if(component instanceof ELSPanel){
+				((ELSPanel)component).init();
+			} else if(component instanceof ELSScrollPane){
+				((ELSScrollPane)component).init();
+			}
+		}
 		if (backName == null) {
 			parent.cl.first(parent);
-//			if(parent.getComponent(0)).init();
 		} else {
 			parent.cl.show(parent, backName);
 		}
 		parent.remove(ELSInfoPanel.this);
+		
 	}
 
 	/**

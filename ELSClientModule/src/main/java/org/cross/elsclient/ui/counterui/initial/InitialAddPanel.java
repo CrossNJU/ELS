@@ -20,6 +20,7 @@ import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSLabel;
+import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
@@ -129,6 +130,7 @@ public class InitialAddPanel extends InitialManagePanel{
 				if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(InitialAddPanel.this), "取消创建", "确认取消创建新账本？")){
 					ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, 3);
 					parent.cl.show(parent, "manage");
+					((ELSManagePanel)parent.getComponent(0)).init();
 					parent.remove(InitialAddPanel.this);
 				}
 			}

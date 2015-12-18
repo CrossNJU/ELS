@@ -30,6 +30,8 @@ public class ELSManagePanel extends ELSScrollPane {
 //	public ELSManagePanel() {
 //		init();
 //	}
+	
+	
 	@Override
 	public void init() {
 		setSize(UIConstant.CONTAINER_WIDTH,UIConstant.CONTAINER_WIDTH);
@@ -75,9 +77,9 @@ public class ELSManagePanel extends ELSScrollPane {
 		setSearchPanel();
 		container.add(searchPanel);
 		setContentPanel();
-		
+		this.setViewport(new JViewport());
 		this.getViewport().add(container);
-		
+		this.getViewport().validate();
 	}
 	
 	/**

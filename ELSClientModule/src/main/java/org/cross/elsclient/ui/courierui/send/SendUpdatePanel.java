@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
+import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -27,7 +29,7 @@ public class SendUpdatePanel extends ELSInfoPanel {
 		
 		setTitle("派发快件");
 //		addAutoItem("订单编号", "", true);
-		addEditableItem("订单编号", "", true,InfoType.NUM);
+		addEditableItem("订单编号", "", true,InfoType.ID);
 		addEditableItem("收件人", "", true,InfoType.NAME);
 		addDateItem("收件时间", true);
 		
@@ -57,5 +59,10 @@ public class SendUpdatePanel extends ELSInfoPanel {
 	@Override
 	protected void cancel() {
 		super.cancel();
+		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消派件", "确认放弃派件单？")) {
+			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+			this.init();
+			parent.setChosenFunction("receipts");
+		}
 	}
 }

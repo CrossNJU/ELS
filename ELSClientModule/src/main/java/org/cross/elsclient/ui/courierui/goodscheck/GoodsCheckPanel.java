@@ -34,8 +34,10 @@ public class GoodsCheckPanel extends ELSManagePanel{
 	public void setContentPanel() {
 		super.setContentPanel();
 		
-		String[] s = {"出发地","出发时间","到达地","到达时间"};
-		int[] itemWidth = {100,200,100,200};
+//		String[] s = {"出发地","出发时间","到达地","到达时间"};
+//		int[] itemWidth = {100,200,100,200};
+		String[] s = {"地点","时间","轨迹类型"};
+		int[] itemWidth = {100,200,200};
 		list= new GoodsCheckTable(s, itemWidth);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
@@ -62,53 +64,69 @@ public class GoodsCheckPanel extends ELSManagePanel{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			if(!historyVOs.isEmpty()){
-				Collections.sort(historyVOs, new Comparator<HistoryVO>() {
-
-					@Override
-					public int compare(HistoryVO o1, HistoryVO o2) {
-						SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
-						Date date1;
-						Date date2;
-						if(o1.time==null){
-							return 1;
-						}else if(o2.time==null){
-							return -1;
-						}
-						
-						try {
-							date1 = sdf.parse(o1.time);
-							date2 = sdf.parse(o2.time);
-							return date1.compareTo(date2);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						return 0;
-					}
-				});
+//			if(!historyVOs.isEmpty()){
+//				Collections.sort(historyVOs, new Comparator<HistoryVO>() {
+//
+//					@Override
+//					public int compare(HistoryVO o1, HistoryVO o2) {
+//						SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
+//						Date date1;
+//						Date date2;
+//						if(o1.time==null){
+//							return 1;
+//						}else if(o2.time==null){
+//							return -1;
+//						}
+//						
+//						try {
+//							date1 = sdf.parse(o1.time);
+//							date2 = sdf.parse(o2.time);
+//							return date1.compareTo(date2);
+//						} catch (ParseException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						return 0;
+//					}
+//				});
 				list.init();
-				for(int i = 0;i<historyVOs.size();i=i+2){
-					if(i+1==historyVOs.size()){
-						list.addItem(historyVOs.get(i), null);
-					}else{
-						list.addItem(historyVOs.get(i), historyVOs.get(i+1));
-					}
+//				for(int i = 0;i<historyVOs.size();i=i+2){
+//					if(i+1==historyVOs.size()){
+//						list.addItem(historyVOs.get(i), null);
+//					}else{
+//						list.addItem(historyVOs.get(i), historyVOs.get(i+1));
+//					}
+//				}
+				for(int i = 0;i<historyVOs.size();i++){
+					list.addItem(historyVOs.get(i));
 				}
 				container.packHeight();
 			}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {}
-
-		@Override
-		public void mouseExited(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
+
+		
 }

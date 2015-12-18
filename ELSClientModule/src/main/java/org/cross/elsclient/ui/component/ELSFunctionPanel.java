@@ -2,6 +2,7 @@ package org.cross.elsclient.ui.component;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -21,7 +22,7 @@ import org.cross.elsclient.ui.util.UIConstant;
 public class ELSFunctionPanel extends ELSPanel {
 	public ELSPanel contentPanel;
 	ArrayList<FunctionBtn> functionBtns = new ArrayList<>();
-	ArrayList<JPanel> functionPanels = new ArrayList<>();
+	ArrayList<ELSPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;
 	ELSButton exitBtn;
 	
@@ -33,6 +34,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	public ELSFunctionPanel() {}
 	
 	public void init(){
+		removeAll();
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
 		setBackground(UIConstant.MAINCOLOR);
@@ -99,6 +101,19 @@ public class ELSFunctionPanel extends ELSPanel {
 				elsButton.setArchive(true);
 			}
 		}
+		for (ELSPanel panel : functionPanels) {
+			if(panel.getName()==functionName){
+				Component cs[] = panel.getComponents();
+				for (Component component : cs) {
+					if(component instanceof ELSPanel){
+						((ELSPanel)component).init();
+					} else if(component instanceof ELSScrollPane){
+						((ELSScrollPane)component).init();
+					}
+				}
+			}
+		}
+		
 		contentPanel.cl.show(contentPanel, functionName);
 	}
 	
@@ -108,7 +123,11 @@ public class ELSFunctionPanel extends ELSPanel {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			FunctionBtn btn = (FunctionBtn)e.getSource();
-			setChosenFunction(btn.getName());
+			if(!btn.isArchive){
+				setChosenFunction(btn.getName());
+			}else{
+				btn.setArchive(true);
+			}
 		}
 		@Override
 		public void mousePressed(MouseEvent e) {
