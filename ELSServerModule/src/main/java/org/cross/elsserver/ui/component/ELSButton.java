@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.component;
+package org.cross.elsserver.ui.component;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -12,8 +12,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import org.cross.elsclient.blservice.initialblservice.InitialBLService;
-import org.cross.elsclient.ui.util.Images;
 
 public class ELSButton extends JLabel {
 	Color backColor = Color.GRAY;

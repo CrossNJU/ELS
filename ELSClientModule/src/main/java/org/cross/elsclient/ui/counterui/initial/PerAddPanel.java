@@ -8,12 +8,15 @@ import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.util.ConstantVal;
+import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.VehicleVO;
+import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
+import org.cross.elscommon.util.SalaryType;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elscommon.util.VehicleType;
 
@@ -63,8 +66,11 @@ public class PerAddPanel extends ELSInfoPanel{
 			String birthday = itemLabels.get(6).toString();
 			String phone = itemLabels.get(7).toString();
 			
-			
-			vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
+			if(position!=PositionType.DRIVER){
+				vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
+			}else{
+				vo = new DriverVO(id, name, position, orgNum, sex, idcard, phone, birthday, new SalaryPO(SalaryType.ADDONCE, ConstantVal.constantbl.show().baseMoneyForDriver, 20, 0, id), null, null);
+			}
 			vos.add(vo);
 			ConstantVal.numberbl.addone(NumberType.PERSONNEL, number);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();

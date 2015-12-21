@@ -51,6 +51,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2
 						+ UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
+		showAll();
 	}
 
 	@Override
@@ -84,6 +85,21 @@ public class ApprovalManagePanel extends ELSManagePanel {
 		searchPanel.add(typeCombobox,3);
 		searchTextField.setEditable(false);
 		searchPanel.validate();
+		
+	}
+	
+	public void showAll(){
+		try {
+			receiptVOs = receiptbl.show();
+			list.init();
+			for (ReceiptVO receiptVO : receiptVOs) {
+				list.addItem(receiptVO);
+			}
+			container.packHeight();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

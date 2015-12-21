@@ -71,7 +71,7 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("统计分析", "analysis");
 		addFunctionBtn("系统日志", "log");
 		
-		addFunctionPanel(new MoneyOutAddPanel(receiptbl,personnelbl),"add", "cost");
+		addFunctionPanel(new MoneyOutAddPanel(receiptbl,personnelbl,accountbl),"add", "cost");
 		addFunctionPanel(new MoneyInManagePanel(receiptbl),"add", "settle");
 		addFunctionPanel(new AccountManagePanel(accountbl),"manage", "account");
 		addFunctionPanel(new InitialCheckPanel(initialbl),"manage", "initial");

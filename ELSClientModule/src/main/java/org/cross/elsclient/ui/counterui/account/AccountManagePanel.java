@@ -119,14 +119,12 @@ public class AccountManagePanel extends ELSManagePanel {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					if(!accountVOs.isEmpty()){
-						list.init();
-						for (AccountVO accountVO : accountVOs) {
-							list.addItem(accountVO);
-						}
-						//容器自适应高度
-						container.packHeight();
+					list.init();
+					for (AccountVO accountVO : accountVOs) {
+						list.addItem(accountVO);
 					}
+					//容器自适应高度
+					container.packHeight();
 					
 				}
 			}

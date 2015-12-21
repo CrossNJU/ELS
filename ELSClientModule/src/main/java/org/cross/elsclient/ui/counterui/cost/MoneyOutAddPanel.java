@@ -2,6 +2,7 @@ package org.cross.elsclient.ui.counterui.cost;
 
 import java.rmi.RemoteException;
 
+import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
@@ -10,6 +11,7 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
+import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 import org.cross.elscommon.util.InfoType;
@@ -20,11 +22,13 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 	Receipt_MoneyOutVO vo;
 	ReceiptBLService receiptbl;
 	PersonnelBLService personnelbl;
+	AccountBLService accountbl;
 	String number;
 	
-	public MoneyOutAddPanel(ReceiptBLService receiptbl, PersonnelBLService personnelbl) {
+	public MoneyOutAddPanel(ReceiptBLService receiptbl, PersonnelBLService personnelbl,AccountBLService accountbl) {
 		this.receiptbl = receiptbl;
 		this.personnelbl = personnelbl;
+		this.accountbl = accountbl;
 		init();
 	}
 	
@@ -67,14 +71,24 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 			String orgNum = itemLabels.get(8).toString();
 			
 			vo = new Receipt_MoneyOutVO(number, time, money, receivePersonID, iD, clause, comments,perNum,orgNum);
-			
-			if(receiptbl.add(vo)==ResultMessage.SUCCESS){
-				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
-				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
-				init();
+			AccountVO account = accountbl.findByID(iD);
+			if(account!=null){
+				account.balance -= money;
+				if(accountbl.update(account)==ResultMessage.SUCCESS){
+					if(receiptbl.add(vo)==ResultMessage.SUCCESS){
+						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
+						ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
+						init();
+					}else{
+						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
+					}
+				}else{
+					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
+				}
 			}else{
-				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
+				ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "找不到账户", "查询不到此账户,无法扣款");
 			}
+			
 		}
 	}
 	

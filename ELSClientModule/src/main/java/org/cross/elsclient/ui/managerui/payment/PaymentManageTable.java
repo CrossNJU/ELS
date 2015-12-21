@@ -33,7 +33,6 @@ public class PaymentManageTable extends ELSManageTable{
 
 	public void addItem(PersonnelVO vo) {
 		vos.add(vo);
-
 		String item[] = {vo.number, vo.name, vo.position.toString(),vo.salary.getSalaryByMonth()+""};
 		addItemLabel(item);
 	}

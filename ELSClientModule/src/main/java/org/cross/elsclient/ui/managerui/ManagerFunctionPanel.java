@@ -18,6 +18,7 @@ import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService_Stub;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
+import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.ui.adminui.UserManagePanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
@@ -40,6 +41,7 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 	public AnalysisBLService analysisbl;
 	public ConstantBLService constantbl;
 	public LogBLService logbl;
+	public StockBLService stockbl;
 	
 	public ManagerFunctionPanel() {
 		organizationbl = new OrganizationBlservice_Stub();
@@ -59,6 +61,7 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 			constantbl = blFactory.constantBLService();
 			logbl = blFactory.logBLService();
 			personelbl = blFactory.personnelBLService();
+			stockbl = blFactory.stockBLService();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,7 +84,7 @@ public class ManagerFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("系统日志", "log");
 		
 		addFunctionPanel(new ApprovalManagePanel(receiptbl),"manange", "receiptApproval");
-		addFunctionPanel(new OrganizationManagePanel(organizationbl),"manange", "organization");
+		addFunctionPanel(new OrganizationManagePanel(organizationbl,stockbl),"manange", "organization");
 		addFunctionPanel(new PerManagePanel(personelbl),"manange", "personnel");
 		addFunctionPanel(new PaymentManagePanel(personelbl),"manange", "payment");
 		addFunctionPanel(new AccountManagePanel(accoutbl),"manange", "account");

@@ -3,6 +3,8 @@ package org.cross.elsclient.ui.managerui.personnel;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.text.Position;
+
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
@@ -10,12 +12,15 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.counterui.initial.InitialManagePanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.util.ConstantVal;
+import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.PersonnelVO;
+import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.SalaryType;
 import org.cross.elscommon.util.StringToType;
 
 public class PerAddPanel extends ELSInfoPanel {
@@ -64,7 +69,11 @@ public class PerAddPanel extends ELSInfoPanel {
 			String birthday = itemLabels.get(6).toString();
 			String phone = itemLabels.get(7).toString();
 			
-			vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
+			if(position!=PositionType.DRIVER){
+				vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
+			}else{
+				vo = new DriverVO(id, name, position, orgNum, sex, idcard, phone, birthday, new SalaryPO(SalaryType.ADDONCE, ConstantVal.constantbl.show().baseMoneyForDriver, 20, 0, id), null, null);
+			}
 			if(personelbl.add(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 				ConstantVal.numberbl.addone(NumberType.PERSONNEL, number);

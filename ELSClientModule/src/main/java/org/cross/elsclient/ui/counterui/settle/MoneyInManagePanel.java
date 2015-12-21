@@ -57,7 +57,7 @@ public class MoneyInManagePanel extends ELSManagePanel {
 						+ UIConstant.SEARCHPANEL_HEIGHT);
 		
 		container.add(list);
-		show();
+		showAll();
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class MoneyInManagePanel extends ELSManagePanel {
 		searchPanel.validate();
 	}
 	
-	public void show(){
+	public void showAll(){
 		list.init();
 		moneyInVOs = new ArrayList<>();
 		// 需修改
@@ -149,11 +149,10 @@ public class MoneyInManagePanel extends ELSManagePanel {
 					list.validate();
 					
 					container.packHeight();
-				} else if (((String) modeBox.getSelectedItem()).equals("按时间查询")) {
+				} else if (((String) modeBox.getSelectedItem()).equals("按时间查找")) {
 					moneyInVOs = new ArrayList<>();
 					try {
 						moneyInVOs = receiptbl.findByTimeAndType(beginDate.getDateString(), endDate.getDateString(), ReceiptType.MONEYIN);
-						
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

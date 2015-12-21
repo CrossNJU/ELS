@@ -45,6 +45,7 @@ public class PerManagePanel extends ELSManagePanel {
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2
 						+ UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
+		showAll();
 	}
 
 	@Override
@@ -75,6 +76,21 @@ public class PerManagePanel extends ELSManagePanel {
 		
 		searchPanel.add(typeCombobox,3);
 		searchPanel.validate();
+	}
+	
+	public void showAll(){
+		list.init();
+		try {
+			personnelVOs = personnelbl.show();
+			for (PersonnelVO personnelVO : personnelVOs) {
+				list.addItem(personnelVO);
+			}
+			container.packHeight();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	class BtnListener implements MouseListener {

@@ -47,6 +47,7 @@ public class LogManagePanel extends ELSManagePanel{
 		list= new LogManageTable(s,itemWidth,logbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
+		show();
 	}
 	
 	@Override
@@ -71,6 +72,21 @@ public class LogManagePanel extends ELSManagePanel{
 		searchPanel.add(searchBtn);
 		
 		searchPanel.validate();
+		
+	}
+	
+	public void show(){
+		list.init();
+		try {
+			logvos = logbl.show("0001-01-01", "3000-12-30");
+			for (LogVO logVO : logvos) {
+				list.addItem(logVO);
+			}
+			container.packHeight();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

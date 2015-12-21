@@ -33,7 +33,6 @@ public class StockAddPanel extends ELSInfoPanel{
 		setTitle("新增仓库");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.STOCK);
 		addEditableItem("仓库编号", number, true,InfoType.ID);
-		addEditableItem("仓库总量", "", true,InfoType.NUM);
 		addEditableItem("特快仓库数量", "", true,InfoType.NUM);
 		addEditableItem("特快仓库容量", "", true,InfoType.NUM);
 		addEditableItem("标准仓库数量", "", true,InfoType.NUM);
