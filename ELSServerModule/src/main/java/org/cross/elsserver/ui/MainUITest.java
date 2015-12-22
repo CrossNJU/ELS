@@ -19,14 +19,14 @@ import org.cross.elscommon.dataservice.goodsdataservice.GoodsDataService;
 import org.cross.elsserver.dataimpl.DataFactoryServiceImpl;
 import org.cross.elsserver.dataimpl.goodsdataimpl.GoodsDataImpl;
 
-public class Mainui {
+public class MainUITest {
 
 	JFrame mainFrame;
 	JTextArea text;
 	JButton button;
 	JLabel label;
 	
-	public Mainui(){
+	public MainUITest(){
 		mainFrame = new JFrame("Server UI");
 		mainFrame.setLayout(null);
 		
@@ -49,7 +49,7 @@ public class Mainui {
 	}
 	
 	public static void main(String [] args) throws RemoteException{
-		Mainui mainUI = new Mainui();
+		MainUITest mainUI = new MainUITest();
 		GoodsDataService goodsdata;
 		DataFactoryService dataFactory = new DataFactoryServiceImpl();
 		try {
