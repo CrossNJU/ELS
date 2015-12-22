@@ -32,12 +32,16 @@ public class DriverUpdatePanel extends ELSInfoPanel{
 
 		setTitle("更新司机信息");
 		addEditableItem("司机编号", vo.number, false);
-		addEditableItem("姓名", "", true,InfoType.NAME);
+		addEditableItem("姓名", vo.name, true,InfoType.NAME);
 		addComboxItem("性别", it1, true);
-		addEditableItem("身份证号码", "", true,InfoType.ID);
-		addEditableItem("手机", "", true,InfoType.TELEPHONE);
+		addEditableItem("身份证号码", vo.id, true,InfoType.ID);
+		addEditableItem("手机", vo.phone, true,InfoType.TELEPHONE);
 		addDateItem("出生日期", true);
 		addDateItem("行驶证期限", true);
+		
+		addConfirmAndCancelBtn();
+		confirmBtn.setText("确认修改");
+		cancelBtn.setText("取消修改");
 	}
 	
 	@Override

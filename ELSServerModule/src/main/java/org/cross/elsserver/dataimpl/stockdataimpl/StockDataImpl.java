@@ -15,6 +15,8 @@ import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
 @SuppressWarnings("serial")
 public class StockDataImpl extends UnicastRemoteObject implements StockDataService {
 
@@ -212,9 +214,11 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 			throws RemoteException {
 		ArrayList<StockOperationPO> list = new ArrayList<StockOperationPO>();
 		list = findStockOPByTime(startTime, endTime);
+//		System.out.println("data/opsize:"+list.size());
 		for (int i = 0; i < list.size(); i++) {
 			StockOperationPO po = list.get(i);
-			if (po.getStockNum() != stockNum) {
+//			System.out.println(i+"  "+po.getStockNum());
+			if (!po.getStockNum().equals(stockNum)) {
 				list.remove(i);
 			}
 		}
@@ -230,9 +234,12 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 //			System.out.println(stockPO.getNumber());
 //			ArrayList<StockOperationPO> operationPOs = stockDataImpl.findStockOPByTime("2015-10-23 10:12:01", "2015-12-12 10:20:01");
 //			ArrayList<StockAreaPO> areaPOs = stockDataImpl.findStockAreaByStock("S0032902");
-			System.out.println(CompareTime.compare("2015-10-23 10:12:01", "2015-12-12 10:20:01"));
+//			System.out.println(CompareTime.compare("2015-10-23 10:12:01", "2015-12-12 10:20:01"));
 //			System.out.println(CompareTime.compare("2015-10-23 10:12",operationPOs.get(0).getTime()));
 //			System.out.println(operationPOs.size());
+			ArrayList<StockOperationPO> ops1 = stockDataImpl.findStockOPByTime("2015-12-18", "2015-12-19");
+			ArrayList<StockOperationPO> ops = stockDataImpl.findStockOPByTimeAndStock("S001","2015-12-18", "2015-12-19");
+			System.out.println(ops.size());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

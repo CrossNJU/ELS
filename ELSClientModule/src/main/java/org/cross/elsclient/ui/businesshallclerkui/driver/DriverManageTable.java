@@ -57,12 +57,10 @@ public class DriverManageTable extends ELSManageTable{
 	@Override
 	public void updateBtn(int index) {
 		super.updateBtn(index);
-		ELSPanel contentPanel = (ELSPanel) getParent().getParent().getParent();
-		DriverManagePanel parent = (DriverManagePanel) getParent()
-				.getParent();
+		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, "driver");
 
 		contentPanel.add(new DriverUpdatePanel(vos.get(index),
-				parent.personnelbl), "update");
+				personnelbl), "update");
 		contentPanel.cl.show(contentPanel, "update");
 	}
 

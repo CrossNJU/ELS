@@ -92,6 +92,7 @@ public class StockBLImpl implements StockBLService {
 			throws RemoteException {
 		ArrayList<StockOperationPO> stockOperationPOs = stockData
 				.findStockOPByTimeAndStock(stockID, time1, time2);
+		System.out.println("opsize:"+stockOperationPOs.size());
 		int totalInStock = stockData.findStockByNumber(stockID).getNumInStock();
 		int numIn = 0, numOut = 0, moneyIn = 0, moneyOut = 0;
 		int size = stockOperationPOs.size();

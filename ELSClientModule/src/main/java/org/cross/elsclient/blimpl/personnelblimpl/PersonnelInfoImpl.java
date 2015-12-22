@@ -72,6 +72,7 @@ public class PersonnelInfoImpl implements PersonnelInfo {
 		}
 		PersonnelPO po = null;
 		DriverPO dpo = null;
+
 		if (vo.position == PositionType.DRIVER) {
 			DriverVO dvo = (DriverVO) vo;
 			dpo = new DriverPO(dvo.number, dvo.name, dvo.position, dvo.orgNum,
