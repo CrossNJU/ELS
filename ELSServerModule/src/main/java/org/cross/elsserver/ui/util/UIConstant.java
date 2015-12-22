@@ -3,6 +3,8 @@ package org.cross.elsserver.ui.util;
 import java.awt.Color;
 import java.awt.Font;
 
+import org.cross.elsserver.ui.LogTable;
+
 
 public class UIConstant {
 	public static int WINDOW_WIDTH = 1024;
@@ -34,5 +36,7 @@ public class UIConstant {
 	public static Color CANCEL_BTN_COLOR = Color.decode("#E57979");
 	
 	public static Font MainFont = new Font("Microsoft YaHei UI",Font.TRUETYPE_FONT, 15);
+	
+	public static LogTable LOG;
 	
 }

@@ -80,7 +80,6 @@ public class ELSInfoPanel extends ELSScrollPane {
 		infoPanel.setSize(getWidth(), 20);
 		infoPanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, 70);
 
-
 		container.add(titlePanel);
 		container.add(infoPanel);
 

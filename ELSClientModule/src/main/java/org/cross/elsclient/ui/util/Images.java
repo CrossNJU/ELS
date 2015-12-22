@@ -32,6 +32,7 @@ public class Images {
 	public final static ImageIcon ADD_IMAGEICON = createImageIcon("img/icons/Common/Icon Add.png");
 	public final static ImageIcon RIGHT_IMAGEICON = createImageIcon("img/icons/Common/Icon Arrow Right.png");
 	public final static ImageIcon RIGHT_ACTIVE_IMAGEICON = createImageIcon("img/icons/Common/Icon Arrow Right Active.png");
+	public final static ImageIcon DOWN_ACTIVE_IMAGEICON = createImageIcon("img/icons/Common/Icon Arrow Down.png");
 	
 	public final static ImageIcon ADJUSTMENT_ICON = createImageIcon("img/icons/Nav/Icon Adjustment.png");
 	public final static ImageIcon CAR_ICON = createImageIcon("img/icons/Nav/Icon Car.png");
