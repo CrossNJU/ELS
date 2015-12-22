@@ -135,7 +135,7 @@ public class InfoItemLabel extends ELSLabel{
 		comboBox.setModel(new DefaultComboBoxModel<>(items));
 		comboBox.setPreferredSize(new Dimension(boxItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		comboBox.setMaximumSize(new Dimension(boxItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
-		comboBox.setFont(getFont().deriveFont(20f));
+		comboBox.setFont(getFont().deriveFont(18f));
 
 //		this.add(Box.createHorizontalStrut(30));
 		this.add(nameLabel);

@@ -34,7 +34,7 @@ public class UIConstant {
 	public static Color NORMAL_BTN_COLOR = Color.decode("#7EBCD0");
 	public static Color CANCEL_BTN_COLOR = Color.decode("#E57979");
 	
-	public static Font MainFont = new Font("Microsoft YaHei UI",Font.TRUETYPE_FONT, 15);
+	public static Font MainFont = new Font("苹方 粗体",Font.TRUETYPE_FONT, 15);
 	
 	public static UserVO CURRENT_USER;
 	public static OrganizationVO CURRENT_ORG;

@@ -34,7 +34,7 @@ public class ELSButton extends JLabel {
 		setOpaque(true);
 		setBackground(Color.gray);
 		setForeground(Color.WHITE);
-		setFont(getFont().deriveFont(Font.BOLD));
+		setFont(getFont().deriveFont(Font.TRUETYPE_FONT));
 		setVerticalAlignment(JLabel.CENTER);
 		setHorizontalAlignment(JLabel.CENTER);
 //		setFocusable(false);

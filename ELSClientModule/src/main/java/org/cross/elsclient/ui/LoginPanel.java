@@ -31,6 +31,7 @@ import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSLabel;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.component.ELSPasswordField;
 import org.cross.elsclient.ui.component.ELSTextField;
 import org.cross.elsclient.ui.counterui.CounterFunctionPanel;
 import org.cross.elsclient.ui.courierui.CourierFunctionPanel;
@@ -52,7 +53,7 @@ public class LoginPanel extends ELSPanel{
 	OrganizationBLService organbl;
 	JPanel inputPanel;
 	ELSTextField idTextField;
-	JPasswordField pwTextField;
+	ELSPasswordField pwTextField;
 	ELSButton loginBtn;
 	ELSButton checkBtn;
 	ELSLabel titleLabel;
@@ -91,7 +92,7 @@ public class LoginPanel extends ELSPanel{
 		
 		inputPanel = new JPanel();
 		idTextField = new ELSTextField("1");
-		pwTextField = new JPasswordField("123456");
+		pwTextField = new ELSPasswordField("123456");
 		idLabel = new ELSLabel("用户名");
 		pwLabel = new ELSLabel("密码");
 		loginBtn = new ELSButton("登录系统");
@@ -130,7 +131,7 @@ public class LoginPanel extends ELSPanel{
 		pwLabel.setSize(135,55);
 		pwLabel.setLocation(0, 212);
 		pwLabel.setHorizontalAlignment(JLabel.RIGHT);
-		pwLabel.setFont(getFont().deriveFont(20f));
+//		pwLabel.setFont(pw.lgetFont().deriveFont(20f));
 		
 		loginBtn.setSize(178, 55);
 		loginBtn.setLocation(92,296);

@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.util.Enumeration;
 
@@ -22,17 +23,18 @@ import org.cross.elsclient.util.ConstantVal;
 public class MainUI extends JFrame {
 
 	public static void main(String[] args) {
-		try {
-			FontUIResource fontUIResource = new FontUIResource(new Font("Microsoft YaHei UI",
-					Font.TRUETYPE_FONT, 15));
-			for (Enumeration<Object> keys = UIManager.getDefaults().keys(); keys
-					.hasMoreElements();) {
-				Object key = keys.nextElement();
-				Object value = UIManager.get(key);
-				if (value instanceof FontUIResource) {
-					UIManager.put(key, fontUIResource);
-				}
+		
+		FontUIResource fontUIResource = new FontUIResource(new Font("苹方 粗体",
+				Font.TRUETYPE_FONT, 15));
+		for (Enumeration<Object> keys = UIManager.getDefaults().keys(); keys
+				.hasMoreElements();) {
+			Object key = keys.nextElement();
+			Object value = UIManager.get(key);
+			if (value instanceof FontUIResource) {
+				UIManager.put(key, fontUIResource);
 			}
+		}
+		try {
 			UIManager
 					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			

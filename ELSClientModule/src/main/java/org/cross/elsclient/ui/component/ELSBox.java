@@ -6,7 +6,6 @@ public class ELSBox extends Box {
 	
 	public ELSBox(int axis) {
 		super(axis);
-		// TODO Auto-generated constructor stub
 	}
 
 }
