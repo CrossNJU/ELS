@@ -42,6 +42,7 @@ import org.cross.elsclient.ui.stockkeeperui.StockFunctionPanel;
 import org.cross.elsclient.ui.transitcenterclerkui.TransmitFunctionPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.Images;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.ConstantVO;
@@ -66,6 +67,7 @@ public class LoginPanel extends ELSPanel{
 		init();
 		ConstantVal.constantbl = ConstantVal.getConstant();
 		ConstantVal.numberbl = ConstantVal.getNumber();
+		LogUtil.initLogBl();
 	}
 	public void init(){
 		

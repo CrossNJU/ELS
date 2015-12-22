@@ -48,6 +48,7 @@ public class ELSServerPanel extends ELSPanel{
 		stopBtn = ComponentFactory.createSearchBtn();
 		logTitle = new TitlePanel("服务器Log");
 		logTable = new LogTable();
+		UIConstant.LOG = logTable;
 		
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
