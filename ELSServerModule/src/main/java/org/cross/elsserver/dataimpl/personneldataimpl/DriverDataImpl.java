@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 import org.cross.elscommon.po.DriverPO;
 import org.cross.elscommon.po.PersonnelPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class DriverDataImpl{
 	private MySQL mysql;

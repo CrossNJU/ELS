@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import org.cross.elscommon.dataservice.organizationdataservice.OrganizationDataService;
 import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.util.City;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class OrganizationDataImpl extends UnicastRemoteObject implements OrganizationDataService {
 

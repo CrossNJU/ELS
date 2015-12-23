@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.po.LogPO;
 import org.cross.elscommon.util.CompareTime;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class LogDataImpl extends UnicastRemoteObject implements LogDataService {
 

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.vehicledataservice.VehicleDataService;
 import org.cross.elscommon.po.VehiclePO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class VehicleDataImpl extends UnicastRemoteObject implements VehicleDataService {
 

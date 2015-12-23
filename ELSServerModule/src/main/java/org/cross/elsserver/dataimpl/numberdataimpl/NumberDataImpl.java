@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 import org.cross.elscommon.dataservice.numberdataservice.NumberDataService;
 import org.cross.elscommon.po.NumberPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class NumberDataImpl extends UnicastRemoteObject implements NumberDataService {
 

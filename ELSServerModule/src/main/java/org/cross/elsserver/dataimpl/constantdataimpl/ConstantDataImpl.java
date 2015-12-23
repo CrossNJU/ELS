@@ -7,10 +7,10 @@ import java.sql.SQLException;
 
 import org.cross.elscommon.dataservice.constantdataservice.ConstantDataService;
 import org.cross.elscommon.po.ConstantPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
+import org.cross.elsserver.ui.util.MySQL;
 
 @SuppressWarnings("serial")
 public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDataService {

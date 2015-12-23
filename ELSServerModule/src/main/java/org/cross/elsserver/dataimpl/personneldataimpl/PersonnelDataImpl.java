@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import org.cross.elscommon.dataservice.personneldataservice.PersonnelDataService;
 import org.cross.elscommon.po.DriverPO;
 import org.cross.elscommon.po.PersonnelPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class PersonnelDataImpl extends UnicastRemoteObject implements PersonnelDataService {
 

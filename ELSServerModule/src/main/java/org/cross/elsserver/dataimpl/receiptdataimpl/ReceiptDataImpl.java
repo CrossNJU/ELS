@@ -13,10 +13,10 @@ import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.po.Receipt_StockOutPO;
 import org.cross.elscommon.po.Receipt_TransPO;
 import org.cross.elscommon.util.CompareTime;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.ui.util.MySQL;
 
 @SuppressWarnings("serial")
 public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataService{

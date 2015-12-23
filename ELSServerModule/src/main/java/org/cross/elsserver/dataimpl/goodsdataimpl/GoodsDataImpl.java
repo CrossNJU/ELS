@@ -11,12 +11,12 @@ import org.cross.elscommon.po.GoodsPO;
 import org.cross.elscommon.po.HistoryPO;
 import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.GoodsState;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StockType;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.HistoryTool;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataService {
 

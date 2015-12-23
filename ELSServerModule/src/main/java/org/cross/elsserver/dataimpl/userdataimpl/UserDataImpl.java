@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.po.UserPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elscommon.util.UserType;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class UserDataImpl extends UnicastRemoteObject implements UserDataService {
 

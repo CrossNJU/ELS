@@ -13,9 +13,9 @@ import org.cross.elscommon.po.OrganizationPO;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.po.VehiclePO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class InitialDataImpl extends UnicastRemoteObject implements InitialDataService {
 

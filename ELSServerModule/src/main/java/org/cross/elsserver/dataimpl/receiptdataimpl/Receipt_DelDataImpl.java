@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import org.cross.elscommon.po.ReceiptPO;
 import org.cross.elscommon.po.Receipt_DeliverPO;
 import org.cross.elscommon.po.Receipt_OrderPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class Receipt_DelDataImpl implements ReceiptTool {
 

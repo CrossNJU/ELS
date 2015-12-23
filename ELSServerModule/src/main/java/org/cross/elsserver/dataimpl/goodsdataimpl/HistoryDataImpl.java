@@ -5,10 +5,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.cross.elscommon.po.HistoryPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.dataimpl.tools.HistoryTool;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class HistoryDataImpl implements HistoryTool {
 

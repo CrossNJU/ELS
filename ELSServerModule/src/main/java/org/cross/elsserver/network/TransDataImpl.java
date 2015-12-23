@@ -11,7 +11,7 @@ import org.cross.elscommon.util.NetWork;
 import org.cross.elsserver.dataimpl.DataFactoryServiceImpl;
 
 public class TransDataImpl {
-	public static void main(String [] args){
+	public static void main(String[] args){
 		DataFactoryService datafactory;
 		
 		try {

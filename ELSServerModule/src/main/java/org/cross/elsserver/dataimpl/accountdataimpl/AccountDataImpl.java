@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
 import org.cross.elscommon.po.AccountPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class AccountDataImpl extends UnicastRemoteObject implements AccountDataService {
 

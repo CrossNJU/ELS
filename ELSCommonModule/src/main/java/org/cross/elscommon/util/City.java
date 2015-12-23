@@ -31,7 +31,20 @@ public enum City {
 			return null;
 		}
 	}
-
+	public String getNum(){
+		switch (this) {
+		case BEIJING:
+			return "010";
+		case SHANGHAI:
+			return "021";
+		case NANJING:
+			return "025";
+		case GUANGZHOU:
+			return "020";
+		default:
+			return null;
+		}
+	}
 	public static String[] toStrings(){
 		String type[] = {BEIJING.toString(),SHANGHAI.toString(),NANJING.toString(),GUANGZHOU.toString()};
 		

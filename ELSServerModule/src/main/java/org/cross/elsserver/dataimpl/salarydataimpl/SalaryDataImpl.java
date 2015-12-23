@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.salarydataservice.SalaryDataService;
 import org.cross.elscommon.po.SalaryPO;
-import org.cross.elscommon.util.MySQL;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.SalaryType;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.ui.util.MySQL;
 
 public class SalaryDataImpl extends UnicastRemoteObject implements SalaryDataService {
 
