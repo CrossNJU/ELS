@@ -8,7 +8,8 @@ public class LogInfoImpl implements LogInfo{
 
 	@Override
 	public LogVO toLogVO(LogPO po) {
-		LogVO vo = new LogVO(po.getNumber(), po.getTime(), po.getOperator(), po.getOperator());
+		LogVO vo = new LogVO(po.getNumber(), po.getTime(), po.getOperator(),
+				po.getOperation());
 		return vo;
 	}
 
