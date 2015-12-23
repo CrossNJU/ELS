@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.AccountVO;
@@ -48,6 +49,7 @@ public class AccoutAddPanel extends ELSInfoPanel{
 			
 			vo = new AccountVO(name, account, balance);
 			if(bl.add(vo)==ResultMessage.SUCCESS){
+				LogUtil.addLog("新增账户");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 				back();
 			}else{

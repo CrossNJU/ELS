@@ -9,6 +9,7 @@ import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.ResultMessage;
@@ -52,6 +53,7 @@ public class UserUpdatePanel extends ELSInfoPanel{
 			vo.password = itemLabels.get(3).toString();
 			vo.userType = StringToType.toUserType(itemLabels.get(2).toString());
 			vo.orgNameID = itemLabels.get(4).toString();
+			LogUtil.addLog("更新用户");
 			if(userbl.update(vo)==ResultMessage.SUCCESS){
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更新成功");
 				back();

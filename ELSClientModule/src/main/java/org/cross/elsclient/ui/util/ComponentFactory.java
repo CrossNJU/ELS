@@ -160,7 +160,7 @@ public class ComponentFactory {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame((JComponent)e.getSource()), "退出系统", "确认退出ELS物流管理系统？")){
+				if(ELSDialog.showConfirmDlg(((JComponent)e.getSource()).getParent().getParent(), "退出系统", "确认退出ELS物流管理系统？")){
 					System.exit(0);
 				}
 			}

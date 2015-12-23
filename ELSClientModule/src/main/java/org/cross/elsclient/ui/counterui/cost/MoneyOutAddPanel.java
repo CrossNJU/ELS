@@ -9,6 +9,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.AccountVO;
@@ -76,6 +77,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 				account.balance -= money;
 				if(accountbl.update(account)==ResultMessage.SUCCESS){
 					if(receiptbl.add(vo)==ResultMessage.SUCCESS){
+						LogUtil.addLog("新增付款单");
 						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 						ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 						init();

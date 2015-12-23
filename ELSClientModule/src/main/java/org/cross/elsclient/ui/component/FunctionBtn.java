@@ -2,6 +2,9 @@ package org.cross.elsclient.ui.component;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -30,6 +33,7 @@ public class FunctionBtn extends ELSButton {
 		archiveFont = UIConstant.MAINCOLOR;
 		setBackground(backColor);
 		setForeground(Color.white);
+		setOpaque(false);
 		setFont(getFont().deriveFont(20f));
 		setFont(getFont().deriveFont(Font.PLAIN));
 		
@@ -69,21 +73,54 @@ public class FunctionBtn extends ELSButton {
 	public void setArchive(boolean isArchive){
 		this.isArchive = isArchive;
 		if(isArchive){
-			setBackground(archiveColor);
+//			setOpaque(true);
+//			setBackground(archiveColor);
 			text.setForeground(archiveFont);
 			icon.setIcon(archiveIcon);
 			arrow.setIcon(Images.RIGHT_ACTIVE_IMAGEICON);
+			if(getParent()!=null){
+				((ELSFunctionPanel)getParent()).repaint();
+				((ELSFunctionPanel)getParent()).mask2.repaint();
+			}
 		}else{
-			setBackground(backColor);
+//			setOpaque(false);
+//			setBackground(backColor);
 			text.setForeground(Color.white);
 			icon.setIcon(normalIcon);
 			arrow.setIcon(Images.RIGHT_IMAGEICON);
+			if(getParent()!=null){
+				((ELSFunctionPanel)getParent()).repaint();
+				((ELSFunctionPanel)getParent()).mask2.repaint();
+			}
 		}
+	}
+	@Override
+	public void press() {
+	}
+	
+	@Override
+	public void release() {
 	}
 	
 	@Override
 	public void setName(String name) {
 		super.setName(name);
 		setIcon();
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		if(isArchive){
+			Graphics2D g2d = (Graphics2D)g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+					RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.setColor(Color.WHITE);
+			int[] xPoints = {168, 168, 180};
+			int[] yPoints = {0, 54, 27};
+			g2d.fillPolygon(xPoints, yPoints, 3);
+			g2d.fillRect(0, 0, 168, 54);
+		}
+		super.paint(g);
 	}
 }

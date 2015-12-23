@@ -25,6 +25,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.util.TimeUtil;
@@ -107,6 +108,7 @@ public class InitialAddPanel extends InitialManagePanel{
 					if(initialbl.addInitial(currentVO)==ResultMessage.SUCCESS){
 						ConstantVal.numberbl.addone(NumberType.INITIAL, number);
 						ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, 3);
+						LogUtil.addLog("期初建账");
 						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(InitialAddPanel.this), "建账成功");
 						InitialCheckPanel checkPanel = (InitialCheckPanel)parent.getComponent(0);
 						parent.cl.show(parent, "manage");

@@ -26,7 +26,7 @@ public class ELSComboboxRender implements ListCellRenderer{
 		JLabel render = (JLabel)defauleRender.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		render.setSize(render.getWidth(),40);
 		render.setPreferredSize(render.getSize());
-		render.setFont(UIConstant.MainFont.deriveFont(16f));
+		render.setFont(UIConstant.MainFont.deriveFont(18f));
 		render.setHorizontalAlignment(JLabel.LEFT);
 		render.setBorder(new EmptyBorder(0, 10, 0, 0));
 		if(isSelected){

@@ -18,7 +18,7 @@ public class ELSComboBox extends JComboBox{
 		setUI(new ELSComboxUI());
 		setRenderer(new ELSComboboxRender());
 		setBorder(new LineBorder(UIConstant.MAINCOLOR));
-		setFont(UIConstant.MainFont.deriveFont(16f));
+		setFont(UIConstant.MainFont.deriveFont(18f));
 		setBackground(Color.white);
 		setForeground(UIConstant.MAINCOLOR);
 	}

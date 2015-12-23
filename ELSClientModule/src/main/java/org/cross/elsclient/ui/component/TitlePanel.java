@@ -27,7 +27,7 @@ public class TitlePanel extends ELSBox{
 		this.setMinimumSize(new Dimension(UIConstant.CONTENTPANEL_WIDTH, 50));
 		this.setSize(UIConstant.CONTENTPANEL_WIDTH, 50);
 		this.setOpaque(true);
-		this.setBackground(UIConstant.MAINCOLOR);
+		this.setBackground(UIConstant.MAINCOLOR_OPACITY_40);
 		
 		titleLabel = new ELSLabel();
 		backBtn = ComponentFactory.createInfoBackBtn();

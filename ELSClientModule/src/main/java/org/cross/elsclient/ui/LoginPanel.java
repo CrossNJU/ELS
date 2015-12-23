@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 import javax.swing.plaf.multi.MultiTextUI;
 import javax.swing.plaf.synth.SynthTextFieldUI;
@@ -43,6 +45,7 @@ import org.cross.elsclient.ui.transitcenterclerkui.TransmitFunctionPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.Images;
 import org.cross.elsclient.ui.util.LogUtil;
+import org.cross.elsclient.ui.util.ProgressGlassPane;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.ConstantVO;
@@ -218,7 +221,19 @@ public class LoginPanel extends ELSPanel{
 			parentContainer.cl.show(parentContainer, "function");
 		}
 		System.out.println("用户类型为:"+type.toString());
-	
+//		new SwingWorker<Boolean, Boolean>(){
+//
+//			@Override
+//			protected Boolean doInBackground() throws Exception {
+//					MainUI.FRAME.getGlassPane().setVisible(true);
+//				for(int i = 2;i<15;i++){
+//					((ProgressGlassPane)MainUI.FRAME.getGlassPane()).setRadius(i);
+//					Thread.sleep(10);
+//				}
+//				return null;
+//			}
+//			
+//		}.execute();
 	}
 	
 	class LoginBtnListener implements MouseListener {

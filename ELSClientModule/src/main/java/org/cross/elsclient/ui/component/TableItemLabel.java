@@ -38,7 +38,7 @@ public class TableItemLabel extends ELSBox{
 		height = UIConstant.MANAGETABLE_ITEM_HEIGHT;
 		
 		this.setOpaque(true);
-		this.setBackground(Color.decode("#f4f5f7"));
+		this.setBackground(UIConstant.TABLEBACK_OPACITY);
 		this.setPreferredSize(new Dimension(width ,height));
 		this.setMaximumSize(new Dimension(width,height));
 		this.setMinimumSize(new Dimension(width,height));
@@ -63,7 +63,7 @@ class ItemBorder extends EmptyBorder{
 			int width, int height) {
 		Graphics2D g2d = (Graphics2D)g;
 		
-		g2d.setColor(UIConstant.MAINCOLOR.brighter().brighter());
+		g2d.setColor(UIConstant.MAINCOLOR_OPACITY_40);
 		
 		g2d.fillRect(x, y+height-2, width+1, 2);
 		

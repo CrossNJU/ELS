@@ -12,13 +12,20 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
+import org.cross.elsclient.demo.MainFrame;
+import org.cross.elsclient.ui.LoginPanel;
+import org.cross.elsclient.ui.MainUI;
 import org.cross.elsclient.ui.util.FrameUtil;
+import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.ProgressGlassPane;
 import org.cross.elsclient.ui.util.UIConstant;
 
 public class ELSDialog extends JDialog {
@@ -39,7 +46,7 @@ public class ELSDialog extends JDialog {
 //		FrameUtil.frameInit(this);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.white);
+		panel.setBackground(new Color(255, 255, 255, 50));
 		panel.setLayout(null);
 		
 		okBtn = new ELSButton("确定");
@@ -55,7 +62,7 @@ public class ELSDialog extends JDialog {
 		cancelBtn.addMouseListener(new BtnListener());
 		
 		titleLabel = new ELSLabel();
-		titleLabel.setBackground(UIConstant.MAINCOLOR);
+		titleLabel.setBackground(UIConstant.MAINCOLOR_OPACITY_90);
 		titleLabel.setOpaque(true);
 		titleLabel.setSize(UIConstant.DIALOG_WIDTH,48);
 		titleLabel.setLocation(0, 0);
@@ -92,6 +99,13 @@ public class ELSDialog extends JDialog {
 
 	public static boolean showConfirmDlg(Component comp,String title,String text) {
 //		instance = new ELSDialog();
+		if(comp.getParent()!=null){
+			if(!(comp.getParent() instanceof LoginPanel)){
+				MainUI.FRAME.getGlassPane().setVisible(true);
+			}
+		}else{
+			MainUI.FRAME.getGlassPane().setVisible(true);
+		}
 		instance.titleLabel.setText("   " + title);
 		instance.textLabel.setText(text);
 		instance.setLocationRelativeTo(comp);// 使得对话框显示在comp的中间
@@ -108,6 +122,7 @@ public class ELSDialog extends JDialog {
 			}else if (e.getSource() == cancelBtn)
 				ret = false;
 			setVisible(false);
+			MainUI.FRAME.getGlassPane().setVisible(false);
 		}
 
 		@Override

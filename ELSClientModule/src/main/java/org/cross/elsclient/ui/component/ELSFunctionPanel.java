@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -25,6 +26,8 @@ public class ELSFunctionPanel extends ELSPanel {
 	ArrayList<ELSPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;
 	ELSButton exitBtn;
+	ELSLabel mask1;
+	ELSLabel mask2;
 	
 	/**
 	 * 功能控制面板需要先实例化BL对象再执行init()
@@ -37,10 +40,12 @@ public class ELSFunctionPanel extends ELSPanel {
 		removeAll();
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
-		setBackground(UIConstant.MAINCOLOR);
+//		setBackground(UIConstant.MAINCOLOR);
+		setOpaque(false);
 		
 		contentPanel = new ELSPanel();
 		contentPanel.setBounds(168, 100, 856, 668);
+		contentPanel.setOpaque(false);
 		
 		logo = new ELSLabel();
 		logo.setSize(225,44);
@@ -50,7 +55,18 @@ public class ELSFunctionPanel extends ELSPanel {
 		exitBtn = ComponentFactory.createExitBtn();
 		exitBtn.setLocation(984, 20);
 		
+		mask1 = new ELSLabel();
+		mask2 = new ELSLabel();
+		mask1.setOpaque(true);
+		mask2.setOpaque(true);
+		mask1.setBackground(new Color(90,96,116,20));
+		mask2.setBackground(new Color(90,96,116,20));
+		mask1.setBounds(0, 0, UIConstant.WINDOW_WIDTH, 100);
+		mask2.setBounds(0,100,168,668);
+		
 		this.add(contentPanel);
+		this.add(mask1);
+		this.add(mask2);
 		this.add(logo);
 		this.add(exitBtn);
 	}
@@ -73,8 +89,8 @@ public class ELSFunctionPanel extends ELSPanel {
 		
 		functionBtns.add(btn);
 		
-		btn.setBounds(0, 100+54*functionBtns.indexOf(btn), 168, 54);
-		this.add(btn);
+		btn.setBounds(0, 100+54*functionBtns.indexOf(btn), 200, 54);
+		this.add(btn,2);
 	}
 	
 	/**
@@ -86,6 +102,7 @@ public class ELSFunctionPanel extends ELSPanel {
 		ELSPanel container = new ELSPanel();
 		container.setBackground(Color.white);
 		container.setName(functionName);
+		container.setOpaque(false);
 		
 		functionPanels.add(container);
 		container.add(panel,name);
@@ -148,5 +165,13 @@ public class ELSFunctionPanel extends ELSPanel {
 			// TODO Auto-generated method stub
 			
 		}
+	}
+	
+	
+	@Override
+	public void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		g.drawImage(Images.BG_IMAGE, 0, 0, null);
+		super.paint(g);
 	}
 }

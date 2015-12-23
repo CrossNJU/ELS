@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.component;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ public class ManageTableItemLabel extends TableItemLabel{
 		for (int i = 0; i < item.length; i++) {
 			tempLabel = new ELSLabel(" " + item[i]);
 			tempLabel.setFont(UIConstant.MainFont.deriveFont(18f));
+			tempLabel.setForeground(Color.WHITE);
 			tempLabel.setPreferredSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
 			tempLabel.setMaximumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));
 			tempLabel.setMinimumSize(new Dimension(itemWidth[i],UIConstant.MANAGETABLE_ITEM_HEIGHT));

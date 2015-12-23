@@ -63,6 +63,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 				+ UIConstant.CONTENTPANEL_MARGIN_LEFT * 2,
 				UIConstant.CONTENTPANEL_HEIGHT
 						+ UIConstant.CONTENTPANEL_MARGIN_TOP * 2);
+		setOpaque(false);
 
 		container.setPreferredSize(new Dimension(
 				UIConstant.CONTENTPANEL_WIDTH
@@ -71,6 +72,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 				+ UIConstant.CONTENTPANEL_MARGIN_TOP * 2));
 		container.setLayout(null);
 		container.setBackground(Color.white);
+		container.setOpaque(false);
 
 		titlePanel.init("Title");
 		titlePanel.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, UIConstant.CONTENTPANEL_MARGIN_TOP);
@@ -84,6 +86,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 		container.add(infoPanel);
 
 		this.getViewport().add(container);
+		this.getViewport().setOpaque(false);
 	}
 
 	/**
@@ -352,7 +355,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (e.getSource() == titlePanel.backBtn) {
-//				System.out.println("Pressed");
+				repaint();
 				if (ELSDialog.showConfirmDlg(
 						GetPanelUtil.getMainFrame(ELSInfoPanel.this), "退出",
 						"确认退出？")) {

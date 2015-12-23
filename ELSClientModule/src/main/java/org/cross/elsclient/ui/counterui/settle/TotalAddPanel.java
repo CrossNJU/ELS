@@ -8,6 +8,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.util.TimeUtil;
@@ -67,6 +68,7 @@ public class TotalAddPanel extends ELSInfoPanel{
 			String orgNum = itemLabels.get(5).toString();
 			vo = new Receipt_TotalMoneyInVO(number, TimeUtil.getCurrentTime(), perNameID, sum, vos, perNum,orgNum);
 			if(bl.add(vo)==ResultMessage.SUCCESS){
+				LogUtil.addLog("新增总收款单");
 				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
 				init();

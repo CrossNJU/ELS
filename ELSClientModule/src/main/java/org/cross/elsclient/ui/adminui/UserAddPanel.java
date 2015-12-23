@@ -57,7 +57,7 @@ public class UserAddPanel extends ELSInfoPanel{
 			if(bl.add(vo)==ResultMessage.SUCCESS){
 				ConstantVal.numberbl.addone(NumberType.USER, getone);
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");
-				LogUtil.addLog("添加用户");
+				LogUtil.addLog("新增用户");
 				back();
 			}else{
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");

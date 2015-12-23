@@ -33,7 +33,7 @@ public class InfoItemLabel extends ELSLabel{
 	public int boxItemWidth;
 	public int dateItemWidth;
 	public int gap;
-	
+	public Color textColor;
 	
 	public InfoItemLabel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -45,6 +45,7 @@ public class InfoItemLabel extends ELSLabel{
 		boxItemWidth = 200;
 		dateItemWidth = 200;
 		gap = 25;
+		textColor = Color.white;
 	}
 	
 	public void initNormal(String name, String content){
@@ -57,12 +58,14 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(18f));
+		nameLabel.setForeground(textColor);
 
 		contentLabel.setPreferredSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		contentLabel.setMaximumSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		contentLabel.setVerticalAlignment(JLabel.CENTER);
 		contentLabel.setHorizontalAlignment(JLabel.LEFT);
 		contentLabel.setFont(getFont().deriveFont(18f));
+		contentLabel.setForeground(textColor);
 
 //		this.add(Box.createHorizontalStrut(30));
 		this.add(nameLabel);
@@ -83,6 +86,7 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(18f));
+		nameLabel.setForeground(textColor);
 
 		inputLabel.setPreferredSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		inputLabel.setMaximumSize(new Dimension(textItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
@@ -131,6 +135,7 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(18f));
+		nameLabel.setForeground(textColor);
 
 		comboBox.setModel(new DefaultComboBoxModel<>(items));
 		comboBox.setPreferredSize(new Dimension(boxItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
@@ -164,6 +169,7 @@ public class InfoItemLabel extends ELSLabel{
 		nameLabel.setVerticalAlignment(JLabel.CENTER);
 		nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nameLabel.setFont(nameLabel.getFont().deriveFont(18f));
+		nameLabel.setForeground(textColor);
 
 		datePicker.setPreferredSize(new Dimension(dateItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));
 		datePicker.setMaximumSize(new Dimension(dateItemWidth, UIConstant.MANAGETABLE_ITEM_HEIGHT - 15));

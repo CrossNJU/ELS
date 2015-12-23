@@ -68,12 +68,14 @@ public class ELSManageTable extends ELSPanel {
 
 		setSize(new Dimension(width, UIConstant.MANAGETABLE_ITEM_HEIGHT));
 		setBorder(null);
+		setBackground(null);
+		setOpaque(false);
 		
 		container.setSize(width,UIConstant.MANAGETABLE_ITEM_HEIGHT);
 
 		//表头初始化
 		header.init(name,itemWidth,false);
-		header.setBackground(UIConstant.MAINCOLOR);
+		header.setBackground(UIConstant.MAINCOLOR_OPACITY_40);
 		header.setFont(font);
 		for (ELSLabel label : header.labels) {
 			label.setForeground(Color.WHITE);
@@ -159,6 +161,7 @@ public class ELSManageTable extends ELSPanel {
 			if(isUpdateAndDelete){
 				itemLabel.updateBtn.setVisible(true);
 				itemLabel.deleteBtn.setVisible(true);
+				repaint();
 			}
 		}
 
@@ -167,6 +170,7 @@ public class ELSManageTable extends ELSPanel {
 			if(isUpdateAndDelete){
 				itemLabel.updateBtn.setVisible(false);
 				itemLabel.deleteBtn.setVisible(false);
+				repaint();
 			}
 		}
 	}

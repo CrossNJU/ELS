@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.ResultMessage;
@@ -45,6 +46,7 @@ public class AccountUpdatePanel extends ELSInfoPanel{
 			vo.balance = Double.valueOf(itemLabels.get(2).toString());
 			
 			if(bl.update(vo)==ResultMessage.SUCCESS){
+				LogUtil.addLog("更新账户");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"修改成功");
 				back();
 			}else{

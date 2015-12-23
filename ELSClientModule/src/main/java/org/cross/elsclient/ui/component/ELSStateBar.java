@@ -7,24 +7,29 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
+import org.cross.elsclient.ui.MainUI;
+import org.cross.elsclient.ui.util.UIConstant;
+
 public class ELSStateBar extends JLabel{
 
 	public static ELSStateBar instance = new ELSStateBar();
+	
 	public ELSStateBar() {
 		setOpaque(true);
 		setFocusable(false);
 		setEnabled(false);
-		setBackground(Color.DARK_GRAY);
+		setBackground(UIConstant.NORMAL_BTN_COLOR);
 		setHorizontalAlignment(JLabel.CENTER);
 		setVerticalAlignment(JLabel.CENTER);
-		setForeground(Color.WHITE);
 		setFont(getFont().deriveFont(18f));
+		setForeground(UIConstant.COMFIRM_BTN_COLOR);
 	}
 	
 	public static void showStateBar(Container c,String text){
 		instance.setSize(c.getWidth(),50);
 		instance.setLocation(0, c.getHeight());
 		instance.setText(text);
+		instance.setForeground(UIConstant.COMFIRM_BTN_COLOR);
 		c.add(instance,0);
 		c.repaint();
 		AnimeTheard thread = instance.new AnimeTheard(instance);
@@ -45,6 +50,7 @@ public class ELSStateBar extends JLabel{
 			for(int i = 0;i<50;i++){
 				c.setLocation(c.getLocation().x, c.getLocation().y-1);
 				c.repaint();
+				c.getParent().repaint();
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
@@ -54,7 +60,7 @@ public class ELSStateBar extends JLabel{
 			}
 			
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -63,6 +69,7 @@ public class ELSStateBar extends JLabel{
 			for(int i = 0;i<50;i++){
 				c.setLocation(c.getLocation().x, c.getLocation().y+1);
 				c.repaint();
+				c.getParent().repaint();
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {

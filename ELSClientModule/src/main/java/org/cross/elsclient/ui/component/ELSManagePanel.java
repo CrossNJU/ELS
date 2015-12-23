@@ -47,6 +47,7 @@ public class ELSManagePanel extends ELSScrollPane {
 		container.setPreferredSize(new Dimension(UIConstant.CONTAINER_WIDTH,UIConstant.CONTAINER_HEIGHT));
 		container.setLayout(null);
 		container.setBackground(Color.WHITE);
+		container.setOpaque(false);
 		
 		searchPanel.setSize(UIConstant.CONTENTPANEL_WIDTH,48);
 //		searchPanel.setLayout(null);
@@ -79,6 +80,7 @@ public class ELSManagePanel extends ELSScrollPane {
 		setContentPanel();
 		this.setViewport(new JViewport());
 		this.getViewport().add(container);
+		this.getViewport().setOpaque(false);
 		this.getViewport().validate();
 	}
 	
