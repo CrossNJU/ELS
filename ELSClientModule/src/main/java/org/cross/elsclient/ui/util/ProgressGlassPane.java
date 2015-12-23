@@ -134,12 +134,12 @@ public class ProgressGlassPane extends JComponent{
 		long delay = System.nanoTime() - start;
 		System.out.println("time = " + (delay / 1000.0f / 1000.0f)+ "ms for radius = " + radius);
 		
-		try {
-			ImageIO.write(backDropNew, "png", new File("D:/11.png"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			ImageIO.write(backDropNew, "png", new File("img/tmp.png"));
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 	}
 	
 	
