@@ -16,6 +16,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
@@ -80,6 +81,7 @@ public class OrganizationManageTable extends ELSManageTable {
 				
 				container.validate();
 				container.repaint();
+				LogUtil.addLog("删除机构");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除成功");
 			}else{
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "删除失败");

@@ -39,9 +39,12 @@ public class GetPanelUtil {
 	public static ELSPanel getSubFunctionPanel(JComponent c,int functionIndex){
 		ELSPanel mainPanel = (ELSPanel)getMainFrame(c).getContentPane().getComponent(0);
 		ELSFunctionPanel functionPanel = (ELSFunctionPanel)mainPanel.getComponent(1);
-		ELSPanel subFunctionPanel = (ELSPanel)((JPanel)functionPanel.getComponent(0)).getComponent(functionIndex);
-//		System.out.println(subFunctionPanel);
-		return subFunctionPanel;
+		if(functionPanel.getComponent(0) instanceof JPanel){
+			ELSPanel subFunctionPanel = (ELSPanel)((JPanel)functionPanel.getComponent(0)).getComponent(functionIndex);
+			return subFunctionPanel;
+		}else{
+			return null;
+		}
 	}
 	
 	public static ELSPanel getSubFunctionPanel(JComponent c,String funcName){

@@ -8,6 +8,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockVO;
@@ -88,6 +89,7 @@ public class StockAddPanel extends ELSInfoPanel{
 			vo = new StockVO(id, totalNum, 0, 0, 0, 0, 0, 0, orgNum, areas);
 			if(stockbl.addStock(vo)==ResultMessage.SUCCESS){
 				ConstantVal.numberbl.addone(NumberType.STOCK, number);
+				LogUtil.addLog("新增仓库");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(StockAddPanel.this), "添加成功");
 				back();
 			}else{

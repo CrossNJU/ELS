@@ -26,6 +26,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	ArrayList<ELSPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;
 	ELSButton exitBtn;
+	ELSButton minusBtn;
 	ELSLabel mask1;
 	ELSLabel mask2;
 	
@@ -54,6 +55,8 @@ public class ELSFunctionPanel extends ELSPanel {
 		
 		exitBtn = ComponentFactory.createExitBtn();
 		exitBtn.setLocation(984, 20);
+		minusBtn = ComponentFactory.createMinusBtn();
+		minusBtn.setLocation(954, 20);
 		
 		mask1 = new ELSLabel();
 		mask2 = new ELSLabel();
@@ -69,6 +72,7 @@ public class ELSFunctionPanel extends ELSPanel {
 		this.add(mask2);
 		this.add(logo);
 		this.add(exitBtn);
+		this.add(minusBtn);
 	}
 	
 	

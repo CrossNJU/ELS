@@ -25,6 +25,12 @@ public class InfoFormatUtil {
 			return CheckNumFormat(src);
 		case PASSWORD:
 			return CheckPasswordFormat(src);
+		case RECEIPT:
+			return CheckString(src);//待更改
+		case ORGANIZATION:
+			return CheckString(src);//待更改
+		case PERSONNEL:
+			return CheckString(src);//待更改
 		default:
 			break;
 		}
@@ -94,6 +100,57 @@ public class InfoFormatUtil {
 		return null;
 	}
 	
+	public static String checkPersonnel(String src){
+		if(src.charAt(0)!='P'){
+			return "人员编号应以P开头";
+		}else if(src.length()!=12){
+			return "编号长度应为12位";
+		}else if(isContainNum(src.substring(1,src.length()))){
+			return "含非法字符";
+		}
+		
+		String sub = src.substring(1, 3);
+		if(sub.charAt(0)!='0'||sub.charAt(1)=='9'){
+			return "该人员类型不存在(1~2位)";
+		}
+		
+		sub = src.substring(3, 6);
+		if(!sub.equals("010")||!sub.equals("021")||!sub.equals("020")||!sub.equals("015")){
+			return "该城市不存在(3~5位)";
+		}
+		
+		return null;
+	}
+	
+	public static String checkOrgan(String src){
+		if(src.charAt(0)!='O'){
+			return "机构编号应以P开头";
+		}else if(src.length()!=8){
+			return "编号长度应为8位";
+		}else if(isContainNum(src.substring(1,src.length()))){
+			return "含非法字符";
+		}
+		
+		String sub = src.substring(1, 4);
+		if(!sub.equals("010")||!sub.equals("021")||!sub.equals("020")||!sub.equals("015")){
+			return "该城市不存在(1~3位)";
+		}
+		
+		return null;
+	}
+	
+	public static String checkReceipt(String src){
+		if(src.charAt(0)!='R'){
+			return "单据编号应以R开头";
+		}else if(src.length()!=25){
+			return "编号长度应为25位";
+		}else if(isContainNum(src.substring(1,src.length()))){
+			return "含非法字符";
+		}
+		
+		return null;
+	}
+	
 	public static boolean isContainUppercase(String src){
 		boolean result = false;
 		char c[] = src.toCharArray();
@@ -131,4 +188,5 @@ public class InfoFormatUtil {
 		}
 		return result;
 	}
+	
 }

@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.ResultMessage;
@@ -47,6 +48,7 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(0).toString());
 			try {
 				if(bl.update(vo)==ResultMessage.SUCCESS){
+					LogUtil.addLog("更新机构");
 					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更改成功");
 					back();
 				}else{

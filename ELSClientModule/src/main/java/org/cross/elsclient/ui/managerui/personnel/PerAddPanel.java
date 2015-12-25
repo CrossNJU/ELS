@@ -11,6 +11,7 @@ import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.counterui.initial.InitialManagePanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.PersonnelVO;
@@ -75,6 +76,7 @@ public class PerAddPanel extends ELSInfoPanel {
 				vo = new DriverVO(id, name, position, orgNum, sex, idcard, phone, birthday, new SalaryPO(SalaryType.ADDONCE, ConstantVal.constantbl.show().baseMoneyForDriver, 20, 0, id), null, null);
 			}
 			if(personelbl.add(vo)==ResultMessage.SUCCESS){
+				LogUtil.addLog("新增人员");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 				ConstantVal.numberbl.addone(NumberType.PERSONNEL, number);
 				back();

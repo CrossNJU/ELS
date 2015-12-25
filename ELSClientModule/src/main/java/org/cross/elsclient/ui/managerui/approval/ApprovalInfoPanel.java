@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elscommon.util.ApproveType;
 
@@ -42,6 +43,7 @@ public class ApprovalInfoPanel extends ELSInfoPanel {
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(this), "审批单据", "确认审批通过该单据？")){
+			LogUtil.addLog("审批单据通过");
 			receiptbl.check(vo, ApproveType.APPROVED);
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(ApprovalInfoPanel.this), "审批通过");
 			back();
@@ -54,6 +56,7 @@ public class ApprovalInfoPanel extends ELSInfoPanel {
 		super.cancel();
 		if(ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(this), "审批单据", "确认审批不通过该单据？")){
 			try {
+				LogUtil.addLog("审批单据不通过");
 				receiptbl.check(vo, ApproveType.NOT_APPROVED);
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(ApprovalInfoPanel.this), "审批不通过");
 				back();

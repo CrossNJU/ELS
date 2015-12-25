@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.OrganizationType;
@@ -60,10 +61,11 @@ public class PerUpdatePanel extends ELSInfoPanel{
 //			vo.birthday = itemLabels.get(6).toString();
 			vo.phone = itemLabels.get(7).toString();
 			if(personelbl.update(vo)==ResultMessage.SUCCESS){
-				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
+				LogUtil.addLog("更新人员");
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "修改成功");
 				back();
 			}else {
-				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "修改失败");
 			}
 		}
 	}

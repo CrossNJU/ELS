@@ -7,5 +7,8 @@ public enum InfoType {
 	CELLPHONE,//手机
 	NUM,//数字
 	PASSWORD,//密码
-	ID;//编号
+	ID,//编号
+	RECEIPT,//单据
+	ORGANIZATION,//机构
+	PERSONNEL;//人员
 }

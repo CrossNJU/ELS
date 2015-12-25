@@ -70,6 +70,7 @@ public class ELSButton extends JLabel {
 	public void setColor(Color bg){
 		setBackground(bg);
 		backColor = bg;
+		pressColor = bg.darker();
 	}
 	
 	public void click(){
@@ -83,7 +84,8 @@ public class ELSButton extends JLabel {
 			c.setLocation(c.getX()-3, c.getY()-3);
 		}
 		setPreferredSize(new Dimension(getPreferredSize().width-6, getPreferredSize().height-6));
-//		setBackground(pressColor);
+		getRootPane().repaint();
+		setBackground(pressColor);
 	}
 	
 	public void release(){
@@ -93,9 +95,8 @@ public class ELSButton extends JLabel {
 			c.setLocation(c.getX()+3, c.getY()+3);
 		}
 		setPreferredSize(new Dimension(getPreferredSize().width+6, getPreferredSize().height+6));
-//		setBackground(backColor);
+		getRootPane().repaint();
+		setBackground(backColor);
 	}
-	
-	
 
 }

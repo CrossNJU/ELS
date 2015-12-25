@@ -7,7 +7,9 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 
+import org.cross.elsclient.ui.MainUI;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSDatePicker;
@@ -148,6 +150,34 @@ public class ComponentFactory {
 		btn.setMaximumSize(new Dimension(250, UIConstant.SEARCHPANEL_HEIGHT));
 		btn.setMinimumSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
 		btn.setColor(UIConstant.NORMAL_BTN_COLOR);
+		return btn;
+	}
+	
+	public static ELSButton createMinusBtn(){
+		ELSButton btn = new ELSButton();
+		btn.setOpaque(false);
+		btn.setSize(20,20);
+		btn.setIcon(Images.MINUS_IMAGEICON);
+		btn.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainUI.FRAME.setExtendedState(JFrame.ICONIFIED);  
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+		});
+		
 		return btn;
 	}
 	

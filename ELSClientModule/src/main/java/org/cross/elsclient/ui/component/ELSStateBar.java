@@ -17,19 +17,18 @@ public class ELSStateBar extends JLabel{
 	public ELSStateBar() {
 		setOpaque(true);
 		setFocusable(false);
-		setEnabled(false);
-		setBackground(UIConstant.NORMAL_BTN_COLOR);
+//		setEnabled(false);
+		setBackground(UIConstant.MAINCOLOR);
 		setHorizontalAlignment(JLabel.CENTER);
 		setVerticalAlignment(JLabel.CENTER);
 		setFont(getFont().deriveFont(18f));
-		setForeground(UIConstant.COMFIRM_BTN_COLOR);
+		setForeground(Color.white);
 	}
 	
 	public static void showStateBar(Container c,String text){
 		instance.setSize(c.getWidth(),50);
 		instance.setLocation(0, c.getHeight());
 		instance.setText(text);
-		instance.setForeground(UIConstant.COMFIRM_BTN_COLOR);
 		c.add(instance,0);
 		c.repaint();
 		AnimeTheard thread = instance.new AnimeTheard(instance);

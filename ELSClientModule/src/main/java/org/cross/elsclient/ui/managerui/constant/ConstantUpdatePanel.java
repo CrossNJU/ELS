@@ -10,6 +10,7 @@ import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.component.InfoItemLabel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.ConstantVO;
 import org.cross.elscommon.util.InfoType;
@@ -90,6 +91,7 @@ public class ConstantUpdatePanel extends ELSInfoPanel {
 			vo.baseMoneyForADMINISTRATOR = Double.valueOf(itemLabels.get(18).toString());
 			
 			if(bl.update(vo)==ResultMessage.SUCCESS){
+				LogUtil.addLog("更新业务常量");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更新成功");
 				back();
 			}else{

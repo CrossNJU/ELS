@@ -9,6 +9,7 @@ import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elscommon.util.InfoType;
@@ -46,6 +47,7 @@ public class SendUpdatePanel extends ELSInfoPanel {
 		vo.receiveTime = itemLabels.get(2).toString();
 		vo.receiverName = itemLabels.get(1).toString();
 			if(bl.update(vo)==ResultMessage.SUCCESS){
+				LogUtil.addLog("派送快件");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"派件成功");
 				this.init();
 				this.validate();

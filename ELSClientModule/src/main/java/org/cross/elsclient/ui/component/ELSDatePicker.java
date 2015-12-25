@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
@@ -32,6 +34,9 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ButtonUI;
 import javax.swing.plaf.ComboBoxUI;
 
+import org.cross.elsclient.ui.util.Images;
+import org.cross.elsclient.ui.util.UIConstant;
+
 public class ELSDatePicker extends JPanel {
 	private JTextField tfDate;
 	private JButton button;
@@ -41,10 +46,10 @@ public class ELSDatePicker extends JPanel {
 	private JComboBox cboYear;
 	private JComboBox cboMonth;
 	private JLabel[] lbls = new JLabel[7];
-	private JToggleButton[] toggles = new JToggleButton[42];
+	private ELSToggleBtn[] toggles = new ELSToggleBtn[42];
 	private Border border;
 	private Color bgColor;
-	private int width = 150, height = 25;
+	private int width = 150, height = 42;
 	private int year;
 	private int month;
 	private int date;
@@ -64,21 +69,30 @@ public class ELSDatePicker extends JPanel {
 	}
 
 	private void initUI() {
+		setBackground(Color.white);
+		
 		tfDate = new JTextField();
 		tfDate.setEditable(false);
 		tfDate.setBackground(Color.WHITE);
 		tfDate.setHorizontalAlignment(JTextField.CENTER);
+		tfDate.setFont(UIConstant.MainFont.deriveFont(18f));
+		tfDate.setForeground(UIConstant.MAINCOLOR);
 		border = tfDate.getBorder();
 		tfDate.setBorder(null);
 
 		button = new JButton();
 		button.setPreferredSize(new Dimension(height, height));
+		button.setOpaque(false);
+		button.setFocusable(false);
+		button.setIcon(Images.DOWN_ACTIVE_IMAGEICON);
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (show == false) {
 					dlg.setLocation(ELSDatePicker.this.getLocationOnScreen().x,
 							ELSDatePicker.this.getLocationOnScreen().y
-									+ ELSDatePicker.this.height);
+									+ ELSDatePicker.this.getMaximumSize().height);
 					dlg.setAlwaysOnTop(true);
 					dlg.setVisible(true);
 				} else {
@@ -91,7 +105,7 @@ public class ELSDatePicker extends JPanel {
 
 		this.bgColor = this.getBackground();
 
-		this.setOpaque(false);
+		this.setOpaque(true);
 		this.setLayout(new BorderLayout(0, 0));
 		this.setBorder(border);
 		this.add(tfDate, BorderLayout.CENTER);
@@ -111,11 +125,11 @@ public class ELSDatePicker extends JPanel {
 				borderWidth));
 		paHeader.setOpaque(false);
 		paHeader.setPreferredSize(new Dimension(this.width, this.height
-				+ borderWidth));
+				));
 		paHeader.setBorder(BorderFactory.createEmptyBorder(borderWidth,
 				borderWidth, borderWidth, borderWidth));
-		paHeader.add(cboYear = new JComboBox());
-		paHeader.add(cboMonth = new JComboBox());
+		paHeader.add(cboYear = new ELSComboBox());
+		paHeader.add(cboMonth = new ELSComboBox());
 		initYearModel();
 		initMonthModel();
 		paCalendar.add(paHeader, BorderLayout.NORTH);
@@ -168,28 +182,21 @@ public class ELSDatePicker extends JPanel {
 		for (int i = 0; i < week.length; i++) {
 			lbls[i] = new JLabel(week[i]);
 			lbls[i].setHorizontalAlignment(SwingConstants.CENTER);
-			lbls[i].setOpaque(true);
-			lbls[i].setBackground(Color.WHITE);
+			lbls[i].setOpaque(false);
+			lbls[i].setFont(getFont());
+			lbls[i].setForeground(UIConstant.MAINCOLOR_OPACITY_90);
 			lbls[i].setPreferredSize(new Dimension(this.height, this.height));
 			pa.add(lbls[i]);
 		}
 		// 加载日历按钮
-		ButtonGroup group = new ButtonGroup();
 		for (int i = 0; i < 42; i++) {
-			toggles[i] = new JToggleButton();
-			toggles[i].setBorder(BorderFactory
-					.createLineBorder(Color.LIGHT_GRAY));
+			toggles[i] = new ELSToggleBtn();
+//			toggles[i].setBorder(BorderFactory
+//					.createLineBorder(Color.LIGHT_GRAY));
+			toggles[i].setSelected(false);
 			toggles[i]
 					.setPreferredSize(new Dimension(this.height, this.height));
-			toggles[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					date = Integer.parseInt(((JToggleButton) e.getSource())
-							.getText().toString());
-					dlg.dispose();
-					updateField();
-				}
-			});
-			group.add(toggles[i]);
+			toggles[i].addMouseListener(new SelectListener());
 			pa.add(toggles[i]);
 		}
 		updateComponent();
@@ -222,6 +229,9 @@ public class ELSDatePicker extends JPanel {
 				toggles[i].setText("");
 				toggles[i].setEnabled(false);
 			}
+		}
+		for (ELSToggleBtn elsToggleBtn : toggles) {
+			elsToggleBtn.setSelected(false);
 		}
 		// 使当天的按钮呈现被按下的效果
 		int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + off - 1;
@@ -256,6 +266,9 @@ public class ELSDatePicker extends JPanel {
 		super.setPreferredSize(preferredSize);
 		this.width = (int) preferredSize.getWidth();
 		this.height = (int) preferredSize.getHeight();
+		initUI();
+		initDateDialog();
+		updateField();
 	}
 
 	public void setBackground(Color bg) {
@@ -278,17 +291,17 @@ public class ELSDatePicker extends JPanel {
 		}
 	}
 
-	public void setDateButtonUI(String clzUIName) {
-		try {
-			for (int i = 0; i < 42; i++)
-				toggles[i].setUI((ButtonUI) Class.forName(clzUIName)
-						.newInstance());
-		} catch (InstantiationException | IllegalAccessException
-				| ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void setDateButtonUI(String clzUIName) {
+//		try {
+//			for (int i = 0; i < 42; i++)
+//				toggles[i].setUI((ButtonUI) Class.forName(clzUIName)
+//						.newInstance());
+//		} catch (InstantiationException | IllegalAccessException
+//				| ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 	public void setComboBoxUI(String clzUIName) {
 		try {
@@ -343,5 +356,45 @@ public class ELSDatePicker extends JPanel {
 		this.month = Integer.valueOf(dates[1]);
 		this.date = Integer.valueOf(dates[2]);
 		updateField();
+	}
+	
+	class SelectListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			for (ELSToggleBtn elsToggleBtn : toggles) {
+				elsToggleBtn.setSelected(false);
+			}
+			((ELSToggleBtn) e.getSource()).setSelected(true);
+			date = Integer.parseInt(((ELSToggleBtn) e.getSource())
+					.getText().toString());
+			dlg.dispose();
+			updateField();
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }
