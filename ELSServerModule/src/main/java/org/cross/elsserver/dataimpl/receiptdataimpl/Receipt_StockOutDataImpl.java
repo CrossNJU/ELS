@@ -8,15 +8,15 @@ import org.cross.elscommon.po.Receipt_StockOutPO;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.database.MySQL;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
-import org.cross.elsserver.ui.util.MySQL;
 
 public class Receipt_StockOutDataImpl implements ReceiptTool {
 
 	private MySQL mysql;
 
 	public Receipt_StockOutDataImpl() {
-		this.mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.PersonnelVO;
@@ -55,6 +56,7 @@ public class DriverUpdatePanel extends ELSInfoPanel{
 		vo.licenceEnd = itemLabels.get(6).toString();
 		if(personnelBLService.update(vo) == ResultMessage.SUCCESS){
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "修改成功");
+			LogUtil.addLog("更新司机");
 			back();
 		}else {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "修改失败");

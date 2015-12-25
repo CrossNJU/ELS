@@ -9,6 +9,7 @@ import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
@@ -67,6 +68,7 @@ public class StockAdjustPanel extends ELSInfoPanel{
 		String id = itemLabels.get(1).toString();
 		String type = itemLabels.get(0).toString().split("-")[1];
 		if(stockbl.stockAdjust(id, StringToType.toGoodsType(type))==ResultMessage.SUCCESS){
+			LogUtil.addLog("库存调整");
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"调整成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 //			parent.contentPanel.cl.show(parent.contentPanel, "receipts");

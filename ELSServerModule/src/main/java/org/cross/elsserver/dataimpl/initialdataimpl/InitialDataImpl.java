@@ -15,7 +15,7 @@ import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 public class InitialDataImpl extends UnicastRemoteObject implements InitialDataService {
 
@@ -28,7 +28,7 @@ public class InitialDataImpl extends UnicastRemoteObject implements InitialDataS
 
 	public InitialDataImpl() throws RemoteException {
 		super();
-		mysql = new MySQL();
+		mysql = MySQL.getMysql();
 	}
 
 	@Override

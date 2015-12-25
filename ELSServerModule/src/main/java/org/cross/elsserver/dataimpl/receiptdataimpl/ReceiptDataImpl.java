@@ -16,7 +16,7 @@ import org.cross.elscommon.util.CompareTime;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 @SuppressWarnings("serial")
 public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataService{
@@ -43,7 +43,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		this.moneyout = new Receipt_MoneyOutDataImpl();
 		this.totalmoneyin = new Receipt_TotalMoneyInDataImpl();
 		this.del = new Receipt_DelDataImpl();
-		this.mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	@Override

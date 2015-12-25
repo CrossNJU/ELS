@@ -2,11 +2,14 @@ package org.cross.elsserver.ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.cross.elsserver.network.TransDataImpl;
 import org.cross.elsserver.ui.component.ELSButton;
 import org.cross.elsserver.ui.component.ELSLabel;
 import org.cross.elsserver.ui.component.ELSPanel;
@@ -85,6 +88,8 @@ public class ELSServerPanel extends ELSPanel{
 		launchBtn.setLocation(708, 120);
 		launchBtn.setText("启动服务");
 		launchBtn.setColor(UIConstant.COMFIRM_BTN_COLOR);
+		launchBtn.addMouseListener(new ELSListener());
+		stopBtn.addMouseListener(new ELSListener());
 		
 		stopBtn.setLocation(864, 120);
 		stopBtn.setText("停止服务");
@@ -104,5 +109,49 @@ public class ELSServerPanel extends ELSPanel{
 		this.add(stopBtn);
 		this.add(logTitle);
 		this.add(logTable);
+	}
+	
+	class ELSListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource().equals(launchBtn)) {
+				if(TransDataImpl.start()){
+					stateLabel.setText("服务器状态:已启动");
+				}
+			}else if (e.getSource().equals(stopBtn)) {
+				if(TransDataImpl.stop()){
+					stateLabel.setText("服务器状态:已停止");
+				}
+			}else if (e.getSource().equals(changeBtn)) {
+				
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

@@ -1,4 +1,4 @@
-package org.cross.elsclient.util;
+package org.cross.elscommon.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

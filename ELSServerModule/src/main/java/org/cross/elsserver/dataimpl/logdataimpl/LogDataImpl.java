@@ -10,7 +10,7 @@ import org.cross.elscommon.dataservice.logdataservice.LogDataService;
 import org.cross.elscommon.po.LogPO;
 import org.cross.elscommon.util.CompareTime;
 import org.cross.elscommon.util.ResultMessage;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 public class LogDataImpl extends UnicastRemoteObject implements LogDataService {
 
@@ -23,7 +23,7 @@ public class LogDataImpl extends UnicastRemoteObject implements LogDataService {
 
 	public LogDataImpl() throws RemoteException {
 		super();
-		mysql = new MySQL();
+		mysql = MySQL.getMysql();
 	}
 
 	@Override

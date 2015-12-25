@@ -4,11 +4,10 @@ import org.cross.elscommon.po.LogPO;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elsserver.dataimpl.receiptdataimpl.Typetotable;
-import org.cross.elsserver.ui.util.MySQL;
 
 public class DBDeleteHelper {
 	
-	public static MySQL mysql = new MySQL();
+	public static MySQL mysql = MySQL.getMysql();
 
 	public static ResultMessage delete_account(String id) {
 		String sql = "delete from `account` where `accountNum`='" + id + "'";

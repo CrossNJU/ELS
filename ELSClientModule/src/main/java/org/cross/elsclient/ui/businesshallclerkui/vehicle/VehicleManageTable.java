@@ -17,6 +17,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.util.ResultMessage;
@@ -76,6 +77,7 @@ public class VehicleManageTable extends ELSManageTable {
 	public void deleteBtn(int index) {
 		try {
 			if (vehiclebl.delete(vos.get(index).number) == ResultMessage.SUCCESS) {
+				LogUtil.addLog("删除车辆");
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);
 

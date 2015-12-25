@@ -19,7 +19,6 @@ import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.CalcuteUtil;
 import org.cross.elsclient.util.ConstantVal;
-import org.cross.elsclient.util.TimeUtil;
 import org.cross.elsclient.vo.GoodsVO;
 import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
@@ -30,6 +29,7 @@ import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StockType;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elscommon.util.TimeUtil;
 
 public class ExpressReceivePanel extends ELSInfoPanel{
 	Receipt_OrderVO orderVO;

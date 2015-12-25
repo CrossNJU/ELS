@@ -8,6 +8,7 @@ import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.PersonnelVO;
@@ -65,6 +66,7 @@ public class DriverAddPanel extends ELSInfoPanel{
 		if(bl.add(drivervo) == ResultMessage.SUCCESS){
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ConstantVal.numberbl.addone(NumberType.PERSONNEL, number);
+			LogUtil.addLog("新增司机");
 			back();
 		}else {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");

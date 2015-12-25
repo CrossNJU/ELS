@@ -33,6 +33,7 @@ public class LogBLImpl implements LogBLService{
 
 	@Override
 	public ResultMessage add(LogVO vo) throws RemoteException {
+		System.out.println("op:"+vo.operator);
 		LogPO po = logInfo.toLogPO(vo);
 		return logData.insert(po);
 	}

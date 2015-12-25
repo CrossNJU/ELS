@@ -1,4 +1,4 @@
-package org.cross.elsserver.ui.util;
+package org.cross.elsserver.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,13 +7,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.cross.elscommon.util.DatabaseConstant;
+import org.cross.elscommon.util.TimeUtil;
+import org.cross.elsserver.ui.util.UIConstant;
 
 public class MySQL {
 	
 	Connection con;
 	PreparedStatement pst;
+	static MySQL mysql;
+	static int count = 0;
 	
-	public MySQL(){
+	public static MySQL getMysql(){
+		if (count == 0) {
+			count ++;
+			mysql = new MySQL();
+		}
+		return mysql;
+	}
+	
+	private MySQL(){
 		connect();
 	}
 	
@@ -25,7 +37,7 @@ public class MySQL {
 					DatabaseConstant.user, 
 					DatabaseConstant.password);
 			StackTraceElement el = Thread.currentThread().getStackTrace()[2];
-//			UIConstant.LOG.addLog(el.getClassName()+" "+el.getMethodName());
+			UIConstant.LOG.addLog(TimeUtil.getCurrentTime()+": "+el.getClassName()+"  "+el.getMethodName());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,7 +51,7 @@ public class MySQL {
 		try {
 			pst = con.prepareStatement(sql);
 			StackTraceElement el = Thread.currentThread().getStackTrace()[2];
-			String s = el.getClassName()+" "+el.getMethodName();
+			String s = TimeUtil.getCurrentTime()+": "+el.getClassName()+"  "+el.getMethodName();
 			if(pst.executeUpdate() > 0) {
 				UIConstant.LOG.addLog(s+" success");
 				return true;
@@ -59,7 +71,7 @@ public class MySQL {
 		try {
 			pst = con.prepareStatement(sql);
 			StackTraceElement el = Thread.currentThread().getStackTrace()[2];
-			UIConstant.LOG.addLog(el.getClassName()+" "+el.getMethodName());
+			UIConstant.LOG.addLog(TimeUtil.getCurrentTime()+": "+el.getClassName()+"  "+el.getMethodName());
 			return pst.executeQuery(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

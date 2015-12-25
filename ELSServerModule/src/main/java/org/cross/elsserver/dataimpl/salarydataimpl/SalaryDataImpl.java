@@ -11,7 +11,7 @@ import org.cross.elscommon.po.SalaryPO;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.SalaryType;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 public class SalaryDataImpl extends UnicastRemoteObject implements SalaryDataService {
 
@@ -19,7 +19,7 @@ public class SalaryDataImpl extends UnicastRemoteObject implements SalaryDataSer
 
 	public SalaryDataImpl() throws RemoteException {
 		super();
-		mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	@Override

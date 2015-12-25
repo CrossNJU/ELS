@@ -11,7 +11,7 @@ import org.cross.elscommon.po.UserPO;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elscommon.util.UserType;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 public class UserDataImpl extends UnicastRemoteObject implements UserDataService {
 
@@ -24,7 +24,7 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 
 	public UserDataImpl() throws RemoteException {
 		super();
-		this.mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	@Override

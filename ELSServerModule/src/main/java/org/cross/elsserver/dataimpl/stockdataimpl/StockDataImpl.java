@@ -13,7 +13,7 @@ import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.util.CompareTime;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 import com.mysql.fabric.xmlrpc.base.Array;
 
@@ -24,7 +24,7 @@ public class StockDataImpl extends UnicastRemoteObject implements StockDataServi
 
 	public StockDataImpl() throws RemoteException {
 		super();
-		mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	@Override

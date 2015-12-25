@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import org.cross.elscommon.po.HistoryPO;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.database.MySQL;
 import org.cross.elsserver.dataimpl.tools.HistoryTool;
-import org.cross.elsserver.ui.util.MySQL;
 
 public class HistoryDataImpl implements HistoryTool {
 
 	MySQL mysql;
 
 	public HistoryDataImpl() {
-		mysql = new MySQL();
+		mysql = MySQL.getMysql();
 	}
 
 	@Override

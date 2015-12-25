@@ -8,6 +8,9 @@ import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
+import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.DriverVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
@@ -69,6 +72,7 @@ public class DriverManageTable extends ELSManageTable{
 		super.deleteBtn(index);
 		try {
 			if (personnelbl.delete(vos.get(index).number) == ResultMessage.SUCCESS) {
+				LogUtil.addLog("删除司机");
 				container.remove(itemLabels.get(index));
 				itemLabels.remove(index);
 				vos.remove(index);

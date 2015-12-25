@@ -29,10 +29,9 @@ import org.cross.elscommon.po.VehiclePO;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
-import org.cross.elsserver.ui.util.MySQL;
 
 public class DBInsertHelper {
-	public static MySQL mysql = new MySQL();
+	public static MySQL mysql = MySQL.getMysql();
 	
 	public static ResultMessage insert_account(AccountPO po){
 		String sql = "insert ignore into `account`(`name`, `accountNum`, `balance`) values ('" + po.getName() + "','"

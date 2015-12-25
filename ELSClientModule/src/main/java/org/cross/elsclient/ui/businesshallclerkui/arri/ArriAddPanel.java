@@ -13,6 +13,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.GoodsVO;
@@ -90,6 +91,7 @@ public class ArriAddPanel extends ELSInfoPanel {
 		if (receiptbl.add(arrivo) == ResultMessage.SUCCESS) {
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
+			LogUtil.addLog("新增到达单");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 //			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");

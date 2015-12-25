@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.VehicleVO;
@@ -53,6 +54,7 @@ public class VehicleAddPanel extends ELSInfoPanel {
 				itemLabels.get(5).toString(), itemLabels.get(6).toString(), itemLabels.get(3).toString(), 
 				itemLabels.get(4).toString(), null, false);
 		if(vehiclebl.add(vo) == ResultMessage.SUCCESS){
+			LogUtil.addLog("新增车辆");
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ConstantVal.numberbl.addone(NumberType.VEHICLE, number);
 			back();

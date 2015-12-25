@@ -8,6 +8,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elsclient.vo.VehicleVO;
@@ -54,6 +55,7 @@ public class VehicleUpdatePanel extends ELSInfoPanel{
 		vo.engineNumber = itemLabels.get(4).toString();
 		vo.baseNumber = itemLabels.get(5).toString();
 		if(vehiclebl.update(vo) == ResultMessage.SUCCESS){
+			LogUtil.addLog("更新车辆");
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "修改成功");
 			back();
 		}else {

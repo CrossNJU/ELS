@@ -15,8 +15,8 @@ import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StockType;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.database.MySQL;
 import org.cross.elsserver.dataimpl.tools.HistoryTool;
-import org.cross.elsserver.ui.util.MySQL;
 
 public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataService {
 
@@ -26,7 +26,7 @@ public class GoodsDataImpl extends UnicastRemoteObject implements GoodsDataServi
 	public GoodsDataImpl() throws RemoteException {
 		super();
 		this.historyTool = new HistoryDataImpl();
-		mysql = new MySQL();
+		mysql = MySQL.getMysql();
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ReceiptType;
@@ -46,7 +47,8 @@ public class ReceiptManagePanel extends ELSManagePanel{
 		list = new ReceiptManageTable(s, itemWidth);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		try {
-			receiptvos = receiptbl.show();
+//			receiptvos = receiptbl.show();
+			receiptvos = receiptbl.findByUser(UIConstant.CURRENT_USER.number);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

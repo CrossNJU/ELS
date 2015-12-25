@@ -28,7 +28,6 @@ import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
-import org.cross.elsclient.util.TimeUtil;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.InitialVO;
 import org.cross.elsclient.vo.OrganizationVO;
@@ -37,6 +36,7 @@ import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.VehicleVO;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.TimeUtil;
 
 public class InitialAddPanel extends InitialManagePanel{
 	ELSButton cancelBtn;

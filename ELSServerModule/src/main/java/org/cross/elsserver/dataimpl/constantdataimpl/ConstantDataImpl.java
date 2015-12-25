@@ -10,7 +10,7 @@ import org.cross.elscommon.po.ConstantPO;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 @SuppressWarnings("serial")
 public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDataService {
@@ -26,7 +26,7 @@ public class ConstantDataImpl extends UnicastRemoteObject implements ConstantDat
 	// `distance_Nanjing_Shanghai`
 	public ConstantDataImpl() throws RemoteException {
 		super();
-		mysql = new MySQL();
+		mysql = MySQL.getMysql();
 	}
 
 	@Override

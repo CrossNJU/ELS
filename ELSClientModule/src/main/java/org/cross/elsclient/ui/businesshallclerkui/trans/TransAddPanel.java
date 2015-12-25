@@ -13,6 +13,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.GoodsVO;
@@ -83,9 +84,9 @@ public class TransAddPanel extends ELSInfoPanel {
 				Double.valueOf(itemLabels.get(10).toString()), itemLabels.get(6).toString(),
 				itemLabels.get(7).toString(), itemLabels.get(2).toString(), itemLabels.get(3).toString(),
 				itemLabels.get(9).toString(), itemLabels.get(8).toString(), user.number);
-		System.out.println(goods.size());
+//		System.out.println(goods.size());
 		for (int i = 0; i < goods.size(); i++) {
-			System.out.println(goods.get(i));
+//			System.out.println(goods.get(i));
 			GoodsVO goodsvo = goodsbl.searchGoods(goods.get(i));
 			HistoryVO historyVO = new HistoryVO(itemLabels.get(5).toString(), UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type, true);
 			goodsvo.history.add(historyVO);
@@ -95,6 +96,7 @@ public class TransAddPanel extends ELSInfoPanel {
 			goodsbl.updateGoods(goodsvo);
 		}
 		if (bl.add(vo) == ResultMessage.SUCCESS) {
+			LogUtil.addLog("新增转运单");
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);

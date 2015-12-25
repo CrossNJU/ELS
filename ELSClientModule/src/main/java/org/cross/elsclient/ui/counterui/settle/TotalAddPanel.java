@@ -11,13 +11,13 @@ import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
-import org.cross.elsclient.util.TimeUtil;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elsclient.vo.Receipt_MoneyOutVO;
 import org.cross.elsclient.vo.Receipt_TotalMoneyInVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.TimeUtil;
 
 public class TotalAddPanel extends ELSInfoPanel{
 	Receipt_TotalMoneyInVO vo;

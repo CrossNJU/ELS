@@ -12,6 +12,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
@@ -72,6 +73,7 @@ public class MoneyAddPanel extends ELSInfoPanel {
 			bl.update(order);
 		}
 		if (bl.add(moneyinvo) == ResultMessage.SUCCESS) {
+			LogUtil.addLog("新增收款单");
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);

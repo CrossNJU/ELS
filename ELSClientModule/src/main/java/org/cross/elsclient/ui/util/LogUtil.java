@@ -7,9 +7,10 @@ import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
 import org.cross.elsclient.blservice.blfactoryservice.BLFactoryService;
 import org.cross.elsclient.blservice.logblservice.LogBLService;
 import org.cross.elsclient.util.ConstantVal;
-import org.cross.elsclient.util.TimeUtil;
 import org.cross.elsclient.vo.LogVO;
 import org.cross.elscommon.util.NumberType;
+import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.TimeUtil;
 import org.junit.experimental.theories.Theories;
 
 public class LogUtil {
@@ -27,7 +28,11 @@ public class LogUtil {
 	
 	public static void addLog(String operation){
 		try {
-			LOGBL.add(new LogVO(ConstantVal.numberbl.getPostNumber(NumberType.LOG), TimeUtil.getCurrentTime(), UIConstant.CURRENT_USER.number, operation));
+			String number = ConstantVal.numberbl.getPostNumber(NumberType.LOG);
+			ResultMessage rs = LOGBL.add(new LogVO(number, TimeUtil.getCurrentTime(), UIConstant.CURRENT_USER.number, operation));
+			if (rs == ResultMessage.SUCCESS) {
+				ConstantVal.numberbl.addone(NumberType.LOG, number);
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

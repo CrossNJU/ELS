@@ -12,7 +12,7 @@ import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 public class OrganizationDataImpl extends UnicastRemoteObject implements OrganizationDataService {
 
@@ -25,7 +25,7 @@ public class OrganizationDataImpl extends UnicastRemoteObject implements Organiz
 
 	public OrganizationDataImpl() throws RemoteException {
 		super();
-		this.mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	@Override

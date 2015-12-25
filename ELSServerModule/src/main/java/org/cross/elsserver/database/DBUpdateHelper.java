@@ -1,7 +1,5 @@
 package org.cross.elsserver.database;
 
-import java.rmi.RemoteException;
-
 import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.po.ConstantPO;
 import org.cross.elscommon.po.GoodsPO;
@@ -10,13 +8,10 @@ import org.cross.elscommon.po.StockAreaPO;
 import org.cross.elscommon.po.StockPO;
 import org.cross.elscommon.po.UserPO;
 import org.cross.elscommon.po.VehiclePO;
-import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
-import org.cross.elsserver.dataimpl.receiptdataimpl.Typetotable;
-import org.cross.elsserver.ui.util.MySQL;
 
 public class DBUpdateHelper {
-	public static MySQL mysql = new MySQL();
+	public static MySQL mysql = MySQL.getMysql();
 	public static ResultMessage update_account(AccountPO po) {
 		String sql = "update `account` set `name`='" + po.getName() + "', `balance`=" + po.getBalance()
 				+ " where `accountNum`='" + po.getAccountNum()+ "'";

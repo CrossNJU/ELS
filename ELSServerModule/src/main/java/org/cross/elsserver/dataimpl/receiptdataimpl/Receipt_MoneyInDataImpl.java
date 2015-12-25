@@ -11,15 +11,15 @@ import org.cross.elscommon.po.Receipt_OrderPO;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elsserver.database.MySQL;
 import org.cross.elsserver.dataimpl.tools.ReceiptTool;
-import org.cross.elsserver.ui.util.MySQL;
 
 public class Receipt_MoneyInDataImpl implements ReceiptTool {
 
 	private MySQL mysql;
 
 	public Receipt_MoneyInDataImpl() {
-		this.mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	@Override

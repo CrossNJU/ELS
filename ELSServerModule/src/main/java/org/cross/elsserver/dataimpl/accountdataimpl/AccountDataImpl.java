@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.cross.elscommon.dataservice.accountdataservice.AccountDataService;
 import org.cross.elscommon.po.AccountPO;
 import org.cross.elscommon.util.ResultMessage;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 public class AccountDataImpl extends UnicastRemoteObject implements AccountDataService {
 
@@ -22,7 +22,7 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 
 	public AccountDataImpl() throws RemoteException {
 		super();
-		this.mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	@Override

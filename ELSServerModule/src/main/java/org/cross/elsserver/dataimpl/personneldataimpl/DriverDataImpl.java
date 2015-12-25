@@ -7,13 +7,13 @@ import org.cross.elscommon.po.DriverPO;
 import org.cross.elscommon.po.PersonnelPO;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
-import org.cross.elsserver.ui.util.MySQL;
+import org.cross.elsserver.database.MySQL;
 
 public class DriverDataImpl{
 	private MySQL mysql;
 
 	public DriverDataImpl() {
-		this.mysql = new MySQL();
+		this.mysql = MySQL.getMysql();
 	}
 
 	public ResultMessage insert(PersonnelPO po) {
