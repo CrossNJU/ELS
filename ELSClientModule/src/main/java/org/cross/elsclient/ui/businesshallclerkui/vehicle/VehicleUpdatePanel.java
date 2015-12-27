@@ -16,7 +16,7 @@ import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 
-public class VehicleUpdatePanel extends ELSInfoPanel{
+public class VehicleUpdatePanel extends ELSInfoPanel {
 	VehicleVO vo;
 	VehicleBLService vehiclebl;
 
@@ -25,47 +25,52 @@ public class VehicleUpdatePanel extends ELSInfoPanel{
 		this.vehiclebl = bl;
 		init();
 	}
-	
+
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		
+
 		setTitle("修改车辆信息");
-		/*0*/addEditableItem("车辆编号", vo.number, false);
-		addEditableItem("车牌号", vo.licence,true,InfoType.NAME);
-		addDateItem("购买时间", true);
-		addDateItem("服役时间", true);
-		addEditableItem("发动机号", vo.engineNumber,true,InfoType.NAME);
-		addEditableItem("底盘号", vo.baseNumber,true,InfoType.NAME);
-		
+		/* 0 */addEditableItem("车辆编号", vo.number, false, "number");
+		addEditableItem("车牌号", vo.licence, true, InfoType.NAME, "licence");
+		addDateItem("购买时间", true, "buytime");
+		addDateItem("服役时间", true, "lasttime");
+		addEditableItem("发动机号", vo.engineNumber, true, InfoType.NAME,
+				"enginenum");
+		addEditableItem("底盘号", vo.baseNumber, true, InfoType.NAME, "basenum");
+
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认修改");
 		cancelBtn.setText("取消修改");
-		
+
 		container.packHeight();
 	}
-	
+
 	@Override
 	protected void confirm() throws RemoteException {
-		super.confirm();
-		vo.licence = itemLabels.get(1).toString();
-		vo.buyTime = itemLabels.get(2).toString();
-		vo.lastTime = itemLabels.get(3).toString();
-		vo.engineNumber = itemLabels.get(4).toString();
-		vo.baseNumber = itemLabels.get(5).toString();
-		if(vehiclebl.update(vo) == ResultMessage.SUCCESS){
-			LogUtil.addLog("更新车辆");
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "修改成功");
-			back();
-		}else {
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "修改失败");
+		if (isAllLegal()) {
+			vo.licence = findItem("licence").toString();
+			vo.buyTime = findItem("buytime").toString();
+			vo.lastTime = findItem("lasttime").toString();
+			vo.engineNumber = findItem("enginenum").toString();
+			vo.baseNumber = findItem("basenum").toString();
+			if (vehiclebl.update(vo) == ResultMessage.SUCCESS) {
+				LogUtil.addLog("更新车辆");
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"修改成功");
+				back();
+			} else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"修改失败");
+			}
 		}
 	}
-	
+
 	@Override
 	protected void cancel() {
-		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")) {
+		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
+				"取消新增", "确认放弃新增单据？")) {
 			back();
 		}
 	}
