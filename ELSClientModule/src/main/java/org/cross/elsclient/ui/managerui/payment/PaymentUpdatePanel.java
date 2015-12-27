@@ -33,15 +33,15 @@ public class PaymentUpdatePanel extends ELSInfoPanel{
 		type = vo.salary.getType();
 		
 		setTitle("制定薪资策略");
-		addEditableItem("人员编号", vo.number, false);
-		addEditableItem("姓名", vo.name, false,InfoType.NAME);
-		addEditableItem("工资类型", vo.salary.getType().toString(), false);
-		addEditableItem("基础工资", vo.salary.getSalaryByMonth()+"", true,InfoType.NUM);
+		addEditableItem("人员编号", vo.number, false,"id");
+		addEditableItem("姓名", vo.name, false,InfoType.NAME,"name");
+		addEditableItem("工资类型", vo.salary.getType().toString(), false,"salaryType");
+		addEditableItem("基础工资", vo.salary.getSalaryByMonth()+"", true,InfoType.NUM,"basic");
 		switch (type) {
 		case ADDNUM:
-			addEditableItem("按次金额", vo.salary.getAddNum()+"", true,InfoType.NUM);
+			addEditableItem("按次金额", vo.salary.getAddOnce()+"", true,InfoType.NUM,"num");
 		case ADDONCE:
-			addEditableItem("提成", vo.salary.getAddOnce()+"", true,InfoType.NUM);
+			addEditableItem("提成", vo.salary.getAddNum()+"", true,InfoType.NUM,"once");
 		default:
 			break;
 		}
@@ -57,15 +57,15 @@ public class PaymentUpdatePanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			double basic = Double.valueOf(itemLabels.get(3).toString());
+			double basic = Double.valueOf(findItem("basic").toString());
 			vo.salary.setSalaryByMonth(basic);
 			switch (type) {
 			case ADDNUM:
-				double addnum = Double.valueOf(itemLabels.get(4).toString());
+				double addnum = Double.valueOf(findItem("num").toString());
 				vo.salary.setAddNum(addnum);
 				break;
 			case ADDONCE:
-				double addonce = Double.valueOf(itemLabels.get(4).toString());
+				double addonce = Double.valueOf(findItem("once").toString());
 				vo.salary.setAddOnce(addonce);
 				break;
 			default:

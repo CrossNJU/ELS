@@ -39,6 +39,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 	protected TitlePanel titlePanel;
 	protected ELSBox infoPanel;
 	protected ArrayList<InfoItemLabel> itemLabels;
+	protected ArrayList<InfoItemLabel> extraLabels;
 	protected int itemHeight;
 	protected String backName;
 	protected ELSButton confirmBtn;
@@ -50,6 +51,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 	public void init() {
 		itemHeight = 50;
 		itemLabels = new ArrayList<>();
+		extraLabels = new ArrayList<>();
 		numberbl = new NumberBLService_Stub();
 
 		container = new ELSPanel();
@@ -200,6 +202,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 		btn.addMouseListener(new ChangeBtnListener(label, btn));
 		btn.setName("add");
 		label.add(btn,3);
+		extraLabels.add(label);
 	}
 	
 	/**
@@ -435,6 +438,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 				delBtn.addMouseListener(new ChangeBtnListener(newLabel, delBtn));
 				delBtn.setName("del");
 				itemLabels.add(itemLabels.indexOf(label)+1, newLabel);
+				extraLabels.add(newLabel);
 				infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 						+ itemHeight);
 				infoPanel.add(newLabel,itemLabels.indexOf(label)+1);
@@ -443,6 +447,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 			}else if(btn.getName().equals("del")){
 				infoPanel.remove(label);
 				itemLabels.remove(label);
+				extraLabels.remove(label);
 				infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 						- itemHeight);
 				infoPanel.validate();

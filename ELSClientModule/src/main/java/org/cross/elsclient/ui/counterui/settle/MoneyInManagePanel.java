@@ -50,7 +50,7 @@ public class MoneyInManagePanel extends ELSManagePanel {
 		super.setContentPanel();
 
 		String[] name = { "单据编号", "收款时间", "金额" };
-		int[] itemWidth = { 150, 150, 100 };
+		int[] itemWidth = { 150, 200, 100 };
 		list = new MoneyInManageTable(name, itemWidth, receiptbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2

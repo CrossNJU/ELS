@@ -32,14 +32,14 @@ public class StockAddPanel extends ELSInfoPanel{
 		
 		setTitle("新增仓库");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.STOCK);
-		addEditableItem("仓库编号", number, true,InfoType.ID);
-		addEditableItem("特快仓库数量", "", true,InfoType.NUM);
-		addEditableItem("特快仓库容量", "", true,InfoType.NUM);
-		addEditableItem("标准仓库数量", "", true,InfoType.NUM);
-		addEditableItem("标准仓库容量", "", true,InfoType.NUM);
-		addEditableItem("经济仓库数量", "", true,InfoType.NUM);
-		addEditableItem("经济仓库容量", "", true,InfoType.NUM);
-		addEditableItem("所属机构", "", true,InfoType.ID);
+		addEditableItem("仓库编号", number, true,InfoType.ID,"id");
+		addEditableItem("特快仓库数量", "", true,InfoType.NUM,"fastNum");
+		addEditableItem("特快仓库容量", "", true,InfoType.NUM,"fastCap");
+		addEditableItem("标准仓库数量", "", true,InfoType.NUM,"normalNum");
+		addEditableItem("标准仓库容量", "", true,InfoType.NUM,"normalCap");
+		addEditableItem("经济仓库数量", "", true,InfoType.NUM,"ecoNum");
+		addEditableItem("经济仓库容量", "", true,InfoType.NUM,"ecoCap");
+		addEditableItem("所属机构", "", true,InfoType.ID,"organ");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -52,13 +52,13 @@ public class StockAddPanel extends ELSInfoPanel{
 		super.confirm();
 		if(isAllLegal()){
 			String id = itemLabels.get(0).toString();
-			int fastNum = Integer.valueOf((itemLabels.get(1).toString()));
-			int fastCap = Integer.valueOf((itemLabels.get(2).toString()));
-			int commonNum = Integer.valueOf((itemLabels.get(3).toString()));
-			int commonCap = Integer.valueOf((itemLabels.get(4).toString()));
-			int ecoNum = Integer.valueOf((itemLabels.get(5).toString()));
-			int ecoCap = Integer.valueOf((itemLabels.get(6).toString()));
-			String orgNum = itemLabels.get(7).toString();
+			int fastNum = Integer.valueOf(findItem("fastNum").toString());
+			int fastCap = Integer.valueOf(findItem("fastCap").toString());
+			int commonNum = Integer.valueOf(findItem("normalNum").toString());
+			int commonCap = Integer.valueOf(findItem("normalCap").toString());
+			int ecoNum = Integer.valueOf(findItem("ecoNum").toString());
+			int ecoCap = Integer.valueOf(findItem("ecoCap").toString());
+			String orgNum = findItem("organ").toString();
 			int totalNum = fastNum+commonNum+ecoNum;
 			
 			ArrayList<StockAreaVO> areas = new ArrayList<>();

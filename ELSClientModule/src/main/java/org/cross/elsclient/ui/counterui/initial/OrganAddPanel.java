@@ -34,9 +34,9 @@ public class OrganAddPanel extends ELSInfoPanel{
 		
 		setTitle("新增机构");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION);
-		addEditableItem("机构编号",number ,false);
-		addComboxItem("地区", citys, true);
-		addComboxItem("机构", organs, true);
+		addEditableItem("机构编号",number,false,"id");
+		addComboxItem("机构地区", citys, true,"city");
+		addComboxItem("机构类型", organs,true,"type");
 	
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -48,8 +48,10 @@ public class OrganAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			vo = new OrganizationVO(StringToType.toCity(itemLabels.get(1).toString()),
-					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(0).toString());
+			String id = findItem("id").toString();
+			City city = StringToType.toCity(findItem("city").toString());
+			OrganizationType type = StringToType.toOrg(findItem("type").toString());
+			vo = new OrganizationVO(city,type,id);
 			vos.add(vo);
 			ConstantVal.numberbl.addone(NumberType.ORGANIZATION, number);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
