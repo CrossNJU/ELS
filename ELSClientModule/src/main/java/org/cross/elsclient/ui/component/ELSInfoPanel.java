@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeListener;
 
 import org.cross.elsclient.blimpl.blfactoryimpl.BLFactoryImpl;
 import org.cross.elsclient.blimpl.numberblimpl.NumberBLImpl;
@@ -113,10 +114,10 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @return void
 	 */
 	public void addEditableItem(String name, String defaultValue,
-			boolean isEditable) {
+			boolean isEditable,String itemName) {
 		InfoItemLabel itemLabel = new InfoItemLabel();
 		itemLabel.initEditable(name, defaultValue, isEditable);;
-
+		itemLabel.setName(itemName);
 
 		itemLabels.add(itemLabel);
 //		inputLabels.add(inputLabel);
@@ -132,17 +133,18 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @para name-条目名, defaultValue-默认值, isEditable-是否可编辑, type-信息类型(不需判断则为null)
 	 * @return void
 	 */
-	public void addEditableItem(String name, String defaultValue,
-			boolean isEditable, InfoType type) {
+	public InfoItemLabel addEditableItem(String name, String defaultValue,
+			boolean isEditable, InfoType type,String itemName) {
 		InfoItemLabel itemLabel = new InfoItemLabel();
 		itemLabel.initEditable(name, defaultValue, isEditable,type);;
-
+		itemLabel.setName(itemName);
 		itemLabels.add(itemLabel);
 //		inputLabels.add(inputLabel);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
 				+ itemHeight);
 		infoPanel.add(itemLabel);
+		return itemLabel;
 	}
 
 	/**
@@ -151,10 +153,10 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 * @para name-条目名, items-下拉框内容, isEditable-是否可编辑
 	 * @return void
 	 */
-	public void addComboxItem(String name, String[] items, boolean isEditable) {
+	public void addComboxItem(String name, String[] items, boolean isEditable,String itemName) {
 		InfoItemLabel itemLabel = new InfoItemLabel();
 		itemLabel.initBox(name, items, isEditable);
-
+		itemLabel.setName(itemName);
 		itemLabels.add(itemLabel);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
@@ -162,10 +164,10 @@ public class ELSInfoPanel extends ELSScrollPane {
 		infoPanel.add(itemLabel);
 	}
 	
-	public void addComboxItem(String name, String[] items,String defaultValue, boolean isEditable) {
+	public void addComboxItem(String name, String[] items,String defaultValue, boolean isEditable,String itemName) {
 		InfoItemLabel itemLabel = new InfoItemLabel();
 		itemLabel.initBox(name, items,defaultValue, isEditable);
-
+		itemLabel.setName(itemName);
 		itemLabels.add(itemLabel);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
@@ -174,10 +176,10 @@ public class ELSInfoPanel extends ELSScrollPane {
 	}
 	
 	public void addAutoItem(String name, String defaultValue,
-			boolean isEditable,InfoType type){
+			boolean isEditable,InfoType type,String itemName){
 		InfoItemLabel itemLabel = new InfoItemLabel();
 		itemLabel.initAuto(name, defaultValue, isEditable,type);
-		
+		itemLabel.setName(itemName);
 		itemLabels.add(itemLabel);
 		itemLabel.inputLabel.addFocusListener(new AutoListener(itemLabel));;
 
@@ -186,17 +188,29 @@ public class ELSInfoPanel extends ELSScrollPane {
 		infoPanel.add(itemLabel);
 	}
 	
+	public void addAutoItem(String name, String[] items,String defaultValue, boolean isEditable,String itemName){
+		addComboxItem(name, items, defaultValue, isEditable, itemName);
+		itemLabels.get(itemLabels.size()-1).addFocusListener(new AutoListener(itemLabels.get(itemLabels.size()-1)));
+	}
+	
+	public void addChangeItem(String name, String defaultValue,
+			boolean isEditable,InfoType type,String itemName){
+		InfoItemLabel label = addEditableItem(name, defaultValue, isEditable, type,itemName);
+		ELSButton btn = ComponentFactory.createPlusBtn();
+		btn.addMouseListener(new ChangeBtnListener(label, btn));
+		btn.setName("add");
+		label.add(btn,3);
+	}
+	
 	/**
 	 * 添加日期条目
 	 * @para name-条目名, isEditable-是否可编辑
 	 * @return void
 	 */
-	public void addDateItem(String name, boolean isEditable) {
+	public void addDateItem(String name, boolean isEditable,String itemName) {
 		InfoItemLabel itemLabel = new InfoItemLabel();
 		itemLabel.initDatePicker(name, isEditable);
-
-		
-
+		itemLabel.setName(itemName);
 		itemLabels.add(itemLabel);
 
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
@@ -329,6 +343,16 @@ public class ELSInfoPanel extends ELSScrollPane {
 	 */
 	public void auto(String text){}
 	
+	public InfoItemLabel findItem(String name){
+		for (InfoItemLabel infoItemLabel : itemLabels) {
+			if(infoItemLabel.getName().equals(name)){
+				return infoItemLabel;
+			}
+		}
+		return null;
+	}
+	
+	
 	class AutoListener implements FocusListener{
 		InfoItemLabel label;
 		
@@ -365,7 +389,6 @@ public class ELSInfoPanel extends ELSScrollPane {
 				try {
 					confirm();
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else if (e.getSource() == cancelBtn) {
@@ -374,31 +397,70 @@ public class ELSInfoPanel extends ELSScrollPane {
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
+		public void mousePressed(MouseEvent e) {}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
+		public void mouseReleased(MouseEvent e) {}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
+		public void mouseEntered(MouseEvent e) {}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
+		public void mouseExited(MouseEvent e) {}
 
 	}
 
-	
+	/**
+	 * 动态添加删除条目的监听类
+	 * @author Moo
+	 * @date 2015年12月25日
+	 */
+	class ChangeBtnListener implements MouseListener{
+		InfoItemLabel label;
+		ELSButton btn;
+		
+		public ChangeBtnListener(InfoItemLabel label, ELSButton btn) {
+			super();
+			this.label = label;
+			this.btn = btn;
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if(btn.getName().equals("add")){
+				InfoItemLabel newLabel = new InfoItemLabel();
+				newLabel.initEditable("", "", true,label.infoType);
+				ELSButton delBtn = ComponentFactory.createMinusBtn();
+				newLabel.add(delBtn,3);
+				delBtn.addMouseListener(new ChangeBtnListener(newLabel, delBtn));
+				delBtn.setName("del");
+				itemLabels.add(itemLabels.indexOf(label)+1, newLabel);
+				infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
+						+ itemHeight);
+				infoPanel.add(newLabel,itemLabels.indexOf(label)+1);
+				infoPanel.validate();
+				container.packHeight();
+			}else if(btn.getName().equals("del")){
+				infoPanel.remove(label);
+				itemLabels.remove(label);
+				infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
+						- itemHeight);
+				infoPanel.validate();
+				container.packHeight();
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
+	}
 
 }

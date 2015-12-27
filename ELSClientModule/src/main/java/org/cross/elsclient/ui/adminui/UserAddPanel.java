@@ -36,12 +36,12 @@ public class UserAddPanel extends ELSInfoPanel{
 		//要拿到其中的信息，要调用对应的itemLabel.toString()的方法
 		setTitle("新增用户");
 		getone = ConstantVal.getNumber().getPostNumber(NumberType.USER);
-		addEditableItem("用户名",getone , false);
-		addEditableItem("姓名","", true,InfoType.NAME);
+		addEditableItem("用户名",getone , false,"id");
+		addChangeItem("姓名","", true,InfoType.NAME,"name");
 		String items[] = {"快递员", "营业厅业务员","中转中心业务员","仓库管理人员","财务人员","高级财务人员","总经理","系统管理员"};
-		addComboxItem("职位", items, true);
-		addEditableItem("密码", "", true,InfoType.PASSWORD);
-		addEditableItem("所属机构", "", true,InfoType.NAME);
+		addComboxItem("职位", items, true,"position");
+		addEditableItem("密码", "", true,InfoType.PASSWORD,"password");
+		addEditableItem("所属机构", "", true,InfoType.NAME,"organ");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -52,8 +52,13 @@ public class UserAddPanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
-			vo = new UserVO(itemLabels.get(0).toString(), itemLabels.get(3).toString(),itemLabels.get(1).toString(), 
-					StringToType.toUserType(itemLabels.get(2).toString()),itemLabels.get(4).toString());
+			String id = findItem("id").toString();
+			String name = findItem("name").toString();
+			String position = findItem("position").toString();
+			String password = findItem("password").toString();
+			String organ = findItem("organ").toString();
+			
+			vo = new UserVO(id, password, name, StringToType.toUserType(position), organ);
 			if(bl.add(vo)==ResultMessage.SUCCESS){
 				ConstantVal.numberbl.addone(NumberType.USER, getone);
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加成功");

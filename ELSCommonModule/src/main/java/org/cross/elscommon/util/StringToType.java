@@ -145,6 +145,8 @@ public class StringToType {
 			return UserType.STOCKKEEPER;
 		case "财务人员":
 			return UserType.COUNTER;
+		case "高级财务人员":
+			return UserType.SUPERCOUNTER;
 		case "总经理":
 			return UserType.MANAGER;
 		case "系统管理员":

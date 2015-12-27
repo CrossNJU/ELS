@@ -53,9 +53,9 @@ public class ELSFunctionPanel extends ELSPanel {
 		logo.setLocation(27, 30);
 		logo.setIcon(Images.LOGO_IMAGEICON);
 		
-		exitBtn = ComponentFactory.createExitBtn();
+		exitBtn = ComponentFactory.createExitBtn(true);
 		exitBtn.setLocation(984, 20);
-		minusBtn = ComponentFactory.createMinusBtn();
+		minusBtn = ComponentFactory.createWindowMinusBtn();
 		minusBtn.setLocation(954, 20);
 		
 		mask1 = new ELSLabel();

@@ -41,6 +41,7 @@ import org.cross.elsclient.ui.courierui.goodscheck.GoodsCheckPanel;
 import org.cross.elsclient.ui.managerui.ManagerFunctionPanel;
 import org.cross.elsclient.ui.publicui.CheckFunctionPanel;
 import org.cross.elsclient.ui.stockkeeperui.StockFunctionPanel;
+import org.cross.elsclient.ui.supercounterui.SuperFunctionPanel;
 import org.cross.elsclient.ui.transitcenterclerkui.TransmitFunctionPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.Images;
@@ -104,7 +105,7 @@ public class LoginPanel extends ELSPanel{
 		checkBtn = new ELSButton("快件查询");
 		titleLabel = new ELSLabel();
 		logoLabel = new ELSLabel();
-		exitBtn = ComponentFactory.createExitBtn();
+		exitBtn = ComponentFactory.createExitBtn(false);
 		
 		inputPanel.setSize(550,390);
 		inputPanel.setLocation((int)((UIConstant.WINDOW_WIDTH-inputPanel.getWidth())*0.5),(int)((UIConstant.WINDOW_HEIGHT-inputPanel.getHeight())*0.5));
@@ -207,7 +208,7 @@ public class LoginPanel extends ELSPanel{
 		}else if(type==UserType.SUPERCOUNTER){
 			System.out.println("登录成功");
 			ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
-			parentContainer.add("function",new CounterFunctionPanel());
+			parentContainer.add("function",new SuperFunctionPanel());
 			parentContainer.cl.show(parentContainer, "function");
 		}else if(type==UserType.MANAGER){
 			System.out.println("登录成功");

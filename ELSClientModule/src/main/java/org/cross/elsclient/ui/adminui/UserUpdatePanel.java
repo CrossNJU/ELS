@@ -33,11 +33,11 @@ public class UserUpdatePanel extends ELSInfoPanel{
 		//ELSInfoPanel提供了三种添加条目的类型:文字，编辑框，下拉框
 		//要拿到其中的信息，要调用对应的itemLabel.toString()的方法
 		setTitle("修改用户");
-		addEditableItem("用户名", vo.number, false);
-		addEditableItem("姓名", vo.name, true,InfoType.NAME);
-		addComboxItem("职位", items,vo.userType.toString(), true);
-		addEditableItem("密码", vo.password, true,InfoType.PASSWORD);
-		addEditableItem("所属机构", vo.orgNameID, true,InfoType.NAME);
+		addEditableItem("用户名", vo.number, false,"id");
+		addEditableItem("姓名", vo.name, true,InfoType.NAME,"name");
+		addComboxItem("职位", items,vo.userType.toString(), true,"position");
+		addEditableItem("密码", vo.password, true,InfoType.PASSWORD,"password");
+		addEditableItem("所属机构", vo.orgNameID, true,InfoType.NAME,"organ");
 		//添加确认和取消按钮
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认修改");
@@ -48,13 +48,19 @@ public class UserUpdatePanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		
 		if(isAllLegal()){
-			vo.number = itemLabels.get(0).toString();
-			vo.name = itemLabels.get(1).toString();
-			vo.password = itemLabels.get(3).toString();
-			vo.userType = StringToType.toUserType(itemLabels.get(2).toString());
-			vo.orgNameID = itemLabels.get(4).toString();
-			LogUtil.addLog("更新用户");
+			String id = findItem("id").toString();
+			String name = findItem("name").toString();
+			String position = findItem("position").toString();
+			String password = findItem("password").toString();
+			String organ = findItem("organ").toString();
+			
+			vo.number = id;
+			vo.name = name;
+			vo.password = password;
+			vo.userType = StringToType.toUserType(position);
+			vo.orgNameID = organ;
 			if(userbl.update(vo)==ResultMessage.SUCCESS){
+				LogUtil.addLog("更新用户");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"更新成功");
 				back();
 			}else{

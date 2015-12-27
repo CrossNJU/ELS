@@ -30,9 +30,9 @@ public class AccoutAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("新增账户");
-		addEditableItem("账户名称","", true,InfoType.NAME);
-		addEditableItem("账户卡号", "", true,InfoType.NUM);
-		addEditableItem("账户余额", "", true,InfoType.NUM);
+		addEditableItem("账户名称","", true,InfoType.NAME,"name");
+		addEditableItem("账户卡号", "", true,InfoType.NUM,"account");
+		addEditableItem("账户余额", "", true,InfoType.NUM,"balance");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -43,9 +43,9 @@ public class AccoutAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
 			
-			String name = itemLabels.get(0).toString();
-			String account = itemLabels.get(1).toString();
-			double balance = Double.valueOf(itemLabels.get(2).toString());
+			String name = findItem("name").toString();
+			String account =findItem("account").toString();
+			double balance = Double.valueOf(findItem("balance").toString());
 			
 			vo = new AccountVO(name, account, balance);
 			if(bl.add(vo)==ResultMessage.SUCCESS){

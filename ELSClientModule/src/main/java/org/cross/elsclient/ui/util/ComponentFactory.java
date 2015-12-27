@@ -19,61 +19,66 @@ import org.cross.elsclient.ui.component.ELSTextField;
 import org.cross.elsclient.ui.component.FunctionBtn;
 
 public class ComponentFactory {
-	
+
 	/**
 	 * 创建功能选择按钮
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSButton createFunctionBtn(){
+	public static ELSButton createFunctionBtn() {
 		return new FunctionBtn();
 	}
-	
+
 	/**
 	 * 创建信息展示界面返回按钮
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSButton	createInfoBackBtn(){
+	public static ELSButton createInfoBackBtn() {
 		ELSButton btn = new ELSButton();
 		btn.setOpaque(false);
 		btn.setIcon(Images.BACK_IMAGEICON);
 		btn.setFocusable(false);
 		btn.setName("back");
-		
+
 		return btn;
 	}
-	
+
 	/**
 	 * 创建信息展示界面确认按钮
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSButton createConfirmBtn(){
+	public static ELSButton createConfirmBtn() {
 		ELSButton btn = new ELSButton();
 		btn.setColor(UIConstant.COMFIRM_BTN_COLOR);
-		
+
 		return btn;
 	}
-	
+
 	/**
 	 * 创建信息展示界面取消按钮
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSButton createCancelBtn(){
+	public static ELSButton createCancelBtn() {
 		ELSButton btn = new ELSButton();
 		btn.setColor(UIConstant.NORMAL_BTN_COLOR);
-		
+
 		return btn;
 	}
-	
+
 	/**
 	 * 创建管理表界面修改按钮
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSButton createUpdateBtn(){
+	public static ELSButton createUpdateBtn() {
 		ELSButton updateBtn = new ELSButton();
 		updateBtn.setOpaque(false);
 		updateBtn.setFocusable(false);
@@ -84,13 +89,14 @@ public class ComponentFactory {
 		updateBtn.setName("update");
 		return updateBtn;
 	}
-	
+
 	/**
 	 * 创建管理表界面删除按钮
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSButton createDeleteBtn(){
+	public static ELSButton createDeleteBtn() {
 		ELSButton deleteBtn = new ELSButton();
 		deleteBtn.setOpaque(false);
 		deleteBtn.setFocusable(false);
@@ -101,50 +107,62 @@ public class ComponentFactory {
 		deleteBtn.setName("delete");
 		return deleteBtn;
 	}
-	
+
 	/**
 	 * 创建搜索栏搜索框
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSTextField createSearchTextField(){
+	public static ELSTextField createSearchTextField() {
 		ELSTextField searchTextField = new ELSTextField();
-		
-		searchTextField.setPreferredSize(new Dimension(300, UIConstant.SEARCHPANEL_HEIGHT));
-//		searchTextField.setMaximumSize(new Dimension(50, searchPanel.getHeight()));
-		searchTextField.setMinimumSize(new Dimension(200,UIConstant.SEARCHPANEL_HEIGHT));
-		
+
+		searchTextField.setPreferredSize(new Dimension(300,
+				UIConstant.SEARCHPANEL_HEIGHT));
+		// searchTextField.setMaximumSize(new Dimension(50,
+		// searchPanel.getHeight()));
+		searchTextField.setMinimumSize(new Dimension(200,
+				UIConstant.SEARCHPANEL_HEIGHT));
+
 		return searchTextField;
 	}
+
 	/**
 	 * 创建搜索栏日历控件
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSDatePicker createDatePicker(){
+	public static ELSDatePicker createDatePicker() {
 		ELSDatePicker datePicker = new ELSDatePicker();
-		datePicker.setMaximumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
-		datePicker.setMinimumSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
+		datePicker.setMaximumSize(new Dimension(200,
+				UIConstant.SEARCHPANEL_HEIGHT));
+		datePicker.setMinimumSize(new Dimension(150,
+				UIConstant.SEARCHPANEL_HEIGHT));
 		return datePicker;
 	}
-	
+
 	/**
 	 * 创建搜索栏下拉框
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSComboBox createSearchBox(){
+	public static ELSComboBox createSearchBox() {
 		ELSComboBox box = new ELSComboBox();
-//		box.setMaximumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
+		// box.setMaximumSize(new Dimension(200,
+		// UIConstant.SEARCHPANEL_HEIGHT));
 		box.setMinimumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
 		return box;
 	}
+
 	/**
 	 * 创建搜索栏按钮
-	 * @para 
+	 * 
+	 * @para
 	 * @return ELSButton
 	 */
-	public static ELSButton createSearchBtn(){
+	public static ELSButton createSearchBtn() {
 		ELSButton btn = new ELSButton();
 		btn.setPreferredSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
 		btn.setMaximumSize(new Dimension(250, UIConstant.SEARCHPANEL_HEIGHT));
@@ -153,72 +171,122 @@ public class ComponentFactory {
 		return btn;
 	}
 	
-	public static ELSButton createMinusBtn(){
+	public static ELSButton createPlusBtn() {
 		ELSButton btn = new ELSButton();
 		btn.setOpaque(false);
-		btn.setSize(20,20);
+		btn.setSize(30, 30);
+		btn.setPreferredSize(new Dimension(30, 30));
+		btn.setMaximumSize(new Dimension(30, 30));
+		btn.setMinimumSize(new Dimension(30, 30));
+		btn.setIcon(Images.ADD_IMAGEICON);
+		return btn;
+	}
+	
+	public static ELSButton createMinusBtn() {
+		ELSButton btn = new ELSButton();
+		btn.setOpaque(false);
+		btn.setSize(30, 30);
+		btn.setPreferredSize(new Dimension(30, 30));
+		btn.setMaximumSize(new Dimension(30, 30));
+		btn.setMinimumSize(new Dimension(30, 30));
 		btn.setIcon(Images.MINUS_IMAGEICON);
-		btn.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MainUI.FRAME.setExtendedState(JFrame.ICONIFIED);  
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-		});
-		
 		return btn;
 	}
-	
-	public static ELSButton createExitBtn(){
+
+	public static ELSButton createWindowMinusBtn() {
 		ELSButton btn = new ELSButton();
 		btn.setOpaque(false);
-		btn.setSize(20,20);
-		btn.setIcon(Images.EXIT_IMAGEICON);
+		btn.setSize(20, 20);
+		btn.setIcon(Images.WINDOW_MINUS_IMAGEICON);
 		btn.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(ELSDialog.showConfirmDlg(((JComponent)e.getSource()).getParent().getParent(), "退出系统", "确认退出ELS物流管理系统？")){
-					System.exit(0);
-				}
+				MainUI.FRAME.setExtendedState(JFrame.ICONIFIED);
 			}
-			
+
 			@Override
-			public void mouseReleased(MouseEvent e) {}
-			
+			public void mouseReleased(MouseEvent e) {
+			}
+
 			@Override
-			public void mousePressed(MouseEvent e) {}
-			
+			public void mousePressed(MouseEvent e) {
+			}
+
 			@Override
-			public void mouseExited(MouseEvent e) {}
-			
+			public void mouseExited(MouseEvent e) {
+			}
+
 			@Override
-			public void mouseEntered(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {
+			}
 		});
-		
+
+		return btn;
+	}
+
+	public static ELSButton createExitBtn(boolean isShowDialog) {
+		ELSButton btn = new ELSButton();
+		btn.setOpaque(false);
+		btn.setSize(20, 20);
+		btn.setIcon(Images.EXIT_IMAGEICON);
+		btn.addMouseListener(new ExitListener(isShowDialog, btn));
 		return btn;
 	}
 	
-	public static ELSButton createInitialAddBtn(){
+
+	public static ELSButton createInitialAddBtn() {
 		ELSButton addBtn = new ELSButton();
 		addBtn.setOpaque(false);
 		addBtn.setFocusable(false);
 		addBtn.setIcon(Images.ADD_IMAGEICON);
-		addBtn.setPreferredSize(new Dimension(30,30));
-		addBtn.setMaximumSize(new Dimension(30,30));
-		addBtn.setMinimumSize(new Dimension(30,30));
+		addBtn.setPreferredSize(new Dimension(30, 30));
+		addBtn.setMaximumSize(new Dimension(30, 30));
+		addBtn.setMinimumSize(new Dimension(30, 30));
 		return addBtn;
 	}
+	
+	
+}
+class ExitListener implements MouseListener{
+	boolean isShow;
+	ELSButton btn;
+	public ExitListener(boolean isShow, ELSButton btn) {
+		super();
+		this.isShow = isShow;
+		this.btn = btn;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(isShow){
+			if (ELSDialog.showConfirmDlg(((JComponent) e.getSource())
+					.getParent().getParent(), "退出系统", "确认退出ELS物流管理系统？","退出","注销")) {
+				System.exit(0);
+			}else{
+				ELSPanel parent = (ELSPanel)GetPanelUtil.getFunctionPanel(btn).getParent();
+				parent.cl.show(parent, "login");
+				parent.remove((ELSPanel)GetPanelUtil.getFunctionPanel(btn));
+			}
+		}else{
+			System.exit(0);
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+	
 }

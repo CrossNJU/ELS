@@ -41,13 +41,13 @@ public class TotalAddPanel extends ELSInfoPanel{
 		
 		setTitle("创建总收款款单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
-		addEditableItem("总收款单编号", number, false, InfoType.NAME);
-		addEditableItem("收款单数量", ""+vos.size(), false, InfoType.NAME);
-		addEditableItem("收款人", "", true,InfoType.NAME);
+		addEditableItem("总收款单编号", number, false, InfoType.NAME,"id");
+		addEditableItem("收款单数量", ""+vos.size(), false, InfoType.NAME,"num");
+		addEditableItem("收款人", "", true,InfoType.NAME,"receive");
 //		addEditableItem("收款账号", "", true,InfoType.NUM);
-		addEditableItem("收款金额", sum+"", false, InfoType.NUM);
-		addEditableItem("建单人",UIConstant.CURRENT_USER.number, false,InfoType.ID);
-		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false, InfoType.NAME);
+		addEditableItem("收款金额", sum+"", false, InfoType.NUM,"money");
+		addEditableItem("建单人",UIConstant.CURRENT_USER.number, false,InfoType.ID,"per");
+		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false, InfoType.NAME,"organ");
 		
 //		titlePanel.backBtn.setVisible(false);
 //		titleLabel.setLocation(10, titleLabel.getLocation().y);
@@ -61,11 +61,11 @@ public class TotalAddPanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
-			String number = itemLabels.get(0).toString();
-			String perNameID = itemLabels.get(2).toString();
-			double sum = Double.valueOf(itemLabels.get(3).toString());
-			String perNum = itemLabels.get(4).toString();
-			String orgNum = itemLabels.get(5).toString();
+			String number = findItem("id").toString();
+			String perNameID = findItem("receive").toString();
+			double sum = Double.valueOf(findItem("money").toString());
+			String perNum = findItem("per").toString();
+			String orgNum = findItem("organ").toString();
 			vo = new Receipt_TotalMoneyInVO(number, TimeUtil.getCurrentTime(), perNameID, sum, vos, perNum,orgNum);
 			if(bl.add(vo)==ResultMessage.SUCCESS){
 				LogUtil.addLog("新增总收款单");

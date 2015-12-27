@@ -29,15 +29,15 @@ import org.cross.elsclient.ui.counterui.log.LogManagePanel;
 import org.cross.elsclient.ui.counterui.settle.MoneyInManagePanel;
 
 public class CounterFunctionPanel extends ELSFunctionPanel{
-	ReceiptBLService receiptbl;
-	PersonnelBLService personnelbl;
-	AccountBLService accountbl;
-	LogBLService logbl;
-	AnalysisBLService analysisbl;
-	InitialBLService initialbl;
-	OrganizationBLService organizationbl;
-	StockBLService stockbl;
-	VehicleBLService vehiclebl;
+	protected ReceiptBLService receiptbl;
+	protected PersonnelBLService personnelbl;
+	protected AccountBLService accountbl;
+	protected LogBLService logbl;
+	protected AnalysisBLService analysisbl;
+	protected InitialBLService initialbl;
+	protected OrganizationBLService organizationbl;
+	protected StockBLService stockbl;
+	protected VehicleBLService vehiclebl;
 	
 	public CounterFunctionPanel() {
 //		receiptbl = new ReceiptBLService_Stub();
@@ -66,7 +66,6 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 		
 		addFunctionBtn("成本管理", "cost");
 		addFunctionBtn("结算管理", "settle");
-		addFunctionBtn("账户管理", "account");
 		addFunctionBtn("期初建账", "initial");
 		addFunctionBtn("统计分析", "analysis");
 		addFunctionBtn("系统日志", "log");

@@ -1,5 +1,9 @@
 package org.cross.elsclient.ui.component;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
@@ -41,5 +45,10 @@ public class ELSLabel extends JLabel{
 		setVerticalAlignment(JLabel.CENTER);
 		setHorizontalAlignment(JLabel.CENTER);
 		setForeground(UIConstant.MAINCOLOR);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
 	}
 }

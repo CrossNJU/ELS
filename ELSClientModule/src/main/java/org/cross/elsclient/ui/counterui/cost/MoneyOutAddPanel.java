@@ -39,15 +39,15 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 		
 		setTitle("创建付款单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
-		addEditableItem("付款单编号", number, false);
-		addEditableItem("条目", "", true, InfoType.NAME);
-		addEditableItem("付款人", "", true,InfoType.NAME);
-		addEditableItem("付款账号", "", true,InfoType.NUM);
-		addEditableItem("付款金额", "", true, InfoType.NUM);
-		addDateItem("付款时间", true);
-		addEditableItem("备注", "", true, InfoType.NAME);
-		addEditableItem("建单人",UIConstant.CURRENT_USER.number, false,InfoType.ID);
-		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false,InfoType.ID);
+		addEditableItem("付款单编号", number, false,"id");
+		addEditableItem("条目", "", true, InfoType.NAME,"clause");
+		addEditableItem("付款人", "", true,InfoType.NAME,"people");
+		addEditableItem("付款账号", "", true,InfoType.NUM,"account");
+		addEditableItem("付款金额", "", true, InfoType.NUM,"money");
+		addDateItem("付款时间", true,"time");
+		addEditableItem("备注", "", true, InfoType.NAME,"comment");
+		addEditableItem("建单人",UIConstant.CURRENT_USER.number, false,InfoType.ID,"per");
+		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false,InfoType.ID,"organ");
 		
 		titlePanel.backBtn.setVisible(false);
 //		titleLabel.setLocation(10, titleLabel.getLocation().y);
@@ -61,15 +61,15 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
-			String number = itemLabels.get(0).toString();
-			String clause = itemLabels.get(1).toString();
-			String receivePersonID = itemLabels.get(2).toString();
-			String iD = itemLabels.get(3).toString();
-			double money = Double.valueOf(itemLabels.get(4).toString());
-			String time = itemLabels.get(5).toString();
-			String comments = itemLabels.get(6).toString();
-			String perNum = itemLabels.get(7).toString();
-			String orgNum = itemLabels.get(8).toString();
+			String number = findItem("id").toString();
+			String clause = findItem("clause").toString();
+			String receivePersonID = findItem("people").toString();
+			String iD = findItem("account").toString();
+			double money = Double.valueOf(findItem("money").toString());
+			String time = findItem("time").toString();
+			String comments = findItem("comment").toString();
+			String perNum = findItem("per").toString();
+			String orgNum = findItem("organ").toString();
 			
 			vo = new Receipt_MoneyOutVO(number, time, money, receivePersonID, iD, clause, comments,perNum,orgNum);
 			AccountVO account = accountbl.findByID(iD);

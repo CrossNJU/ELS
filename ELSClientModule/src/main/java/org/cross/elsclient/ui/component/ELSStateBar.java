@@ -18,7 +18,7 @@ public class ELSStateBar extends JLabel{
 		setOpaque(true);
 		setFocusable(false);
 //		setEnabled(false);
-		setBackground(UIConstant.MAINCOLOR);
+		setBackground(UIConstant.COMFIRM_BTN_COLOR);
 		setHorizontalAlignment(JLabel.CENTER);
 		setVerticalAlignment(JLabel.CENTER);
 		setFont(getFont().deriveFont(18f));

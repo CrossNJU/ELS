@@ -54,7 +54,7 @@ public class UserManageTable extends ELSManageTable{
 	 */
 	public void addItem(UserVO vo){
 		vos.add(vo);
-		
+		System.out.println("h");
 		String[] item = {vo.number,vo.name,vo.userType.toString()};
 		addItemLabel(item);
 		

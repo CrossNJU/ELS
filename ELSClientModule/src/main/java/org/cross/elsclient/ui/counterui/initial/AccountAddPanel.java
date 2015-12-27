@@ -29,9 +29,9 @@ public class AccountAddPanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("新增账户");
-		addEditableItem("账户名称", "", true,InfoType.NAME);
-		addEditableItem("账户卡号", "", true,InfoType.NAME);
-		addEditableItem("账户余额", "", true,InfoType.NUM);
+		addEditableItem("账户名称","", true,InfoType.NAME,"name");
+		addEditableItem("账户卡号", "", true,InfoType.NUM,"account");
+		addEditableItem("账户余额", "", true,InfoType.NUM,"balance");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -43,8 +43,10 @@ public class AccountAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			vo = new AccountVO(itemLabels.get(0).toString(), 
-					itemLabels.get(1).toString(), Double.valueOf(itemLabels.get(2).toString()));
+			String name = findItem("name").toString();
+			String account =findItem("account").toString();
+			double balance = Double.valueOf(findItem("balance").toString());
+			vo = new AccountVO(name,account,balance);
 			vos.add(vo);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(AccountAddPanel.this), "添加成功");

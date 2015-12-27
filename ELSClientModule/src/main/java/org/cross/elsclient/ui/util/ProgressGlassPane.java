@@ -125,14 +125,14 @@ public class ProgressGlassPane extends JComponent{
 		g2 = backDropNew.createGraphics();
 		g2.drawImage(backDrop, radius, radius, null);
 		g2.dispose();
-		
-		long start = System.nanoTime();
+//		
+//		long start = System.nanoTime();
 		backDropNew = changeImageWidth(backDropNew, backDropNew.getWidth() / 4);
 		backDropNew = getGaussianBlurFilter(radius / 4, true).filter(backDropNew,null);
 		backDropNew = getGaussianBlurFilter(radius / 4, false).filter(backDropNew,null);
 		backDropNew = changeImageWidth(backDropNew, backDropNew.getWidth() * 4);
-		long delay = System.nanoTime() - start;
-		System.out.println("time = " + (delay / 1000.0f / 1000.0f)+ "ms for radius = " + radius);
+//		long delay = System.nanoTime() - start;
+//		System.out.println("time = " + (delay / 1000.0f / 1000.0f)+ "ms for radius = " + radius);
 		
 //		try {
 //			ImageIO.write(backDropNew, "png", new File("img/tmp.png"));
