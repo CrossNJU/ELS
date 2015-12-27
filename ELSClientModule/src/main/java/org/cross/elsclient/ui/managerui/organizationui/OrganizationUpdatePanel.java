@@ -9,7 +9,9 @@ import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.vo.OrganizationVO;
+import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 
@@ -32,9 +34,9 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 		String[] area = {"北京","上海", "南京","广州"};
 		
 		setTitle("机构详细信息");
-		addEditableItem("机构编号", vo.number,false);
-		addComboxItem("机构地区", area,vo.city.toString() ,true);
-		addComboxItem("机构类型", types,vo.type.toString(),true);
+		addEditableItem("机构编号",vo.number,false,"id");
+		addComboxItem("机构地区", area,vo.city.toString(), true,"city");
+		addComboxItem("机构类型", types,vo.type.toString(),true,"type");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认更改");
@@ -44,8 +46,14 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() {
 		if(isAllLegal()){
-			vo = new OrganizationVO(StringToType.toCity(itemLabels.get(1).toString()),
-					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(0).toString());
+			String id = findItem("id").toString();
+			City city = StringToType.toCity(findItem("city").toString());
+			OrganizationType type = StringToType.toOrg(findItem("type").toString());
+
+			vo.number = id;
+			vo.type = type;
+			vo.city = city;
+			
 			try {
 				if(bl.update(vo)==ResultMessage.SUCCESS){
 					LogUtil.addLog("更新机构");

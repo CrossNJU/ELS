@@ -52,31 +52,31 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		
 		setTitle("创建快件单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
-		addEditableItem("快件单编号",number , false);
-		addEditableItem("寄件人姓名", "", true);
-		addEditableItem("寄件人地址", "", true);
-		addEditableItem("寄件人单位", "", true);
-		addEditableItem("寄件人电话", "", true);
+		addEditableItem("快件单编号",number , false,"id");
+		addEditableItem("寄件人姓名", "", true,"sendName");
+		addEditableItem("寄件人地址", "", true,"sendAd");
+		addEditableItem("寄件人单位", "", true,"sendUnit");
+		addEditableItem("寄件人电话", "", true,"sendPhone");
 		//5
-		addEditableItem("寄件人手机", "", true);
-		addEditableItem("收件人姓名", "", true);
-		addEditableItem("收件人地址", "", true);
-		addEditableItem("收件人单位", "", true);
-		addEditableItem("收件人电话", "", true);
+		addEditableItem("寄件人手机", "", true,"sendCell");
+		addEditableItem("收件人姓名", "", true,"reName");
+		addEditableItem("收件人地址", "", true,"reAd");
+		addEditableItem("收件人单位", "", true,"reUnit");
+		addEditableItem("收件人电话", "", true,"rePhone");
 		//10
-		addEditableItem("收件人手机", "", true);
-		addComboxItem("出发城市", City.toStrings(), true);
-		addComboxItem("到达城市", City.toStrings(), true);
-		addComboxItem("快递类型", StockType.toGoodsStrings(), true);
-		addEditableItem("货物件数", "1", true,InfoType.NUM);
+		addEditableItem("收件人手机", "", true,"reCell");
+		addComboxItem("出发城市", City.toStrings(), true,"from");
+		addComboxItem("到达城市", City.toStrings(), true,"to");
+		addComboxItem("快递类型", StockType.toGoodsStrings(), true,"type");
+		addEditableItem("货物件数", "1", true,InfoType.NUM,"num");
 		//15
-		addAutoItem("货物重量(kg)", "", true,InfoType.NUM);
-		addComboxItem("包装类型",packType, true);
-		addEditableItem("价格", "", false);
-		addEditableItem("预计到达时间", "", false);
-		addEditableItem("建单人编号", UIConstant.CURRENT_USER.number, false,InfoType.ID);
+		addAutoItem("货物重量(kg)", "", true,InfoType.NUM,"weight");
+		addComboxItem("包装类型",packType, true,"pack");
+		addEditableItem("价格", "", false,"price");
+		addEditableItem("预计到达时间", "", false,"time");
+		addEditableItem("建单人编号", UIConstant.CURRENT_USER.number, false,InfoType.ID,"per");
 		//20
-		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false,InfoType.ID);
+		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false,InfoType.ID,"organ");
 		
 		itemLabels.get(15).inputLabel.addFocusListener(new PriceListener());
 		itemLabels.get(11).comboBox.addItemListener(new PriceItemListener());
@@ -94,25 +94,25 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() throws RemoteException {
 		if(isAllLegal()){
-			String number = itemLabels.get(0).toString();
-			String senderName = itemLabels.get(1).toString();
-			String senderAdd = itemLabels.get(2).toString();
-			String senderOrg = itemLabels.get(3).toString();
-			String senderPhone = itemLabels.get(4).toString();
-			String senderMobile = itemLabels.get(5).toString();
-			String receiverName = itemLabels.get(6).toString();
-			String receiverAdd = itemLabels.get(7).toString();
-			String receiverOrg = itemLabels.get(8).toString();
-			String receiverPhone = itemLabels.get(9).toString();
-			String receiverMobile = itemLabels.get(10).toString();
-			City startCity = StringToType.toCity(itemLabels.get(11).toString());
-			City endCity = StringToType.toCity(itemLabels.get(12).toString());
-			StockType goodsType = StringToType.toGoodsType(itemLabels.get(13).toString());
-			int volume = Integer.valueOf(itemLabels.get(14).toString());
-			int weight = Integer.valueOf(itemLabels.get(15).toString());
-			int cost = Integer.valueOf(itemLabels.get(17).toString());
-			String perNum = itemLabels.get(19).toString();
-			String orgNum = itemLabels.get(20).toString();
+			String number = findItem("id").toString();
+			String senderName = findItem("sendName").toString();
+			String senderAdd = findItem("sendAd").toString();
+			String senderOrg = findItem("sendUnit").toString();
+			String senderPhone = findItem("sendPhone").toString();
+			String senderMobile = findItem("sendCell").toString();
+			String receiverName = findItem("reName").toString();
+			String receiverAdd = findItem("reAd").toString();
+			String receiverOrg = findItem("reUnit").toString();
+			String receiverPhone = findItem("rePhone").toString();
+			String receiverMobile = findItem("reCell").toString();
+			City startCity = StringToType.toCity(findItem("from").toString());
+			City endCity = StringToType.toCity(findItem("to").toString());
+			StockType goodsType = StringToType.toGoodsType(findItem("type").toString());
+			int volume = Integer.valueOf(findItem("num").toString());
+			int weight = Integer.valueOf(findItem("weight").toString());
+			int cost = Integer.valueOf(findItem("price").toString());
+			String perNum = findItem("per").toString();
+			String orgNum = findItem("organ").toString();
 			
 			
 			goodsVO = new GoodsVO(number, goodsType,startCity, OrganizationType.BUSINESSHALL, weight, volume);

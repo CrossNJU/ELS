@@ -43,7 +43,7 @@ public class LogManagePanel extends ELSManagePanel{
 		// TODO Auto-generated method stub
 		super.setContentPanel();
 		String[] s = {"操作时间","操作人员","操作内容"};
-		int[] itemWidth = {200,100,200};
+		int[] itemWidth = {200,150,200};
 		list= new LogManageTable(s,itemWidth,logbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);

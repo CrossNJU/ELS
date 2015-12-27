@@ -31,15 +31,15 @@ public class PerUpdatePanel extends ELSInfoPanel{
 		super.init();
 		
 		setTitle("更改人员信息");
-		addEditableItem("人员编号", vo.number, false);
-		addEditableItem("姓名", vo.name, true,InfoType.NAME);
-		addComboxItem("性别",new String[]{"男","女"} , vo.sex,true);
-		addEditableItem("身份证", vo.id, true,InfoType.NAME);
+		addEditableItem("人员编号", vo.number, false,"id");
+		addEditableItem("姓名", vo.name, true,InfoType.NAME,"name");
+		addComboxItem("性别",new String[]{"男","女"} , vo.sex,true,"sex");
+		addEditableItem("身份证", vo.id, true,InfoType.NAME,"idcard");
 		String []position = PositionType.toStrings();
-		addEditableItem("所属机构ID", vo.orgNum, true,InfoType.ID);
-		addComboxItem("职位", position, vo.position.toString(),true);
-		addDateItem("出生日期", true);
-		addEditableItem("手机", vo.phone, true,InfoType.TELEPHONE);
+		addEditableItem("所属机构ID", vo.orgNum, true,InfoType.ID,"organ");
+		addComboxItem("职位", position, vo.position.toString(),true,"position");
+		addDateItem("出生日期", true,"birth");
+		addEditableItem("手机", vo.phone, true,InfoType.TELEPHONE,"phone");
 		
 		
 		addConfirmAndCancelBtn();
@@ -52,14 +52,22 @@ public class PerUpdatePanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			vo.number = itemLabels.get(0).toString();
-			vo.name = itemLabels.get(1).toString();
-			vo.sex = itemLabels.get(2).toString();
-			vo.id = itemLabels.get(3).toString();
-			vo.orgNum = itemLabels.get(4).toString();
-			vo.position = StringToType.toPositionType(itemLabels.get(5).toString());
-//			vo.birthday = itemLabels.get(6).toString();
-			vo.phone = itemLabels.get(7).toString();
+			String id = findItem("id").toString();
+			String name = findItem("name").toString();
+			String sex = findItem("sex").toString();
+			String idcard = findItem("idcard").toString();
+			String orgNum = findItem("organ").toString();
+			PositionType position = StringToType.toPositionType(findItem("position").toString());
+			String birthday = findItem("birth").toString();
+			String phone = findItem("phone").toString();
+			vo.number = id;
+			vo.name = name;
+			vo.sex = sex;
+			vo.id = idcard;
+			vo.orgNum = orgNum;
+			vo.position = position;
+			vo.birthday = birthday;
+			vo.phone = phone;
 			if(personelbl.update(vo)==ResultMessage.SUCCESS){
 				LogUtil.addLog("更新人员");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "修改成功");

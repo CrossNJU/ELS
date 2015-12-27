@@ -30,9 +30,9 @@ public class SendUpdatePanel extends ELSInfoPanel {
 		
 		setTitle("派发快件");
 //		addAutoItem("订单编号", "", true);
-		addEditableItem("订单编号", "", true,InfoType.ID);
-		addEditableItem("收件人", "", true,InfoType.NAME);
-		addDateItem("收件时间", true);
+		addEditableItem("订单编号", "", true,InfoType.ID,"id");
+		addEditableItem("收件人", "", true,InfoType.NAME,"per");
+		addDateItem("收件时间", true,"time");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认已派发");
@@ -43,9 +43,9 @@ public class SendUpdatePanel extends ELSInfoPanel {
 	@Override
 	protected void confirm() throws RemoteException {
 		super.confirm();
-		vo = (Receipt_OrderVO)bl.findByID(itemLabels.get(0).toString());
-		vo.receiveTime = itemLabels.get(2).toString();
-		vo.receiverName = itemLabels.get(1).toString();
+		vo = (Receipt_OrderVO)bl.findByID(findItem("id").toString());
+		vo.receiveTime = findItem("time").toString();
+		vo.receiverName = findItem("per").toString();
 			if(bl.update(vo)==ResultMessage.SUCCESS){
 				LogUtil.addLog("派送快件");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"派件成功");

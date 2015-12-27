@@ -10,8 +10,10 @@ import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.OrganizationVO;
+import org.cross.elscommon.util.City;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.NumberType;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 
@@ -33,11 +35,11 @@ public class OrganizationAddPanel extends ELSInfoPanel{
 		String[] types = {"营业厅","中转中心", "总部"};
 		String[] area = {"北京","上海", "南京","广州"};
 		
-		setTitle("机构详细信息");
+		setTitle("新增机构");
 		number =  ConstantVal.numberbl.getPostNumber(NumberType.ORGANIZATION);
-		addEditableItem("机构编号",number,false);
-		addComboxItem("机构地区", area, true);
-		addComboxItem("机构类型", types,true);
+		addEditableItem("机构编号",number,false,"id");
+		addComboxItem("机构地区", area, true,"city");
+		addComboxItem("机构类型", types,true,"type");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -47,8 +49,10 @@ public class OrganizationAddPanel extends ELSInfoPanel{
 	@Override
 	protected void confirm() {
 		if(isAllLegal()){
-			vo = new OrganizationVO(StringToType.toCity(itemLabels.get(1).toString()),
-					StringToType.toOrg(itemLabels.get(2).toString()), itemLabels.get(0).toString());
+			String id = findItem("id").toString();
+			City city = StringToType.toCity(findItem("city").toString());
+			OrganizationType type = StringToType.toOrg(findItem("type").toString());
+			vo = new OrganizationVO(city,type,id);
 			try {
 				if(bl.add(vo)==ResultMessage.SUCCESS){
 					LogUtil.addLog("新增机构");

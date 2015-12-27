@@ -88,7 +88,7 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		list1.addItemLabel(item);
 		
 		String[] name2 = {"单据编号","类型","建单时间","金额"};
-		int[] itemWidth2 = {150,100,150,100};
+		int[] itemWidth2 = {150,100,200,100};
 		list2 = new AnalysisManageTable(name2, itemWidth2, analysisbl);
 		list2.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, searchPanel.getHeight()+searchPanel.getLocation().y+15);
 		list2.init();

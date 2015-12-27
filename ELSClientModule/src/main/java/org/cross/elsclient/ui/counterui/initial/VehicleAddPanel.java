@@ -7,6 +7,7 @@ import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
+import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.VehicleVO;
@@ -31,13 +32,14 @@ public class VehicleAddPanel extends ELSInfoPanel{
 		
 		setTitle("新增车辆");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE);
-		addEditableItem("车牌编号",number ,true,InfoType.NUM);
-		addEditableItem("车牌号", "",true,InfoType.NUM);
-		addEditableItem("营业厅编号", "",true,InfoType.NUM);
-		addDateItem("购买时间",true);
-		addDateItem("服役时间",true);
-		addEditableItem("发动机号", "",true,InfoType.NUM);
-		addEditableItem("底盘号", "",true,InfoType.NUM);
+		/* 0 */addEditableItem("车辆编号", number, false, "number");
+		addEditableItem("车牌号", "", true, InfoType.NAME, "licence");
+		addEditableItem("营业厅编号", UIConstant.CURRENT_USER.orgNameID, false,
+				"orgid");
+		addDateItem("购买时间", true, "buytime");
+		addDateItem("服役时间", true, "lasttime");
+		addEditableItem("发动机号", "", true, InfoType.NAME, "enginenum");
+		addEditableItem("底盘号", "", true, InfoType.NAME, "basenum");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -49,15 +51,15 @@ public class VehicleAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			String number = itemLabels.get(0).toString();
-			String licence = itemLabels.get(1).toString();
-			String orgNum = itemLabels.get(2).toString();
-			String buyTime = itemLabels.get(3).toString();
-			String lastTime = itemLabels.get(4).toString();
-			String engineNumber = itemLabels.get(5).toString();
-			String apparatusNumber = itemLabels.get(6).toString();
+			String cnumber = findItem("number").toString();
+			String licence = findItem("licence").toString();
+			String orgid = findItem("orgid").toString();
+			String buytime = findItem("buytime").toString();
+			String lasttime = findItem("lasttime").toString();
+			String enginenum = findItem("enginenum").toString();
+			String basenum = findItem("basenum").toString();
 			
-			vo = new VehicleVO(number, licence, orgNum, engineNumber, apparatusNumber, buyTime, lastTime, null, false);
+			vo = new VehicleVO(number, licence, orgid, enginenum, basenum, buytime, lasttime, null, false);
 			vos.add(vo);
 			ConstantVal.numberbl.addone(NumberType.VEHICLE, number);
 			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();

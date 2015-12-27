@@ -37,15 +37,15 @@ public class PerAddPanel extends ELSInfoPanel{
 		
 		setTitle("新增人员");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.PERSONNEL);
-		addEditableItem("人员编号", number, true);
-		addEditableItem("姓名", "", true,InfoType.NAME);
-		addComboxItem("性别",new String[]{"男","女"} , true);
-		addEditableItem("身份证", "", true,InfoType.IDCARD);
+		addEditableItem("人员编号", number, true,"id");
+		addEditableItem("姓名", "", true,InfoType.NAME,"name");
+		addComboxItem("性别",new String[]{"男","女"} , true,"sex");
+		addEditableItem("身份证", "", true,InfoType.NAME,"idcard");
 		String []position = PositionType.toStrings();
-		addEditableItem("所属机构ID", "", true,InfoType.ID);
-		addComboxItem("职位", position, true);
-		addDateItem("出生日期", true);
-		addEditableItem("手机", "", true,InfoType.TELEPHONE);
+		addEditableItem("所属机构ID", "", true,InfoType.ID,"organ");
+		addComboxItem("职位", position, true,"position");
+		addDateItem("出生日期", true,"birth");
+		addEditableItem("手机", "", true,InfoType.TELEPHONE,"phone");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -57,14 +57,14 @@ public class PerAddPanel extends ELSInfoPanel{
 	protected void confirm() throws RemoteException {
 		super.confirm();
 		if(isAllLegal()){
-			String id = itemLabels.get(0).toString();
-			String name = itemLabels.get(1).toString();
-			String sex = itemLabels.get(2).toString();
-			String idcard = itemLabels.get(3).toString();
-			String orgNum = itemLabels.get(4).toString();
-			PositionType position = StringToType.toPositionType(itemLabels.get(5).toString());
-			String birthday = itemLabels.get(6).toString();
-			String phone = itemLabels.get(7).toString();
+			String id = findItem("id").toString();
+			String name = findItem("name").toString();
+			String sex = findItem("sex").toString();
+			String idcard = findItem("idcard").toString();
+			String orgNum = findItem("organ").toString();
+			PositionType position = StringToType.toPositionType(findItem("position").toString());
+			String birthday = findItem("birth").toString();
+			String phone = findItem("phone").toString();
 			
 			if(position!=PositionType.DRIVER){
 				vo = new PersonnelVO(id, name, position, orgNum, sex, idcard, phone, birthday);
