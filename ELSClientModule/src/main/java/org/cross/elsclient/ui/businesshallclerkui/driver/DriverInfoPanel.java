@@ -28,7 +28,7 @@ public class DriverInfoPanel extends ELSInfoPanel{
 		addNormalItem("身份证号码", vo.id);
 		addNormalItem("手机", vo.phone);
 		addNormalItem("出生日期", vo.birthday);
-		addNormalItem("车辆单位", user.orgNameID);
+		addNormalItem("行驶证开始", vo.licenceStart);
 		addNormalItem("行驶证期限", vo.licenceEnd);
 	}
 }

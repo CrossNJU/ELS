@@ -46,7 +46,8 @@ public class DeliverAddPanel extends ELSInfoPanel {
 	UserVO user;
 	String number;
 
-	public DeliverAddPanel(ReceiptBLService receiptbl, UserVO user, GoodsBLService goodsbl) {
+	public DeliverAddPanel(ReceiptBLService receiptbl, UserVO user,
+			GoodsBLService goodsbl) {
 		this.receiptbl = receiptbl;
 		this.user = user;
 		this.goodsbl = goodsbl;
@@ -58,12 +59,12 @@ public class DeliverAddPanel extends ELSInfoPanel {
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增派件单");
-		number =  ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
-		/* 0 */addEditableItem("派件单编号",number, false);
-		addDateItem("派件时间", false);
-		addEditableItem("快件单编号", "", true,InfoType.ID);
-		addEditableItem("快递员工号", "", true,InfoType.ID);
-		addEditableItem("快递员姓名", "", true,InfoType.NAME);
+		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
+		/* 0 */addEditableItem("派件单编号", number, false, "number");
+		addDateItem("派件时间", false, "time");
+		addEditableItem("快件单编号", "", true, InfoType.ID, "goodsnum");
+		addEditableItem("快递员工号", "", true, InfoType.ID, "pernum");
+		addEditableItem("快递员姓名", "", true, InfoType.NAME, "name");
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");
@@ -72,33 +73,47 @@ public class DeliverAddPanel extends ELSInfoPanel {
 
 	@Override
 	protected void confirm() throws RemoteException {
-		delvo = new Receipt_DeliverVO(itemLabels.get(0).toString(), itemLabels.get(1).toString(), itemLabels.get(2).toString(), itemLabels.get(4).toString(),
-				itemLabels.get(3).toString(),user.number, user.orgNameID);
-		GoodsVO goods = goodsbl.searchGoods(itemLabels.get(2).toString());
-		//要获得当前用户的信息
-		HistoryVO historyVO = new HistoryVO(itemLabels.get(1).toString(),  UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type, false);
-		goods.history.add(historyVO);
-		goods.placeCity =   UIConstant.CURRENT_ORG.city;
-		goods.placeOrg = UIConstant.CURRENT_ORG.type;
-		goods.delNum = itemLabels.get(0).toString();
-		goodsbl.updateGoods(goods);
-		if (receiptbl.add(delvo) == ResultMessage.SUCCESS) {
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
-			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
-			LogUtil.addLog("新增派件单");
-			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
-			parent.setChosenFunction("receipts");
-		} else {
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
+		if (isAllLegal()) {
+			String cnumber = findItem("number").toString();
+			String ctime = findItem("time").toString();
+			String goodsnum = findItem("goodsnum").toString();
+			String pernum = findItem("pernum").toString();
+			String name = findItem("name").toString();
+			delvo = new Receipt_DeliverVO(cnumber,
+					ctime, goodsnum,
+					name, pernum,
+					user.number, user.orgNameID);
+			GoodsVO goods = goodsbl.searchGoods(goodsnum);
+			// 要获得当前用户的信息
+			HistoryVO historyVO = new HistoryVO(ctime,
+					UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type,
+					false);
+			goods.history.add(historyVO);
+			goods.placeCity = UIConstant.CURRENT_ORG.city;
+			goods.placeOrg = UIConstant.CURRENT_ORG.type;
+			goods.delNum = cnumber;
+			goodsbl.updateGoods(goods);
+			if (receiptbl.add(delvo) == ResultMessage.SUCCESS) {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"添加成功");
+				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
+				LogUtil.addLog("新增派件单");
+				ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+				// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+				parent.setChosenFunction("receipts");
+			} else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"添加失败");
+			}
 		}
 	}
 
 	@Override
 	protected void cancel() {
-		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")) {
+		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
+				"取消新增", "确认放弃新增单据？")) {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
 		}
 	}

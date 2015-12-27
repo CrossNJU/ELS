@@ -15,25 +15,25 @@ import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 
-public class StockAdjustPanel extends ELSInfoPanel{
+public class StockAdjustPanel extends ELSInfoPanel {
 
 	StockBLService stockbl;
 	UserVO user;
 	StockVO stockvo;
-	
-	public StockAdjustPanel(StockBLService stockbl, UserVO user, StockVO stockvo){
+
+	public StockAdjustPanel(StockBLService stockbl, UserVO user, StockVO stockvo) {
 		this.stockbl = stockbl;
 		this.stockvo = stockvo;
 		init();
 	}
-	
+
 	@Override
-	public void init(){
+	public void init() {
 		System.out.println("in");
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
-		
-		//需呀find
+
+		// 需呀find
 		String[] it1 = null;
 		String[] it2 = null;
 		ArrayList<String> it1s;
@@ -49,32 +49,36 @@ public class StockAdjustPanel extends ELSInfoPanel{
 			for (int i = 0; i < it1.length; i++) {
 				it1[i] = it1s.get(i);
 			}
-			
+
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 		setTitle("调整库存");
-		/*0*/addComboxItem("需要调整的类型", it1, true);
-		addComboxItem("需要配合的仓库", it2, true);
+		/* 0 */addComboxItem("需要调整的类型", it1, true, "needs");
+		addComboxItem("需要配合的仓库", it2, true, "change");
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认调整");
 		cancelBtn.setVisible(false);
 		container.packHeight();
 	}
-	
+
 	@Override
 	protected void confirm() throws RemoteException {
-		String id = itemLabels.get(1).toString();
-		String type = itemLabels.get(0).toString().split("-")[1];
-		if(stockbl.stockAdjust(id, StringToType.toGoodsType(type))==ResultMessage.SUCCESS){
-			LogUtil.addLog("库存调整");
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"调整成功");
-			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
-			parent.setChosenFunction("receipts");
-		}else{
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"调整失败");
+		if (isAllLegal()) {
+			String id = findItem("change").toString();
+			String type = findItem("needs").toString().split("-")[1];
+			if (stockbl.stockAdjust(id, StringToType.toGoodsType(type)) == ResultMessage.SUCCESS) {
+				LogUtil.addLog("库存调整");
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"调整成功");
+				ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+				// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+				parent.setChosenFunction("receipts");
+			} else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"调整失败");
+			}
 		}
 	}
 }

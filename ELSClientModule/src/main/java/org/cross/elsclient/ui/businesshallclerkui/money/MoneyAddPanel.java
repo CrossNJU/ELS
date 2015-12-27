@@ -46,11 +46,11 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增收款单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
-		/* 0 */addEditableItem("收款单编号", number, false);
-		addEditableItem("快件单编号", "", true);
-		addDateItem("收款时间", false);
-		/*3*/addEditableItem("收款快递员ID", "", true);
-		addEditableItem("收款金额", "", true);
+		/* 0 */addEditableItem("收款单编号", number, false, "number");
+		addEditableItem("快件单编号", "", true, "goodsnum");
+		addDateItem("收款时间", false, "time");
+		/* 3 */addEditableItem("收款快递员ID", "", true, "perid");
+		addEditableItem("收款金额", "", true, "money");
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");
@@ -59,36 +59,47 @@ public class MoneyAddPanel extends ELSInfoPanel {
 
 	@Override
 	protected void confirm() throws RemoteException {
-		String[] orders = itemLabels.get(1).toString().split(";");
-		ArrayList<String> orderNums = new ArrayList<String>();
-		for (int i = 0; i < orders.length; i++) {
-			orderNums.add(orders[i]);
-		}
-		moneyinvo = new Receipt_MoneyInVO(itemLabels.get(2).toString(), Double.valueOf(itemLabels.get(4).toString()),
-				itemLabels.get(3).toString(), itemLabels.get(0).toString(), 
-				orderNums, user.orgNameID, user.number);
-		for (int i = 0; i < orders.length; i++) {
-			Receipt_OrderVO order = (Receipt_OrderVO)bl.findByID(orders[i]);
-			order.moneyinNum = itemLabels.get(0).toString();
-			bl.update(order);
-		}
-		if (bl.add(moneyinvo) == ResultMessage.SUCCESS) {
-			LogUtil.addLog("新增收款单");
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
-			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
-//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
-			parent.setChosenFunction("receipts");
-		} else {
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
+		if (isAllLegal()) {
+			String cnumber = findItem("number").toString();
+			String goodsnum = findItem("goodsnum").toString();
+			String time = findItem("time").toString();
+			String perid = findItem("perid").toString();
+			String money = findItem("money").toString();
+			String[] orders = goodsnum.split(";");
+			ArrayList<String> orderNums = new ArrayList<String>();
+			for (int i = 0; i < orders.length; i++) {
+				orderNums.add(orders[i]);
+			}
+			moneyinvo = new Receipt_MoneyInVO(time,
+					Double.valueOf(money), perid, cnumber,
+					orderNums, user.orgNameID, user.number);
+			for (int i = 0; i < orders.length; i++) {
+				Receipt_OrderVO order = (Receipt_OrderVO) bl
+						.findByID(orders[i]);
+				order.moneyinNum = cnumber;
+				bl.update(order);
+			}
+			if (bl.add(moneyinvo) == ResultMessage.SUCCESS) {
+				LogUtil.addLog("新增收款单");
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"添加成功");
+				ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
+				// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+				parent.setChosenFunction("receipts");
+			} else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"添加失败");
+			}
 		}
 	}
 
 	@Override
 	protected void cancel() {
-		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")) {
+		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
+				"取消新增", "确认放弃新增单据？")) {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");?
+			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");?
 			parent.setChosenFunction("receipts");
 		}
 	}

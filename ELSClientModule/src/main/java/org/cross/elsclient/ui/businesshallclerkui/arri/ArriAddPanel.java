@@ -42,7 +42,8 @@ public class ArriAddPanel extends ELSInfoPanel {
 	UserVO user;
 	String number;
 
-	public ArriAddPanel(ReceiptBLService receiptbl, UserVO user, GoodsBLService goodsbl) {
+	public ArriAddPanel(ReceiptBLService receiptbl, UserVO user,
+			GoodsBLService goodsbl) {
 		this.receiptbl = receiptbl;
 		this.user = user;
 		this.goodsbl = goodsbl;
@@ -59,12 +60,12 @@ public class ArriAddPanel extends ELSInfoPanel {
 
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
 		setTitle("新增到达单");
-		/* 0 */addEditableItem("到达单编号",number , false);
-		/* 1 */addEditableItem("装车/中转单号", "", true, InfoType.NAME);
-		/* 2 */addEditableItem("出发机构", "", true, InfoType.NAME);
-		/* 3 */addDateItem("出发时间", true);
-		/* 4 */addEditableItem("到达机构", user.orgNameID, false);
-		/* 5 */addDateItem("到达时间", false);
+		/* 0 */addEditableItem("到达单编号", number, false, "number");
+		/* 1 */addEditableItem("装车/中转单号", "", true, InfoType.NAME, "transnum");
+		/* 2 */addEditableItem("出发机构", "", true, InfoType.NAME, "startorg");
+		/* 3 */addDateItem("出发时间", true, "starttime");
+		/* 4 */addEditableItem("到达机构", user.orgNameID, false, "arriorg");
+		/* 5 */addDateItem("到达时间", false, "arritime");
 		/* 6 */addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");
@@ -73,38 +74,53 @@ public class ArriAddPanel extends ELSInfoPanel {
 
 	@Override
 	protected void confirm() throws RemoteException {
-		arrivo = new Receipt_ArriveVO(itemLabels.get(0).toString(), itemLabels.get(5).toString(),
-				itemLabels.get(2).toString(), itemLabels.get(1).toString(), itemLabels.get(3).toString(),
-				user.orgNameID, user.number);
-		Receipt_TransVO transvo = (Receipt_TransVO) receiptbl.findByID(itemLabels.get(1).toString());
-		
-		for (int i = 0; i < transvo.goodsID.size(); i++) {
-			GoodsVO goods = goodsbl.searchGoods(transvo.goodsID.get(i));
-			//更新goods
-			HistoryVO historyVO = new HistoryVO(itemLabels.get(5).toString(), UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type, true);
-			goods.history.add(historyVO);
-			goods.placeCity = UIConstant.CURRENT_ORG.city;
-			goods.placeOrg = UIConstant.CURRENT_ORG.type;
-			goods.arriNum = itemLabels.get(0).toString();
-			goodsbl.updateGoods(goods);
-		}
-		if (receiptbl.add(arrivo) == ResultMessage.SUCCESS) {
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
-			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
-			LogUtil.addLog("新增到达单");
-			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
-			parent.setChosenFunction("receipts");
-		} else {
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
+		if (isAllLegal()) {
+			String cnumber = findItem("number").toString();
+			String transnum = findItem("transnum").toString();
+			String startorg = findItem("startorg").toString();
+			String starttime = findItem("starttime").toString();
+			String carriorg = findItem("arriorg").toString();
+			String arritime = findItem("arritime").toString();
+			
+			arrivo = new Receipt_ArriveVO(cnumber,
+					arritime, startorg,
+					transnum, starttime,
+					carriorg , user.number);
+			Receipt_TransVO transvo = (Receipt_TransVO) receiptbl
+					.findByID(transnum);
+
+			for (int i = 0; i < transvo.goodsID.size(); i++) {
+				GoodsVO goods = goodsbl.searchGoods(transvo.goodsID.get(i));
+				// 更新goods
+				HistoryVO historyVO = new HistoryVO(arritime, UIConstant.CURRENT_ORG.city,
+						UIConstant.CURRENT_ORG.type, true);
+				goods.history.add(historyVO);
+				goods.placeCity = UIConstant.CURRENT_ORG.city;
+				goods.placeOrg = UIConstant.CURRENT_ORG.type;
+				goods.arriNum = cnumber;
+				goodsbl.updateGoods(goods);
+			}
+			if (receiptbl.add(arrivo) == ResultMessage.SUCCESS) {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"添加成功");
+				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
+				LogUtil.addLog("新增到达单");
+				ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+				// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+				parent.setChosenFunction("receipts");
+			} else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"添加失败");
+			}
 		}
 	}
 
 	@Override
 	protected void cancel() {
-		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")) {
+		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
+				"取消新增", "确认放弃新增单据？")) {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-//			parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
 		}
 	}

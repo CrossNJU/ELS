@@ -38,8 +38,8 @@ public class StockInAddPanel extends ELSInfoPanel {
 	StockVO stockvo;
 	String number;
 
-	public StockInAddPanel(StockBLService stockbl, ReceiptBLService receiptbl, UserVO user, StockVO stockvo,
-			GoodsBLService goodsbl) {
+	public StockInAddPanel(StockBLService stockbl, ReceiptBLService receiptbl,
+			UserVO user, StockVO stockvo, GoodsBLService goodsbl) {
 		this.stockbl = stockbl;
 		this.receiptbl = receiptbl;
 		this.stockvo = stockvo;
@@ -54,11 +54,11 @@ public class StockInAddPanel extends ELSInfoPanel {
 		titlePanel.remove(titlePanel.backBtn);
 		setTitle("新增入库单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
-		/* 0 */addEditableItem("入库单编号", number, false);
-		addEditableItem("快件单编号", "", true, InfoType.NAME);
-		addDateItem("入库时间", false);
-		addEditableItem("目的地", "", true, InfoType.NAME);
-		addEditableItem("仓库区号", "", true, InfoType.NAME);
+		/* 0 */addEditableItem("入库单编号", number, false, "number");
+		addEditableItem("快件单编号", "", true, InfoType.NAME, "goodsnum");
+		addDateItem("入库时间", false, "time");
+		addEditableItem("目的地", "", true, InfoType.NAME, "des");
+		addEditableItem("仓库区号", "", true, InfoType.NAME, "areaid");
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");
@@ -67,38 +67,52 @@ public class StockInAddPanel extends ELSInfoPanel {
 
 	@Override
 	protected void confirm() throws RemoteException {
-		stockinvo = new Receipt_StockInVO(itemLabels.get(0).toString(), itemLabels.get(2).toString(),
-				itemLabels.get(1).toString(), itemLabels.get(3).toString(), itemLabels.get(4).toString(), user.number,
-				user.orgNameID);
-		stockbl.intoStock(itemLabels.get(1).toString(), stockvo.number, itemLabels.get(2).toString(),
-				itemLabels.get(4).toString());
-		GoodsVO goodsvo = goodsbl.searchGoods(itemLabels.get(1).toString());
-		HistoryVO newhistory = new HistoryVO(itemLabels.get(2).toString(), UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type, true);
-		goodsvo.history.add(newhistory);
-		goodsvo.stockAreaNum = itemLabels.get(4).toString();
-		goodsvo.stockNum = stockvo.number;
-		goodsbl.updateGoods(goodsvo);
-		if (receiptbl.add(stockinvo) == ResultMessage.SUCCESS) {
-			LogUtil.addLog("新增入库单");
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
-			ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
-			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
-			parent.setChosenFunction("receipts");
-			init();
-		} else {
-			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加失败");
+		if (isAllLegal()) {
+			String cnumber = findItem("number").toString();
+			String goodsnum = findItem("goodsnum").toString();
+			String time = findItem("time").toString();
+			String des = findItem("des").toString();
+			String areaid = findItem("areaid").toString();
+			
+			stockinvo = new Receipt_StockInVO(cnumber,
+					time, goodsnum,
+					des, areaid,
+					user.number, user.orgNameID);
+			stockbl.intoStock(goodsnum, stockvo.number,
+					time, itemLabels.get(4).toString());
+			GoodsVO goodsvo = goodsbl.searchGoods(goodsnum);
+			HistoryVO newhistory = new HistoryVO(time,
+					UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type,
+					true);
+			goodsvo.history.add(newhistory);
+			goodsvo.stockAreaNum = itemLabels.get(4).toString();
+			goodsvo.stockNum = stockvo.number;
+			goodsbl.updateGoods(goodsvo);
+			if (receiptbl.add(stockinvo) == ResultMessage.SUCCESS) {
+				LogUtil.addLog("新增入库单");
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"添加成功");
+				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
+				ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+				// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+				parent.setChosenFunction("receipts");
+				init();
+			} else {
+				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
+						"添加失败");
+			}
 		}
 	}
 
 	@Override
 	protected void cancel() {
-		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认放弃新增单据？")) {
+		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
+				"取消新增", "确认放弃新增单据？")) {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
 			parent.setChosenFunction("receipts");
 			init();
 		}
 	}
-	
+
 }
