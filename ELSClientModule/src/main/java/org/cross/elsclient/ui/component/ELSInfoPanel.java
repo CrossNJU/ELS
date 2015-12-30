@@ -433,6 +433,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 			if(btn.getName().equals("add")){
 				InfoItemLabel newLabel = new InfoItemLabel();
 				newLabel.initEditable("", "", true,label.infoType);
+				newLabel.setName("extra");
 				ELSButton delBtn = ComponentFactory.createMinusBtn();
 				newLabel.add(delBtn,3);
 				delBtn.addMouseListener(new ChangeBtnListener(newLabel, delBtn));
