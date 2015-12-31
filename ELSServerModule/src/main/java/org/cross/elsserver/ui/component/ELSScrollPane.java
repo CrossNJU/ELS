@@ -36,7 +36,6 @@ public class ELSScrollPane extends JScrollPane{
 	public void initComponent(){
 		setBorder(null);
 		setOpaque(false);
-		setBackground(Color.RED);
 		JScrollBar bar = getVerticalScrollBar();
 		bar.setUI(new ELSScrollPaneUI());
 		bar.setBorder(null);
@@ -46,7 +45,6 @@ public class ELSScrollPane extends JScrollPane{
 		bar.setMinimumSize(new Dimension(15,bar.getPreferredSize().height));
 		bar.setSize(15,bar.getHeight());
 		getViewport().setOpaque(false);
-		getViewport().setBackground(Color.red);
 	}
 	
 	public void packHeight(){
