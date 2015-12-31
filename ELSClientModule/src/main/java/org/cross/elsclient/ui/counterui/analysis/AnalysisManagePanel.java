@@ -81,17 +81,18 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		String[] name1 = {"总支出", "总收益","总利润"};
 		int[] itemWidth1 = {200,200,200};
 		list1 = new ELSManageTable(name1, itemWidth1);
-		double[] data = analysisbl.showCostBenefitTable();
-		String[] item = {data[0]+"",data[1]+"",data[2]+""};
+//		double[] data = analysisbl.showCostBenefitTable();
+//		String[] item = {data[0]+"",data[1]+"",data[2]+""};
 		list1.init();
 		list1.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, title1.getHeight()+title1.getLocation().y+15);
-		list1.addItemLabel(item);
+//		list1.addItemLabel(item);
 		
 		String[] name2 = {"单据编号","类型","建单时间","金额"};
 		int[] itemWidth2 = {150,100,200,100};
 		list2 = new AnalysisManageTable(name2, itemWidth2, analysisbl);
 		list2.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, searchPanel.getHeight()+searchPanel.getLocation().y+15);
 		list2.init();
+//<<<<<<< HEAD
 		try {
 			receiptVOs = new ArrayList<>();
 //			System.out.println("th");
@@ -110,6 +111,26 @@ public class AnalysisManagePanel extends ELSManagePanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+//=======
+		try {
+			receiptVOs = new ArrayList<>();
+			System.out.println("th");
+			ArrayList<Receipt_MoneyInVO> tempInVos = analysisbl.showMoneyinTable("1000-01-01", "3000-01-01");
+			if(tempInVos!=null){
+				receiptVOs.addAll(tempInVos);
+			}
+			ArrayList<Receipt_MoneyOutVO> tempOutVos = analysisbl.showMoneyoutTable("1000-01-01", "3000-01-01");
+			if(tempOutVos!=null){
+				receiptVOs.addAll(tempOutVos);
+			}
+			for (ReceiptVO receiptVO : receiptVOs) {
+				list2.addItem(receiptVO);
+			}
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+//>>>>>>> branch 'master' of https://github.com/CrossNJU/ELS.git
 		
 		this.container.add(list1);
 		this.container.add(list2);
