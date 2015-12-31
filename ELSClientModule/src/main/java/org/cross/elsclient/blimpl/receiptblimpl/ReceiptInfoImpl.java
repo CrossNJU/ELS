@@ -328,7 +328,10 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 		// vos.add(toVO(polist.get(i)));
 		// }
 		// return vos;
-		ArrayList<ReceiptVO> vo = ConstantVal.currentReceipts;
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		for (ReceiptVO receiptVO : ConstantVal.currentReceipts) {
+			vo.add(receiptVO);
+		}
 		Iterator<ReceiptVO> ite = vo.iterator();
 		while (ite.hasNext()) {
 			ReceiptVO v = ite.next();
@@ -357,7 +360,10 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 		// vos.add(toVO(polist.get(i)));
 		// }
 		// return vos;
-		ArrayList<ReceiptVO> vo = ConstantVal.currentReceipts;
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		for (ReceiptVO receiptVO : ConstantVal.currentReceipts) {
+			vo.add(receiptVO);
+		}
 		Iterator<ReceiptVO> ite = vo.iterator();
 		while (ite.hasNext()) {
 			ReceiptVO v = ite.next();

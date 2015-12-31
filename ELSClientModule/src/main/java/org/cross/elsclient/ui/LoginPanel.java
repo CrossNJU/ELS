@@ -195,7 +195,7 @@ public class LoginPanel extends ELSPanel{
 				UIConstant.CURRENT_USER = userbl.findById(id);
 				UIConstant.CURRENT_ORG = organbl.findById(UIConstant.CURRENT_USER.orgNameID);
 				ConstantVal.currentReceipts = receiptbl.show();
-				System.out.println("fi");
+//				System.out.println("fi");
 //				System.out.println(UIConstant.CURRENT_USER);
 			}
 		} catch (RemoteException e1) {

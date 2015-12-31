@@ -94,7 +94,7 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		list2.init();
 		try {
 			receiptVOs = new ArrayList<>();
-			System.out.println("th");
+//			System.out.println("th");
 			ArrayList<Receipt_MoneyInVO> tempInVos = analysisbl.showMoneyinTable("1000-01-01", "3000-01-01");
 			if(tempInVos!=null){
 				receiptVOs.addAll(tempInVos);

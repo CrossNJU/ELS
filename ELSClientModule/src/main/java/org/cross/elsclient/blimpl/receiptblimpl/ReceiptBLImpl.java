@@ -86,6 +86,7 @@ public class ReceiptBLImpl implements ReceiptBLService{
 	public ArrayList<ReceiptVO> show() throws RemoteException {
 		ArrayList<ReceiptVO> vos = new ArrayList<ReceiptVO>();
 		if (ConstantVal.currentReceipts!=null) {
+//			System.out.println("show:"+ConstantVal.currentReceipts.size());
 			return ConstantVal.currentReceipts;
 		}
 		ArrayList<ReceiptPO> list = receiptdata.show();
@@ -120,7 +121,10 @@ public class ReceiptBLImpl implements ReceiptBLService{
 	@Override
 	public ArrayList<ReceiptVO> findByTime(String startTime, String endTime) throws RemoteException {
 //		ArrayList<ReceiptPO> po = receiptdata.findByTime(startTime, endTime);
-		ArrayList<ReceiptVO> vo = ConstantVal.currentReceipts;
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		for (ReceiptVO receiptVO : ConstantVal.currentReceipts) {
+			vo.add(receiptVO);
+		}
 		Iterator<ReceiptVO> ite = vo.iterator();
 		while (ite.hasNext()) {
 			ReceiptVO v = ite.next();
@@ -144,7 +148,10 @@ public class ReceiptBLImpl implements ReceiptBLService{
 	@Override
 	public ArrayList<ReceiptVO> findByType(ReceiptType type) throws RemoteException {
 //		ArrayList<ReceiptPO> po = receiptdata.findByType(type);
-		ArrayList<ReceiptVO> vo = ConstantVal.currentReceipts;
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		for (ReceiptVO receiptVO : ConstantVal.currentReceipts) {
+			vo.add(receiptVO);
+		}
 		Iterator<ReceiptVO> ite = vo.iterator();
 		while (ite.hasNext()) {
 			ReceiptVO v = ite.next();
@@ -188,7 +195,10 @@ public class ReceiptBLImpl implements ReceiptBLService{
 
 	@Override
 	public ArrayList<ReceiptVO> findByUser(String userId) throws RemoteException {
-		ArrayList<ReceiptVO> vo = ConstantVal.currentReceipts;
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		for (ReceiptVO receiptVO : ConstantVal.currentReceipts) {
+			vo.add(receiptVO);
+		}
 		Iterator<ReceiptVO> ite = vo.iterator();
 		while (ite.hasNext()) {
 			ReceiptVO v = ite.next();
@@ -205,7 +215,10 @@ public class ReceiptBLImpl implements ReceiptBLService{
 
 	@Override
 	public ArrayList<ReceiptVO> findByOrgan(String organId) throws RemoteException {
-		ArrayList<ReceiptVO> vo = ConstantVal.currentReceipts;
+		ArrayList<ReceiptVO> vo = new ArrayList<ReceiptVO>();
+		for (ReceiptVO receiptVO : ConstantVal.currentReceipts) {
+			vo.add(receiptVO);
+		}
 		Iterator<ReceiptVO> ite = vo.iterator();
 		while (ite.hasNext()) {
 			ReceiptVO v = ite.next();
@@ -232,8 +245,8 @@ public class ReceiptBLImpl implements ReceiptBLService{
 			impl = new ReceiptBLImpl(faDatafactory.getReceiptData(), rinfo, ginfo);
 			ConstantVal.currentReceipts = impl.show();
 
-			ArrayList<ReceiptVO> list = rinfo.findByTimeAndType(
-					ReceiptType.MONEYIN, "1000-01-01", "3000-01-01");
+			ArrayList<ReceiptVO> list = impl.show();
+			list = impl.show();
 			System.out.println(list.size());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
