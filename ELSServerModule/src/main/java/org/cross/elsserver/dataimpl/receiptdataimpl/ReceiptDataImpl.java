@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CountDownLatch;
 
 import org.cross.elscommon.dataservice.receiptdataservice.ReceiptDataService;
 import org.cross.elscommon.po.ReceiptPO;
@@ -140,15 +141,20 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements
 	public ArrayList<ReceiptPO> findByTime(String startTime, String endTime)
 			throws RemoteException {
 		ArrayList<ReceiptPO> receipts = new ArrayList<ReceiptPO>();
+//		ArrayList<ReceiptPO> needtoremove = new ArrayList<ReceiptPO>();
 		receipts = show();
-		for (ReceiptPO po: receipts) {
+		Iterator<ReceiptPO> ite = receipts.iterator();
+		while(ite.hasNext()) {
+			ReceiptPO po = ite.next();
 			if (CompareTime.compare(po.getTime(), startTime) != 1
 					|| CompareTime.compare(endTime, po.getTime()) != 1) {
 //				ReceiptPO po = findByNum(rs.getString("number"));
-				receipts.remove(po);
+				ite.remove();
 			}
-			
 		}
+//		for (ReceiptPO receiptPO : needtoremove) {
+//			receipts.remove(receiptPO);
+//		}
 //		String sql = "select * from `receipt`";
 //		ResultSet rs = mysql.query(sql);
 //		try {
@@ -191,12 +197,18 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements
 	public ArrayList<ReceiptPO> findByTimeAndType(String startTime,
 			String endTime, ReceiptType type) throws RemoteException {
 		ArrayList<ReceiptPO> receipts = new ArrayList<ReceiptPO>();
+//		ArrayList<ReceiptPO> needtoremove = new ArrayList<ReceiptPO>();
 		receipts = findByTime(startTime, endTime);
-		for (ReceiptPO receiptPO : receipts) {
-			if (receiptPO.getType()!=type) {
-				receipts.remove(receiptPO);
+		Iterator<ReceiptPO> ite = receipts.iterator();
+		while(ite.hasNext()){
+			ReceiptPO po = ite.next();
+			if (!po.getType().equals(type)) {
+				ite.remove();
 			}
 		}
+//		for (ReceiptPO receiptPO : needtoremove) {
+//			receipts.remove(receiptPO);
+//		}
 //		String sql = "select * from `receipt` where `type`='" + type.toString()
 //				+ "'";
 //		ResultSet rs = mysql.query(sql);
@@ -262,66 +274,157 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements
 	}
 
 	public ArrayList<ReceiptPO> findreceipts(String table, String num, boolean show){
-		String sql = "select * from receipt,receiptarrive,receiptdeliver,receiptmoneyin,"
-				+ "receiptmoneyout,receiptorder,receiptstockin,receiptstockout,receipttotalmoneyin,receipttrans"
-				+ " where receipt."+table+"= '"+num+"' and ( "
-				+ " receiptarrive.number = receipt.number or "
-				+ " receiptdeliver.number = receipt.number or "
-				+ " receiptmoneyin.number = receipt.number or "
-				+ " receiptmoneyout.number = receipt.number or "
-				+ " receiptorder.number = receipt.number or "
-				+ " receiptstockin.number = receipt.number or "
-				+ " receiptstockout.number = receipt.number or "
-				+ " receipttotalmoneyin.number = receipt.number or "
-				+ " receipttrans.number = receipt.number )";
-		if (show) {
-			sql = "select * from receipt,receiptarrive,receiptdeliver,receiptmoneyin,"
-					+ "receiptmoneyout,receiptorder,receiptstockin,receiptstockout,receipttotalmoneyin,receipttrans";
+//		String sql = "select * from receipt,receiptarrive,receiptdeliver,receiptmoneyin,"
+//				+ "receiptmoneyout,receiptorder,receiptstockin,receiptstockout,receipttotalmoneyin,receipttrans"
+//				+ " where receipt."+table+"= '"+num+"' and ( "
+//				+ " receiptarrive.number = receipt.number or "
+//				+ " receiptdeliver.number = receipt.number or "
+//				+ " receiptmoneyin.number = receipt.number or "
+//				+ " receiptmoneyout.number = receipt.number or "
+//				+ " receiptorder.number = receipt.number or "
+//				+ " receiptstockin.number = receipt.number or "
+//				+ " receiptstockout.number = receipt.number or "
+//				+ " receipttotalmoneyin.number = receipt.number or "
+//				+ " receipttrans.number = receipt.number )";
+//		if (show) {
+//			sql = "select * from receipt,receiptarrive,receiptdeliver,receiptmoneyin,"
+//					+ "receiptmoneyout,receiptorder,receiptstockin,receiptstockout,receipttotalmoneyin,receipttrans";
+//		}
+//		String sql = "select * from receipt";
+//		ResultSet rs0 = mysql.query(sql);
+		String app = "";
+		if (!show) {
+			app = " and receipt."+table+"= '"+num+"'";
 		}
-		ResultSet rs = mysql.query(sql);
 		ArrayList<ReceiptPO> list = new ArrayList<ReceiptPO>();
+		String sql = "select * from receipt,receiptarrive where receipt.number = receiptarrive.number"+app;
+		ResultSet rs_arri = mysql.query(sql);
+		getpos(list, rs_arri);
+		sql = "select * from receipt,receiptdeliver where receipt.number = receiptdeliver.number"+app;
+		ResultSet rs_del = mysql.query(sql);
+		getpos(list, rs_del);
+		sql = "select * from receipt,receiptmoneyin where receipt.number = receiptmoneyin.number"+app;
+		ResultSet rs_min = mysql.query(sql);
+		getpos(list, rs_min);
+		sql = "select * from receipt,receiptmoneyout where receipt.number = receiptmoneyout.number"+app;
+		ResultSet rs_mout = mysql.query(sql);
+		getpos(list, rs_mout);
+		sql = "select * from receipt,receiptorder where receipt.number = receiptorder.number"+app;
+		ResultSet rs_ord = mysql.query(sql);
+		getpos(list, rs_ord);
+		sql = "select * from receipt,receiptstockin where receipt.number = receiptstockin.number"+app;
+		ResultSet rs_sin = mysql.query(sql);
+		getpos(list, rs_sin);
+		sql = "select * from receipt,receiptstockout where receipt.number = receiptstockout.number"+app;
+		ResultSet rs_sout = mysql.query(sql);
+		getpos(list, rs_sout);
+		sql = "select * from receipt,receipttotalmoneyin where receipt.number = receipttotalmoneyin.number"+app;
+		ResultSet rs_tmin = mysql.query(sql);
+		getpos(list, rs_tmin);
+		sql = "select * from receipt,receipttrans where receipt.number = receipttrans.number"+app;
+		ResultSet rs_tra = mysql.query(sql);
+		getpos(list, rs_tra);
+//		int count =0;
+//		try {
+//			while (rs.next()) {
+//				count ++;
+//				ReceiptType type = StringToType.toReceiptType(rs
+//						.getString("type"));
+//				if (type == null) {
+//					return null;
+//				}
+//				ReceiptPO po = null;
+//				switch (type) {
+//				case ORDER:
+//					po = order.getFromDB(rs);
+//					break;
+//				case TRANS:
+//					po = trans.getFromDB(rs);
+//					break;
+//				case ARRIVE:
+//					po = arri.getFromDB(rs);
+//					break;
+//				case STOCKIN:
+//					po = stockin.getFromDB(rs);
+//					break;
+//				case STOCKOUT:
+//					po = stockout.getFromDB(rs);
+//					break;
+//				case MONEYIN:
+//					po = moneyin.getFromDB(rs);
+//					break;
+//				case MONEYOUT:
+//					po = moneyout.getFromDB(rs);
+//					break;
+//				case TOTALMONEYIN:
+//					po = totalmoneyin.getFromDB(rs);
+//					break;
+//				case DELIVER:
+//					po = del.getFromDB(rs);
+//					break;
+//				default:
+//				}
+////				boolean has = false;
+////				for (ReceiptPO receiptPO : list) {
+////					if (receiptPO.getNumber().equals(po.getNumber())) {
+////						has = true;
+////					}
+////				}
+//				list.add(po);
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println("count"+" "+count);
+		return list;
+	}
+	
+	public void getpos(ArrayList<ReceiptPO> list, ResultSet rs){
 		try {
 			while (rs.next()) {
 				ReceiptType type = StringToType.toReceiptType(rs
 						.getString("type"));
 				if (type == null) {
-					return null;
+					continue;
 				}
 				ReceiptPO po = null;
 				switch (type) {
 				case ORDER:
 					po = order.getFromDB(rs);
+					break;
 				case TRANS:
 					po = trans.getFromDB(rs);
+					break;
 				case ARRIVE:
 					po = arri.getFromDB(rs);
+					break;
 				case STOCKIN:
 					po = stockin.getFromDB(rs);
+					break;
 				case STOCKOUT:
 					po = stockout.getFromDB(rs);
+					break;
 				case MONEYIN:
 					po = moneyin.getFromDB(rs);
+					break;
 				case MONEYOUT:
 					po = moneyout.getFromDB(rs);
+					break;
 				case TOTALMONEYIN:
 					po = totalmoneyin.getFromDB(rs);
+					break;
 				case DELIVER:
 					po = del.getFromDB(rs);
+					break;
 				default:
 				}
-				boolean has = false;
-				for (ReceiptPO receiptPO : list) {
-					if (receiptPO.getNumber().equals(po.getNumber())) {
-						has = true;
-					}
-				}
-				if(!has) list.add(po);
+				list.add(po);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return list;
 	}
 
 	public static void main(String[] args) throws RemoteException {
@@ -340,11 +443,25 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements
 		// Receipt_TransPO po = (Receipt_TransPO)impl.findByNum("R0000011");
 //		Receipt_StockOutPO po = (Receipt_StockOutPO) impl.findByNum("R0000013");
 //		System.out.println(po.getNumber());
-		ArrayList<ReceiptPO> list = impl.findreceipts("number", "R0000002", false);
-//		for (int i = 0; i < list.size(); i++) {
-//			System.out.println(list.get(i).getType());
-//		}
+//		ArrayList<ReceiptPO> list = impl.findreceipts("type",ReceiptType.MONEYIN.toString(),false);
+		ArrayList<ReceiptPO> list = impl.findByTimeAndType("2014-1-1", "2016-1-1",ReceiptType.MONEYIN);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getType());
+		}
 		System.out.println(list.size());
+//		String sql = "select * from receipt, receiptarrive where receipt.number = receiptarrive.number"
+//				+ " and receipt.perNum = 'U002'";
+//		ResultSet rs = impl.mysql.query(sql);
+//		int c =0;
+//		try {
+//			while (rs.next()) {
+//				c++;
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println(c);
 	}
 
 }
