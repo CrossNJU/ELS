@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import org.cross.elscommon.util.UserType;
+
 public class Images {
 	static String src = "src/main/img";
 	
@@ -38,9 +40,18 @@ public class Images {
 	public final static ImageIcon DOWN_ACTIVE_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Arrow Down.png");
 	public final static ImageIcon WINDOW_MINUS_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Window Minus.png");
 	public final static ImageIcon ALERT_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Alert.png");
+	public final static ImageIcon EXPORT_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Export.png");
+	
 	public final static Image BG_IMAGE = createImage(src+"/Background.png");
 	public final static ImageIcon DIALOG_BG_IMAGE = createImageIcon(src+"/Mask.png");
 	
+	public final static ImageIcon ADMIN_AVATAR = createImageIcon(src+"/Icons/Common/Administrator.png");
+	public final static ImageIcon BUSINESSCLERKCLERK_AVATAR = createImageIcon(src+"/Icons/Common/BHClerk.png");
+	public final static ImageIcon COUNTER_AVATAR = createImageIcon(src+"/Icons/Common/Counter.png");
+	public final static ImageIcon COURIER_AVATAR = createImageIcon(src+"/Icons/Common/Courier.png");
+	public final static ImageIcon MANAGER_AVATAR = createImageIcon(src+"/Icons/Common/Manager.png");
+	public final static ImageIcon TCCLERK_AVATAR = createImageIcon(src+"/Icons/Common/TCClerk.png");
+	public final static ImageIcon STOCKKEEPER_AVATAR = createImageIcon(src+"/Icons/Common/Stockkeeper.png");
 	
 	public final static ImageIcon ADJUSTMENT_ICON = createImageIcon(src+"/icons/Nav/Icon Adjustment.png");
 	public final static ImageIcon CAR_ICON = createImageIcon(src+"/icons/Nav/Icon Car.png");
@@ -152,6 +163,29 @@ public class Images {
 		default:
 			return null;
 		}
+	}
+	
+	public static ImageIcon getAvatar(UserType type){
+		switch (type) {
+		case ADMINISTRATOR:
+			return ADMIN_AVATAR;
+		case COUNTER:
+		case SUPERCOUNTER:
+			return COUNTER_AVATAR;
+		case COURIER:
+			return COURIER_AVATAR;
+		case BUSINESSHALLCLERK:
+			return BUSINESSCLERKCLERK_AVATAR;
+		case MANAGER:
+			return MANAGER_AVATAR;
+		case STOCKKEEPER:
+			return STOCK_ACTIVE_ICON;
+		case TRANSITCENTERCLERK:
+			return TCCLERK_AVATAR;
+		default:
+			return null;
+		}
+		
 	}
 	
 	public static ImageIcon getActiveIcon(String name){

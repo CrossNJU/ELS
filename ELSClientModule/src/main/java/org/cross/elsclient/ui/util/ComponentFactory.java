@@ -58,6 +58,8 @@ public class ComponentFactory {
 
 		return btn;
 	}
+	
+	
 
 	/**
 	 * 创建信息展示界面取消按钮
@@ -229,11 +231,23 @@ public class ComponentFactory {
 		ELSButton btn = new ELSButton();
 		btn.setOpaque(false);
 		btn.setSize(20, 20);
+		btn.setName("exit");
 		btn.setIcon(Images.EXIT_IMAGEICON);
-		btn.addMouseListener(new ExitListener(isShowDialog, btn));
+		btn.addMouseListener(new BtnListener(isShowDialog, btn));
 		return btn;
 	}
 	
+	public static ELSButton createExportBtn(){
+		ELSButton btn = new ELSButton();
+		btn.setOpaque(false);
+		btn.setIcon(Images.EXPORT_IMAGEICON);
+		btn.setPreferredSize(new Dimension(30,30));
+		btn.setMaximumSize(new Dimension(30,30));
+		btn.setMinimumSize(new Dimension(30,30));
+		btn.setName("export");
+		btn.addMouseListener(new BtnListener(true, btn));
+		return btn;
+	}
 
 	public static ELSButton createInitialAddBtn() {
 		ELSButton addBtn = new ELSButton();
@@ -248,10 +262,10 @@ public class ComponentFactory {
 	
 	
 }
-class ExitListener implements MouseListener{
+class BtnListener implements MouseListener{
 	boolean isShow;
 	ELSButton btn;
-	public ExitListener(boolean isShow, ELSButton btn) {
+	public BtnListener(boolean isShow, ELSButton btn) {
 		super();
 		this.isShow = isShow;
 		this.btn = btn;
@@ -259,17 +273,21 @@ class ExitListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(isShow){
-			if (ELSDialog.showConfirmDlg(((JComponent) e.getSource())
-					.getParent().getParent(), "退出系统", "确认退出ELS物流管理系统？","退出","注销")) {
-				System.exit(0);
+		if(btn.getName().equals("exit")){
+			if(isShow){
+				if (ELSDialog.showConfirmDlg(((JComponent) e.getSource())
+						.getParent().getParent(), "退出系统", "确认退出ELS物流管理系统？","退出","注销")) {
+					System.exit(0);
+				}else{
+					ELSPanel parent = (ELSPanel)GetPanelUtil.getFunctionPanel(btn).getParent();
+					parent.cl.show(parent, "login");
+					parent.remove((ELSPanel)GetPanelUtil.getFunctionPanel(btn));
+				}
 			}else{
-				ELSPanel parent = (ELSPanel)GetPanelUtil.getFunctionPanel(btn).getParent();
-				parent.cl.show(parent, "login");
-				parent.remove((ELSPanel)GetPanelUtil.getFunctionPanel(btn));
+				System.exit(0);
 			}
-		}else{
-			System.exit(0);
+		}else if(btn.getName().equals("export")){
+			
 		}
 	}
 

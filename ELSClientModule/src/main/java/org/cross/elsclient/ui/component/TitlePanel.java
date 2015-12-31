@@ -39,6 +39,7 @@ public class TitlePanel extends ELSBox{
 		titleLabel.setHorizontalAlignment(JLabel.LEFT);
 		titleLabel.setText(title);
 		titleLabel.setForeground(Color.white);
+		titleLabel.setFont(UIConstant.MainFont.deriveFont(18f));
 		
 		this.add(backBtn);
 		this.add(Box.createHorizontalStrut(10));

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.Box;
 
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
+import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSDatePicker;
 import org.cross.elsclient.ui.component.ELSDialog;
 import org.cross.elsclient.ui.component.ELSManagePanel;
@@ -141,12 +142,20 @@ public class AnalysisManagePanel extends ELSManagePanel {
 	public void setTitle(){
 		title1 = new TitlePanel();
 		title2 = new TitlePanel();
+		ELSButton btn1 = ComponentFactory.createExportBtn();
+		ELSButton btn2 = ComponentFactory.createExportBtn();
 		
 		title1.init("成本收益表");
+		title1.add(Box.createHorizontalGlue());
+		title1.add(btn1);
+		title1.add(Box.createHorizontalStrut(10));
 		title1.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, UIConstant.CONTENTPANEL_MARGIN_TOP);
 		title1.remove(title1.backBtn);
 		
 		title2.init("经营情况表");
+		title2.add(Box.createHorizontalGlue());
+		title2.add(btn2);
+		title2.add(Box.createHorizontalStrut(10));
 		title2.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, 200);
 		title2.remove(title2.backBtn);
 		

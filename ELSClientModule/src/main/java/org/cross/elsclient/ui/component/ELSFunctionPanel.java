@@ -31,6 +31,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	ELSLabel mask2;
 	ELSLabel posLabel;
 	ELSLabel idLabel;
+	ELSLabel avatarLabel;
 	
 	/**
 	 * 功能控制面板需要先实例化BL对象再执行init()
@@ -63,13 +64,17 @@ public class ELSFunctionPanel extends ELSPanel {
 		posLabel = new ELSLabel(UIConstant.CURRENT_USER.userType.toString());
 		idLabel = new ELSLabel(UIConstant.CURRENT_USER.number);
 		posLabel.setHorizontalAlignment(JLabel.LEFT);
-		posLabel.setBounds(850, 45, 140, 20);
+		posLabel.setBounds(850, 40, 140, 20);
 		posLabel.setFont(UIConstant.MainFont.deriveFont(20f));
 		posLabel.setForeground(Color.white);
 		idLabel.setHorizontalAlignment(JLabel.LEFT);
 		idLabel.setBounds(850, 70, 140, 20);
 		idLabel.setFont(UIConstant.MainFont.deriveFont(20f));
 		idLabel.setForeground(Color.white);
+		
+		avatarLabel = new ELSLabel();
+		avatarLabel.setBounds(790, 40, 50, 50);
+		avatarLabel.setIcon(Images.getAvatar(UIConstant.CURRENT_USER.userType));
 		
 		mask1 = new ELSLabel();
 		mask2 = new ELSLabel();
@@ -83,6 +88,7 @@ public class ELSFunctionPanel extends ELSPanel {
 		this.add(contentPanel);
 		this.add(posLabel);
 		this.add(idLabel);
+		this.add(avatarLabel);
 		this.add(mask1);
 		this.add(mask2);
 		this.add(logo);
