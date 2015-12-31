@@ -10,5 +10,6 @@ public enum InfoType {
 	ID,//编号
 	RECEIPT,//单据
 	ORGANIZATION,//机构
-	PERSONNEL;//人员
+	PERSONNEL,//人员
+	STOCKAREA;//仓库小间
 }

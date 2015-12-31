@@ -29,7 +29,7 @@ public class StockAdjustPanel extends ELSInfoPanel {
 
 	@Override
 	public void init() {
-		System.out.println("in");
+//		System.out.println("in");
 		super.init();
 		titlePanel.remove(titlePanel.backBtn);
 

@@ -18,6 +18,7 @@ import org.cross.elsclient.vo.PersonnelVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.UserVO;
+import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
@@ -47,10 +48,11 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		setTitle("新增收款单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
 		/* 0 */addEditableItem("收款单编号", number, false, "number");
-		addEditableItem("快件单编号", "", true, "goodsnum");
+//		addEditableItem("快件单编号", "", true, "goodsnum");
+		addChangeItem("快件单编号", "", true, InfoType.RECEIPT , "goodsnum");
 		addDateItem("收款时间", false, "time");
-		/* 3 */addEditableItem("收款快递员ID", "", true, "perid");
-		addEditableItem("收款金额", "", true, "money");
+		/* 3 */addEditableItem("收款快递员ID", "", true, InfoType.PERSONNEL, "perid");
+		addEditableItem("收款金额", "", true,InfoType.NUM, "money");
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");
@@ -61,21 +63,21 @@ public class MoneyAddPanel extends ELSInfoPanel {
 	protected void confirm() throws RemoteException {
 		if (isAllLegal()) {
 			String cnumber = findItem("number").toString();
-			String goodsnum = findItem("goodsnum").toString();
+//			String goodsnum = findItem("goodsnum").toString();
 			String time = findItem("time").toString();
 			String perid = findItem("perid").toString();
 			String money = findItem("money").toString();
-			String[] orders = goodsnum.split(";");
+//			String[] orders = goodsnum.split(";");
 			ArrayList<String> orderNums = new ArrayList<String>();
-			for (int i = 0; i < orders.length; i++) {
-				orderNums.add(orders[i]);
+			for (int i = 0; i < extraLabels.size(); i++) {
+				orderNums.add(extraLabels.get(i).toString());
 			}
 			moneyinvo = new Receipt_MoneyInVO(time,
 					Double.valueOf(money), perid, cnumber,
 					orderNums, user.orgNameID, user.number);
-			for (int i = 0; i < orders.length; i++) {
+			for (int i = 0; i < extraLabels.size(); i++) {
 				Receipt_OrderVO order = (Receipt_OrderVO) bl
-						.findByID(orders[i]);
+						.findByID(extraLabels.get(i).toString());
 				order.moneyinNum = cnumber;
 				bl.update(order);
 			}

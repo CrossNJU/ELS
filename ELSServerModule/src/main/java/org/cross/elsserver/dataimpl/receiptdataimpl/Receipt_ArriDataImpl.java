@@ -34,27 +34,27 @@ public class Receipt_ArriDataImpl implements ReceiptTool {
 	}
 
 	@Override
-	public ReceiptPO getFromDB(String number) {
-		String sql = "select * from `receiptArrive` where `number`='" + number + "'";
+	public ReceiptPO getFromDB(ResultSet rs) {
+//		String sql = "select * from `receiptArrive` where `number`='" + number + "'";
 		Receipt_ArrivePO po = null;
-		ResultSet rs = mysql.query(sql);
+//		ResultSet rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
+//			if (rs.next()) {
 				po = new Receipt_ArrivePO(rs.getString("number"), ReceiptType.ARRIVE, rs.getString("time"), null, null,
 						rs.getString("startCity"), rs.getString("startTime"), rs.getString("transNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sql = "select * from `receipt` where `number`='"+number+"'";
-		rs = mysql.query(sql);
+//		sql = "select * from `receipt` where `number`='"+number+"'";
+//		rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
+//			if (rs.next()) {
 				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 				po.setOrgNum(rs.getString("orgNum"));
 				po.setPerNum(rs.getString("perNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

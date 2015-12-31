@@ -55,10 +55,10 @@ public class StockInAddPanel extends ELSInfoPanel {
 		setTitle("新增入库单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
 		/* 0 */addEditableItem("入库单编号", number, false, "number");
-		addEditableItem("快件单编号", "", true, InfoType.NAME, "goodsnum");
+		addEditableItem("快件单编号", "", true, InfoType.RECEIPT, "goodsnum");
 		addDateItem("入库时间", false, "time");
-		addEditableItem("目的地", "", true, InfoType.NAME, "des");
-		addEditableItem("仓库区号", "", true, InfoType.NAME, "areaid");
+		addEditableItem("目的地", "", true, InfoType.ORGANIZATION, "des");
+		addEditableItem("仓库区号", "", true, InfoType.STOCKAREA, "areaid");
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
 		cancelBtn.setText("查看单据");

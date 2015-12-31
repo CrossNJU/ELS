@@ -43,7 +43,7 @@ public class DriverAddPanel extends ELSInfoPanel {
 		/* 0 */addEditableItem("司机编号", number, false, "number");
 		addEditableItem("姓名", "", true, InfoType.NAME, "name");
 		addComboxItem("性别", it1, true, "sex");
-		addEditableItem("身份证号码", "", true, InfoType.ID, "id");
+		addEditableItem("身份证号码", "", true, InfoType.IDCARD, "id");
 		addEditableItem("手机", "", true, InfoType.TELEPHONE, "phone");
 		addDateItem("出生日期", true, "birth");
 		addDateItem("行驶证开始", true, "licencestart");

@@ -31,6 +31,8 @@ public class InfoFormatUtil {
 			return CheckString(src);//待更改
 		case PERSONNEL:
 			return CheckString(src);//待更改
+		case STOCKAREA:
+			return CheckString(src);//待更改
 		default:
 			break;
 		}

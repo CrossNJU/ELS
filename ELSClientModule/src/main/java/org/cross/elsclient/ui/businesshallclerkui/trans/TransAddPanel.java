@@ -58,7 +58,8 @@ public class TransAddPanel extends ELSInfoPanel {
 		setTitle("新增装车单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
 		/* 0 */addEditableItem("装车单编号", number, false, "number");
-		addEditableItem("快件单编号", "", true, InfoType.NAME, "goodsnum");
+//		addEditableItem("快件单编号", "", true, InfoType.NAME, "goodsnum");
+		addChangeItem("快件单编号", "", true, InfoType.NAME, "goodsnum");
 		addEditableItem("出发地", user.orgNameID, false, "startplace");
 		addComboxItem("到达城市", it1, true, "arricity");
 		addEditableItem("到达机构", "", true, InfoType.NAME, "arriorg");
@@ -89,9 +90,9 @@ public class TransAddPanel extends ELSInfoPanel {
 			String observer = findItem("observer").toString();
 			String cost = findItem("cost").toString();
 			ArrayList<String> goods = new ArrayList<String>();
-			String[] temp = goodsnum.split(";");
-			for (int i = 0; i < temp.length; i++) {
-				goods.add(temp[i]);
+//			String[] temp = goodsnum.split(";");
+			for (int i = 0; i < extraLabels.size(); i++) {
+				goods.add(extraLabels.get(i).toString());
 			}
 			vo = new Receipt_TransVO(cnumber, time, goods, Double.valueOf(cost), transnum,
 					vehnum, startplace,

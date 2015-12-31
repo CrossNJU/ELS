@@ -33,27 +33,27 @@ public class Receipt_DelDataImpl implements ReceiptTool {
 	}
 
 	@Override
-	public ReceiptPO getFromDB(String number) {
-		String sql = "select * from `receiptDeliver` where `number`='" + number + "'";
+	public ReceiptPO getFromDB(ResultSet rs) {
+//		String sql = "select * from `receiptDeliver` where `number`='" + number + "'";
 		Receipt_DeliverPO po = null;
-		ResultSet rs = mysql.query(sql);
+//		ResultSet rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
-				po = new Receipt_DeliverPO(number, ReceiptType.DELIVER, rs.getString("time"), null, null,
+//			if (rs.next()) {
+				po = new Receipt_DeliverPO(rs.getString("number"), ReceiptType.DELIVER, rs.getString("time"), null, null,
 						rs.getString("orderNum"), rs.getString("name"), rs.getString("posterNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sql = "select * from `receipt` where `number`='" + number + "'";
-		rs = mysql.query(sql);
+//		sql = "select * from `receipt` where `number`='" + number + "'";
+//		rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
+//			if (rs.next()) {
 				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 				po.setOrgNum(rs.getString("orgNum"));
 				po.setPerNum(rs.getString("perNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

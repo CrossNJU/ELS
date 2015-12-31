@@ -11,7 +11,6 @@ import org.cross.elsclient.vo.LogVO;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.TimeUtil;
-import org.junit.experimental.theories.Theories;
 
 public class LogUtil {
 	public static LogBLService LOGBL;

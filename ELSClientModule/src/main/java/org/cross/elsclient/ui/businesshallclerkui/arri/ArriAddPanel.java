@@ -61,8 +61,8 @@ public class ArriAddPanel extends ELSInfoPanel {
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
 		setTitle("新增到达单");
 		/* 0 */addEditableItem("到达单编号", number, false, "number");
-		/* 1 */addEditableItem("装车/中转单号", "", true, InfoType.NAME, "transnum");
-		/* 2 */addEditableItem("出发机构", "", true, InfoType.NAME, "startorg");
+		/* 1 */addEditableItem("装车/中转单号", "", true, InfoType.RECEIPT, "transnum");
+		/* 2 */addEditableItem("出发机构", "", true, InfoType.ORGANIZATION, "startorg");
 		/* 3 */addDateItem("出发时间", true, "starttime");
 		/* 4 */addEditableItem("到达机构", user.orgNameID, false, "arriorg");
 		/* 5 */addDateItem("到达时间", false, "arritime");

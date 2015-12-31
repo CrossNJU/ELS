@@ -62,8 +62,8 @@ public class DeliverAddPanel extends ELSInfoPanel {
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
 		/* 0 */addEditableItem("派件单编号", number, false, "number");
 		addDateItem("派件时间", false, "time");
-		addEditableItem("快件单编号", "", true, InfoType.ID, "goodsnum");
-		addEditableItem("快递员工号", "", true, InfoType.ID, "pernum");
+		addEditableItem("快件单编号", "", true, InfoType.RECEIPT, "goodsnum");
+		addEditableItem("快递员工号", "", true, InfoType.PERSONNEL, "pernum");
 		addEditableItem("快递员姓名", "", true, InfoType.NAME, "name");
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");

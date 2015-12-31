@@ -30,27 +30,27 @@ public class Receipt_TotalMoneyInDataImpl implements ReceiptTool {
 	}
 
 	@Override
-	public ReceiptPO getFromDB(String number) {
+	public ReceiptPO getFromDB(ResultSet rs) {
 		Receipt_TotalMoneyInPO po = null;
-		String sql = "select * from `receiptTotalMoneyIn` where `number`='" + number + "'";
-		ResultSet rs = mysql.query(sql);
+//		String sql = "select * from `receiptTotalMoneyIn` where `number`='" + number + "'";
+//		ResultSet rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
-				po = new Receipt_TotalMoneyInPO(number, ReceiptType.TOTALMONEYIN, rs.getString("time"), null, null,
+//			if (rs.next()) {
+				po = new Receipt_TotalMoneyInPO(rs.getString("number"), ReceiptType.TOTALMONEYIN, rs.getString("time"), null, null,
 						rs.getDouble("money"), rs.getString("accountNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sql = "select * from `receipt` where `number`='" + number + "'";
-		rs = mysql.query(sql);
+//		sql = "select * from `receipt` where `number`='" + number + "'";
+//		rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
+//			if (rs.next()) {
 				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 				po.setOrgNum(rs.getString("orgNum"));
 				po.setPerNum(rs.getString("perNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

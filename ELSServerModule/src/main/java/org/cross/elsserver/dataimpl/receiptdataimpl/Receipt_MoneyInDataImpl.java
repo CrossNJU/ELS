@@ -34,27 +34,27 @@ public class Receipt_MoneyInDataImpl implements ReceiptTool {
 	}
 
 	@Override
-	public ReceiptPO getFromDB(String number) {
+	public ReceiptPO getFromDB(ResultSet rs) {
 		Receipt_MoneyInPO po = null;
-		String sql = "select * from `receiptMoneyIn` where `number`='" + number + "'";
-		ResultSet rs = mysql.query(sql);
+//		String sql = "select * from `receiptMoneyIn` where `number`='" + number + "'";
+//		ResultSet rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
+//			if (rs.next()) {
 				po = new Receipt_MoneyInPO(rs.getString("number"), ReceiptType.MONEYIN, rs.getString("time"), null,
 						null, rs.getDouble("money"), rs.getString("totalMoneyInNum"), rs.getString("person"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sql = "select * from `receipt` where `number`='" + number + "'";
-		rs = mysql.query(sql);
+//		sql = "select * from `receipt` where `number`='" + number + "'";
+//		rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
+//			if (rs.next()) {
 				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 				po.setOrgNum(rs.getString("orgNum"));
 				po.setPerNum(rs.getString("perNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

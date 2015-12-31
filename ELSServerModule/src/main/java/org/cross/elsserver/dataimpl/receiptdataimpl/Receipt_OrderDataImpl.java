@@ -34,12 +34,12 @@ public class Receipt_OrderDataImpl implements ReceiptTool {
 			return ResultMessage.SUCCESS;
 	}
 
-	public ReceiptPO getFromDB(String number) {
+	public ReceiptPO getFromDB(ResultSet rs) {
 		Receipt_OrderPO po = null;
-		String sql = "select * from `receiptOrder` where `number`='" + number + "'";
-		ResultSet rs = mysql.query(sql);
+//		String sql = "select * from `receiptOrder` where `number`='" + number + "'";
+//		ResultSet rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
+//			if (rs.next()) {
 				po = new Receipt_OrderPO(rs.getString("number"), ReceiptType.ORDER, rs.getString("time"), null, null,
 						rs.getDouble("price"), rs.getString("expectTime"),
 						rs.getString("senderName"), rs.getString("receiverName"), rs.getString("senderOrg"),
@@ -48,19 +48,19 @@ public class Receipt_OrderDataImpl implements ReceiptTool {
 						rs.getString("receiverMobile"));
 				po.setReceiveTime(rs.getString("receiveTime"));
 				po.setMoneyInNum(rs.getString("moneyInNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sql = "select * from `receipt` where `number`='" + number + "'";
-		rs = mysql.query(sql);
+//		sql = "select * from `receipt` where `number`='" + number + "'";
+//		rs = mysql.query(sql);
 		try {
-			if (rs.next()) {
+//			if (rs.next()) {
 				po.setApproveState(StringToType.toApproveType(rs.getString("approveState")));
 				po.setOrgNum(rs.getString("orgNum"));
 				po.setPerNum(rs.getString("perNum"));
-			}
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

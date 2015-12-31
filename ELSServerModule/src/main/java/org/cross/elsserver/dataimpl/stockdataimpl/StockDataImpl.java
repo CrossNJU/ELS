@@ -15,7 +15,7 @@ import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elsserver.database.MySQL;
 
-import com.mysql.fabric.xmlrpc.base.Array;
+//import com.mysql.fabric.xmlrpc.base.Array;
 
 @SuppressWarnings("serial")
 public class StockDataImpl extends UnicastRemoteObject implements StockDataService {

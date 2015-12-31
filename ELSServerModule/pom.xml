@@ -5,34 +5,45 @@
     <artifactId>ELS-All</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
+  <groupId>ELS</groupId>
   <artifactId>ELSServerModule</artifactId>
-    <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.11.0</version>
-        <scope>test</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>module-server</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
   <build>
-    <pluginManagement>
       <plugins>
         <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.2</version>
-          <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
-            <encoding>UTF-8</encoding>
-          </configuration>
-        </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+                        <manifest>
+                            <mainClass>org.cross.elsserver.ui.MainUI</mainClass>
+                        </manifest>
+                    </archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+					</execution>
+				</executions>
+	  </plugin>
       </plugins>
-    </pluginManagement>
   </build>
-  <version>0.0.1-SNAPSHOT</version>
+  
   <dependencies>
   	<dependency>
   		<groupId>ELS</groupId>
