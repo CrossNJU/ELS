@@ -17,7 +17,7 @@ public class ComponentFactory {
 		ELSButton btn = new ELSButton();
 		btn.setOpaque(false);
 		btn.setSize(20,20);
-		btn.setIcon(new ImageIcon("img/Icons/Common/Icon Close.png"));
+		btn.setIcon(Images.EXIT_IMAGEICON);
 		btn.addMouseListener(new MouseListener() {
 			
 			@Override

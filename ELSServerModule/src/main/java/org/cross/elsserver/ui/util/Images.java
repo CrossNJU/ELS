@@ -1,4 +1,4 @@
-package org.cross.elsclient.ui.util;
+package org.cross.elsserver.ui.util;
 
 import java.awt.Image;
 import java.io.FileInputStream;

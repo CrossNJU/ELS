@@ -1,8 +1,12 @@
 package org.cross.elsserver.ui.component;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 
 public class ELSScrollPane extends JScrollPane{
@@ -31,6 +35,18 @@ public class ELSScrollPane extends JScrollPane{
 	
 	public void initComponent(){
 		setBorder(null);
+		setOpaque(false);
+		setBackground(Color.RED);
+		JScrollBar bar = getVerticalScrollBar();
+		bar.setUI(new ELSScrollPaneUI());
+		bar.setBorder(null);
+		bar.setOpaque(false);
+		bar.setPreferredSize(new Dimension(15,bar.getPreferredSize().height));
+		bar.setMaximumSize(new Dimension(15,bar.getPreferredSize().height));
+		bar.setMinimumSize(new Dimension(15,bar.getPreferredSize().height));
+		bar.setSize(15,bar.getHeight());
+		getViewport().setOpaque(false);
+		getViewport().setBackground(Color.red);
 	}
 	
 	public void packHeight(){

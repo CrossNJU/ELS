@@ -2,6 +2,8 @@ package org.cross.elsserver.ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -20,6 +22,7 @@ import org.cross.elsserver.ui.component.ELSTextField;
 import org.cross.elsserver.ui.component.TitlePanel;
 import org.cross.elsserver.ui.util.ComponentFactory;
 import org.cross.elsserver.ui.util.ELSDialog;
+import org.cross.elsserver.ui.util.Images;
 import org.cross.elsserver.ui.util.UIConstant;
 
 import com.mysql.fabric.Server;
@@ -61,37 +64,41 @@ public class ELSServerPanel extends ELSPanel{
 		isLaunched = false;
 		UIConstant.LOG = logTable;
 		
+		this.setOpaque(false);
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
+		this.setForeground(Color.white);
 		
 		logo.setSize(225,44);
 		logo.setLocation(27, 30);
-		logo.setIcon(new ImageIcon("img/Logo.png"));
+		logo.setIcon(Images.LOGO_IMAGEICON);
 		
 		exitBtn.setLocation(984, 20);
 	
-		title.setSize(UIConstant.WINDOW_WIDTH,100);
-		title.setLocation(0, 0);
-		title.setBackground(UIConstant.MAINCOLOR);
+		title.setBounds(0, 0, UIConstant.WINDOW_WIDTH, 100);
+		title.setBackground(new Color(90,96,116,20));
 		title.setOpaque(true);
-		title.setLayout(null);;
+		title.setLayout(null);
+		
 		
 		infoLabel.setText("服务器信息:");
 		infoLabel.setBounds(UIConstant.CONTENTPANEL_MARGIN_LEFT, 120, 110, 48);
 		infoLabel.setHorizontalAlignment(JLabel.LEFT);
 		infoLabel.setFont(getFont().deriveFont(18f));
-		infoLabel.setForeground(UIConstant.MAINCOLOR);
+		infoLabel.setForeground(Color.white);
 		
 		stateLabel.setText("服务器状态:未启动");
 		stateLabel.setBounds(504, 120, 200, 48);
 		stateLabel.setHorizontalAlignment(JLabel.LEFT);
 		stateLabel.setFont(getFont().deriveFont(18f));
 		stateLabel.setForeground(UIConstant.MAINCOLOR);
+		stateLabel.setForeground(Color.white);
 		
 		ipLabel.setText(NetWork.preAddress.substring(6));
 		ipLabel.setBounds(125, 120, 120, 48);
 		ipLabel.setHorizontalAlignment(JLabel.LEFT);
 		ipLabel.setFont(getFont().deriveFont(18f));
+		ipLabel.setForeground(Color.white);
 		
 		portField.setText(NetWork.port+"");
 		portField.setBounds(245, 120, 80, 48);
@@ -188,6 +195,11 @@ public class ELSServerPanel extends ELSPanel{
 			// TODO Auto-generated method stub
 			
 		}
-		
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(Images.BG_IMAGE, 0, 0, null);
 	}
 }

@@ -41,10 +41,10 @@ public class LogTable extends ELSScrollPane{
 		container.setPreferredSize(new Dimension(width,height));
 		container.setLayout(new BorderLayout());
 		
-		textArea.setBackground(UIConstant.BACKCOLOR);
+		textArea.setBackground(UIConstant.MAINCOLOR_OPACITY_10);
 		textArea.setEditable(false);
 		textArea.setFont(getFont().deriveFont(18f));
-		textArea.setForeground(UIConstant.MAINCOLOR);
+		textArea.setForeground(Color.WHITE);
 		
 		
 		container.add(textArea);
