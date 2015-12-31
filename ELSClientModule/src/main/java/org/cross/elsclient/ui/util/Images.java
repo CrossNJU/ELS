@@ -179,7 +179,7 @@ public class Images {
 		case MANAGER:
 			return MANAGER_AVATAR;
 		case STOCKKEEPER:
-			return STOCK_ACTIVE_ICON;
+			return STOCKKEEPER_AVATAR;
 		case TRANSITCENTERCLERK:
 			return TCCLERK_AVATAR;
 		default:
