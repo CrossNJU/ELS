@@ -12,6 +12,7 @@ import org.cross.elsclient.blimpl.blUtility.GoodsInfo;
 import org.cross.elsclient.blimpl.blUtility.ReceiptInfo;
 import org.cross.elsclient.blimpl.blUtility.StockInfo;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
+import org.cross.elsclient.util.ConstantVal;
 import org.cross.elsclient.vo.ReceiptVO;
 
 public class ReceiptBLImpl implements ReceiptBLService{
@@ -57,27 +58,34 @@ public class ReceiptBLImpl implements ReceiptBLService{
 //		default:
 //			break;
 //		}
+		ConstantVal.currentReceipts = null;
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage delete(String number,ReceiptType type) throws RemoteException {
+		ConstantVal.currentReceipts = null;
 		return receiptdata.delete(number,type);
 	}
 
 	@Override
 	public ResultMessage update(ReceiptVO vo) throws RemoteException {
+		ConstantVal.currentReceipts = null;
 		return receiptdata.update(receiptInfo.toPO(vo));
 	}
 
 	@Override
 	public ArrayList<ReceiptVO> show() throws RemoteException {
 		ArrayList<ReceiptVO> vos = new ArrayList<ReceiptVO>();
+		if (ConstantVal.currentReceipts!=null) {
+			return ConstantVal.currentReceipts;
+		}
 		ArrayList<ReceiptPO> list = receiptdata.show();
 		for (int i = 0; i < list.size(); i++) {
 			ReceiptVO vo = receiptInfo.toVO(list.get(i));
 			vos.add(vo);
 		}
+		ConstantVal.currentReceipts = vos;
 		return vos;
 	}
 
@@ -89,6 +97,7 @@ public class ReceiptBLImpl implements ReceiptBLService{
 
 	@Override
 	public ResultMessage check(ReceiptVO vo, ApproveType approveState) throws RemoteException {
+		ConstantVal.currentReceipts = null;
 		return receiptdata.updateCheck(vo.number, approveState.toString());
 	}
 
