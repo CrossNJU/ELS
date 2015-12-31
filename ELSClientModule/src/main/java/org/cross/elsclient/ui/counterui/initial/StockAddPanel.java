@@ -87,7 +87,7 @@ public class StockAddPanel extends ELSInfoPanel{
 			vo = new StockVO(id, totalNum, 0, 0, 0, 0, 0, 0, orgNum, areas);
 			vos.add(vo);
 			ConstantVal.numberbl.addone(NumberType.STOCK, number);
-			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
+			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, "initial").getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(StockAddPanel.this), "添加成功");
 			back();
 		}

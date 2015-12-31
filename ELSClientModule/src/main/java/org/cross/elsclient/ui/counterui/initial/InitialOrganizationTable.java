@@ -41,7 +41,7 @@ public class InitialOrganizationTable extends InitialManageTable{
 	@Override
 	public void addBtn() {
 		super.addBtn();
-		ELSPanel parent = GetPanelUtil.getSubFunctionPanel(this, 3);
+		ELSPanel parent = GetPanelUtil.getSubFunctionPanel(this, "initial");
 		parent.add("addOrgan",new OrganAddPanel(vos));
 		parent.cl.show(parent, "addOrgan");
 	}

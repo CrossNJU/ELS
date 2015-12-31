@@ -50,7 +50,7 @@ public class OrganizationManageTable extends ELSManageTable {
 	public void infoBtn(int index) {
 		super.infoBtn(index);
 		//界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 1);
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, "organization");
 		OrganizationVO vo = vos.get(index);
 		contentPanel.add("info",new OrganizationInfoPanel(vo));
 		contentPanel.cl.show(contentPanel, "info");
@@ -60,7 +60,7 @@ public class OrganizationManageTable extends ELSManageTable {
 	public void updateBtn(int index) {
 		super.updateBtn(index);
 		//界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 1);
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, "organization");
 		
 		contentPanel.add("update",new OrganizationUpdatePanel(vos.get(index),organizationbl));
 		contentPanel.cl.show(contentPanel, "update");

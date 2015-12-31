@@ -78,7 +78,7 @@ public class AnalysisManagePanel extends ELSManagePanel {
 	public void setContentPanel() {
 		// TODO Auto-generated method stub
 		super.setContentPanel();
-		String[] name1 = {"总收入", "总支出","总利润"};
+		String[] name1 = {"总支出", "总收益","总利润"};
 		int[] itemWidth1 = {200,200,200};
 		list1 = new ELSManageTable(name1, itemWidth1);
 		double[] data = analysisbl.showCostBenefitTable();

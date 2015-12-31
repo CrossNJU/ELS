@@ -39,7 +39,7 @@ public class InitialAccountTable extends InitialManageTable {
 	@Override
 	public void addBtn() {
 		super.addBtn();
-		ELSPanel parent = GetPanelUtil.getSubFunctionPanel(this, 3);
+		ELSPanel parent = GetPanelUtil.getSubFunctionPanel(this,"initial");
 		parent.add("addAccount",new AccountAddPanel(vos));
 		parent.cl.show(parent, "addAccount");
 	}

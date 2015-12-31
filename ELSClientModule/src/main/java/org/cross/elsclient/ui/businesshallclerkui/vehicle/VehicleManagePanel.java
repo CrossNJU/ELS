@@ -42,7 +42,7 @@ public class VehicleManagePanel extends ELSManagePanel{
 		// TODO Auto-generated method stub
 		super.setContentPanel();
 		String[] s = {"车辆编号","车牌号","服役时间"};
-		int[] itemWidth = {100,100,200};
+		int[] itemWidth = {150,150,400};
 		list= new VehicleManageTable(s,itemWidth,vehiclebl);
 		try {
 			vehicleVOs = vehiclebl.show();

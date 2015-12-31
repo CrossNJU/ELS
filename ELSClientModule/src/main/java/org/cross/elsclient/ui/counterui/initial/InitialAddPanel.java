@@ -43,8 +43,17 @@ public class InitialAddPanel extends InitialManagePanel{
 	ELSLabel titleLabel;
 	String number;
 	
-	public InitialAddPanel(InitialBLService initialbl) {
-		super(initialbl);
+	public InitialAddPanel(InitialBLService initialbl,
+			StockBLService stockbl, OrganizationBLService organbl,
+			PersonnelBLService personnelbl, AccountBLService accountbl,
+			VehicleBLService vehiclebl) {
+		super(initialbl, stockbl, organbl, personnelbl, accountbl, vehiclebl);
+		this.initialbl = initialbl;
+		this.stockbl = stockbl;
+		this.organbl = organbl;
+		this.personnelbl = personnelbl;
+		this.accountbl = accountbl;
+		this.vehiclebl = vehiclebl;
 		currentVO = new InitialVO("", "", new ArrayList<OrganizationVO>(), new ArrayList<PersonnelVO>(), 
 				new ArrayList<VehicleVO>(), new ArrayList<StockVO>(),new ArrayList<AccountVO>(),"","","");
 		init();
@@ -61,7 +70,8 @@ public class InitialAddPanel extends InitialManagePanel{
 		titleLabel.setOpaque(true);
 		titleLabel.setHorizontalAlignment(JLabel.LEFT);
 		titleLabel.setForeground(Color.white);
-		titleLabel.setBackground(UIConstant.MAINCOLOR);
+		titleLabel.setFont(getFont().deriveFont(18f));
+		titleLabel.setBackground(UIConstant.MAINCOLOR_OPACITY_40);
 		
 		searchBtn.setText("创建账本");
 		searchBtn.addMouseListener(new BtnListener());
@@ -106,8 +116,24 @@ public class InitialAddPanel extends InitialManagePanel{
 					currentVO.perNumber = infoList.label.labels.get(1).getText();
 					currentVO.time = infoList.label.labels.get(2).getText();
 					if(initialbl.addInitial(currentVO)==ResultMessage.SUCCESS){
+						for (AccountVO vo : currentVO.accounts) {
+							accountbl.add(vo);
+						}
+						for (OrganizationVO vo : currentVO.organizations) {
+							organbl.add(vo);
+						}
+						for (PersonnelVO vo : currentVO.personnels) {
+							personnelbl.add(vo);
+						}
+						for (VehicleVO vo : currentVO.vehicles) {
+							vehiclebl.add(vo);
+						}
+						for (StockVO vo : currentVO.stocks) {
+							stockbl.addStock(vo);
+						}
+						
 						ConstantVal.numberbl.addone(NumberType.INITIAL, number);
-						ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, 3);
+						ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, "initial");
 						LogUtil.addLog("期初建账");
 						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(InitialAddPanel.this), "建账成功");
 						InitialCheckPanel checkPanel = (InitialCheckPanel)parent.getComponent(0);
@@ -130,7 +156,7 @@ public class InitialAddPanel extends InitialManagePanel{
 				
 			}else if(e.getSource()==cancelBtn){
 				if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(InitialAddPanel.this), "取消创建", "确认取消创建新账本？")){
-					ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, 3);
+					ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, "initial");
 					parent.cl.show(parent, "manage");
 					((ELSManagePanel)parent.getComponent(0)).init();
 					parent.remove(InitialAddPanel.this);

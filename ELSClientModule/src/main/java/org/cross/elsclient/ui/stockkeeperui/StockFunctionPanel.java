@@ -13,6 +13,7 @@ import org.cross.elsclient.test.StockBLTest;
 import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
 import org.cross.elsclient.ui.businesshallclerkui.arri.ArriAddPanel;
 import org.cross.elsclient.ui.businesshallclerkui.trans.TransAddPanel;
+import org.cross.elsclient.ui.component.AlertFunctionBtn;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.stockkeeperui.adjust.StockAdjustPanel;
 import org.cross.elsclient.ui.stockkeeperui.check.StockCheckManagePanel;
@@ -33,6 +34,7 @@ public class StockFunctionPanel extends ELSFunctionPanel {
 	public GoodsBLService goodsbl;
 	UserVO user;
 	StockVO stock;
+	AlertFunctionBtn alertBtn;
 
 	public StockFunctionPanel() {
 		super();
@@ -64,8 +66,20 @@ public class StockFunctionPanel extends ELSFunctionPanel {
 		addFunctionBtn("出库单", "stockout");
 		addFunctionBtn("库存查看", "stocksee");
 		addFunctionBtn("库存盘点", "stockcheck");
-		addFunctionBtn("库存调整", "stockadjust");
+		addAlertBtn("库存调整", "stockadjust");
 		addFunctionBtn("单据管理", "receipts");
+		alertBtn = (AlertFunctionBtn)functionBtns.get(4);
+		try {
+			if(!stockbl.getNeedChange(stock.number).isEmpty()){
+				alertBtn.setAlert(true);
+			}else{
+				alertBtn.setAlert(false);
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.alertBtn = (AlertFunctionBtn)functionBtns.get(4);
 
 		addFunctionPanel(new StockInAddPanel(stockbl, receiptbl, user, stock, goodsbl), "add", "stockin");
 		addFunctionPanel(new StockOutAddPanel(stockbl, receiptbl, user, stock, goodsbl), "add", "stockout");

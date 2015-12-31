@@ -45,7 +45,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 		// TODO Auto-generated method stub
 		super.setContentPanel();
 		String name[] = { "单据编号", "单据类型", "建单时间", "状态" };
-		int itemWidth[] = { 150, 100, 150, 100 };
+		int itemWidth[] = { 150, 100, 200, 100 };
 		list = new ApprovalManageTable(name, itemWidth, receiptbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2

@@ -23,9 +23,17 @@ import org.cross.elsclient.vo.InitialVO;
 public class InitialCheckPanel extends InitialManagePanel {
 	ArrayList<InitialVO> initialVOs;
 	
-
-	public InitialCheckPanel(InitialBLService initialbl) {
-		super(initialbl);
+	public InitialCheckPanel(InitialBLService initialbl,
+			StockBLService stockbl, OrganizationBLService organbl,
+			PersonnelBLService personnelbl, AccountBLService accountbl,
+			VehicleBLService vehiclebl) {
+		super(initialbl, stockbl, organbl, personnelbl, accountbl, vehiclebl);
+		this.initialbl = initialbl;
+		this.stockbl = stockbl;
+		this.organbl = organbl;
+		this.personnelbl = personnelbl;
+		this.accountbl = accountbl;
+		this.vehiclebl = vehiclebl;
 		try {
 			initialVOs = initialbl.show();
 		} catch (RemoteException e) {
@@ -33,7 +41,7 @@ public class InitialCheckPanel extends InitialManagePanel {
 		}
 		init();
 	}
-
+	
 	@Override
 	public void setSearchPanel() {
 		super.setSearchPanel();
@@ -75,8 +83,8 @@ public class InitialCheckPanel extends InitialManagePanel {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialCheckPanel.this, 3);
-			parent.add("add",new InitialAddPanel(initialbl));
+			ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialCheckPanel.this, "initial");
+			parent.add("add",new InitialAddPanel(initialbl, stockbl, organbl, personnelbl, accountbl, vehiclebl));
 			parent.cl.show(parent, "add");
 		}
 

@@ -34,7 +34,7 @@ public class VehicleAddPanel extends ELSInfoPanel{
 		number = ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE);
 		/* 0 */addEditableItem("车辆编号", number, false, "number");
 		addEditableItem("车牌号", "", true, InfoType.NAME, "licence");
-		addEditableItem("营业厅编号", UIConstant.CURRENT_USER.orgNameID, false,
+		addEditableItem("营业厅编号", "",true,
 				"orgid");
 		addDateItem("购买时间", true, "buytime");
 		addDateItem("服役时间", true, "lasttime");
@@ -62,7 +62,7 @@ public class VehicleAddPanel extends ELSInfoPanel{
 			vo = new VehicleVO(number, licence, orgid, enginenum, basenum, buytime, lasttime, null, false);
 			vos.add(vo);
 			ConstantVal.numberbl.addone(NumberType.VEHICLE, number);
-			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
+			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, "initial").getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			back();
 		}

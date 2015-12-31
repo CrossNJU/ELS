@@ -36,25 +36,20 @@ public class GetPanelUtil {
 	 * @para c-该功能界面下的任意一个组件, functionIndex-功能界面序号（参考加入的顺序）
 	 * @return ELSPanel
 	 */
-	public static ELSPanel getSubFunctionPanel(JComponent c,int functionIndex){
-		ELSPanel mainPanel = (ELSPanel)getMainFrame(c).getContentPane().getComponent(0);
-		ELSFunctionPanel functionPanel = (ELSFunctionPanel)mainPanel.getComponent(1);
-		if(functionPanel.getComponent(0) instanceof JPanel){
-			ELSPanel subFunctionPanel = (ELSPanel)((JPanel)functionPanel.getComponent(0)).getComponent(functionIndex);
-			return subFunctionPanel;
-		}else{
-			return null;
-		}
-	}
+//	public static ELSPanel getSubFunctionPanel(JComponent c,int functionIndex){
+//		ELSPanel mainPanel = (ELSPanel)getMainFrame(c).getContentPane().getComponent(0);
+//		ELSFunctionPanel functionPanel = (ELSFunctionPanel)mainPanel.getComponent(1);
+//		if(functionPanel.getComponent(0) instanceof JPanel){
+//			ELSPanel subFunctionPanel = (ELSPanel)((JPanel)functionPanel.getComponent(0)).getComponent(functionIndex);
+//			return subFunctionPanel;
+//		}else{
+//			return null;
+//		}
+//	}
 	
 	public static ELSPanel getSubFunctionPanel(JComponent c,String funcName){
 		ELSPanel mainPanel = (ELSPanel)getMainFrame(c).getContentPane().getComponent(0);
 		ELSFunctionPanel functionPanel = (ELSFunctionPanel)mainPanel.getComponent(1);
-		for (Component panel : ((JPanel)functionPanel.getComponent(0)).getComponents()) {
-			if(panel.getName().equals(funcName)){
-				return (ELSPanel)panel;
-			}
-		};
-		return null;
+		return functionPanel.getSubFunctionPanel(funcName);
 	}
 }

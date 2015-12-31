@@ -47,17 +47,19 @@ public class ReceiptManagePanel extends ELSManagePanel{
 		list = new ReceiptManageTable(s, itemWidth);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		try {
-//			receiptvos = receiptbl.show();
-			receiptvos = receiptbl.findByUser(UIConstant.CURRENT_USER.number);
+			receiptvos = receiptbl.show();
+//			receiptvos = receiptbl.findByUser(UIConstant.CURRENT_USER.number);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		list.init();
 		for (int i = 0; i < receiptvos.size(); i++) {
 			list.addItem(receiptvos.get(i));
 		}
 		container.add(list);
 		container.packHeight();
+		validate();
 	}
 	
 	@Override

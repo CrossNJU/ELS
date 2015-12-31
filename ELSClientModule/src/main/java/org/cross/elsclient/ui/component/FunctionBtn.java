@@ -22,6 +22,8 @@ public class FunctionBtn extends ELSButton {
 	ELSLabel arrow;
 	ImageIcon normalIcon;
 	ImageIcon archiveIcon;
+	ImageIcon arrowIcon;
+	ImageIcon arrowArchiveIcon;
 	
 	@Override
 	public void init() {
@@ -40,6 +42,8 @@ public class FunctionBtn extends ELSButton {
 		icon = new ELSLabel();
 		text = new ELSLabel();
 		arrow = new ELSLabel();
+		arrowIcon = Images.RIGHT_IMAGEICON;
+		arrowArchiveIcon = Images.RIGHT_ACTIVE_IMAGEICON;
 		
 		this.setLayout(null);
 		icon.setBounds(18, 18, 20, 20);
@@ -77,7 +81,7 @@ public class FunctionBtn extends ELSButton {
 //			setBackground(archiveColor);
 			text.setForeground(archiveFont);
 			icon.setIcon(archiveIcon);
-			arrow.setIcon(Images.RIGHT_ACTIVE_IMAGEICON);
+			arrow.setIcon(arrowArchiveIcon);
 			if(getParent()!=null){
 				((ELSFunctionPanel)getParent()).repaint();
 				((ELSFunctionPanel)getParent()).mask2.repaint();
@@ -87,7 +91,7 @@ public class FunctionBtn extends ELSButton {
 //			setBackground(backColor);
 			text.setForeground(Color.white);
 			icon.setIcon(normalIcon);
-			arrow.setIcon(Images.RIGHT_IMAGEICON);
+			arrow.setIcon(arrowIcon);
 			if(getParent()!=null){
 				((ELSFunctionPanel)getParent()).repaint();
 				((ELSFunctionPanel)getParent()).mask2.repaint();

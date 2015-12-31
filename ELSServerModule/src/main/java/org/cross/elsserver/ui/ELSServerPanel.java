@@ -9,6 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.cross.elscommon.util.DatabaseConstant;
+import org.cross.elscommon.util.NetWork;
+import org.cross.elsserver.database.MySQL;
 import org.cross.elsserver.network.TransDataImpl;
 import org.cross.elsserver.ui.component.ELSButton;
 import org.cross.elsserver.ui.component.ELSLabel;
@@ -16,6 +19,7 @@ import org.cross.elsserver.ui.component.ELSPanel;
 import org.cross.elsserver.ui.component.ELSTextField;
 import org.cross.elsserver.ui.component.TitlePanel;
 import org.cross.elsserver.ui.util.ComponentFactory;
+import org.cross.elsserver.ui.util.ELSDialog;
 import org.cross.elsserver.ui.util.UIConstant;
 
 import com.mysql.fabric.Server;
@@ -28,10 +32,12 @@ public class ELSServerPanel extends ELSPanel{
 	ELSTextField portField;
 	ELSLabel stateLabel;
 	ELSButton changeBtn;
+	ELSLabel ipLabel;
 	ELSButton launchBtn;
 	ELSButton stopBtn;
 	TitlePanel logTitle;
 	LogTable logTable;
+	boolean isLaunched;
 	
 	public ELSServerPanel() {
 		init();
@@ -46,11 +52,13 @@ public class ELSServerPanel extends ELSPanel{
 		infoLabel = new ELSLabel();
 		portField = new ELSTextField();
 		stateLabel = new ELSLabel();
+		ipLabel = new ELSLabel();
 		changeBtn = ComponentFactory.createSearchBtn();
 		launchBtn = ComponentFactory.createSearchBtn();
 		stopBtn = ComponentFactory.createSearchBtn();
 		logTitle = new TitlePanel("服务器Log");
 		logTable = new LogTable();
+		isLaunched = false;
 		UIConstant.LOG = logTable;
 		
 		this.setBackground(Color.WHITE);
@@ -80,10 +88,18 @@ public class ELSServerPanel extends ELSPanel{
 		stateLabel.setFont(getFont().deriveFont(18f));
 		stateLabel.setForeground(UIConstant.MAINCOLOR);
 		
-		portField.setBounds(125, 120, 200, 48);
+		ipLabel.setText(NetWork.preAddress.substring(6));
+		ipLabel.setBounds(125, 120, 120, 48);
+		ipLabel.setHorizontalAlignment(JLabel.LEFT);
+		ipLabel.setFont(getFont().deriveFont(18f));
+		
+		portField.setText(NetWork.port+"");
+		portField.setBounds(245, 120, 80, 48);
+		portField.setFont(getFont().deriveFont(18f));
 		
 		changeBtn.setLocation(340, 120);
 		changeBtn.setText("更改端口");
+		changeBtn.addMouseListener(new ELSListener());
 		
 		launchBtn.setLocation(708, 120);
 		launchBtn.setText("启动服务");
@@ -102,6 +118,7 @@ public class ELSServerPanel extends ELSPanel{
 		this.add(title);
 		this.add(infoLabel);
 		this.add(stateLabel);
+		this.add(ipLabel);
 		this.add(changeBtn);
 		this.add(portField);
 		this.add(changeBtn);
@@ -111,21 +128,40 @@ public class ELSServerPanel extends ELSPanel{
 		this.add(logTable);
 	}
 	
+	public void launch(){
+		if(!isLaunched){
+			logTable.init();
+			logTable.addLog("服务器回送地址: "+NetWork.preAddress.substring(6,NetWork.preAddress.length()-1));
+			logTable.addLog("服务器内网地址: "+NetWork.preAddress.substring(6,NetWork.preAddress.length()-1));
+			logTable.addLog("===================================");
+			if(TransDataImpl.start()){
+				stateLabel.setText("服务器状态:已启动");
+				isLaunched = true;
+			}
+		}
+	}
+	public void stop(){
+		if(isLaunched){
+			if(TransDataImpl.stop()){
+				stateLabel.setText("服务器状态:已停止");
+				isLaunched = false;
+			}
+		}
+	}
+	
 	class ELSListener implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			if (e.getSource().equals(launchBtn)) {
-				if(TransDataImpl.start()){
-					stateLabel.setText("服务器状态:已启动");
-				}
+				launch();
 			}else if (e.getSource().equals(stopBtn)) {
-				if(TransDataImpl.stop()){
-					stateLabel.setText("服务器状态:已停止");
-				}
+				stop();
 			}else if (e.getSource().equals(changeBtn)) {
-				
+				NetWork.port = Integer.valueOf(portField.getText());
+				stop();
+				launch();
 			}
 		}
 

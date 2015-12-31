@@ -22,13 +22,15 @@ import org.cross.elsclient.ui.util.UIConstant;
 
 public class ELSFunctionPanel extends ELSPanel {
 	public ELSPanel contentPanel;
-	ArrayList<FunctionBtn> functionBtns = new ArrayList<>();
-	ArrayList<ELSPanel> functionPanels = new ArrayList<>();
+	public ArrayList<FunctionBtn> functionBtns = new ArrayList<>();
+	public ArrayList<ELSPanel> functionPanels = new ArrayList<>();
 	ELSLabel logo;
 	ELSButton exitBtn;
 	ELSButton minusBtn;
 	ELSLabel mask1;
 	ELSLabel mask2;
+	ELSLabel posLabel;
+	ELSLabel idLabel;
 	
 	/**
 	 * 功能控制面板需要先实例化BL对象再执行init()
@@ -58,6 +60,17 @@ public class ELSFunctionPanel extends ELSPanel {
 		minusBtn = ComponentFactory.createWindowMinusBtn();
 		minusBtn.setLocation(954, 20);
 		
+		posLabel = new ELSLabel(UIConstant.CURRENT_USER.userType.toString());
+		idLabel = new ELSLabel(UIConstant.CURRENT_USER.number);
+		posLabel.setHorizontalAlignment(JLabel.LEFT);
+		posLabel.setBounds(850, 45, 140, 20);
+		posLabel.setFont(UIConstant.MainFont.deriveFont(20f));
+		posLabel.setForeground(Color.white);
+		idLabel.setHorizontalAlignment(JLabel.LEFT);
+		idLabel.setBounds(850, 70, 140, 20);
+		idLabel.setFont(UIConstant.MainFont.deriveFont(20f));
+		idLabel.setForeground(Color.white);
+		
 		mask1 = new ELSLabel();
 		mask2 = new ELSLabel();
 		mask1.setOpaque(true);
@@ -68,6 +81,8 @@ public class ELSFunctionPanel extends ELSPanel {
 		mask2.setBounds(0,100,168,668);
 		
 		this.add(contentPanel);
+		this.add(posLabel);
+		this.add(idLabel);
 		this.add(mask1);
 		this.add(mask2);
 		this.add(logo);
@@ -84,6 +99,21 @@ public class ELSFunctionPanel extends ELSPanel {
 	public void addFunctionBtn(String text,String functionName){
 		FunctionBtn btn = (FunctionBtn)ComponentFactory.createFunctionBtn();
 		
+		btn.setBtnText(text);
+		btn.setName(functionName);
+		btn.addMouseListener(new FuncBtnListener());
+		if(functionBtns.isEmpty()){
+			btn.setArchive(true);
+		}		
+		
+		functionBtns.add(btn);
+		
+		btn.setBounds(0, 100+54*functionBtns.indexOf(btn), 200, 54);
+		this.add(btn,2);
+	}
+	
+	public void addAlertBtn(String text,String functionName){
+		AlertFunctionBtn btn = new AlertFunctionBtn();
 		btn.setBtnText(text);
 		btn.setName(functionName);
 		btn.addMouseListener(new FuncBtnListener());
@@ -135,6 +165,15 @@ public class ELSFunctionPanel extends ELSPanel {
 		}
 		
 		contentPanel.cl.show(contentPanel, functionName);
+	}
+	
+	public ELSPanel getSubFunctionPanel(String name){
+		for (ELSPanel elsPanel : functionPanels) {
+			if(elsPanel.getName().equals(name)){
+				return elsPanel;
+			}
+		}
+		return null;
 	}
 	
 	class FuncBtnListener implements MouseListener{

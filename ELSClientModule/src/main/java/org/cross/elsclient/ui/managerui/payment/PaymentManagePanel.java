@@ -40,7 +40,7 @@ public class PaymentManagePanel extends ELSManagePanel{
 		super.setContentPanel();
 
 		String[] name = { "人员编号", "姓名", "职位", "工资" };
-		int[] itemWidth = { 100, 100, 100, 200 };
+		int[] itemWidth = { 150, 150, 150, 200 };
 		list = new PaymentManageTable(name, itemWidth, personnelbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2

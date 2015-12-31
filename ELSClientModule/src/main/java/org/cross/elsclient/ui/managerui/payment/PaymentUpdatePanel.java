@@ -38,10 +38,12 @@ public class PaymentUpdatePanel extends ELSInfoPanel{
 		addEditableItem("工资类型", vo.salary.getType().toString(), false,"salaryType");
 		addEditableItem("基础工资", vo.salary.getSalaryByMonth()+"", true,InfoType.NUM,"basic");
 		switch (type) {
-		case ADDNUM:
-			addEditableItem("按次金额", vo.salary.getAddOnce()+"", true,InfoType.NUM,"num");
 		case ADDONCE:
+			addEditableItem("按次金额", vo.salary.getAddOnce()+"", true,InfoType.NUM,"num");
+			break;
+		case ADDNUM:
 			addEditableItem("提成", vo.salary.getAddNum()+"", true,InfoType.NUM,"once");
+			break;
 		default:
 			break;
 		}
@@ -49,7 +51,7 @@ public class PaymentUpdatePanel extends ELSInfoPanel{
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认修改");
-		cancelBtn.setText("取消添加");
+		cancelBtn.setText("取消修改");
 		setBackPanel("add");
 	}
 	

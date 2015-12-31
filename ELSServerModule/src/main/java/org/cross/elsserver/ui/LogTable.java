@@ -51,18 +51,15 @@ public class LogTable extends ELSScrollPane{
 		this.getViewport().add(container);
 		
 		textArea.setText("===================================");
-		addLog("服务器回送地址");
-		addLog("服务器内网地址");
-		addLog("===================================");
 	}
 	
 	public void addLog(String logStr){
 		textArea.setText(textArea.getText()+"\n"+logStr);
 		if(textArea.getLineCount()>21){
-			container.setPreferredSize(new Dimension(width,container.getPreferredSize().height+textArea.getFont().getSize()));
+			container.setPreferredSize(new Dimension(width,container.getPreferredSize().height+textArea.getFont().getSize()+6));
 		}
 		Point p = new Point();
-	    p.setLocation(0, textArea.getLineCount() * 20);
+	    p.setLocation(0, textArea.getLineCount() * (textArea.getFont().getSize()+6));
 	    this.getViewport().setViewPosition(p);
 		container.repaint();
 	}

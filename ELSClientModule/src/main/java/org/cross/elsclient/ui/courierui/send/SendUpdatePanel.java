@@ -27,7 +27,7 @@ public class SendUpdatePanel extends ELSInfoPanel {
 	@Override
 	public void init() {
 		super.init();
-		
+		titlePanel.backBtn.setVisible(false);
 		setTitle("派发快件");
 //		addAutoItem("订单编号", "", true);
 		addEditableItem("订单编号", "", true,InfoType.ID,"id");

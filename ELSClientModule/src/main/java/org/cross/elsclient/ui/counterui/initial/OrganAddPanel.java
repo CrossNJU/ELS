@@ -54,7 +54,7 @@ public class OrganAddPanel extends ELSInfoPanel{
 			vo = new OrganizationVO(city,type,id);
 			vos.add(vo);
 			ConstantVal.numberbl.addone(NumberType.ORGANIZATION, number);
-			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
+			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, "initial").getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this), "添加成功");
 			back();
 		}

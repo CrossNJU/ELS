@@ -38,7 +38,7 @@ public class MoneyInManageTable extends ELSManageTable {
 		checkBoxHeader = new CheckBoxItemLabel();
 		checkBoxHeader.init(name,itemWidth,false);
 		checkBoxHeader.setFont(font);
-		checkBoxHeader.setBackground(UIConstant.MAINCOLOR);
+		checkBoxHeader.setBackground(UIConstant.MAINCOLOR_OPACITY_40);
 		for (ELSLabel label : checkBoxHeader.labels) {
 			label.setForeground(Color.WHITE);
 		}

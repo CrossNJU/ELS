@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
 import org.cross.elsclient.blimpl.initialblimpl.InitialBLImpl;
+import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
+import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
+import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
+import org.cross.elsclient.blservice.stockblservice.StockBLService;
+import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.util.UIConstant;
@@ -17,6 +22,11 @@ import org.cross.elsclient.vo.InitialVO;
 
 public class InitialManagePanel extends ELSManagePanel{
 	InitialBLService initialbl;
+	StockBLService stockbl;
+	OrganizationBLService organbl;
+	PersonnelBLService personnelbl;
+	AccountBLService accountbl;
+	VehicleBLService vehiclebl;
 	InitialVO currentVO;
 	ArrayList<InitialManageTable> lists;
 	InitialInfoTable infoList;
@@ -26,9 +36,17 @@ public class InitialManagePanel extends ELSManagePanel{
 	InitialStockTable stockList;
 	InitialVehicleTable veList;
 	
-	public InitialManagePanel(InitialBLService initialbl) {
+	public InitialManagePanel(InitialBLService initialbl,
+			StockBLService stockbl, OrganizationBLService organbl,
+			PersonnelBLService personnelbl, AccountBLService accountbl,
+			VehicleBLService vehiclebl) {
 		super();
 		this.initialbl = initialbl;
+		this.stockbl = stockbl;
+		this.organbl = organbl;
+		this.personnelbl = personnelbl;
+		this.accountbl = accountbl;
+		this.vehiclebl = vehiclebl;
 	}
 	
 	@Override

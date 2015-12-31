@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -83,7 +84,9 @@ public class TotalAddPanel extends ELSInfoPanel{
 	@Override
 	protected void cancel() {
 		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
-			back();
+			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+			this.init();
+			parent.setChosenFunction("receipts");
 		}
 	}
 }

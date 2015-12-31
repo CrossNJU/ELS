@@ -39,7 +39,7 @@ public class PerManagePanel extends ELSManagePanel {
 		super.setContentPanel();
 
 		String[] name = { "人员编号", "姓名", "职位", "所属机构" };
-		int[] itemWidth = { 100, 100, 100, 200 };
+		int[] itemWidth = { 150, 150, 150, 200 };
 		list = new PerManageTable(name, itemWidth, personnelbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2

@@ -43,7 +43,7 @@ public class PaymentManageTable extends ELSManageTable{
 	public void updateBtn(int index) {
 		// TODO Auto-generated method stub
 		super.updateBtn(index);
-		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, 3);
+		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, "payment");
 		contentPanel.add("update", new PaymentUpdatePanel(vos.get(index), personnelbl));
 		contentPanel.cl.show(contentPanel, "update");
 	}

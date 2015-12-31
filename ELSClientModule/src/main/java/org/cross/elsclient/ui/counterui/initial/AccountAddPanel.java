@@ -48,7 +48,7 @@ public class AccountAddPanel extends ELSInfoPanel{
 			double balance = Double.valueOf(findItem("balance").toString());
 			vo = new AccountVO(name,account,balance);
 			vos.add(vo);
-			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, 3).getComponent(1)).refresh();
+			((InitialManagePanel)GetPanelUtil.getSubFunctionPanel(this, "initial").getComponent(1)).refresh();
 			ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(AccountAddPanel.this), "添加成功");
 			back();
 		}

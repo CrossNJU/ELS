@@ -54,7 +54,7 @@ public class UserManagePanel extends ELSManagePanel {
 		// TODO Auto-generated method stub
 		super.setContentPanel();
 		String[] s = {"编号","姓名","类型"};
-		int[] itemWidth = {100,100,200};
+		int[] itemWidth = {150,100,200};
 		list= new UserManageTable(s,itemWidth,userbl);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		try {

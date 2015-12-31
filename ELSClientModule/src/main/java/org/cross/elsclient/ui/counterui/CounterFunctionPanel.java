@@ -18,6 +18,7 @@ import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService_Stub;
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
+import org.cross.elsclient.ui.businesshallclerkui.ReceiptManagePanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.counterui.account.AccountManagePanel;
@@ -69,13 +70,15 @@ public class CounterFunctionPanel extends ELSFunctionPanel{
 		addFunctionBtn("期初建账", "initial");
 		addFunctionBtn("统计分析", "analysis");
 		addFunctionBtn("系统日志", "log");
+		addFunctionBtn("查看单据", "receipts");
 		
 		addFunctionPanel(new MoneyOutAddPanel(receiptbl,personnelbl,accountbl),"add", "cost");
 		addFunctionPanel(new MoneyInManagePanel(receiptbl),"add", "settle");
 		addFunctionPanel(new AccountManagePanel(accountbl),"manage", "account");
-		addFunctionPanel(new InitialCheckPanel(initialbl),"manage", "initial");
+		addFunctionPanel(new InitialCheckPanel(initialbl, stockbl, organizationbl, personnelbl, accountbl, vehiclebl),"manage", "initial");
 		addFunctionPanel(new AnalysisManagePanel(analysisbl),"add", "analysis");
 		addFunctionPanel(new LogManagePanel(logbl),"manage", "log");
+		addFunctionPanel(new ReceiptManagePanel(receiptbl), "manage","receipts");
 		
 		validate();
 		

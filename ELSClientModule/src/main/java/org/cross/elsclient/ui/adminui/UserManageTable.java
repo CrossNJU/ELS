@@ -55,6 +55,9 @@ public class UserManageTable extends ELSManageTable{
 	public void addItem(UserVO vo){
 		vos.add(vo);
 		System.out.println("h");
+		System.out.println(vo.number);
+		System.out.println(vo.name);
+		System.out.println(vo.userType);
 		String[] item = {vo.number,vo.name,vo.userType.toString()};
 		addItemLabel(item);
 		
@@ -64,7 +67,7 @@ public class UserManageTable extends ELSManageTable{
 	public void infoBtn(int index) {
 		super.infoBtn(index);
 		//界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 0);
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, "user");
 		UserVO vo = vos.get(index);
 		contentPanel.add("info",new UserInfoPanel(vo));
 		contentPanel.cl.show(contentPanel, "info");
@@ -74,7 +77,7 @@ public class UserManageTable extends ELSManageTable{
 	public void updateBtn(int index) {
 		super.updateBtn(index);
 		//界面统一添加到功能界面(managePanel的父容器)
-		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, 0);
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, "user");
 		
 		contentPanel.add("update",new UserUpdatePanel(vos.get(index),userbl));
 		contentPanel.cl.show(contentPanel, "update");

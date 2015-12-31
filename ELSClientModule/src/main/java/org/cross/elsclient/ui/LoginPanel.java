@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,6 +67,10 @@ public class LoginPanel extends ELSPanel{
 	ELSLabel idLabel;
 	ELSLabel pwLabel;
 	ELSButton exitBtn;
+	int width = 550;
+	int height = 390;
+	int x;
+	int y;
 	
 	public LoginPanel() {
 		init();
@@ -94,7 +99,7 @@ public class LoginPanel extends ELSPanel{
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
 		setOpaque(false);
-		setBackground(Color.LIGHT_GRAY);
+//		setBackground(Color.LIGHT_GRAY);
 		
 		inputPanel = new JPanel();
 		idTextField = new ELSTextField("1");
@@ -106,13 +111,16 @@ public class LoginPanel extends ELSPanel{
 		titleLabel = new ELSLabel();
 		logoLabel = new ELSLabel();
 		exitBtn = ComponentFactory.createExitBtn(false);
+		x = (int)((UIConstant.WINDOW_WIDTH-width)*0.5);
+		y = (int)((UIConstant.WINDOW_HEIGHT-height)*0.5);
 		
-		inputPanel.setSize(550,390);
-		inputPanel.setLocation((int)((UIConstant.WINDOW_WIDTH-inputPanel.getWidth())*0.5),(int)((UIConstant.WINDOW_HEIGHT-inputPanel.getHeight())*0.5));
-		inputPanel.setBackground(Color.WHITE);
+		inputPanel.setSize(width,height);
+		inputPanel.setLocation(x,y);
+//		inputPanel.setBackground(Color.WHITE);
+		inputPanel.setOpaque(false);
 		inputPanel.setLayout(null);
 		
-		titleLabel.setBackground(UIConstant.MAINCOLOR);
+		titleLabel.setBackground(UIConstant.MAINCOLOR_OPACITY_40);
 		titleLabel.setSize(inputPanel.getSize().width,110);
 		titleLabel.setOpaque(true);
 		titleLabel.setLocation(0, 0);
@@ -128,6 +136,7 @@ public class LoginPanel extends ELSPanel{
 		idLabel.setSize(135,55);
 		idLabel.setLocation(0, 149);
 		idLabel.setHorizontalAlignment(JLabel.RIGHT);
+		idLabel.setForeground(Color.white);
 		idLabel.setFont(getFont().deriveFont(20f));
 		
 		pwTextField.setSize(314,55);
@@ -137,7 +146,8 @@ public class LoginPanel extends ELSPanel{
 		pwLabel.setSize(135,55);
 		pwLabel.setLocation(0, 212);
 		pwLabel.setHorizontalAlignment(JLabel.RIGHT);
-//		pwLabel.setFont(pw.lgetFont().deriveFont(20f));
+		pwLabel.setForeground(Color.white);
+		pwLabel.setFont(getFont().deriveFont(20f));
 		
 		loginBtn.setSize(178, 55);
 		loginBtn.setLocation(92,296);
@@ -285,5 +295,11 @@ public class LoginPanel extends ELSPanel{
 		@Override
 		public void keyReleased(KeyEvent e) {}
 		
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(Images.BG_IMAGE, x, y, x+width, y+height,x, y, x+width, y+height, null);
 	}
 }

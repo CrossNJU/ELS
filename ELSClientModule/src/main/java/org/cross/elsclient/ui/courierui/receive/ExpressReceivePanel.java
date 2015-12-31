@@ -12,6 +12,7 @@ import javax.rmi.CORBA.Tie;
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -87,7 +88,7 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		titlePanel.remove(titlePanel.backBtn);
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认创建");
-		cancelBtn.setText("取消创建");
+		cancelBtn.setText("查看单据");
 		container.packHeight();
 	}
 	
@@ -132,7 +133,9 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 	@Override
 	protected void cancel() {
 		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
-			init();
+			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+			this.init();
+			parent.setChosenFunction("receipts");
 		}
 	}
 	
