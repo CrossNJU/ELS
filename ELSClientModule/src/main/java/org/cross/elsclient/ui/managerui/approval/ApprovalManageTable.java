@@ -37,7 +37,7 @@ public class ApprovalManageTable extends ELSManageTable {
 	@Override
 	public void infoBtn(int index) {
 		super.infoBtn(index);
-		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, "approval");
+		ELSPanel contentPanel  = GetPanelUtil.getSubFunctionPanel(this, "receiptApproval");
 		ReceiptVO vo = vos.get(index);
 		contentPanel.add("info",new ApprovalInfoPanel(vo,receiptbl));
 		contentPanel.cl.show(contentPanel, "info");

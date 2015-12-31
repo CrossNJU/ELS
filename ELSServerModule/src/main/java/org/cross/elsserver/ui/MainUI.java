@@ -18,7 +18,7 @@ public class MainUI extends JFrame {
 
 	public static void main(String[] args) {
 		try {
-			FontUIResource fontUIResource = new FontUIResource(new Font("Microsoft YaHei UI",
+			FontUIResource fontUIResource = new FontUIResource(new Font("苹方 粗体",
 					Font.TRUETYPE_FONT, 15));
 			for (Enumeration<Object> keys = UIManager.getDefaults().keys(); keys
 					.hasMoreElements();) {
