@@ -5,7 +5,19 @@ import java.net.UnknownHostException;
 
 public class NetWork {
 	public static int port = 8885;
+	public static String local = "127.0.0.1";
+	public static String current_ip = "127.0.0.1";
 	public static String preAddress = "rmi://localhost:";
+	
+	public static void setpreAddress(){
+		try {
+			current_ip =  InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		preAddress = "rmi://"+current_ip+":";
+	}
 	
 	public static void main(String [] args){
 		String ip = null;

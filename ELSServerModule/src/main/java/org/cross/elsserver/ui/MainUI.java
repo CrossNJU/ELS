@@ -9,6 +9,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.FontUIResource;
 
+import org.cross.elscommon.util.NetWork;
 import org.cross.elsserver.ui.component.ELSPanel;
 import org.cross.elsserver.ui.util.FrameUtil;
 import org.cross.elsserver.ui.util.UIConstant;
@@ -51,6 +52,8 @@ public class MainUI extends JFrame {
 //        {  
 //            System.out.println(fontName[i]);  
 //        }  
+		
+		NetWork.setpreAddress();
 
 		JFrame jf = new JFrame();
 		ELSPanel mainPanel = new ELSPanel();

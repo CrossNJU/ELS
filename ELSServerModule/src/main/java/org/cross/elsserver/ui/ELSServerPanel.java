@@ -94,7 +94,7 @@ public class ELSServerPanel extends ELSPanel{
 		stateLabel.setForeground(UIConstant.MAINCOLOR);
 		stateLabel.setForeground(Color.white);
 		
-		ipLabel.setText(NetWork.preAddress.substring(6));
+		ipLabel.setText(NetWork.current_ip);
 		ipLabel.setBounds(125, 120, 120, 48);
 		ipLabel.setHorizontalAlignment(JLabel.LEFT);
 		ipLabel.setFont(getFont().deriveFont(18f));
@@ -138,8 +138,8 @@ public class ELSServerPanel extends ELSPanel{
 	public void launch(){
 		if(!isLaunched){
 			logTable.init();
-			logTable.addLog("服务器回送地址: "+NetWork.preAddress.substring(6,NetWork.preAddress.length()-1));
-			logTable.addLog("服务器内网地址: "+NetWork.preAddress.substring(6,NetWork.preAddress.length()-1));
+			logTable.addLog("服务器回送地址: "+NetWork.current_ip);
+			logTable.addLog("服务器内网地址: "+NetWork.local);
 			logTable.addLog("===================================");
 			if(TransDataImpl.start()){
 				stateLabel.setText("服务器状态:已启动");
