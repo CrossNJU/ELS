@@ -8,7 +8,10 @@ public enum UserType {
 	COUNTER, // 财务人员
 	SUPERCOUNTER,//高级财务人员
 	MANAGER, // 总经理
-	ADMINISTRATOR; // 系统管理员
+	ADMINISTRATOR, // 系统管理员
+	
+	NOTFOUND,
+	PWDERROR;
 
 	public String toString() {
 		switch (this) {
