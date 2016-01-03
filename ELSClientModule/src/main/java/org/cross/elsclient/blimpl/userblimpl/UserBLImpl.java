@@ -87,12 +87,12 @@ public class UserBLImpl implements UserBLService{
 	public UserType login(String id, String password) throws RemoteException{
 		UserPO pos = userData.findById(id);
 		if (pos == null) {
-			return null;
+			return UserType.NOTFOUND;
 		}else {
 			if (pos.getPassword().equals(password)) {
 				return pos.getType();
 			}else
-				return null;
+				return UserType.PWDERROR;
 		}
 	}
 }
