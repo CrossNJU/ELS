@@ -39,7 +39,7 @@ public class StockAddPanel extends ELSInfoPanel{
 		addEditableItem("标准仓库容量", "", true,InfoType.NUM,"normalCap");
 		addEditableItem("经济仓库数量", "", true,InfoType.NUM,"ecoNum");
 		addEditableItem("经济仓库容量", "", true,InfoType.NUM,"ecoCap");
-		addEditableItem("所属机构", "", true,InfoType.ID,"organ");
+		addEditableItem("所属机构", "", true,InfoType.ORGANIZATION,"organ");
 		
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");

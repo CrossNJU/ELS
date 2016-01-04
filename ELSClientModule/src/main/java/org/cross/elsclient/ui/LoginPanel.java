@@ -33,7 +33,9 @@ import org.cross.elsclient.blservice.userblservice.UserBLService_Stub;
 import org.cross.elsclient.ui.adminui.AdminFunctionPanel;
 import org.cross.elsclient.ui.businesshallclerkui.BusinessFunctionPanel;
 import org.cross.elsclient.ui.component.ELSButton;
+import org.cross.elsclient.ui.component.ELSInputDialog;
 import org.cross.elsclient.ui.component.ELSLabel;
+import org.cross.elsclient.ui.component.ELSNetSettingDialog;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSPasswordField;
 import org.cross.elsclient.ui.component.ELSTextField;
@@ -65,6 +67,7 @@ public class LoginPanel extends ELSPanel{
 	ELSButton loginBtn;
 	ELSButton checkBtn;
 	public ELSLabel titleLabel;
+	ELSButton settingBtn;
 	ELSLabel logoLabel;
 	ELSLabel idLabel;
 	ELSLabel pwLabel;
@@ -119,6 +122,7 @@ public class LoginPanel extends ELSPanel{
 		pwLabel = new ELSLabel("密码");
 		loginBtn = new ELSButton("登录系统");
 		checkBtn = new ELSButton("快件查询");
+		settingBtn = new ELSButton();
 		titleLabel = new ELSLabel();
 		logoLabel = new ELSLabel();
 		warnLabel = new ELSLabel();
@@ -178,9 +182,17 @@ public class LoginPanel extends ELSPanel{
 		
 		exitBtn.setLocation(510, 20);
 		
+		settingBtn.setText("网络设置");
+		settingBtn.setOpaque(false);
+		settingBtn.setBounds(410, 15,100,30);
+		settingBtn.setFont(settingBtn.getFont().deriveFont(18f));
+		settingBtn.addMouseListener(new LoginBtnListener());
+		settingBtn.setForeground(Color.white);;
+		
 		titleLabel.add(logoLabel);
 		titleLabel.add(exitBtn);
 		
+		inputPanel.add(settingBtn);
 		inputPanel.add(titleLabel);
 		inputPanel.add(idTextField);
 		inputPanel.add(idLabel);
@@ -258,19 +270,6 @@ public class LoginPanel extends ELSPanel{
 			warnLabel.setText("密码错误");
 		}
 		System.out.println("用户类型为:"+type.toString());
-//		new SwingWorker<Boolean, Boolean>(){
-//
-//			@Override
-//			protected Boolean doInBackground() throws Exception {
-//					MainUI.FRAME.getGlassPane().setVisible(true);
-//				for(int i = 2;i<15;i++){
-//					((ProgressGlassPane)MainUI.FRAME.getGlassPane()).setRadius(i);
-//					Thread.sleep(10);
-//				}
-//				return null;
-//			}
-//			
-//		}.execute();
 	}
 	
 	class LoginBtnListener implements MouseListener {
@@ -278,7 +277,7 @@ public class LoginPanel extends ELSPanel{
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource()==loginBtn){
 				login();
-			}else {
+			}else if(e.getSource()==checkBtn){
 				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
 				try {
 					parentContainer.add("check",new CheckFunctionPanel(blFactory.goodsBLService()));
@@ -287,6 +286,8 @@ public class LoginPanel extends ELSPanel{
 					e1.printStackTrace();
 				}
 				parentContainer.cl.show(parentContainer, "check");
+			}else if(e.getSource()==settingBtn){
+				ELSNetSettingDialog.showNetDig(LoginPanel.this);
 			}
 				
 		}

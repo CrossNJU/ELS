@@ -72,6 +72,9 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		addEditableItem("货物件数", "1", true,InfoType.NUM,"num");
 		//15
 		addAutoItem("货物重量(kg)", "", true,InfoType.NUM,"weight");
+		addAutoItem("体积(长/cm)", "", true, InfoType.NUM, "length");
+		addAutoItem("体积(宽/cm)", "", true, InfoType.NUM, "width");
+		addAutoItem("体积(高/cm)", "", true, InfoType.NUM, "height");
 		addComboxItem("包装类型",packType, true,"pack");
 		addEditableItem("价格", "", false,"price");
 		addEditableItem("预计到达时间", "", false,"time");
@@ -79,11 +82,14 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		//20
 		addEditableItem("所属机构", UIConstant.CURRENT_USER.orgNameID, false,InfoType.ID,"organ");
 		
-		itemLabels.get(15).inputLabel.addFocusListener(new PriceListener());
-		itemLabels.get(11).comboBox.addItemListener(new PriceItemListener());
-		itemLabels.get(12).comboBox.addItemListener(new PriceItemListener());
-		itemLabels.get(13).comboBox.addItemListener(new PriceItemListener());
-		itemLabels.get(16).comboBox.addItemListener(new PriceItemListener());
+		findItem("weight").inputLabel.addFocusListener(new PriceListener());
+		findItem("length").inputLabel.addFocusListener(new PriceListener());
+		findItem("width").inputLabel.addFocusListener(new PriceListener());
+		findItem("height").inputLabel.addFocusListener(new PriceListener());
+		findItem("from").comboBox.addItemListener(new PriceItemListener());
+		findItem("to").comboBox.addItemListener(new PriceItemListener());
+		findItem("type").comboBox.addItemListener(new PriceItemListener());
+		findItem("pack").comboBox.addItemListener(new PriceItemListener());
 		
 		titlePanel.remove(titlePanel.backBtn);
 		addConfirmAndCancelBtn();
@@ -140,21 +146,35 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 	}
 	
 	public void price() {
-		if(itemLabels.get(15).checkFormat()){
-			StockType goodsType = StringToType.toGoodsType(itemLabels.get(13).toString());
-			City startCity = StringToType.toCity(itemLabels.get(11).toString());
-			City endCity = StringToType.toCity(itemLabels.get(12).toString());
-			double weight = Double.valueOf(itemLabels.get(15).toString());
-			String packCost = itemLabels.get(16).toString();
+		if(findItem("width").checkFormat()&&findItem("height").checkFormat()&&findItem("length").checkFormat()&&findItem("weight").checkFormat()){
+			double length = Double.valueOf(findItem("length").toString());
+			double width = Double.valueOf(findItem("width").toString());
+			double height = Double.valueOf(findItem("height").toString());
+			double weight = Double.valueOf(findItem("weight").toString());
+			if(weight<(length*width*height/5000)){
+				weight = length*width*height/5000;
+			}
+			StockType goodsType = StringToType.toGoodsType(findItem("type").toString());
+			City startCity = StringToType.toCity(findItem("from").toString());
+			City endCity = StringToType.toCity(findItem("to").toString());
+			String packCost = findItem("pack").toString();
 			int result = (int)CalcuteUtil.calcutePrice(goodsType, ConstantVal.CONSTANT.getDistance(startCity, endCity), weight, packCost);
-			itemLabels.get(17).inputLabel.setText(result+"");
+			findItem("price").inputLabel.setText(result+"");
+		}else if(findItem("weight").checkFormat()){
+			StockType goodsType = StringToType.toGoodsType(findItem("type").toString());
+			City startCity = StringToType.toCity(findItem("from").toString());
+			City endCity = StringToType.toCity(findItem("to").toString());
+			double weight = Double.valueOf(findItem("weight").toString());
+			String packCost = findItem("pack").toString();
+			int result = (int)CalcuteUtil.calcutePrice(goodsType, ConstantVal.CONSTANT.getDistance(startCity, endCity), weight, packCost);
+			findItem("price").inputLabel.setText(result+"");
 		}
 	}
 	public void time(){
-		City startCity = StringToType.toCity(itemLabels.get(11).toString());
-		City endCity = StringToType.toCity(itemLabels.get(12).toString());
+		City startCity = StringToType.toCity(findItem("from").toString());
+		City endCity = StringToType.toCity(findItem("to").toString());
 		int result = (int)(ConstantVal.CONSTANT.getDistance(startCity, endCity)*ConstantVal.CONSTANT.timeBykilo);
-		itemLabels.get(18).inputLabel.setText(TimeUtil.getAfterTime(result));
+		findItem("time").inputLabel.setText(TimeUtil.getAfterTime(result));
 	}
 	
 	class PriceListener implements FocusListener{

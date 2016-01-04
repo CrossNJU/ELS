@@ -34,7 +34,7 @@ public class VehicleAddPanel extends ELSInfoPanel{
 		number = ConstantVal.numberbl.getPostNumber(NumberType.VEHICLE);
 		/* 0 */addEditableItem("车辆编号", number, false, "number");
 		addEditableItem("车牌号", "", true, InfoType.NAME, "licence");
-		addEditableItem("营业厅编号", "",true,
+		addEditableItem("营业厅编号", "",true,InfoType.ORGANIZATION,
 				"orgid");
 		addDateItem("购买时间", true, "buytime");
 		addDateItem("服役时间", true, "lasttime");

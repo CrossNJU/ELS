@@ -168,8 +168,8 @@ public class ComponentFactory {
 	public static ELSButton createSearchBtn() {
 		ELSButton btn = new ELSButton();
 		btn.setPreferredSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
-		btn.setMaximumSize(new Dimension(250, UIConstant.SEARCHPANEL_HEIGHT));
-		btn.setMinimumSize(new Dimension(150, UIConstant.SEARCHPANEL_HEIGHT));
+		btn.setMaximumSize(new Dimension(200, UIConstant.SEARCHPANEL_HEIGHT));
+		btn.setMinimumSize(new Dimension(100, UIConstant.SEARCHPANEL_HEIGHT));
 		btn.setColor(UIConstant.NORMAL_BTN_COLOR);
 		return btn;
 	}
@@ -253,9 +253,9 @@ public class ComponentFactory {
 	public static ELSButton createSettingBtn(){
 		ELSButton btn = new ELSButton();
 		btn.setOpaque(false);
-		btn.setSize(60,20);
+		btn.setSize(60,25);
 		btn.setText("设置");
-		btn.setFont(UIConstant.MainFont.deriveFont(16f));
+		btn.setFont(UIConstant.MainFont.deriveFont(18f));
 		btn.setName("setting");
 		btn.addMouseListener(new BtnListener(true, btn));
 		return btn;

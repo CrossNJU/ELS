@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.component;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -13,11 +14,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.cross.elsclient.blservice.initialblservice.InitialBLService;
+import org.cross.elsclient.ui.MainUI;
 import org.cross.elsclient.ui.util.Images;
+import org.cross.elsclient.ui.util.UIConstant;
 
 public class ELSButton extends JLabel {
 	Color backColor = Color.GRAY;
 	Color pressColor = Color.DARK_GRAY;
+	ELSLabel mask;
 	ImageIcon icon;
 	
 	public ELSButton() {
@@ -31,6 +35,8 @@ public class ELSButton extends JLabel {
 	}
 	
 	public void init(){
+		
+		
 		setOpaque(true);
 		setBackground(Color.gray);
 		setForeground(Color.WHITE);
@@ -38,33 +44,8 @@ public class ELSButton extends JLabel {
 		setVerticalAlignment(JLabel.CENTER);
 		setHorizontalAlignment(JLabel.CENTER);
 //		setFocusable(false);
-		addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				release();
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				press();
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				requestFocus();
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				click();
-			}
-		});
+		addMouseListener(new BtnListener());
+		
 	}
 	
 	public void setColor(Color bg){
@@ -97,6 +78,32 @@ public class ELSButton extends JLabel {
 		setPreferredSize(new Dimension(getPreferredSize().width+6, getPreferredSize().height+6));
 		getRootPane().repaint();
 		setBackground(backColor);
+	}
+	
+	class BtnListener implements MouseListener{
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			release();
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			press();
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			requestFocus();
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			click();
+		}
 	}
 
 }

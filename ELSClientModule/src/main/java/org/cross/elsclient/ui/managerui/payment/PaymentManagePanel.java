@@ -46,7 +46,7 @@ public class PaymentManagePanel extends ELSManagePanel{
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2
 						+ UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
-//		showAll();
+		showAll();
 	}
 
 	@Override

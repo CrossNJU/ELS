@@ -42,6 +42,8 @@ public class Images {
 	public final static ImageIcon WINDOW_MINUS_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Window Minus.png");
 	public final static ImageIcon ALERT_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Alert.png");
 	public final static ImageIcon EXPORT_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Export.png");
+	public final static ImageIcon CHECK_IMAGEICON = createImageIcon(src+"/icons/Common/Icon CheckBox.png");
+	public final static ImageIcon CHECK_CHOSEN_IMAGEICON = createImageIcon(src+"/icons/Common/Icon CheckBox Chosen.png");
 	
 	public final static ImageIcon BG1_IMAGE = createImageIcon(src+"/Background-1.png");
 	public final static ImageIcon BG2_IMAGE = createImageIcon(src+"/Background-2.png");

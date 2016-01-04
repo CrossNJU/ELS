@@ -45,7 +45,7 @@ public class PerAddPanel extends ELSInfoPanel {
 		addComboxItem("性别",new String[]{"男","女"} , true,"sex");
 		addEditableItem("身份证", "", true,InfoType.NAME,"idcard");
 		String []position = PositionType.toStrings();
-		addEditableItem("所属机构ID", "", true,InfoType.ID,"organ");
+		addEditableItem("所属机构ID", "", true,InfoType.ORGANIZATION,"organ");
 		addComboxItem("职位", position, true,"position");
 		addDateItem("出生日期", true,"birth");
 		addEditableItem("手机", "", true,InfoType.TELEPHONE,"phone");

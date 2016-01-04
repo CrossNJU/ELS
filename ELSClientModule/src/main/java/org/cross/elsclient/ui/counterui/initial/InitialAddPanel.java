@@ -116,21 +116,21 @@ public class InitialAddPanel extends InitialManagePanel{
 					currentVO.perNumber = infoList.label.labels.get(1).getText();
 					currentVO.time = infoList.label.labels.get(2).getText();
 					if(initialbl.addInitial(currentVO)==ResultMessage.SUCCESS){
-						for (AccountVO vo : currentVO.accounts) {
-							accountbl.add(vo);
-						}
-						for (OrganizationVO vo : currentVO.organizations) {
-							organbl.add(vo);
-						}
-						for (PersonnelVO vo : currentVO.personnels) {
-							personnelbl.add(vo);
-						}
-						for (VehicleVO vo : currentVO.vehicles) {
-							vehiclebl.add(vo);
-						}
-						for (StockVO vo : currentVO.stocks) {
-							stockbl.addStock(vo);
-						}
+//						for (AccountVO vo : currentVO.accounts) {
+//							accountbl.add(vo);
+//						}
+//						for (OrganizationVO vo : currentVO.organizations) {
+//							organbl.add(vo);
+//						}
+//						for (PersonnelVO vo : currentVO.personnels) {
+//							personnelbl.add(vo);
+//						}
+//						for (VehicleVO vo : currentVO.vehicles) {
+//							vehiclebl.add(vo);
+//						}
+//						for (StockVO vo : currentVO.stocks) {
+//							stockbl.addStock(vo);
+//						}
 						
 						ConstantVal.numberbl.addone(NumberType.INITIAL, number);
 						ELSPanel parent = GetPanelUtil.getSubFunctionPanel(InitialAddPanel.this, "initial");

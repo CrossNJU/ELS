@@ -82,11 +82,11 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		String[] name1 = {"总支出", "总收益","总利润"};
 		int[] itemWidth1 = {200,200,200};
 		list1 = new ELSManageTable(name1, itemWidth1);
-//		double[] data = analysisbl.showCostBenefitTable();
-//		String[] item = {data[0]+"",data[1]+"",data[2]+""};
+		double[] data = analysisbl.showCostBenefitTable();
+		String[] item = {data[0]+"",data[1]+"",data[2]+""};
 		list1.init();
 		list1.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, title1.getHeight()+title1.getLocation().y+15);
-//		list1.addItemLabel(item);
+		list1.addItemLabel(item);
 		
 		String[] name2 = {"单据编号","类型","建单时间","金额"};
 		int[] itemWidth2 = {150,100,200,100};

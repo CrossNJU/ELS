@@ -61,17 +61,17 @@ public class InitialManagePanel extends ELSManagePanel{
 		infoList.addBtn.setVisible(false);
 		
 		String[] organName = {"机构编号","地区","类型"};
-		int[] organWidth = {200,100,100}; 
+		int[] organWidth = {200,100,200}; 
 		organList = new InitialOrganizationTable(organName, organWidth,currentVO.organizations);
 		organList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, infoList.getHeight()+infoList.getLocation().y+10);
 		
 		String[] personName = {"人员编号","姓名","职位","所属机构"};
-		int[] personWidth = {200,100,100,200};
+		int[] personWidth = {200,100,200,200};
 		personnelList = new InitialPersonnelTable(personName,personWidth, currentVO.personnels);
 		personnelList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, organList.getHeight()+organList.getLocation().y+10);
 		
 		String[] vehicleName = {"车辆编号","车辆号","服役时间"};
-		int[] vehicleWidth = {200,100,200};
+		int[] vehicleWidth = {200,150,200};
 		veList = new InitialVehicleTable(vehicleName,vehicleWidth, currentVO.vehicles);
 		veList.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, personnelList.getHeight()+personnelList.getLocation().y+10);
 		

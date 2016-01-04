@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.counterui.initial;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import org.cross.elsclient.ui.component.ELSManageTable;
@@ -29,8 +30,9 @@ public class InitialAccountTable extends InitialManageTable {
 		if (vos == null) {
 			return;
 		}
+		DecimalFormat decimalFormat = new DecimalFormat("#");
 		for (AccountVO vo : vos) {
-			String item[] = {vo.name,vo.account,vo.balance+""};
+			String item[] = {vo.name,vo.account,decimalFormat.format(vo.balance)+""};
 			addItemLabel(item);
 		}
 		container.validate();

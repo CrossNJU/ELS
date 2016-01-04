@@ -60,11 +60,11 @@ public class ELSFunctionPanel extends ELSPanel {
 		logo.setIcon(Images.LOGO_IMAGEICON);
 		
 		exitBtn = ComponentFactory.createExitBtn(true);
-		exitBtn.setLocation(984, 20);
+		exitBtn.setLocation(994, 10);
 		setBtn = ComponentFactory.createSettingBtn();
-		setBtn.setLocation(900,20);
+		setBtn.setLocation(900,7);
 		minusBtn = ComponentFactory.createWindowMinusBtn();
-		minusBtn.setLocation(954, 20);
+		minusBtn.setLocation(964, 10);
 		
 		posLabel = new ELSLabel();
 		idLabel = new ELSLabel();
@@ -98,12 +98,12 @@ public class ELSFunctionPanel extends ELSPanel {
 		this.add(posLabel);
 		this.add(idLabel);
 		this.add(avatarLabel);
-		this.add(mask1);
-		this.add(mask2);
 		this.add(logo);
 		this.add(exitBtn);
 		this.add(minusBtn);
 		this.add(setBtn);
+		this.add(mask1);
+		this.add(mask2);
 	}
 	
 	

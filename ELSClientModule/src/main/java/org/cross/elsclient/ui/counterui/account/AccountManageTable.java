@@ -1,6 +1,7 @@
 package org.cross.elsclient.ui.counterui.account;
 
 import java.rmi.RemoteException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
@@ -42,8 +43,8 @@ public class AccountManageTable extends ELSManageTable{
 	 */
 	public void addItem(AccountVO vo){
 		vos.add(vo);
-		
-		String[] item = {vo.name,vo.account,String.valueOf(vo.balance)};
+		DecimalFormat decimalFormat = new DecimalFormat("#");
+		String[] item = {vo.name,vo.account,String.valueOf(decimalFormat.format(vo.balance))};
 		addItemLabel(item);
 		
 	}

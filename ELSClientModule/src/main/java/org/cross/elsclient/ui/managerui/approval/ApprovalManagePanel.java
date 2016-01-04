@@ -1,5 +1,6 @@
 package org.cross.elsclient.ui.managerui.approval;
 
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
@@ -12,13 +13,21 @@ import javax.swing.DefaultComboBoxModel;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.adminui.UserAddPanel;
+import org.cross.elsclient.ui.component.CheckBoxItemLabel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.component.TableItemLabel;
+import org.cross.elsclient.ui.counterui.settle.MoneyInManagePanel;
+import org.cross.elsclient.ui.counterui.settle.TotalAddPanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
+import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
 import org.cross.elsclient.vo.ReceiptVO;
+import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ApproveType;
 import org.cross.elscommon.util.ReceiptType;
@@ -33,6 +42,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 	ApprovalManageTable list;
 	ELSButton checkBtn;
 	ELSComboBox typeCombobox;
+	ELSButton batchBtn;
 
 	public ApprovalManagePanel(ReceiptBLService receiptbl) {
 		super();
@@ -59,6 +69,7 @@ public class ApprovalManagePanel extends ELSManagePanel {
 		super.setSearchPanel();
 		checkBtn = ComponentFactory.createSearchBtn();
 		typeCombobox = ComponentFactory.createSearchBox();
+		batchBtn = ComponentFactory.createSearchBtn();
 
 		// 设置搜索模式
 		String[] s = {"所有单据","按单据编号查找", "按单据类型查找" };
@@ -73,14 +84,25 @@ public class ApprovalManagePanel extends ELSManagePanel {
 		// 搜索按钮设置文字和监听
 		searchBtn.setText("查找单据");
 		searchBtn.addMouseListener(new BtnListener());
+		searchBtn.setFont(searchBtn.getFont().deriveFont(18f));
+		searchBtn.setPreferredSize(new Dimension(100, UIConstant.SEARCHPANEL_HEIGHT));
 
 		// 添加按钮设置文字和监听
 		checkBtn.setText("查看未审批");
 		checkBtn.addMouseListener(new BtnListener());
+		checkBtn.setFont(searchBtn.getFont().deriveFont(18f));
+		checkBtn.setPreferredSize(new Dimension(100, UIConstant.SEARCHPANEL_HEIGHT));
+		
+		batchBtn.setText("批量通过");
+		batchBtn.addMouseListener(new BtnListener());
+		batchBtn.setFont(searchBtn.getFont().deriveFont(18f));
+		batchBtn.setPreferredSize(new Dimension(100, UIConstant.SEARCHPANEL_HEIGHT));
 
 		// 添加间隔
 		searchPanel.add(Box.createHorizontalStrut(10));
 		searchPanel.add(checkBtn);
+		searchPanel.add(Box.createHorizontalStrut(10));
+		searchPanel.add(batchBtn);
 		
 		searchPanel.add(typeCombobox,3);
 		searchTextField.setEditable(false);
@@ -164,6 +186,36 @@ public class ApprovalManagePanel extends ELSManagePanel {
 					}
 				}
 				container.packHeight();
+			}
+			
+			if (e.getSource() == batchBtn){
+				ArrayList<ReceiptVO> vos = new ArrayList<>();
+				CheckBoxItemLabel checkLabel;
+				for (TableItemLabel itemLabel : list.itemLabels) {
+					if(itemLabel instanceof CheckBoxItemLabel){
+						checkLabel = (CheckBoxItemLabel) itemLabel;
+						if (checkLabel.checkBox.isSelected()) {
+							vos.add((ReceiptVO) receiptVOs
+									.get(list.itemLabels.indexOf(itemLabel)));
+						}
+					}
+				}
+				if (!vos.isEmpty()) {
+					for (ReceiptVO receiptVO : vos) {
+						try {
+							receiptbl.check(receiptVO, ApproveType.APPROVED);
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					init();
+					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(ApprovalManagePanel.this),"批量审批成功");
+				} else {
+					ELSComfirmDialog.showConfirmDlg(GetPanelUtil
+							.getFunctionPanel(ApprovalManagePanel.this), "创建失败",
+							"请选择任意单据");
+				}
 			}
 		}
 
