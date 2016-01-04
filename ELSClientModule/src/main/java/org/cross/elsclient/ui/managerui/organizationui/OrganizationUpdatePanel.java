@@ -3,7 +3,7 @@ package org.cross.elsclient.ui.managerui.organizationui;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.organizationblservice.OrganizationBLService;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -71,7 +71,7 @@ public class OrganizationUpdatePanel extends ELSInfoPanel{
 	
 	@Override
 	protected void cancel() {
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消", "确认退出修改界面？")){
+		if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消", "确认退出修改界面？")){
 			back();
 		}
 	}

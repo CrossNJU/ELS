@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.cross.elsclient.ui.LoginPanel;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 
@@ -31,21 +32,17 @@ public class GetPanelUtil {
 		ELSFunctionPanel functionPanel = (ELSFunctionPanel)mainPanel.getComponent(1);
 		return functionPanel;
 	}
+	
+	public static LoginPanel getLoginPanel(JComponent c){
+		ELSPanel mainPanel = (ELSPanel)getMainFrame(c).getContentPane().getComponent(0);
+		LoginPanel loginPanel = (LoginPanel)mainPanel.getComponent(0);
+		return loginPanel;
+	}
 	/**
 	 * 返回一个功能界面
 	 * @para c-该功能界面下的任意一个组件, functionIndex-功能界面序号（参考加入的顺序）
 	 * @return ELSPanel
 	 */
-//	public static ELSPanel getSubFunctionPanel(JComponent c,int functionIndex){
-//		ELSPanel mainPanel = (ELSPanel)getMainFrame(c).getContentPane().getComponent(0);
-//		ELSFunctionPanel functionPanel = (ELSFunctionPanel)mainPanel.getComponent(1);
-//		if(functionPanel.getComponent(0) instanceof JPanel){
-//			ELSPanel subFunctionPanel = (ELSPanel)((JPanel)functionPanel.getComponent(0)).getComponent(functionIndex);
-//			return subFunctionPanel;
-//		}else{
-//			return null;
-//		}
-//	}
 	
 	public static ELSPanel getSubFunctionPanel(JComponent c,String funcName){
 		ELSPanel mainPanel = (ELSPanel)getMainFrame(c).getContentPane().getComponent(0);

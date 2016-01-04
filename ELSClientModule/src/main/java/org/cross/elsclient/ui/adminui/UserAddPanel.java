@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.ui.component.ELSDatePicker;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -72,7 +72,7 @@ public class UserAddPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void cancel() {
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
+		if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
 			back();
 		}
 	}

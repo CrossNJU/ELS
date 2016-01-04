@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.constantblservice.ConstantBLService;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.component.InfoItemLabel;
@@ -103,7 +103,7 @@ public class ConstantUpdatePanel extends ELSInfoPanel {
 	@Override
 	protected void cancel() {
 		super.cancel();
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消更新", "确认退出更新界面？")){
+		if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消更新", "确认退出更新界面？")){
 			back();
 		}
 	}

@@ -3,6 +3,8 @@ package org.cross.elsclient.ui.util;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
+
 import org.cross.elsclient.vo.OrganizationVO;
 import org.cross.elsclient.vo.UserVO;
 
@@ -29,15 +31,17 @@ public class UIConstant {
 	public static int BTN_WIDTH = 142;
 	public static int BTN_HEIGHT = 48;
 	
-	public static Color MAINCOLOR = Color.decode("#5a6074");
-	public static Color MAINCOLOR_OPACITY_10 = new Color(90, 96, 116, 25);
-	public static Color MAINCOLOR_OPACITY_40 = new Color(90, 96, 116, 100);
-	public static Color MAINCOLOR_OPACITY_90 = new Color(90, 96, 116, 200);
+	public static Color MAINCOLOR = ThemeColors.COLOR1.main;
+	public static Color MAINCOLOR_OPACITY_10 = ThemeColors.COLOR1.opacity_10;
+	public static Color MAINCOLOR_OPACITY_40 = ThemeColors.COLOR1.opacity_40;
+	public static Color MAINCOLOR_OPACITY_90 = ThemeColors.COLOR1.opacity_90;
 	public static Color TABLEBACK = Color.decode("#f4f5f7");
 	public static Color TABLEBACK_OPACITY = new Color(244, 245, 247, 20);
 	public static Color COMFIRM_BTN_COLOR = Color.decode("#7ED09D");
 	public static Color NORMAL_BTN_COLOR = Color.decode("#7EBCD0");
 	public static Color CANCEL_BTN_COLOR = Color.decode("#E57979");
+	
+	public static ImageIcon BACK_IMG = Images.BG1_IMAGE;
 	
 	public static Font MainFont = new Font("苹方 粗体",Font.TRUETYPE_FONT, 15);
 	

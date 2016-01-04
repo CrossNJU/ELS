@@ -27,6 +27,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	ELSLabel logo;
 	ELSButton exitBtn;
 	ELSButton minusBtn;
+	ELSButton setBtn;
 	ELSLabel mask1;
 	ELSLabel mask2;
 	ELSLabel posLabel;
@@ -42,6 +43,8 @@ public class ELSFunctionPanel extends ELSPanel {
 	
 	public void init(){
 		removeAll();
+		functionBtns = new ArrayList<>();
+		functionPanels = new ArrayList<>();
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
 //		setBackground(UIConstant.MAINCOLOR);
@@ -58,11 +61,19 @@ public class ELSFunctionPanel extends ELSPanel {
 		
 		exitBtn = ComponentFactory.createExitBtn(true);
 		exitBtn.setLocation(984, 20);
+		setBtn = ComponentFactory.createSettingBtn();
+		setBtn.setLocation(900,20);
 		minusBtn = ComponentFactory.createWindowMinusBtn();
 		minusBtn.setLocation(954, 20);
 		
-		posLabel = new ELSLabel(UIConstant.CURRENT_USER.userType.toString());
-		idLabel = new ELSLabel(UIConstant.CURRENT_USER.number);
+		posLabel = new ELSLabel();
+		idLabel = new ELSLabel();
+		avatarLabel = new ELSLabel();
+		if(UIConstant.CURRENT_USER!=null){
+			posLabel.setText(UIConstant.CURRENT_USER.userType.toString());
+			idLabel.setText(UIConstant.CURRENT_USER.number);
+			avatarLabel.setIcon(Images.getAvatar(UIConstant.CURRENT_USER.userType));
+		}
 		posLabel.setHorizontalAlignment(JLabel.LEFT);
 		posLabel.setBounds(850, 40, 140, 20);
 		posLabel.setFont(UIConstant.MainFont.deriveFont(20f));
@@ -71,10 +82,8 @@ public class ELSFunctionPanel extends ELSPanel {
 		idLabel.setBounds(850, 70, 140, 20);
 		idLabel.setFont(UIConstant.MainFont.deriveFont(20f));
 		idLabel.setForeground(Color.white);
-		
-		avatarLabel = new ELSLabel();
 		avatarLabel.setBounds(790, 40, 50, 50);
-		avatarLabel.setIcon(Images.getAvatar(UIConstant.CURRENT_USER.userType));
+		
 		
 		mask1 = new ELSLabel();
 		mask2 = new ELSLabel();
@@ -94,6 +103,7 @@ public class ELSFunctionPanel extends ELSPanel {
 		this.add(logo);
 		this.add(exitBtn);
 		this.add(minusBtn);
+		this.add(setBtn);
 	}
 	
 	
@@ -220,7 +230,7 @@ public class ELSFunctionPanel extends ELSPanel {
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		g.drawImage(Images.BG_IMAGE, 0, 0, null);
+		g.drawImage(UIConstant.BACK_IMG.getImage(), 0, 0, null);
 		super.paint(g);
 	}
 }

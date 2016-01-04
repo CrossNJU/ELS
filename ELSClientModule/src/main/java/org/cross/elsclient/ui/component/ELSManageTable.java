@@ -189,7 +189,7 @@ public class ELSManageTable extends ELSPanel {
 			if(btn.getName()=="update"){
 				updateBtn(index);
 			}else if(btn.getName()=="delete"){
-				if(ELSDialog.showConfirmDlg(SwingUtilities.getWindowAncestor(ELSManageTable.this), "删除","是否删除")){
+				if(ELSComfirmDialog.showConfirmDlg(SwingUtilities.getWindowAncestor(ELSManageTable.this), "删除","是否删除")){
 					deleteBtn(index);
 				}
 			}

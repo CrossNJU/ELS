@@ -33,6 +33,7 @@ public class Images {
 	public final static ImageIcon WARNING_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Warning.png");
 	public final static ImageIcon LOGO_IMAGEICON = createImageIcon(src+"/Logo.png");
 	public final static ImageIcon EXIT_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Close.png");
+	public final static ImageIcon SETTING_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Setting.png");
 	public final static ImageIcon ADD_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Add.png");
 	public final static ImageIcon MINUS_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Minus.png");
 	public final static ImageIcon RIGHT_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Arrow Right.png");
@@ -42,8 +43,12 @@ public class Images {
 	public final static ImageIcon ALERT_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Alert.png");
 	public final static ImageIcon EXPORT_IMAGEICON = createImageIcon(src+"/icons/Common/Icon Export.png");
 	
-	public final static Image BG_IMAGE = createImage(src+"/Background.png");
+	public final static ImageIcon BG1_IMAGE = createImageIcon(src+"/Background-1.png");
+	public final static ImageIcon BG2_IMAGE = createImageIcon(src+"/Background-2.png");
+	public final static ImageIcon BG3_IMAGE = createImageIcon(src+"/Background-3.png");
+	public final static ImageIcon BG4_IMAGE = createImageIcon(src+"/Background-4.png");
 	public final static ImageIcon DIALOG_BG_IMAGE = createImageIcon(src+"/Mask.png");
+	public final static ImageIcon[] BG_GROUP = {BG1_IMAGE,BG2_IMAGE,BG3_IMAGE,BG4_IMAGE};
 	
 	public final static ImageIcon ADMIN_AVATAR = createImageIcon(src+"/Icons/Common/Administrator.png");
 	public final static ImageIcon BUSINESSCLERKCLERK_AVATAR = createImageIcon(src+"/Icons/Common/BHClerk.png");
@@ -185,7 +190,6 @@ public class Images {
 		default:
 			return null;
 		}
-		
 	}
 	
 	public static ImageIcon getActiveIcon(String name){

@@ -3,7 +3,7 @@ package org.cross.elsclient.ui.counterui.account;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -61,7 +61,7 @@ public class AccountUpdatePanel extends ELSInfoPanel{
 	
 	@Override
 	protected void cancel() {
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消修改", "确认退出修改界面？")){
+		if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消修改", "确认退出修改界面？")){
 			back();
 		}
 	}

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.swing.text.Position;
 
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.counterui.initial.InitialManagePanel;
@@ -90,7 +90,7 @@ public class PerAddPanel extends ELSInfoPanel {
 	protected void cancel() {
 		// TODO Auto-generated method stub
 		super.cancel();
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
+		if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
 				"取消添加", "确认退出新增界面？")){
 			back();
 		}

@@ -64,11 +64,12 @@ public class LoginPanel extends ELSPanel{
 	ELSPasswordField pwTextField;
 	ELSButton loginBtn;
 	ELSButton checkBtn;
-	ELSLabel titleLabel;
+	public ELSLabel titleLabel;
 	ELSLabel logoLabel;
 	ELSLabel idLabel;
 	ELSLabel pwLabel;
 	ELSButton exitBtn;
+	ELSLabel warnLabel;
 	int width = 550;
 	int height = 390;
 	int x;
@@ -120,6 +121,7 @@ public class LoginPanel extends ELSPanel{
 		checkBtn = new ELSButton("快件查询");
 		titleLabel = new ELSLabel();
 		logoLabel = new ELSLabel();
+		warnLabel = new ELSLabel();
 		exitBtn = ComponentFactory.createExitBtn(false);
 		x = (int)((UIConstant.WINDOW_WIDTH-width)*0.5);
 		y = (int)((UIConstant.WINDOW_HEIGHT-height)*0.5);
@@ -141,23 +143,28 @@ public class LoginPanel extends ELSPanel{
 		logoLabel.setIcon(Images.LOGO_IMAGEICON);
 		
 		idTextField.setSize(314,55);
-		idTextField.setLocation(164,149);
+		idTextField.setLocation(164,139);
 		idTextField.addKeyListener(new MyKeyListener());
 		idLabel.setSize(135,55);
-		idLabel.setLocation(0, 149);
+		idLabel.setLocation(0, 139);
 		idLabel.setHorizontalAlignment(JLabel.RIGHT);
 		idLabel.setForeground(Color.white);
 		idLabel.setFont(getFont().deriveFont(20f));
 		
 		pwTextField.setSize(314,55);
-		pwTextField.setLocation(164,212);
+		pwTextField.setLocation(164,202);
 		pwTextField.setForeground(UIConstant.MAINCOLOR);
 		pwTextField.addKeyListener(new MyKeyListener());
 		pwLabel.setSize(135,55);
-		pwLabel.setLocation(0, 212);
+		pwLabel.setLocation(0, 202);
 		pwLabel.setHorizontalAlignment(JLabel.RIGHT);
 		pwLabel.setForeground(Color.white);
 		pwLabel.setFont(getFont().deriveFont(20f));
+		
+		warnLabel.setBounds(164, 257, 314, 40);
+		warnLabel.setHorizontalAlignment(JLabel.LEFT);
+		warnLabel.setForeground(Color.ORANGE);
+		warnLabel.setFont(getFont().deriveFont(15f));
 		
 		loginBtn.setSize(178, 55);
 		loginBtn.setLocation(92,296);
@@ -181,6 +188,7 @@ public class LoginPanel extends ELSPanel{
 		inputPanel.add(pwLabel);
 		inputPanel.add(loginBtn);
 		inputPanel.add(checkBtn);
+		inputPanel.add(warnLabel);
 		
 		this.add(inputPanel);
 	}
@@ -191,17 +199,19 @@ public class LoginPanel extends ELSPanel{
 		UserType type = null;
 		try {
 			type = userbl.login(id, pw);
-			if(type!=null){
+			if(type==null||type==UserType.NOTFOUND||type==UserType.PWDERROR){
+				UIConstant.CURRENT_USER = null;
+				UIConstant.CURRENT_ORG = null;
+			}else{
 				UIConstant.CURRENT_USER = userbl.findById(id);
 				UIConstant.CURRENT_ORG = organbl.findById(UIConstant.CURRENT_USER.orgNameID);
 				ConstantVal.currentReceipts = receiptbl.show();
-//				System.out.println("fi");
-//				System.out.println(UIConstant.CURRENT_USER);
 			}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
 		
+		warnLabel.setText("");
 		if(type==UserType.ADMINISTRATOR){//系统管理员
 			System.out.println("登录成功");
 			ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
@@ -242,6 +252,10 @@ public class LoginPanel extends ELSPanel{
 			ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
 			parentContainer.add("function",new StockFunctionPanel());
 			parentContainer.cl.show(parentContainer, "function");
+		}else if(type==UserType.NOTFOUND){
+			warnLabel.setText("该用户名不存在");
+		}else if(type==UserType.PWDERROR){
+			warnLabel.setText("密码错误");
 		}
 		System.out.println("用户类型为:"+type.toString());
 //		new SwingWorker<Boolean, Boolean>(){
@@ -312,6 +326,6 @@ public class LoginPanel extends ELSPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(Images.BG_IMAGE, x, y, x+width, y+height,x, y, x+width, y+height, null);
+		g.drawImage(UIConstant.BACK_IMG.getImage(), x, y, x+width, y+height,x, y, x+width, y+height, null);
 	}
 }

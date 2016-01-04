@@ -20,7 +20,7 @@ import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSDatePicker;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;

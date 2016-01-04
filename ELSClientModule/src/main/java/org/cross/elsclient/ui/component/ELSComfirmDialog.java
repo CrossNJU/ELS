@@ -33,8 +33,8 @@ import org.cross.elsclient.ui.util.Images;
 import org.cross.elsclient.ui.util.ProgressGlassPane;
 import org.cross.elsclient.ui.util.UIConstant;
 
-public class ELSDialog extends JDialog {
-	private static ELSDialog instance = new ELSDialog();
+public class ELSComfirmDialog extends JDialog {
+	private static ELSComfirmDialog instance = new ELSComfirmDialog();
 	private boolean ret;
 	private ELSTextField field;
 	private static ELSButton okBtn;
@@ -42,7 +42,7 @@ public class ELSDialog extends JDialog {
 	private static ELSLabel textLabel;
 	private static ELSLabel titleLabel;
 
-	private ELSDialog() {
+	private ELSComfirmDialog() {
 		setModal(true);// 当对话框显示时候其他窗口不能获得焦点
 		this.setUndecorated(true);
 //		this.setLayout(null);
@@ -72,7 +72,7 @@ public class ELSDialog extends JDialog {
 		titleLabel = new ELSLabel();
 		titleLabel.setBackground(UIConstant.MAINCOLOR_OPACITY_90);
 		titleLabel.setOpaque(true);
-		titleLabel.setSize(UIConstant.DIALOG_WIDTH,48);
+		titleLabel.setSize(getWidth(),48);
 		titleLabel.setLocation(0, 0);
 		titleLabel.setHorizontalAlignment(JLabel.LEFT);
 		titleLabel.setVerticalAlignment(JLabel.CENTER);
@@ -117,6 +117,7 @@ public class ELSDialog extends JDialog {
 		
 		instance.titleLabel.setText("   " + title);
 		instance.textLabel.setText(text);
+		instance.titleLabel.setBackground(UIConstant.MAINCOLOR_OPACITY_90);
 		instance.setLocationRelativeTo(comp);// 使得对话框显示在comp的中间
 		instance.setVisible(true);// 显示对话框时候，调用它的线程被阻塞
 		return instance.ret;// 直到对话框不显示时才返回，而时候ret已经被设置好了
@@ -125,6 +126,7 @@ public class ELSDialog extends JDialog {
 	public static boolean showConfirmDlg(Component comp,String title,String text,String btn1,String btn2) {
 		instance.okBtn.setText(btn1);
 		instance.cancelBtn.setText(btn2);
+		instance.titleLabel.setBackground(UIConstant.MAINCOLOR_OPACITY_90);
 		boolean flag = showConfirmDlg(comp, title, text);
 		instance.okBtn.setText("确认");
 		instance.cancelBtn.setText("取消");

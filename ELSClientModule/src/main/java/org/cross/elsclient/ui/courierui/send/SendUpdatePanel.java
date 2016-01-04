@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
@@ -61,7 +61,7 @@ public class SendUpdatePanel extends ELSInfoPanel {
 	@Override
 	protected void cancel() {
 		super.cancel();
-		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消派件", "确认放弃派件单？")) {
+		if (ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消派件", "确认放弃派件单？")) {
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			this.init();
 			parent.setChosenFunction("receipts");

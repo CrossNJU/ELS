@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import org.cross.elsclient.blservice.accountblservice.AccountBLService;
 import org.cross.elsclient.blservice.personnelblservice.PersonnelBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
@@ -89,7 +89,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 					ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"添加失败");
 				}
 			}else{
-				ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "找不到账户", "查询不到此账户,无法扣款");
+				ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "找不到账户", "查询不到此账户,无法扣款");
 			}
 			
 		}
@@ -97,7 +97,7 @@ public class MoneyOutAddPanel extends ELSInfoPanel{
 	
 	@Override
 	protected void cancel() {
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
+		if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this), "取消新增", "确认退出新增界面？")){
 			ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
 			this.init();
 			parent.setChosenFunction("receipts");

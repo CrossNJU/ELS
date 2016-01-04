@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.cross.elsclient.blservice.stockblservice.StockBLService;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -102,7 +102,7 @@ public class StockAddPanel extends ELSInfoPanel{
 	protected void cancel() {
 		// TODO Auto-generated method stub
 		super.cancel();
-		if(ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
+		if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
 				"取消添加", "确认退出新增界面？")){
 			back();
 		}

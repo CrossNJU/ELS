@@ -13,8 +13,9 @@ import org.cross.elsclient.ui.MainUI;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSComboBox;
 import org.cross.elsclient.ui.component.ELSDatePicker;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.component.ELSSettingDialog;
 import org.cross.elsclient.ui.component.ELSTextField;
 import org.cross.elsclient.ui.component.FunctionBtn;
 
@@ -248,6 +249,17 @@ public class ComponentFactory {
 		btn.addMouseListener(new BtnListener(true, btn));
 		return btn;
 	}
+	
+	public static ELSButton createSettingBtn(){
+		ELSButton btn = new ELSButton();
+		btn.setOpaque(false);
+		btn.setSize(60,20);
+		btn.setText("设置");
+		btn.setFont(UIConstant.MainFont.deriveFont(16f));
+		btn.setName("setting");
+		btn.addMouseListener(new BtnListener(true, btn));
+		return btn;
+	}
 
 	public static ELSButton createInitialAddBtn() {
 		ELSButton addBtn = new ELSButton();
@@ -275,7 +287,7 @@ class BtnListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		if(btn.getName().equals("exit")){
 			if(isShow){
-				if (ELSDialog.showConfirmDlg(((JComponent) e.getSource())
+				if (ELSComfirmDialog.showConfirmDlg(((JComponent) e.getSource())
 						.getParent().getParent(), "退出系统", "确认退出ELS物流管理系统？","退出","注销")) {
 					System.exit(0);
 				}else{
@@ -288,6 +300,8 @@ class BtnListener implements MouseListener{
 			}
 		}else if(btn.getName().equals("export")){
 			
+		}else if(btn.getName().equals("setting")){
+			ELSSettingDialog.showDialog(btn.getParent());
 		}
 	}
 

@@ -14,7 +14,7 @@ import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.ui.component.CheckBoxItemLabel;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSDatePicker;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.TableItemLabel;
@@ -212,7 +212,7 @@ public class MoneyInManagePanel extends ELSManagePanel {
 					parent.add("add", addPanel);
 					parent.cl.show(parent, "add");
 				} else {
-					ELSDialog.showConfirmDlg(GetPanelUtil
+					ELSComfirmDialog.showConfirmDlg(GetPanelUtil
 							.getFunctionPanel(MoneyInManagePanel.this), "创建失败",
 							"请选择任意单据");
 				}

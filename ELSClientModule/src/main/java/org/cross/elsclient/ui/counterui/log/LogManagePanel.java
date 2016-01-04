@@ -13,7 +13,7 @@ import org.cross.elsclient.blservice.logblservice.LogBLService;
 import org.cross.elsclient.ui.adminui.UserAddPanel;
 import org.cross.elsclient.ui.adminui.UserManageTable;
 import org.cross.elsclient.ui.component.ELSDatePicker;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.counterui.analysis.AnalysisManagePanel;
@@ -109,7 +109,7 @@ public class LogManagePanel extends ELSManagePanel{
 				}
 				container.packHeight();
 			}else{
-				ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(LogManagePanel.this), "时间矛盾", "起始时间大于结束时间");
+				ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getMainFrame(LogManagePanel.this), "时间矛盾", "起始时间大于结束时间");
 			}
 			
 		}

@@ -3,7 +3,7 @@ package org.cross.elsclient.ui.businesshallclerkui.vehicle;
 import java.rmi.RemoteException;
 
 import org.cross.elsclient.blservice.vehicleblservice.VehicleBLService;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -76,7 +76,7 @@ public class VehicleAddPanel extends ELSInfoPanel {
 
 	@Override
 	protected void cancel() {
-		if (ELSDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
+		if (ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(this),
 				"取消新增", "确认放弃新增单据？")) {
 			back();
 		}

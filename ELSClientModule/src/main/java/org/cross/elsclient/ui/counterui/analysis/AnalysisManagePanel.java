@@ -13,7 +13,7 @@ import javax.swing.Box;
 import org.cross.elsclient.blservice.analysisblservice.AnalysisBLService;
 import org.cross.elsclient.ui.component.ELSButton;
 import org.cross.elsclient.ui.component.ELSDatePicker;
-import org.cross.elsclient.ui.component.ELSDialog;
+import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
@@ -93,29 +93,8 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		list2 = new AnalysisManageTable(name2, itemWidth2, analysisbl);
 		list2.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, searchPanel.getHeight()+searchPanel.getLocation().y+15);
 		list2.init();
-//<<<<<<< HEAD
 		try {
 			receiptVOs = new ArrayList<>();
-//			System.out.println("th");
-			ArrayList<Receipt_MoneyInVO> tempInVos = analysisbl.showMoneyinTable("1000-01-01", "3000-01-01");
-			if(tempInVos!=null){
-				receiptVOs.addAll(tempInVos);
-			}
-			ArrayList<Receipt_MoneyInVO> tempOutVos = analysisbl.showMoneyinTable("1000-01-01", "3000-01-01");
-			if(tempOutVos!=null){
-				receiptVOs.addAll(tempOutVos);
-			}
-			for (ReceiptVO receiptVO : receiptVOs) {
-				list2.addItem(receiptVO);
-			}
-		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-//=======
-		try {
-			receiptVOs = new ArrayList<>();
-			System.out.println("th");
 			ArrayList<Receipt_MoneyInVO> tempInVos = analysisbl.showMoneyinTable("1000-01-01", "3000-01-01");
 			if(tempInVos!=null){
 				receiptVOs.addAll(tempInVos);
@@ -131,7 +110,6 @@ public class AnalysisManagePanel extends ELSManagePanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-//>>>>>>> branch 'master' of https://github.com/CrossNJU/ELS.git
 		
 		this.container.add(list1);
 		this.container.add(list2);
@@ -182,7 +160,7 @@ public class AnalysisManagePanel extends ELSManagePanel {
 				}
 				container.packHeight();
 			}else{
-				ELSDialog.showConfirmDlg(GetPanelUtil.getMainFrame(AnalysisManagePanel.this), "时间矛盾", "起始时间大于结束时间");
+				ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getMainFrame(AnalysisManagePanel.this), "时间矛盾", "起始时间大于结束时间");
 			}
 		}
 
