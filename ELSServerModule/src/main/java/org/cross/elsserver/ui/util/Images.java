@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class Images {
-	static String src = "src/main/img";
+	static String src = "img";
 	
 	public static ImageIcon createImageIcon(String path){
 		ImageIcon icon = new ImageIcon(path);
