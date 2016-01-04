@@ -74,8 +74,6 @@ public class MainUI extends JFrame {
 				com.sun.awt.AWTUtilities.setWindowOpaque(jf, false);
 				
 				
-				ConstantBLService constantbl = new ConstantBLService_Stub();
-				ConstantVal.CONSTANT = constantbl.show();
 				mainPanel.add(new LoginPanel(), "login");
 				mainPanel.setOpaque(false);
 				jf.getContentPane().add(mainPanel);	

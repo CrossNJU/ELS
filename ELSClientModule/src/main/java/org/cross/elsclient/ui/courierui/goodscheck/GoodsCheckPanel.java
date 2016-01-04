@@ -37,7 +37,7 @@ public class GoodsCheckPanel extends ELSManagePanel{
 //		String[] s = {"出发地","出发时间","到达地","到达时间"};
 //		int[] itemWidth = {100,200,100,200};
 		String[] s = {"地点","时间","轨迹类型"};
-		int[] itemWidth = {100,200,200};
+		int[] itemWidth = {200,200,200};
 		list= new GoodsCheckTable(s, itemWidth);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP*2+UIConstant.SEARCHPANEL_HEIGHT);
 		container.add(list);
@@ -65,32 +65,32 @@ public class GoodsCheckPanel extends ELSManagePanel{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-//			if(!historyVOs.isEmpty()){
-//				Collections.sort(historyVOs, new Comparator<HistoryVO>() {
-//
-//					@Override
-//					public int compare(HistoryVO o1, HistoryVO o2) {
-//						SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
-//						Date date1;
-//						Date date2;
-//						if(o1.time==null){
-//							return 1;
-//						}else if(o2.time==null){
-//							return -1;
-//						}
-//						
-//						try {
-//							date1 = sdf.parse(o1.time);
-//							date2 = sdf.parse(o2.time);
-//							return date1.compareTo(date2);
-//						} catch (ParseException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//						return 0;
-//					}
-//				});
-				list.init();
+			list.init();
+			if(!historyVOs.isEmpty()){
+				Collections.sort(historyVOs, new Comparator<HistoryVO>() {
+
+					@Override
+					public int compare(HistoryVO o1, HistoryVO o2) {
+						SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
+						Date date1;
+						Date date2;
+						if(o1.time==null){
+							return 1;
+						}else if(o2.time==null){
+							return -1;
+						}
+						
+						try {
+							date1 = sdf.parse(o1.time);
+							date2 = sdf.parse(o2.time);
+							return date1.compareTo(date2);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return 0;
+					}
+				});
 //				for(int i = 0;i<historyVOs.size();i=i+2){
 //					if(i+1==historyVOs.size()){
 //						list.addItem(historyVOs.get(i), null);
@@ -103,6 +103,7 @@ public class GoodsCheckPanel extends ELSManagePanel{
 				}
 				container.packHeight();
 			}
+		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {

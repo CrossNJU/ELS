@@ -2,6 +2,7 @@ package org.cross.elsclient.ui.businesshallclerkui.trans;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
@@ -29,6 +30,8 @@ import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elscommon.util.TimeUtil;
+
 
 public class TransAddPanel extends ELSInfoPanel {
 	Receipt_TransVO vo;
@@ -83,7 +86,7 @@ public class TransAddPanel extends ELSInfoPanel {
 			String startplace = findItem("startplace").toString();
 			String arricity = findItem("arricity").toString();
 			String arriorg = findItem("arriorg").toString();
-			String time = findItem("time").toString();
+			String time = TimeUtil.getCurrentTime();
 			String transnum = findItem("transnum").toString();
 			String vehnum = findItem("vehnum").toString();
 			String driver = findItem("driver").toString();
@@ -103,7 +106,8 @@ public class TransAddPanel extends ELSInfoPanel {
 				// System.out.println(goods.get(i));
 				GoodsVO goodsvo = goodsbl.searchGoods(goods.get(i));
 				HistoryVO historyVO = new HistoryVO(time, UIConstant.CURRENT_ORG.city,
-						UIConstant.CURRENT_ORG.type, true);
+						UIConstant.CURRENT_ORG.type, false);
+				System.out.println(goodsvo);
 				goodsvo.history.add(historyVO);
 				goodsvo.placeCity = UIConstant.CURRENT_ORG.city;
 				goodsvo.placeOrg = UIConstant.CURRENT_ORG.type;

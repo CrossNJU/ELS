@@ -29,6 +29,7 @@ import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
+import org.cross.elscommon.util.TimeUtil;
 
 public class ArriAddPanel extends ELSInfoPanel {
 
@@ -80,7 +81,7 @@ public class ArriAddPanel extends ELSInfoPanel {
 			String startorg = findItem("startorg").toString();
 			String starttime = findItem("starttime").toString();
 			String carriorg = findItem("arriorg").toString();
-			String arritime = findItem("arritime").toString();
+			String arritime = TimeUtil.getCurrentTime();
 			
 			arrivo = new Receipt_ArriveVO(cnumber,
 					arritime, startorg,

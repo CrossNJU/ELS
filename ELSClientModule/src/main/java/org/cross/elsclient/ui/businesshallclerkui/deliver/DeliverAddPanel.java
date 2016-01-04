@@ -34,6 +34,7 @@ import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.TimeUtil;
 
 public class DeliverAddPanel extends ELSInfoPanel {
 	/**
@@ -75,7 +76,7 @@ public class DeliverAddPanel extends ELSInfoPanel {
 	protected void confirm() throws RemoteException {
 		if (isAllLegal()) {
 			String cnumber = findItem("number").toString();
-			String ctime = findItem("time").toString();
+			String ctime = TimeUtil.getCurrentTime();;
 			String goodsnum = findItem("goodsnum").toString();
 			String pernum = findItem("pernum").toString();
 			String name = findItem("name").toString();

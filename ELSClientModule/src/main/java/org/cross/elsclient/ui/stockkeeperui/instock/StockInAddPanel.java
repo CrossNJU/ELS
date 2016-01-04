@@ -24,6 +24,7 @@ import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.InfoType;
 import org.cross.elscommon.util.NumberType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.TimeUtil;
 
 public class StockInAddPanel extends ELSInfoPanel {
 	/**
@@ -70,7 +71,7 @@ public class StockInAddPanel extends ELSInfoPanel {
 		if (isAllLegal()) {
 			String cnumber = findItem("number").toString();
 			String goodsnum = findItem("goodsnum").toString();
-			String time = findItem("time").toString();
+			String time = TimeUtil.getCurrentTime();
 			String des = findItem("des").toString();
 			String areaid = findItem("areaid").toString();
 			

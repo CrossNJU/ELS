@@ -15,6 +15,7 @@ import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.counterui.cost.MoneyOutInfoPanel;
 import org.cross.elsclient.ui.counterui.settle.TotalInfoPanel;
+import org.cross.elsclient.ui.courierui.receive.ExpressReceivePanel;
 import org.cross.elsclient.ui.stockkeeperui.instock.StockInInfoPanel;
 import org.cross.elsclient.ui.stockkeeperui.outstock.StockOutInfoPanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;

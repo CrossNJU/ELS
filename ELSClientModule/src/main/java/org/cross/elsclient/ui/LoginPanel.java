@@ -80,35 +80,9 @@ public class LoginPanel extends ELSPanel{
 	
 	public LoginPanel() {
 		init();
-		ConstantVal.constantbl = ConstantVal.getConstant();
-		ConstantVal.numberbl = ConstantVal.getNumber();
-//		try {
-////			ConstantVal.currentReceipts = receiptbl.show();
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		LogUtil.initLogBl();
 	}
+	
 	public void init(){
-		
-//		try {
-//			BLFactoryService blFactory = new BLFactoryImpl();
-//			userbl = blFactory.getUserBLService();
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		try {
-			blFactory = new BLFactoryImpl();
-			userbl = blFactory.getUserBLService();
-			organbl = blFactory.organizationBLService();
-			receiptbl = blFactory.receiptBLService();
-//			ConstantVal
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		setSize(UIConstant.WINDOW_WIDTH,UIConstant.WINDOW_HEIGHT);
 		setLayout(null);
@@ -206,6 +180,15 @@ public class LoginPanel extends ELSPanel{
 	}
 	
 	public void login(){
+		try {
+			blFactory = new BLFactoryImpl();
+			userbl = blFactory.getUserBLService();
+			organbl = blFactory.organizationBLService();
+			receiptbl = blFactory.receiptBLService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String id = idTextField.getText();
 		String pw = String.valueOf(pwTextField.getPassword());
 		UserType type = null;
@@ -215,6 +198,9 @@ public class LoginPanel extends ELSPanel{
 				UIConstant.CURRENT_USER = null;
 				UIConstant.CURRENT_ORG = null;
 			}else{
+				ConstantVal.constantbl = ConstantVal.getConstant();
+				ConstantVal.numberbl = ConstantVal.getNumber();
+				LogUtil.initLogBl();
 				UIConstant.CURRENT_USER = userbl.findById(id);
 				UIConstant.CURRENT_ORG = organbl.findById(UIConstant.CURRENT_USER.orgNameID);
 				ConstantVal.currentReceipts = receiptbl.show();
@@ -278,6 +264,15 @@ public class LoginPanel extends ELSPanel{
 			if(e.getSource()==loginBtn){
 				login();
 			}else if(e.getSource()==checkBtn){
+				try {
+					blFactory = new BLFactoryImpl();
+					userbl = blFactory.getUserBLService();
+					organbl = blFactory.organizationBLService();
+					receiptbl = blFactory.receiptBLService();
+				} catch (RemoteException ee) {
+					// TODO Auto-generated catch block
+					ee.printStackTrace();
+				}
 				ELSPanel parentContainer = (ELSPanel)LoginPanel.this.getParent();
 				try {
 					parentContainer.add("check",new CheckFunctionPanel(blFactory.goodsBLService()));

@@ -24,6 +24,7 @@ import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.PositionType;
 import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.TimeUtil;
 
 public class MoneyAddPanel extends ELSInfoPanel {
 	/**
@@ -64,7 +65,7 @@ public class MoneyAddPanel extends ELSInfoPanel {
 		if (isAllLegal()) {
 			String cnumber = findItem("number").toString();
 //			String goodsnum = findItem("goodsnum").toString();
-			String time = findItem("time").toString();
+			String time = TimeUtil.getCurrentTime();
 			String perid = findItem("perid").toString();
 			String money = findItem("money").toString();
 //			String[] orders = goodsnum.split(";");
