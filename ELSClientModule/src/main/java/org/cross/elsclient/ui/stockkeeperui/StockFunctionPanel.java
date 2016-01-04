@@ -34,7 +34,7 @@ public class StockFunctionPanel extends ELSFunctionPanel {
 	public GoodsBLService goodsbl;
 	UserVO user;
 	StockVO stock;
-	AlertFunctionBtn alertBtn;
+	public AlertFunctionBtn alertBtn;
 
 	public StockFunctionPanel() {
 		super();
@@ -79,7 +79,6 @@ public class StockFunctionPanel extends ELSFunctionPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.alertBtn = (AlertFunctionBtn)functionBtns.get(4);
 
 		addFunctionPanel(new StockInAddPanel(stockbl, receiptbl, user, stock, goodsbl), "add", "stockin");
 		addFunctionPanel(new StockOutAddPanel(stockbl, receiptbl, user, stock, goodsbl), "add", "stockout");

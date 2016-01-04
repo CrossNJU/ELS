@@ -11,6 +11,7 @@ import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.stockkeeperui.StockFunctionPanel;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
@@ -58,7 +59,7 @@ public class StockInAddPanel extends ELSInfoPanel {
 		/* 0 */addEditableItem("入库单编号", number, false, "number");
 		addEditableItem("快件单编号", "", true, InfoType.RECEIPT, "goodsnum");
 		addDateItem("入库时间", false, "time");
-		addEditableItem("目的地", "", true, InfoType.ORGANIZATION, "des");
+		addEditableItem("目的地", "", true, InfoType.NAME, "des");
 		addEditableItem("仓库区号", "", true, InfoType.STOCKAREA, "areaid");
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认添加");
@@ -82,14 +83,28 @@ public class StockInAddPanel extends ELSInfoPanel {
 			stockbl.intoStock(goodsnum, stockvo.number,
 					time, itemLabels.get(4).toString());
 			GoodsVO goodsvo = goodsbl.searchGoods(goodsnum);
-			HistoryVO newhistory = new HistoryVO(time,
-					UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type,
-					true);
-			goodsvo.history.add(newhistory);
+//			HistoryVO newhistory = new HistoryVO(time,
+//					UIConstant.CURRENT_ORG.city, UIConstant.CURRENT_ORG.type,
+//					true);
+//			goodsvo.history.add(newhistory);
 			goodsvo.stockAreaNum = itemLabels.get(4).toString();
 			goodsvo.stockNum = stockvo.number;
 			goodsbl.updateGoods(goodsvo);
 			if (receiptbl.add(stockinvo) == ResultMessage.SUCCESS) {
+				try {
+					stockvo = stockbl.findStock(stockvo.number);
+					if(!stockbl.getNeedChange(stockvo.number).isEmpty()){
+						StockFunctionPanel parent = (StockFunctionPanel)GetPanelUtil.getFunctionPanel(this);
+						parent.alertBtn.setAlert(true);
+						if(ELSComfirmDialog.showConfirmDlg(this, "库存报警", "是否跳转至库存调整界面")){
+							parent.setChosenFunction("stockadjust");
+						}
+					}
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				LogUtil.addLog("新增入库单");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
 						"添加成功");

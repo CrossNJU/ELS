@@ -181,6 +181,10 @@ public class LoginPanel extends ELSPanel{
 	
 	public void login(){
 		try {
+			ConstantVal.constantbl = ConstantVal.getConstant();
+			ConstantVal.numberbl = ConstantVal.getNumber();
+			ConstantVal.CONSTANT = ConstantVal.constantbl.show();
+			LogUtil.initLogBl();
 			blFactory = new BLFactoryImpl();
 			userbl = blFactory.getUserBLService();
 			organbl = blFactory.organizationBLService();
@@ -198,9 +202,7 @@ public class LoginPanel extends ELSPanel{
 				UIConstant.CURRENT_USER = null;
 				UIConstant.CURRENT_ORG = null;
 			}else{
-				ConstantVal.constantbl = ConstantVal.getConstant();
-				ConstantVal.numberbl = ConstantVal.getNumber();
-				LogUtil.initLogBl();
+				
 				UIConstant.CURRENT_USER = userbl.findById(id);
 				UIConstant.CURRENT_ORG = organbl.findById(UIConstant.CURRENT_USER.orgNameID);
 				ConstantVal.currentReceipts = receiptbl.show();
@@ -265,6 +267,10 @@ public class LoginPanel extends ELSPanel{
 				login();
 			}else if(e.getSource()==checkBtn){
 				try {
+					ConstantVal.constantbl = ConstantVal.getConstant();
+					ConstantVal.numberbl = ConstantVal.getNumber();
+					ConstantVal.CONSTANT = ConstantVal.constantbl.show();
+					LogUtil.initLogBl();
 					blFactory = new BLFactoryImpl();
 					userbl = blFactory.getUserBLService();
 					organbl = blFactory.organizationBLService();

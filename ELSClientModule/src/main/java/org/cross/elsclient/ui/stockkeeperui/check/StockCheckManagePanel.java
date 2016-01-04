@@ -45,7 +45,7 @@ public class StockCheckManagePanel extends ELSManagePanel{
 	public void setContentPanel(){
 		super.setContentPanel();
 		String[] name = {"快件单编号","入库时间","目的地","所属小间"};
-		int[] itemWidth = {200,200,200,100};
+		int[] itemWidth = {200,200,100,200};
 		list = new StockCheckManageTable(name, itemWidth);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,UIConstant.CONTENTPANEL_MARGIN_TOP);
 		for(StockCheckVO check : checkvos){

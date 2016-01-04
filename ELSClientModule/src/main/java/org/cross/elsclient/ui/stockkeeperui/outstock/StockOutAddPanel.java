@@ -58,7 +58,7 @@ public class StockOutAddPanel extends ELSInfoPanel {
 		/* 0 */addEditableItem("出库单编号", number, false, "number");
 		addEditableItem("快件单编号", "", true, InfoType.RECEIPT, "goodsnum");
 		addDateItem("出库时间", false, "time");
-		addEditableItem("目的地", "", true, InfoType.ORGANIZATION, "des");
+		addEditableItem("目的地", "", true, InfoType.NAME, "des");
 		addEditableItem("中转/装车单号", "", true, InfoType.RECEIPT, "transnum");
 		addComboxItem("运输方式", it1, true, "vehtype");
 		addConfirmAndCancelBtn();
@@ -87,6 +87,7 @@ public class StockOutAddPanel extends ELSInfoPanel {
 			goodsvo.stockAreaNum = "null";
 			goodsbl.updateGoods(goodsvo);
 			if (receiptbl.add(stockoutvo) == ResultMessage.SUCCESS) {
+				stockvo = stockbl.findStock(stockvo.number);
 				LogUtil.addLog("新增出库单");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
 						"添加成功");

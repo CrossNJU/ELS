@@ -26,13 +26,13 @@ public class InfoFormatUtil {
 		case PASSWORD:
 			return CheckPasswordFormat(src);
 		case RECEIPT:
-			return CheckString(src);//待更改
+			return checkReceipt(src);//待更改
 		case ORGANIZATION:
-			return CheckString(src);//待更改
+			return checkOrgan(src);//待更改
 		case PERSONNEL:
-			return CheckString(src);//待更改
+			return checkPersonnel(src);//待更改
 		case STOCKAREA:
-			return CheckString(src);//待更改
+			return checkStockArea(src);//待更改
 		default:
 			break;
 		}
@@ -107,7 +107,7 @@ public class InfoFormatUtil {
 			return "人员编号应以P开头";
 		}else if(src.length()!=8){
 			return "编号长度应为8位";
-		}else if(isContainNum(src.substring(1,src.length()))){
+		}else if(!isContainNum(src.substring(1,src.length()))){
 			return "含非法字符";
 		}
 		
@@ -129,7 +129,7 @@ public class InfoFormatUtil {
 			return "机构编号应以O开头";
 		}else if(src.length()!=8){
 			return "编号长度应为8位";
-		}else if(isContainNum(src.substring(1,src.length()))){
+		}else if(!isContainNum(src.substring(1,src.length()))){
 			return "含非法字符";
 		}
 		
@@ -146,7 +146,7 @@ public class InfoFormatUtil {
 			return "单据编号应以R开头";
 		}else if(src.length()!=8){
 			return "编号长度应为8位";
-		}else if(isContainNum(src.substring(1,src.length()))){
+		}else if(!isContainNum(src.substring(1,src.length()))){
 			return "含非法字符";
 		}
 		
@@ -156,7 +156,7 @@ public class InfoFormatUtil {
 	public static String checkStockArea(String src){
 		if(!src.substring(0, 2).equals("SA")){
 			return "单据编号应以SA开头";
-		}else if(isContainNum(src.substring(1,src.length()))){
+		}else if(!isContainNum(src.substring(1,src.length()))){
 			return "含非法字符";
 		}
 		return null;
