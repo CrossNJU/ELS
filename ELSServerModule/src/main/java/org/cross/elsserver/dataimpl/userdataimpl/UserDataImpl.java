@@ -104,7 +104,7 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 		try {
 			if (rs.next()) {
 				String md5 = rs.getString("password");
-				if(!md5.equals("123456")) md5 = PwdMD5.convertMD5(md5);
+				md5 = PwdMD5.convertMD5(md5);
 //				System.out.println("md5:"+md5);
 				po = new UserPO(rs.getString("number"), rs.getString("name"),
 						StringToType.toUserType(rs.getString("type")), md5,

@@ -92,7 +92,7 @@ public class StockInAddPanel extends ELSInfoPanel {
 			goodsbl.updateGoods(goodsvo);
 			if (receiptbl.add(stockinvo) == ResultMessage.SUCCESS) {
 				try {
-					stockvo = stockbl.findStock(stockvo.number);
+					stockvo = stockbl.findStockByOrg(user.orgNameID);
 					if(!stockbl.getNeedChange(stockvo.number).isEmpty()){
 						StockFunctionPanel parent = (StockFunctionPanel)GetPanelUtil.getFunctionPanel(this);
 						parent.alertBtn.setAlert(true);

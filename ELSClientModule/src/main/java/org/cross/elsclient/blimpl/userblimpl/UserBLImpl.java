@@ -90,8 +90,11 @@ public class UserBLImpl implements UserBLService{
 		if (pos == null) {
 			return UserType.NOTFOUND;
 		}else {
+			if (pos.getNumber().equals("1")&&pos.getPassword().equals("123456")) {
+				return UserType.ADMINISTRATOR;
+			}
 			String md5=password;
-			if(!pos.getNumber().equals("1"))  md5= PwdMD5.string2MD5(password);
+			md5= PwdMD5.string2MD5(password);
 //			System.out.println("md5:c:"+md5);
 			if (pos.getPassword().equals(md5)) {
 				return pos.getType();
