@@ -88,23 +88,23 @@ public class ELSServerPanel extends ELSPanel{
 		infoLabel.setForeground(Color.white);
 		
 		stateLabel.setText("服务器状态:未启动");
-		stateLabel.setBounds(504, 120, 200, 48);
+		stateLabel.setBounds(544, 120, 150, 48);
 		stateLabel.setHorizontalAlignment(JLabel.LEFT);
 		stateLabel.setFont(getFont().deriveFont(18f));
 		stateLabel.setForeground(UIConstant.MAINCOLOR);
 		stateLabel.setForeground(Color.white);
 		
 		ipLabel.setText(NetWork.current_ip);
-		ipLabel.setBounds(125, 120, 120, 48);
+		ipLabel.setBounds(125, 120, 160, 48);
 		ipLabel.setHorizontalAlignment(JLabel.LEFT);
 		ipLabel.setFont(getFont().deriveFont(18f));
 		ipLabel.setForeground(Color.white);
 		
 		portField.setText(NetWork.port+"");
-		portField.setBounds(245, 120, 80, 48);
+		portField.setBounds(285, 120, 80, 48);
 		portField.setFont(getFont().deriveFont(18f));
 		
-		changeBtn.setLocation(340, 120);
+		changeBtn.setLocation(380, 120);
 		changeBtn.setText("更改端口");
 		changeBtn.addMouseListener(new ELSListener());
 		

@@ -96,8 +96,11 @@ public class StockInAddPanel extends ELSInfoPanel {
 					if(!stockbl.getNeedChange(stockvo.number).isEmpty()){
 						StockFunctionPanel parent = (StockFunctionPanel)GetPanelUtil.getFunctionPanel(this);
 						parent.alertBtn.setAlert(true);
-						if(ELSComfirmDialog.showConfirmDlg(this, "库存报警", "是否跳转至库存调整界面")){
+						if(ELSComfirmDialog.showConfirmDlg(parent, "库存报警", "是否跳转至库存调整界面")){
 							parent.setChosenFunction("stockadjust");
+						}else{
+							parent.setChosenFunction("receipts");
+							init();
 						}
 					}
 				} catch (RemoteException e) {
@@ -109,10 +112,7 @@ public class StockInAddPanel extends ELSInfoPanel {
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
 						"添加成功");
 				ConstantVal.numberbl.addone(NumberType.RECEIPT, number);
-				ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-				// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
-				parent.setChosenFunction("receipts");
-				init();
+				
 			} else {
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
 						"添加失败");

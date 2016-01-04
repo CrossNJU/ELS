@@ -54,22 +54,22 @@ public class ExpressReceivePanel extends ELSInfoPanel{
 		setTitle("创建快件单");
 		number = ConstantVal.numberbl.getPostNumber(NumberType.RECEIPT);
 		addEditableItem("快件单编号",number , false,"id");
-		addEditableItem("寄件人姓名", "", true,"sendName");
-		addEditableItem("寄件人地址", "", true,"sendAd");
-		addEditableItem("寄件人单位", "", true,"sendUnit");
-		addEditableItem("寄件人电话", "", true,"sendPhone");
+		addEditableItem("寄件人姓名", "", true,InfoType.NAME,"sendName");
+		addEditableItem("寄件人地址", "", true,InfoType.NAME,"sendAd");
+		addEditableItem("寄件人单位", "", true,InfoType.NAME,"sendUnit");
+		addEditableItem("寄件人电话", "", true,InfoType.TELEPHONE,"sendPhone");
 		//5
-		addEditableItem("寄件人手机", "", true,"sendCell");
-		addEditableItem("收件人姓名", "", true,"reName");
-		addEditableItem("收件人地址", "", true,"reAd");
-		addEditableItem("收件人单位", "", true,"reUnit");
-		addEditableItem("收件人电话", "", true,"rePhone");
+		addEditableItem("寄件人手机", "", true,InfoType.CELLPHONE,"sendCell");
+		addEditableItem("收件人姓名", "", true,InfoType.NAME,"reName");
+		addEditableItem("收件人地址", "", true,InfoType.NAME,"reAd");
+		addEditableItem("收件人单位", "", true,InfoType.NAME,"reUnit");
+		addEditableItem("收件人电话", "", true,InfoType.TELEPHONE,"rePhone");
 		//10
-		addEditableItem("收件人手机", "", true,"reCell");
+		addEditableItem("收件人手机", "", true,InfoType.CELLPHONE,"reCell");
 		addComboxItem("出发城市", City.toStrings(), true,"from");
 		addComboxItem("到达城市", City.toStrings(), true,"to");
 		addComboxItem("快递类型", StockType.toGoodsStrings(), true,"type");
-		addEditableItem("货物件数", "1", true,InfoType.NUM,"num");
+		addEditableItem("货物件数", "1", true,InfoType.PURENUM,"num");
 		//15
 		addAutoItem("货物重量(kg)", "", true,InfoType.NUM,"weight");
 		addAutoItem("体积(长/cm)", "", true, InfoType.NUM, "length");

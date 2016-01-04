@@ -33,6 +33,8 @@ public class InfoFormatUtil {
 			return checkPersonnel(src);//待更改
 		case STOCKAREA:
 			return checkStockArea(src);//待更改
+		case PURENUM:
+			return CheckPureNumFormat(src);
 		default:
 			break;
 		}
@@ -102,6 +104,17 @@ public class InfoFormatUtil {
 		return null;
 	}
 	
+	public static String CheckPureNumFormat(String src){
+		 char c[] = src.toCharArray();
+		 
+		 for (char ch : c) {
+			if(ch<'0'||ch>'9'){
+				return "包含非数字字符";
+			}
+		}
+		return null;
+	}
+	
 	public static String checkPersonnel(String src){
 		if(src.charAt(0)!='P'){
 			return "人员编号应以P开头";
@@ -156,6 +169,8 @@ public class InfoFormatUtil {
 	public static String checkStockArea(String src){
 		if(!src.substring(0, 2).equals("SA")){
 			return "单据编号应以SA开头";
+		}else if(src.length()!=11){
+			return "编号长度应为11位";
 		}else if(!isContainNum(src.substring(1,src.length()))){
 			return "含非法字符";
 		}

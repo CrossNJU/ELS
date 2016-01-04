@@ -12,6 +12,7 @@ import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.stockkeeperui.StockFunctionPanel;
 import org.cross.elsclient.ui.util.ConstantValue;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
@@ -87,6 +88,11 @@ public class StockOutAddPanel extends ELSInfoPanel {
 			goodsvo.stockAreaNum = "null";
 			goodsbl.updateGoods(goodsvo);
 			if (receiptbl.add(stockoutvo) == ResultMessage.SUCCESS) {
+				stockvo = stockbl.findStockByOrg(user.orgNameID);
+				if(stockbl.getNeedChange(stockvo.number).isEmpty()){
+					StockFunctionPanel parent = (StockFunctionPanel)GetPanelUtil.getFunctionPanel(this);
+					parent.alertBtn.setAlert(false);
+				}
 				stockvo = stockbl.findStock(stockvo.number);
 				LogUtil.addLog("新增出库单");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),

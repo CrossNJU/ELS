@@ -6,6 +6,7 @@ public enum InfoType {
 	TELEPHONE,//电话
 	CELLPHONE,//手机
 	NUM,//数字
+	PURENUM,//整数
 	PASSWORD,//密码
 	ID,//编号
 	RECEIPT,//单据
