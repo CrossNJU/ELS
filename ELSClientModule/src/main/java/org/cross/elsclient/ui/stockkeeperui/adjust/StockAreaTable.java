@@ -25,7 +25,7 @@ public class StockAreaTable extends ELSManageTable{
 	public void addItem(StockAreaVO vo){
 		vos.add(vo);
 		double p = (double)vo.usedCapacity/vo.totalCapacity*100;
-		String[] item = {vo.number, p+"%"};
+		String[] item = {vo.number,vo.stockType.toString(), p+"%"};
 		addItemLabel(item);
 	}
 

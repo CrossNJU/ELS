@@ -55,7 +55,7 @@ public class StockBLImpl implements StockBLService {
 		int size = areaPO.size();
 
 		for (int i = 0; i < size; i++) {
-			System.out.println("area num :" + areaPO.get(i).getNumber());
+//			System.out.println("area num :" + areaPO.get(i).getNumber());
 			ArrayList<GoodsVO> goodsPOs = goodsInfo.findGoodsFromArea(areaPO
 					.get(i).getNumber());
 
@@ -63,7 +63,7 @@ public class StockBLImpl implements StockBLService {
 				continue;
 
 			int size1 = goodsPOs.size();
-			System.out.println("goods size : " + size1);
+//			System.out.println("goods size : " + size1);
 			for (int j = 0; j < size1; j++) {
 //				System.out.println("instock:"+goodsPOs.get(j).number+" "+areaPO.get(i).getNumber());
 				String inTime = "";
@@ -81,7 +81,7 @@ public class StockBLImpl implements StockBLService {
 				StockCheckVO check = new StockCheckVO(goodsPOs.get(j).number,
 						inTime, targetCity, areaPO.get(i).getNumber());
 				checkVOs.add(check);
-				System.out.println("checkvos size : " + checkVOs.size());
+//				System.out.println("checkvos size : " + checkVOs.size());
 			}
 		}
 		return checkVOs;
@@ -92,7 +92,7 @@ public class StockBLImpl implements StockBLService {
 			throws RemoteException {
 		ArrayList<StockOperationPO> stockOperationPOs = stockData
 				.findStockOPByTimeAndStock(stockID, time1, time2);
-		System.out.println("opsize:"+stockOperationPOs.size());
+//		System.out.println("opsize:"+stockOperationPOs.size());
 		int totalInStock = stockData.findStockByNumber(stockID).getNumInStock();
 		int numIn = 0, numOut = 0, moneyIn = 0, moneyOut = 0;
 		int size = stockOperationPOs.size();
@@ -154,7 +154,7 @@ public class StockBLImpl implements StockBLService {
 		ResultMessage updateMessage = ResultMessage.SUCCESS;
 		GoodsVO goodsVO = goodsInfo.searchGoods(goodsID);
 		if (goodsVO == null) {
-			System.out.println("goodsVo = null");
+//			System.out.println("goodsVo = null");
 			return ResultMessage.FAILED;
 		}
 		String areaNum = goodsInfo.findStockAreaNum(goodsID);
@@ -214,7 +214,7 @@ public class StockBLImpl implements StockBLService {
 		if (areaPO == null)
 			return ResultMessage.FAILED;
 
-		System.out.println("areapo stockNum     " + areaPO.getStockNum());
+//		System.out.println("areapo stockNum     " + areaPO.getStockNum());
 
 		if (!areaPO.getStockNum().equals(stockID)) {
 			return ResultMessage.FAILED;

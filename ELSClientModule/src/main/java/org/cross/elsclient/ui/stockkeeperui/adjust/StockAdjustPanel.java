@@ -62,8 +62,8 @@ public class StockAdjustPanel extends ELSInfoPanel {
 		/* 0 */addComboxItem("需要调整的类型", it1, true, "needs");
 		addComboxItem("需要配合的仓库", it2, true, "change");
 		
-		String[] s = {"仓库小间编号","用量"};
-		int[] itemWidth = {300,100};
+		String[] s = {"仓库小间编号","仓库小间类型","用量"};
+		int[] itemWidth = {250,200,100};
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认调整");
 		cancelBtn.setVisible(false);
