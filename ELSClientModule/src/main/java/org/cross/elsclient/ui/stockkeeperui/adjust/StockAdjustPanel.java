@@ -10,6 +10,8 @@ import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
+import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.vo.StockAreaVO;
 import org.cross.elsclient.vo.StockVO;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.util.ResultMessage;
@@ -20,6 +22,8 @@ public class StockAdjustPanel extends ELSInfoPanel {
 	StockBLService stockbl;
 	UserVO user;
 	StockVO stockvo;
+	
+	StockAreaTable areaTable;
 
 	public StockAdjustPanel(StockBLService stockbl, UserVO user, StockVO stockvo) {
 		this.stockbl = stockbl;
@@ -52,14 +56,25 @@ public class StockAdjustPanel extends ELSInfoPanel {
 
 		} catch (RemoteException e) {
 			e.printStackTrace();
-		}
-
+		}		
 		setTitle("调整库存");
 		/* 0 */addComboxItem("需要调整的类型", it1, true, "needs");
 		addComboxItem("需要配合的仓库", it2, true, "change");
+		
+		String[] s = {"仓库小间编号","用量"};
+		int[] itemWidth = {300,100};
 		addConfirmAndCancelBtn();
 		confirmBtn.setText("确认调整");
 		cancelBtn.setVisible(false);
+		
+		areaTable = new StockAreaTable(s, itemWidth);
+		ArrayList<StockAreaVO> vos = stockvo.stockAreaVOs;
+		for (StockAreaVO vo : vos) {
+			areaTable.addItem(vo);
+		}
+		areaTable.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,300);
+		container.add(areaTable);
+		
 		container.packHeight();
 	}
 

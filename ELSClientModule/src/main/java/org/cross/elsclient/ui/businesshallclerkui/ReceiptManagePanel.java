@@ -80,6 +80,7 @@ public class ReceiptManagePanel extends ELSManagePanel{
 		datePicker2.setVisible(false);
 		
 		searchPanel.add(datePicker2,3);
+		searchPanel.add(Box.createHorizontalStrut(5), 3);
 		searchPanel.add(datePicker1,3);
 		searchPanel.validate();
 	}
