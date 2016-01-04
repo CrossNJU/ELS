@@ -9,6 +9,12 @@ public class NetWork {
 	public static String current_ip = "127.0.0.1";
 	public static String preAddress = "rmi://localhost:";
 	
+	public static void setClient(String ip, int p){
+		current_ip = ip;
+		port = p;
+		preAddress = "rmi://"+current_ip+":";
+	}
+	
 	public static void setpreAddress(){
 		try {
 			current_ip =  InetAddress.getLocalHost().getHostAddress();

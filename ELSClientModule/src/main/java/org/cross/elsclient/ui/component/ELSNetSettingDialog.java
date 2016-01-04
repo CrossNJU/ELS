@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import org.cross.elsclient.ui.LoginPanel;
 import org.cross.elsclient.ui.MainUI;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elscommon.util.NetWork;
 
 public class ELSNetSettingDialog extends JDialog{
 	private static ELSNetSettingDialog instance = new ELSNetSettingDialog();
@@ -105,6 +106,8 @@ public class ELSNetSettingDialog extends JDialog{
 	}
 	
 	public static String showNetDig(Component comp) {
+		instance.ipField.setText(NetWork.current_ip);
+		instance.portField.setText(NetWork.port+"");
 		instance.titleLabel.setBackground(UIConstant.MAINCOLOR_OPACITY_90);
 		instance.setLocationRelativeTo(comp);// 使得对话框显示在comp的中间
 		instance.setVisible(true);// 显示对话框时候，调用它的线程被阻塞
@@ -150,6 +153,7 @@ public class ELSNetSettingDialog extends JDialog{
 	
 	public void ok(){
 		ret = instance.ipField.getText()+"+"+instance.portField.getText();
+		NetWork.setClient(instance.ipField.getText(), Integer.valueOf(instance.portField.getText()));
 		setVisible(false);
 	}
 	
