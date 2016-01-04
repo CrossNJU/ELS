@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.po.UserPO;
+import org.cross.elscommon.util.PwdMD5;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.StringToType;
 import org.cross.elscommon.util.UserType;
@@ -29,6 +30,10 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 
 	@Override
 	public ResultMessage insert(UserPO po) throws RemoteException {
+		
+		String pwd = po.getPassword();
+		po.setPassword(PwdMD5.convertMD5(PwdMD5.string2MD5(pwd)));
+		
 		String sql = "insert ignore into `user`(`number`,`name`,`password`,`type`,`orgNum`) values ('" + po.getNumber()
 				+ "','" + po.getName() + "','" + po.getPassword() + "','" + po.getType().toString() + "','"
 				+ po.getOrgNum() + "')";
@@ -98,8 +103,11 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 		UserPO po = null;
 		try {
 			if (rs.next()) {
+				String md5 = rs.getString("password");
+				if(!md5.equals("123456")) md5 = PwdMD5.convertMD5(md5);
+//				System.out.println("md5:"+md5);
 				po = new UserPO(rs.getString("number"), rs.getString("name"),
-						StringToType.toUserType(rs.getString("type")), rs.getString("password"),
+						StringToType.toUserType(rs.getString("type")), md5,
 						rs.getString("orgNum"));
 			}
 		} catch (SQLException e) {
@@ -109,4 +117,17 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 		return po;
 	}
 
+	public static void main(String[] args){
+		UserDataImpl impl;
+		
+		try {
+			impl = new UserDataImpl();
+			UserPO po = impl.findById("U001");
+			System.out.println(po.getName());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }

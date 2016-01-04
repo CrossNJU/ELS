@@ -8,6 +8,7 @@ import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.vo.UserVO;
 import org.cross.elscommon.dataservice.userdataservice.UserDataService;
 import org.cross.elscommon.po.UserPO;
+import org.cross.elscommon.util.PwdMD5;
 import org.cross.elscommon.util.ResultMessage;
 import org.cross.elscommon.util.UserType;
 
@@ -89,7 +90,10 @@ public class UserBLImpl implements UserBLService{
 		if (pos == null) {
 			return UserType.NOTFOUND;
 		}else {
-			if (pos.getPassword().equals(password)) {
+			String md5=password;
+			if(!pos.getNumber().equals("1"))  md5= PwdMD5.string2MD5(password);
+//			System.out.println("md5:c:"+md5);
+			if (pos.getPassword().equals(md5)) {
 				return pos.getType();
 			}else
 				return UserType.PWDERROR;
