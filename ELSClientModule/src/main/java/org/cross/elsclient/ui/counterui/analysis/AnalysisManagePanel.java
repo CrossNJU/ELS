@@ -145,23 +145,26 @@ public class AnalysisManagePanel extends ELSManagePanel {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if(beginDate.getDate().compareTo(endDate.getDate())<1){
-				receiptVOs = new ArrayList<>();
-				list2.init();
-				try {
-					receiptVOs.addAll(analysisbl.showMoneyinTable(beginDate.getDateString(), endDate.getDateString()));
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			if(e.getSource()==searchBtn){
+				if(beginDate.getDate().compareTo(endDate.getDate())<1){
+					receiptVOs = new ArrayList<>();
+					list2.init();
+					try {
+						receiptVOs.addAll(analysisbl.showMoneyinTable(beginDate.getDateString(), endDate.getDateString()));
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					receiptVOs.addAll(analysisbl.showMoneyoutTable(beginDate.getDateString(), endDate.getDateString()));
+					for (ReceiptVO receiptVO : receiptVOs) {
+						list2.addItem(receiptVO);
+					}
+					container.packHeight();
+				}else{
+					ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getMainFrame(AnalysisManagePanel.this), "时间矛盾", "起始时间大于结束时间");
 				}
-				receiptVOs.addAll(analysisbl.showMoneyoutTable(beginDate.getDateString(), endDate.getDateString()));
-				for (ReceiptVO receiptVO : receiptVOs) {
-					list2.addItem(receiptVO);
-				}
-				container.packHeight();
-			}else{
-				ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getMainFrame(AnalysisManagePanel.this), "时间矛盾", "起始时间大于结束时间");
 			}
+			
 		}
 
 		@Override

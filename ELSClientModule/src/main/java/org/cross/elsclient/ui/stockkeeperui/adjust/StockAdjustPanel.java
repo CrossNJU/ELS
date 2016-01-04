@@ -8,6 +8,7 @@ import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSFunctionPanel;
 import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
+import org.cross.elsclient.ui.stockkeeperui.StockFunctionPanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
 import org.cross.elsclient.ui.util.UIConstant;
@@ -82,14 +83,19 @@ public class StockAdjustPanel extends ELSInfoPanel {
 	protected void confirm() throws RemoteException {
 		if (isAllLegal()) {
 			String id = findItem("change").toString();
-			String type = findItem("needs").toString().split("-")[1];
+			String type = findItem("needs").toString();
 			if (stockbl.stockAdjust(id, StringToType.toGoodsType(type)) == ResultMessage.SUCCESS) {
+				if(stockbl.getNeedChange(stockvo.number).isEmpty()){
+					StockFunctionPanel parent = (StockFunctionPanel)GetPanelUtil.getFunctionPanel(this);
+					parent.alertBtn.setAlert(false);
+				}
 				LogUtil.addLog("库存调整");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
 						"调整成功");
-				ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
-				// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
-				parent.setChosenFunction("receipts");
+//				ELSFunctionPanel parent = GetPanelUtil.getFunctionPanel(this);
+//				// parent.contentPanel.cl.show(parent.contentPanel, "receipts");
+//				parent.setChosenFunction("receipts");
+				init();
 			} else {
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),
 						"调整失败");
