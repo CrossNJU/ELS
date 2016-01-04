@@ -23,6 +23,7 @@ public class MoneyInfoPanel extends ELSInfoPanel{
 		for (int i = 0; i < vo.orderNumbers.size()-1; i++) {
 			goodsNum+=vo.orderNumbers.get(i)+";";
 		}
+		if(vo.orderNumbers.size()>0) goodsNum+=vo.orderNumbers.get(vo.orderNumbers.size()-1);
 		
 		setTitle("收款单信息");
 		addNormalItem("收款单编号", vo.number);

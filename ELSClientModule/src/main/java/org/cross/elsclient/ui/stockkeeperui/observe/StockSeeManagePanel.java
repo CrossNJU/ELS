@@ -88,6 +88,19 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		listSecond = new StockSeeManageTableSecond(s2, itemWidth2);
 		listSecond.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,listFirst.getHeight()+listFirst.getLocation().y+15);
 		container.add(listSecond);
+
+		try {
+			stocksee = stockbl.showStockInfo(stock.number, "1000-1-1", "3000-1-1");
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		listFirst.init();
+		listFirst.addItem(stocksee);
+		listSecond.init();
+		for (int i = 0; i < stocksee.goods.size(); i++) {
+			listSecond.addItem(stocksee.goods.get(i));
+		}
 	}
 	
 
@@ -96,8 +109,8 @@ public class StockSeeManagePanel extends ELSManagePanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			System.out.println("begin : " + beginDate.getDateString());
-			System.out.println("end : " + endDate.getDateString());
+//			System.out.println("begin : " + beginDate.getDateString());
+//			System.out.println("end : " + endDate.getDateString());
 			try {
 				stocksee = stockbl.showStockInfo(stock.number, beginDate.getDateString(), endDate.getDateString());
 			} catch (RemoteException e1) {
@@ -106,6 +119,7 @@ public class StockSeeManagePanel extends ELSManagePanel{
 			}
 			listFirst.init();
 			listFirst.addItem(stocksee);
+			listSecond.init();
 			for (int i = 0; i < stocksee.goods.size(); i++) {
 				listSecond.addItem(stocksee.goods.get(i));
 			}

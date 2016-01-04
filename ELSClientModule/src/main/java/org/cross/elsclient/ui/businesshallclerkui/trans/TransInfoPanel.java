@@ -18,11 +18,11 @@ public class TransInfoPanel extends ELSInfoPanel{
 	@Override
 	public void init(){
 		super.init();
-		
 		String goodsNum = "";
 		for (int i = 0; i < vo.goodsID.size()-1; i++) {
 			goodsNum+=vo.goodsID.get(i)+";";
 		}
+		if(vo.goodsID.size()>0) goodsNum+=vo.goodsID.get(vo.goodsID.size()-1);
 		
 		setTitle("创建装车单");
 		addNormalItem("装车单编号", vo.number);

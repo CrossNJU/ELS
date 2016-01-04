@@ -16,6 +16,7 @@ import org.cross.elsclient.ui.component.ELSPanel;
 import org.cross.elsclient.ui.counterui.cost.MoneyOutInfoPanel;
 import org.cross.elsclient.ui.counterui.settle.TotalInfoPanel;
 import org.cross.elsclient.ui.courierui.receive.ExpressReceivePanel;
+import org.cross.elsclient.ui.courierui.receive.OrderInfoPanel;
 import org.cross.elsclient.ui.stockkeeperui.instock.StockInInfoPanel;
 import org.cross.elsclient.ui.stockkeeperui.outstock.StockOutInfoPanel;
 import org.cross.elsclient.ui.util.GetPanelUtil;
@@ -24,6 +25,7 @@ import org.cross.elsclient.vo.Receipt_ArriveVO;
 import org.cross.elsclient.vo.Receipt_DeliverVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elsclient.vo.Receipt_MoneyOutVO;
+import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elsclient.vo.Receipt_StockInVO;
 import org.cross.elsclient.vo.Receipt_StockOutVO;
 import org.cross.elsclient.vo.Receipt_TotalMoneyInVO;
@@ -63,7 +65,8 @@ public class ReceiptManageTable extends ELSManageTable{
 			contentPanel.add("info", new TransInfoPanel((Receipt_TransVO)vo));
 			break;
 		case ORDER:
-//			contentPanel.add("info", new );
+			Receipt_OrderVO order = (Receipt_OrderVO)vo;
+			contentPanel.add("info", new OrderInfoPanel(order));
 			break;
 		case ARRIVE:
 			contentPanel.add("info", new ArriInfoPanel((Receipt_ArriveVO)vo));

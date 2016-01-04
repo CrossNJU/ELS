@@ -16,12 +16,13 @@ import org.cross.elscommon.util.StockType;
 
 public class OrderInfoPanel extends ELSInfoPanel{
 	Receipt_OrderVO orderVO;
-	GoodsVO goodsVO;
+//	GoodsVO goodsVO;
 	
-	public OrderInfoPanel(Receipt_OrderVO orderVO, GoodsVO goodsVO) {
+	public OrderInfoPanel(Receipt_OrderVO orderVO) {
 		super();
 		this.orderVO = orderVO;
-		this.goodsVO = goodsVO;
+		init();
+//		this.goodsVO = goodsVO;
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class OrderInfoPanel extends ELSInfoPanel{
 		addNormalItem("收件人电话", orderVO.receiverPhone);
 		//10
 		addNormalItem("收件人手机", orderVO.receiverMobile);
-		addNormalItem("快递类型", goodsVO.goodsType.toGoodsString());
+//		addNormalItem("快递类型", goodsVO.goodsType.toGoodsString());
 		addNormalItem("价格", orderVO.cost+"");
 		addNormalItem("建单人编号",orderVO.perNum);
 		//20

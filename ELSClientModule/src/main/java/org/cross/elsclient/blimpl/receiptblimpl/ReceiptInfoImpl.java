@@ -96,6 +96,9 @@ public class ReceiptInfoImpl implements ReceiptInfo {
 					transpo.getObserver(), transpo.getDriver(),
 					transpo.getPerNum());
 			transvo.approveState = transpo.getApproveState();
+			
+//			System.out.println("goods in trans:"+transvo.goodsID.size());
+			
 			return transvo;
 		case STOCKIN:
 			Receipt_StockInPO stockinpo = (Receipt_StockInPO) po;
