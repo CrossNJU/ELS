@@ -14,9 +14,29 @@ import org.cross.elscommon.util.ReceiptType;
 import org.cross.elscommon.util.ResultMessage;
 
 public interface ReceiptDataService extends Remote{
+	/**
+	 * 添加单据
+	 * @para 
+	 * @return ResultMessage
+	 */
 	public ResultMessage insert(ReceiptPO po) throws RemoteException;
+	/**
+	 * 删除单据
+	 * @para 
+	 * @return ResultMessage
+	 */
 	public ResultMessage delete(String number, ReceiptType type) throws RemoteException;
+	/**
+	 * 审批单据
+	 * @para 
+	 * @return ResultMessage
+	 */
 	public ResultMessage updateCheck(String number,String state) throws RemoteException;
+	/**
+	 * 更新单据
+	 * @para 
+	 * @return ResultMessage
+	 */
 	public ResultMessage update(ReceiptPO po)throws RemoteException;
 	public ArrayList<ReceiptPO> show() throws RemoteException;
 	public ReceiptPO findByNum(String number) throws RemoteException; 

@@ -14,9 +14,24 @@ import org.cross.elscommon.util.ResultMessage;
 
 public interface LogDataService extends Remote{
 
+	/**
+	 * 添加系统日志
+	 * @para 
+	 * @return ResultMessage
+	 */
 	public ResultMessage insert(LogPO po) throws RemoteException;
 
+	/**
+	 * 查找系统日志
+	 * @para 
+	 * @return ArrayList<LogPO>
+	 */
 	public ArrayList<LogPO> find(String startTime, String endTime) throws RemoteException;
 
+	/**
+	 * 展示系统日志
+	 * @para 
+	 * @return ArrayList<LogPO>
+	 */
 	public ArrayList<LogPO> show() throws RemoteException;
 }

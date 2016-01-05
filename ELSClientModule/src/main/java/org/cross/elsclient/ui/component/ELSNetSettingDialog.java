@@ -105,6 +105,11 @@ public class ELSNetSettingDialog extends JDialog{
 		setResizable(false);
 	}
 	
+	/**
+	 * 显示网络设置界面
+	 * @para 
+	 * @return String
+	 */
 	public static String showNetDig(Component comp) {
 		instance.ipField.setText(NetWork.current_ip);
 		instance.portField.setText(NetWork.port+"");

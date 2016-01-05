@@ -128,6 +128,11 @@ public class ELSFunctionPanel extends ELSPanel {
 		this.add(btn,2);
 	}
 	
+	/**
+	 * 添加报警按钮
+	 * @para text-按钮文字，text-功能名称
+	 * @return void
+	 */
 	public void addAlertBtn(String text,String functionName){
 		AlertFunctionBtn btn = new AlertFunctionBtn();
 		btn.setBtnText(text);
@@ -159,6 +164,11 @@ public class ELSFunctionPanel extends ELSPanel {
 		contentPanel.add(container,functionName);
 	}
 	
+	/**
+	 * 跳转子功能界面
+	 * @para functionName-功能名称
+	 * @return void
+	 */
 	public void setChosenFunction(String functionName){
 		for (FunctionBtn elsButton : functionBtns) {
 			if(elsButton.getName()!=functionName){
@@ -183,6 +193,11 @@ public class ELSFunctionPanel extends ELSPanel {
 		contentPanel.cl.show(contentPanel, functionName);
 	}
 	
+	/**
+	 * 获取子功能界面
+	 * @para name-功能名称
+	 * @return ELSPanel
+	 */
 	public ELSPanel getSubFunctionPanel(String name){
 		for (ELSPanel elsPanel : functionPanels) {
 			if(elsPanel.getName().equals(name)){
