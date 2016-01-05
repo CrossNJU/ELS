@@ -18,7 +18,7 @@ public class InfoFormatUtil {
 		case NAME:
 			return CheckString(src);
 		case IDCARD:
-			return CheckString(src);//待更改
+			return CheckIDCardFormat(src);//待更改
 		case CELLPHONE:
 			return CheckCellPhoneFormat(src);
 		case NUM:
