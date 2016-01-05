@@ -101,7 +101,7 @@ public class ELSInfoPanel extends ELSScrollPane {
 	public void addNormalItem(String name, String content) {
 		InfoItemLabel itemLabel = new InfoItemLabel();
 		itemLabel.initNormal(name, content);
-
+		itemLabel.setName("");
 		itemLabels.add(itemLabel);
 //		contentLabels.add(contentLabel);
 		infoPanel.setSize(infoPanel.getWidth(), infoPanel.getHeight()
