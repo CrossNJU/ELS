@@ -42,7 +42,7 @@ public class DriverManagePanel extends ELSManagePanel {
 		// TODO Auto-generated method stub
 		super.setContentPanel();
 		String[] s = { "司机编号", "姓名", "性别", "手机", "车辆单位" };
-		int[] itemWidth = { 100, 200, 100, 200, 200 };
+		int[] itemWidth = { 150, 200, 100, 200, 200 };
 		list = new DriverManageTable(s, itemWidth, personnelbl, user);
 		list.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT,
 				UIConstant.CONTENTPANEL_MARGIN_TOP * 2 + UIConstant.SEARCHPANEL_HEIGHT);

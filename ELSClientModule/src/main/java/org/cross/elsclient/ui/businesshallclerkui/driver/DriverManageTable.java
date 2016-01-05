@@ -44,14 +44,14 @@ public class DriverManageTable extends ELSManageTable{
 		vos.add(vo);
 		int index = vos.indexOf(vo);
 
-		String[] item = { vo.id, vo.name, vo.sex, vo.phone + vo.orgNum };
+		String[] item = { vo.number, vo.name, vo.sex, vo.phone + vo.orgNum };
 		addItemLabel(item);
 	}
 
 	@Override
 	public void infoBtn(int index) {
 		super.infoBtn(index);
-		ELSPanel contentPanel = (ELSPanel) getParent().getParent().getParent();
+		ELSPanel contentPanel = GetPanelUtil.getSubFunctionPanel(this, "driver");
 		DriverVO vo = vos.get(index);
 		contentPanel.add(new DriverInfoPanel(vo, user), "info");
 		contentPanel.cl.show(contentPanel, "info");
