@@ -2,6 +2,7 @@ package org.cross.elsclient.ui.courierui.send;
 
 import java.rmi.RemoteException;
 
+import org.cross.elsclient.blservice.goodsblservice.GoodsBLService;
 import org.cross.elsclient.blservice.receiptblservice.ReceiptBLService;
 import org.cross.elsclient.blservice.userblservice.UserBLService;
 import org.cross.elsclient.ui.component.ELSComfirmDialog;
@@ -10,17 +11,24 @@ import org.cross.elsclient.ui.component.ELSInfoPanel;
 import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.LogUtil;
+import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.vo.GoodsVO;
+import org.cross.elsclient.vo.HistoryVO;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.Receipt_OrderVO;
 import org.cross.elscommon.util.InfoType;
+import org.cross.elscommon.util.OrganizationType;
 import org.cross.elscommon.util.ResultMessage;
+import org.cross.elscommon.util.TimeUtil;
 
 public class SendUpdatePanel extends ELSInfoPanel {
 	Receipt_OrderVO vo;
 	ReceiptBLService bl;
+	GoodsBLService goodsbl;
 	
-	public SendUpdatePanel(ReceiptBLService bl) {
+	public SendUpdatePanel(ReceiptBLService bl,GoodsBLService goodsbl) {
 		this.bl = bl;
+		this.goodsbl = goodsbl;
 		init();
 	}
 	
@@ -47,6 +55,9 @@ public class SendUpdatePanel extends ELSInfoPanel {
 		vo.receiveTime = findItem("time").toString();
 		vo.receiverName = findItem("per").toString();
 			if(bl.update(vo)==ResultMessage.SUCCESS){
+				GoodsVO goodsVO = goodsbl.searchGoods(vo.number);
+				goodsVO.history.add(new HistoryVO(TimeUtil.getCurrentTime(), UIConstant.CURRENT_ORG.city, OrganizationType.BUSINESSHALL, false));
+				goodsbl.updateGoods(goodsVO);
 				LogUtil.addLog("派送快件");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"派件成功");
 				this.init();

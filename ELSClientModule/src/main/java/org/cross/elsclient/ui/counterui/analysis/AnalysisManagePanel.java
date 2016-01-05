@@ -17,26 +17,32 @@ import org.cross.elsclient.ui.component.ELSComfirmDialog;
 import org.cross.elsclient.ui.component.ELSManagePanel;
 import org.cross.elsclient.ui.component.ELSManageTable;
 import org.cross.elsclient.ui.component.ELSPanel;
+import org.cross.elsclient.ui.component.ELSStateBar;
 import org.cross.elsclient.ui.component.TitlePanel;
 import org.cross.elsclient.ui.counterui.account.AccoutAddPanel;
 import org.cross.elsclient.ui.counterui.log.LogManagePanel;
 import org.cross.elsclient.ui.util.ComponentFactory;
 import org.cross.elsclient.ui.util.GetPanelUtil;
 import org.cross.elsclient.ui.util.UIConstant;
+import org.cross.elsclient.util.ExportExcel;
 import org.cross.elsclient.vo.AccountVO;
 import org.cross.elsclient.vo.ReceiptVO;
 import org.cross.elsclient.vo.Receipt_MoneyInVO;
 import org.cross.elsclient.vo.Receipt_MoneyOutVO;
+import org.cross.elscommon.util.ResultMessage;
 
 public class AnalysisManagePanel extends ELSManagePanel {
 	AnalysisBLService analysisbl;
 	ArrayList<ReceiptVO> receiptVOs;
+	String dataStrs[];
 	ELSDatePicker beginDate;
 	ELSDatePicker endDate;
 	ELSManageTable list1;
 	AnalysisManageTable list2;
 	TitlePanel title1;
 	TitlePanel title2;
+	ELSButton outBtn1;
+	ELSButton outBtn2;
 
 	public AnalysisManagePanel(AnalysisBLService analysisbl) {
 		super();
@@ -84,6 +90,7 @@ public class AnalysisManagePanel extends ELSManagePanel {
 		list1 = new ELSManageTable(name1, itemWidth1);
 		double[] data = analysisbl.showCostBenefitTable();
 		String[] item = {data[0]+"",data[1]+"",data[2]+""};
+		dataStrs = item;
 		list1.init();
 		list1.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, title1.getHeight()+title1.getLocation().y+15);
 		list1.addItemLabel(item);
@@ -120,19 +127,21 @@ public class AnalysisManagePanel extends ELSManagePanel {
 	public void setTitle(){
 		title1 = new TitlePanel();
 		title2 = new TitlePanel();
-		ELSButton btn1 = ComponentFactory.createExportBtn();
-		ELSButton btn2 = ComponentFactory.createExportBtn();
+		outBtn1 = ComponentFactory.createExportBtn();
+		outBtn2 = ComponentFactory.createExportBtn();
+		outBtn1.addMouseListener(new BtnListener());
+		outBtn2.addMouseListener(new BtnListener());
 		
 		title1.init("成本收益表");
 		title1.add(Box.createHorizontalGlue());
-		title1.add(btn1);
+		title1.add(outBtn1);
 		title1.add(Box.createHorizontalStrut(10));
 		title1.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, UIConstant.CONTENTPANEL_MARGIN_TOP);
 		title1.remove(title1.backBtn);
 		
 		title2.init("经营情况表");
 		title2.add(Box.createHorizontalGlue());
-		title2.add(btn2);
+		title2.add(outBtn2);
 		title2.add(Box.createHorizontalStrut(10));
 		title2.setLocation(UIConstant.CONTENTPANEL_MARGIN_LEFT, 200);
 		title2.remove(title2.backBtn);
@@ -162,6 +171,34 @@ public class AnalysisManagePanel extends ELSManagePanel {
 					container.packHeight();
 				}else{
 					ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getMainFrame(AnalysisManagePanel.this), "时间矛盾", "起始时间大于结束时间");
+				}
+			}else if(e.getSource()==outBtn1){
+				if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(AnalysisManagePanel.this), "导出报表", "是否导出成本收益表")){
+					String name[] = {"总支出","总收入","总利润"};
+					ArrayList<String[]> datas = new ArrayList<>();
+					datas.add(dataStrs);
+					if(ExportExcel.exportExcel(name, datas, "成本收益表")==ResultMessage.SUCCESS){
+						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(AnalysisManagePanel.this), "导出成本收益表成功");
+					}
+				}
+			}else if(e.getSource()==outBtn2){
+				if(ELSComfirmDialog.showConfirmDlg(GetPanelUtil.getFunctionPanel(AnalysisManagePanel.this), "导出报表", "是否导出成本收益表")){
+					String name[] = {"编号","单据类型","建单时间","金额"};
+					ArrayList<String[]> datas = new ArrayList<>();
+					for (ReceiptVO receiptVO : receiptVOs) {
+						if(receiptVO instanceof Receipt_MoneyInVO){
+							Receipt_MoneyInVO invo = (Receipt_MoneyInVO)receiptVO;
+							String []data = {receiptVO.number,receiptVO.type.toString(),receiptVO.time,invo.money+"元"};
+							datas.add(data);
+						}else if(receiptVO instanceof Receipt_MoneyOutVO){
+							Receipt_MoneyOutVO outvo = (Receipt_MoneyOutVO)receiptVO;
+							String []data = {receiptVO.number,receiptVO.type.toString(),receiptVO.time,outvo.money+"元"};
+							datas.add(data);
+						}
+					}
+					if(ExportExcel.exportExcel(name, datas, "经营情况表")==ResultMessage.SUCCESS){
+						ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(AnalysisManagePanel.this), "导出经营情况表成功");
+					}
 				}
 			}
 			
