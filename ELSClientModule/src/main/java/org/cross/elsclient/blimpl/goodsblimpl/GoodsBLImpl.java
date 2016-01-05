@@ -26,9 +26,15 @@ public class GoodsBLImpl implements GoodsBLService {
 
 	@Override
 	public ResultMessage updateGoods(GoodsVO goods) throws RemoteException {
-		ResultMessage addHistroy = goodsData.addHistory(goods.number, goodsInfo
+		ArrayList<HistoryVO> old = findGoods(goods.number);
+		
+		ResultMessage addHistroy = ResultMessage.SUCCESS;
+		
+		if (old.size() < goods.history.size()) {
+			addHistroy = goodsData.addHistory(goods.number, goodsInfo
 				.toHistroyPO(goods.history.get(goods.history.size() - 1),
 						goods.number));
+		}
 		ResultMessage updateMessage = goodsData.update(goodsInfo
 				.toGoodsPO(goods));
 		if (updateMessage == ResultMessage.SUCCESS
