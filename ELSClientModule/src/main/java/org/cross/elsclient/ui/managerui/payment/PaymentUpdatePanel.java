@@ -39,10 +39,10 @@ public class PaymentUpdatePanel extends ELSInfoPanel{
 		addEditableItem("基础工资", vo.salary.getSalaryByMonth()+"", true,InfoType.NUM,"basic");
 		switch (type) {
 		case ADDONCE:
-			addEditableItem("按次金额", vo.salary.getAddOnce()+"", true,InfoType.NUM,"num");
+			addEditableItem("按次金额", vo.salary.getAddOnce()+"", true,InfoType.NUM,"once");
 			break;
 		case ADDNUM:
-			addEditableItem("提成", vo.salary.getAddNum()+"", true,InfoType.NUM,"once");
+			addEditableItem("提成", vo.salary.getAddNum()+"", true,InfoType.NUM,"num");
 			break;
 		default:
 			break;
