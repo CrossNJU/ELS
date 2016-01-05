@@ -35,7 +35,7 @@ public class ExportExcel {
 		return list;
 	}
 
-	public static ResultMessage exportExcel(List list) {
+	public static ResultMessage exportExcel(String[] name, ArrayList<String[]> list, String filename) {
 		String success = "导出成功！";
 		HSSFWorkbook wb = new HSSFWorkbook();
 		HSSFSheet sheet = wb.createSheet("test");
@@ -44,31 +44,39 @@ public class ExportExcel {
 
 		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 
-		@SuppressWarnings("deprecation")
-		HSSFCell cell = row.createCell((short) 0);
-		cell.setCellValue("快件编号");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 1);
-		cell.setCellValue("入库时间");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 2);
-		cell.setCellValue("到达城市");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 3);
-		cell.setCellValue("存放位置");
-		cell.setCellStyle(style);
+//		@SuppressWarnings("deprecation")
+//		HSSFCell cell = row.createCell((short) 0);
+//		cell.setCellValue("快件编号");
+//		cell.setCellStyle(style);
+//		cell = row.createCell((short) 1);
+//		cell.setCellValue("入库时间");
+//		cell.setCellStyle(style);
+//		cell = row.createCell((short) 2);
+//		cell.setCellValue("到达城市");
+//		cell.setCellStyle(style);
+//		cell = row.createCell((short) 3);
+//		cell.setCellValue("存放位置");
+//		cell.setCellStyle(style);
+		for (int i = 0; i < name.length; i++) {
+			HSSFCell cell = row.createCell((short) i);
+			cell.setCellValue(name[i]);
+			cell.setCellStyle(style);
+		}
 
 		for (int i = 0; i < list.size(); i++) {
 			row = sheet.createRow((int) i + 1);
-			StockCheckVO check = (StockCheckVO) list.get(i);
+//			StockCheckVO check = (StockCheckVO) list.get(i);
+			for (int j = 0; j < name.length; j++) {
+				row.createCell((short) j).setCellValue((String) list.get(i)[j]);
+			}
 
-			row.createCell((short) 0).setCellValue((String) check.goodsNumber);
-			row.createCell((short) 1).setCellValue((String) check.inTime);
-			row.createCell((short) 2).setCellValue((String) check.targetCity);
-			row.createCell((short) 3).setCellValue((String) check.stockAreaNum);
+//			row.createCell((short) 0).setCellValue((String) check.goodsNumber);
+//			row.createCell((short) 1).setCellValue((String) check.inTime);
+//			row.createCell((short) 2).setCellValue((String) check.targetCity);
+//			row.createCell((short) 3).setCellValue((String) check.stockAreaNum);
 
 			try {
-				FileOutputStream fout = new FileOutputStream("src/main/test.xls");
+				FileOutputStream fout = new FileOutputStream(filename+".xls");
 				wb.write(fout);
 				fout.close();
 
@@ -83,8 +91,14 @@ public class ExportExcel {
 	}
 
 	public static void main(String[] args) {
-		List list = ExportExcel.getStockcheck();
-		ResultMessage res = ExportExcel.exportExcel(list);
+//		List list = ExportExcel.getStockcheck();
+		String[] name = {"a","b"};
+		String[] l1 = {"a11","a12"};
+		String[] l2 = {"a21","aa22"};
+		ArrayList<String[]> list = new ArrayList<String[]>();
+		list.add(l1);
+		list.add(l2);
+		ResultMessage res = ExportExcel.exportExcel(name,list,"test");
 		if (res == ResultMessage.SUCCESS)
 			System.out.println("导出成功");
 		else
