@@ -56,7 +56,7 @@ public class SendUpdatePanel extends ELSInfoPanel {
 		vo.receiverName = findItem("per").toString();
 			if(bl.update(vo)==ResultMessage.SUCCESS){
 				GoodsVO goodsVO = goodsbl.searchGoods(vo.number);
-				goodsVO.history.add(new HistoryVO(TimeUtil.getCurrentTime(), UIConstant.CURRENT_ORG.city, OrganizationType.BUSINESSHALL, false));
+				goodsVO.history.add(new HistoryVO(TimeUtil.getCurrentTime(), UIConstant.CURRENT_ORG.city, OrganizationType.BUSINESSHALL, true));
 				goodsbl.updateGoods(goodsVO);
 				LogUtil.addLog("派送快件");
 				ELSStateBar.showStateBar(GetPanelUtil.getFunctionPanel(this),"派件成功");
